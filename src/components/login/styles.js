@@ -27,12 +27,12 @@ export const Input = styled.input`
   font-size: 1rem;
 
 
-     background-color: transparent;
-    color: #eeeeee;
-    outline: none;
-    outline-style: none;
-    border: none;
-    border-bottom: solid #eeeeee 1px;
+  background-color: transparent;
+  color: #eeeeee;
+  outline: none;
+  outline-style: none;
+  border: none;
+  border-bottom: solid #eeeeee 1px;
 `;
 
 export const Button = styled.button`
@@ -44,8 +44,10 @@ export const Button = styled.button`
   font-size: 1rem;
   margin: 10px;
   cursor: pointer;
+  width: 140px;
 `;
 
 export const Img = styled.img`
   width: 400px;
+  margin-bottom: 75px;
 `;

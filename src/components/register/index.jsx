@@ -84,7 +84,7 @@ const Register = () => {
           />
           <Input
             type="text"
-            placeholder="Telefone"
+            placeholder="Whatsapp"
             value={phone}
             onChange={event => setPhone(event.target.value)}
           />
@@ -120,7 +120,7 @@ const Register = () => {
           />
           <div>
             <Button onClick={() => handleClick()}>Login</Button>
-            <Button type="submit">Registrar</Button>
+            <Button type="submit">Cadastre-se aqui</Button>
           </div>
         </LoginForm>
       </motion.div>

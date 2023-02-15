@@ -44,6 +44,8 @@ export const Button = styled.button`
   font-size: 1rem;
   margin: 10px;
   cursor: pointer;
+  width: 140px;
+
 `;
 
 export const Img = styled.img`
