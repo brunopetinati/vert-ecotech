@@ -19,7 +19,12 @@ const Login = () => {
     console.log('password:', password);
   };
 
-  const handleClick = () => {
+  const handleLoginClick = () => {
+    navigate('/welcome');
+  };
+
+
+  const handleRegisterClick = () => {
     navigate('/register');
   };
 
@@ -46,8 +51,8 @@ const Login = () => {
               onChange={event => setPassword(event.target.value)}
             />
             <div>
-              <Button type="submit">Login</Button>
-              <Button onClick={() => handleClick()}>Cadastre-se aqui</Button>
+              <Button onClick={() => handleLoginClick()} type="submit">Login</Button>
+              <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
             </div>
           </LoginForm>
         </motion.div>

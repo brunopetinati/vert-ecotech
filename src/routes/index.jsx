@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 
+import Welcome from '../pages/welcome'
+
 import Login from '../components/login';
 import Register from '../components/register'
 import RegisterProjectStep1 from '../components/register_project_step_1'
@@ -19,6 +21,7 @@ const AppRoutes = () => {
           <Route exact path="/register" element={<Register />}/>
           <Route exact path="/register_project" element={<RegisterProjectStep1 />}/>
           <Route exact path="/register_project_last_step" element={<RegisterProjectStep2 />}/>
+          <Route exact path="/welcome" element={<Welcome />}/>
           { 
           /* state.token ? 
             <Route exact path="/my_favorites" element={<Login />}/> 
