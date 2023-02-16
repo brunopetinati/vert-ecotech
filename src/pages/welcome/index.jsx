@@ -1,12 +1,14 @@
+import Projects from "../../components/projects";
 import Sidebar from "../../components/sidebar";
+import { Container } from './styles';
 
 const Welcome = () => {
 
   return (
-    <>
-      <Sidebar></Sidebar>
-      <div>Bem vindo!</div>
-    </>
+    <Container>
+      <Sidebar />
+      <Projects />
+    </Container>
   )
 };
 
