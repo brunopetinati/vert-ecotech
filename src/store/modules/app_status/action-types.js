@@ -1,5 +1,1 @@
-export const DASHBOARD = '@app_status/DASHBOARD'
-export const PROJECTS = '@app_status/PROJECTS'
-export const CART = '@app_status/CART'
-export const STORE = '@app_status/STORE'
-export const SETTINGS = '@app_status/SETTINGS'
+export const APP_STATUS = '@app_status/APP_STATUS'

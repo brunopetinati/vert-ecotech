@@ -1,22 +1,10 @@
-import { DASHBOARD, PROJECTS, CART, STORE, SETTINGS } from "./action-types";
+import { APP_STATUS } from "./action-types";
 
-const appStatusReducer = (state = '', action) => {
+const appStatusReducer = (state = 'Dashboard', action) => {
   switch (action.type) {
 
-    case DASHBOARD:
-      return state = 'Dashboard';
-
-    case PROJECTS:
-      return state = 'Projects';
-
-    case CART:
-      return state = 'Cart';
-
-    case STORE:
-      return state = 'Store';
-    
-    case SETTINGS:
-      return state = 'Settings';
+    case APP_STATUS:
+      return state = action;
 
     default:
       return state;

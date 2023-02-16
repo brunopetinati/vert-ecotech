@@ -1,17 +1,18 @@
 
-import { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter } from './styles'
-import { dashboardStatus, previousStatus, cartStatus, storeStatus, settingsStatus } from '../../store/modules/app_status/actions';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 
 const Sidebar = () => {
 
   const dispatch = useDispatch();
+  const app_status = useSelector((state) => state.app_status.status);
+  
+  //const [activeItem, setActiveItem] = useState("Dashboard");
 
-  const [activeItem, setActiveItem] = useState("Dashboard");
-
-  const handleItemClick = (itemName) => {
-    setActiveItem(itemName);
+  const handleItemClick = (status) => {
+    dispatch(appStatus(status));
   };
 
   return (
@@ -20,11 +21,11 @@ const Sidebar = () => {
         <h2>Vert Ecotech</h2>
       </SidebarHeader>
       <SidebarMenu>
-        <SidebarMenuItem className={activeItem === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>Dashboard</SidebarMenuItem>
-        <SidebarMenuItem className={activeItem === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>Projetos</SidebarMenuItem>
-        <SidebarMenuItem className={activeItem === "Pedidos" ? "active" : ""} onClick={() => handleItemClick("Pedidos")}>Pedidos</SidebarMenuItem>
-        <SidebarMenuItem className={activeItem === "Loja" ? "active" : ""} onClick={() => handleItemClick("Loja")}>Loja</SidebarMenuItem>
-        <SidebarMenuItem className={activeItem === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>Configurações</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>Dashboard</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>Projetos</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Pedidos" ? "active" : ""} onClick={() => handleItemClick("Pedidos")}>Pedidos</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Loja" ? "active" : ""} onClick={() => handleItemClick("Loja")}>Loja</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>Configurações</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
         <span>Vert Ecotech &copy; 2023</span>
