@@ -1,32 +1,26 @@
-import { ADD_MOVIE_TO_FAVORITE, REMOVE_MOVIE_FROM_FAVORITE } from "./action-types";
+import { DASHBOARD, PROJECTS, CART, STORE, SETTINGS } from "./action-types";
 
-const favoriteMoviesReducer = (state = [], action) => {
-
+const appStatusReducer = (state = '', action) => {
   switch (action.type) {
-    case ADD_MOVIE_TO_FAVORITE:
 
-      const { data } = action;
+    case DASHBOARD:
+      return state = 'Dashboard';
 
-      const preventDuplicate = state.filter((song) => song.title !== data.title);
+    case PROJECTS:
+      return state = 'Projects';
 
-      state = preventDuplicate
+    case CART:
+      return state = 'Cart';
 
-      return [...state, data]
-
-    case REMOVE_MOVIE_FROM_FAVORITE:
-
-      const { dataToRemove } = action;
-
-      const removeFromFavorite = state.filter((song) => song.title !== dataToRemove.title);
-
-      state = removeFromFavorite
-
-      return state
-
+    case STORE:
+      return state = 'Store';
+    
+    case SETTINGS:
+      return state = 'Settings';
 
     default:
-      return state
+      return state;
   }
 };
 
-export default favoriteMoviesReducer;
+export default appStatusReducer;

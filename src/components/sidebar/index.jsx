@@ -1,16 +1,18 @@
 
 import { useState } from 'react';
 import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter } from './styles'
+import { dashboardStatus, previousStatus, cartStatus, storeStatus, settingsStatus } from '../../store/modules/app_status/actions';
+
 
 const Sidebar = () => {
+
+  const dispatch = useDispatch();
 
   const [activeItem, setActiveItem] = useState("Dashboard");
 
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
   };
-
-
 
   return (
     <SidebarContainer>

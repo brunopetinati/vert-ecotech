@@ -1,11 +1,27 @@
-import { ADD_MOVIE_TO_FAVORITE, REMOVE_MOVIE_FROM_FAVORITE } from "./action-types";
+import { DASHBOARD, PROJECTS, CART, STORE, SETTINGS } from "./action-types";
 
-export const addMoviesToFavorites = (data) => ({
-  type: ADD_MOVIE_TO_FAVORITE,
-  data
+export const dashboardStatus = (status) => ({
+  type: DASHBOARD,
+  status,
 });
 
-export const removeMoviesFromFavorites = (data) => ({
-  type: REMOVE_MOVIE_FROM_FAVORITE,
-  data
+export const previousStatus = (status) => ({
+  type: PROJECTS,
+  status,
+});
+
+
+export const cartStatus = (status) => ({
+  type: CART,
+  status,
+});
+
+export const storeStatus = (status) => ({
+  type: STORE,
+  status,
+});
+
+export const settingsStatus = (status) => ({
+  type: SETTINGS,
+  status,
 });
