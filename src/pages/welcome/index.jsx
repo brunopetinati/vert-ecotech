@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { SideContainer } from './styles'
 import Projects from "../../components/projects";
 import Sidebar from "../../components/sidebar";
 
@@ -15,7 +16,9 @@ const Welcome = () => {
   return (
     <Container>
       <Sidebar />
-      {app_status == 'Projetos' && <Projects />}
+      <SideContainer>
+        {app_status == 'Projetos' && <Projects />}
+      </SideContainer>
     </Container>
   )
 };
