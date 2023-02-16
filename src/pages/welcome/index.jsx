@@ -6,7 +6,7 @@ import { Container } from './styles';
 
 const Welcome = () => {
 
-  const app_status = useSelector((state) => state.app_status);
+  const app_status = useSelector((state) => state.app_status.status);
 
   // criar função que retorna de acordo com o estado o componente
   // state == Projects && Projects etc
@@ -15,7 +15,7 @@ const Welcome = () => {
   return (
     <Container>
       <Sidebar />
-      <Projects />
+      {app_status == 'Projetos' && <Projects />}
     </Container>
   )
 };
