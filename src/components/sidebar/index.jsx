@@ -22,6 +22,7 @@ const Sidebar = () => {
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>Dashboard</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>Usuários</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>Projetos</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Pedidos" ? "active" : ""} onClick={() => handleItemClick("Pedidos")}>Pedidos</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Loja" ? "active" : ""} onClick={() => handleItemClick("Loja")}>Loja</SidebarMenuItem>

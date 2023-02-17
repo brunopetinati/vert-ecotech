@@ -1,16 +1,21 @@
 import ProjectsTable from "../projects_table";
 import DefaultButton from "../default_button";
-import { TableContainer } from "./styles";
+import { Container, TitleContainer, ButtonContainer, TableContainer } from "./styles";
 
 const Projects = () => {
 
   return (
-    <>
-      <DefaultButton text={'Adicionar Projeto'} />
+    <Container>
+      <TitleContainer>
+        <h1>Projetos</h1>
+      </TitleContainer>
+      <ButtonContainer>
+        <DefaultButton text={'Adicionar Projeto'} />
+      </ButtonContainer>
       <TableContainer>
         <ProjectsTable />
       </TableContainer>
-    </>
+    </Container>
   );
 };
 
