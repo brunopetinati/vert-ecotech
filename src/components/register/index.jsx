@@ -29,8 +29,16 @@ const Register = () => {
 
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const [formState, setFormState] = useState({
+    full_name: '',
+    email: '',
+    password: '',
+    phone: '',
+    city: '',
+    state: ''
+  });
 
-  const schema = yup.object().shape({
+  /* const schema = yup.object().shape({
     email: yup.string().min(6).required(),
 
     password: yup.string().min(6).required(),
@@ -38,7 +46,7 @@ const Register = () => {
 
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
-  });
+  }); */
 
 
   const navigate = useNavigate();
@@ -48,24 +56,30 @@ const Register = () => {
     navigate('/');
   };
 
-/*   const handleForm = (result) => {
-    axios
-      .post("https://kenziehub.me/sessions", result)
-      .then((res) => {
-        window.localStorage.setItem("authToken", res.data.token);
-        window.localStorage.setItem(
+  const CreateUserForm = (event) => {
+    event.preventDefault();
+
+    axios.post('http://localhost:8000/api/users/', formState)
+      .then(response => {
+        console.log(response);
+        //window.localStorage.setItem("authToken", res.data.token);
+        /* window.localStorage.setItem(
           "userLogged",
           JSON.stringify(res.data.user)
-        );
-        dispatch(setAuthenticate(true));
+        ); */
+        /* dispatch(setAuthenticate(true));
         history.push("/users");
-        setOpen(false);
+        setOpen(false); */
       })
-      .catch(() => {
-        dispatch(setAuthenticate(false));
-        setOpen(true);
+      .catch(error => {
+        console.error(error);
       });
-  }; */
+  };
+  
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormState(prevState => ({ ...prevState, [name]: value }));
+  };
 
   return (
     <LoginContainer>
@@ -75,49 +89,13 @@ const Register = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
             >
-        <LoginForm onSubmit={handleSubmit}>
-          <Input
-            type="text"
-            placeholder="Nome completo"
-            value={name}
-            onChange={event => setName(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Whatsapp"
-            value={phone}
-            onChange={event => setPhone(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Cidade"
-            value={city}
-            onChange={event => setCity(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Estado"
-            value={state}
-            onChange={event => setState(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Senha"
-            value={password}
-            onChange={event => setPassword(event.target.value)}
-          />
-          <Input
-            type="text"
-            placeholder="Confirmar senha"
-            value={passwordConfirmation}
-            onChange={event => setPasswordConfirmation(event.target.value)}
-          />
+        <LoginForm onSubmit={CreateUserForm}>
+          <Input placeholder="Nome" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
+          <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
+          <Input placeholder="Senha" type="password" name="password" value={formState.password} onChange={handleInputChange} />
+          <Input placeholder="Whatsapp" type="tel" name="phone" value={formState.phone} onChange={handleInputChange} />
+          <Input placeholder="Cidade" type="text" name="city" value={formState.city} onChange={handleInputChange} />
+          <Input placeholder="Estado" type="text" name="state" value={formState.state} onChange={handleInputChange} />
           <div>
             <Button onClick={() => handleClick()}>Login</Button>
             <Button type="submit">Cadastre-se aqui</Button>
