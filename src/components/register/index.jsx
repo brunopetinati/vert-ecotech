@@ -56,6 +56,10 @@ const Register = () => {
     navigate('/');
   };
 
+  const handleSubmition = () => {
+    console.log(formState)
+  };
+
   const CreateUserForm = (event) => {
     event.preventDefault();
 
@@ -98,7 +102,7 @@ const Register = () => {
           <Input placeholder="Estado" type="text" name="state" value={formState.state} onChange={handleInputChange} />
           <div>
             <Button onClick={() => handleClick()}>Login</Button>
-            <Button type="submit">Cadastre-se aqui</Button>
+            <Button onClick={() => handleSubmition()} type="submit">Cadastre-se aqui</Button>
           </div>
         </LoginForm>
       </motion.div>
