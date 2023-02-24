@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
   height: 100%;
   background: #f0f0f0;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
 `;
 
 export const TitleContainer = styled.div`

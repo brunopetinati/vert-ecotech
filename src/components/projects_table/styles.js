@@ -46,5 +46,5 @@ export const TD = styled.td`
 export const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
-  height: 70vh;
+  height: 79vh;
 `;
