@@ -27,7 +27,7 @@ const Sidebar = () => {
   return (
     <SidebarContainer collapsed={collapsed}>
       <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
-      {collapsed ? <img src={IconHamburger} alt="0" style={{width: '20px'}}/> : <h2>Vert Ecotech</h2>}
+        {collapsed ? <img src={IconHamburger} alt="0" style={{width: '20px'}}/> : <h2>Vert Ecotech</h2>}
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? 'D' : 'Dashboard'}</SidebarMenuItem>
@@ -38,7 +38,7 @@ const Sidebar = () => {
         <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? 'C' : 'Configurações'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-      {collapsed ? '' : <span>Vert Ecotech &copy; 2023</span>}
+       {collapsed ? <span>V.E  &copy;</span> : <span>Vert Ecotech &copy; 2023</span>}
       </SidebarFooter>
     </SidebarContainer>
   );
