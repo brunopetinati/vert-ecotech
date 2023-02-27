@@ -32,6 +32,7 @@ const ProjectsTable = () => {
       <Table>
         <THead>
           <TR>
+            <TH>Registro do Projeto</TH>
             <TH>Projeto</TH>
             <TH>Área Total</TH>
             <TH>Créditos Disponíveis</TH>
@@ -40,8 +41,7 @@ const ProjectsTable = () => {
             <TH>Data de término</TH>
             <TH>Crédito Total</TH>
             <TH>Produção Regular</TH>
-            <TH>Estágio</TH>
-            <TH></TH>
+            <TH>Status</TH>
           </TR>
         </THead>
         <tbody>

@@ -6,9 +6,7 @@ import Welcome from '../pages/welcome'
 
 import Login from '../components/login';
 import Register from '../components/register'
-import RegisterProjectStep1 from '../components/register_project_step_1'
-import RegisterProjectStep2 from '../components/register_project_step_2'
-
+import RegisterProject from '../components/register_project'
 
 const AppRoutes = () => {
 
@@ -19,8 +17,7 @@ const AppRoutes = () => {
           <Routes>
           <Route exact path="/" element={<Login />}/>
           <Route exact path="/register" element={<Register />}/>
-          <Route exact path="/register_project" element={<RegisterProjectStep1 />}/>
-          <Route exact path="/register_project_last_step" element={<RegisterProjectStep2 />}/>
+          <Route exact path="/register_project" element={<RegisterProject />}/>
           <Route exact path="/welcome" element={<Welcome />}/>
           { 
           /* state.token ? 

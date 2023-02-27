@@ -6,6 +6,7 @@ export const Table = styled.table`
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   table-layout: fixed;
+  border-radius: 20px;
 `;
 
 export const THead = styled.thead`
@@ -39,8 +40,6 @@ export const TD = styled.td`
   border-right: 1px solid #ddd;
   text-align:center;
   width: 150px;
-  color: grey;
-
 `;
 
 export const Wrapper = styled.div`

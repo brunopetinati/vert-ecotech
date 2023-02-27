@@ -3,22 +3,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions';
 import { collapseSidebar } from '../../store/modules/sidebar/actions';
-import IconHamburger from '../../assets/icons/list.png'
+
+import ExpandedLogo from '../../assets/logo-vert.png'
+import Logo from '../../assets/marca-vert.png'
 
 
 const Sidebar = () => {
 
   const dispatch = useDispatch();
   const app_status = useSelector((state) => state.app_status.status);
-  
   const collapsed = useSelector((state) => state.sidebar.status);
-  console.log('este é o console.log do collapsed', collapsed)
 
   const setCollapsed = (state) => {
     dispatch(collapseSidebar(state))
   };
-
-  //const [activeItem, setActiveItem] = useState("Dashboard");
 
   const handleItemClick = (status) => {
     dispatch(appStatus(status));
@@ -27,7 +25,7 @@ const Sidebar = () => {
   return (
     <SidebarContainer collapsed={collapsed}>
       <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
-        {collapsed ? <img src={IconHamburger} alt="0" style={{width: '20px'}}/> : <h2>Vert Ecotech</h2>}
+        {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? 'D' : 'Dashboard'}</SidebarMenuItem>

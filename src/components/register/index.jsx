@@ -26,6 +26,8 @@ const Register = () => {
     console.log('username:', name);
     console.log('password:', password);
   }; */
+  
+  const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -49,7 +51,6 @@ const Register = () => {
   }); */
 
 
-  const navigate = useNavigate();
 
 
   const handleClick = () => {

@@ -1,4 +1,4 @@
-import { Container, InnerContainer, Column, Label, Input, Button, Span } from './styles'
+import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span } from './styles'
 import React from 'react';
 
 const RegisterProjectStep1 = () => {
@@ -29,7 +29,10 @@ const RegisterProjectStep1 = () => {
           <Input  type="text" />          
         </Column>
       </InnerContainer>
-      <Button>Atualizar</Button>
+      <ButtonContainer>
+        <Button>Voltar</Button>
+        <Button>Registrar</Button>
+      </ButtonContainer>
     </Container>
   )
 };

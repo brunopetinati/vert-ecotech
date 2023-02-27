@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { SideContainer } from './styles'
 import Projects from "../../components/projects";
+import Users from "../../components/users"
 import Sidebar from "../../components/sidebar";
 
 import { Container } from './styles';
@@ -17,7 +18,7 @@ const Welcome = () => {
     <Container>
       <Sidebar />
       <SideContainer>
-        {app_status == 'Projetos' && <Projects />}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : null}
       </SideContainer>
     </Container>
   )
