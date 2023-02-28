@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  background: #f0f0f0;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,4 +29,6 @@ export const ButtonContainer = styled.div`
 export const TableContainer = styled.div`
   display: flex;
   width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 20px;
 `;

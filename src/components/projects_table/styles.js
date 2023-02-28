@@ -10,8 +10,7 @@ export const Table = styled.table`
 `;
 
 export const THead = styled.thead`
-  background: #003a00;
-  color: #c2fbd7;
+
   font-weight: bold;
   font-family: 'Inter', sans-serif;
   font-size: 14px;

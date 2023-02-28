@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-  background: rgb(235,243,231);
-  background: linear-gradient(90deg, rgba(235,243,231,1) 0%, rgba(240,240, 240,1) 100%);
+
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
+  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};  
 `;
 
 export const TitleContainer = styled.div`
@@ -30,4 +29,6 @@ export const ButtonContainer = styled.div`
 export const TableContainer = styled.div`
   display: flex;
   width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 20px;
 `;
