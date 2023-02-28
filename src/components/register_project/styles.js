@@ -6,15 +6,14 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center; 
   justify-content: center;
-  background-size: cover;
-  background-position: center center;
+  background: #fafafa;
 `;
 
 
 export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: ${({app_status}) => app_status == 'register_land_continue' ? '100vh' : '100vh'};
+  height: ${({app_status}) => app_status == 'register_land_continue' ? '150vh' : '100vh'};
   align-items: center; 
   justify-content: center;
   width: 800px;

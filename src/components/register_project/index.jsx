@@ -3,6 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import RegisterProjectStep1 from '../register_project_step_1'
 import RegisterProjectStep2 from '../register_project_step_2'
+import Sidebar from '../sidebar';
 
 
 const RegisterProject = () => {
@@ -11,11 +12,11 @@ const RegisterProject = () => {
   console.log(app_status)
 
   return (
-  <Container>
-    <InnerContainer app_status={app_status}>
-      {app_status == 'register_land_continue' ? <RegisterProjectStep2 /> : <RegisterProjectStep1 />}
-    </InnerContainer>
-  </Container>
+    <Container>
+      <InnerContainer app_status={app_status}>
+        {app_status == 'register_land_continue' ? <RegisterProjectStep2 /> : <RegisterProjectStep1 />}
+      </InnerContainer>
+    </Container>
   )
 };
 

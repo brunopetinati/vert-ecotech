@@ -46,7 +46,7 @@ const RegisterProjectStep1 = () => {
       </InnerContainer>
       <ButtonContainer>
         <Button onClick={() => handleClick()}>Voltar</Button>
-        <Button onClick={() => handleRegister()}>Registrar</Button>
+        <Button onClick={() => handleRegister()}>Confirmar</Button>
       </ButtonContainer>
     </Container>
   )

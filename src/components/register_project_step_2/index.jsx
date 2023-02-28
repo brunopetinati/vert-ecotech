@@ -1,7 +1,20 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button } from './styles'
+import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer } from './styles'
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { appStatus } from '../../store/modules/app_status/actions';
+
 
 const RegisterProjectStep2 = () => {
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(appStatus(''))
+  };
+
+  const handleRegister = () => {};
+
   return (
     <Container>
       <h3>Informações Cadastrais</h3>
@@ -12,7 +25,7 @@ const RegisterProjectStep2 = () => {
           <p />
           <Label>Razão social</Label>
           <Input  type="text" placeholder='Nome da empresa LTDA' />
-          <Label>Possui documentação regulatória em dia?</Label>
+          <Label>Possui documentação regulatória?</Label>
           <Input  type="text" />
           <Label>Status do CAR</Label>
           <Input  type="text" />
@@ -37,12 +50,12 @@ const RegisterProjectStep2 = () => {
           <Input  type="text" />
           <Label>Situação da reserva legal da propriedade?</Label>
           <Input  type="text" />
-          <Label>Existe unidade de conservação no imóvel?</Label>
+          <Label>Possui unidade de conservação no imóvel?</Label>
           <Input  type="text" />
         </Column>
       </InnerContainer>
       <Column>
-          <Label>Possui dívidas federal pelo não pagamento de tributos?</Label>
+          <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
           <Input  type="text" />
           <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
           <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
@@ -50,7 +63,10 @@ const RegisterProjectStep2 = () => {
             <p />
           <TextArea  type="text" />
       </Column>
-      <Button>Atualizar</Button>
+      <ButtonContainer>
+        <Button onClick={() => handleClick()}>Voltar</Button>
+        <Button onClick={() => handleRegister()}>Confirmar</Button>
+      </ButtonContainer>
     </Container>
   )
 };

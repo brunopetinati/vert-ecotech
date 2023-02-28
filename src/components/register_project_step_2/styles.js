@@ -1,26 +1,26 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 800px;
+  width: 1000px;
   border-radius: 20px;
   padding: 2em;
-  border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 500px;
+  height: auto;
   background: #fff;
   display: flex;
   flex-direction: column;
   
   h3 {
-    color:#054D00;
+    color: #054D00;
   }
 `;
 
 export const InnerContainer = styled.div`
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 600px;
+  width: 80%;
 `;
 
 export const Column = styled.div`
@@ -36,7 +36,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 10px;
   margin-bottom: 20px;
-  width: 250px;
+  width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
