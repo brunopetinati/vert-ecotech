@@ -14,6 +14,7 @@ const Sidebar = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const collapsed = useSelector((state) => state.sidebar.status);
 
+
   const setCollapsed = (state) => {
     dispatch(collapseSidebar(state))
   };

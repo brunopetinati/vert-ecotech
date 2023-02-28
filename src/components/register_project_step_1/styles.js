@@ -8,6 +8,9 @@ export const Container = styled.div`
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: 500px;
+  z-index: 2;
+  background: #fff;
+  
   h3 {
     color:#054D00;
   }
@@ -58,7 +61,7 @@ export const ButtonContainer = styled.div`
 
 export const Button = styled.button`
   background-color: #c2fbd7;
-  border-radius: 100px;
+  border-radius: 10px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
   color: green;
   cursor: pointer;
@@ -74,6 +77,7 @@ export const Button = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-top: 50px;
+  margin-right: 16px;
 
   :hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;

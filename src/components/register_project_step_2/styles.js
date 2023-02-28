@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  max-width: 800px;
+  width: 800px;
   border-radius: 20px;
-  height: auto;
-  background: #FFFFFF;
+  padding: 2em;
   border-radius: 20px;
-
-
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 500px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  
   h3 {
     color:#054D00;
   }
@@ -17,7 +20,7 @@ export const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 600px;
 `;
 
 export const Column = styled.div`
@@ -33,7 +36,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 10px;
   margin-bottom: 20px;
-
+  width: 250px;
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
@@ -47,7 +50,39 @@ export const Input = styled.input`
 
 export const Span = styled.span`
   color: #323338;
-  font-family: 'Baloo 2';
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
+export const Button = styled.button`
+  background-color: #c2fbd7;
+  border-radius: 10px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 50px;
+  margin-right: 16px;
+
+  :hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.02) ;
+  }
 `;
 
 export const TextArea = styled.textarea `
@@ -65,13 +100,3 @@ export const TextArea = styled.textarea `
   }
 `;
 
-export const Button = styled.button`
-  background: #054D00;
-  border-radius: 4px;
-  width: 154px;
-  height: 32px;
-  color: white;
-  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  letter-spacing: 1px;
-  font-weight: 700;
-`;

@@ -13,7 +13,7 @@ const Users = () => {
         <h1>Usuários</h1>
       </TitleContainer>
       <ButtonContainer>
-        <DefaultButton text={'Adicionar Usuário'} />
+        <DefaultButton text={'Adicionar Usuário'} path={'/register'}/>
       </ButtonContainer>
       <TableContainer>
         <UsersTable />
