@@ -29,7 +29,7 @@ const RegisterProjectStep2 = () => {
     { value: "Cancelada", label: "Cancelada" }
   ];
 
-  handleStatusMatricula = (selectedStatusMatricula) => {
+  const handleStatusMatricula = (selectedStatusMatricula) => {
     setSelectedStatusMatricula(selectedStatusMatricula);
   };
 
