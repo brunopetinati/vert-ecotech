@@ -52,6 +52,8 @@ const RegisterProjectStep2 = () => {
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica</Span>
           <p />
+          <Label>CPF/CNPJ</Label>
+          <Input  type="text" />
           <Label>Status da Matrícula</Label>
           <StyledSelect
             value={selectedStatusMatricula}
@@ -59,13 +61,7 @@ const RegisterProjectStep2 = () => {
             options={optionsStatusMatricula}
             placeholder={'Selecione uma opção'}
           />
-          <Label>Status do CAR</Label>
-          <StyledSelect
-            value={selectedCar}
-            onChange={handleOptionsCar}
-            options={optionsCar}
-            placeholder={'Selecione uma opção'}
-          />
+          
           <Label>Código da matrícula</Label>
           <Input  type="text" />
           <Label>Possui déficit de reserva legal?</Label>
@@ -77,9 +73,14 @@ const RegisterProjectStep2 = () => {
           <Label>Cadastro realizado em</Label>         
           <Span>23-09-2022</Span>
           <p />
-          <Label>CPF/CNPJ</Label>
-          <Input  type="text" />
-          
+
+          <Label>Status do CAR</Label>
+          <StyledSelect
+            value={selectedCar}
+            onChange={handleOptionsCar}
+            options={optionsCar}
+            placeholder={'Selecione uma opção'}
+          />
           <Label>Código SICAR(CAR)</Label>
           <Input  type="text" />
           <Label>Status do georreferenciamento no SIGEF</Label>
