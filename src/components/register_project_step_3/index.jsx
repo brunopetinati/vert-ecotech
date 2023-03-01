@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
 import React from 'react';
 
-const RegisterProjectStep1 = () => {
+const RegisterProjectStep3 = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/welcome')
+    dispatch(appStatus('register_land_continue'))
   };
 
   const handleRegister = () => {
-    dispatch(appStatus('register_land_continue'))
+    console.log('concluded')
   };
 
   return (
@@ -25,22 +25,22 @@ const RegisterProjectStep1 = () => {
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica || Tipo de pessoa</Span>
           <p />          
-          <Label>Nome do proprietário da área:</Label>
+          <Label>Área total da propriedade (ha)?</Label>
           <Input  type="text" />
-          <Label>Contato Whatsapp do proprietário:</Label>
+          <Label>Endereço da propriedade</Label>
           <Input  type="text" />
-          <Label>E-mail do proprietário:</Label>
+          <Label>Número</Label>
           <Input  type="text" />        
         </Column>
         <Column>
           <Label>Cadastro realizado em</Label>         
           <Span>23-09-2022</Span>
           <p />
-          <Label>Área total da propriedade (ha)?</Label>
-          <Input  type="text" />
           <Label>Área total da reserva legal (ha)?</Label>
           <Input  type="text" />
-          <Label>Qual o endereço da propriedade?</Label>
+          <Label>Cidade</Label>
+          <Input  type="text" />
+          <Label>Complemento</Label>
           <Input  type="text" />          
         </Column>
       </InnerContainer>
@@ -52,4 +52,4 @@ const RegisterProjectStep1 = () => {
   )
 };
 
-export default RegisterProjectStep1;
+export default RegisterProjectStep3;

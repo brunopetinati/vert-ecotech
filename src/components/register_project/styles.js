@@ -9,7 +9,6 @@ export const Container = styled.div`
   background: #fafafa;
 `;
 
-
 export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -18,4 +17,3 @@ export const InnerContainer = styled.div`
   justify-content: center;
   width: 800px;
 `;
-

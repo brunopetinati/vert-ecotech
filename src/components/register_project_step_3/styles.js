@@ -1,27 +1,26 @@
 import styled from 'styled-components';
-import Select from "react-select";
 
 export const Container = styled.div`
-  width: 1000px;
+  width: 800px;
   border-radius: 20px;
-  padding: 2em;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: auto;
+  padding: 2em;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 500px;
+  z-index: 2;
   background: #fff;
-  display: flex;
-  flex-direction: column;
   
   h3 {
-    color: #054D00;
+    color:#054D00;
   }
 `;
 
 export const InnerContainer = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  width: 80%;
+  max-width: 600px;
 `;
 
 export const Column = styled.div`
@@ -37,7 +36,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 10px;
   margin-bottom: 20px;
-  width: 350px;
+  
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
@@ -85,31 +84,3 @@ export const Button = styled.button`
   transform: scale(1.02) ;
   }
 `;
-
-export const TextArea = styled.textarea `
-  padding: 10px;
-  margin-bottom: 20px;
-
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
-  outline: none;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-
-export const StyledSelect = styled(Select)`
-  margin-bottom: 20px;
-  width: 370px  ;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-
