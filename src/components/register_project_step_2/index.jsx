@@ -3,10 +3,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { appStatus } from '../../store/modules/app_status/actions';
-
+import { SICARMask } from '../../assets/masks/masks';
 
 const RegisterProjectStep2 = () => {
-
 
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
@@ -116,6 +115,53 @@ const RegisterProjectStep2 = () => {
   };
   
 
+  const mask = [
+    /[A-Z]/,
+    /[A-Z]/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /[A-Z]/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    "-",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    ".",
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ];
+
   return (
     <Container>
       <h3>Informações Cadastrais</h3>
@@ -163,7 +209,12 @@ const RegisterProjectStep2 = () => {
             placeholder={'Selecione uma opção'}
           />
           <Label>Código SICAR(CAR)</Label>
-          <Input  type="text" />
+          <Input type="text" 
+             mask={"**-*******-****.****.****.****.****.****.****.****"}
+             maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
+             alwaysShowMask={true}
+           >  
+          </Input>
           <Label>Status do georreferenciamento no SIGEF</Label>
           <StyledSelect
             value={selectedGeorreferenciamentoStatus}

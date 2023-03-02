@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Select from "react-select";
+import InputMask from "react-input-mask";
 
 export const Container = styled.div`
   width: 1000px;
@@ -34,7 +35,7 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 
-export const Input = styled.input`
+export const Input = styled(InputMask)`
   padding: 10px;
   margin-bottom: 20px;
   width: 350px;
@@ -43,6 +44,10 @@ export const Input = styled.input`
   padding: 8px;
   font-size: 16px;
   outline: none;
+
+  ::placeholder {
+    font-size: 12px;
+  }
 
   &:focus {
     border-color: #007bff;
