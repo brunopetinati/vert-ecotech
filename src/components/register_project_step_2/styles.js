@@ -129,7 +129,7 @@ export const ButtonLink = styled.button`
   font-weight: 400;
   font-size: 14px;
   text-decoration: none;
-  margin-left: 80px;
+  margin-left: 90px;
 
   &:hover {
   color: darkblue;

@@ -135,9 +135,9 @@ const RegisterProjectStep2 = () => {
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica</Span>
           <p />
-          <Label>CNPJ do proprietário {<ButtonLink onClick={(event) => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CPF' : 'Alternar para CNPJ'}</ButtonLink>}</Label>
+          <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
           <Input type="text" 
-            placeholder='CNPJ ou CPF'
+            placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-00'}
             mask={mask}
             maskPlaceholder="CPF/CNPJ"
             alwaysShowMask={false}
