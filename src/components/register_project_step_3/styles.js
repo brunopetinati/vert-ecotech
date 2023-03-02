@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const Container = styled.div`
   width: 800px;
   border-radius: 20px;
-  height: auto;
   padding: 2em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 500px;
+  height: 580px;
   z-index: 2;
   background: #fff;
   
@@ -18,7 +17,8 @@ export const Container = styled.div`
 
 export const InnerContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
   max-width: 600px;
 `;

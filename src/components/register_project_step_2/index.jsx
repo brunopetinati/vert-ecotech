@@ -209,11 +209,10 @@ const RegisterProjectStep2 = () => {
           />
         </Column>
       </InnerContainer>
-      <Column>
-
+      <Column style={{ marginTop: '36px'}}>
           <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
           <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
-          <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
+          <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
             <p />
           <TextArea  type="text" />
       </Column>
