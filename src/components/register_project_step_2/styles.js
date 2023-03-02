@@ -118,3 +118,21 @@ export const StyledSelect = styled(Select)`
   }
 `;
 
+export const ButtonLink = styled.button`
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+  font: inherit;
+  padding: 0;
+  text-decoration: underline;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: none;
+  margin-left: 80px;
+
+  &:hover {
+  color: darkblue;
+  text-decoration: none;
+}
+`;

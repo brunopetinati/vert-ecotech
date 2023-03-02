@@ -28,18 +28,23 @@ const RegisterProjectStep1 = () => {
           <Label>Nome do proprietário da área:</Label>
           <Input  type="text" />
           <Label>Telefone Whatsapp do proprietário:</Label>
-          <Input  type="text" />
+          <Input type="text" 
+             mask={"(99) 99999-9999"}
+             maskPlaceholder="(99) 99999-9999"
+             alwaysShowMask={false}
+             placeholder="Ex: (99) 99999-9999"
+           ></Input>  
           <Label>E-mail do proprietário:</Label>
-          <Input  type="text" />        
+          <Input  type="text" placeholder="Ex: usuario@email.com"/>        
         </Column>
         <Column>
           <Label>Cadastro realizado em</Label>         
           <Span>23-09-2022</Span>
           <p />
           <Label>Área total da propriedade (ha)?</Label>
-          <Input  type="text" />
+          <Input  type="text" placeholder="Em hectares(ha)"/>
           <Label>Área total da reserva legal (ha)?</Label>
-          <Input  type="text" />
+          <Input  type="text" placeholder="Em hectares(ha)"/>
           <Label>Qual o endereço da propriedade?</Label>
           <Input  type="text" />          
         </Column>

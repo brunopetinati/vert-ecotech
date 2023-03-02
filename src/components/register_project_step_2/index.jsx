@@ -1,9 +1,7 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, StyledSelect } from './styles'
+import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, StyledSelect, ButtonLink } from './styles'
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { appStatus } from '../../store/modules/app_status/actions';
-import { SICARMask } from '../../assets/masks/masks';
 
 const RegisterProjectStep2 = () => {
 
@@ -57,51 +55,64 @@ const RegisterProjectStep2 = () => {
   const optionsReservaSituation = [
     { value: "Sem vegetação / em vegetação natural", label: "Sem vegetação / em vegetação natural" },
     { value: "Em regeneração a partir de reflorestamento", label: "Em regeneração a partir de reflorestamento" },
-    { value: "Completamente florestada", label: "Completamente florestada" },
+    { value: "Completamente florestada", label: "Completamente florestada" }
   ];
 
   const handleReservaSituation = (selectedReservaSituation) => {
     setSelectedReservaSituation(selectedReservaSituation);
   };
 
-    // Unidade de conservação do imóvel
+  // Unidade de conservação do imóvel
 
-    const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('')
+  const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('')
 
-    const optionsUnidadeConservacao = [
-      { value: "Privada", label: "Privada" },
-      { value: "Não possui", label: "Não possui" },
-      { value: "Pública", label: "Pública" }
-    ];
+  const optionsUnidadeConservacao = [
+    { value: "Privada", label: "Privada" },
+    { value: "Pública", label: "Pública" },
+    { value: "Não possui", label: "Não possui" }
+  ];
+
+  const handleUnidadeConservacao = (selectedUnidadeConservacao) => {
+    setSelectedUnidadeConservacao(selectedUnidadeConservacao);
+  };
+
+  // Dívida Federal
+
+  const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('')
+
+  const optionsPossuiDivida = [
+    { value: true, label: "Sim" },
+    { value: false, label: "Não" }
+  ];
+
+  const handlePossuiDivida = (selectedPossuiDivida) => {
+    setSelectedPossuiDivida(selectedPossuiDivida);
+  };
   
-    const handleUnidadeConservacao = (selectedUnidadeConservacao) => {
-      setSelectedUnidadeConservacao(selectedUnidadeConservacao);
-    };
+  // Possui déficit de reserva legal?
+  const [selectedPossuiDeficit, setSelectedPossuiDeficit] = useState('')
 
-    // Dívida Federal
+  const optionsPossuiDeficit = [
+    { value: true, label: "Sim" },
+    { value: false, label: "Não" }
+  ];
 
-    const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('')
+  const handlePossuiDeficit = (selectedPossuiDeficit) => {
+    setSelectedPossuiDeficit(selectedPossuiDeficit);
+  };
 
-    const optionsPossuiDivida = [
-      { value: true, label: "Sim" },
-      { value: false, label: "Não" }
-    ];
-  
-    const handlePossuiDivida = (selectedPossuiDivida) => {
-      setSelectedPossuiDivida(selectedPossuiDivida);
-    };
-    
-    // Possui déficit de reserva legal?
-    const [selectedPossuiDeficit, setSelectedPossuiDeficit] = useState('')
+  // Máscara CPF ou CNPJ
 
-    const optionsPossuiDeficit = [
-      { value: true, label: "Sim" },
-      { value: false, label: "Não" }
-    ];
-  
-    const handlePossuiDeficit = (selectedPossuiDeficit) => {
-      setSelectedPossuiDeficit(selectedPossuiDeficit);
-    };
+  const [mask, setMask] = useState("99.999.999/9999-99");
+  const [boolean, setBoolean] = useState(false);
+
+  const handleInputChange = () => {
+    if (!boolean) {
+      setMask("99.999.999/9999-99");
+    } else {
+      setMask("999.999.999-99");
+    }
+  };
 
   // Rotas
   const dispatch = useDispatch();
@@ -115,52 +126,6 @@ const RegisterProjectStep2 = () => {
   };
   
 
-  const mask = [
-    /[A-Z]/,
-    /[A-Z]/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /[A-Z]/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    "-",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    ".",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    ".",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-    ".",
-    /\d/,
-    /\d/,
-    /\d/,
-    /\d/,
-  ];
 
   return (
     <Container>
@@ -170,8 +135,13 @@ const RegisterProjectStep2 = () => {
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica</Span>
           <p />
-          <Label>CNPJ do proprietário (CPF em caso de pessoa física)</Label>
-          <Input  type="text" placeholder='CNPJ ou CPF'/>
+          <Label>CNPJ do proprietário {<ButtonLink onClick={(event) => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CPF' : 'Alternar para CNPJ'}</ButtonLink>}</Label>
+          <Input type="text" 
+            placeholder='CNPJ ou CPF'
+            mask={mask}
+            maskPlaceholder="CPF/CNPJ"
+            alwaysShowMask={false}
+          />
           <Label>Status da Matrícula</Label>
           <StyledSelect
             value={selectedMatriculaStatus}
@@ -212,7 +182,8 @@ const RegisterProjectStep2 = () => {
           <Input type="text" 
              mask={"**-*******-****.****.****.****.****.****.****.****"}
              maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
-             alwaysShowMask={true}
+             alwaysShowMask={false}
+             placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
            >  
           </Input>
           <Label>Status do georreferenciamento no SIGEF</Label>
