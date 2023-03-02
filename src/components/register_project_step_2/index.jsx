@@ -8,6 +8,7 @@ import { appStatus } from '../../store/modules/app_status/actions';
 const RegisterProjectStep2 = () => {
 
 
+  // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
 
   const optionsCar = [
@@ -21,18 +22,89 @@ const RegisterProjectStep2 = () => {
     setSelectedCar(selectedCar);
   };
 
-  const [selectedStatusMatricula, setSelectedStatusMatricula] = useState('')
+  // Status Matrícula
+  const [selectedMatriculaStatus, setSelectedMatriculaStatus] = useState('')
 
-  const optionsStatusMatricula = [
+  const optionsMatriculaStatus = [
     { value: "Vigente", label: "Vigente" },
     { value: "Em atualização", label: "Em atualização" },
     { value: "Cancelada", label: "Cancelada" }
   ];
 
-  const handleStatusMatricula = (selectedStatusMatricula) => {
-    setSelectedStatusMatricula(selectedStatusMatricula);
+  const handleMatriculaStatus = (selectedMatriculaStatus) => {
+    setSelectedMatriculaStatus(selectedMatriculaStatus);
   };
 
+
+  // Georreferenciamento
+  const [selectedGeorreferenciamentoStatus, setSelectedGeorreferenciamentoStatus] = useState('')
+
+  const optionsGerorreferenciamentoStatus = [
+    { value: "Atualizado", label: "Atualizado" },
+    { value: "Em atualização", label: "Em atualização" },
+    { value: "Pendente", label: "Pendente" },
+    { value: "Não aplicável", label: "Não aplicável" }
+  ];
+
+  const handleGeorreferenciamentoStatus = (selectedGeorreferenciamentoStatus) => {
+    setSelectedGeorreferenciamentoStatus(selectedGeorreferenciamentoStatus);
+  };
+
+
+  // Situação da reserva legal da propriedade
+
+  const [selectedReservaSituation, setSelectedReservaSituation] = useState('')
+
+  const optionsReservaSituation = [
+    { value: "Sem vegetação / em vegetação natural", label: "Sem vegetação / em vegetação natural" },
+    { value: "Em regeneração a partir de reflorestamento", label: "Em regeneração a partir de reflorestamento" },
+    { value: "Completamente florestada", label: "Completamente florestada" },
+  ];
+
+  const handleReservaSituation = (selectedReservaSituation) => {
+    setSelectedReservaSituation(selectedReservaSituation);
+  };
+
+    // Unidade de conservação do imóvel
+
+    const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('')
+
+    const optionsUnidadeConservacao = [
+      { value: "Privada", label: "Privada" },
+      { value: "Não possui", label: "Não possui" },
+      { value: "Pública", label: "Pública" }
+    ];
+  
+    const handleUnidadeConservacao = (selectedUnidadeConservacao) => {
+      setSelectedUnidadeConservacao(selectedUnidadeConservacao);
+    };
+
+    // Dívida Federal
+
+    const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('')
+
+    const optionsPossuiDivida = [
+      { value: true, label: "Sim" },
+      { value: false, label: "Não" }
+    ];
+  
+    const handlePossuiDivida = (selectedPossuiDivida) => {
+      setSelectedPossuiDivida(selectedPossuiDivida);
+    };
+    
+    // Possui déficit de reserva legal?
+    const [selectedPossuiDeficit, setSelectedPossuiDeficit] = useState('')
+
+    const optionsPossuiDeficit = [
+      { value: true, label: "Sim" },
+      { value: false, label: "Não" }
+    ];
+  
+    const handlePossuiDeficit = (selectedPossuiDeficit) => {
+      setSelectedPossuiDeficit(selectedPossuiDeficit);
+    };
+
+  // Rotas
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -52,22 +124,31 @@ const RegisterProjectStep2 = () => {
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica</Span>
           <p />
-          <Label>CPF/CNPJ</Label>
-          <Input  type="text" />
+          <Label>CNPJ do proprietário (CPF em caso de pessoa física)</Label>
+          <Input  type="text" placeholder='CNPJ ou CPF'/>
           <Label>Status da Matrícula</Label>
           <StyledSelect
-            value={selectedStatusMatricula}
-            onChange={handleStatusMatricula}
-            options={optionsStatusMatricula}
+            value={selectedMatriculaStatus}
+            onChange={handleMatriculaStatus}
+            options={optionsMatriculaStatus}
             placeholder={'Selecione uma opção'}
           />
-          
           <Label>Código da matrícula</Label>
-          <Input  type="text" />
+          <Input  type="text" placeholder='Ex: 30.137' />
           <Label>Possui déficit de reserva legal?</Label>
-          <Input  type="text" />
+          <StyledSelect
+            value={selectedPossuiDeficit}
+            onChange={handlePossuiDeficit}
+            options={optionsPossuiDeficit}
+            placeholder={'Selecione uma opção'}
+          />
           <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
-          <Input  type="text" />
+          <StyledSelect
+            value={selectedPossuiDivida}
+            onChange={handlePossuiDivida}
+            options={optionsPossuiDivida}
+            placeholder={'Selecione uma opção'}
+          />
         </Column>
         <Column>
           <Label>Cadastro realizado em</Label>         
@@ -84,11 +165,26 @@ const RegisterProjectStep2 = () => {
           <Label>Código SICAR(CAR)</Label>
           <Input  type="text" />
           <Label>Status do georreferenciamento no SIGEF</Label>
-          <Input  type="text" />
-          <Label>Situação da reserva legal da propriedade?</Label>
-          <Input  type="text" />
+          <StyledSelect
+            value={selectedGeorreferenciamentoStatus}
+            onChange={handleGeorreferenciamentoStatus}
+            options={optionsGerorreferenciamentoStatus}
+            placeholder={'Selecione uma opção'}
+          />
+          <Label>Situação da reserva legal da propriedade:</Label>
+          <StyledSelect
+            value={selectedReservaSituation}
+            onChange={handleReservaSituation}
+            options={optionsReservaSituation}
+            placeholder={'Selecione uma opção'}
+          />
           <Label>Possui unidade de conservação no imóvel?</Label>
-          <Input  type="text" />
+          <StyledSelect
+            value={selectedUnidadeConservacao}
+            onChange={handleUnidadeConservacao}
+            options={optionsUnidadeConservacao}
+            placeholder={'Selecione uma opção'}
+          />
         </Column>
       </InnerContainer>
       <Column>

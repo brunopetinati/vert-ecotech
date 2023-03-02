@@ -27,7 +27,7 @@ const RegisterProjectStep1 = () => {
           <p />          
           <Label>Nome do proprietário da área:</Label>
           <Input  type="text" />
-          <Label>Contato Whatsapp do proprietário:</Label>
+          <Label>Telefone Whatsapp do proprietário:</Label>
           <Input  type="text" />
           <Label>E-mail do proprietário:</Label>
           <Input  type="text" />        
