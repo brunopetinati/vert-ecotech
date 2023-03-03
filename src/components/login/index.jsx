@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom"; 
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
+import axios from 'axios';
 
 import Logo from '../../assets/logo-vert-white.png'
 //import Logo from '../../assets/marca-vert.png'
@@ -13,10 +14,35 @@ const Login = () => {
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = event => {
+  /* const handleSubmit = async event => {
+    //event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8000/api/login/', {
+        email,
+        password,
+      });
+      console.log('Login successful:', response.data);
+      // Navigate to the welcome page on successful login
+      handleLoginClick();
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    }
+  }; */
+
+  const handleSubmit = async event => {
     event.preventDefault();
-    console.log('username:', email);
-    console.log('password:', password);
+    try {
+      console.log('sending login request...');
+      const response = await axios.post('http://localhost:8000/api/login/', {
+        email,
+        password,
+      });
+      console.log('Login successful:', response.data);
+      // Navigate to the welcome page on successful login
+      handleLoginClick();
+    } catch (error) {
+      console.error('Login failed:', error.message);
+    }
   };
 
   const handleLoginClick = () => {
@@ -51,7 +77,9 @@ const Login = () => {
               onChange={event => setPassword(event.target.value)}
             />
             <div>
-              <Button onClick={() => handleLoginClick()} type="submit">Login</Button>
+              {/* <Button onClick={() => handleLoginClick()} type="submit">Login</Button> */}
+              <Button type="submit">Login</Button>
+
               <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
             </div>
           </LoginForm>
