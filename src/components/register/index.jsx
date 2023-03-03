@@ -64,7 +64,7 @@ const Register = () => {
   const CreateUserForm = (event) => {
     event.preventDefault();
 
-    axios.post('http://localhost:8000/api/users/', formState)
+    axios.post('http://localhost:8000/api/signup/', formState)
       .then(response => {
         console.log(response);
         //window.localStorage.setItem("authToken", res.data.token);
