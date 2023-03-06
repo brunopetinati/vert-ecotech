@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Background from '../../assets/fundo.jpg'
+import InputMask from "react-input-mask";
+
 
 export const LoginContainer = styled.div`
   display: flex;
@@ -19,20 +21,18 @@ export const LoginForm = styled.form`
   padding: 1rem;
 `;
 
-export const Input = styled.input`
+export const Input = styled(InputMask)`
   margin-bottom: 1rem;
   padding: 0.5rem;
   border-radius: 5px;
   border: none;
   font-size: 1rem;
-
-
-     background-color: transparent;
-    color: #eeeeee;
-    outline: none;
-    outline-style: none;
-    border: none;
-    border-bottom: solid #eeeeee 1px;
+  background-color: transparent;
+  color: #eeeeee;
+  outline: none;
+  outline-style: none;
+  border: none;
+  border-bottom: solid #eeeeee 1px;
 `;
 
 export const Button = styled.button`

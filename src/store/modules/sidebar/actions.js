@@ -4,5 +4,3 @@ export const collapseSidebar = (status) => ({
   type: SIDEBAR,
   status,
 });
-
-

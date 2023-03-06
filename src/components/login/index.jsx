@@ -42,6 +42,7 @@ const Login = () => {
       handleLoginClick();
     } catch (error) {
       console.error('Login failed:', error.message);
+      alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
     }
   };
 
