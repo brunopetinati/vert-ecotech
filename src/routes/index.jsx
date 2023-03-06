@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import { AnimatePresence } from "framer-motion";
 import { useSelector } from "react-redux";
 
-import Welcome from '../pages/welcome'
+import Welcome from '../pages/main_display'
 
 import Login from '../components/login';
 import Register from '../components/register'

@@ -29,6 +29,7 @@ const Sidebar = () => {
         {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
       </SidebarHeader>
       <SidebarMenu>
+        <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? 'MP' : 'Meu Perfil'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? 'D' : 'Dashboard'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? 'U' : 'Usuários'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? 'Pr' : 'Projetos'}</SidebarMenuItem>
