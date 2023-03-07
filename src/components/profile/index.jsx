@@ -36,6 +36,8 @@ const RegisterProjectStep1 = () => {
         <StyledButton onClick={handleModalEndereco}>Adicionar Endereço</StyledButton>
         {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
       </ButtonContainerIndex>
+      <p />
+      <span>Exibir nessa página o objeto que veio do backend com as informações do usuário</span>
     </>
   )
 };
