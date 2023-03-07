@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import InputMask from "react-input-mask";
 
-
 export const Container = styled.div`
   width: 1000px;
   height: 700px !important;

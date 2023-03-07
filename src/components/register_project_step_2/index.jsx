@@ -53,7 +53,7 @@ const RegisterProjectStep2 = () => {
   const [selectedReservaSituation, setSelectedReservaSituation] = useState('')
 
   const optionsReservaSituation = [
-    { value: "Sem vegetação / em vegetação natural", label: "Sem vegetação / em vegetação natural" },
+    { value: "Sem vegetação / em regeneração natural", label: "Sem vegetação / em regeneração natural" },
     { value: "Em regeneração a partir de reflorestamento", label: "Em regeneração a partir de reflorestamento" },
     { value: "Completamente florestada", label: "Completamente florestada" }
   ];
