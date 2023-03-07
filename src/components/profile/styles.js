@@ -82,3 +82,19 @@ export const Button = styled.button`
   transform: scale(1.02) ;
   }
 `;
+
+export const ButtonContainerIndex = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+  padding: 2em;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 2;
+  background: #fff;
+
+  h3 {
+    color:#054D00;
+  }
+`;

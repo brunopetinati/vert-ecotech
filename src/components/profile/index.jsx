@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import  Info from './info';
 import  Endereco from './endereco';
 import  Banco from './banco';
+import { StyledButton } from '../default_button/styles';
+import { InnerContainer, ButtonContainerIndex } from './styles'
 
 
 const RegisterProjectStep1 = () => {
@@ -26,12 +28,14 @@ const RegisterProjectStep1 = () => {
 
   return (
     <>
-      <button onClick={handleModalInfo}>Open Info</button>
-      {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
-      <button onClick={handleModalBanco}>Open Banco</button>
-      {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
-      <button onClick={handleModalEndereco}>Open Endereço</button>
-      {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
+      <ButtonContainerIndex>
+        <StyledButton onClick={handleModalInfo}>Adicionar Informações</StyledButton>
+        {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
+        <StyledButton onClick={handleModalBanco}>Adicionar Banco</StyledButton>
+        {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
+        <StyledButton onClick={handleModalEndereco}>Adicionar Endereço</StyledButton>
+        {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
+      </ButtonContainerIndex>
     </>
   )
 };
