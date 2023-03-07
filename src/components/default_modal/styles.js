@@ -13,18 +13,18 @@ export const ModalContainer = styled.div`
 `;
 
 export const ModalBox = styled.div`
-  background-color: white;
+  position: relative;
   border-radius: 4px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
 `;
 
 export const CloseButton = styled.button`
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  transform: translate(50%, -50%);
   background-color: transparent;
   border: none;
-  position: absolute;
-  top: 10px;
-  right: 10px;
   font-size: 20px;
   cursor: pointer;
 `;

@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import  Info from './info';
 import  Endereco from './endereco';
@@ -29,11 +27,11 @@ const RegisterProjectStep1 = () => {
   return (
     <>
       <button onClick={handleModalInfo}>Open Info</button>
-      {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo} children={''}/>}
+      {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
       <button onClick={handleModalBanco}>Open Banco</button>
-      {/* {showModalBanco && <Banco onClose={handleModalBanco} />} */}
+      {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
       <button onClick={handleModalEndereco}>Open Endereço</button>
-      {/* {showModalEndereco && <Endereco onClose={handleModalEndereco} />} */}
+      {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
     </>
   )
 };
