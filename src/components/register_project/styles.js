@@ -15,5 +15,4 @@ export const InnerContainer = styled.div`
   height: ${({app_status}) => app_status == 'register_land_continue' ? '150vh' : '100vh'};
   align-items: center; 
   justify-content: center;
-  width: 800px;
 `;

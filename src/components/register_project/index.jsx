@@ -1,6 +1,6 @@
 import { Container, InnerContainer } from './styles'
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import RegisterProjectStep1 from '../register_project_step_1'
 import RegisterProjectStep2 from '../register_project_step_2'
 import RegisterProjectStep3 from '../register_project_step_3'

@@ -53,13 +53,13 @@ const Profile = () => {
   
 
   return (
-    <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-              >
       <IndexContainer>
+        <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+        >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
             <h3>Informações</h3>
@@ -149,8 +149,8 @@ const Profile = () => {
           {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
         </ButtonContainerIndex> */}
         <p />
+        </motion.div >
       </IndexContainer>
-    </motion.div>
   )
 };
 
