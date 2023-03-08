@@ -9,9 +9,6 @@ const Users = () => {
   
   return (
     <Container collapsed={collapsed} >
-      <TitleContainer>
-        <h1>Usuários</h1>
-      </TitleContainer>
       <ButtonContainer>
         <DefaultButton text={'Adicionar Usuário'} path={'/register'}/>
       </ButtonContainer>

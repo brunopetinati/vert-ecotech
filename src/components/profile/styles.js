@@ -14,6 +14,16 @@ export const Container = styled.div`
   }
 `;
 
+export const IndexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f9fafb;
+  width: 100%;
+  height: 100%;
+`;
+
 export const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;

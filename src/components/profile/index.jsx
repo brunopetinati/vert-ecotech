@@ -3,10 +3,10 @@ import  Info from './info';
 import  Endereco from './endereco';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
-import { InnerContainer, ButtonContainerIndex } from './styles'
+import { InnerContainer, ButtonContainerIndex, IndexContainer } from './styles'
 
 
-const RegisterProjectStep1 = () => {
+const Profile = () => {
 
   const [showModalInfo, setShowModalInfo] = useState(false);
   const [showModalBanco, setShowModalBanco] = useState(false);
@@ -27,8 +27,10 @@ const RegisterProjectStep1 = () => {
   console.log('here are the three conscutive modals', showModalInfo, showModalBanco, showModalEndereco)
 
   return (
-    <>
+    <IndexContainer>
       <ButtonContainerIndex>
+      </ButtonContainerIndex>
+      <ButtonContainerIndex style={{marginTop: '100px'}}>
         <StyledButton onClick={handleModalInfo}>Adicionar Informações</StyledButton>
         {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
         <StyledButton onClick={handleModalBanco}>Adicionar Banco</StyledButton>
@@ -37,9 +39,8 @@ const RegisterProjectStep1 = () => {
         {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
       </ButtonContainerIndex>
       <p />
-      <span>Exibir nessa página o objeto que veio do backend com as informações do usuário</span>
-    </>
+    </IndexContainer>
   )
 };
 
-export default RegisterProjectStep1;
+export default Profile;

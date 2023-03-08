@@ -2,10 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   height: 100%;
-
+  background: var(--body-color);
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};  
 `;
 

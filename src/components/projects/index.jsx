@@ -11,9 +11,6 @@ const Projects = () => {
 
   return (
     <Container collapsed={collapsed} >
-      <TitleContainer>
-        <h1>Projetos</h1>
-      </TitleContainer>
       <ButtonContainer>
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
       </ButtonContainer>
