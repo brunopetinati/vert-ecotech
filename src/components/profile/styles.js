@@ -41,12 +41,15 @@ export const Label = styled.label`
 `;
 
 export const ShowInput = styled(InputMask)`
+  padding: 10px;
+  margin-bottom: 20px;
+  
   border: 2px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
   padding: 8px;
   font-size: 16px;
   outline: none;
-  background: transparent;
+  width: 350px;
 
   &:focus {
     border-color: #007bff;
@@ -62,6 +65,7 @@ export const Input = styled(InputMask)`
   padding: 8px;
   font-size: 16px;
   outline: none;
+  width: 250px;
 
   &:focus {
     border-color: #007bff;
