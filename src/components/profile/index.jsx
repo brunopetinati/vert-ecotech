@@ -3,6 +3,7 @@ import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
 import { ProfileContainerInfo, IndexContainer, Row, ShowInput, Label, Input } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
+import { motion } from 'framer-motion';
 
 const Profile = () => {
 
@@ -51,6 +52,12 @@ const Profile = () => {
   
 
   return (
+    <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}
+              >
     <IndexContainer>
       <ProfileContainerInfo>
         <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
@@ -134,6 +141,7 @@ const Profile = () => {
       </ButtonContainerIndex> */}
       <p />
     </IndexContainer>
+    </motion.div>
   )
 };
 
