@@ -1,5 +1,5 @@
 import Modal from "../default_modal";
-import { Container, InnerContainer, Column, Label, Input} from './styles'
+import { Container, InnerContainer, Column, Label, Input, Button, ButtonDisplay} from './styles'
 
 const Info = ({ isOpen, onClose, children }) => {
 
@@ -19,6 +19,9 @@ const Info = ({ isOpen, onClose, children }) => {
           <Input type="text" id="cnpj" name="cnpj" />
         </Column>
       </InnerContainer>
+      <ButtonDisplay>
+        <Button>Adicionar Informações</Button>
+      </ButtonDisplay>
     </Container>
   </Modal>
   )

@@ -1,5 +1,5 @@
 import Modal from "../default_modal";
-import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span } from './styles'
+import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span, ButtonDisplay } from './styles'
 
 const Endereco = ({ isOpen, onClose, children }) => {
   return(
@@ -25,6 +25,9 @@ const Endereco = ({ isOpen, onClose, children }) => {
             <Input type="text" id="uf" name="uf"/>         
           </Column>
         </InnerContainer>
+      <ButtonDisplay>
+        <Button>Adicionar Endereço</Button>
+      </ButtonDisplay>
       </Container>
     </Modal>
   )

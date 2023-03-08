@@ -57,6 +57,14 @@ export const ButtonContainer = styled.div`
   width: 100%;
 `;
 
+export const ButtonDisplay = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  width: 102%;
+`;
+
 export const Button = styled.button`
   background-color: #c2fbd7;
   border-radius: 10px;

@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
 `;
 
-export const InnerContainer = styled.div`
+export const InnerContainer = styled.form`
   display: flex;
   justify-content: space-between;
   margin: 0 auto;

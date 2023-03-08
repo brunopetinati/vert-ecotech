@@ -1,5 +1,5 @@
 import Modal from "../default_modal";
-import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span } from './styles'
+import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span, ButtonDisplay } from './styles'
 
 const Banco = ({ isOpen, onClose, children }) => {
   return(
@@ -22,6 +22,9 @@ const Banco = ({ isOpen, onClose, children }) => {
             <Input type="text" id="chave_pix" name="chave_pix"/>
           </Column>
         </InnerContainer>
+      <ButtonDisplay>
+        <Button>Adicionar Informações de Banco</Button>
+      </ButtonDisplay>
       </Container>
     </Modal>
   )

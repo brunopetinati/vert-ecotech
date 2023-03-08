@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span } from './styles'
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
+import DefaultButton from '../default_button/index'
 
 const RegisterProjectStep1 = () => {
 
@@ -13,14 +15,36 @@ const RegisterProjectStep1 = () => {
     navigate('/welcome')
   };
 
-  const handleRegister = () => {
+  const handleRegister = (event) => {
+    handleSubmit(event);
     dispatch(appStatus('register_land_continue'))
+  };
+
+  const [totalArea, setTotalArea] = useState('');
+  const [totalReserveArea, setTotalReserveArea] = useState('');
+  const [address, setAddress] = useState('');
+
+
+
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      try {
+        const response = await axios.post('http://localhost:8000/api/projects/', {
+          totalArea,
+          totalReserveArea,
+          address
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+        return
+    }
   };
 
   return (
     <Container>
       <h3>Informações Cadastrais</h3>
-      <InnerContainer>
+      <InnerContainer onSubmit={handleRegister}>
         <Column>
           <Label>Tipo de pessoa</Label>         
           <Span>Jurídica || Tipo de pessoa</Span>
@@ -42,11 +66,25 @@ const RegisterProjectStep1 = () => {
           <Span>23-09-2022</Span>
           <p />
           <Label>Área total da propriedade (ha)?</Label>
-          <Input  type="text" placeholder="Em hectares(ha)"/>
+          <Input
+            type="text"
+            placeholder="Em hectares(ha)"
+            value={totalArea}
+            onChange={(event) => setTotalArea(event.target.value)}
+          />
           <Label>Área total da reserva legal (ha)?</Label>
-          <Input  type="text" placeholder="Em hectares(ha)"/>
+          <Input
+            type="text"
+            placeholder="Em hectares(ha)"
+            value={totalReserveArea}
+            onChange={(event) => setTotalReserveArea(event.target.value)}
+          />
           <Label>Qual o endereço da propriedade?</Label>
-          <Input  type="text" />          
+            <Input
+            type="text"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+          />        
         </Column>
       </InnerContainer>
       <ButtonContainer>
