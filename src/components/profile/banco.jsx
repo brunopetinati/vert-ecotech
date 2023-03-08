@@ -5,7 +5,6 @@ const Banco = ({ isOpen, onClose, children }) => {
   return(
     <Modal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-        <h3>Meu Perfil</h3>
         <InnerContainer>
           <Column> 
             <Label for="tipo_conta">Tipo de conta:</Label>

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import  Info from './info';
-import  Endereco from './endereco';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
-import { InnerContainer, ButtonContainerIndex, IndexContainer } from './styles'
-
+import { ProfileContainerInfo, IndexContainer, Row, ShowInput, Label, Input } from './styles'
+import { handleCepChange } from '../../api/requests/cep';
 
 const Profile = () => {
 
@@ -12,32 +10,128 @@ const Profile = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
   const [showModalEndereco, setShowModalEndereco] = useState(false);
 
-  const handleModalInfo = () => {
+  /* const handleModalInfo = () => {
     setShowModalInfo(!showModalInfo);
-  };
+  }; */
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
   };
 
-  const handleModalEndereco = () => {
+  /* const handleModalEndereco = () => {
     setShowModalEndereco(!showModalEndereco);
+  }; */
+
+  // Código pertinente ao preenchimento automático do CEP
+  
+  const [cep, setCep] = useState('');
+  const [address, setAddress] = useState({
+    street: '',
+    district: '',
+    number: '',
+    state: '',
+    city: ''
+    // add more fields as needed
+  });
+
+  const handleCepOnForm = async (cep) => {
+    if (cep.length === 8) {
+      const cepObject = await handleCepChange(cep)
+      console.log(cepObject)
+      setAddress({
+        street: cepObject.logradouro,
+        district: cepObject.bairro,
+        state: cepObject.uf,
+        city: cepObject.localidade
+      })
+    }    
   };
 
-  console.log('here are the three conscutive modals', showModalInfo, showModalBanco, showModalEndereco)
+  const [phone, setPhone] = useState('');
+  
 
   return (
     <IndexContainer>
-      <ButtonContainerIndex>
-      </ButtonContainerIndex>
-      <ButtonContainerIndex style={{marginTop: '100px'}}>
+      <ProfileContainerInfo>
+        <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
+          <h3>Informações</h3>
+          <Row>
+            <Label>Nome</Label>
+            <ShowInput type="text" value={'Fernando Gonçalves Aguilar'} />
+          </Row>
+          <Row>
+            <Label>Email</Label>
+            <ShowInput type="text" value={'fernando@email.com'} />
+          </Row>
+          <Row>
+            <Label>Whatsapp</Label>
+            <ShowInput type="text" value={phone} 
+            mask={"(99) 99999-9999"}
+            maskPlaceholder="+55 21 98787-5512"
+            alwaysShowMask={false}
+            />
+          </Row>
+          <Row>
+            <Label for="rg">RG:</Label>
+            <Input type="text" id="rg" name="rg" 
+            mask={"99.999.999-9"}
+            maskPlaceholder="47.857.659.3"
+            alwaysShowMask={false} />
+          </Row>
+          <Row>            
+            <Label for="cpg">CPF:</Label>
+            <Input type="text" id="cpg" name="cpg" 
+            mask={"999.999.999-99"}
+            maskPlaceholder="359.868.555-19"
+            alwaysShowMask={false}
+            />          
+          </Row>
+          <Row>            
+            <Label for="cnpj">CNPJ:</Label>
+            <Input type="text" id="cnpj" name="cnpj" 
+            mask={"99.999.999/9999-99"}
+            maskPlaceholder="12.345.678/0001-00"
+            alwaysShowMask={false}
+            />
+          </Row>
+          <Row>
+            <Label for="cep">CEP:</Label>
+            <Input type="text" id="cep" name="cep" value={cep} onChange={(event) => {
+              handleCepOnForm(event.target.value)
+              setCep(event.target.value)
+            }} />
+          </Row>
+          <Row>
+            <Label for="rua">Rua:</Label>
+            <Input type="text" id="rua" name="rua" value={address.street} disabled />    
+          </Row>
+          <Row>
+            <Label for="numero">Número:</Label>
+            <Input type="text" id="numero" name="numero" value={address.number} />
+          </Row>
+          <Row>
+            <Label for="bairro">Bairro:</Label>
+            <Input type="text" id="bairro" name="bairro" value={address.district} disabled/>    
+          </Row>
+          <Row>
+            <Label for="cidade">Cidade:</Label>
+            <Input type="text" id="cidade" name="cidade" value={address.city} disabled/>
+          </Row>
+          <Row>
+            <Label for="uf">UF:</Label>
+            <Input type="text" id="uf" name="uf" value={address.state} disabled/>         
+          </Row>          
+          <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Banco</StyledButton>
+          {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
+        </div>
+      </ProfileContainerInfo>
+
+      {/* <ButtonContainerIndex style={{marginTop: '16px'}}>
         <StyledButton onClick={handleModalInfo}>Adicionar Informações</StyledButton>
         {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
-        <StyledButton onClick={handleModalBanco}>Adicionar Banco</StyledButton>
-        {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
         <StyledButton onClick={handleModalEndereco}>Adicionar Endereço</StyledButton>
         {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
-      </ButtonContainerIndex>
+      </ButtonContainerIndex> */}
       <p />
     </IndexContainer>
   )

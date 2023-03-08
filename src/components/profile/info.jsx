@@ -1,5 +1,5 @@
 import Modal from "../default_modal";
-import { Container, InnerContainer, Column, Label, Input, Button, ButtonDisplay} from './styles'
+import { Container, InnerContainer, Row, Label, Input, Button, ButtonDisplay} from './styles'
 
 const Info = ({ isOpen, onClose, children }) => {
 
@@ -8,16 +8,16 @@ const Info = ({ isOpen, onClose, children }) => {
       <Container>
       <h3>Meu Perfil</h3>
       <InnerContainer>
-        <Column>  
+        <Row>  
           <Label for="rg">RG:</Label>
           <Input type="text" id="rg" name="rg" />
           <Label for="cpg">CPF:</Label>
           <Input type="text" id="cpg" name="cpg" />          
-        </Column>
-        <Column>            
+        </Row>
+        <Row>            
           <Label for="cnpj">CNPJ:</Label>
           <Input type="text" id="cnpj" name="cnpj" />
-        </Column>
+        </Row>
       </InnerContainer>
       <ButtonDisplay>
         <Button>Adicionar Informações</Button>

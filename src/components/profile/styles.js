@@ -14,16 +14,6 @@ export const Container = styled.div`
   }
 `;
 
-export const IndexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #f9fafb;
-  width: 100%;
-  height: 100%;
-`;
-
 export const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,9 +26,31 @@ export const Column = styled.div`
   flex-direction: column;
 `;
 
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  padding: 16px;
+`;
+
 export const Label = styled.label`
   margin-bottom: 10px;
   font-weight: 700;
+`;
+
+export const ShowInput = styled(InputMask)`
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+
+  &:focus {
+    border-color: #007bff;
+  }
 `;
 
 export const Input = styled(InputMask)`
@@ -101,10 +113,41 @@ export const Button = styled.button`
   }
 `;
 
+export const IndexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f9fafb;
+  width: 100%;
+  height: 100%;
+`;
+
+export const ProfileContainerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 900px;
+  padding: 4em;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 2;
+  background: #fff;
+  max-height: 500px;
+
+  h3 {
+    display: flex;
+    align-self: flex-start;
+    color: #054D00;
+  }
+`;
+
 export const ButtonContainerIndex = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 600px;
   padding: 2em;
   border-radius: 20px;
