@@ -37,8 +37,8 @@ const Profile = () => {
   });
 
   const handleCepOnForm = async (cep) => {
-    if (cep.length === 8) {
-      const cepObject = await handleCepChange(cep)
+    if (cep.length === 9) {
+      const cepObject = await handleCepChange(cep.replace('-',''))
       console.log(cepObject)
       setAddress({
         street: cepObject.logradouro,
