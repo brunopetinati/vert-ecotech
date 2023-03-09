@@ -7,21 +7,11 @@ import { motion } from 'framer-motion';
 
 const Profile = () => {
 
-  const [showModalInfo, setShowModalInfo] = useState(false);
   const [showModalBanco, setShowModalBanco] = useState(false);
-  const [showModalEndereco, setShowModalEndereco] = useState(false);
-
-  /* const handleModalInfo = () => {
-    setShowModalInfo(!showModalInfo);
-  }; */
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
   };
-
-  /* const handleModalEndereco = () => {
-    setShowModalEndereco(!showModalEndereco);
-  }; */
 
   // Código pertinente ao preenchimento automático do CEP
   
@@ -37,7 +27,7 @@ const Profile = () => {
   });
 
   const handleCepOnForm = async (cep) => {
-    if (cep.length === 9) {
+    if (cep.length === 9 && !isNaN(cep.charAt(cep.length -1))) {
       const cepObject = await handleCepChange(cep.replace('-',''))
       console.log(cepObject)
       setAddress({
@@ -65,17 +55,18 @@ const Profile = () => {
             <h3>Informações</h3>
             <Row>
               <Label>Nome</Label>
-              <ShowInput type="text" value={'Fernando Gonçalves Aguilar'} />
+              <ShowInput type="text" />
             </Row>
             <Row>
               <Label>Email</Label>
-              <ShowInput type="text" value={'fernando@email.com'} />
+              <ShowInput type="text" />
             </Row>
             <Row>
               <Label>Whatsapp</Label>
-              <ShowInput type="text" value={phone} 
+              <ShowInput type="text" value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               mask={"(99) 99999-9999"}
-              maskPlaceholder="+55 21 98787-5512"
+              maskPlaceholder="(21) 98787-5512"
               alwaysShowMask={false}
               />
             </Row>
@@ -123,7 +114,7 @@ const Profile = () => {
             </Row>
             <Row>
               <Label for="rua">Complemento:</Label>
-              <ShowInput type="text" id="complemento" name="complemento" value={address.complemento} disabled placeholder="Preencha o CEP para auto preenchimento" />    
+              <ShowInput type="text" id="complemento" name="complemento" value={address.complemento} />    
             </Row>
             <Row>
               <Label for="bairro">Bairro:</Label>
@@ -136,8 +127,11 @@ const Profile = () => {
             <Row>
               <Label for="uf">UF:</Label>
               <ShowInput type="text" id="uf" name="uf" value={address.state} disabled placeholder="Preencha o CEP para preenchimento automático"/>         
-            </Row>          
-            <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Banco</StyledButton>
+            </Row>     
+            <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
+              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
+              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
+            </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>
         </ProfileContainerInfo>
