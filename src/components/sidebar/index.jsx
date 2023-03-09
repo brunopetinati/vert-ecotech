@@ -1,5 +1,6 @@
 
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions';
 import { collapseSidebar } from '../../store/modules/sidebar/actions';
@@ -10,6 +11,7 @@ import Logo from '../../assets/marca-vert.png'
 
 const Sidebar = () => {
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const app_status = useSelector((state) => state.app_status.status);
   const collapsed = useSelector((state) => state.sidebar.status);
@@ -21,6 +23,11 @@ const Sidebar = () => {
 
   const handleItemClick = (status) => {
     dispatch(appStatus(status));
+  };
+
+  const handleSecret = () => {
+
+    navigate("/intern_client_register");
   };
 
   return (
@@ -38,7 +45,7 @@ const Sidebar = () => {
         <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? 'C' : 'Configurações'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-       {collapsed ? <span>V.E  &copy;</span> : <span>Vert Ecotech &copy; 2023</span>}
+       {collapsed ? <span>V.E  &copy;</span> : <span onClick={handleSecret}>Vert Ecotech &copy; 2023</span>}
       </SidebarFooter>
     </SidebarContainer>
   );

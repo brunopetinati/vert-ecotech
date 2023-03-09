@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
+import { MainContainer, ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, StyledSelect } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { motion } from 'framer-motion';
 
-const Profile = () => {
+const InternRegisterUser = () => {
 
   const [showModalBanco, setShowModalBanco] = useState(false);
+  const [userType, setUserType] = useState('');
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -39,10 +40,21 @@ const Profile = () => {
     }    
   };
 
+  const handleSelectUserType = (event) => {
+    setUserType(event);
+  };
+
   const [phone, setPhone] = useState('');
-  
+
+  // Informações refetentes ao tipo de usuário, engenheiro ou comercial
+  const optionsForAccess = [
+    { value: "Engenheiro", label: "Engenheiro" },
+    { value: "Comercial", label: "Comercial" },
+    { value: "", label: "Sem acesso" }
+  ];
 
   return (
+    <MainContainer>
       <IndexContainer>
         <motion.div
         initial={{ opacity: 0 }}
@@ -52,7 +64,7 @@ const Profile = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Informações</h3>
+            <h3>Cadastro Interno de Usuário</h3>
             <Row>
               <Label>Nome</Label>
               <ShowInput type="text" />
@@ -127,7 +139,16 @@ const Profile = () => {
             <Row>
               <Label for="uf">UF:</Label>
               <ShowInput type="text" id="uf" name="uf" value={address.state} disabled placeholder="Preencha o CEP para preenchimento automático"/>         
-            </Row>     
+            </Row> 
+            <Row>
+              <Label for="uf">Acesso</Label>
+              <StyledSelect
+                value={userType}
+                onChange={handleSelectUserType}
+                options={optionsForAccess}
+                placeholder={'Selecione uma opção'}
+              />
+            </Row>         
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
@@ -135,16 +156,11 @@ const Profile = () => {
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>
         </ProfileContainerInfo>
-        {/* <ButtonContainerIndex style={{marginTop: '16px'}}>
-          <StyledButton onClick={handleModalInfo}>Adicionar Informações</StyledButton>
-          {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
-          <StyledButton onClick={handleModalEndereco}>Adicionar Endereço</StyledButton>
-          {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
-        </ButtonContainerIndex> */}
         <p />
         </motion.div >
       </IndexContainer>
+    </MainContainer>
   )
 };
 
-export default Profile;
+export default InternRegisterUser;
