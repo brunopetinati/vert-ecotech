@@ -45,7 +45,7 @@ const Sidebar = () => {
         <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? 'C' : 'Configurações'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-       {collapsed ? <span>V.E  &copy;</span> : <span onClick={handleSecret}>Vert Ecotech &copy; 2023</span>}
+       {collapsed ? <span onClick={handleSecret}>V.E  &copy;</span> : <span>Vert Ecotech &copy; 2023</span>}
       </SidebarFooter>
     </SidebarContainer>
   );
