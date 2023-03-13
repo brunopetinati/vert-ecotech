@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const SidebarContainerOriginal = styled.div`
   background-color: #F9FAFB;
   height: 100vh;
@@ -38,12 +39,16 @@ export const SidebarMenu = styled.ul`
 `;
 
 export const SidebarMenuItem = styled.li` 
-  padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   font-size: 18px;
   font-weight: 500;
   color: #606F7B;
   cursor: pointer;
+  padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
+
 
   &:hover {
     background-color: #E5E5E5;
@@ -52,7 +57,7 @@ export const SidebarMenuItem = styled.li`
 
   &.active {
     background-color: #1D2228;
-    color: #FFF;
+    color: white;
   }
 `;
 
@@ -62,4 +67,10 @@ export const SidebarFooter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const SidebarIcon = styled.img`
+  color: black;
+  width: 30px;
+  height: 30px;
 `;

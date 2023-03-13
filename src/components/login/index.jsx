@@ -9,7 +9,6 @@ import axios from 'axios';
 import Logo from '../../assets/logo-vert-white.png'
 //import Logo from '../../assets/marca-vert.png'
 
-
 const Login = () => {
 
   const navigate = useNavigate();
