@@ -81,28 +81,22 @@ export const SidebarFooter = styled.div`
 
 export const SidebarIcon = styled.img`
   width: 30px;
-  height: 30px;
-  fill: white;
-
 `;
 export const StyledUser = styled(User)`
-  fill: ${({active}) => active ? "#fff" : "#000"};
+  fill: ${({active}) => active ? "#fff" : "#fff"};
   height: 32px;
-  width: 16px;
   transform: scale(2.5);
 `;
 
 export const StyledStocks = styled(Stocks)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 16px;
   transform: scale(2.5);
 `;
 
 export const StyledShoppingCart = styled(ShoppingCart)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 16px;
   transform: scale(2.5);
 `;
 
@@ -110,13 +104,11 @@ export const StyledShoppingCart = styled(ShoppingCart)`
 export const StyledUsers = styled(Users)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 16px;
   transform: scale(2.5);
 `;
 
 export const StyledSettings = styled(Settings)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 16px;
   transform: scale(2.5);
 `;

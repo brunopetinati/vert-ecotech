@@ -45,6 +45,7 @@ const Sidebar = () => {
   const [activeShoppingCart, setActiveShoppingCart] = useState(false);
   const [activeSettings, setActiveSettings] = useState(false);
 
+  console.log(app_status)
 
   const handleActiveIcon = () => {
     if (app_status === "Dashboard") {
@@ -76,7 +77,7 @@ const Sidebar = () => {
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
-        <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUser} /> : 'Usuários'}</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Projetos'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Pedidos" ? "active" : ""} onClick={() => handleItemClick("Pedidos")}>{collapsed ? <StyledShoppingCart active={activeShoppingCart} /> :'Pedidos'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
