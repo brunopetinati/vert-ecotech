@@ -1,4 +1,11 @@
 import styled from 'styled-components';
+//import Settings from '../../assets/icons/settings.svg'
+import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
+import { ReactComponent as User } from '../../assets/icons/user.svg';
+import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
+import { ReactComponent as ShoppingCart } from '../../assets/icons/shopping-cart.svg';
+import { ReactComponent as Users } from '../../assets/icons/users.svg';
+
 
 
 export const SidebarContainerOriginal = styled.div`
@@ -49,10 +56,13 @@ export const SidebarMenuItem = styled.li`
   cursor: pointer;
   padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
 
-
   &:hover {
     background-color: #E5E5E5;
     color: #333;
+  }
+
+  li {
+    background-color: red;
   }
 
   &.active {
@@ -70,7 +80,43 @@ export const SidebarFooter = styled.div`
 `;
 
 export const SidebarIcon = styled.img`
-  color: black;
   width: 30px;
   height: 30px;
+  fill: white;
+
+`;
+export const StyledUser = styled(User)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 16px;
+  transform: scale(2.5);
+`;
+
+export const StyledStocks = styled(Stocks)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 16px;
+  transform: scale(2.5);
+`;
+
+export const StyledShoppingCart = styled(ShoppingCart)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 16px;
+  transform: scale(2.5);
+`;
+
+
+export const StyledUsers = styled(Users)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 16px;
+  transform: scale(2.5);
+`;
+
+export const StyledSettings = styled(Settings)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 16px;
+  transform: scale(2.5);
 `;

@@ -10,7 +10,7 @@ const Users = () => {
   return (
     <Container collapsed={collapsed} >
       <ButtonContainer>
-        <DefaultButton text={'Adicionar Usuário'} path={'/register'}/>
+        <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
       </ButtonContainer>
       <TableContainer>
         <UsersTable />
