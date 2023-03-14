@@ -8,7 +8,6 @@ import { userLogin } from '../../store/modules/login/actions';
 import axios from 'axios';
 
 import Logo from '../../assets/logo-vert-white.png'
-//import Logo from '../../assets/marca-vert.png'
 
 const Login = () => {
 
@@ -16,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const app_status = useSelector((state) => state.app_status.status);
-  const login = useSelector((state) => state.app_status.status);
+  const login = useSelector((state) => state.token);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -34,7 +33,7 @@ const Login = () => {
         console.log('Login successful:', response.data);
         // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.token);
-        dispatch(userLogin(response.data.accessToken));
+        dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
         handleLoginClick();
       });

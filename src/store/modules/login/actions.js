@@ -1,6 +1,9 @@
 import { USER_LOGIN } from "./action-types";
 
-export const userLogin = (token) => ({
+export const userLogin = (accessToken, userData) => ({
   type: USER_LOGIN,
-  token,
+  payload: {
+    accessToken,
+    userData,
+  },
 });

@@ -11,18 +11,16 @@ import Logo from '../../assets/marca-vert.png'
 import Leaf from '../../assets/icons/leaf.svg';
 
 
-import { StyledUser, StyledUsers, StyledLeaf, StyledShoppingCart, StyledStocks, StyledSettings } from './styles';
+import { StyledUser, StyledUsers,  StyledStocks, StyledSettings } from './styles';
 
 
 
 const Sidebar = () => {
 
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const app_status = useSelector((state) => state.app_status.status);
   const collapsed = useSelector((state) => state.sidebar.status);
-
 
   const setCollapsed = (state) => {
     dispatch(collapseSidebar(state))
@@ -45,7 +43,7 @@ const Sidebar = () => {
   const [activeShoppingCart, setActiveShoppingCart] = useState(false);
   const [activeSettings, setActiveSettings] = useState(false);
 
-  console.log(app_status)
+  console.log('status do app', app_status);
 
   const handleActiveIcon = () => {
     if (app_status === "Dashboard") {

@@ -96,12 +96,12 @@ export const StyledStocks = styled(Stocks)`
   transform: scale(2.5);
 `;
 
-export const StyledShoppingCart = styled(ShoppingCart)`
+/* export const StyledShoppingCart = styled(ShoppingCart)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;
   transform: scale(2.5);
-`;
+`; */
 
 
 export const StyledUsers = styled(Users)`
