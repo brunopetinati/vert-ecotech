@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-//import Settings from '../../assets/icons/settings.svg'
 import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
 import { ReactComponent as User } from '../../assets/icons/user.svg';
 import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
@@ -28,7 +27,7 @@ export const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: all 0.5s ease-in-out;
+  transition: width 0.5s ease-in-out;
 `;
 
 export const SidebarHeader = styled.div`
@@ -82,21 +81,28 @@ export const SidebarFooter = styled.div`
 export const SidebarIcon = styled.img`
   width: 30px;
 `;
+
 export const StyledUser = styled(User)`
   fill: ${({active}) => active ? "#fff" : "#fff"};
   height: 32px;
+  width: 10px;
+
   transform: scale(2.5);
 `;
 
 export const StyledStocks = styled(Stocks)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
+  width: 10px;
+
   transform: scale(2.5);
 `;
 
 export const StyledShoppingCart = styled(ShoppingCart)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
+  width: 10px;
+
   transform: scale(2.5);
 `;
 
@@ -104,11 +110,15 @@ export const StyledShoppingCart = styled(ShoppingCart)`
 export const StyledUsers = styled(Users)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
+  width: 10px;
+
   transform: scale(2.5);
 `;
 
 export const StyledSettings = styled(Settings)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
+  width: 10px;
+
   transform: scale(2.5);
 `;
