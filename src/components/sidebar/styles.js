@@ -86,7 +86,6 @@ export const StyledUser = styled(User)`
   fill: ${({active}) => active ? "#fff" : "#fff"};
   height: 32px;
   width: 10px;
-
   transform: scale(2.5);
 `;
 
@@ -94,7 +93,6 @@ export const StyledStocks = styled(Stocks)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;
-
   transform: scale(2.5);
 `;
 
@@ -102,7 +100,6 @@ export const StyledShoppingCart = styled(ShoppingCart)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;
-
   transform: scale(2.5);
 `;
 
@@ -111,7 +108,6 @@ export const StyledUsers = styled(Users)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;
-
   transform: scale(2.5);
 `;
 
@@ -119,6 +115,5 @@ export const StyledSettings = styled(Settings)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;
-
   transform: scale(2.5);
 `;
