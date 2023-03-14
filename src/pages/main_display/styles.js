@@ -11,5 +11,5 @@ export const SideContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100vw;
+  background: #f9fafb;
 `;
-

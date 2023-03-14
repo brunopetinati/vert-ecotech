@@ -8,9 +8,11 @@ import thunk from "redux-thunk";
 
 import appStatusReducer from "./modules/app_status/reducer";
 import sidebarReducer from './modules/sidebar/reducer'
+import loginReducer from './modules/login/reducer'
 
 const reducers = combineReducers({
   app_status: appStatusReducer,
+  login: loginReducer,
   sidebar: sidebarReducer
 });
 

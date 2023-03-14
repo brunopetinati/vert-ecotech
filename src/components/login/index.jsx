@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
+import { userLogin } from '../../store/modules/login/actions';
 import axios from 'axios';
 
 import Logo from '../../assets/logo-vert-white.png'
@@ -15,27 +16,34 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const app_status = useSelector((state) => state.app_status.status);
+  const login = useSelector((state) => state.app_status.status);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   console.log(app_status)
+  console.log('essas são as informações do login', login)
 
   const handleSubmit = async event => {
     event.preventDefault();
     try {
       console.log('sending login request...');
-      const response = await axios.post('http://localhost:8000/api/login/', {
+      axios.post('http://localhost:8000/api/login/', {
         email,
         password,
+      }).then(response => {
+        console.log('Login successful:', response.data);
+        // Store the token in the sessionStorage
+        sessionStorage.setItem('Authorization', response.data.token);
+        dispatch(userLogin(response.data.accessToken));
+        // Navigate to the welcome page on successful login
+        handleLoginClick();
       });
-      console.log('Login successful:', response.data);
-      // Navigate to the welcome page on successful login
-      handleLoginClick();
     } catch (error) {
       console.error('Login failed:', error.message);
       alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
     }
   };
+  
 
   const handleLoginClick = () => {
     navigate('/welcome');
