@@ -15,8 +15,6 @@ const AppRoutes = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const login = useSelector((state) => state.loginIntel);
-  
-  console.log('login.acessToken =', login.accessToken)
 
   if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register') {
     navigate('/');

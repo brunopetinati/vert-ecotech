@@ -1,31 +1,33 @@
 import { Table, THead, TR, TH, TD, Wrapper} from './styles'
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
-//const TableComponent = ({ data }) => {
+
 const UsersTable = () => {
 
-  let data = [
-  { 'column1':'São Bernardo',
-    'column2':'50kha',
-    'column3':'300.000',
-    'column4':'850.000',
-    'column5':'23-12-2022',
-    'column6':'23-12-2042',
-    'column7':'1.150.000',
-    'column8':'250.000/a',
-    'column9':'Aprovado',
-    'column10':'Badge',
-  },
-  {'column1':'Akita',
-  'column2':'80kha',
-  'column3':'100.000',
-  'column4':'200.000',
-  'column5':'23-12-2022',
-  'column6':'23-12-2042',
-  'column7':'300.000',
-  'column8':'10.000/a',
-  'column9':'Aprovado',
-  'column10':'Badge',
-  },'this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this',]
+  const [users, setUsers] = useState([]);
+
+  const app_status = useSelector((state) => state.app_status);
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        const response = await axios.get('http://localhost:8000/api/users/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUsers();
+  }, [app_status]);
 
   return (
     <Wrapper>
@@ -33,22 +35,20 @@ const UsersTable = () => {
         <THead>
           <TR>
             <TH>Nome</TH>
-            <TH>WhatsApp</TH>
-            <TH>Cidade</TH>
-            <TH>Estado</TH>
             <TH>Email</TH>
-            <TH>Role</TH>
+            <TH>Whatsapp</TH>
+            <TH>Localidade</TH>
+            <TH>Acesso</TH>
           </TR>
         </THead>
         <tbody>
-          {data.map((row, index) => (
+          {users && users.map((row, index) => (
             <TR key={index}>
-              <TD>{row.column1}</TD>
-              <TD>{row.column2}</TD>
-              <TD>{row.column3}</TD>
-              <TD>{row.column4}</TD>
-              <TD>{row.column5}</TD>
-              <TD>{row.column6}</TD>         
+              <TD>{row.full_name}</TD>
+              <TD>{row.email}</TD>
+              <TD>{row.phone}</TD>
+              <TD>{row.city + ', ' + row.state}</TD>
+              <TD>{row.user_type}</TD>         
             </TR>
           ))}
         </tbody>

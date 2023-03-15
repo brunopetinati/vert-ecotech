@@ -8,6 +8,7 @@ import * as yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
+import { userLogin } from "../../store/modules/login/actions";
 import { setAuthenticate } from '../../store/modules/authentication/actions';
 
 
@@ -26,7 +27,8 @@ const Register = () => {
     password: '',
     phone: '',
     city: '',
-    state: ''
+    state: '',
+    user_type: 'Regular'
   });
 
   const handleClick = () => {
@@ -53,6 +55,7 @@ const Register = () => {
     axios.post('http://localhost:8000/api/signup/', formState)
       .then(response => {
         console.log(response);
+        // editar código aqui de quando der certo se cadastrar
         //window.localStorage.setItem("authToken", res.data.token);
         /* window.localStorage.setItem(
           "userLogged",
@@ -61,10 +64,17 @@ const Register = () => {
         /* dispatch(setAuthenticate(true));
         history.push("/users");
         setOpen(false); */
+        console.log('Login successful:', response.data);
+        // Store the token in the sessionStorage
+        sessionStorage.setItem('Authorization', response.data.access);
+        dispatch(userLogin(response.data.access, response.data));
+        // Navigate to the welcome page on successful login
+        navigate('/welcome');
       })
       .catch(error => {
         alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
         console.error(error);
+        return
       });
     setShowLoading(true);
     setTimeout(() => {
