@@ -16,9 +16,9 @@ const AppRoutes = () => {
   const location = useLocation();
   const login = useSelector((state) => state.loginIntel);
   
-  console.log(login.accessToken)
+  console.log('login.acessToken =', login.accessToken)
 
-  if (!login.accessToken && location.pathname !== '/') {
+  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register') {
     navigate('/');
     return (
       <AnimatePresence>
