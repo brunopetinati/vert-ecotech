@@ -9,7 +9,7 @@ import RegisterProjectStep3 from '../register_project_step_3'
 const RegisterProject = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
-  console.log(app_status)
+  //console.log(app_status)
 
   return (
     <Container>

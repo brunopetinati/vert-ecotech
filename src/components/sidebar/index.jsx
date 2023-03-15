@@ -43,7 +43,7 @@ const Sidebar = () => {
   const [activeShoppingCart, setActiveShoppingCart] = useState(false);
   const [activeSettings, setActiveSettings] = useState(false);
 
-  console.log('status do app', app_status);
+  //console.log('status do app', app_status);
 
   const handleActiveIcon = () => {
     if (app_status === "Dashboard") {

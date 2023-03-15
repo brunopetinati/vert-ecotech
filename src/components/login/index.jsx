@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch, useSelector } from "react-redux";
@@ -15,12 +15,10 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const app_status = useSelector((state) => state.app_status.status);
-  const login = useSelector((state) => state.token);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  console.log(app_status)
-  console.log('essas são as informações do login', login)
+
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -32,10 +30,13 @@ const Login = () => {
       }).then(response => {
         console.log('Login successful:', response.data);
         // Store the token in the sessionStorage
-        sessionStorage.setItem('Authorization', response.data.token);
+        sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
         handleLoginClick();
+      }).catch(error => {
+        console.error('Login failed:', error.message);
+        alert('Não foi possível logar. Verifique as informações e tente novamente.');
       });
     } catch (error) {
       console.error('Login failed:', error.message);
