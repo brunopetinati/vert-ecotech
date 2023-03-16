@@ -1,6 +1,6 @@
 import UsersTable from "../users_table/index";
 import DefaultButton from "../default_button";
-import { Container, TitleContainer, ButtonContainer, TableContainer } from "./styles";
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -69,18 +69,17 @@ const Users = () => {
   return (
     <Container collapsed={collapsed} >
       <ButtonContainer>
-      <div>
-        <label htmlFor="column-select">Select a column to search:</label>
-        <select id="column-select" onChange={handleColumnChange}>
+        <div>
+        <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
+        <StyledSelect id="column-select" onChange={handleColumnChange}>
           <option value="">---</option>
           <option value="Nome">Nome</option>
           <option value="Email">Email</option>
           <option value="Whatsapp">Whatsapp</option>
           <option value="Localidade">Localidade</option>
           <option value="Acesso">Acesso</option>
-        </select>
-        <input type="text" placeholder="Search..." value={searchValue} onChange={handleSearchChange} />
-      </div>
+        </StyledSelect>
+        </div>
         <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
       </ButtonContainer>
       <TableContainer>
