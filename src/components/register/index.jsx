@@ -1,19 +1,15 @@
 import { useState } from 'react'
 import { motion } from "framer-motion";
-import { LoginContainer, LoginForm, Input, Button } from './styles'
+import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
 import axios from "axios";
+import Logo from '../../assets/logo-vert-white.png'
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/modules/login/actions";
-import { setAuthenticate } from '../../store/modules/authentication/actions';
 
 
 const Register = () => {
-
 
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [showLoading, setShowLoading] = useState(false);
@@ -104,14 +100,13 @@ const Register = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-        > <h3 style={{color: 'white'}}>Registrado com sucesso!</h3></motion.div> : <LoginForm onSubmit={CreateUserForm}>
+        > <h3 style={{color: 'white'}}>Registrado com sucesso!</h3></motion.div> : <><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
         <Input placeholder="Nome" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
         <Input placeholder="Senha" type="password" name="password" value={formState.password} onChange={handleInputChange} />
         <Input placeholder="Confirmar senha" type="password" name="password_confirmation" value={passwordConfirmation} onChange={event => setPasswordConfirmation(event.target.value)} />
         <Input placeholder="Whatsapp" type="tel" name="phone" value={formState.phone} onChange={handleInputChange} 
           mask={"(99) 99999-9999"}
-          maskPlaceholder="+55 21 98787-5512"
           alwaysShowMask={false}
         />
         <Input placeholder="Cidade" type="text" name="city" value={formState.city} onChange={handleInputChange} />
@@ -120,7 +115,7 @@ const Register = () => {
           <Button onClick={() => handleClick()}>Login</Button>
           <Button onClick={() => handleSubmition()} type="submit">Cadastre-se aqui</Button>
         </div>
-      </LoginForm>}
+      </LoginForm></>}
     </motion.div>
   </LoginContainer>
   );

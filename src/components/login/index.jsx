@@ -17,6 +17,7 @@ const Login = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showLoading, setShowLoading] = useState(false);
 
 
 
@@ -31,9 +32,12 @@ const Login = () => {
         console.log('Login successful:', response.data);
         // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.access);
-        dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
-        handleLoginClick();
+        setShowLoading(true);
+        setTimeout(() => {
+          handleLoginClick(response); 
+          dispatch(userLogin(response.data.access, response.data));
+        }, 2000);
       }).catch(error => {
         console.error('Login failed:', error.message);
         alert('Não foi possível logar. Verifique as informações e tente novamente.');
@@ -65,13 +69,18 @@ const Login = () => {
   }
   
   return (
-      <LoginContainer>
-        <motion.div
+     <LoginContainer>
+        {showLoading ? <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8 }}> <h1 style={{color: 'white'}}>Seja Bem Vindo!</h1></motion.div> : 
+            <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
-        >
+            >
           <Img src={Logo} />
           {app_status == 'forgot_password' ? 
             <motion.div
@@ -110,9 +119,8 @@ const Login = () => {
                 <Button type="submit">Login</Button>
                 <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
               </div>
-            </LoginForm>}
-        </motion.div>
-        {app_status != 'forgot_password' && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
+            </LoginForm>}</motion.div>}
+        {app_status != 'forgot_password' && !showLoading && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
       </LoginContainer>
   );
 };
