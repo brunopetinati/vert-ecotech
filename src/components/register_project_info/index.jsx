@@ -1,10 +1,13 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, StyledSelect, ButtonLink } from './styles'
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
+import { motion } from 'framer-motion';
 
 const RegisterProjectStep2 = () => {
 
+  const navigate = useNavigate();
 
   const [totalArea, setTotalArea] = useState('');
   const [totalReserveArea, setTotalReserveArea] = useState('');
@@ -124,7 +127,8 @@ const RegisterProjectStep2 = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(appStatus(''))
+    dispatch(appStatus('Projetos'));
+    navigate('/welcome');
   };
 
   const handleRegister = () => {
@@ -134,114 +138,121 @@ const RegisterProjectStep2 = () => {
 
 
   return (
-    <Container>
-      <h3>Informações Cadastrais</h3>
-      <InnerContainer>
-        <Column> 
-          <Label>Proprietário da área:</Label>
-          <Input  type="text" />
-          <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
-          <Input type="text" 
-            placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
-            mask={mask}
-            maskPlaceholder="CPF/CNPJ"
-            alwaysShowMask={false}
-          />
-          <Label>Qual o endereço da propriedade?</Label>
-          <Input
-          type="text"
-          value={address}
-          onChange={(event) => setAddress(event.target.value)}
-          />        
-          <Label>Status da Matrícula</Label>
-          <StyledSelect
-            value={selectedMatriculaStatus}
-            onChange={handleMatriculaStatus}
-            options={optionsMatriculaStatus}
-            placeholder={'Selecione uma opção'}
-          />
-          <Label>Código da matrícula</Label>
-          <Input  type="text" placeholder='Ex: 30.137' />
-          <Label>Possui déficit de reserva legal?</Label>
-          <StyledSelect
-            value={selectedPossuiDeficit}
-            onChange={handlePossuiDeficit}
-            options={optionsPossuiDeficit}
-            placeholder={'Selecione uma opção'}
-          />
-          <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
-          <StyledSelect
-            value={selectedPossuiDivida}
-            onChange={handlePossuiDivida}
-            options={optionsPossuiDivida}
-            placeholder={'Selecione uma opção'}
-          />
-        </Column>
-        <Column>
-          <Label>Área total da propriedade (ha)?</Label>
-          <Input
-              type="text"
-              placeholder="Em hectares(ha)"
-              value={totalArea}
-              onChange={(event) => setTotalArea(event.target.value)}
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+          >
+      <Container>
+        <h3>Informações Cadastrais</h3>
+        <InnerContainer>
+          <Column> 
+            <Label>Proprietário da área:</Label>
+            <Input  type="text" />
+            <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
+            <Input type="text" 
+              placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
+              mask={mask}
+              maskPlaceholder="CPF/CNPJ"
+              alwaysShowMask={false}
             />
-          <Label>Área total da reserva legal (ha)?</Label>
+            <Label>Qual o endereço da propriedade?</Label>
             <Input
-              type="text"
-              placeholder="Em hectares(ha)"
-              value={totalReserveArea}
-              onChange={(event) => setTotalReserveArea(event.target.value)}
+            type="text"
+            value={address}
+            onChange={(event) => setAddress(event.target.value)}
+            />        
+            <Label>Status da Matrícula</Label>
+            <StyledSelect
+              value={selectedMatriculaStatus}
+              onChange={handleMatriculaStatus}
+              options={optionsMatriculaStatus}
+              placeholder={'Selecione uma opção'}
             />
-          <Label>Status do CAR</Label>
-          <StyledSelect
-            value={selectedCar}
-            onChange={handleOptionsCar}
-            options={optionsCar}
-            placeholder={'Selecione uma opção'}
-          />
-          <Label>Código SICAR(CAR)</Label>
-          <Input type="text" 
-             mask={"**-*******-****.****.****.****.****.****.****.****"}
-             maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
-             alwaysShowMask={false}
-             placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
-           >  
-          </Input>
-          <Label>Status do georreferenciamento no SIGEF</Label>
-          <StyledSelect
-            value={selectedGeorreferenciamentoStatus}
-            onChange={handleGeorreferenciamentoStatus}
-            options={optionsGerorreferenciamentoStatus}
-            placeholder={'Selecione uma opção'}
-          />
-          <Label>Situação da reserva legal da propriedade:</Label>
-          <StyledSelect
-            value={selectedReservaSituation}
-            onChange={handleReservaSituation}
-            options={optionsReservaSituation}
-            placeholder={'Selecione uma opção'}
-          />
-          <Label>Possui unidade de conservação no imóvel?</Label>
-          <StyledSelect
-            value={selectedUnidadeConservacao}
-            onChange={handleUnidadeConservacao}
-            options={optionsUnidadeConservacao}
-            placeholder={'Selecione uma opção'}
-          />
+            <Label>Código da matrícula</Label>
+            <Input  type="text" placeholder='Ex: 30.137' />
+            <Label>Possui déficit de reserva legal?</Label>
+            <StyledSelect
+              value={selectedPossuiDeficit}
+              onChange={handlePossuiDeficit}
+              options={optionsPossuiDeficit}
+              placeholder={'Selecione uma opção'}
+            />
+            <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
+            <StyledSelect
+              value={selectedPossuiDivida}
+              onChange={handlePossuiDivida}
+              options={optionsPossuiDivida}
+              placeholder={'Selecione uma opção'}
+            />
+          </Column>
+          <Column>
+            <Label>Área total da propriedade (ha)?</Label>
+            <Input
+                type="text"
+                placeholder="Em hectares(ha)"
+                value={totalArea}
+                onChange={(event) => setTotalArea(event.target.value)}
+              />
+            <Label>Área total da reserva legal (ha)?</Label>
+              <Input
+                type="text"
+                placeholder="Em hectares(ha)"
+                value={totalReserveArea}
+                onChange={(event) => setTotalReserveArea(event.target.value)}
+              />
+            <Label>Status do CAR</Label>
+            <StyledSelect
+              value={selectedCar}
+              onChange={handleOptionsCar}
+              options={optionsCar}
+              placeholder={'Selecione uma opção'}
+            />
+            <Label>Código SICAR(CAR)</Label>
+            <Input type="text" 
+              mask={"**-*******-****.****.****.****.****.****.****.****"}
+              maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
+              alwaysShowMask={false}
+              placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
+            >  
+            </Input>
+            <Label>Status do georreferenciamento no SIGEF</Label>
+            <StyledSelect
+              value={selectedGeorreferenciamentoStatus}
+              onChange={handleGeorreferenciamentoStatus}
+              options={optionsGerorreferenciamentoStatus}
+              placeholder={'Selecione uma opção'}
+            />
+            <Label>Situação da reserva legal da propriedade:</Label>
+            <StyledSelect
+              value={selectedReservaSituation}
+              onChange={handleReservaSituation}
+              options={optionsReservaSituation}
+              placeholder={'Selecione uma opção'}
+            />
+            <Label>Possui unidade de conservação no imóvel?</Label>
+            <StyledSelect
+              value={selectedUnidadeConservacao}
+              onChange={handleUnidadeConservacao}
+              options={optionsUnidadeConservacao}
+              placeholder={'Selecione uma opção'}
+            />
+          </Column>
+        </InnerContainer>
+        <Column style={{ marginTop: '36px'}}>
+            <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
+            <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
+            <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
+              <p />
+            <TextArea  type="text" />
         </Column>
-      </InnerContainer>
-      <Column style={{ marginTop: '36px'}}>
-          <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
-          <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
-          <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
-            <p />
-          <TextArea  type="text" />
-      </Column>
-      <ButtonContainer>
-        <Button onClick={() => handleClick()}>Voltar</Button>
-        <Button onClick={() => handleRegister()}>Confirmar</Button>
-      </ButtonContainer>
-    </Container>
+        <ButtonContainer>
+          <Button onClick={() => handleClick()}>Voltar</Button>
+          <Button onClick={() => handleRegister()}>Confirmar</Button>
+        </ButtonContainer>
+      </Container>
+    </motion.div>
   )
 };
 
