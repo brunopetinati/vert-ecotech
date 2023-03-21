@@ -21,7 +21,6 @@ const Projects = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log('deu certo?', response.data)
         setProjects(response.data);
       } catch (error) {
         console.error(error);

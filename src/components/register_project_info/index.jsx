@@ -1,11 +1,41 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, StyledSelect, ButtonLink } from './styles'
-import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
 import { motion } from 'framer-motion';
+import axios from 'axios';
 
 const RegisterProjectStep2 = () => {
+
+
+  const [users, setUsers] = useState([]);
+  const [selectedUserId, setSelectedUserId] = useState('');
+
+
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        const response = await axios.get('http://localhost:8000/api/users/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+
+  const handleUserSelect = (event) => {
+    setOwner(event.target.value);
+  }
 
   const navigate = useNavigate();
 
@@ -172,6 +202,15 @@ const RegisterProjectStep2 = () => {
           <Column> 
             <Label>Proprietário da área:</Label>
             <Input  type="text"  value={owner} onChange={setOwner}/>
+              <div>
+                <select value={selectedUserId} onChange={handleUserSelect} >
+                  <option value="">Select a user...</option>
+                  {users.map(user => (
+                    <option key={user.id} value={user.id}>{user.full_name}</option>
+                  ))}
+                </select>
+              <p>Selected user ID: {selectedUserId}</p>
+            </div>
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
             <Input type="text" 
               placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
