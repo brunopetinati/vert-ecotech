@@ -12,7 +12,8 @@ const RegisterProjectStep2 = () => {
   const [totalArea, setTotalArea] = useState('');
   const [totalReserveArea, setTotalReserveArea] = useState('');
   const [address, setAddress] = useState('');
-
+  const [owner, setOwner] = useState('');
+  
 
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
@@ -41,6 +42,8 @@ const RegisterProjectStep2 = () => {
     setSelectedMatriculaStatus(selectedMatriculaStatus);
   };
 
+  // Código SICAR
+  const [sicarCode, setSicarCode] = useState(''); 
 
   // Georreferenciamento
   const [selectedGeorreferenciamentoStatus, setSelectedGeorreferenciamentoStatus] = useState('')
@@ -73,7 +76,7 @@ const RegisterProjectStep2 = () => {
 
   // Unidade de conservação do imóvel
 
-  const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('')
+  const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('');
 
   const optionsUnidadeConservacao = [
     { value: "Privada", label: "Privada" },
@@ -87,7 +90,7 @@ const RegisterProjectStep2 = () => {
 
   // Dívida Federal
 
-  const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('')
+  const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('');
 
   const optionsPossuiDivida = [
     { value: true, label: "Sim" },
@@ -99,7 +102,7 @@ const RegisterProjectStep2 = () => {
   };
   
   // Possui déficit de reserva legal?
-  const [selectedPossuiDeficit, setSelectedPossuiDeficit] = useState('')
+  const [selectedPossuiDeficit, setSelectedPossuiDeficit] = useState('');
 
   const optionsPossuiDeficit = [
     { value: true, label: "Sim" },
@@ -111,7 +114,7 @@ const RegisterProjectStep2 = () => {
   };
 
   // Máscara CPF ou CNPJ
-
+  const [CNPJ, setCNPJ] = useState('');
   const [mask, setMask] = useState("99.999.999/9999-99");
   const [boolean, setBoolean] = useState(false);
 
@@ -135,7 +138,26 @@ const RegisterProjectStep2 = () => {
     dispatch(appStatus('register_land_upload_files'))
   };
   
+  const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
 
+  // preparar objeto para ser enviado para a requisição
+
+  const preparedObject = {
+    "owner": owner,
+    "total_area":  totalArea,
+    "legal_reserve_area": totalReserveArea,
+    "address": address,
+    "documentation_up_to_date": true,
+    "status_car": selectedCar,
+    "sicar_code": sicarCode,
+    "matricula_status": selectedMatriculaStatus,
+    "georeferencing_status": selectedGeorreferenciamentoStatus,
+    "reserve_legal_status":  selectedReservaSituation,
+    "physical_or_legal_entity": "legal",
+    "cnpj": CNPJ,
+    "conservation_unit": selectedUnidadeConservacao,
+    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest
+  };
 
   return (
     <motion.div
@@ -145,23 +167,25 @@ const RegisterProjectStep2 = () => {
         transition={{ duration: 0.8 }}
           >
       <Container>
-        <h3>Informações Cadastrais</h3>
+        <h2>Informações Cadastrais</h2>
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            <Input  type="text" />
+            <Input  type="text"  value={owner} onChange={setOwner}/>
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
             <Input type="text" 
               placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
               mask={mask}
               maskPlaceholder="CPF/CNPJ"
               alwaysShowMask={false}
+              value={CNPJ}
+              onChange={(e) => setCNPJ(e.target.value)}
             />
             <Label>Qual o endereço da propriedade?</Label>
             <Input
             type="text"
             value={address}
-            onChange={(event) => setAddress(event.target.value)}
+            onChange={(e) => setAddress(e.target.value)}
             />        
             <Label>Status da Matrícula</Label>
             <StyledSelect
@@ -170,8 +194,7 @@ const RegisterProjectStep2 = () => {
               options={optionsMatriculaStatus}
               placeholder={'Selecione uma opção'}
             />
-            <Label>Código da matrícula</Label>
-            <Input  type="text" placeholder='Ex: 30.137' />
+            
             <Label>Possui déficit de reserva legal?</Label>
             <StyledSelect
               value={selectedPossuiDeficit}
@@ -245,7 +268,7 @@ const RegisterProjectStep2 = () => {
             <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
             <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
               <p />
-            <TextArea  type="text" />
+            <TextArea  type="text" value={ownerActionsToPreserveForest} onChange={setOwnerActionsToPreserveForest}/>
         </Column>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>
@@ -257,3 +280,21 @@ const RegisterProjectStep2 = () => {
 };
 
 export default RegisterProjectStep2;
+
+
+/* 
+ owner
+ totalArea
+ totalReserveArea
+ CNPJ
+ address
+ selectedCar
+ selectedMatriculaStatus
+ codeSicar
+ selectedGeorreferenciamentoStatus
+ selectedReservaSituation
+ selectedUnidadeConservacao
+ selectedPossuiDivida
+ selectedPossuiDeficit
+ ownerActionsToPreserveForest 
+ */

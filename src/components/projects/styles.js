@@ -7,7 +7,7 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};  
+  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
 `;
 
 export const TitleContainer = styled.div`
@@ -22,7 +22,8 @@ export const TitleContainer = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 90%;
   margin-bottom: 32px;
 `;
@@ -32,4 +33,42 @@ export const TableContainer = styled.div`
   width: 90%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
+`;
+
+export const Input = styled.input`
+  padding: 10px;
+  width: 350px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+
+  ::placeholder {
+    font-size: 16px;
+  }
+
+  &:focus {
+    border-color: #7eff00;
+  }
+`;
+
+export const StyledSelect = styled.select`
+  padding: 10px;
+  width: 350px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+  margin-left: 16px;
+  background: white;
+
+  ::placeholder {
+    font-size: 16px;
+  }
+
+  &:focus {
+    border-color: #7eff00;
+  }
 `;

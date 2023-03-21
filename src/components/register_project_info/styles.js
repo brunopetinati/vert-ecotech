@@ -12,8 +12,8 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   
-  h3 {
-    color: #054D00;
+  h2 {
+    color: #054d00;
   }
 `;
 
