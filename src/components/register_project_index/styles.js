@@ -12,7 +12,7 @@ export const Container = styled.div`
 export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: ${({app_status}) => app_status == 'register_land_continue' ? '150vh' : '100vh'};
+  height: ${({app_status}) => app_status == 'register_land_upload_files' ? '100vh' : '150vh'};
   align-items: center; 
   justify-content: center;
 `;

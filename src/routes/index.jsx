@@ -4,7 +4,7 @@ import Welcome from '../pages/main_display'
 
 import Login from '../components/login';
 import Register from '../components/register'
-import RegisterProject from '../components/register_project'
+import RegisterProject from '../components/register_project_index'
 import InternRegisterUser from '../components/inter_register_user';
 
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
@@ -15,6 +15,8 @@ const AppRoutes = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const login = useSelector((state) => state.loginIntel);
+  //const token = sessionStorage.Authorization;
+  //console.log('authorization', token)
 
   if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register') {
     navigate('/');
@@ -25,7 +27,7 @@ const AppRoutes = () => {
         </Routes>
       </AnimatePresence>
     );
-  }
+  };
 
   return (
     <AnimatePresence>

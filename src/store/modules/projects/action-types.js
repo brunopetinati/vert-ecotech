@@ -1,0 +1,1 @@
+export const ADD_PROPERTY = "@login/ADD_PROPERTY";

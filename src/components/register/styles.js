@@ -45,9 +45,9 @@ export const Button = styled.button`
   margin: 10px;
   cursor: pointer;
   width: 140px;
-
 `;
 
 export const Img = styled.img`
-  width: 400px;
+  width: 300px;
+  height: 150px;
 `;

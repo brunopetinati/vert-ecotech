@@ -5,6 +5,12 @@ import { appStatus } from '../../store/modules/app_status/actions';
 
 const RegisterProjectStep2 = () => {
 
+
+  const [totalArea, setTotalArea] = useState('');
+  const [totalReserveArea, setTotalReserveArea] = useState('');
+  const [address, setAddress] = useState('');
+
+
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
 
@@ -132,9 +138,8 @@ const RegisterProjectStep2 = () => {
       <h3>Informações Cadastrais</h3>
       <InnerContainer>
         <Column> 
-          <Label>Tipo de pessoa</Label>         
-          <Span>Jurídica</Span>
-          <p />
+          <Label>Proprietário da área:</Label>
+          <Input  type="text" />
           <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
           <Input type="text" 
             placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
@@ -142,6 +147,12 @@ const RegisterProjectStep2 = () => {
             maskPlaceholder="CPF/CNPJ"
             alwaysShowMask={false}
           />
+          <Label>Qual o endereço da propriedade?</Label>
+          <Input
+          type="text"
+          value={address}
+          onChange={(event) => setAddress(event.target.value)}
+          />        
           <Label>Status da Matrícula</Label>
           <StyledSelect
             value={selectedMatriculaStatus}
@@ -167,10 +178,20 @@ const RegisterProjectStep2 = () => {
           />
         </Column>
         <Column>
-          <Label>Cadastro realizado em</Label>         
-          <Span>23-09-2022</Span>
-          <p />
-
+          <Label>Área total da propriedade (ha)?</Label>
+          <Input
+              type="text"
+              placeholder="Em hectares(ha)"
+              value={totalArea}
+              onChange={(event) => setTotalArea(event.target.value)}
+            />
+          <Label>Área total da reserva legal (ha)?</Label>
+            <Input
+              type="text"
+              placeholder="Em hectares(ha)"
+              value={totalReserveArea}
+              onChange={(event) => setTotalReserveArea(event.target.value)}
+            />
           <Label>Status do CAR</Label>
           <StyledSelect
             value={selectedCar}

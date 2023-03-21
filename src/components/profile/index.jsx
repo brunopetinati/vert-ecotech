@@ -52,7 +52,7 @@ const Profile = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Informações</h3>
+            <h3>Meu perfil</h3>
             <Row>
               <Label>Nome</Label>
               <ShowInput type="text" />

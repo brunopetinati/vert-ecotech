@@ -1,9 +1,8 @@
 import { Container, InnerContainer } from './styles'
 import React from 'react';
 import { useSelector } from "react-redux";
-import RegisterProjectStep1 from '../register_project_step_1'
-import RegisterProjectStep2 from '../register_project_step_2'
-import RegisterProjectStep3 from '../register_project_step_3'
+import RegisterProjectStep2 from '../register_project_info'
+import RegisterProjectStep3 from '../register_project_upload_files'
 
 
 const RegisterProject = () => {
@@ -14,7 +13,7 @@ const RegisterProject = () => {
   return (
     <Container>
       <InnerContainer app_status={app_status}>
-        {app_status == 'register_land_continue' ? <RegisterProjectStep2 /> : app_status == 'register_land_upload_files' ? <RegisterProjectStep3 /> : <RegisterProjectStep1 />}
+        {app_status == 'register_land_upload_files' ? <RegisterProjectStep3 /> : <RegisterProjectStep2 />}
       </InnerContainer>
     </Container>
   )
