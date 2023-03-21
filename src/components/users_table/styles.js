@@ -37,9 +37,10 @@ export const TD = styled.td`
   text-align: left;
   border-bottom: 1px solid #ddd;
   border-right: 1px solid #ddd;
-  text-align:center;
-  width: 150px;
+  text-align: center;
+  word-wrap: break-word;
 `;
+
 
 export const Wrapper = styled.div`
   overflow-x: auto;

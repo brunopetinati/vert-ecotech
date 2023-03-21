@@ -1,62 +1,54 @@
 import { Table, THead, TR, TH, TD, Wrapper} from './styles'
 
 //const TableComponent = ({ data }) => {
-const ProjectsTable = () => {
-
-  let data = [
-  { 'column1':'São Bernardo',
-    'column2':'50kha',
-    'column3':'300.000',
-    'column4':'850.000',
-    'column5':'23-12-2022',
-    'column6':'23-12-2042',
-    'column7':'1.150.000',
-    'column8':'250.000/a',
-    'column9':'Aprovado',
-    'column10':'Badge',
-  },
-  {'column1':'Akita',
-  'column2':'80kha',
-  'column3':'100.000',
-  'column4':'200.000',
-  'column5':'23-12-2022',
-  'column6':'23-12-2042',
-  'column7':'300.000',
-  'column8':'10.000/a',
-  'column9':'Aprovado',
-  'column10':'Badge',
-  },'this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this','this',]
+const ProjectsTable = ({filteredProjects}) => {
 
   return (
     <Wrapper>
       <Table>
         <THead>
           <TR>
-            <TH>Registro do Projeto</TH>
-            <TH>Projeto</TH>
+            <TH>Proprietário ID</TH>
+            <TH>Área de Reserva Legal</TH>
             <TH>Área Total</TH>
-            <TH>Créditos Disponíveis</TH>
-            <TH>Créditos Vendidos</TH>
-            <TH>Data de início</TH>
-            <TH>Data de término</TH>
-            <TH>Crédito Total</TH>
-            <TH>Produção Regular</TH>
-            <TH>Status</TH>
+            <TH>Localidade</TH>
+            <TH>Status CAR</TH>
+            <TH>Código SICAR</TH>
+            <TH>Status da matrícula</TH>
+            <TH>Status de georreferenciamento no SIGEF</TH>
+            <TH>Situação da Reserva Legal</TH>
+            <TH>Entidade Física ou Legal</TH>
+            <TH>Unidade de Conservação</TH>
+            <TH>Ações tomadas para preservação:</TH>
+            <TH>CNPJ</TH>
+            <TH>PDF:Certidão de matrícula</TH>
+            <TH>PDF:CAR</TH>
+            <TH>PDF:Polígono da propriedade</TH>
+            <TH>PDF:Certidão de Regularidade da Dívida Federal</TH>
+            <TH>PDF:CCIR</TH>
           </TR>
         </THead>
         <tbody>
-          {data.map((row, index) => (
+          {filteredProjects.map((row, index) => (
             <TR key={index}>
-              <TD>{row.column1}</TD>
-              <TD>{row.column2}</TD>
-              <TD>{row.column3}</TD>
-              <TD>{row.column4}</TD>
-              <TD>{row.column5}</TD>
-              <TD>{row.column6}</TD>
-              <TD>{row.column7}</TD>
-              <TD>{row.column8}</TD>
-              <TD>{row.column9}</TD>
-              <TD>{row.column10}</TD>            
+              <TD>{row.owner}</TD>
+              <TD>{row.legal_reserve_area}</TD>
+              <TD>{row.total_area}</TD>
+              <TD>{row.address}</TD>
+              <TD>{row.status_car}</TD>
+              <TD>{row.sicar_code}</TD>
+              <TD>{row.matricula_status}</TD>
+              <TD>{row.georeferencing_status}</TD>
+              <TD>{row.reserve_legal_status}</TD>
+              <TD>{row.physical_or_legal_entity}</TD> 
+              <TD>{row.conservation_unit}</TD>
+              <TD>{row.owner_actions_to_preserve_forest}</TD>
+              <TD>{row.cnpj}</TD>
+              <TD>{row.pdf_matricula_certificate}</TD>
+              <TD>{row.pdf_car}</TD>
+              <TD>{row.property_polygon}</TD>
+              <TD>{row.pdf_federal_debt_certificate}</TD>
+              <TD>{row.pdf_ccir}</TD>
             </TR>
           ))}
         </tbody>

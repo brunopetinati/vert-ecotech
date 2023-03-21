@@ -5,7 +5,6 @@ const UsersTable = ({filteredUsers}) => {
 
   return (
     <Wrapper>
-      
       <Table>
         <THead>
           <TR>
