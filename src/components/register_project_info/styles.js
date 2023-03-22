@@ -106,18 +106,6 @@ export const TextArea = styled.textarea `
   }
 `;
 
-export const StyledSelect = styled(Select)`
-  margin-bottom: 20px;
-  width: 370px  ;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-
 export const ButtonLink = styled.button`
   background: none;
   border: none;
@@ -135,4 +123,38 @@ export const ButtonLink = styled.button`
   color: darkblue;
   text-decoration: none;
 }
+`;
+
+export const StyledSelect = styled(Select)`
+  margin-bottom: 20px;
+  width: 370px  ;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
+
+export const StyledSelectForUser = styled.select`
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+  color: grey;
+  margin-bottom: 20px;
+  width: 370px;
+  font-size: 16px;
+  outline: none;
+
+  ::placeholder {
+    font-size: 16px;
+  }
+
+  &:focus {
+    border-color: #7eff00;
+  }
 `;

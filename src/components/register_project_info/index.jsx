@@ -1,4 +1,4 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, StyledSelect, ButtonLink } from './styles'
+import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -11,8 +11,6 @@ const RegisterProjectStep2 = () => {
 
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
-
-
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,19 +30,17 @@ const RegisterProjectStep2 = () => {
     fetchUsers();
   }, []);
 
-
-  const handleUserSelect = (event) => {
-    setOwner(event.target.value);
-  }
-
   const navigate = useNavigate();
 
   const [totalArea, setTotalArea] = useState('');
   const [totalReserveArea, setTotalReserveArea] = useState('');
   const [address, setAddress] = useState('');
   const [owner, setOwner] = useState('');
-  
 
+  const handleUserSelect = (event) => {
+    setOwner(event.target.value);
+  };
+  
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
 
@@ -201,16 +197,15 @@ const RegisterProjectStep2 = () => {
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            <Input  type="text"  value={owner} onChange={setOwner}/>
-              <div>
-                <select value={selectedUserId} onChange={handleUserSelect} >
-                  <option value="">Select a user...</option>
-                  {users.map(user => (
-                    <option key={user.id} value={user.id}>{user.full_name}</option>
-                  ))}
-                </select>
-              <p>Selected user ID: {selectedUserId}</p>
-            </div>
+            {/* <Input  type="text"  value={owner} onChange={setOwner}/> */}
+
+            <StyledSelectForUser value={owner} onChange={handleUserSelect} >
+              <option value="">Selecione o proprietário</option>
+              {users.map(user => (
+                <option key={user.id} value={user.id}>{user.full_name}</option>
+              ))}
+            </StyledSelectForUser>
+
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
             <Input type="text" 
               placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
