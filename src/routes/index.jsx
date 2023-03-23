@@ -1,12 +1,10 @@
 import { AnimatePresence } from "framer-motion";
 
-import Welcome from '../pages/main_display'
-
+import Welcome from '../pages/main_display';
 import Login from '../components/login';
-import Register from '../components/register'
-import RegisterProject from '../components/register_project_index'
+import Register from '../components/create_user';
+import RegisterProject from '../components/register_project_index';
 import InternRegisterUser from '../components/inter_register_user';
-
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -14,9 +12,9 @@ const AppRoutes = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const login = useSelector((state) => state.loginIntel);
-  //const token = sessionStorage.Authorization;
-  //console.log('authorization', token)
+
+  const login = useSelector((state) => state.user);
+
 
   if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register') {
     navigate('/');

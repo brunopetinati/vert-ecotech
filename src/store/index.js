@@ -12,7 +12,7 @@ import loginReducer from './modules/login/reducer'
 
 const reducers = combineReducers({
   app_status: appStatusReducer,
-  loginIntel: loginReducer,
+  user: loginReducer,
   sidebar: sidebarReducer
 });
 

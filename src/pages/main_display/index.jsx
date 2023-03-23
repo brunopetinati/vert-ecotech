@@ -10,10 +10,9 @@ import { Container } from './styles';
 const Welcome = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
+  const user = useSelector((state) => state.user);
 
-  // criar função que retorna de acordo com o estado o componente
-  // state == Projects && Projects etc
-  // essa função vai ser um componente que retorna todos os outros
+  console.log(user);
 
   return (
     <Container>

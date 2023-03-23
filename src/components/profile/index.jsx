@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
 import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
@@ -8,6 +9,8 @@ import { motion } from 'framer-motion';
 const Profile = () => {
 
   const [showModalBanco, setShowModalBanco] = useState(false);
+
+  const user = useSelector((state) => state.user.userData);
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -54,20 +57,21 @@ const Profile = () => {
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
             <h3>Meu perfil</h3>
             <Row>
-              <Label>Nome</Label>
-              <ShowInput type="text" />
+              <Label>Nome completo</Label>
+              <ShowInput type="text" defaultValue={user.full_name} />
             </Row>
             <Row>
               <Label>Email</Label>
-              <ShowInput type="text" />
+              <ShowInput type="text" defaultValue={user.email} />
             </Row>
             <Row>
               <Label>Whatsapp</Label>
-              <ShowInput type="text" value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              mask={"(99) 99999-9999"}
-              maskPlaceholder="(21) 98787-5512"
-              alwaysShowMask={false}
+              <ShowInput type="text"
+                onChange={(e) => setPhone(e.target.value)}
+                mask={"(99) 99999-9999"}
+                maskPlaceholder={"(21) 98787-5512"}
+                alwaysShowMask={false}
+                defaultValue={user.phone}
               />
             </Row>
             <Row>
@@ -135,12 +139,6 @@ const Profile = () => {
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>
         </ProfileContainerInfo>
-        {/* <ButtonContainerIndex style={{marginTop: '16px'}}>
-          <StyledButton onClick={handleModalInfo}>Adicionar Informações</StyledButton>
-          {showModalInfo && <Info isOpen={showModalInfo} onClose={handleModalInfo}/>}
-          <StyledButton onClick={handleModalEndereco}>Adicionar Endereço</StyledButton>
-          {showModalEndereco && <Endereco isOpen={showModalEndereco} onClose={handleModalEndereco} />}
-        </ButtonContainerIndex> */}
         <p />
         </motion.div >
       </IndexContainer>
