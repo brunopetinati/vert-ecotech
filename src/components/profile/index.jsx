@@ -110,7 +110,7 @@ const Profile = () => {
             </Row>
             <Row>
               <Label for="rua">Rua:</Label>
-              <ShowInput type="text" id="rua" name="rua" value={address.street} disabled placeholder="Preencha o CEP para auto preenchimento" />    
+              <ShowInput type="text" id="rua" name="rua" value={address.street} disabled placeholder="Preencha o CEP para preenchimento automático" />    
             </Row>
             <Row>
               <Label for="numero">Número:</Label>

@@ -1,6 +1,6 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
 import { motion } from 'framer-motion';
@@ -8,27 +8,7 @@ import axios from 'axios';
 
 const RegisterProjectStep2 = () => {
 
-
   const [users, setUsers] = useState([]);
-  const [selectedUserId, setSelectedUserId] = useState('');
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get('http://localhost:8000/api/users/', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
   const navigate = useNavigate();
 
@@ -52,7 +32,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handleOptionsCar = (selectedCar) => {
-    setSelectedCar(selectedCar);
+    setSelectedCar(selectedCar.value);
   };
 
   // Status Matrícula
@@ -65,7 +45,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handleMatriculaStatus = (selectedMatriculaStatus) => {
-    setSelectedMatriculaStatus(selectedMatriculaStatus);
+    setSelectedMatriculaStatus(selectedMatriculaStatus.value);
   };
 
   // Código SICAR
@@ -82,7 +62,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handleGeorreferenciamentoStatus = (selectedGeorreferenciamentoStatus) => {
-    setSelectedGeorreferenciamentoStatus(selectedGeorreferenciamentoStatus);
+    setSelectedGeorreferenciamentoStatus(selectedGeorreferenciamentoStatus.value);
   };
 
 
@@ -97,7 +77,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handleReservaSituation = (selectedReservaSituation) => {
-    setSelectedReservaSituation(selectedReservaSituation);
+    setSelectedReservaSituation(selectedReservaSituation.value);
   };
 
   // Unidade de conservação do imóvel
@@ -111,7 +91,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handleUnidadeConservacao = (selectedUnidadeConservacao) => {
-    setSelectedUnidadeConservacao(selectedUnidadeConservacao);
+    setSelectedUnidadeConservacao(selectedUnidadeConservacao.value);
   };
 
   // Dívida Federal
@@ -124,7 +104,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handlePossuiDivida = (selectedPossuiDivida) => {
-    setSelectedPossuiDivida(selectedPossuiDivida);
+    setSelectedPossuiDivida(selectedPossuiDivida.value);
   };
   
   // Possui déficit de reserva legal?
@@ -136,7 +116,7 @@ const RegisterProjectStep2 = () => {
   ];
 
   const handlePossuiDeficit = (selectedPossuiDeficit) => {
-    setSelectedPossuiDeficit(selectedPossuiDeficit);
+    setSelectedPossuiDeficit(selectedPossuiDeficit.value);
   };
 
   // Máscara CPF ou CNPJ
@@ -160,9 +140,48 @@ const RegisterProjectStep2 = () => {
     navigate('/welcome');
   };
 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        const response = await axios.get('http://localhost:8000/api/users/', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setUsers(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUsers();
+    console.log('preparedObject', preparedObject)
+  }, []);
+
+
+  // REGISTRAR PROJETO
   const handleRegister = () => {
-    dispatch(appStatus('register_land_upload_files'))
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}`, };
+    
+    axios.post('http://localhost:8000/api/projects/', preparedObject, { headers })
+      .then(response => {
+        const projectId = response.data.id;
+        const newUrl = `${window.location.origin}/projects/${projectId}`;
+        window.history.replaceState({}, '', newUrl);
+        //window.location.replace(newUrl);
+        console.log('newUrl', newUrl);
+        dispatch(appStatus('register_land_upload_files'))
+      })
+      .catch(error => {
+        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+        console.error(error);
+        return
+      });
   };
+  
   
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
 
@@ -173,17 +192,22 @@ const RegisterProjectStep2 = () => {
     "total_area":  totalArea,
     "legal_reserve_area": totalReserveArea,
     "address": address,
-    "documentation_up_to_date": true,
     "status_car": selectedCar,
     "sicar_code": sicarCode,
     "matricula_status": selectedMatriculaStatus,
     "georeferencing_status": selectedGeorreferenciamentoStatus,
     "reserve_legal_status":  selectedReservaSituation,
     "physical_or_legal_entity": "legal",
-    "cnpj": CNPJ,
+    "cnpj": 123123,
     "conservation_unit": selectedUnidadeConservacao,
-    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest
+    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
+    "legal_reserve_deficit": selectedPossuiDeficit,
+	  "has_federal_debt": selectedPossuiDivida
   };
+
+  console.log(preparedObject);
+
+
 
   return (
     <motion.div
@@ -223,7 +247,6 @@ const RegisterProjectStep2 = () => {
             />        
             <Label>Status da Matrícula</Label>
             <StyledSelect
-              value={selectedMatriculaStatus}
               onChange={handleMatriculaStatus}
               options={optionsMatriculaStatus}
               placeholder={'Selecione uma opção'}
@@ -231,14 +254,12 @@ const RegisterProjectStep2 = () => {
             
             <Label>Possui déficit de reserva legal?</Label>
             <StyledSelect
-              value={selectedPossuiDeficit}
               onChange={handlePossuiDeficit}
               options={optionsPossuiDeficit}
               placeholder={'Selecione uma opção'}
             />
             <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
             <StyledSelect
-              value={selectedPossuiDivida}
               onChange={handlePossuiDivida}
               options={optionsPossuiDivida}
               placeholder={'Selecione uma opção'}
@@ -261,7 +282,6 @@ const RegisterProjectStep2 = () => {
               />
             <Label>Status do CAR</Label>
             <StyledSelect
-              value={selectedCar}
               onChange={handleOptionsCar}
               options={optionsCar}
               placeholder={'Selecione uma opção'}
@@ -272,25 +292,23 @@ const RegisterProjectStep2 = () => {
               maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               alwaysShowMask={false}
               placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
+              onChange={(e) => setSicarCode(e.target.value)}
             >  
             </Input>
             <Label>Status do georreferenciamento no SIGEF</Label>
             <StyledSelect
-              value={selectedGeorreferenciamentoStatus}
               onChange={handleGeorreferenciamentoStatus}
               options={optionsGerorreferenciamentoStatus}
               placeholder={'Selecione uma opção'}
             />
             <Label>Situação da reserva legal da propriedade:</Label>
             <StyledSelect
-              value={selectedReservaSituation}
               onChange={handleReservaSituation}
               options={optionsReservaSituation}
               placeholder={'Selecione uma opção'}
             />
             <Label>Possui unidade de conservação no imóvel?</Label>
             <StyledSelect
-              value={selectedUnidadeConservacao}
               onChange={handleUnidadeConservacao}
               options={optionsUnidadeConservacao}
               placeholder={'Selecione uma opção'}
@@ -302,7 +320,7 @@ const RegisterProjectStep2 = () => {
             <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
             <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
               <p />
-            <TextArea  type="text" value={ownerActionsToPreserveForest} onChange={setOwnerActionsToPreserveForest}/>
+            <TextArea  type="text" value={ownerActionsToPreserveForest} onChange={(e) => setOwnerActionsToPreserveForest(e.target.value)}/>
         </Column>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>

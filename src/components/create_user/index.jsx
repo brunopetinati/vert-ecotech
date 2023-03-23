@@ -100,7 +100,7 @@ const Register = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-        > <h1 style={{color: 'white'}}>Registrado com sucesso!</h1></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
+        ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
         <Input placeholder="Nome" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
         <Input placeholder="Senha" type="password" name="password" value={formState.password} onChange={handleInputChange} />
