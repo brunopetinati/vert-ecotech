@@ -47,7 +47,7 @@ const ProjectsTable = ({filteredProjects}) => {
               <TD>{row.cnpj}</TD>
               <TD>{row.pdf_matricula_certificate}</TD>
               <TD>{row.pdf_car}</TD>
-              <TD>{row.property_polygon}</TD>
+              <TD><a href={row.property_polygon} download="FAZ_PARAISO_INVERNADAS_2_ChrHqVb.kml">Download File</a></TD>
               <TD>{row.pdf_federal_debt_certificate}</TD>
               <TD>{row.pdf_ccir}</TD>
               <TD>Editar</TD>
