@@ -3,7 +3,7 @@ import Select from "react-select";
 import InputMask from "react-input-mask";
 
 export const Container = styled.div`
-  width: 1000px;
+  width: 1100px;
   border-radius: 20px;
   padding: 2em;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -22,7 +22,7 @@ export const InnerContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  width: 80%;
+  width: 90%;
 `;
 
 export const Column = styled.div`
@@ -38,7 +38,7 @@ export const Label = styled.label`
 export const Input = styled(InputMask)`
   padding: 10px;
   margin-bottom: 20px;
-  width: 350px;
+  width: 430px;
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
@@ -117,7 +117,7 @@ export const ButtonLink = styled.button`
   font-weight: 400;
   font-size: 14px;
   text-decoration: none;
-  margin-left: 90px;
+  margin-left: 170px;
 
   &:hover {
   color: darkblue;
@@ -127,7 +127,7 @@ export const ButtonLink = styled.button`
 
 export const StyledSelect = styled(Select)`
   margin-bottom: 20px;
-  width: 370px  ;
+  width: 450px;
   border-radius: 4px;
   font-size: 16px;
   outline: none;
@@ -146,7 +146,7 @@ export const StyledSelectForUser = styled.select`
   background: white;
   color: grey;
   margin-bottom: 20px;
-  width: 370px;
+  width: 450px;
   font-size: 16px;
   outline: none;
 

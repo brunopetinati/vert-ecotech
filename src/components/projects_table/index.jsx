@@ -26,6 +26,7 @@ const ProjectsTable = ({filteredProjects}) => {
             <TH>PDF:Polígono da propriedade</TH>
             <TH>PDF:Certidão de Regularidade da Dívida Federal</TH>
             <TH>PDF:CCIR</TH>
+            <TH></TH>
           </TR>
         </THead>
         <tbody>
@@ -49,6 +50,7 @@ const ProjectsTable = ({filteredProjects}) => {
               <TD>{row.property_polygon}</TD>
               <TD>{row.pdf_federal_debt_certificate}</TD>
               <TD>{row.pdf_ccir}</TD>
+              <TD>Editar</TD>
             </TR>
           ))}
         </tbody>

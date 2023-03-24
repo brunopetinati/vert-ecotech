@@ -35,6 +35,7 @@ const AppRoutes = () => {
         <Route exact path="/register_project" element={<RegisterProject />} />
         <Route exact path="/welcome" element={<Welcome />} />
         <Route exact path="/intern_client_register" element={<InternRegisterUser />} />
+        
       </Routes>
     </AnimatePresence>
   );

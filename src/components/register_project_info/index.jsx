@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
+import { storeId } from '../../store/modules/current_id/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -119,6 +120,19 @@ const RegisterProjectStep2 = () => {
     setSelectedPossuiDeficit(selectedPossuiDeficit.value);
   };
 
+  // A propriedade está sob domínio de uma pessoa física ou jurídica?
+
+  const [selectedPessoaJuridicaOuFisica, setSelectedPessoaJuridicaOuFisica] = useState('');
+
+  const optionsPessoaJuridicaOuFisica = [
+    { value : 'Física', label: 'Física' },
+    { value : 'Jurídica', label: 'Jurídica' }
+  ]
+
+  const handlePessoaFisicaOuJuridica = (selectedPessoaJuridicaOuFisica) => {
+    setSelectedPessoaJuridicaOuFisica(selectedPessoaJuridicaOuFisica.value)
+  };
+
   // Máscara CPF ou CNPJ
   const [CNPJ, setCNPJ] = useState('');
   const [mask, setMask] = useState("99.999.999/9999-99");
@@ -169,10 +183,7 @@ const RegisterProjectStep2 = () => {
     axios.post('http://localhost:8000/api/projects/', preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
-        const newUrl = `${window.location.origin}/projects/${projectId}`;
-        window.history.replaceState({}, '', newUrl);
-        //window.location.replace(newUrl);
-        console.log('newUrl', newUrl);
+        dispatch(storeId(projectId));
         dispatch(appStatus('register_land_upload_files'))
       })
       .catch(error => {
@@ -202,12 +213,11 @@ const RegisterProjectStep2 = () => {
     "conservation_unit": selectedUnidadeConservacao,
     "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
     "legal_reserve_deficit": selectedPossuiDeficit,
-	  "has_federal_debt": selectedPossuiDivida
+	  "has_federal_debt": selectedPossuiDivida,
+    "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
   };
 
   console.log(preparedObject);
-
-
 
   return (
     <motion.div
@@ -229,6 +239,13 @@ const RegisterProjectStep2 = () => {
                 <option key={user.id} value={user.id}>{user.full_name}</option>
               ))}
             </StyledSelectForUser>
+
+            <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
+            <StyledSelect
+              onChange={handlePessoaFisicaOuJuridica}
+              options={optionsPessoaJuridicaOuFisica}
+              placeholder={'Selecione uma opção'}
+            />
 
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
             <Input type="text" 

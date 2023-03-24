@@ -7,13 +7,15 @@ import thunk from "redux-thunk";
 // REDUCERS
 
 import appStatusReducer from "./modules/app_status/reducer";
-import sidebarReducer from './modules/sidebar/reducer'
-import loginReducer from './modules/login/reducer'
+import sidebarReducer from './modules/sidebar/reducer';
+import loginReducer from './modules/login/reducer';
+import currentIDReducer from './modules/current_id/reducer';
 
 const reducers = combineReducers({
   app_status: appStatusReducer,
   user: loginReducer,
-  sidebar: sidebarReducer
+  sidebar: sidebarReducer,
+  current_id: currentIDReducer
 });
 
 const store = configureStore({reducer: reducers}, applyMiddleware(thunk));
