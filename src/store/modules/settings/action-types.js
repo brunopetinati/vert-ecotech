@@ -1,2 +1,3 @@
-export const TOGGLE_LAYOUT = 'TOGGLE_LAYOUT';
+export const PROJECTS_LAYOUT = 'PROJECTS_LAYOUT';
+export const USERS_LAYOUT = 'USERS_LAYOUT';
 

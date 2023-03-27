@@ -1,15 +1,22 @@
-import { TOGGLE_LAYOUT } from './action-types';
+import { PROJECTS_LAYOUT, USERS_LAYOUT } from './action-types';
 
 const initialState = {
-  cardsLayout: false,
+  cardsLayoutProjects: false,
+  cardsLayoutUsers: false,
 };
 
 const layoutReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_LAYOUT:
+    case PROJECTS_LAYOUT:
       return {
         ...state,
-        cardsLayout: !action.layout,
+        cardsLayoutProjects: !action.layout,
+      };
+
+    case USERS_LAYOUT:
+      return {
+        ...state,
+        cardsLayoutUsers: !action.layout,
       };
     default:
       return state;

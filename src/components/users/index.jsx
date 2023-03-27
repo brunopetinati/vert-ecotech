@@ -9,6 +9,9 @@ import axios from 'axios';
 const Users = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
+  const layoutUsers = useSelector((state) => state.layout.cardsLayoutUsers);
+  console.log('mais novo console.log',layoutUsers);
+
   const collapsed = useSelector((state) => state.sidebar.status);
   const [users, setUsers] = useState([]);
 
@@ -84,7 +87,7 @@ const Users = () => {
         <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
       </ButtonContainer>
       <TableContainer>
-        <UsersCard filteredUsers={filteredUsers} />
+        {layoutUsers ? <UsersCard filteredUsers={filteredUsers} /> : <UsersTable filteredUsers={filteredUsers} /> }
       </TableContainer>
     </Container>
   );
