@@ -1,4 +1,5 @@
 import ProjectsTable from "../projects_table";
+import ProjectsCard from "../projects_cards";
 import DefaultButton from "../default_button";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -69,7 +70,7 @@ const Projects = () => {
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
       </ButtonContainer>
       <TableContainer>
-        <ProjectsTable filteredProjects={filteredProjects} />
+        <ProjectsCard filteredProjects={filteredProjects} />
       </TableContainer>
     </Container>
   );

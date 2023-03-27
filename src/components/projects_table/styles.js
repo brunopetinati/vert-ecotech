@@ -10,7 +10,6 @@ export const Table = styled.table`
 `;
 
 export const THead = styled.thead`
-
   font-weight: bold;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
