@@ -2,7 +2,7 @@ import ToggleSwitch from '../default_toggle';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleLayout } from '../../store/modules/settings/actions';
-
+import { Container } from './styles'
 
 const Settings = () => {
 
@@ -30,9 +30,10 @@ const Settings = () => {
   };
 
   return (
-    <>
-      <ToggleSwitch label={"Visualizar projetos em cards"} checked={layout} onChange={handleChange}/>
-    </>
+    <Container>
+      <h1>Configurações</h1>
+      <ToggleSwitch label={"Habilitar visualização de cards para projetos"} checked={layout} onChange={handleChange}/>
+    </Container>
   );
 };
 

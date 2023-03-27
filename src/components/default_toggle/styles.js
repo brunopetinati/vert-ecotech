@@ -43,36 +43,6 @@ export const SwitchInput = styled.input.attrs({ type: 'checkbox' })`
   }
 `;
 
-export const SwitchSlider = styled.span`
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #fff;
-  transition: transform 0.3s ease;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: #d8d8d8;
-    transition: background-color 0.3s ease;
-  }
-
-  &:checked:before {
-    background-color: #5cb85c;
-  }
-
-  &:focus {
-    outline: none;
-  }
-`;
 
 export const SwitchWrapper = styled.label`
   display: flex;

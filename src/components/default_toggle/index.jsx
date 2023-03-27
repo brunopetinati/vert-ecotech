@@ -8,7 +8,6 @@ const DefaultToggle = ({ label, checked, onChange }) => {
     <SwitchWrapper>
       <SwitchLabel>{label}</SwitchLabel>
       <SwitchInput checked={checked} onChange={onChange} />
-      <SwitchSlider />
     </SwitchWrapper>
   );
 };
