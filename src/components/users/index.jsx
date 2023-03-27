@@ -1,4 +1,5 @@
 import UsersTable from "../users_table/index";
+import UsersCard from "../users_cards";
 import DefaultButton from "../default_button";
 import { Container, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
 import { useState, useEffect } from 'react';
@@ -83,7 +84,7 @@ const Users = () => {
         <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
       </ButtonContainer>
       <TableContainer>
-        <UsersTable filteredUsers={filteredUsers} />
+        <UsersCard filteredUsers={filteredUsers} />
       </TableContainer>
     </Container>
   );
