@@ -1,0 +1,2 @@
+export const TOGGLE_LAYOUT = 'TOGGLE_LAYOUT';
+

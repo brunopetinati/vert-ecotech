@@ -11,6 +11,9 @@ const Projects = () => {
   const collapsed = useSelector((state) => state.sidebar.status);
   const app_status = useSelector((state) => state.app_status.status);
   const [projects, setProjects] = useState([]);
+  const layout = useSelector((state) => state.layout.cardsLayout);
+
+  console.log('layout em projects',layout);
 
 
   useEffect(() => {
@@ -70,12 +73,10 @@ const Projects = () => {
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
       </ButtonContainer>
       <TableContainer>
-        <ProjectsCard filteredProjects={filteredProjects} />
+        {layout ? <ProjectsCard filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} /> }
       </TableContainer>
     </Container>
   );
 };
 
 export default Projects;
-
-
