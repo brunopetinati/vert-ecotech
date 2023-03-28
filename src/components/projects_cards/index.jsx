@@ -1,45 +1,22 @@
-import { useEffect, useState } from 'react';
+import { getFullNameById } from '../../store/modules/app_data/thunk';
 import { Wrapper, Card, CardHeader, CardBody, CardFooter, Score } from './styles';
 import { getStatusCARColor, getStatusMatriculaColor, getScoreColor } from '../../constants/functions';
+import { useSelector } from 'react-redux';
 
 const ProjectsCard = ({ filteredProjects }) => {
-  const [owners, setOwners] = useState({});
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('Authorization');
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
-    };
-    fetch('http://localhost:8000/api/users/', requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
-        setOwners(data);
-      })
-      .catch((error) => {
-        console.error('Error fetching owners', error);
-      });
-  }, []);
-
-
-  const getFullNameById = (ownerId) => {
-    const ownerObj = owners.find(user => user.id === ownerId);
-    if (ownerObj) {
-      return ownerObj.full_name;
-    }
-    return 'unknown';
-  };
-
+  
   function getRandomFloat() {
     const num = (Math.random() * 10).toFixed(1);
     return Number(num);
   }
-  
+
+  const users = useSelector((state) => state.app_data.users);
+
   return (
     <Wrapper>
       {filteredProjects.map((project, index) => (
         <Card key={index}>
-          <CardHeader>{getFullNameById(project.owner)}</CardHeader>
+          <CardHeader>{getFullNameById(project.owner, users)}</CardHeader>
           <CardBody>
             <p>Área de Reserva Legal: {project.legal_reserve_area + ' ha'}</p>
             <p>Área Total: {project.total_area + ' ha'}</p>

@@ -1,14 +1,17 @@
-import { Table, THead, TR, TH, TD, Wrapper} from './styles'
+import { getFullNameById } from '../../store/modules/app_data/thunk';
+import { Table, THead, TR, TH, TD, Wrapper} from './styles';
+import { useSelector } from 'react-redux';
 
-//const TableComponent = ({ data }) => {
 const ProjectsTable = ({filteredProjects}) => {
+
+  const users = useSelector((state) => state.app_data.users);
 
   return (
     <Wrapper>
       <Table>
         <THead>
           <TR>
-            <TH>Proprietário ID</TH>
+            <TH>Proprietário</TH>
             <TH>Área de Reserva Legal</TH>
             <TH>Área Total</TH>
             <TH>Localidade</TH>
@@ -32,7 +35,7 @@ const ProjectsTable = ({filteredProjects}) => {
         <tbody>
           {filteredProjects.map((row, index) => (
             <TR key={index}>
-              <TD>{row.owner}</TD>
+              <TD>{getFullNameById(row.owner, users)}</TD>
               <TD>{row.legal_reserve_area}</TD>
               <TD>{row.total_area}</TD>
               <TD>{row.address}</TD>

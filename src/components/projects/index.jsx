@@ -13,9 +13,6 @@ const Projects = () => {
   const [projects, setProjects] = useState([]);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
 
-  console.log('layout em projects',layoutProjects);
-
-
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -48,7 +45,22 @@ const Projects = () => {
     if (selectedColumn === 'Unidade de Conservação' && project.conservation_unit.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
-    return false
+    if (selectedColumn === 'Status da Matrícula' && project.matricula_status.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
+    if (selectedColumn === 'Status do Georreferenciamento' && project.georeferencing_status.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
+    if (selectedColumn === 'Situação da Reserva Legal' && project.reserve_legal_status.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
+    if (selectedColumn === 'Status CAR' && project.status_car.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
+    if (selectedColumn === 'Proprietário' && project.owner.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
+    return false;
   });
 
   const handleColumnChange = (event) => {
@@ -68,6 +80,11 @@ const Projects = () => {
           <option value="">---</option>
           <option value="Unidade de Conservação">Unidade de Conservação</option>
           <option value="Localidade">Localidade</option>
+          <option value="Status da Matrícula">Status da Matrícula</option>
+          <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
+          <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
+          <option value="Status CAR">Status CAR</option>
+          <option value="Proprietário">Proprietário</option>
         </StyledSelect>
         </div>
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />

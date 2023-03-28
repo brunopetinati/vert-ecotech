@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
-import { storeId } from '../../store/modules/current_id/actions';
+import { storeProjectId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -183,8 +183,8 @@ const RegisterProjectStep2 = () => {
     axios.post('http://localhost:8000/api/projects/', preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
-        dispatch(storeId(projectId));
-        dispatch(appStatus('register_land_upload_files'))
+        dispatch(storeProjectId(projectId));
+        dispatch(appStatus('register_land_upload_files'));
       })
       .catch(error => {
         alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
@@ -217,7 +217,6 @@ const RegisterProjectStep2 = () => {
     "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
   };
 
-  console.log(preparedObject);
 
   return (
     <motion.div
