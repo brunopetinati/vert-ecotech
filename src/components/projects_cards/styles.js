@@ -18,10 +18,11 @@ export const Card = styled.div`
 `;
 
 export const CardHeader = styled.div`
-  background-color: #f2f2f2;
+  background-color: #d1e7dd;
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
+  color: #054d00;
 `;
 
 export const CardBody = styled.div`
@@ -30,8 +31,32 @@ export const CardBody = styled.div`
 `;
 
 export const CardFooter = styled.div`
-  background-color: #f2f2f2;
+  background-color: #d1e7dd;
   padding: 10px;
   font-size: 12px;
   text-align: right;
+`;
+
+export const CardWrapper = styled.div`
+  width: 300px;
+  height: 200px;
+  background-color: #d1e7dd;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+`;
+
+export const Title = styled.h2`
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #173f5f;
+`;
+
+export const Description = styled.p`
+  font-size: 16px;
+  color: #20639b;
 `;

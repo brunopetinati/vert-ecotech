@@ -4,6 +4,7 @@ import Profile from '../../components/profile'
 import Projects from "../../components/projects";
 import Users from "../../components/users"
 import Settings from "../../components/settings";
+import StockChart from "../../components/dashboard";
 import Sidebar from "../../components/sidebar";
 
 import { Container } from './styles';
@@ -18,7 +19,7 @@ const Welcome = () => {
     <Container>
       <Sidebar />
       <SideContainer>
-        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Configurações" ? <Settings /> : null}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <StockChart /> : null}
       </SideContainer>
     </Container>
   )

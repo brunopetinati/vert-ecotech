@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   gap: 20px;
   overflow-x: auto;
   overflow-y: auto;
-  height: 79vh;
+  height: 80vh;
 `;
 
 export const Card = styled.div`
@@ -35,3 +35,4 @@ export const CardFooter = styled.div`
   font-size: 12px;
   text-align: right;
 `;
+
