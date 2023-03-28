@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Wrapper, Card, CardHeader, CardBody, CardFooter } from './styles';
-import { getStatusCARColor, getStatusMatriculaColor } from '../../constants/functions';
+import { Wrapper, Card, CardHeader, CardBody, CardFooter, Score } from './styles';
+import { getStatusCARColor, getStatusMatriculaColor, getScoreColor } from '../../constants/functions';
 
 const ProjectsCard = ({ filteredProjects }) => {
   const [owners, setOwners] = useState({});
@@ -30,6 +30,11 @@ const ProjectsCard = ({ filteredProjects }) => {
     return 'unknown';
   };
 
+  function getRandomFloat() {
+    const num = (Math.random() * 10).toFixed(1);
+    return Number(num);
+  }
+  
   return (
     <Wrapper>
       {filteredProjects.map((project, index) => (
@@ -42,7 +47,7 @@ const ProjectsCard = ({ filteredProjects }) => {
             <p>Status CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
             <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>
           </CardBody>
-          <CardFooter>Footer</CardFooter>
+          <CardFooter><Score style={{color: getScoreColor(getRandomFloat())}}>{getRandomFloat()}</Score></CardFooter>
         </Card>
       ))}
     </Wrapper>

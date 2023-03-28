@@ -25,3 +25,14 @@ export const getStatusMatriculaColor = (status) => {
       return 'black';
   }
 };
+
+export const getScoreColor = (score) => {
+  if (score < 4) {
+    return "red";
+  } else if (score < 7) {
+    return "orange";
+  } else {
+    return "green";
+  }
+}
+

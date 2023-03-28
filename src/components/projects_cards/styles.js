@@ -28,6 +28,7 @@ export const CardHeader = styled.div`
 export const CardBody = styled.div`
   padding: 10px;
   font-size: 14px;
+  min-height: 210px;
 `;
 
 export const CardFooter = styled.div`
@@ -35,7 +36,24 @@ export const CardFooter = styled.div`
   padding: 10px;
   font-size: 12px;
   text-align: right;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
 `;
+
+export const Score = styled.div`
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  color: green;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+// estou fazendo a cor da pontuação
 
 export const CardWrapper = styled.div`
   width: 300px;
@@ -60,3 +78,5 @@ export const Description = styled.p`
   font-size: 16px;
   color: #20639b;
 `;
+
+
