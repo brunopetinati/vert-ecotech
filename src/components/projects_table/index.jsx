@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 const ProjectsTable = ({filteredProjects}) => {
 
   const users = useSelector((state) => state.app_data.users);
+  const projects = useSelector((state) => state.app_data.projects);
 
   return (
     <Wrapper>
@@ -37,7 +38,7 @@ const ProjectsTable = ({filteredProjects}) => {
               <TD>{row.reserve_legal_status}</TD>
               <TD>{row.physical_or_legal_entity}</TD> 
               <TD>{row.conservation_unit}</TD>
-              <TD><a href="">Visualizar</a></TD>
+              <TD onClick={() => {console.log(projects.find(project => project.id === row.id))}} >Visualizar</TD>
             </TR>
           ))}
         </tbody>
