@@ -3,8 +3,9 @@ import ProjectsCard from "../projects_cards";
 import DefaultButton from "../default_button";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Container, TitleContainer, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
+import { storeProjects } from "../../store/modules/app_data/actions"
 
 const Projects = () => {
 
@@ -12,6 +13,10 @@ const Projects = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const [projects, setProjects] = useState([]);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
+  const dispatch = useDispatch();
+  const app_data = useSelector((state) => state.app_data);
+
+  console.log('data', app_data);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -23,6 +28,7 @@ const Projects = () => {
           },
         });
         setProjects(response.data);
+        dispatch(storeProjects(response.data));
       } catch (error) {
         console.error(error);
       }
