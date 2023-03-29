@@ -29,6 +29,7 @@ export const TH = styled.th`
   width: 100px;
   text-align: center;
   width: 150px;
+  color: #054d00;
 `;
 
 export const TD = styled.td`

@@ -5,16 +5,19 @@ import { useSelector } from 'react-redux';
 
 
 const FileUploader = () => {
+
+  const currentID = useSelector((state) => state.user.userData.id);
+
+
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,
     pdf_car: null,
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
-    owner: 2
+    owner: currentID
   });
 
-  const currentID = useSelector((state) => state.current_id.id);
 
   const handleFileInput = (fieldName, e) => {
     setSelectedFiles((prevSelectedFiles) => ({

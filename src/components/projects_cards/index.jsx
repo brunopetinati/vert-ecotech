@@ -18,11 +18,11 @@ const ProjectsCard = ({ filteredProjects }) => {
         <Card key={index}>
           <CardHeader>{getFullNameById(project.owner, users)}</CardHeader>
           <CardBody>
+            <p>{project.address}</p>
             <p>Área de Reserva Legal: {project.legal_reserve_area + ' ha'}</p>
             <p>Área Total: {project.total_area + ' ha'}</p>
-            <p>Localidade: {project.address}</p>
             <p>Status CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
-            <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>
+            <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>          
           </CardBody>
           <CardFooter><Score style={{color: getScoreColor(getRandomFloat())}}>{getRandomFloat()}</Score></CardFooter>
         </Card>

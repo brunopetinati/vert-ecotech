@@ -19,10 +19,12 @@ export const getOwners = () => (dispatch, getState) => {
 
 
 export const getFullNameById = (ownerId, owners) => {
-  const ownerObj = owners.find(user => user.id === ownerId);
+  if (owners) {
+    const ownerObj = owners.find(user => user.id === ownerId);
+  
   if (ownerObj) {
     return ownerObj.full_name;
-  }
+  }};
   return 'unknown';
 };
 

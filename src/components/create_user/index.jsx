@@ -75,7 +75,7 @@ const Register = () => {
     setShowLoading(true);
     setTimeout(() => {
       navigate('/');
-    }, 4000);
+    }, 6000);
   };
   
   const handleInputChange = (event) => {

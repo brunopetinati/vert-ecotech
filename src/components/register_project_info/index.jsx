@@ -209,7 +209,7 @@ const RegisterProjectStep2 = () => {
     "georeferencing_status": selectedGeorreferenciamentoStatus,
     "reserve_legal_status":  selectedReservaSituation,
     "physical_or_legal_entity": "legal",
-    "cnpj": 123123,
+    "cnpj": CNPJ,
     "conservation_unit": selectedUnidadeConservacao,
     "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
     "legal_reserve_deficit": selectedPossuiDeficit,
@@ -217,6 +217,7 @@ const RegisterProjectStep2 = () => {
     "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
   };
 
+  
 
   return (
     <motion.div
@@ -230,7 +231,6 @@ const RegisterProjectStep2 = () => {
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            {/* <Input  type="text"  value={owner} onChange={setOwner}/> */}
 
             <StyledSelectForUser value={owner} onChange={handleUserSelect} >
               <option value="">Selecione o proprietário</option>
@@ -288,6 +288,7 @@ const RegisterProjectStep2 = () => {
                 placeholder="Em hectares(ha)"
                 value={totalArea}
                 onChange={(event) => setTotalArea(event.target.value)}
+                maskPlaceholder={null}
               />
             <Label>Área total da reserva legal (ha)?</Label>
               <Input

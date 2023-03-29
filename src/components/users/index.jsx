@@ -10,9 +10,9 @@ const Users = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
   const layoutUsers = useSelector((state) => state.layout.cardsLayoutUsers);
-  console.log('mais novo console.log',layoutUsers);
 
   const collapsed = useSelector((state) => state.sidebar.status);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
