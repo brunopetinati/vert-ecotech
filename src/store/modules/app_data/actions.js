@@ -1,10 +1,17 @@
 import Projects from "../../../components/projects";
-import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID } from "./action-types";
 
-export const storeProjectId = (id) => {
+export const storeProjectId = (project_id) => {
   return {
     type: STORE_PROJECT_ID,
-    payload: id,
+    payload: project_id,
+  };
+};
+
+export const storeOwnerId = (owner_id) => {
+  return {
+    type: STORE_OWNER_ID,
+    payload: owner_id,
   };
 };
 

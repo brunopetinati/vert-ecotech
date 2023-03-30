@@ -6,7 +6,11 @@ import { useSelector } from 'react-redux';
 
 const FileUploader = () => {
 
-  const currentID = useSelector((state) => state.user.userData.id);
+  // quando é o próprio usuário registrando o próprio projeto
+  // const currentID = useSelector((state) => state.user.userData.id);
+
+  const projectID = useSelector((state) => state.app_data.project_id);
+  const ownerID = useSelector((state) => state.app_data.owner_id);
 
 
   const [selectedFiles, setSelectedFiles] = useState({
@@ -15,7 +19,7 @@ const FileUploader = () => {
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
-    owner: currentID
+    owner: ownerID // alterar essa linha
   });
 
 
@@ -28,7 +32,7 @@ const FileUploader = () => {
 
   const handleUpload = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `http://localhost:8000/api/projects/${currentID}/update/`;
+    const url = `http://localhost:8000/api/projects/${projectID}/update/`;
 
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);

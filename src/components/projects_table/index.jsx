@@ -12,7 +12,7 @@ const ProjectsTable = ({filteredProjects}) => {
   
 
   const handleClick = (project) => {
-    navigate('/intern_project', { state: { project } });
+    navigate('/intern_project', { state: { project }} );
   };
   
 

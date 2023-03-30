@@ -1,7 +1,8 @@
-import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS } from "./action-types";
 
 const initialState = {
-  id: null,
+  project_id: null,
+  owner_id: null,
   users: [],
   projects: []
 };
@@ -11,7 +12,13 @@ const currentAppData = (state = initialState, action) => {
     case STORE_PROJECT_ID:
       return {
         ...state,
-        id: action.payload,
+        project_id: action.payload,
+      };
+
+    case STORE_OWNER_ID:
+      return {
+        ...state,
+        owner_id: action.payload,
       };
 
     case STORE_USERS:

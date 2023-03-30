@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
-import { storeProjectId } from '../../store/modules/app_data/actions';
+import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
@@ -20,6 +20,7 @@ const RegisterProjectStep2 = () => {
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
+    dispatch(storeOwnerId(event.target.value));
   };
   
   // SICAR
