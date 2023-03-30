@@ -40,19 +40,13 @@ const ProjectIntern = () => {
     console.log('nothing')
   };
 
-  const donwloadPDF = async (fieldName) => {
-    try {
-      const token = sessionStorage.getItem('Authorization');
-      const response = await axios.get(`http://localhost:8000/api/project/${project.id}/download/${fieldName}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    console.log('finalizado')
-    } catch (error) {
-      console.error(error);
+  const downloadPDF = (fieldName) => {
+
+      //const token = sessionStorage.getItem('Authorization');
+      const downloadUrl = `http://localhost:8000/api/project/${project.id}/download/${fieldName}/`;
+      window.open(downloadUrl, '_blank');
+
     };
-  };
 
   return (
     <motion.div
@@ -103,11 +97,11 @@ const ProjectIntern = () => {
             <p />
 
         <ButtonContainer>
-          {project.pdf_matricula_certificate && <DownloadButton onClick={donwloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
-          {project.pdf_car && <DownloadButton onClick={donwloadPDF('pdf_car')}>PDF CAR</DownloadButton>}
-          {project.pdf_ccir && <DownloadButton onClick={donwloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
-          {project.property_polygon && <DownloadButton onClick={donwloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
-          {project.pdf_federal_debt_certificate && <DownloadButton onClick={donwloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}
+          {project.pdf_matricula_certificate && <DownloadButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
+          {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF CAR</DownloadButton>}
+          {project.pdf_ccir && <DownloadButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
+          {project.property_polygon && <DownloadButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
+          {project.pdf_federal_debt_certificate && <DownloadButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}
         </ButtonContainer>          
         
         </Column>
