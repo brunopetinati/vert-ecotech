@@ -1,11 +1,20 @@
 import { getFullNameById } from '../../store/modules/app_data/thunk';
 import { Table, THead, TR, TH, TD, Wrapper} from './styles';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 const ProjectsTable = ({filteredProjects}) => {
 
+  const navigate = useNavigate();
   const users = useSelector((state) => state.app_data.users);
   const projects = useSelector((state) => state.app_data.projects);
+  
+
+  const handleClick = (project) => {
+    navigate('/intern_project', { state: { project } });
+  };
+  
 
   return (
     <Wrapper>
@@ -38,7 +47,7 @@ const ProjectsTable = ({filteredProjects}) => {
               <TD>{row.reserve_legal_status}</TD>
               <TD>{row.physical_or_legal_entity}</TD> 
               <TD>{row.conservation_unit}</TD>
-              <TD onClick={() => {console.log(projects.find(project => project.id === row.id))}} >Visualizar</TD>
+              <TD onClick={() => {handleClick(projects.find(project => project.id === row.id))}} >Visualizar</TD>
             </TR>
           ))}
         </tbody>

@@ -36,3 +36,10 @@ export const getScoreColor = (score) => {
   }
 }
 
+export const returnYesorNoforBoolean = (boolean) => {
+  if(boolean) {
+    return 'Sim'
+  } else {
+    return 'Não'
+  }
+};
