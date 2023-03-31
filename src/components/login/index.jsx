@@ -24,12 +24,10 @@ const Login = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      console.log('sending login request...');
       axios.post('http://localhost:8000/api/login/', {
         email,
         password,
       }).then(response => {
-        console.log('Login successful:', response.data);
         // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.access);
         // Navigate to the welcome page on successful login

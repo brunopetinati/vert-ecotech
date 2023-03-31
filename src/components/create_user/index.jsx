@@ -32,7 +32,6 @@ const Register = () => {
   };
 
   const handleSubmition = () => {
-    //console.log(formState)
   };
 
   const CreateUserForm = (event) => {
@@ -50,7 +49,6 @@ const Register = () => {
 
     axios.post('http://localhost:8000/api/signup/', formState)
       .then(response => {
-        console.log(response);
         // editar código aqui de quando der certo se cadastrar
         //window.localStorage.setItem("authToken", res.data.token);
         /* window.localStorage.setItem(
@@ -60,7 +58,6 @@ const Register = () => {
         /* dispatch(setAuthenticate(true));
         history.push("/users");
         setOpen(false); */
-        console.log('Login successful:', response.data);
         // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));

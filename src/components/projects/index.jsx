@@ -16,7 +16,6 @@ const Projects = () => {
   const dispatch = useDispatch();
   const app_data = useSelector((state) => state.app_data);
 
-  console.log('data', app_data);
 
   useEffect(() => {
     const fetchUsers = async () => {

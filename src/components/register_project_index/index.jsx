@@ -8,7 +8,6 @@ import RegisterProjectStep3 from '../register_project_upload_files'
 const RegisterProject = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
-  //console.log(app_status)
 
   return (
     <Container>

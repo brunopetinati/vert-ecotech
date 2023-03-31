@@ -21,12 +21,10 @@ const ProjectIntern = () => {
   const location = useLocation();
   const project = location.state.project;
 
-  console.log(project);
 
   const [boolean, setBoolean] = useState(false);
 
   const handleInputChange = () => {
-    console.log('nothing')
   };
 
   const dispatch = useDispatch();
@@ -37,8 +35,7 @@ const ProjectIntern = () => {
   };
 
   const handleRegister = () => {
-
-    console.log('nothing')
+    navigate('/edit_intern_project')
   };
 
   const downloadPDF = (fieldName) => {
@@ -46,7 +43,6 @@ const ProjectIntern = () => {
       //const token = sessionStorage.getItem('Authorization');
       const downloadUrl = `http://localhost:8000/api/project/${project.id}/download/${fieldName}/`;
       window.open(downloadUrl, '_blank');
-
     };
 
   return (

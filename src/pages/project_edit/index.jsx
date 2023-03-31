@@ -1,17 +1,19 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
 import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 
-const RegisterProjectStep2 = () => {
+const EditProject = () => {
+
+  const location = useLocation();
+  //const project = location.state.project;
+  const navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
-
-  const navigate = useNavigate();
 
   const [totalArea, setTotalArea] = useState('');
   const [totalReserveArea, setTotalReserveArea] = useState('');
@@ -348,7 +350,7 @@ const RegisterProjectStep2 = () => {
   )
 };
 
-export default RegisterProjectStep2;
+export default EditProject;
 
 
 /* 

@@ -12,7 +12,6 @@ const RegisterProjectStep3 = () => {
   };
 
   const handleRegister = () => {
-    console.log('concluded')
   };
 
   return (

@@ -49,7 +49,6 @@ const FileUploader = () => {
         },
       });
 
-      console.log('Response:', response.data);
       // Add code to handle the response from the server
     } catch (error) {
       console.error('Error:', error);
