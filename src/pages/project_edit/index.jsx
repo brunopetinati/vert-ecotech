@@ -12,18 +12,16 @@ import { useSelector } from 'react-redux';
 
 const EditProject = () => {
 
-  const location = useLocation();
-  const project = location.state.project;
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const project = location.state.project;
   const userNames = useSelector(state => state.app_data.users);
-  
-
-  const [users, setUsers] = useState([]);
-
   const [totalArea, setTotalArea] = useState(project.total_area);
   const [totalReserveArea, setTotalReserveArea] = useState(project.legal_reserve_area);
   const [address, setAddress] = useState(project.address);
   const [owner, setOwner] = useState(project.owner);
+  const [users, setUsers] = useState([]);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -33,12 +31,11 @@ const EditProject = () => {
   // SICAR
   const [selectedCar, setSelectedCar] = useState(project.status_car);
 
-
   const optionsCar = [
     { value: "Ativo", label: "Ativo" },
     { value: "Pendente", label: "Pendente" },
     { value: "Cancelado", label: "Cancelado" },
-    { value: null, label: "Não possui CAR" },
+    { value: null, label: "Não possui CAR" }
   ];
 
   const handleOptionsCar = (selectedCar) => {
@@ -180,33 +177,13 @@ const EditProject = () => {
 
     fetchUsers();
   }, []);
-
-
-  // REGISTRAR PROJETO
-  const handleRegister = () => {
-
-    const token = sessionStorage.getItem('Authorization');
-    const headers = { Authorization: `Bearer ${token}`, };
-    
-    axios.post('http://localhost:8000/api/projects/', preparedObject, { headers })
-      .then(response => {
-        const projectId = response.data.id;
-        dispatch(storeProjectId(projectId));
-        dispatch(appStatus('register_land_upload_files'));
-      })
-      .catch(error => {
-        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
-        console.error(error);
-        return
-      });
-  };
   
   
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState(project.owner_actions_to_preserve_forest);
 
   // preparar objeto para ser enviado para a requisição
 
-  const preparedObject = {
+/*   const preparedObject = {
     "owner": project.owner,
     "total_area": project.total_area,
     "legal_reserve_area": project.legal_reserve_area,
@@ -222,6 +199,25 @@ const EditProject = () => {
     "owner_actions_to_preserve_forest": project.owner_actions_to_preserve_forest,
     "legal_reserve_deficit": project.legal_reserve_deficit,
 	  "has_federal_debt": project.has_federal_debt,
+  }; */
+
+  const preparedObject = {
+    "owner": owner,
+    "total_area":  totalArea,
+    "legal_reserve_area": totalReserveArea,
+    "address": address,
+    "status_car": selectedCar,
+    "sicar_code": sicarCode,
+    "matricula_status": selectedMatriculaStatus,
+    "georeferencing_status": selectedGeorreferenciamentoStatus,
+    "reserve_legal_status":  selectedReservaSituation,
+    "physical_or_legal_entity": "legal",
+    "cnpj": CNPJ,
+    "conservation_unit": selectedUnidadeConservacao,
+    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
+    "legal_reserve_deficit": selectedPossuiDeficit,
+	  "has_federal_debt": selectedPossuiDivida,
+    "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
   };
 
 
@@ -248,31 +244,43 @@ const EditProject = () => {
     }));
   };
 
-  const handleUpload = async () => {
+  const handleSave = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `http://localhost:8000/api/projects/${projectID}/update/`;
-
-    const formData = new FormData();
-    formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
-    formData.append('pdf_car', selectedFiles.pdf_car);
-    formData.append('property_polygon', selectedFiles.property_polygon);
-    formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
-    formData.append('pdf_ccir', selectedFiles.pdf_ccir);
-
+    const url = `http://localhost:8000/api/projects/${project.id}/update`;
+  
     try {
-      const response = await axios.put(url, selectedFiles, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
-        },
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+  
+      let data = preparedObject;
+  
+      if (selectedFiles) {
+        const formData = new FormData();
+        formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
+        formData.append('pdf_car', selectedFiles.pdf_car);
+        formData.append('property_polygon', selectedFiles.property_polygon);
+        formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
+        formData.append('pdf_ccir', selectedFiles.pdf_ccir);
+  
+        // Merge the preparedObject and formData into a single object
+        data = Object.assign({}, preparedObject, formData);
+        
+        headers['Content-Type'] = 'multipart/form-data';
+      }
+  
+      const response = await axios.put(url, data, {
+        headers,
       });
-
+  
       // Add code to handle the response from the server
     } catch (error) {
+      alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
       console.error('Error:', error);
       // Add code to handle the error
     }
   };
+  
   
 
   return (
@@ -451,7 +459,7 @@ const EditProject = () => {
 
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>
-          <Button onClick={() => handleRegister()}>Confirmar</Button>
+          <Button onClick={() => handleSave()}>Confirmar</Button>
         </ButtonContainer>
 
       </Container>
