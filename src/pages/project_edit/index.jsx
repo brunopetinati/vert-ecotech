@@ -6,19 +6,24 @@ import { appStatus } from '../../store/modules/app_status/actions';
 import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { returnYesorNoforBoolean, returnUserName } from '../../constants/functions';
+import { useSelector } from 'react-redux';
+
 
 const EditProject = () => {
 
   const location = useLocation();
-  //const project = location.state.project;
+  const project = location.state.project;
   const navigate = useNavigate();
+  const userNames = useSelector(state => state.app_data.users);
+  
 
   const [users, setUsers] = useState([]);
 
-  const [totalArea, setTotalArea] = useState('');
-  const [totalReserveArea, setTotalReserveArea] = useState('');
-  const [address, setAddress] = useState('');
-  const [owner, setOwner] = useState('');
+  const [totalArea, setTotalArea] = useState(project.total_area);
+  const [totalReserveArea, setTotalReserveArea] = useState(project.legal_reserve_area);
+  const [address, setAddress] = useState(project.address);
+  const [owner, setOwner] = useState(project.owner);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -26,7 +31,8 @@ const EditProject = () => {
   };
   
   // SICAR
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedCar, setSelectedCar] = useState(project.status_car);
+
 
   const optionsCar = [
     { value: "Ativo", label: "Ativo" },
@@ -40,7 +46,7 @@ const EditProject = () => {
   };
 
   // Status Matrícula
-  const [selectedMatriculaStatus, setSelectedMatriculaStatus] = useState('')
+  const [selectedMatriculaStatus, setSelectedMatriculaStatus] = useState(project.matricula_status);
 
   const optionsMatriculaStatus = [
     { value: "Vigente", label: "Vigente" },
@@ -53,10 +59,10 @@ const EditProject = () => {
   };
 
   // Código SICAR
-  const [sicarCode, setSicarCode] = useState(''); 
+  const [sicarCode, setSicarCode] = useState(project.sicar_code); 
 
   // Georreferenciamento
-  const [selectedGeorreferenciamentoStatus, setSelectedGeorreferenciamentoStatus] = useState('')
+  const [selectedGeorreferenciamentoStatus, setSelectedGeorreferenciamentoStatus] = useState(project.georeferencing_status);
 
   const optionsGerorreferenciamentoStatus = [
     { value: "Atualizado", label: "Atualizado" },
@@ -72,7 +78,7 @@ const EditProject = () => {
 
   // Situação da reserva legal da propriedade
 
-  const [selectedReservaSituation, setSelectedReservaSituation] = useState('')
+  const [selectedReservaSituation, setSelectedReservaSituation] = useState(project.reserve_legal_status)
 
   const optionsReservaSituation = [
     { value: "Sem vegetação / em regeneração natural", label: "Sem vegetação / em regeneração natural" },
@@ -86,7 +92,7 @@ const EditProject = () => {
 
   // Unidade de conservação do imóvel
 
-  const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('');
+  const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState(project.conservation_unit);
 
   const optionsUnidadeConservacao = [
     { value: "Privada", label: "Privada" },
@@ -100,7 +106,7 @@ const EditProject = () => {
 
   // Dívida Federal
 
-  const [selectedPossuiDivida, setSelectedPossuiDivida] = useState('');
+  const [selectedPossuiDivida, setSelectedPossuiDivida] = useState(project.has_federal_debt);
 
   const optionsPossuiDivida = [
     { value: true, label: "Sim" },
@@ -125,7 +131,7 @@ const EditProject = () => {
 
   // A propriedade está sob domínio de uma pessoa física ou jurídica?
 
-  const [selectedPessoaJuridicaOuFisica, setSelectedPessoaJuridicaOuFisica] = useState('');
+  const [selectedPessoaJuridicaOuFisica, setSelectedPessoaJuridicaOuFisica] = useState(project.physical_or_legal_entity);
 
   const optionsPessoaJuridicaOuFisica = [
     { value : 'Física', label: 'Física' },
@@ -137,7 +143,7 @@ const EditProject = () => {
   };
 
   // Máscara CPF ou CNPJ
-  const [CNPJ, setCNPJ] = useState('');
+  const [CNPJ, setCNPJ] = useState(project.cnpj);
   const [mask, setMask] = useState("99.999.999/9999-99");
   const [boolean, setBoolean] = useState(false);
 
@@ -153,8 +159,8 @@ const EditProject = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(appStatus('Projetos'));
-    navigate('/welcome');
+    //dispatch(appStatus('Projetos'));
+    navigate('/intern_project', { state: { project }});
   };
 
   useEffect(() => {
@@ -196,29 +202,77 @@ const EditProject = () => {
   };
   
   
-  const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
+  const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState(project.owner_actions_to_preserve_forest);
 
   // preparar objeto para ser enviado para a requisição
 
   const preparedObject = {
-    "owner": owner,
-    "total_area":  totalArea,
-    "legal_reserve_area": totalReserveArea,
-    "address": address,
-    "status_car": selectedCar,
-    "sicar_code": sicarCode,
-    "matricula_status": selectedMatriculaStatus,
-    "georeferencing_status": selectedGeorreferenciamentoStatus,
-    "reserve_legal_status":  selectedReservaSituation,
-    "physical_or_legal_entity": "legal",
-    "cnpj": CNPJ,
-    "conservation_unit": selectedUnidadeConservacao,
-    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
-    "legal_reserve_deficit": selectedPossuiDeficit,
-	  "has_federal_debt": selectedPossuiDivida,
-    "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
+    "owner": project.owner,
+    "total_area": project.total_area,
+    "legal_reserve_area": project.legal_reserve_area,
+    "address": project.address,
+    "status_car": project.status_car,
+    "sicar_code": project.sicar_code,
+    "matricula_status": project.matricula_status,
+    "georeferencing_status": project.georeferencing_status,
+    "reserve_legal_status": project.reserve_legal_status,
+    "physical_or_legal_entity": project.physical_or_legal_entity,
+    "cnpj": project.cnpj,
+    "conservation_unit": project.conservation_unit,
+    "owner_actions_to_preserve_forest": project.owner_actions_to_preserve_forest,
+    "legal_reserve_deficit": project.legal_reserve_deficit,
+	  "has_federal_debt": project.has_federal_debt,
   };
 
+
+  // file uploader
+
+  const projectID = useSelector((state) => state.app_data.project_id);
+  const ownerID = useSelector((state) => state.app_data.owner_id);
+
+
+  const [selectedFiles, setSelectedFiles] = useState({
+    pdf_matricula_certificate: null,
+    pdf_car: null,
+    property_polygon: null,
+    pdf_federal_debt_certificate: null,
+    pdf_ccir: null,
+    owner: ownerID // alterar essa linha
+  });
+
+
+  const handleFileInput = (fieldName, e) => {
+    setSelectedFiles((prevSelectedFiles) => ({
+      ...prevSelectedFiles,
+      [fieldName]: e.target.files[0],
+    }));
+  };
+
+  const handleUpload = async () => {
+    const token = sessionStorage.getItem('Authorization');
+    const url = `http://localhost:8000/api/projects/${projectID}/update/`;
+
+    const formData = new FormData();
+    formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
+    formData.append('pdf_car', selectedFiles.pdf_car);
+    formData.append('property_polygon', selectedFiles.property_polygon);
+    formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
+    formData.append('pdf_ccir', selectedFiles.pdf_ccir);
+
+    try {
+      const response = await axios.put(url, selectedFiles, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Add code to handle the response from the server
+    } catch (error) {
+      console.error('Error:', error);
+      // Add code to handle the error
+    }
+  };
   
 
   return (
@@ -233,19 +287,13 @@ const EditProject = () => {
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-
-            <StyledSelectForUser value={owner} onChange={handleUserSelect} >
-              <option value="">Selecione o proprietário</option>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>{user.full_name}</option>
-              ))}
-            </StyledSelectForUser>
-
+            <div style={{marginBottom: '32px', marginTop: '8px'}}>{returnUserName(project.owner, userNames)}</div>
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <StyledSelect
               onChange={handlePessoaFisicaOuJuridica}
               options={optionsPessoaJuridicaOuFisica}
               placeholder={'Selecione uma opção'}
+              defaultValue={{ value: project.physical_or_legal_entity, label: project.physical_or_legal_entity}}
             />
 
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
@@ -268,6 +316,7 @@ const EditProject = () => {
               onChange={handleMatriculaStatus}
               options={optionsMatriculaStatus}
               placeholder={'Selecione uma opção'}
+              defaultValue={{value : project.matricula_status, label: project.matricula_status}}
             />
             
             <Label>Possui déficit de reserva legal?</Label>
@@ -275,12 +324,14 @@ const EditProject = () => {
               onChange={handlePossuiDeficit}
               options={optionsPossuiDeficit}
               placeholder={'Selecione uma opção'}
+              defaultValue={{value: project.legal_reserve_deficit, label: returnYesorNoforBoolean(project.legal_reserve_deficit)}}
             />
             <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
             <StyledSelect
               onChange={handlePossuiDivida}
               options={optionsPossuiDivida}
               placeholder={'Selecione uma opção'}
+              defaultValue={{value: project.has_federal_debt, label: returnYesorNoforBoolean(project.has_federal_debt)}}
             />
           </Column>
           <Column>
@@ -304,6 +355,7 @@ const EditProject = () => {
               onChange={handleOptionsCar}
               options={optionsCar}
               placeholder={'Selecione uma opção'}
+              defaultValue={{ value: project.status_car, label: project.status_car }}
             />
             <Label>Código SICAR(CAR)</Label>
             <Input type="text" 
@@ -312,6 +364,7 @@ const EditProject = () => {
               alwaysShowMask={false}
               placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               onChange={(e) => setSicarCode(e.target.value)}
+              value={sicarCode}
             >  
             </Input>
             <Label>Status do georreferenciamento no SIGEF</Label>
@@ -319,18 +372,21 @@ const EditProject = () => {
               onChange={handleGeorreferenciamentoStatus}
               options={optionsGerorreferenciamentoStatus}
               placeholder={'Selecione uma opção'}
+              defaultValue={{value: project.georeferencing_status, label: project.georeferencing_status}}
             />
             <Label>Situação da reserva legal da propriedade:</Label>
             <StyledSelect
               onChange={handleReservaSituation}
               options={optionsReservaSituation}
               placeholder={'Selecione uma opção'}
+              defaultValue={{ label: project.reserve_legal_status, value: project.reserve_legal_status}}
             />
             <Label>Possui unidade de conservação no imóvel?</Label>
             <StyledSelect
               onChange={handleUnidadeConservacao}
               options={optionsUnidadeConservacao}
               placeholder={'Selecione uma opção'}
+              defaultValue={{value: project.conservation_unit, label: project.conservation_unit}}
             />
           </Column>
         </InnerContainer>
@@ -341,10 +397,63 @@ const EditProject = () => {
               <p />
             <TextArea  type="text" value={ownerActionsToPreserveForest} onChange={(e) => setOwnerActionsToPreserveForest(e.target.value)}/>
         </Column>
+        
+        {/* file uploader */}
+        <h2>Arquivos</h2>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '16px'}}>
+          <div>
+            <div>
+              <label>Anexar Certidão de Matrícula</label>
+              <p />
+              <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
+            </div>
+            <p />
+            <div>
+              <label>Anexar PDF do CAR(SICAR)</label>
+              <p />
+              <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
+            </div>
+            <p />
+            <div>
+              <label>Anexar o Polígono da propriedade</label>
+              <small style={{ marginLeft: '8px' }}>
+                (Formatos aceitos: *.KMZ ou *.KML)
+              </small>
+              <p />
+              <input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
+            </div>
+            <p />
+          </div>
+          <div>
+            <div>
+              <label>Anexar cópia do CCIR</label>
+              <p />
+              <input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
+            </div>
+            <p />
+            <div>
+              <label>Anexar Certidão de Regularidade da Dívida Federal</label>
+              <p />
+              <input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
+            </div>
+            <p />
+          </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >    
+          </div>
+        </div>
+
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>
           <Button onClick={() => handleRegister()}>Confirmar</Button>
         </ButtonContainer>
+
       </Container>
     </motion.div>
   )

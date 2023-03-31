@@ -43,3 +43,9 @@ export const returnYesorNoforBoolean = (boolean) => {
     return 'Não'
   }
 };
+
+export const returnUserName = (id, users) => {
+  console.log(users)
+  const user = users.find(user => user.id === id);
+  return user ? user.full_name : '';
+};

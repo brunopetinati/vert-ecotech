@@ -10,7 +10,7 @@ import Settings from "../../components/settings";
 import StockChart from "../../components/dashboard";
 import Sidebar from "../../components/sidebar";
 import { motion } from 'framer-motion';
-import { returnYesorNoforBoolean } from "../../constants/functions";
+import { returnYesorNoforBoolean, returnUserName } from "../../constants/functions";
 import axios from "axios";
 
 
@@ -20,7 +20,7 @@ const ProjectIntern = () => {
   const user = useSelector((state) => state.user);
   const location = useLocation();
   const project = location.state.project;
-
+  const users = useSelector((state) => state.app_data.users);
 
   const [boolean, setBoolean] = useState(false);
 
@@ -35,7 +35,7 @@ const ProjectIntern = () => {
   };
 
   const handleRegister = () => {
-    navigate('/edit_intern_project')
+    navigate('/edit_intern_project', { state: { project }});
   };
 
   const downloadPDF = (fieldName) => {
@@ -57,7 +57,7 @@ const ProjectIntern = () => {
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            <Span>{project.owner}</Span>
+            <Span>{returnUserName(project.owner, users)}</Span>
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <Span>{project.physical_or_legal_entity}</Span>        
             <Label>CNPJ ou CPF do proprietário</Label>

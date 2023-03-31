@@ -1,13 +1,10 @@
-
-
 import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
 
 export const Container = styled.div`
-  width: 1100px;
   border-radius: 20px;
-  padding: 2em;
+  padding: 4em;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: auto;
   background: #fff;
