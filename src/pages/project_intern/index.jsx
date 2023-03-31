@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, DownloadButton } from './styles'
 import { useState } from 'react'
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { SideContainer } from './styles'
 import Profile from '../../components/profile'
 import Projects from "../../components/projects";
@@ -30,9 +30,10 @@ const ProjectIntern = () => {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    console.log('nothing')
+    navigate('/welcome')
   };
 
   const handleRegister = () => {
@@ -107,7 +108,7 @@ const ProjectIntern = () => {
         </Column>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>
-          <Button onClick={() => handleRegister()}>Confirmar</Button>
+          <Button onClick={() => handleRegister()}>Editar Informações</Button>
         </ButtonContainer>
       </Container>
     </motion.div>

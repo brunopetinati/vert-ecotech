@@ -47,7 +47,7 @@ const ProjectsTable = ({filteredProjects}) => {
               <TD>{row.reserve_legal_status}</TD>
               <TD>{row.physical_or_legal_entity}</TD> 
               <TD>{row.conservation_unit}</TD>
-              <TD onClick={() => {handleClick(projects.find(project => project.id === row.id))}} >Visualizar</TD>
+              <TD style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={() => {handleClick(projects.find(project => project.id === row.id))}} >Visualizar</TD>
             </TR>
           ))}
         </tbody>
