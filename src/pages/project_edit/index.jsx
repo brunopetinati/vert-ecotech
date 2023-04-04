@@ -164,7 +164,7 @@ const EditProject = () => {
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get('http://localhost:8000/api/users/', {
+        const response = await axios.get('http://3.145.151.125:8000/api/users/', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -246,7 +246,7 @@ const EditProject = () => {
 
   const handleSave = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `http://localhost:8000/api/projects/${project.id}/update`;
+    const url = `http://3.145.151.125:8000/api/projects/${project.id}/update`;
   
     try {
       const headers = {

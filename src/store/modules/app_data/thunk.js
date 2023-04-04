@@ -7,7 +7,7 @@ export const getOwners = () => (dispatch, getState) => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
   };
-  fetch('http://localhost:8000/api/users/', requestOptions)
+  fetch('http://3.145.151.125:8000/api/users/', requestOptions)
     .then((response) => response.json())
     .then((data) => {
       dispatch(storeUsers(data)); // Dispatch the action to update the store
@@ -40,7 +40,7 @@ const [owners, setOwners] = useState({});
       method: 'GET',
       headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
     };
-    fetch('http://localhost:8000/api/users/', requestOptions)
+    fetch('http://3.145.151.125:8000/api/users/', requestOptions)
       .then((response) => response.json())
       .then((data) => {
         setOwners(data);

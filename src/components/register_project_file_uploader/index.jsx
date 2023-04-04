@@ -32,7 +32,7 @@ const FileUploader = () => {
 
   const handleUpload = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `http://localhost:8000/api/projects/${projectID}/update/`;
+    const url = `http://3.145.151.125:8000/api/projects/${projectID}/update/`;
 
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
