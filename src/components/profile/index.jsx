@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
 import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
+import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 
 const Profile = () => {
@@ -11,6 +13,7 @@ const Profile = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
 
   const user = useSelector((state) => state.user.userData);
+  console.log('console.log: user', user)
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -18,21 +21,28 @@ const Profile = () => {
 
   // Código pertinente ao preenchimento automático do CEP
   
-  const [cep, setCep] = useState('');
-  const [address, setAddress] = useState({
-    street: '',
-    district: '',
-    number: '',
-    complemento: '',
-    state: '',
-    city: ''
-    // add more fields as needed
+  const [userUpdate, setUserUpdate] = useState({
+    full_name: user.full_name || '',
+    rg: user.rg || '',
+    cpf: user.cpf || '',
+    phone: user.phone || '',
+    email: user.email || '',
+    user_type: user.user_type || '',
+    cep: user.cep || '',
+    street: user.street || '',
+    number: user.number || '',
+    complement: user.complement || '',
+    district: user.district || '',
+    state: user.state || '',
+    city: user.city || '',
   });
 
   const handleCepOnForm = async (cep) => {
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length -1))) {
       const cepObject = await handleCepChange(cep.replace('-',''))
-      setAddress({
+      setUserUpdate({
+        ...userUpdate,
+        cep: cepObject.cep,
         street: cepObject.logradouro,
         district: cepObject.bairro,
         state: cepObject.uf,
@@ -41,7 +51,29 @@ const Profile = () => {
     }    
   };
 
-  const [phone, setPhone] = useState('');
+
+  const handleRegister = () => {
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}`, };
+    
+    axios.put(`http://${currentUrl}:8000/api/users/${user.id}/update/`, userUpdate, { headers })
+      .then(response => {
+        console.log('objeto registrado com sucesso');
+        console.log(response);
+      })
+      .catch(error => {
+        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+        console.error(error);
+        return
+      });
+  };
+
+
+  useEffect(() =>{
+    console.log('objeto userUpdate',userUpdate)
+  }, [userUpdate])
+  
   
 
   return (
@@ -57,20 +89,20 @@ const Profile = () => {
             <h3>Meu perfil</h3>
             <Row>
               <Label>Nome completo</Label>
-              <ShowInput type="text" defaultValue={user.full_name} />
+              <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />
             </Row>
             <Row>
               <Label>Email</Label>
-              <ShowInput type="text" defaultValue={user.email} />
+              <ShowInput type="text" defaultValue={userUpdate.email} onChange={(e) => setUserUpdate({...userUpdate, email: e.target.value})}/>
             </Row>
             <Row>
               <Label>Whatsapp</Label>
               <ShowInput type="text"
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setUserUpdate({ ...userUpdate, phone: e.target.value})}
                 mask={"(99) 99999-9999"}
                 maskPlaceholder={"(21) 98787-5512"}
                 alwaysShowMask={false}
-                defaultValue={user.phone}
+                defaultValue={userUpdate.phone}
               />
             </Row>
             <Row>
@@ -78,7 +110,9 @@ const Profile = () => {
               <ShowInput type="text" id="rg" name="rg" 
               mask={"99.999.999-9"}
               maskPlaceholder="47.857.659.3"
-              alwaysShowMask={false} />
+              alwaysShowMask={false}
+              defaultValue={userUpdate.rg}
+              onChange={((e) => setUserUpdate({...userUpdate, rg: e.target.value}))} />
             </Row>
             <Row>            
               <Label for="cpg">CPF:</Label>
@@ -86,54 +120,64 @@ const Profile = () => {
               mask={"999.999.999-99"}
               maskPlaceholder="359.868.555-19"
               alwaysShowMask={false}
+              defaultValue={userUpdate.cpf}
+              onChange={(e) => setUserUpdate({...userUpdate, cpf: e.target.value})}
               />          
             </Row>
-            <Row>            
+            {/* <Row>            
               <Label for="cnpj">CNPJ:</Label>
               <ShowInput type="text" id="cnpj" name="cnpj" 
               mask={"99.999.999/9999-99"}
               maskPlaceholder="12.345.678/0001-00"
               alwaysShowMask={false}
+              onChange={(e) => setUserUpdate({...userUpdate, cnpj: e.target.value})}
               />
-            </Row>
+            </Row> */}
             <Row>
               <Label for="cep">CEP:</Label>
-              <ShowInput type="text" id="cep" name="cep" value={cep} onChange={(event) => {
-                handleCepOnForm(event.target.value)
-                setCep(event.target.value)
+              <ShowInput type="text" id="cep" name="cep" value={userUpdate.cep} onChange={(event) => {
+                setUserUpdate({...userUpdate, cep: event.target.value});
+                handleCepOnForm(event.target.value);
               }} 
               mask={"99999-999"}
               maskPlaceholder="13140-989"
               alwaysShowMask={false}
+              
               />
             </Row>
             <Row>
               <Label for="rua">Rua:</Label>
-              <ShowInput type="text" id="rua" name="rua" value={address.street} disabled placeholder="Preencha o CEP para preenchimento automático" />    
+              <ShowInput type="text" id="rua" name="rua" value={userUpdate.street} onChange={(e) => setUserUpdate({...userUpdate, street: e.target.value})} disabled placeholder="Preencha o CEP para preenchimento automático" />    
             </Row>
             <Row>
               <Label for="numero">Número:</Label>
-              <ShowInput type="text" id="numero" name="numero" value={address.number} />
+              <ShowInput type="text" id="numero" name="numero" value={userUpdate.number} onChange={(e) => setUserUpdate({...userUpdate, number: e.target.value})} />
             </Row>
             <Row>
               <Label for="rua">Complemento:</Label>
-              <ShowInput type="text" id="complemento" name="complemento" value={address.complemento} />    
+              <ShowInput type="text" id="complemento" name="complemento" value={userUpdate.complement} onChange={(e) => setUserUpdate({...userUpdate, complement: e.target.value})} />    
             </Row>
             <Row>
               <Label for="bairro">Bairro:</Label>
-              <ShowInput type="text" id="bairro" name="bairro" value={address.district} disabled placeholder="Preencha o CEP para preenchimento automático"/>    
+              <ShowInput type="text" id="bairro" name="bairro" value={userUpdate.district} disabled placeholder="Preencha o CEP para preenchimento automático" onChange={(e) => setUserUpdate({...userUpdate, district: e.target.value})}/>    
             </Row>
             <Row>
               <Label for="cidade">Cidade:</Label>
-              <ShowInput type="text" id="cidade" name="cidade" value={address.city} disabled placeholder="Preencha o CEP para preenchimento automático"/>
+              <ShowInput type="text" id="cidade" name="cidade" value={userUpdate.city} disabled placeholder="Preencha o CEP para preenchimento automático" onChange={(e) => setUserUpdate({...userUpdate, city: e.target.value})}/>
             </Row>
             <Row>
               <Label for="uf">UF:</Label>
-              <ShowInput type="text" id="uf" name="uf" value={address.state} disabled placeholder="Preencha o CEP para preenchimento automático"/>         
-            </Row>     
+              <ShowInput type="text" id="uf" name="uf" value={userUpdate.state} disabled placeholder="Preencha o CEP para preenchimento automático" onChange={(e) => setUserUpdate({...userUpdate, state: e.target.value})}/>         
+            </Row>
+            {/* <Row>            
+              <Label for="cnpj">Senha:</Label>
+              <ShowInput type="text" id="cnpj" name="cnpj" 
+              onChange={(e) => setUserUpdate({...userUpdate, password: e.target.value})}
+              />
+            </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
-              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
+              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>

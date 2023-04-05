@@ -20,8 +20,6 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showLoading, setShowLoading] = useState(false);
 
-
-
   const handleSubmit = async event => {
     event.preventDefault();
     try {
@@ -33,6 +31,7 @@ const Login = () => {
         sessionStorage.setItem('Authorization', response.data.access);
         // Navigate to the welcome page on successful login
         setShowLoading(true);
+        console.log('response.data em login', response.data);
         setTimeout(() => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));

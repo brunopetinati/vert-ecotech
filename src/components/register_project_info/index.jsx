@@ -160,7 +160,7 @@ const RegisterProjectStep2 = () => {
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get('http://3.145.151.125:8000/api/users/', {
+        const response = await axios.get(`http://${currentUrl }:8000/api/users/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -24,7 +24,7 @@ const StockChart = () => {
 
   return (
     <div>
-      {data ? (
+      {/* {data ? (
         <Line
           data={data}
           options={{
@@ -56,7 +56,8 @@ const StockChart = () => {
         />
       ) : (
         'Loading...'
-      )}
+      )} */}
+      <h1>dashboard</h1>
     </div>
   );
 };
