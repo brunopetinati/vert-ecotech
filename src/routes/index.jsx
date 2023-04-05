@@ -8,8 +8,7 @@ import InternRegisterUser from '../components/inter_register_user';
 import ProjectIntern from "../pages/project_intern";
 import EditProject from "../pages/project_edit/";
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import { getOwners } from "../store/modules/app_data/thunk";
 
 const AppRoutes = () => {

@@ -1,4 +1,4 @@
-import { USER_LOGIN } from "./action-types";
+import { USER_LOGIN, USER_UPDATE } from "./action-types";
 
 export const userLogin = (accessToken, userData) => ({
   type: USER_LOGIN,
@@ -6,4 +6,11 @@ export const userLogin = (accessToken, userData) => ({
     accessToken,
     userData,
   },
+});
+
+export const userUpdater = (userData) => ({
+  type: USER_UPDATE,
+  payload: {
+    userData
+  }
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
@@ -7,13 +7,16 @@ import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './s
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
+import { userUpdater } from '../../store/modules/login/actions';
 
 const Profile = () => {
+
+  const dispatch = useDispatch();
 
   const [showModalBanco, setShowModalBanco] = useState(false);
 
   const user = useSelector((state) => state.user.userData);
-  console.log('console.log: user', user)
+  console.log('constante análise', user)
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -61,6 +64,7 @@ const Profile = () => {
       .then(response => {
         console.log('objeto registrado com sucesso');
         console.log(response);
+        dispatch(userUpdater(userUpdate));
       })
       .catch(error => {
         alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
@@ -69,12 +73,6 @@ const Profile = () => {
       });
   };
 
-
-  useEffect(() =>{
-    console.log('objeto userUpdate',userUpdate)
-  }, [userUpdate])
-  
-  
 
   return (
       <IndexContainer>
