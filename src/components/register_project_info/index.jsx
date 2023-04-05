@@ -181,7 +181,7 @@ const RegisterProjectStep2 = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
-    axios.post('http://3.145.151.125:8000/api/projects/', preparedObject, { headers })
+    axios.post(`http://${currentUrl}:8000/api/projects/`, preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
         dispatch(storeProjectId(projectId));

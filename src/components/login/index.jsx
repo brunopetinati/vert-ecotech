@@ -25,7 +25,7 @@ const Login = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      axios.post('http://3.145.151.125:8000/api/login/', {
+      axios.post(`http://${currentUrl}:8000/api/login/`, {
         email,
         password,
       }).then(response => {

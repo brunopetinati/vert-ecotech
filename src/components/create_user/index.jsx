@@ -47,7 +47,7 @@ const Register = () => {
       return
     } 
 
-    axios.post('http://3.145.151.125:8000/api/signup/', formState)
+    axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
         // editar código aqui de quando der certo se cadastrar
         //window.localStorage.setItem("authToken", res.data.token);

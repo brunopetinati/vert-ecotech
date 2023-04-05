@@ -22,7 +22,7 @@ const Projects = () => {
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get('http://3.145.151.125:8000/api/projects/', {
+        const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -42,7 +42,7 @@ const ProjectIntern = () => {
   const downloadPDF = (fieldName) => {
 
       //const token = sessionStorage.getItem('Authorization');
-      const downloadUrl = `http://3.145.151.125:8000/api/project/${project.id}/download/${fieldName}/`;
+      const downloadUrl = `http://${currentUrl}:8000/api/project/${project.id}/download/${fieldName}/`;
       window.open(downloadUrl, '_blank');
     };
 
