@@ -6,6 +6,7 @@ import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
 import axios from 'axios';
+import { currentUrl } from '../../constants/global';
 
 import Logo from '../../assets/logo-vert-white.png'
 

@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { returnYesorNoforBoolean, returnUserName } from '../../constants/functions';
 import { useSelector } from 'react-redux';
+import { currentUrl } from '../../constants/global';
 
 
 const EditProject = () => {

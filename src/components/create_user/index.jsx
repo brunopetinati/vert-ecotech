@@ -7,7 +7,7 @@ import Logo from '../../assets/logo-vert-white.png'
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/modules/login/actions";
-
+import { currentUrl } from '../../constants/global';
 
 const Register = () => {
 

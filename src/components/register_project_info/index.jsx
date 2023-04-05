@@ -6,6 +6,7 @@ import { appStatus } from '../../store/modules/app_status/actions';
 import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
+import { currentUrl } from '../../constants/global';
 
 const RegisterProjectStep2 = () => {
 

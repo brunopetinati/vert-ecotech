@@ -1,3 +1,4 @@
+import { currentUrl } from '../../constants/global';
 
 import { storeUsers } from './actions';
 

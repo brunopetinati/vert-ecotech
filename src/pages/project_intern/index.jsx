@@ -12,6 +12,7 @@ import Sidebar from "../../components/sidebar";
 import { motion } from 'framer-motion';
 import { returnYesorNoforBoolean, returnUserName } from "../../constants/functions";
 import axios from "axios";
+import { currentUrl } from '../../constants/global';
 
 
 const ProjectIntern = () => {
