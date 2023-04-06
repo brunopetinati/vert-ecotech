@@ -24,7 +24,10 @@ const Profile = () => {
 
   // Código pertinente ao preenchimento automático do CEP
   
+  console.log('userObject:', user, 'userId:', user.id)
+
   const [userUpdate, setUserUpdate] = useState({
+    id: user.id || '',
     full_name: user.full_name || '',
     rg: user.rg || '',
     cpf: user.cpf || '',
