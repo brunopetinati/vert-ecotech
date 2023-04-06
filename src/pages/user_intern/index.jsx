@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import  Banco from './banco';
-import { StyledButton } from '../default_button/styles';
+import { StyledButton } from '../../components/default_button/styles'
 import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Profile = () => {
+const UserIntern = () => {
 
   const dispatch = useDispatch();
 
+  const location = useLocation();
+
+  const user = location.state.user;
+
   const [showModalBanco, setShowModalBanco] = useState(false);
 
-  const user = useSelector((state) => state.user.userData);
-  console.log('constante análise', user)
+  const navigate = useNavigate();
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -73,6 +77,11 @@ const Profile = () => {
         return
       });
   };
+
+
+  const handleComeBack = () =>{
+    navigate('/welcome');
+  }
 
 
   return (
@@ -176,7 +185,8 @@ const Profile = () => {
             </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
+              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Editar</StyledButton>
+              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0px'}}>Voltar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>
@@ -187,4 +197,4 @@ const Profile = () => {
   )
 };
 
-export default Profile;
+export default UserIntern;

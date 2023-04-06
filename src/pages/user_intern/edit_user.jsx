@@ -2,21 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import  Banco from './banco';
-import { StyledButton } from '../default_button/styles';
+import { StyledButton } from '../../components/default_button/styles'
 import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
+import { useLocation } from 'react-router-dom';
 
-const Profile = () => {
+const UserIntern = () => {
 
   const dispatch = useDispatch();
 
-  const [showModalBanco, setShowModalBanco] = useState(false);
+  const location = useLocation();
 
-  const user = useSelector((state) => state.user.userData);
-  console.log('constante análise', user)
+  const user = location.state.user;
+
+  const [showModalBanco, setShowModalBanco] = useState(false);
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -187,4 +189,4 @@ const Profile = () => {
   )
 };
 
-export default Profile;
+export default UserIntern;

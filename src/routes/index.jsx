@@ -7,6 +7,7 @@ import RegisterProject from '../components/register_project_index';
 import InternRegisterUser from '../components/inter_register_user';
 import ProjectIntern from "../pages/project_intern";
 import EditProject from "../pages/project_edit/";
+import UserIntern from "../pages/user_intern";
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOwners } from "../store/modules/app_data/thunk";
@@ -44,6 +45,7 @@ const AppRoutes = () => {
         <Route exact path="/intern_client_register" element={<InternRegisterUser />} />
         <Route exact path="/intern_project" element={<ProjectIntern />} />
         <Route exact path="/edit_intern_project" element={<EditProject />} />
+        <Route exact path="/intern_user" element={<UserIntern />} />
       </Routes>
     </AnimatePresence>
   );
