@@ -49,16 +49,7 @@ const Register = () => {
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
-        // editar código aqui de quando der certo se cadastrar
-        //window.localStorage.setItem("authToken", res.data.token);
-        /* window.localStorage.setItem(
-          "userLogged",
-          JSON.stringify(res.data.user)
-        ); */
-        /* dispatch(setAuthenticate(true));
-        history.push("/users");
-        setOpen(false); */
-        // Store the token in the sessionStorage
+
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
@@ -66,7 +57,7 @@ const Register = () => {
       })
       .catch(error => {
         alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
-        console.error(error);
+        console.error('tracking the following error would be important',error);
         return
       });
     setShowLoading(true);

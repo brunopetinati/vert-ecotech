@@ -16,7 +16,7 @@ const Profile = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
 
   const user = useSelector((state) => state.user.userData);
-  console.log('constante análise', user)
+  console.log('constante análise', user);
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -33,6 +33,7 @@ const Profile = () => {
     email: user.email || '',
     user_type: user.user_type || '',
     cep: user.cep || '',
+    cnpj: user.cnpj || '',
     street: user.street || '',
     number: user.number || '',
     complement: user.complement || '',
@@ -68,8 +69,8 @@ const Profile = () => {
         dispatch(userUpdater(userUpdate));
       })
       .catch(error => {
-        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
-        console.error(error);
+        alert('por que alert?')
+        console.error('erro a seguir', error);
         return
       });
   };
@@ -117,21 +118,19 @@ const Profile = () => {
               <Label for="cpg">CPF:</Label>
               <ShowInput type="text" id="cpg" name="cpg" 
               mask={"999.999.999-99"}
-              maskPlaceholder="359.868.555-19"
               alwaysShowMask={false}
               defaultValue={userUpdate.cpf}
               onChange={(e) => setUserUpdate({...userUpdate, cpf: e.target.value})}
               />          
             </Row>
-            {/* <Row>            
+            <Row>            
               <Label for="cnpj">CNPJ:</Label>
               <ShowInput type="text" id="cnpj" name="cnpj" 
               mask={"99.999.999/9999-99"}
-              maskPlaceholder="12.345.678/0001-00"
               alwaysShowMask={false}
               onChange={(e) => setUserUpdate({...userUpdate, cnpj: e.target.value})}
               />
-            </Row> */}
+            </Row>
             <Row>
               <Label for="cep">CEP:</Label>
               <ShowInput type="text" id="cep" name="cep" value={userUpdate.cep} onChange={(event) => {

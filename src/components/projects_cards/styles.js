@@ -7,12 +7,13 @@ export const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   height: 79vh;
+
 `;
 
 export const Card = styled.div`
   width: 220px;
   height: auto;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   :hover {
@@ -43,6 +44,7 @@ export const CardFooter = styled.div`
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+  border-radius: 16px;
 `;
 
 export const Score = styled.div`
