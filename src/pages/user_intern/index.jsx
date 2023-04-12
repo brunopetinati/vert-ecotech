@@ -9,6 +9,7 @@ import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UserIntern = () => {
 
@@ -67,12 +68,20 @@ const UserIntern = () => {
     
     axios.put(`http://${currentUrl}:8000/api/users/${user.id}/update/`, userUpdate, { headers })
       .then(response => {
-        console.log('objeto registrado com sucesso');
-        console.log(response);
-        dispatch(userUpdater(userUpdate));
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Sua requisição foi processada com sucesso.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       })
       .catch(error => {
-        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao tentar processar sua requisição.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })        
         console.error(error);
         return
       });
@@ -94,7 +103,7 @@ const UserIntern = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Meu perfil</h3>
+            <h3>{userUpdate.full_name}</h3>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />
@@ -132,15 +141,15 @@ const UserIntern = () => {
               onChange={(e) => setUserUpdate({...userUpdate, cpf: e.target.value})}
               />          
             </Row>
-            {/* <Row>            
+            <Row>            
               <Label for="cnpj">CNPJ:</Label>
               <ShowInput type="text" id="cnpj" name="cnpj" 
               mask={"99.999.999/9999-99"}
-              maskPlaceholder="12.345.678/0001-00"
               alwaysShowMask={false}
+              defaultValue={userUpdate.cnpj}
               onChange={(e) => setUserUpdate({...userUpdate, cnpj: e.target.value})}
               />
-            </Row> */}
+            </Row>
             <Row>
               <Label for="cep">CEP:</Label>
               <ShowInput type="text" id="cep" name="cep" value={userUpdate.cep} onChange={(event) => {

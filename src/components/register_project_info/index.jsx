@@ -7,6 +7,7 @@ import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actio
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
+import Swal from 'sweetalert2';
 
 const RegisterProjectStep2 = () => {
 
@@ -23,6 +24,13 @@ const RegisterProjectStep2 = () => {
     setOwner(event.target.value);
     dispatch(storeOwnerId(event.target.value));
   };
+
+  // validações
+
+  const [totalAreaError, setTotalAreaError] = useState('');
+  const [legalReserveAreaError, setLegalReserveAreaError] = useState('');
+  const [statusCARError, setStatusCARError] = useState('');
+  const [ownerError, setOwnerError] = useState('');
   
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
@@ -178,18 +186,45 @@ const RegisterProjectStep2 = () => {
   // REGISTRAR PROJETO
   const handleRegister = () => {
 
+    if (!totalArea || !totalReserveArea || !sicarCode || !owner) {
+      if (!totalArea) {
+        setTotalAreaError('Esse campo é necessário');
+      }
+      if (!totalReserveArea) {
+        setLegalReserveAreaError('Esse campo é necessário');
+      }
+      if (!sicarCode) {
+        setStatusCARError('Esse campo é necessário');
+      }
+      if (!owner) {
+        setOwnerError('Esse campo é necessário');
+      }
+      return;
+    };
+
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
     axios.post(`http://${currentUrl}:8000/api/projects/`, preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Sua requisição foi processada com sucesso.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         dispatch(storeProjectId(projectId));
         dispatch(appStatus('register_land_upload_files'));
       })
       .catch(error => {
-        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
-        console.error(error);
+        console.error('erro', error);
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao tentar processar sua requisição.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
         return
       });
   };
@@ -239,7 +274,8 @@ const RegisterProjectStep2 = () => {
                 <option key={user.id} value={user.id}>{user.full_name}</option>
               ))}
             </StyledSelectForUser>
-
+            {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
+            
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <StyledSelect
               onChange={handlePessoaFisicaOuJuridica}
@@ -251,7 +287,7 @@ const RegisterProjectStep2 = () => {
             <Input type="text" 
               placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
               mask={mask}
-              maskPlaceholder="CPF/CNPJ"
+              maskplaceholder="CPF/CNPJ"
               alwaysShowMask={false}
               value={CNPJ}
               onChange={(e) => setCNPJ(e.target.value)}
@@ -289,8 +325,9 @@ const RegisterProjectStep2 = () => {
                 placeholder="Em hectares(ha)"
                 value={totalArea}
                 onChange={(event) => setTotalArea(event.target.value)}
-                maskPlaceholder={null}
+                maskplaceholder={null}
               />
+            {totalAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{totalAreaError}</div>}
             <Label>Área total da reserva legal (ha)?</Label>
               <Input
                 type="text"
@@ -298,6 +335,7 @@ const RegisterProjectStep2 = () => {
                 value={totalReserveArea}
                 onChange={(event) => setTotalReserveArea(event.target.value)}
               />
+            {legalReserveAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{legalReserveAreaError}</div>}            
             <Label>Status do CAR</Label>
             <StyledSelect
               onChange={handleOptionsCar}
@@ -307,12 +345,13 @@ const RegisterProjectStep2 = () => {
             <Label>Código SICAR(CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
-              maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
+              maskplaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               alwaysShowMask={false}
               placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               onChange={(e) => setSicarCode(e.target.value)}
-            >  
+            >
             </Input>
+            {statusCARError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{statusCARError}</div>}
             <Label>Status do georreferenciamento no SIGEF</Label>
             <StyledSelect
               onChange={handleGeorreferenciamentoStatus}
@@ -333,7 +372,7 @@ const RegisterProjectStep2 = () => {
             />
           </Column>
         </InnerContainer>
-        <Column style={{ marginTop: '36px'}}>
+        <Column style={{ marginTop: '36px', fontStyle: 'italic', fontSize: '12px'}}>
             <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
             <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
             <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>

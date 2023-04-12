@@ -122,7 +122,7 @@ export const IndexContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #054d00;
+  background: #fff;
   width: 100%;
   height: 100%;
 `;

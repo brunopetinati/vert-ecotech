@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/modules/login/actions";
 import { currentUrl } from '../../constants/global';
+import Swal from 'sweetalert2';
 
 const Register = () => {
 
@@ -53,10 +54,21 @@ const Register = () => {
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Sua requisição foi processada com sucesso.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         navigate('/welcome');
       })
       .catch(error => {
-        alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao tentar processar sua requisição.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
         console.error('tracking the following error would be important',error);
         return
       });

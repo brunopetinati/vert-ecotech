@@ -8,6 +8,8 @@ import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
+import Swal from 'sweetalert2';
+
 
 const Profile = () => {
 
@@ -16,7 +18,6 @@ const Profile = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
 
   const user = useSelector((state) => state.user.userData);
-  console.log('constante análise', user);
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -64,12 +65,22 @@ const Profile = () => {
     
     axios.put(`http://${currentUrl}:8000/api/users/${user.id}/update/`, userUpdate, { headers })
       .then(response => {
-        console.log('objeto registrado com sucesso');
         console.log(response);
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Sua requisição foi processada com sucesso.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         dispatch(userUpdater(userUpdate));
       })
       .catch(error => {
-        alert('por que alert?')
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao tentar processar sua requisição.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });        
         console.error('erro a seguir', error);
         return
       });
