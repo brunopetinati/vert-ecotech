@@ -41,6 +41,8 @@ const InternRegisterUser = () => {
     district: '',
     state:  '',
     city:  '',
+    user_type: '',
+    password: '123mudar',
   });
 
   const handleCepOnForm = async (cep) => {
@@ -57,13 +59,49 @@ const InternRegisterUser = () => {
     }    
   };
 
+  const [verifyName, setVerifyName] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState(false);
+  const [verifyPhone, setVerifyPhone] = useState(false);
+  const [verifyCEP, setVerifyCEP] = useState(false);
+  const [verifyAccessType, setVerifyAccestype] = useState(false);
 
   const handleRegister = () => {
 
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
+  
+    if(!userObject.email || !/^\S+@\S+\.\S+$/.test(userObject.email) || !userObject.cep || userObject.cep.length < 9 || !userObject.name || !userObject.phone || !userObject.user_type) {
+  
+      if(!userObject.email) {
+        setVerifyEmail(true);
+      }
+  
+      if(!userObject.cep) {
+        setVerifyCEP(true);
+      }
+  
+      if(!userObject.name) {
+        setVerifyName(true);
+      }
+  
+      if(!userObject.phone) {
+        setVerifyPhone(true);
+      }
+  
+      if(!userObject.user_type) {
+        setVerifyAccestype(true);
+      }
+  
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Verifique os campos que ainda faltam serem preenchidos.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });        
+      return;
+    };
     
-    axios.put(`http://${currentUrl}:8000/api/signup/`, userObject, { headers })
+    axios.post(`http://${currentUrl}:8000/api/signup/`, userObject, { headers })
       .then(response => {
         Swal.fire({
           title: 'Sucesso!',
@@ -89,6 +127,12 @@ const InternRegisterUser = () => {
     navigate('/welcome');
   }
 
+  const optionsAccess = [
+    { value: "Comercial", label: "Comercial" },
+    { value: "Engenheiro", label: "Engenheiro" },
+    { value: "Regular", label: "Regular" },
+  ];
+
 
   return (
       <MainContainer>
@@ -100,24 +144,33 @@ const InternRegisterUser = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Informações cadastrais: {userObject.full_name}</h3>
+            <h3>Cadastrar novo usuário</h3>
             <Row>
               <Label>Nome completo</Label>
-              <ShowInput type="text" defaultValue={userObject.full_name} onChange={(e) => setUserObject({...userObject, full_name: e.target.value})} />
+              <div>
+                <ShowInput type="text" defaultValue={userObject.full_name} onChange={(e) => setUserObject({...userObject, full_name: e.target.value})} />              
+                {verifyName && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+              </div>
             </Row>
             <Row>
               <Label>Email</Label>
-              <ShowInput type="text" defaultValue={userObject.email} onChange={(e) => setUserObject({...userObject, email: e.target.value})}/>
+              <div>
+                <ShowInput type="text" defaultValue={userObject.email} onChange={(e) => setUserObject({...userObject, email: e.target.value})}/>
+                {verifyEmail && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+              </div>
             </Row>
             <Row>
               <Label>Whatsapp</Label>
-              <ShowInput type="text"
-                onChange={(e) => setUserObject({ ...userObject, phone: e.target.value})}
-                mask={"(99) 99999-9999"}
-                maskPlaceholder={"(21) 98787-5512"}
-                alwaysShowMask={false}
-                defaultValue={userObject.phone}
-              />
+              <div>
+                <ShowInput type="text"
+                  onChange={(e) => setUserObject({ ...userObject, phone: e.target.value})}
+                  mask={"(99) 99999-9999"}
+                  maskPlaceholder={"(21) 98787-5512"}
+                  alwaysShowMask={false}
+                  defaultValue={userObject.phone}
+                />
+                {verifyPhone && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}                
+              </div>
             </Row>
             <Row>
               <Label for="rg">RG:</Label>
@@ -149,15 +202,18 @@ const InternRegisterUser = () => {
             </Row>
             <Row>
               <Label for="cep">CEP:</Label>
-              <ShowInput type="text" id="cep" name="cep" value={userObject.cep} onChange={(event) => {
-                setUserObject({...userObject, cep: event.target.value});
-                handleCepOnForm(event.target.value);
-              }} 
-              mask={"99999-999"}
-              maskPlaceholder="13140-989"
-              alwaysShowMask={false}
-              
-              />
+              <div>
+                <ShowInput type="text" id="cep" name="cep" value={userObject.cep} onChange={(event) => {
+                  setUserObject({...userObject, cep: event.target.value});
+                  handleCepOnForm(event.target.value);
+                  }} 
+                  mask={"99999-999"}
+                  maskPlaceholder="13140-989"
+                  alwaysShowMask={false}
+                />
+                {verifyCEP && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}                
+              </div>
+
             </Row>
             <Row>
               <Label for="rua">Rua:</Label>
@@ -183,6 +239,17 @@ const InternRegisterUser = () => {
               <Label for="uf">UF:</Label>
               <ShowInput type="text" id="uf" name="uf" value={userObject.state} disabled placeholder="Preencha o CEP para preenchimento automático" onChange={(e) => setUserObject({...userObject, state: e.target.value})}/>         
             </Row>
+            <Row>
+              <Label>Tipo de acesso</Label>
+              <div>
+                <StyledSelect
+                  options={optionsAccess}
+                  placeholder={'Selecione uma opção'}
+                  onChange={(e) => setUserObject({...userObject, user_type: e.target.value})}
+                />
+                {verifyAccessType && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+              </div>
+            </Row>
             {/* <Row>            
               <Label for="cnpj">Senha:</Label>
               <ShowInput type="text" id="cnpj" name="cnpj" 
@@ -191,7 +258,7 @@ const InternRegisterUser = () => {
             </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Editar</StyledButton>
+              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Cadastrar</StyledButton>
               <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0px'}}>Voltar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
