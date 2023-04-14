@@ -13,8 +13,6 @@ import Swal from 'sweetalert2';
 
 const UserIntern = () => {
 
-  const dispatch = useDispatch();
-
   const location = useLocation();
 
   const user = location.state.user;

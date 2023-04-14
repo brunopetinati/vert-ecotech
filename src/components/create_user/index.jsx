@@ -41,12 +41,12 @@ const Register = () => {
     if (formState.password.length < 6) { 
       alert('A senha precisa ter no mínimo 6 caracteres.'); 
       return
-    }
+    };
 
     if ( formState.password != passwordConfirmation ) {
       alert('As senhas não conferem.')
       return
-    } 
+    };
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
