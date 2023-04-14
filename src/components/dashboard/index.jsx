@@ -25,7 +25,7 @@ const StockChart = () => {
 
   return (
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-      <h2 style={{fontStyle: 'italic'}}>Still working on that...</h2>
+      <h2 style={{fontStyle: 'italic', color: '#054d00'}}>Still working on that...</h2>
       <img src={WalkingVase} style={{width: '150px'}} alt="Loading..." />
     </div>
   );
