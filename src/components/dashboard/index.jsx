@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
+import WalkingVase from '../../assets/gifs/walking-vase.gif'
 
 const StockChart = () => {
   const [data, setData] = useState(null);
@@ -23,41 +24,9 @@ const StockChart = () => {
   }, []);
 
   return (
-    <div>
-      {/* {data ? (
-        <Line
-          data={data}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                display: false
-              },
-            },
-            scales: {
-              x: {
-                ticks: {
-                  color: '#555',
-                },
-                grid: {
-                  color: '#ddd',
-                },
-              },
-              y: {
-                ticks: {
-                  color: '#555',
-                },
-                grid: {
-                  color: '#ddd',
-                },
-              },
-            },
-          }}
-        />
-      ) : (
-        'Loading...'
-      )} */}
-      <h1>dashboard</h1>
+    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+      <h2 style={{fontStyle: 'italic'}}>Still working on that...</h2>
+      <img src={WalkingVase} style={{width: '150px'}} alt="Loading..." />
     </div>
   );
 };
