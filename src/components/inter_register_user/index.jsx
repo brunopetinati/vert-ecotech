@@ -4,17 +4,14 @@ import { StyledButton } from '../default_button/styles';
 import { MainContainer, ProfileContainerInfo, Row, Label, ShowInput, StyledSelect } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { motion } from 'framer-motion';
-import { IndexContainer } from '../../pages/user_intern/styles'
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { currentUrl } from '../../constants/global';
+import { addUserToUsers } from '../../store/modules/app_data/actions';
+import { useDispatch } from 'react-redux';
 
 const InternRegisterUser = () => {
-
-  //const location = useLocation();
-
-  //const user = location.state.user;
 
   const [showModalBanco, setShowModalBanco] = useState(false);
 
@@ -23,6 +20,8 @@ const InternRegisterUser = () => {
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
   };
+
+  const dispatch = useDispatch();
 
   // Código pertinente ao preenchimento automático do CEP
   
@@ -59,6 +58,10 @@ const InternRegisterUser = () => {
     }    
   };
 
+  const handleAccesTypeChange = (e) => {
+    setUserObject({...userObject, user_type: e.value})
+  };
+
   const [verifyName, setVerifyName] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
   const [verifyPhone, setVerifyPhone] = useState(false);
@@ -70,7 +73,7 @@ const InternRegisterUser = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
   
-    if(!userObject.email || !/^\S+@\S+\.\S+$/.test(userObject.email) || !userObject.cep || userObject.cep.length < 9 || !userObject.name || !userObject.phone || !userObject.user_type) {
+    if(!userObject.email || !/^\S+@\S+\.\S+$/.test(userObject.email) || !userObject.cep || userObject.cep.length < 9 || !userObject.full_name || !userObject.phone || !userObject.user_type) {
   
       if(!userObject.email) {
         setVerifyEmail(true);
@@ -80,7 +83,7 @@ const InternRegisterUser = () => {
         setVerifyCEP(true);
       }
   
-      if(!userObject.name) {
+      if(!userObject.full_name) {
         setVerifyName(true);
       }
   
@@ -109,6 +112,8 @@ const InternRegisterUser = () => {
           icon: 'success',
           confirmButtonText: 'OK'
         });
+        dispatch(addUserToUsers(response.data))
+        navigate('/welcome');
       })
       .catch(error => {
         Swal.fire({
@@ -245,7 +250,7 @@ const InternRegisterUser = () => {
                 <StyledSelect
                   options={optionsAccess}
                   placeholder={'Selecione uma opção'}
-                  onChange={(e) => setUserObject({...userObject, user_type: e.target.value})}
+                  onChange={handleAccesTypeChange}
                 />
                 {verifyAccessType && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
               </div>
