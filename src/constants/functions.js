@@ -48,3 +48,14 @@ export const returnUserName = (id, users) => {
   const user = users.find(user => user.id === id);
   return user ? user.full_name : '';
 };
+
+export const regularMaskforNumbers = (event, onChangeFunction) => {
+  const inputValue = event.target.value.replace(/\D/g, '');
+  const numberValue = Number(inputValue) / 100;
+  const formattedValue = numberValue.toLocaleString('de-DE', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  onChangeFunction(formattedValue+'ha');
+};

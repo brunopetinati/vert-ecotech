@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
+import { regularMaskforNumbers } from '../../constants/functions';
 
 const RegisterProjectStep2 = () => {
 
@@ -253,8 +254,6 @@ const RegisterProjectStep2 = () => {
     "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
   };
 
-  
-
   return (
     <motion.div
         initial={{ opacity: 0 }}
@@ -324,7 +323,7 @@ const RegisterProjectStep2 = () => {
                 type="text"
                 placeholder="Em hectares(ha)"
                 value={totalArea}
-                onChange={(event) => setTotalArea(event.target.value)}
+                onChange={(event) => regularMaskforNumbers(event, setTotalArea)}
                 maskplaceholder={null}
               />
             {totalAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{totalAreaError}</div>}
@@ -333,7 +332,7 @@ const RegisterProjectStep2 = () => {
                 type="text"
                 placeholder="Em hectares(ha)"
                 value={totalReserveArea}
-                onChange={(event) => setTotalReserveArea(event.target.value)}
+                onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
             {legalReserveAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{legalReserveAreaError}</div>}            
             <Label>Status do CAR</Label>

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import  Banco from './banco';
 import { StyledButton } from '../default_button/styles';
-import { MainContainer, ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, StyledSelect } from './styles'
+import { MainContainer, ProfileContainerInfo, Row, Label, ShowInput, StyledSelect } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const InternRegisterUser = () => {
 
   const [showModalBanco, setShowModalBanco] = useState(false);
   const [userType, setUserType] = useState('');
+  const navigate = useNavigate();
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -49,12 +51,15 @@ const InternRegisterUser = () => {
   const optionsForAccess = [
     { value: "Engenheiro", label: "Engenheiro" },
     { value: "Comercial", label: "Comercial" },
-    { value: "", label: "Sem acesso" }
+    { value: "Regular", label: "Regular" }
   ];
+
+  const handleComeBack = () => {
+    navigate('/welcome')
+  };
 
   return (
     <MainContainer>
-      <IndexContainer>
         <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -149,6 +154,7 @@ const InternRegisterUser = () => {
               />
             </Row>         
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
+              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Voltar</StyledButton>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
               <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
             </div>     
@@ -157,7 +163,6 @@ const InternRegisterUser = () => {
         </ProfileContainerInfo>
         <p />
         </motion.div >
-      </IndexContainer>
     </MainContainer>
   )
 };

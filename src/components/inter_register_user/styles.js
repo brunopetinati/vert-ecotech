@@ -10,6 +10,7 @@ export const MainContainer = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background: #054d00;
 `;
 
 export const Container = styled.div`
@@ -144,6 +145,7 @@ export const ProfileContainerInfo = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 900px;
+  height: 1200px;
   padding: 4em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
