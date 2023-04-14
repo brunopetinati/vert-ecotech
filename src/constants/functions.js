@@ -57,5 +57,5 @@ export const regularMaskforNumbers = (event, onChangeFunction) => {
     maximumFractionDigits: 2,
   });
 
-  onChangeFunction(formattedValue+'ha');
+  onChangeFunction(formattedValue+' ha');
 };
