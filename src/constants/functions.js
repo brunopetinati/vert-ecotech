@@ -49,13 +49,27 @@ export const returnUserName = (id, users) => {
   return user ? user.full_name : '';
 };
 
+export const transformNumbersToHectares = (value) => {
+  const inputValue = typeof value === 'number' ? value.toString() : value;
+  const formattedValue = Number(inputValue).toLocaleString('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
+  return formattedValue + ' ha';
+};
+
+
 export const regularMaskforNumbers = (event, onChangeFunction) => {
   const inputValue = event.target.value.replace(/\D/g, '');
-  const numberValue = Number(inputValue) / 100;
-  const formattedValue = numberValue.toLocaleString('de-DE', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
+  const formattedValue = Number(inputValue).toLocaleString('de-DE', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   });
 
-  onChangeFunction(formattedValue+' ha');
+  onChangeFunction(formattedValue);
+};
+
+export const extractNumbers = (str) => {
+  const parsed = parseFloat(str.replace(/[^\d\.]/g, ''));
+  return isNaN(parsed) ? null : Math.round(parsed * 1000);
 };

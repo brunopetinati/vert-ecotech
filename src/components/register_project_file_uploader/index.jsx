@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
+import Swal from 'sweetalert2';
 
 
 
@@ -34,14 +35,14 @@ const FileUploader = () => {
   const handleUpload = async () => {
     const token = sessionStorage.getItem('Authorization');
     const url = `http://${currentUrl}:8000/api/projects/${projectID}/update/`;
-
+  
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
     formData.append('pdf_car', selectedFiles.pdf_car);
     formData.append('property_polygon', selectedFiles.property_polygon);
     formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
     formData.append('pdf_ccir', selectedFiles.pdf_ccir);
-
+  
     try {
       const response = await axios.put(url, selectedFiles, {
         headers: {
@@ -49,14 +50,25 @@ const FileUploader = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Os documentos escolhidos foram enviados com sucesso!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      console.log('Success:', response);
       // Add code to handle the response from the server
     } catch (error) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Algo deu errado ao tentar processar sua requisição.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       console.error('Error:', error);
       // Add code to handle the error
     }
   };
-  
 
   return (
     <>

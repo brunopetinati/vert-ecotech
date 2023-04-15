@@ -9,7 +9,7 @@ import axios from 'axios';
 import { returnYesorNoforBoolean, returnUserName } from '../../constants/functions';
 import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
-
+import Swal from 'sweetalert2';
 
 const EditProject = () => {
 
@@ -162,6 +162,7 @@ const EditProject = () => {
   };
 
   useEffect(() => {
+    alert('Alerta: A próxima página de editar o projeto, ainda não está funcionando apropriadamente.')
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
@@ -247,7 +248,7 @@ const EditProject = () => {
 
   const handleSave = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `http://3.145.151.125:8000/api/projects/${project.id}/update`;
+    const url = `http://${currentUrl}:8000/api/projects/${project.id}/update`;
   
     try {
       const headers = {
@@ -273,10 +274,21 @@ const EditProject = () => {
       const response = await axios.put(url, data, {
         headers,
       });
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Sua requisição foi processada com sucesso.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
   
       // Add code to handle the response from the server
     } catch (error) {
-      alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Algo deu errado ao tentar processar sua requisição.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       console.error('Error:', error);
       // Add code to handle the error
     }

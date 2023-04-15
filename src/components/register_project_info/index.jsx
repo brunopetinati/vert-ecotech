@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
-import { regularMaskforNumbers } from '../../constants/functions';
+import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 
 const RegisterProjectStep2 = () => {
 
@@ -20,6 +20,8 @@ const RegisterProjectStep2 = () => {
   const [totalReserveArea, setTotalReserveArea] = useState('');
   const [address, setAddress] = useState('');
   const [owner, setOwner] = useState('');
+  const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
+
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -40,7 +42,7 @@ const RegisterProjectStep2 = () => {
     { value: "Ativo", label: "Ativo" },
     { value: "Pendente", label: "Pendente" },
     { value: "Cancelado", label: "Cancelado" },
-    { value: null, label: "Não possui CAR" },
+    { value: "Não possui", label: "Não possui CAR" },
   ];
 
   const handleOptionsCar = (selectedCar) => {
@@ -183,6 +185,26 @@ const RegisterProjectStep2 = () => {
     fetchUsers();
   }, []);
 
+    // preparar objeto para ser enviado para a requisição
+
+    const preparedObject = {
+      "owner": owner,
+      "total_area":  extractNumbers(totalArea),
+      "legal_reserve_area": extractNumbers(totalReserveArea),
+      "address": address,
+      "status_car": selectedCar,
+      "sicar_code": sicarCode,
+      "matricula_status": selectedMatriculaStatus,
+      "georeferencing_status": selectedGeorreferenciamentoStatus,
+      "reserve_legal_status":  selectedReservaSituation,
+      "physical_or_legal_entity": "legal",
+      "cnpj": CNPJ,
+      "conservation_unit": selectedUnidadeConservacao,
+      "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
+      "legal_reserve_deficit": selectedPossuiDeficit,
+      "has_federal_debt": selectedPossuiDivida,
+      "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
+    };
 
   // REGISTRAR PROJETO
   const handleRegister = () => {
@@ -211,7 +233,7 @@ const RegisterProjectStep2 = () => {
         const projectId = response.data.id;
         Swal.fire({
           title: 'Sucesso!',
-          text: 'Sua requisição foi processada com sucesso.',
+          text: 'Agora continue realizando o upload dos seguintes documentos',
           icon: 'success',
           confirmButtonText: 'OK'
         });
@@ -219,7 +241,7 @@ const RegisterProjectStep2 = () => {
         dispatch(appStatus('register_land_upload_files'));
       })
       .catch(error => {
-        console.error('erro', error);
+        console.error('error', error);
         Swal.fire({
           title: 'Erro!',
           text: 'Algo deu errado ao tentar processar sua requisição.',
@@ -230,29 +252,6 @@ const RegisterProjectStep2 = () => {
       });
   };
   
-  
-  const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
-
-  // preparar objeto para ser enviado para a requisição
-
-  const preparedObject = {
-    "owner": owner,
-    "total_area":  totalArea,
-    "legal_reserve_area": totalReserveArea,
-    "address": address,
-    "status_car": selectedCar,
-    "sicar_code": sicarCode,
-    "matricula_status": selectedMatriculaStatus,
-    "georeferencing_status": selectedGeorreferenciamentoStatus,
-    "reserve_legal_status":  selectedReservaSituation,
-    "physical_or_legal_entity": "legal",
-    "cnpj": CNPJ,
-    "conservation_unit": selectedUnidadeConservacao,
-    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
-    "legal_reserve_deficit": selectedPossuiDeficit,
-	  "has_federal_debt": selectedPossuiDivida,
-    "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
-  };
 
   return (
     <motion.div
@@ -341,6 +340,7 @@ const RegisterProjectStep2 = () => {
               options={optionsCar}
               placeholder={'Selecione uma opção'}
             />
+            {statusCARError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{statusCARError}</div>}
             <Label>Código SICAR(CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}

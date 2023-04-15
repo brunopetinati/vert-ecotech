@@ -1,17 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
-import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span } from './styles'
-import { appStatus } from '../../store/modules/app_status/actions';
+import { Container, InnerContainer, ButtonContainer, Column, Button } from './styles'
 import FileUploader from "../register_project_file_uploader";
+import { useNavigate } from "react-router-dom";
 
 const RegisterProjectStep3 = () => {
 
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(appStatus('register_land_continue'))
-  };
-
+  const navigate = useNavigate();
   const handleRegister = () => {
+    navigate('/welcome');
   };
 
   return (
@@ -23,8 +18,7 @@ const RegisterProjectStep3 = () => {
         </Column>
       </InnerContainer>
       <ButtonContainer>
-        <Button onClick={() => handleClick()}>Voltar</Button>
-        <Button onClick={() => handleRegister()}>Confirmar</Button>
+        <Button onClick={() => handleRegister()}>Voltar ao painel</Button>
       </ButtonContainer>
     </Container>
   )

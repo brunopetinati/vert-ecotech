@@ -2,7 +2,7 @@ import { getFullNameById } from '../../store/modules/app_data/thunk';
 import { Table, THead, TR, TH, TD, Wrapper} from './styles';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { transformNumbersToHectares } from '../../constants/functions';
 
 const ProjectsTable = ({filteredProjects}) => {
 
@@ -38,8 +38,8 @@ const ProjectsTable = ({filteredProjects}) => {
           {filteredProjects.map((row, index) => (
             <TR key={index}>
               <TD>{getFullNameById(row.owner, users)}</TD>
-              <TD>{row.legal_reserve_area}</TD>
-              <TD>{row.total_area}</TD>
+              <TD>{transformNumbersToHectares(row.legal_reserve_area)}</TD>
+              <TD>{transformNumbersToHectares(row.total_area)}</TD>
               <TD>{row.address}</TD>
               <TD>{row.status_car}</TD>
               <TD>{row.matricula_status}</TD>
