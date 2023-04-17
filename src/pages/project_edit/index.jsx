@@ -162,7 +162,6 @@ const EditProject = () => {
   };
 
   useEffect(() => {
-    alert('Alerta: A próxima página de editar o projeto, ainda não está funcionando apropriadamente.')
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
