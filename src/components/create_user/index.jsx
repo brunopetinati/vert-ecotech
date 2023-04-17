@@ -54,12 +54,6 @@ const Register = () => {
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
-        Swal.fire({
-          title: 'Sucesso!',
-          text: 'Sua requisição foi processada com sucesso.',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
         navigate('/welcome');
       })
       .catch(error => {
@@ -83,9 +77,6 @@ const Register = () => {
     setFormState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const RegisterComponent = () => {
-    return
-  };
 
   return (
     <LoginContainer>
