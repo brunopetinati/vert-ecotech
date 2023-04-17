@@ -113,14 +113,3 @@ const ProjectIntern = () => {
 };
 
 export default ProjectIntern;
-
-
-
-{/* <div style={{display: 'flex', flexDirection: 'column'}}>
-<h1>hello world!</h1>
-<Span>{project.pdf_matricula_certificate}</Span>
-<Span>{project.pdf_car}</Span>
-<Span>{project.property_polygon}</Span>
-<Span>{project.pdf_federal_debt_certificate}</Span>
-<Span>{project.pdf_ccir}</Span>
-</div> */}

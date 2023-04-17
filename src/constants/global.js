@@ -2,8 +2,8 @@
 
 //#054d00
 
-export const awsUrl = '18.218.97.13'
+const awsUrl = '18.218.97.13'
 
-export const localHost = 'localhost'
+const localHost = 'localhost'
 
 export const currentUrl = awsUrl

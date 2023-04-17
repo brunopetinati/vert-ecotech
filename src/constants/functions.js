@@ -69,7 +69,11 @@ export const regularMaskforNumbers = (event, onChangeFunction) => {
   onChangeFunction(formattedValue);
 };
 
-export const extractNumbers = (str) => {
-  const parsed = parseFloat(str.replace(/[^\d\.]/g, ''));
-  return isNaN(parsed) ? null : Math.round(parsed * 1000);
+export const extractNumbers = (num) => {
+  const str = num.toString();
+  if (str.length < 4) {
+    return parseInt(str);
+  }
+  const withoutPoints = str.replace(/\./g, '');
+  return parseInt(withoutPoints);
 };

@@ -2,14 +2,14 @@ import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { appStatus } from '../../store/modules/app_status/actions';
-import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
+import { storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { returnYesorNoforBoolean, returnUserName } from '../../constants/functions';
 import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
+import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 
 const EditProject = () => {
 
@@ -23,11 +23,6 @@ const EditProject = () => {
   const [address, setAddress] = useState(project.address);
   const [owner, setOwner] = useState(project.owner);
   const [users, setUsers] = useState([]);
-
-  const handleUserSelect = (event) => {
-    setOwner(event.target.value);
-    dispatch(storeOwnerId(event.target.value));
-  };
   
   // SICAR
   const [selectedCar, setSelectedCar] = useState(project.status_car);
@@ -154,15 +149,18 @@ const EditProject = () => {
   };
 
   // Rotas
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     //dispatch(appStatus('Projetos'));
     navigate('/intern_project', { state: { project }});
   };
 
-  useEffect(() => {
-    const fetchUsers = async () => {
+
+  // Acredito que não seja necessário editar o proprietário do projeto. 
+  // No caso poderia deletar o projeto e cadastrar novamente no nome de outra pessoa 
+
+  /* useEffect(() => {
+    const fetchUsers = async () => {  
       try {
         const token = sessionStorage.getItem('Authorization');
         const response = await axios.get(`http://${currentUrl}:8000/api/users/`, {
@@ -177,56 +175,13 @@ const EditProject = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, []); */
   
   
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState(project.owner_actions_to_preserve_forest);
 
-  // preparar objeto para ser enviado para a requisição
-
-/*   const preparedObject = {
-    "owner": project.owner,
-    "total_area": project.total_area,
-    "legal_reserve_area": project.legal_reserve_area,
-    "address": project.address,
-    "status_car": project.status_car,
-    "sicar_code": project.sicar_code,
-    "matricula_status": project.matricula_status,
-    "georeferencing_status": project.georeferencing_status,
-    "reserve_legal_status": project.reserve_legal_status,
-    "physical_or_legal_entity": project.physical_or_legal_entity,
-    "cnpj": project.cnpj,
-    "conservation_unit": project.conservation_unit,
-    "owner_actions_to_preserve_forest": project.owner_actions_to_preserve_forest,
-    "legal_reserve_deficit": project.legal_reserve_deficit,
-	  "has_federal_debt": project.has_federal_debt,
-  }; */
-
-  const preparedObject = {
-    "owner": owner,
-    "total_area":  totalArea,
-    "legal_reserve_area": totalReserveArea,
-    "address": address,
-    "status_car": selectedCar,
-    "sicar_code": sicarCode,
-    "matricula_status": selectedMatriculaStatus,
-    "georeferencing_status": selectedGeorreferenciamentoStatus,
-    "reserve_legal_status":  selectedReservaSituation,
-    "physical_or_legal_entity": "legal",
-    "cnpj": CNPJ,
-    "conservation_unit": selectedUnidadeConservacao,
-    "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
-    "legal_reserve_deficit": selectedPossuiDeficit,
-	  "has_federal_debt": selectedPossuiDivida,
-    "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
-  };
-
-
   // file uploader
-
-  const projectID = useSelector((state) => state.app_data.project_id);
   const ownerID = useSelector((state) => state.app_data.owner_id);
-
 
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,
@@ -245,54 +200,80 @@ const EditProject = () => {
     }));
   };
 
-  const handleSave = async () => {
-    const token = sessionStorage.getItem('Authorization');
-    const url = `http://${currentUrl}:8000/api/projects/${project.id}/update`;
-  
-    try {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-  
-      let data = preparedObject;
-  
-      if (selectedFiles) {
+    // preparar objeto para ser enviado para a requisição
+
+    const preparedObject = {
+      "owner": owner,
+      "total_area": extractNumbers(totalArea),
+      "legal_reserve_area": extractNumbers(totalReserveArea),
+      "address": address,
+      "status_car": selectedCar,
+      "sicar_code": sicarCode,
+      "matricula_status": selectedMatriculaStatus,
+      "georeferencing_status": selectedGeorreferenciamentoStatus,
+      "reserve_legal_status":  selectedReservaSituation,
+      "physical_or_legal_entity": "legal",
+      "cnpj": CNPJ,
+      "conservation_unit": selectedUnidadeConservacao,
+      "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
+      "legal_reserve_deficit": selectedPossuiDeficit,
+      "has_federal_debt": selectedPossuiDivida,
+      "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
+    };
+
+    console.log(preparedObject.total_area)
+
+    const handleSave = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        const url = `http://${currentUrl}:8000/api/projects/${project.id}/update/`;
+    
         const formData = new FormData();
-        formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
-        formData.append('pdf_car', selectedFiles.pdf_car);
-        formData.append('property_polygon', selectedFiles.property_polygon);
-        formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
-        formData.append('pdf_ccir', selectedFiles.pdf_ccir);
-  
-        // Merge the preparedObject and formData into a single object
-        data = Object.assign({}, preparedObject, formData);
-        
-        headers['Content-Type'] = 'multipart/form-data';
+        if (selectedFiles?.pdf_matricula_certificate) {
+          formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
+        }
+        if (selectedFiles?.pdf_car) {
+          formData.append('pdf_car', selectedFiles.pdf_car);
+        }
+        if (selectedFiles?.property_polygon) {
+          formData.append('property_polygon', selectedFiles.property_polygon);
+        }
+        if (selectedFiles?.pdf_federal_debt_certificate) {
+          formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
+        }
+        if (selectedFiles?.pdf_ccir) {
+          formData.append('pdf_ccir', selectedFiles.pdf_ccir);
+        }
+    
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+
+        for (const [key, value] of Object.entries(preparedObject)) {
+          formData.append(key, value);
+        }
+    
+        const response = await axios.put(url, preparedObject, { headers });
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'As informações foram editadas com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+    
+        // Add code to handle the response from the server
+      } catch (error) {
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao tentar processar sua requisição.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+        console.error('Error:', error);
+        // Add code to handle the error
       }
-  
-      const response = await axios.put(url, data, {
-        headers,
-      });
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Sua requisição foi processada com sucesso.',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });
-  
-      // Add code to handle the response from the server
-    } catch (error) {
-      Swal.fire({
-        title: 'Erro!',
-        text: 'Algo deu errado ao tentar processar sua requisição.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      console.error('Error:', error);
-      // Add code to handle the error
-    }
-  };
-  
+    };
+    
   
 
   return (
@@ -360,7 +341,7 @@ const EditProject = () => {
                 type="text"
                 placeholder="Em hectares(ha)"
                 value={totalArea}
-                onChange={(event) => setTotalArea(event.target.value)}
+                onChange={(event) => regularMaskforNumbers(event, setTotalArea)}
                 maskPlaceholder={null}
               />
             <Label>Área total da reserva legal (ha)?</Label>
@@ -368,7 +349,7 @@ const EditProject = () => {
                 type="text"
                 placeholder="Em hectares(ha)"
                 value={totalReserveArea}
-                onChange={(event) => setTotalReserveArea(event.target.value)}
+                onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
             <Label>Status do CAR</Label>
             <StyledSelect
