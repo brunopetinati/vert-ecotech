@@ -77,3 +77,9 @@ export const extractNumbers = (num) => {
   const withoutPoints = str.replace(/\./g, '');
   return parseInt(withoutPoints);
 };
+
+export const removeNonDigits = (phoneNumber) => {
+  const digitsOnly = phoneNumber.replace(/\D/g, "");
+  return digitsOnly;
+};
+
