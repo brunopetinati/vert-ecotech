@@ -14,7 +14,8 @@ const Register = () => {
 
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [showLoading, setShowLoading] = useState(false);
-  
+  const [validEmail, setValidEmail] = useState(false);
+
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -46,6 +47,12 @@ const Register = () => {
     if ( formState.password != passwordConfirmation ) {
       alert('As senhas não conferem.')
       return
+    };
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formState.email)) {
+      setValidEmail(true);
+      return;
     };
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
@@ -92,8 +99,9 @@ const Register = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
         ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
-        <Input placeholder="Nome" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
+        <Input placeholder="Nome Completo" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
+        {validEmail && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira um email válido.</div>}            
         <Input placeholder="Senha" type="password" name="password" value={formState.password} onChange={handleInputChange} />
         <Input placeholder="Confirmar senha" type="password" name="password_confirmation" value={passwordConfirmation} onChange={event => setPasswordConfirmation(event.target.value)} />
         <Input placeholder="Whatsapp" type="tel" name="phone" value={formState.phone} onChange={handleInputChange} 

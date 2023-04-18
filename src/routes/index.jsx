@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import Welcome from '../pages/main_display';
 import Login from '../components/login';
-import Register from '../components/create_user';
+import Register from '../components/register_user';
 import RegisterProject from '../components/register_project_index';
 import InternRegisterUser from '../components/inter_register_user';
 import ProjectIntern from "../pages/project_intern";

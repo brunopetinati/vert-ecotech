@@ -6,4 +6,4 @@ const awsUrl = '18.218.97.13'
 
 const localHost = 'localhost'
 
-export const currentUrl = awsUrl
+export const currentUrl = localHost
