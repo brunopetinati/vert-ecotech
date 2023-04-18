@@ -53,8 +53,8 @@ const Profile = () => {
         district: cepObject.bairro,
         state: cepObject.uf,
         city: cepObject.localidade
-      })
-    }    
+      });
+    };
   };
 
 

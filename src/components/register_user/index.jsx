@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 
@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/modules/login/actions";
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
+import { handleCepChange } from '../../api/requests/cep';
+import { storeCEP } from '../../store/modules/app_data/actions';
 
 const Register = () => {
 
@@ -24,8 +26,11 @@ const Register = () => {
     email: '',
     password: '',
     phone: '',
-    city: '',
-    state: '',
+    cep: '',
+    city:'',
+    state:'',
+    street:'',
+    district:'',
     user_type: 'Regular'
   });
 
@@ -49,11 +54,6 @@ const Register = () => {
       return
     };
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formState.email)) {
-      setValidEmail(true);
-      return;
-    };
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
@@ -62,26 +62,51 @@ const Register = () => {
         dispatch(userLogin(response.data.access, response.data));
         // Navigate to the welcome page on successful login
         navigate('/welcome');
+        setShowLoading(true);
+        setTimeout(() => {
+          navigate('/');
+        }, 6000);
       })
       .catch(error => {
         Swal.fire({
           title: 'Erro!',
-          text: 'Algo deu errado ao tentar processar sua requisição.',
+          text: 'Algo deu errado ao tentar processar sua requisição. Verifique e tente novamente',
           icon: 'error',
           confirmButtonText: 'OK'
         });
         console.error('tracking the following error would be important',error);
         return
       });
-    setShowLoading(true);
-    setTimeout(() => {
-      navigate('/');
-    }, 6000);
+    
   };
   
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     setFormState(prevState => ({ ...prevState, [name]: value }));
+
+    if (name === 'cep') {
+      const cep = event.target.value;
+      checkCEP(cep);
+      setFormState({...formState, cep: cep})
+    };
+  };
+
+  const checkCEP = async (cep) => {
+    console.log(cep)
+    setFormState({...formState, cep: cep})
+    if (cep.length === 9 && !isNaN(cep.charAt(cep.length -1))) {
+      const cepObject = await handleCepChange(cep.replace('-',''));
+      console.log('cepObject',cepObject);
+      setFormState({
+        ...formState,
+        cep: cepObject.cep,
+        street: cepObject.logradouro,
+        district: cepObject.bairro,
+        state: cepObject.uf,
+        city: cepObject.localidade
+      });
+    };
+    dispatch(storeCEP(cep));
   };
 
 
@@ -108,8 +133,16 @@ const Register = () => {
           mask={"(99) 99999-9999"}
           alwaysShowMask={false}
         />
-        <Input placeholder="Cidade" type="text" name="city" value={formState.city} onChange={handleInputChange} />
-        <Input placeholder="Estado" type="text" name="state" value={formState.state} onChange={handleInputChange} />
+        <Input
+          placeholder="CEP"
+          type="text"
+          name="cep"
+          value={formState.cep}
+          onChange={(event) => {
+            handleInputChange(event); // Call the original onChange handler to update the state
+          }}
+          mask={"99999-999"}
+        />
         <div>
           <Button onClick={() => handleClick()}>Login</Button>
           <Button onClick={() => handleSubmition()} type="submit">Cadastre-se aqui</Button>

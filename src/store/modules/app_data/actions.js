@@ -1,5 +1,5 @@
 import Projects from "../../../components/projects";
-import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP } from "./action-types";
 
 export const storeProjectId = (project_id) => {
   return {
@@ -33,5 +33,12 @@ export const addUserToUsers = (user) => {
   return {
     type: STORE_USER_TO_USERS,
     payload: user
+  }
+};
+
+export const storeCEP = (cep) => {
+  return {
+    type: STORE_CEP,
+    payload: cep
   }
 };

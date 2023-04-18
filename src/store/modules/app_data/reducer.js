@@ -1,10 +1,11 @@
-import { STORE_PROJECT_ID, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP } from "./action-types";
 
 const initialState = {
   project_id: null,
   owner_id: null,
   users: [],
-  projects: []
+  projects: [],
+  cep: null
 };
 
 const currentAppData = (state = initialState, action) => {
@@ -37,6 +38,12 @@ const currentAppData = (state = initialState, action) => {
       return {
         ...state,
         users: [...state.users, action.payload]
+      }
+
+    case STORE_CEP:
+      return {
+        ...state,
+        cep: action.payload
       }
 
     default:
