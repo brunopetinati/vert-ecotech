@@ -158,7 +158,27 @@ export const ProfileContainerInfo = styled.div`
     align-self: flex-start;
     color: #054D00;
   }
+
+  @media screen and (min-width: 1920px) {
+    width: 1400px;
+    height: 1500px;
+    padding: 10em;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    height: auto;
+    padding: 2em;
+    border-radius: 0;
+    box-shadow: none;
+    max-height: none;
+
+    h3 {
+      align-self: center;
+    }
+  }
 `;
+
 
 export const ButtonContainerIndex = styled.div`
   display: flex;

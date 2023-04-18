@@ -84,21 +84,28 @@ const Register = () => {
 
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
-        navigate('/welcome');
         setShowLoading(true);
         setTimeout(() => {
           navigate('/');
         }, 6000);
       })
       .catch(error => {
-        Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado ao tentar processar sua requisição. Verifique os campos e tente novamente!',
-          icon: 'error',
-          confirmButtonText: 'OK'
-        });
-        console.error('tracking the following error would be important',error);
-        return
+        if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Verifique o CEP e tente novamente. Caso o erro persista, contate nosso suporte.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+        } else {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Algo deu errado ao tentar processar sua requisição. Verifique os campos e tente novamente!',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+          console.error('tracking the following error would be important',error);
+        }
       });    
   };
   
