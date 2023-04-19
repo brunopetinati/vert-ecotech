@@ -7,7 +7,7 @@ import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
-
+import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
 import Logo from '../../assets/logo-vert-white.png'
 
 const Login = () => {
@@ -35,7 +35,7 @@ const Login = () => {
         setTimeout(() => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));
-        }, 2000);
+        }, 5500);
       }).catch(error => {
         console.error('Login failed:', error.message);
         alert('Não foi possível logar. Verifique as informações e tente novamente.');
@@ -72,7 +72,9 @@ const Login = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}> <h1 style={{color: 'white'}}>Bem Vindo!</h1></motion.div> : 
+            transition={{ duration: 0.8 }}> <h1 style={{color: 'white'}}>Bem Vindo!</h1>
+            <img src={Loading} style={{width: '180px',
+position: 'absolute', top: '0', right: '0'}}/></motion.div> : 
             <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

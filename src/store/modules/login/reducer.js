@@ -2,7 +2,7 @@ import { USER_LOGIN, USER_UPDATE } from "./action-types";
 
 const initialState = {
   accessToken: null,
-  userData: null,
+  currentUser: null,
 };
 
 const loginReducer = (state = initialState, action) => {
@@ -11,13 +11,13 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         accessToken: action.payload.accessToken,
-        userData: action.payload.userData,
+        currentUser: action.payload.currentUser,
       };
     
     case USER_UPDATE:
       return {
         ...state,
-        userData: action.payload.userData
+        currentUser: action.payload.currentUser
       }
 
     default:

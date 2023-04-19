@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 const FileUploader = () => {
 
   // quando é o próprio usuário registrando o próprio projeto
-  // const currentID = useSelector((state) => state.user.userData.id);
+  // const currentID = useSelector((state) => state.user.currentUser.id);
 
   const projectID = useSelector((state) => state.app_data.project_id);
   const ownerID = useSelector((state) => state.app_data.owner_id);

@@ -17,7 +17,7 @@ const Profile = () => {
 
   const [showModalBanco, setShowModalBanco] = useState(false);
 
-  const user = useSelector((state) => state.user.userData);
+  const user = useSelector((state) => state.user.currentUser);
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);

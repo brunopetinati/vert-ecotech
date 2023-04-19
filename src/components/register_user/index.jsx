@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { handleCepChange } from '../../api/requests/cep';
 import { storeCEP } from '../../store/modules/app_data/actions';
 import { removeNonDigits } from '../../constants/functions';
+import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
 
 const Register = () => {
 
@@ -87,7 +88,7 @@ const Register = () => {
         setShowLoading(true);
         setTimeout(() => {
           navigate('/');
-        }, 6000);
+        }, 5500);
       })
       .catch(error => {
         if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
@@ -155,7 +156,9 @@ const Register = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-        ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
+        ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1>
+         <img src={Loading} style={{width: '180px',
+position: 'absolute', top: '0', right: '0'}}/></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
         <Input placeholder="Nome Completo" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         {validName && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira o nome completo.</div>}            
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
@@ -181,8 +184,7 @@ const Register = () => {
         />
         {validCEP && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira um CEP válido.</div>}            
         <div>
-          <Button onClick={() => handleClick()}>Login</Button>
-          <Button onClick={() => handleSubmition()} type="submit">Cadastre-se aqui</Button>
+          <Button onClick={() => handleSubmition()} type="submit">Cadastrar</Button>
         </div>
       </LoginForm></div>}
     </motion.div>
