@@ -9,6 +9,7 @@ import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
 import Logo from '../../assets/logo-vert-white.png'
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
@@ -31,18 +32,21 @@ const Login = () => {
         sessionStorage.setItem('Authorization', response.data.access);
         // Navigate to the welcome page on successful login
         setShowLoading(true);
-        console.log('response.data em login', response.data);
         setTimeout(() => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));
         }, 5500);
       }).catch(error => {
-        console.error('Login failed:', error.message);
-        alert('Não foi possível logar. Verifique as informações e tente novamente.');
+        console.error('Login failed:', error.message);        
       });
     } catch (error) {
       console.error('Login failed:', error.message);
-      alert('Algo de errado aconteceu. Verifique o procedimento e tente novamente.');
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Não foi possível logar, verifique as informações e tente novamente.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
   
@@ -65,6 +69,36 @@ const Login = () => {
     e.preventDefault();
     dispatch(appStatus(''));
   }
+
+
+  const handleSendPasswordBack = (e) => {
+    e.preventDefault();
+    axios.post(`http://${currentUrl}:8000/api/recover-password/`) // send GET request to get CSRF token
+      .then(response => {
+        const csrfToken = response.data.csrfToken;
+        axios.defaults.headers.post['X-CSRF-Token'] = csrfToken; // set CSRF token as a header in all subsequent POST requests
+        return axios.post(`http://${currentUrl}:8000/api/recover-password/`, { email })
+      })
+      .then(response => {
+        console.log(response.data); // handle success response
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada ou spam.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      })
+      .catch(error => {
+        console.error(error); // handle error response
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado ao processar a requisição. Caso o erro persista, contate nosso suporte.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
+  }
+  
   
   return (
      <LoginContainer>
@@ -89,7 +123,7 @@ position: 'absolute', top: '0', right: '0'}}/></motion.div> :
               exit={{ opacity: 0 }}
               transition={{ duration: 0.8 }}
               >
-              <LoginForm onSubmit={handleSubmit}>
+              <LoginForm>
                 <Input
                   type="text"
                   placeholder="Email"
@@ -97,7 +131,7 @@ position: 'absolute', top: '0', right: '0'}}/></motion.div> :
                   onChange={event => setUsername(event.target.value)}
                 />
                 <div>
-                  <Button>Enviar Email</Button>
+                  <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
                   <Button onClick={handleRememberPassword}>Voltar</Button>
                 </div>
               </LoginForm>

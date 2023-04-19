@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
-
 import axios from "axios";
 import Logo from '../../assets/logo-vert-white.png'
 import { useNavigate } from "react-router-dom"; 
@@ -68,8 +67,6 @@ const Register = () => {
     } 
     
     const treatPhone = removeNonDigits(formState.phone);
-    console.log('treatPhone', treatPhone);
-    console.log('treatPhone.length:', treatPhone.length)
     if (treatPhone.length < 10) {
       setValidPhone(true);
     }
@@ -78,7 +75,6 @@ const Register = () => {
   const CreateUserForm = (event) => {
     event.preventDefault();
 
-    console.log('Qual o tamanho do cep?',formState.cep.length)
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
@@ -184,6 +180,7 @@ position: 'absolute', top: '0', right: '0'}}/></motion.div> : <div style={{displ
         />
         {validCEP && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira um CEP válido.</div>}            
         <div>
+          <Button onClick={() => handleClick()}>Voltar</Button>
           <Button onClick={() => handleSubmition()} type="submit">Cadastrar</Button>
         </div>
       </LoginForm></div>}
