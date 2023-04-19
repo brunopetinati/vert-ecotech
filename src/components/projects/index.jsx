@@ -17,24 +17,27 @@ const Projects = () => {
   const dispatch = useDispatch();
   const app_data = useSelector((state) => state.app_data);
 
+  console.log('app_data.projects:',app_data.projects)
+
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setProjects(response.data);
-        dispatch(storeProjects(response.data));
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
+    if (app_data.projects != []){
+      const fetchProjects = async () => {
+        try {
+          const token = sessionStorage.getItem('Authorization');
+          const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setProjects(response.data);
+          dispatch(storeProjects(response.data));
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchProjects();
+    }
   }, [app_status]);
 
 
