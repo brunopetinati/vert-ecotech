@@ -10,6 +10,7 @@ const Settings = () => {
   const collapsed = useSelector((state) => state.sidebar.status);
   const [isCheckedProject, setIsCheckedProject] = useState(false);
   const [isCheckedUser, setIsCheckedUser] = useState(false);
+  const user = useSelector((state) => state.user.currentUser);
 
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const layoutUsers = useSelector((state) => state.layout.cardsLayoutUsers);
@@ -47,7 +48,7 @@ const Settings = () => {
   return (
     <Container collapsed={collapsed}>
       <h1>Configurações</h1>
-      <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>
+      {user.user_type === 'admin' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
       <ToggleSwitch label={"Habilitar visualização em cards para projetos"} checked={layoutProjects} onChange={handleChangeProjects}/>
     </Container>
   );
