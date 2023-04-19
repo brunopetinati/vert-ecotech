@@ -12,33 +12,40 @@ const Projects = () => {
 
   const collapsed = useSelector((state) => state.sidebar.status);
   const app_status = useSelector((state) => state.app_status.status);
-  const [projects, setProjects] = useState([]);
+  //const [projects, setProjects] = useState([]);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const dispatch = useDispatch();
-  const app_data = useSelector((state) => state.app_data);
-
-  console.log('app_data.projects:',app_data.projects)
-
+  const projects = useSelector((state) => state.app_data.projects);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   useEffect(() => {
-    if (app_data.projects != []){
+    if (projects.length === 0) {
       const fetchProjects = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');
-          const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setProjects(response.data);
-          dispatch(storeProjects(response.data));
+          if (currentUser.user_type === 'admin') {
+            const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            dispatch(storeProjects(response.data));
+          } else {
+            const response = await axios.get(`http://${currentUrl}:8000/api/projects/${currentUser.id}/by_user/`, {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+            dispatch(storeProjects(response.data));
+          }
         } catch (error) {
           console.error(error);
         }
       };
       fetchProjects();
     }
-  }, [app_status]);
+  }, [app_status, currentUser.id, currentUser.user_type, currentUrl, dispatch, projects]);
+  
 
 
   const [selectedColumn, setSelectedColumn] = useState('');

@@ -37,7 +37,13 @@ const Login = () => {
           dispatch(userLogin(response.data.access, response.data));
         }, 5500);
       }).catch(error => {
-        console.error('Login failed:', error.message);        
+        console.error('Login failed:', error.message);
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Não foi possível logar, verifique as informações e tente novamente.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });        
       });
     } catch (error) {
       console.error('Login failed:', error.message);
