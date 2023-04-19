@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Line } from 'react-chartjs-2';
-import WalkingVase from '../../assets/gifs/walking-vase.gif'
+import WalkingVase from '../../assets/gifs/plant-gworing.gif'
 
 const StockChart = () => {
   const [data, setData] = useState(null);
