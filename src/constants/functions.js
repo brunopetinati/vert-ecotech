@@ -31,8 +31,10 @@ export const getScoreColor = (score) => {
     return "red";
   } else if (score < 7) {
     return "orange";
+  } else if (score < 13) {
+    return "#054d00";
   } else {
-    return "green";
+    return "#7eff00";
   }
 }
 

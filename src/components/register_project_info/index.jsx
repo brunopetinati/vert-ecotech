@@ -27,7 +27,6 @@ const RegisterProjectStep2 = () => {
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
-    dispatch(storeOwnerId(event.target.value));
   };
 
   // validações
@@ -193,6 +192,7 @@ const RegisterProjectStep2 = () => {
 
   useEffect(() => {
     console.log(preparedObject);
+    dispatch(storeOwnerId(owner));
     if (currentUser.user_type === 'admin') {
       const fetchUsers = async () => {
         try {
@@ -292,7 +292,6 @@ const RegisterProjectStep2 = () => {
                 <option key={currentUser.id} value={currentUser.id}>{currentUser.full_name}</option>
               )}
             </StyledSelectForUser>
-
 
             {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
             

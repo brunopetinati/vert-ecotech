@@ -23,7 +23,8 @@ const EditProject = () => {
   const [address, setAddress] = useState(project.address);
   const [owner, setOwner] = useState(project.owner);
   const [users, setUsers] = useState([]);
-  
+  const [title, setTitle] = useState([]);
+
   // SICAR
   const [selectedCar, setSelectedCar] = useState(project.status_car);
 
@@ -218,7 +219,8 @@ const EditProject = () => {
       "owner_actions_to_preserve_forest": ownerActionsToPreserveForest,
       "legal_reserve_deficit": selectedPossuiDeficit,
       "has_federal_debt": selectedPossuiDivida,
-      "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
+      "physical_or_legal_entity": selectedPessoaJuridicaOuFisica,
+      "title": title
     };
 
     console.log(preparedObject.total_area)

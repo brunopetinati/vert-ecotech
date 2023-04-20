@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
-
+import { useDispatch } from 'react-redux';
+import { addProjectToProjects } from '../../store/modules/app_data/actions';
 
 
 const FileUploader = () => {
@@ -13,7 +14,7 @@ const FileUploader = () => {
 
   const projectID = useSelector((state) => state.app_data.project_id);
   const ownerID = useSelector((state) => state.app_data.owner_id);
-
+  const dispatch = useDispatch();
 
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,
@@ -57,7 +58,7 @@ const FileUploader = () => {
         confirmButtonText: 'OK'
       });
       console.log('Success:', response);
-      // Add code to handle the response from the server
+      dispatch(addProjectToProjects(response.data));
     } catch (error) {
       Swal.fire({
         title: 'Erro!',
