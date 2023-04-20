@@ -1,6 +1,6 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { appStatus } from '../../store/modules/app_status/actions';
 import { storeProjectId, storeOwnerId } from '../../store/modules/app_data/actions';
@@ -9,6 +9,7 @@ import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
+import { currentUser } from '../../constants/global';
 
 const RegisterProjectStep2 = () => {
 
@@ -21,7 +22,7 @@ const RegisterProjectStep2 = () => {
   const [address, setAddress] = useState('');
   const [owner, setOwner] = useState('');
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
-
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -152,7 +153,7 @@ const RegisterProjectStep2 = () => {
   const [boolean, setBoolean] = useState(false);
 
   const handleInputChange = () => {
-    if (!boolean) {
+    if (boolean) {
       setMask("99.999.999/9999-99");
     } else {
       setMask("999.999.999-99");
@@ -166,24 +167,6 @@ const RegisterProjectStep2 = () => {
     dispatch(appStatus('Projetos'));
     navigate('/welcome');
   };
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get(`http://${currentUrl }:8000/api/users/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
 
     // preparar objeto para ser enviado para a requisição
 
@@ -205,6 +188,29 @@ const RegisterProjectStep2 = () => {
       "has_federal_debt": selectedPossuiDivida,
       "physical_or_legal_entity": selectedPessoaJuridicaOuFisica
     };
+
+  useEffect(() => {
+    console.log(preparedObject);
+    if (currentUser.user_type === 'admin') {
+      const fetchUsers = async () => {
+        try {
+          const token = sessionStorage.getItem('Authorization');
+          const response = await axios.get(`http://${currentUrl }:8000/api/users/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          setUsers(response.data);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      fetchUsers();
+    } else {
+      setOwner(currentUser.id);
+    }
+  }, [owner, preparedObject]);
+
 
   // REGISTRAR PROJETO
   const handleRegister = () => {
@@ -252,7 +258,6 @@ const RegisterProjectStep2 = () => {
       });
   };
   
-
   return (
     <motion.div
         initial={{ opacity: 0 }}
@@ -266,12 +271,17 @@ const RegisterProjectStep2 = () => {
           <Column> 
             <Label>Proprietário da área:</Label>
 
-            <StyledSelectForUser value={owner} onChange={handleUserSelect} >
-              <option value="">Selecione o proprietário</option>
-              {users.map(user => (
-                <option key={user.id} value={user.id}>{user.full_name}</option>
-              ))}
+            <StyledSelectForUser value={owner} onChange={handleUserSelect}>
+              {users.length > 0 ? (
+                users.map(user => (
+                  <option key={user.id} value={user.id}>{user.full_name}</option>
+                ))
+              ) : (
+                <option key={currentUser.id} value={currentUser.id}>{currentUser.full_name}</option>
+              )}
             </StyledSelectForUser>
+
+
             {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
             
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
