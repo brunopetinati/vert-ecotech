@@ -1,7 +1,7 @@
 import { PROJECTS_LAYOUT, USERS_LAYOUT } from './action-types';
 
 const initialState = {
-  cardsLayoutProjects: false,
+  cardsLayoutProjects: true,
   cardsLayoutUsers: false,
 };
 

@@ -25,7 +25,7 @@ const ProjectsCard = ({ filteredProjects }) => {
     <Wrapper>
       {filteredProjects.map((project, index) => (
         <Card key={index} onClick={() => {handleClick(projects.find(project => project.id === project.id))}}>
-          <CardHeader>{getFullNameById(project.owner, users)}</CardHeader>
+          <CardHeader>{project.title === "default" ? '-' : project.title}</CardHeader>
           <CardBody>
             <p>{project.address}</p>
             <p>Área de Reserva Legal: {project.legal_reserve_area + ' ha'}</p>

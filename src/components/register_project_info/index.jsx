@@ -23,6 +23,7 @@ const RegisterProjectStep2 = () => {
   const [owner, setOwner] = useState('');
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
+  const [title, setTitle] = useState('');
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -171,6 +172,7 @@ const RegisterProjectStep2 = () => {
     // preparar objeto para ser enviado para a requisição
 
     const preparedObject = {
+      "title": title,
       "owner": owner,
       "total_area":  extractNumbers(totalArea),
       "legal_reserve_area": extractNumbers(totalReserveArea),
@@ -267,6 +269,16 @@ const RegisterProjectStep2 = () => {
           >
       <Container>
         <h2>Informações Cadastrais</h2>
+        <div style={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <Label style={{fontSize : '16px'}} >Qual o nome (fantasia) da sua terra, fazenda ou reserva?</Label>
+          <Input
+              type="text"
+              placeholder="Ex: Fazenda Santa Júlia"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={{width: '88%', fontSize: '18px'}}
+            />
+        </div>
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
@@ -382,11 +394,12 @@ const RegisterProjectStep2 = () => {
           </Column>
         </InnerContainer>
         <Column style={{ marginTop: '36px', fontStyle: 'italic', fontSize: '12px'}}>
-            <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
+            <Label style={{fontSize : '16px'}}>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
             <Span>Descrever abaixo quais são essas ações e a data em que foram realizadas.</Span>
             <Span>Estas ações podem ser in loco, tal como cercamento ou aceiro, ou pode ser uma ação legal, tal como averbação da reserva legal na matrícula ou criação de uma RPPN.</Span>
               <p />
             <TextArea  type="text" value={ownerActionsToPreserveForest} onChange={(e) => setOwnerActionsToPreserveForest(e.target.value)}/>
+            
         </Column>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>

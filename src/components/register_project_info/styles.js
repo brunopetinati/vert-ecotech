@@ -42,11 +42,11 @@ export const Input = styled(InputMask)`
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
 
   ::placeholder {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   &:focus {
