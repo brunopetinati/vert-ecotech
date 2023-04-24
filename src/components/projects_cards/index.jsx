@@ -3,6 +3,8 @@ import { Wrapper, Card, CardHeader, CardBody, CardFooter, Score } from './styles
 import { getStatusCARColor, getStatusMatriculaColor, getScoreColor } from '../../constants/functions';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import DefaultForestImage from '../../assets/default-image2.webp';
+
 
 const ProjectsCard = ({ filteredProjects }) => {
 
@@ -26,14 +28,14 @@ const ProjectsCard = ({ filteredProjects }) => {
       {filteredProjects.map((project, index) => (
         <Card key={index} onClick={() => {handleClick(projects.find(project => project.id === project.id))}}>
           <CardHeader>{project.title === "default" ? '-' : project.title}</CardHeader>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
+            <img src={DefaultForestImage} style={{width: '100%', marginTop: '8px'}}></img>
+          </div>
           <CardBody>
-            <p>{project.address}</p>
-            <p>Área de Reserva Legal: {project.legal_reserve_area + ' ha'}</p>
-            <p>Área Total: {project.total_area + ' ha'}</p>
             <p>Status CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
             <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>          
           </CardBody>
-          <CardFooter><Score style={{color: getScoreColor(project.score)}}>{project.score}</Score></CardFooter>
+          <CardFooter><Score style={{color: getScoreColor(project.score)}} score={project.score}>{project.score}</Score></CardFooter>
         </Card>
       ))}
     </Wrapper>

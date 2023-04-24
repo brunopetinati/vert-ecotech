@@ -6,8 +6,7 @@ export const Container = styled.div`
   padding: 2em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 2;
-  
+  background: #fff;
   h3 {
     color:#054D00;
   }
@@ -18,7 +17,6 @@ export const InnerContainer = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   max-width: 600px;
-
 `;
 
 export const Column = styled.div`
@@ -134,7 +132,6 @@ export const ProfileContainerInfo = styled.div`
   align-items: center;
   width: 900px;
   padding: 4em;
-  z-index: 2;
   background: #fff;
   margin-top: 64px;
   border-radius: 20px;
@@ -156,7 +153,6 @@ export const ButtonContainerIndex = styled.div`
   padding: 2em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 2;
   background: #fff;
 
   h3 {

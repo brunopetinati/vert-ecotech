@@ -177,7 +177,7 @@ const UserIntern = () => {
               />
             </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Adicionar Informações de Banco</StyledButton>
+              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton>
               <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Salvar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
