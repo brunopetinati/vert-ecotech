@@ -10,14 +10,17 @@ import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
+import { addProjectToProjects, resetProjects, eraseProjects } from '../../store/modules/app_data/actions';
 
 const EditProject = () => {
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
 
   const project = location.state.project;
   const userNames = useSelector(state => state.app_data.users);
+  const projects = useSelector(state => state.app_data.projects);
   const [totalArea, setTotalArea] = useState(project.total_area);
   const [totalReserveArea, setTotalReserveArea] = useState(project.legal_reserve_area);
   const [address, setAddress] = useState(project.address);
@@ -238,10 +241,23 @@ const EditProject = () => {
           icon: 'success',
           confirmButtonText: 'OK'
         });
-        console.log('response:', response);
-        console.log('formData', formData);
+        const projectIndex = projects.findIndex(p => p.id === response.data.id);
 
-        // Add code to handle the response from the server
+        console.log(response.data)
+        console.log(projects)
+
+        if (projectIndex !== -1) {
+          const updatedProjects = [...projects];
+          updatedProjects.splice(projectIndex, 1);
+          dispatch(eraseProjects());
+          dispatch(resetProjects([...updatedProjects, response.data]));
+          navigate('/welcome')
+        } else {
+          // nunca vai existir isso
+          console.log("alert: danger. It shouldn't be here. Check it ASAP.");
+          dispatch(addProjectToProjects(response.data));
+        }
+
       } catch (error) {
         Swal.fire({
           title: 'Erro!',

@@ -10,6 +10,7 @@ import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 import { currentUser } from '../../constants/global';
+import { addProjectToProjects } from '../../store/modules/app_data/actions';
 
 const RegisterProjectStep2 = () => {
 
@@ -191,7 +192,6 @@ const RegisterProjectStep2 = () => {
     };
 
   useEffect(() => {
-    console.log(preparedObject);
     dispatch(storeOwnerId(owner));
     if (currentUser.user_type === 'admin') {
       const fetchUsers = async () => {
@@ -247,6 +247,8 @@ const RegisterProjectStep2 = () => {
         });
         dispatch(storeProjectId(projectId));
         dispatch(appStatus('register_land_upload_files'));
+        //adicionada linha, mas não testada
+        dispatch(addProjectToProjects(response.data));
       })
       .catch(error => {
         console.error('error', error);

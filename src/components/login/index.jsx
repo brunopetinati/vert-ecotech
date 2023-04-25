@@ -113,8 +113,7 @@ const Login = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}> <h1 style={{color: 'white'}}>Bem Vindo!</h1>
-            <img src={Loading} style={{width: '180px',
-position: 'absolute', top: '0', right: '0'}}/></motion.div> : 
+            </motion.div> : 
             <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

@@ -153,8 +153,7 @@ const Register = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
         ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1>
-         <img src={Loading} style={{width: '180px',
-position: 'absolute', top: '0', right: '0'}}/></motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
+         </motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
         <Input placeholder="Nome Completo" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         {validName && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira o nome completo.</div>}            
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
