@@ -16,7 +16,7 @@ const ProjectsCard = ({ filteredProjects }) => {
     return Number(num);
   }
 
-  const users = useSelector((state) => state.app_data.users);
+  //const users = useSelector((state) => state.app_data.users);
   const projects = useSelector((state) => state.app_data.projects);
 
   const handleClick = (project) => {
@@ -26,7 +26,7 @@ const ProjectsCard = ({ filteredProjects }) => {
   return (
     <Wrapper>
       {filteredProjects.map((project, index) => (
-        <Card key={index} onClick={() => {handleClick(projects.find(project => project.id === project.id))}}>
+        <Card key={index} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}}>
           <CardHeader>{project.title === "default" ? '-' : project.title}</CardHeader>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
             <img src={DefaultForestImage} style={{width: '100%', marginTop: '8px'}}></img>

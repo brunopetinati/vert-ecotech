@@ -54,7 +54,7 @@ const ProjectIntern = () => {
         transition={{ duration: 0.8 }}
           >
       <Container>
-        <h2>Informações Cadastrais</h2>
+        <h2>{project.title || '-'}</h2>
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>

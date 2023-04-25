@@ -23,7 +23,7 @@ const EditProject = () => {
   const [address, setAddress] = useState(project.address);
   const [owner, setOwner] = useState(project.owner);
   const [users, setUsers] = useState([]);
-  const [title, setTitle] = useState([]);
+  const [title, setTitle] = useState(project.title);
 
   // SICAR
   const [selectedCar, setSelectedCar] = useState(project.status_car);
@@ -155,29 +155,6 @@ const EditProject = () => {
     //dispatch(appStatus('Projetos'));
     navigate('/intern_project', { state: { project }});
   };
-
-
-  // Acredito que não seja necessário editar o proprietário do projeto. 
-  // No caso poderia deletar o projeto e cadastrar novamente no nome de outra pessoa 
-
-  /* useEffect(() => {
-    const fetchUsers = async () => {  
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get(`http://${currentUrl}:8000/api/users/`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setUsers(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchUsers();
-  }, []); */
-  
   
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState(project.owner_actions_to_preserve_forest);
 
@@ -223,7 +200,6 @@ const EditProject = () => {
       "title": title
     };
 
-    console.log(preparedObject.total_area)
 
     const handleSave = async () => {
       try {
@@ -250,19 +226,21 @@ const EditProject = () => {
         const headers = {
           Authorization: `Bearer ${token}`,
         };
-
+        
         for (const [key, value] of Object.entries(preparedObject)) {
           formData.append(key, value);
         }
-    
-        const response = await axios.put(url, preparedObject, { headers });
+
+        const response = await axios.put(url, formData, { headers });
         Swal.fire({
           title: 'Sucesso!',
           text: 'As informações foram editadas com sucesso!',
           icon: 'success',
           confirmButtonText: 'OK'
         });
-    
+        console.log('response:', response);
+        console.log('formData', formData);
+
         // Add code to handle the response from the server
       } catch (error) {
         Swal.fire({
@@ -287,6 +265,16 @@ const EditProject = () => {
           >
       <Container>
         <h2>Informações Cadastrais</h2>
+        <div style={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+          <Label style={{fontSize : '16px'}} >Qual o nome (fantasia) da sua terra, fazenda ou reserva?</Label>
+          <Input
+              type="text"
+              placeholder="Ex: Fazenda Santa Júlia"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              style={{width: '88%', fontSize: '18px'}}
+            />
+        </div>
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
@@ -321,7 +309,6 @@ const EditProject = () => {
               placeholder={'Selecione uma opção'}
               defaultValue={{value : project.matricula_status, label: project.matricula_status}}
             />
-            
             <Label>Possui déficit de reserva legal?</Label>
             <StyledSelect
               onChange={handlePossuiDeficit}
