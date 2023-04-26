@@ -35,7 +35,7 @@ const Login = () => {
         setTimeout(() => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));
-        }, 5500);
+        }, 4000);
       }).catch(error => {
         console.error('Login failed:', error.message);
         Swal.fire({

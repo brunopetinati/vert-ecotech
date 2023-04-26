@@ -33,7 +33,7 @@ const Sidebar = () => {
   };
 
   const handleSecret = () => {
-    alert('secret')
+    return
   };
 
 
@@ -75,13 +75,13 @@ const Sidebar = () => {
       </SidebarHeader>
       <SidebarMenu>
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
-        {currentUser.user_type === "admin" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
+        {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
         <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Projetos'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-       {collapsed ? <span onClick={handleSecret}>V.E  &copy;</span> : <span>Vert Ecotech &copy; 2023</span>}
+       {collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
       </SidebarFooter>
     </SidebarContainer>
   );

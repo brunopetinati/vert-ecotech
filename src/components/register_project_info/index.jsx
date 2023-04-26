@@ -193,7 +193,7 @@ const RegisterProjectStep2 = () => {
 
   useEffect(() => {
     dispatch(storeOwnerId(owner));
-    if (currentUser.user_type === 'admin') {
+    if (currentUser.user_type === 'ADM') {
       const fetchUsers = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');

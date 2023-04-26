@@ -10,7 +10,7 @@ export const MainContainer = styled.div`
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background: #054d00;
+  background: #f5f5f5;
 `;
 
 export const Container = styled.div`

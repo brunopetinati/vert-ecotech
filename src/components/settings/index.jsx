@@ -48,7 +48,7 @@ const Settings = () => {
   return (
     <Container collapsed={collapsed}>
       <h1>Configurações</h1>
-      {currentUser.user_type === 'admin' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
+      {currentUser.user_type === 'ADM' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
       <ToggleSwitch label={"Habilitar visualização em cards para projetos"} checked={layoutProjects} onChange={handleChangeProjects}/>
     </Container>
   );

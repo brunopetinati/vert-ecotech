@@ -84,7 +84,7 @@ const Register = () => {
         setShowLoading(true);
         setTimeout(() => {
           navigate('/');
-        }, 5500);
+        }, 4000);
       })
       .catch(error => {
         if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {

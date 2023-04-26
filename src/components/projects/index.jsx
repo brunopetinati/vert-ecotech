@@ -23,7 +23,7 @@ const Projects = () => {
       const fetchProjects = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');
-          if (currentUser.user_type === 'admin') {
+          if (currentUser.user_type === 'ADM') {
             const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
