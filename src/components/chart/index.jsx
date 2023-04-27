@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "r
 
 const Graph = ({data, title, name, key_a, key_b, key_c, stroke_a, stroke_b, stroke_c}) => (
   <div>
-    <h2>{title}</h2>
+    <h2 style={{color: '#054d00'}}>{title}</h2>
     <LineChart width={500} height={300} data={data}>
       <XAxis dataKey={name} />
       <YAxis />
