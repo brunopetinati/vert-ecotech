@@ -15,7 +15,7 @@ export const Card = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: #f5f5f5;
+  background: white;
   width: 220px;
   height: 350px; /* set a fixed height for all cards */
   border-radius: 16px;
@@ -33,24 +33,21 @@ export const CardHeader = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background-color: #d1e7dd;
-  padding: 10px;
+  background-color: #efefef;
   font-size: 14px;
   font-weight: bold;
   color: #054d00;
   overflow: hidden;
-  height: 35px;
+  height: 45px;
 `;
 
 export const CardBody = styled.div`
   padding: 10px;
   font-size: 14px;
-  height: 200px;
-  background: #f5f5f5;
+  background: white;
 `;
 
 export const CardFooter = styled.div`
-  background-color: #d1e7dd;
   padding: 10px;
   font-size: 12px;
   text-align: right;
@@ -78,7 +75,7 @@ export const Score = styled.div`
 export const CardWrapper = styled.div`
   width: 300px;
   height: 200px;
-  background-color: #d1e7dd;
+  background-color: #efefef;
   border-radius: 10px;
   display: flex;
   flex-direction: column;

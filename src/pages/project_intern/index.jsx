@@ -79,7 +79,7 @@ const ProjectIntern = () => {
             <Span>{project.legal_reserve_area}</Span>  
             <Label>Status do CAR</Label>
             <Span>{project.status_car}</Span>
-            <Label>Código SICAR(CAR)</Label>
+            <Label>Código SICAR (CAR)</Label>
             <Span>{project.sicar_code}</Span>
             <Label>Status do georreferenciamento no SIGEF</Label>
             <Span>{project.georeferencing_status}</Span>

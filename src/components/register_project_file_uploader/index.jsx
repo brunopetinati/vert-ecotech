@@ -75,12 +75,13 @@ const FileUploader = () => {
     <>
       <div>
         <label>Anexar Certidão de Matrícula</label>
+        <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
         <p />
         <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
       </div>
       <p />
       <div>
-        <label>Anexar PDF do CAR(SICAR)</label>
+        <label>Anexar PDF do CAR (SICAR)</label>
         <p />
         <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
       </div>

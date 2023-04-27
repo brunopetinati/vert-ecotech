@@ -11,7 +11,7 @@ import Logo from '../../assets/marca-vert.png'
 import Leaf from '../../assets/icons/leaf.svg';
 
 
-import { StyledUser, StyledUsers,  StyledStocks, StyledSettings } from './styles';
+import { StyledUser, StyledUsers,  StyledStocks, StyledSettings, StyledWork } from './styles';
 
 
 
@@ -77,7 +77,7 @@ const Sidebar = () => {
         <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
         {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
         <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Projetos'}</SidebarMenuItem>
-        {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleItemClick("Desenvolvimento")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Desenvolvimento'}</SidebarMenuItem>}
+        {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleItemClick("Desenvolvimento")}>{collapsed ? <StyledWork active={activeUsers} /> : 'Desenvolvimento'}</SidebarMenuItem>}
         <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
         <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
       </SidebarMenu>

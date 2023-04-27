@@ -4,7 +4,7 @@ import { ReactComponent as User } from '../../assets/icons/user.svg';
 import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
 import { ReactComponent as ShoppingCart } from '../../assets/icons/shopping-cart.svg';
 import { ReactComponent as Users } from '../../assets/icons/users.svg';
-
+import { ReactComponent as Work } from '../../assets/icons/work.svg';
 
 
 export const SidebarContainerOriginal = styled.div`
@@ -112,6 +112,13 @@ export const StyledUsers = styled(Users)`
 `;
 
 export const StyledSettings = styled(Settings)`
+  fill: ${({active}) => active ? "#fff" : "#000"};
+  height: 32px;
+  width: 10px;
+  transform: scale(2.5);
+`;
+
+export const StyledWork = styled(Work)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
   width: 10px;

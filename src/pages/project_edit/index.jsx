@@ -363,7 +363,7 @@ const EditProject = () => {
               placeholder={'Selecione uma opção'}
               defaultValue={{ value: project.status_car, label: project.status_car }}
             />
-            <Label>Código SICAR(CAR)</Label>
+            <Label>Código SICAR (CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
               maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"

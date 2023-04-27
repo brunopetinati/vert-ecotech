@@ -28,14 +28,14 @@ const ProjectsCard = ({ filteredProjects }) => {
       {filteredProjects.map((project, index) => (
         <Card key={index} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}}>
           <CardHeader>{project.title === "default" ? '-' : project.title}</CardHeader>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
-            <img src={DefaultForestImage} style={{width: '100%', marginTop: '8px'}}></img>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '-16px'}}>
+            <img src={DefaultForestImage} style={{width: '100%'}}></img>
           </div>
           <CardBody>
             <p>Status CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
             <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>          
           </CardBody>
-          <CardFooter><Score style={{color: getScoreColor(project.score)}} score={project.score}>{project.score}</Score></CardFooter>
+          <CardFooter><Score style={{color: getScoreColor(project.score)}} score={project.score || '0'}>{project.score || '0'}</Score></CardFooter>
         </Card>
       ))}
     </Wrapper>
