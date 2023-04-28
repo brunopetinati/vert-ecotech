@@ -344,7 +344,7 @@ const EditProject = () => {
             <Label>Área total da propriedade (ha)?</Label>
             <Input
                 type="text"
-                placeholder="Em hectares(ha)"
+                placeholder="Em hectares (ha)"
                 value={totalArea}
                 onChange={(event) => regularMaskforNumbers(event, setTotalArea)}
                 maskPlaceholder={null}
@@ -352,7 +352,7 @@ const EditProject = () => {
             <Label>Área total da reserva legal (ha)?</Label>
               <Input
                 type="text"
-                placeholder="Em hectares(ha)"
+                placeholder="Em hectares (ha)"
                 value={totalReserveArea}
                 onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />

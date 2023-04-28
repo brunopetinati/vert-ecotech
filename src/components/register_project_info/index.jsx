@@ -32,10 +32,13 @@ const RegisterProjectStep2 = () => {
 
   // validações
 
+  const [titleError, setTitleError] = useState('');
   const [totalAreaError, setTotalAreaError] = useState('');
   const [legalReserveAreaError, setLegalReserveAreaError] = useState('');
   const [statusCARError, setStatusCARError] = useState('');
   const [ownerError, setOwnerError] = useState('');
+  const [selectedCarError, setSelectedCarError] = useState('');
+  const [thereIsNoCar, setThereIsNoCar] = useState(false);
   
   // SICAR
   const [selectedCar, setSelectedCar] = useState(null);
@@ -44,11 +47,17 @@ const RegisterProjectStep2 = () => {
     { value: "Ativo", label: "Ativo" },
     { value: "Pendente", label: "Pendente" },
     { value: "Cancelado", label: "Cancelado" },
-    { value: "Não possui", label: "Não possui CAR" },
+    { value: "Não possui CAR", label: "Não possui CAR" },
   ];
 
   const handleOptionsCar = (selectedCar) => {
     setSelectedCar(selectedCar.value);
+    if (selectedCar.value === "Não possui CAR") {
+      setThereIsNoCar(true);
+      setSicarCode('Não possui');
+    } else {
+      setThereIsNoCar(false);
+    }
   };
 
   // Status Matrícula
@@ -217,7 +226,42 @@ const RegisterProjectStep2 = () => {
   // REGISTRAR PROJETO
   const handleRegister = () => {
 
-    if (!totalArea || !totalReserveArea || !sicarCode || !owner) {
+    console.log('selectedCar', selectedCar);
+
+    if (totalArea) {
+      setTotalAreaError('');
+    }
+
+    if (totalReserveArea) {
+      setStatusCARError('');
+    }
+
+    if (sicarCode) {
+      setStatusCARError('');
+    }
+
+    if (owner) {
+      setOwnerError('');
+    }
+
+    if (title) {
+      setTitleError('');
+    }
+
+    if (totalReserveArea) {
+      setLegalReserveAreaError('');
+    }
+
+    if (selectedCar) {
+      setSelectedCarError('');
+    }
+
+    if (!totalArea || !totalReserveArea || !sicarCode || !owner || !title || !selectedCar)  {
+
+      if (!title) {
+        setTitleError('Esse campo é necessário');
+      }
+
       if (!totalArea) {
         setTotalAreaError('Esse campo é necessário');
       }
@@ -229,6 +273,10 @@ const RegisterProjectStep2 = () => {
       }
       if (!owner) {
         setOwnerError('Esse campo é necessário');
+      }
+
+      if (!selectedCar) {
+        setSelectedCarError('Escolha uma opção para continuar');
       }
       return;
     };
@@ -280,6 +328,8 @@ const RegisterProjectStep2 = () => {
               onChange={(e) => setTitle(e.target.value)}
               style={{width: '88%', fontSize: '18px'}}
             />
+            {titleError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{titleError}</div>}
+
         </div>
         <InnerContainer>
           <Column> 
@@ -343,7 +393,7 @@ const RegisterProjectStep2 = () => {
             <Label>Área total da propriedade (ha)?</Label>
             <Input
                 type="text"
-                placeholder="Em hectares(ha)"
+                placeholder="Em hectares (ha)"
                 value={totalArea}
                 onChange={(event) => regularMaskforNumbers(event, setTotalArea)}
                 maskplaceholder={null}
@@ -352,7 +402,7 @@ const RegisterProjectStep2 = () => {
             <Label>Área total da reserva legal (ha)?</Label>
               <Input
                 type="text"
-                placeholder="Em hectares(ha)"
+                placeholder="Em hectares (ha)"
                 value={totalReserveArea}
                 onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
@@ -363,7 +413,7 @@ const RegisterProjectStep2 = () => {
               options={optionsCar}
               placeholder={'Selecione uma opção'}
             />
-            {statusCARError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{statusCARError}</div>}
+            {selectedCarError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{selectedCarError}</div>}
             <Label>Código SICAR (CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
@@ -371,6 +421,7 @@ const RegisterProjectStep2 = () => {
               alwaysShowMask={false}
               placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               onChange={(e) => setSicarCode(e.target.value)}
+              disabled={thereIsNoCar}
             >
             </Input>
             {statusCARError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{statusCARError}</div>}
