@@ -34,17 +34,18 @@ export const CardHeader = styled.div`
   align-items: center;
   text-align: center;
   background-color: #efefef;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: bold;
   color: #054d00;
-  overflow: hidden;
-  height: 45px;
+  height: 15%;
 `;
 
 export const CardBody = styled.div`
   padding: 10px;
   font-size: 14px;
   background: white;
+  height: 30%;
+  margin-bottom: -80px;
 `;
 
 export const CardFooter = styled.div`

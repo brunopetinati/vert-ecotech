@@ -1,6 +1,6 @@
 import { getFullNameById } from '../../store/modules/app_data/thunk';
 import { Wrapper, Card, CardHeader, CardBody, CardFooter, Score } from './styles';
-import { getStatusCARColor, getStatusMatriculaColor, getScoreColor } from '../../constants/functions';
+import { getStatusCARColor, getStatusMatriculaColor, getScoreColor, transformNumbersToHectares } from '../../constants/functions';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DefaultForestImage from '../../assets/default-image2.webp';
@@ -27,13 +27,14 @@ const ProjectsCard = ({ filteredProjects }) => {
     <Wrapper>
       {filteredProjects.map((project, index) => (
         <Card key={index} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}}>
-          <CardHeader>{project.title === "default" ? '-' : project.title}</CardHeader>
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '-16px'}}>
+          <CardHeader>{project.title === "default" ? '-' : project.title.captalize()}</CardHeader>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '-80px'}}>
             <img src={DefaultForestImage} style={{width: '100%'}}></img>
           </div>
           <CardBody>
-            <p>Status CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
-            <p>Status Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>          
+            <p>{transformNumbersToHectares(project.total_area)}</p>
+            <p>CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></p>
+            <p>Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></p>          
           </CardBody>
           <CardFooter><Score style={{color: getScoreColor(project.score)}} score={project.score || '0'}>{project.score || '0'}</Score></CardFooter>
         </Card>

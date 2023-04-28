@@ -126,35 +126,23 @@ export const ButtonLink = styled.button`
 `;
 
 export const StyledSelect = styled.select`
-  margin-bottom: 20px;
-  width: 450px;
-  border-radius: 4px;
+border: 2px solid #ccc;
+border-radius: 4px;
+padding: 8px;
+font-size: 16px;
+outline: none;
+background: white;
+color: black;
+margin-bottom: 20px;
+width: 450px;
+font-size: 16px;
+outline: none;
+
+::placeholder {
   font-size: 16px;
-  outline: none;
+}
 
-  &:focus {
-    border-color: #007bff;
-  }
-`;
-
-export const StyledSelectForUser = styled.select`
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
-  outline: none;
-  background: white;
-  color: grey;
-  margin-bottom: 20px;
-  width: 450px;
-  font-size: 16px;
-  outline: none;
-
-  ::placeholder {
-    font-size: 16px;
-  }
-
-  &:focus {
-    border-color: #7eff00;
-  }
+&:focus {
+  border-color: #7eff00;
+}
 `;

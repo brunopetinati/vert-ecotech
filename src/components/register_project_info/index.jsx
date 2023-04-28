@@ -335,7 +335,7 @@ const RegisterProjectStep2 = () => {
           <Column> 
             <Label>Proprietário da área:</Label>
 
-            <StyledSelectForUser value={owner} onChange={handleUserSelect}>
+            <StyledSelect value={owner} onChange={handleUserSelect}>
               {users.length > 0 ? (
                 users.map(user => (
                   <option key={user.id} value={user.id}>{user.full_name}</option>
@@ -343,7 +343,7 @@ const RegisterProjectStep2 = () => {
               ) : (
                 <option key={currentUser.id} value={currentUser.id}>{currentUser.full_name}</option>
               )}
-            </StyledSelectForUser>
+            </StyledSelect>
 
             {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
             
