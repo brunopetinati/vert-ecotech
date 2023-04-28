@@ -125,7 +125,7 @@ export const ButtonLink = styled.button`
 }
 `;
 
-export const StyledSelect = styled(Select)`
+export const StyledSelect = styled.select`
   margin-bottom: 20px;
   width: 450px;
   border-radius: 4px;

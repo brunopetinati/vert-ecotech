@@ -352,7 +352,13 @@ const RegisterProjectStep2 = () => {
               onChange={handlePessoaFisicaOuJuridica}
               options={optionsPessoaJuridicaOuFisica}
               placeholder={'Selecione uma opção'}
-            />
+              defaultValue={""}
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsPessoaJuridicaOuFisica.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+            </StyledSelect>
 
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
             <Input type="text" 
@@ -372,22 +378,36 @@ const RegisterProjectStep2 = () => {
             <Label>Status da Matrícula</Label>
             <StyledSelect
               onChange={handleMatriculaStatus}
-              options={optionsMatriculaStatus}
               placeholder={'Selecione uma opção'}
-            />
-            
+              defaultValue={""}
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsMatriculaStatus.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+            </StyledSelect>            
             <Label>Possui déficit de reserva legal?</Label>
             <StyledSelect
               onChange={handlePossuiDeficit}
-              options={optionsPossuiDeficit}
               placeholder={'Selecione uma opção'}
-            />
+              defaultValue={""}
+            >
+              <option disabled value="">Selecione uma opção</option>
+                {optionsPossuiDeficit.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+              ))}    
+            </StyledSelect>
             <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
             <StyledSelect
               onChange={handlePossuiDivida}
-              options={optionsPossuiDivida}
               placeholder={'Selecione uma opção'}
-            />
+              defaultValue={""}
+              >
+              <option disabled value="">Selecione uma opção</option>
+                {optionsPossuiDivida.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+              ))}      
+              </StyledSelect>
           </Column>
           <Column>
             <Label>Área total da propriedade (ha)?</Label>
@@ -410,9 +430,14 @@ const RegisterProjectStep2 = () => {
             <Label>Status do CAR</Label>
             <StyledSelect
               onChange={handleOptionsCar}
-              options={optionsCar}
+              defaultValue={""}
               placeholder={'Selecione uma opção'}
-            />
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsCar.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+            </StyledSelect>
             {selectedCarError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{selectedCarError}</div>}
             <Label>Código SICAR (CAR)</Label>
             <Input type="text" 
@@ -428,21 +453,36 @@ const RegisterProjectStep2 = () => {
             <Label>Status do georreferenciamento no SIGEF</Label>
             <StyledSelect
               onChange={handleGeorreferenciamentoStatus}
-              options={optionsGerorreferenciamentoStatus}
+              defaultValue={""}
               placeholder={'Selecione uma opção'}
-            />
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsGerorreferenciamentoStatus.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+            </StyledSelect>
             <Label>Situação da reserva legal da propriedade:</Label>
             <StyledSelect
               onChange={handleReservaSituation}
-              options={optionsReservaSituation}
               placeholder={'Selecione uma opção'}
-            />
+              defaultValue={""}
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsReservaSituation.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}
+            </StyledSelect>
             <Label>Possui unidade de conservação no imóvel?</Label>
             <StyledSelect
               onChange={handleUnidadeConservacao}
-              options={optionsUnidadeConservacao}
               placeholder={'Selecione uma opção'}
-            />
+              defaultValue={""}
+            >
+            <option disabled value="">Selecione uma opção</option>
+            {optionsUnidadeConservacao.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))}  
+            </StyledSelect>
           </Column>
         </InnerContainer>
         <Column style={{ marginTop: '36px', fontStyle: 'italic', fontSize: '12px'}}>
