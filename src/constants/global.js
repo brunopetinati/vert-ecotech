@@ -8,6 +8,6 @@ const awsUrl = '18.218.97.13'
 
 const localHost = 'localhost'
 
-export const currentUrl = localHost;
+export const currentUrl = awsUrl;
 
 //const currentUser = useDispatch((state) => state.user.currentUser);
