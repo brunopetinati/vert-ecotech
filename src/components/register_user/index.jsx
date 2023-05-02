@@ -83,7 +83,7 @@ const Register = () => {
         dispatch(userLogin(response.data.access, response.data));
         setShowLoading(true);
         setTimeout(() => {
-          navigate('/');
+          navigate('/privacy_policy');
         }, 4000);
       })
       .catch(error => {
@@ -118,11 +118,9 @@ const Register = () => {
   };
 
   const checkCEP = async (cep) => {
-    console.log(cep)
     setFormState({...formState, cep: cep})
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length -1))) {
       const cepObject = await handleCepChange(cep.replace('-',''));
-      console.log('cepObject',cepObject);
       setFormState({
         ...formState,
         cep: cepObject.cep,
