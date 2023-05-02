@@ -31,6 +31,7 @@ export const Card = ({filteredProjects}) => {
         <InnerContainer>
           <Title style={{color: getScoreColor(project.score)}}>{project.title === "default" ? '-' : project.title}</Title>
           <Info>{transformNumbersToHectares(project.total_area)}</Info>
+          <Info>{transformNumbersToHectares(project.legal_reserve_area || '-')}</Info>
           <Info>CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></Info>
           <Info>Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></Info>          
         </InnerContainer>

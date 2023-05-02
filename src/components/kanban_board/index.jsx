@@ -1,28 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-const Column = styled.div`
-  width: 300px;
-  background-color: #f5f5f5;
-  border-radius: 5px;
-  padding: 10px;
-`;
-
-const Card = styled.div`
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 10px;
-  cursor: move;
-`;
+import { Container, Column, Card } from './styles';
+import { useSelector } from 'react-redux';
 
 const KanbanBoard = () => {
-  const [status, setStatus] = useState('todo');
+  const [status, setStatus] = useState('started');
+
+  const projects = useSelector((state) => state.app_data.projects);
+  console.log(projects);
 
   const handleDragStart = (e) => {
     e.dataTransfer.setData('text/plain', status);
@@ -44,10 +28,10 @@ const KanbanBoard = () => {
     <Container>
       <Column
         onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'todo')}
+        onDrop={(e) => handleDrop(e, 'started')}
       >
-        <h2>Todo</h2>
-        {status === 'todo' && (
+        <h2>Iniciados</h2>
+        {status === 'started' && (
           <Card draggable onDragStart={handleDragStart}>
             <h3>Task 1</h3>
             <p>This task needs to be completed today.</p>
@@ -56,14 +40,68 @@ const KanbanBoard = () => {
       </Column>
       <Column
         onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'done')}
+        onDrop={(e) => handleDrop(e, 'analysis')}
       >
-        <h2>Done</h2>
-        {status === 'done' && (
+        <h2>Análise de viabilidade</h2>
+        {status === 'analysis' && (
           <Card draggable onDragStart={handleDragStart}>
             <h3>Task 1</h3>
-            <p>This task has been completed.</p>
+            <p>This task needs to be completed today.</p>
           </Card>
+        )}
+      </Column>
+      <Column
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, 'viability')}
+      >
+        <h2>Viabilidade concluída</h2>
+        {status === 'viability' && (
+          <Card draggable onDragStart={handleDragStart}>
+            <h3>Task 1</h3>
+            <p>This task needs to be completed today.</p>
+          </Card>
+        )}
+      </Column>
+      <Column
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, 'negotiation')}
+      >
+        <h2>Em negociação</h2>
+        {status === 'negotiation' && (
+          <Card draggable onDragStart={handleDragStart}>
+            <h3>Task 1</h3>
+            <p>This task needs to be completed today.</p>
+          </Card>
+        )}
+      </Column>
+      <Column
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, 'idle')}
+      >
+        <h2>Projeto aguardando</h2>
+        {status === 'idle' && (
+          <Card draggable onDragStart={handleDragStart}>
+            <h3>Task 1</h3>
+            <p>This task needs to be completed today.</p>
+          </Card>
+        )}
+      </Column>
+      <Column
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(e, 'concluded')}
+      >
+        <h2>Projeto em andamento</h2>
+        {status === 'concluded' && (
+          <>
+          <Card draggable onDragStart={handleDragStart}>
+            <h3>Task 1</h3>
+            <p>This task needs to be completed today.</p>
+          </Card>
+          <Card draggable onDragStart={handleDragStart}>
+            <h3>Task 1</h3>
+            <p>This task needs to be completed today.</p>
+          </Card>
+          </>
         )}
       </Column>
     </Container>

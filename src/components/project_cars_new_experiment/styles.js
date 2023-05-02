@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const CardContainer = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   width: 450px;
   height: 200px;
@@ -20,6 +20,7 @@ export const CardContainer = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   padding: 16px;
   margin-right: 8px;
+  cursor: pointer;
 `;
 
 export const ImageContainer = styled.div`
@@ -50,7 +51,7 @@ export const Title = styled.h2`
 
 export const Info = styled.p`
   font-size: 16px;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 `;
 
 export const ScoreContainer = styled.div`
