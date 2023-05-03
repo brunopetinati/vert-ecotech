@@ -13,7 +13,7 @@ export const CardContainer = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  width: 450px;
+  width: 460px;
   height: 200px;
   background-color: #fff;
   border-radius: 8px;
@@ -47,6 +47,7 @@ export const Title = styled.h2`
   font-weight: bold;
   margin-bottom: 8px;
   color: #054d00;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 `;
 
 export const Info = styled.p`

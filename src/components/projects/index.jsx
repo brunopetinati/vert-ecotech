@@ -59,7 +59,7 @@ const Projects = () => {
     if (selectedColumn === 'Localidade' && project.address.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
-    if (selectedColumn === 'Unidade de Conservação' && project.conservation_unit.toLowerCase().includes(searchValue.toLowerCase())) {
+    if (selectedColumn === 'Unidade de Conservação (UC)' && project.conservation_unit.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
     if (selectedColumn === 'Status da Matrícula' && project.matricula_status.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -74,9 +74,7 @@ const Projects = () => {
     if (selectedColumn === 'Status CAR' && project.status_car.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
-    if (selectedColumn === 'Proprietário' && project.owner.toLowerCase().includes(searchValue.toLowerCase())) {
-      return true;
-    }
+    
     return false;
   });
 
@@ -95,14 +93,13 @@ const Projects = () => {
         <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
         <StyledSelect id="column-select" onChange={handleColumnChange}>
           <option value="">---</option>
-          <option value="Unidade de Conservação">Unidade de Conservação</option>
+          <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
           <option value="Localidade">Localidade</option>
           <option value="Status da Matrícula">Status da Matrícula</option>
           <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
           <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
           <option value="Status CAR">Status CAR</option>
-          <option value="Proprietário">Proprietário</option>
-        </StyledSelect>
+          </StyledSelect>
         </div>
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
       </ButtonContainer>

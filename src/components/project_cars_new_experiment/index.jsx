@@ -30,10 +30,10 @@ export const Card = ({filteredProjects}) => {
         </ImageContainer>
         <InnerContainer>
           <Title style={{color: getScoreColor(project.score)}}>{project.title === "default" ? '-' : project.title}</Title>
-          <Info>{transformNumbersToHectares(project.total_area)}</Info>
-          <Info>{transformNumbersToHectares(project.legal_reserve_area || '-')}</Info>
-          <Info>CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></Info>
-          <Info>Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></Info>          
+          <Info style={{ fontFamily: `"Times New Roman", Times, serif`, fontStyle: 'italic'}}>{transformNumbersToHectares(project.total_area)}</Info>
+          <Info style={{ fontFamily: `"Times New Roman", Times, serif`, fontStyle: 'italic'}}>{transformNumbersToHectares(project.legal_reserve_area || '-')}</Info>
+          <Info style={{ fontSize: '16px' }}>CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></Info>
+          <Info style={{ fontSize: '16px' }}>Matrícula: <span style={{color : getStatusMatriculaColor(project.matricula_status)}}>{project.matricula_status}</span></Info>          
         </InnerContainer>
         <ScoreContainer style={{color: getScoreColor(project.score)}} score={project.score || '0'}>{project.score || '0'}</ScoreContainer>
       </CardContainer>

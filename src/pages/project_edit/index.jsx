@@ -87,7 +87,7 @@ const EditProject = () => {
     setSelectedReservaSituation(selectedReservaSituation.value);
   };
 
-  // Unidade de conservação do imóvel
+  // Unidade de Conservação (UC) do imóvel
 
   const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState(project.conservation_unit);
 
@@ -387,7 +387,7 @@ const EditProject = () => {
               placeholder={'Selecione uma opção'}
               defaultValue={{ label: project.reserve_legal_status, value: project.reserve_legal_status}}
             />
-            <Label>Possui unidade de conservação no imóvel?</Label>
+            <Label>Possui Unidade de Conservação (UC) no imóvel?</Label>
             <StyledSelect
               onChange={handleUnidadeConservacao}
               options={optionsUnidadeConservacao}

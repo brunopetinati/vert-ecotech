@@ -30,7 +30,7 @@ const ProjectsTable = ({filteredProjects}) => {
             <TH>Status de georreferenciamento no SIGEF</TH>
             <TH>Situação da Reserva Legal</TH>
             <TH>Entidade Física ou Legal</TH>
-            <TH>Unidade de Conservação</TH>
+            <TH>Unidade de Conservação (UC)</TH>
             <TH></TH>
           </TR>
         </THead>

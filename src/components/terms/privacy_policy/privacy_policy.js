@@ -7,15 +7,12 @@ export const privacyPolicyHTML = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Tr
 	<meta name="created" content="00:00:00"/>
 	<meta name="changed" content="00:00:00"/>
 	<style type="text/css">
-		@page { size: 21.59cm 27.94cm; margin-left: 2.54cm; margin-right: 2.54cm; margin-top: 0.64cm; margin-bottom: 0.64cm }
+		@page { size: 21.59cm 27.94cm; width margin-left: 2.54cm; margin-right: 2.54cm; margin-top: 0.64cm; margin-bottom: 0.64cm }
 		p { margin-bottom: 0.25cm; direction: ltr; line-height: 115%; text-align: left; orphans: 2; widows: 2; background: transparent }
 	</style>
 </head>
 <body lang="pt-BR" link="#000080" vlink="#800000" dir="ltr">
 <div title="header"><p align="center" style="margin-bottom: 0cm; line-height: 100%">
-	    
-	<img src="Vert%20ecotech%20-%20POL%C3%8DTICA%20DE%20PRIVACIDADE_html_7433277f039049f8.png" name="image1.png" align="bottom" width="154" height="87" border="0"/>
-
 	                                                    
 	</p>
 	<p align="center" style="margin-bottom: 1.8cm; line-height: 100%">  

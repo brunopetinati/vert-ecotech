@@ -105,7 +105,7 @@ const RegisterProjectStep2 = () => {
     setSelectedReservaSituation(selectedReservaSituation.value);
   };
 
-  // Unidade de conservação do imóvel
+  // Unidade de Conservação (UC) do imóvel
 
   const [selectedUnidadeConservacao, setSelectedUnidadeConservacao] = useState('');
 
@@ -472,7 +472,7 @@ const RegisterProjectStep2 = () => {
               <option key={option.value} value={option.value}>{option.label}</option>
             ))}
             </StyledSelect>
-            <Label>Possui unidade de conservação no imóvel?</Label>
+            <Label>Possui Unidade de Conservação (UC) no imóvel?</Label>
             <StyledSelect
               onChange={handleUnidadeConservacao}
               placeholder={'Selecione uma opção'}

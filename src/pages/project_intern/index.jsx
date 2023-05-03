@@ -85,7 +85,7 @@ const ProjectIntern = () => {
             <Span>{project.georeferencing_status}</Span>
             <Label>Situação da reserva legal da propriedade:</Label>
             <Span>{project.reserve_legal_status}</Span>
-            <Label>Possui unidade de conservação no imóvel?</Label>
+            <Label>Possui Unidade de Conservação (UC) no imóvel?</Label>
             <Span>{project.conservation_unit}</Span>
           </Column>
         </InnerContainer>
