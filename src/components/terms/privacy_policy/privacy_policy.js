@@ -463,7 +463,6 @@ mesmas na área pertinente do aplicativo.</span></font></font></font></p>
 
 </p>
 <div title="footer"><p align="right" style="margin-top: 1.8cm; margin-bottom: 0cm; line-height: 100%">
-	<span style="background: #c0c0c0"><sdfield type=PAGE subtype=RANDOM format=PAGE>6</sdfield></span></p>
 </div>
 </body>
 </html>`;

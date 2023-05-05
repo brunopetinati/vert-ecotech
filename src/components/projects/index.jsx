@@ -1,19 +1,18 @@
 import ProjectsTable from "../projects_table";
 import ProjectsCard from "../projects_cards";
-import Card from "../project_cars_new_experiment";
+import Card from "../projects_cards";
 import DefaultButton from "../default_button";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, TitleContainer, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
-import { storeProjects } from "../../store/modules/app_data/actions"
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
+import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
 
 const Projects = () => {
 
   const collapsed = useSelector((state) => state.sidebar.status);
   const app_status = useSelector((state) => state.app_status.status);
-  //const [projects, setProjects] = useState([]);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const dispatch = useDispatch();
   const projects = useSelector((state) => state.app_data.projects);

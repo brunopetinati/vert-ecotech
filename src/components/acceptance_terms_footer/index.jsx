@@ -12,12 +12,16 @@ const AcceptanceBar = ({path, func}) => {
     navigate(path);
   };
 
+  const handleDecline = () => {
+    navigate('/');
+  }
+
   return (
     <FooterContainer>
       <div>Copyright © 2023</div>
       <div style={{ marginBottom: '64px'}}>
         <Button onClick={handleAccept}>Aceitar</Button>
-        <Button>Declinar</Button>
+        <Button onClick={handleDecline}>Declinar</Button>
       </div>
     </FooterContainer>
   );

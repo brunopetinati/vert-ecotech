@@ -78,7 +78,7 @@ const Register = () => {
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
-
+        console.log('response.data.access', response.data.access);
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
         setShowLoading(true);

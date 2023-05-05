@@ -7,6 +7,10 @@ import { motion } from 'framer-motion';
 const TermsOfUse = () => {
 
   const user = useSelector((state) => state.user.currentUser);
+
+  if (!user) {
+    return
+  }
   
   const scrollWindow = () => {
     window.scrollTo(0, 0);

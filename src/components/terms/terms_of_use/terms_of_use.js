@@ -954,7 +954,6 @@ de Contato</span></b></font></font></font></p>
 	contato conosco.</font></font></p>
 </ul>
 <div title="footer"><p align="right" style="margin-top: 1.8cm; margin-bottom: 0cm; line-height: 100%">
-	<span style="background: #c0c0c0"><sdfield type=PAGE subtype=RANDOM format=PAGE>12</sdfield></span></p>
 </div>
 </body>
 </html>

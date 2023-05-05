@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DefaultForestImage from '../../assets/default-image2.webp';
 
-export const Card = ({filteredProjects}) => {
+export const MiniCard = ({filteredProjects}) => {
 
   const navigate = useNavigate();
   
@@ -42,4 +42,4 @@ export const Card = ({filteredProjects}) => {
   );
 };
 
-export default Card;
+export default MiniCard;

@@ -8,6 +8,10 @@ const PrivacyPolicy = () => {
 
   const user = useSelector((state) => state.user.currentUser);
 
+  if (!user) {
+    return
+  }
+
   return (
     <Container>
       <motion.div
@@ -19,7 +23,6 @@ const PrivacyPolicy = () => {
         <div dangerouslySetInnerHTML={{__html: privacyPolicyHTML}} />
       </motion.div>
       <AcceptanceBar path={'/terms_of_use'} />
-
     </Container>
   )
 };
