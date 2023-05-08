@@ -20,6 +20,7 @@ const KanbanBoard = () => {
   const [currentProjectID, setCurrentProjectID] = useState('');
   const [updateComponent, setUpdateComponent] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
+  const [showingColumn, setShowingColumn] = useState(false);
 
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);
@@ -29,6 +30,7 @@ const KanbanBoard = () => {
 
   const handleDragOver = (e) => {
     e.preventDefault();
+    setShowingColumn(!showingColumn);
   };
 
   const handleDrop = (e, newStatus) => {
@@ -87,7 +89,7 @@ const KanbanBoard = () => {
 
   return (
     <Container>
-      <Column
+      <Column showingColumn={showingColumn}
         onDragOver={handleDragOver}
         onDrop={(e) => handleDrop(e, 'started')}
       >
@@ -95,8 +97,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'started') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );
@@ -113,8 +115,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'analysis') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );
@@ -149,8 +151,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'negotiation') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );
@@ -167,8 +169,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'idle') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );
@@ -185,8 +187,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'concluded') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );

@@ -27,7 +27,7 @@ export const getStatusMatriculaColor = (status) => {
 };
 
 export const getScoreColor = (score) => {
-  if (score < 4) {
+  if (score < 5) {
     return "red";
   } else if (score < 7) {
     return "orange";

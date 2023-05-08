@@ -16,15 +16,26 @@ export const Column = styled.div`
     min-height: 80px;
     text-align: center;
   }
+
+  h3 {
+    text-transform: capitalize;
+  }
+
+  :hover {
+
+  }
 `;
 
 export const Card = styled.div`
-  background-color: #fff;
+  background-color: ${(props) => props.showingColumn ? 'red' : '#fff'};
   border-radius: 5px;
   padding: 10px;
   cursor: move;
-  color: ${(props) => props.scoreColor};
-  border: 1px solid ${(props) => props.scoreColor};
   border-radius: 8px;
   margin-bottom: 8px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+
+  h3 {
+    color: ${(props) => props.scoreColor};
+  }
 `;
