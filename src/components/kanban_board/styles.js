@@ -11,6 +11,11 @@ export const Column = styled.div`
   background-color: #f5f5f5;
   border-radius: 5px;
   padding: 10px;
+
+  h2 {
+    min-height: 80px;
+    text-align: center;
+  }
 `;
 
 export const Card = styled.div`
@@ -18,4 +23,8 @@ export const Card = styled.div`
   border-radius: 5px;
   padding: 10px;
   cursor: move;
+  color: ${(props) => props.scoreColor};
+  border: 1px solid ${(props) => props.scoreColor};
+  border-radius: 8px;
+  margin-bottom: 8px;
 `;

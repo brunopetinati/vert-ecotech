@@ -131,8 +131,8 @@ const KanbanBoard = () => {
         {projects.map((project) => {
           if (project.status === 'viability') {
             return (
-              <Card draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3 style={{color: getScoreColor(project.score)}}>{project.title}</h3>
+              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <h3>{project.title}</h3>
                 <p>project.description</p>
               </Card>
             );
