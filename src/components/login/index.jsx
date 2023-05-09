@@ -22,6 +22,10 @@ const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   const handleSubmit = async event => {
+
+
+  console.log('current app status', app_status);
+
     event.preventDefault();
     try {
       axios.post(`http://${currentUrl}:8000/api/login/`, {
@@ -36,6 +40,7 @@ const Login = () => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));
         }, 4000);
+        dispatch(appStatus('Dashboard'));
       }).catch(error => {
         console.error('Login failed:', error.message);
         Swal.fire({

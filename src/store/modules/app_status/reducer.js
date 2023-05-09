@@ -1,6 +1,6 @@
 import { APP_STATUS } from "./action-types";
 
-const appStatusReducer = (state = 'Dashboard', action) => {
+const appStatusReducer = (state = '', action) => {
   switch (action.type) {
 
     case APP_STATUS:
