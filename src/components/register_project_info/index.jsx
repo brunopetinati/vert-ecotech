@@ -298,7 +298,6 @@ const RegisterProjectStep2 = () => {
         dispatch(storeProjectId(projectId));
         dispatch(appStatus('register_land_upload_files'));
         //adicionada linha, mas não testada
-        dispatch(addProjectToProjects(response.data));
       })
       .catch(error => {
         console.error('error', error);

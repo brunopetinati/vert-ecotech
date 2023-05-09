@@ -16,6 +16,8 @@ const FileUploader = () => {
   const ownerID = useSelector((state) => state.app_data.owner_id);
   const dispatch = useDispatch();
 
+  const projects = useSelector((state) => state.app_data.projects);
+
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,
     pdf_car: null,
@@ -58,6 +60,7 @@ const FileUploader = () => {
         confirmButtonText: 'OK'
       });
       console.log('Success:', response);
+        // se existe projeto com mesmo id no array, não adicionar, tratar isso
       dispatch(addProjectToProjects(response.data));
     } catch (error) {
       Swal.fire({
