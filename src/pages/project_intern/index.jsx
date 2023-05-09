@@ -13,12 +13,13 @@ import { motion } from 'framer-motion';
 import { returnYesorNoforBoolean, returnUserName } from "../../constants/functions";
 import axios from "axios";
 import { currentUrl } from '../../constants/global';
+import Swal from "sweetalert2";
 
 
 const ProjectIntern = () => {
 
   const app_status = useSelector((state) => state.app_status.status);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.currentUser);
   const location = useLocation();
   const project = location.state.project;
   const users = useSelector((state) => state.app_data.users);
@@ -45,6 +46,27 @@ const ProjectIntern = () => {
       const downloadUrl = `http://${currentUrl}:8000/api/project/${project.id}/download/${fieldName}/`;
       window.open(downloadUrl, '_blank');
     };
+
+  const startProject = () => {
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}`, };
+    
+    axios
+    .put(`http://${currentUrl}:8000/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
+    .then((response) => {
+      console.log(response);
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'O projeto foi inicializado com sucesso!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      navigate('/analysis_and_development');
+    })
+    .catch((error) => {
+      // Handle the error if any
+    });
+  };
 
   return (
     <motion.div
@@ -107,6 +129,18 @@ const ProjectIntern = () => {
           <Button onClick={() => handleClick()}>Voltar</Button>
           <Button onClick={() => handleRegister()}>Editar Informações</Button>
         </ButtonContainer>
+        {user.user_type === "ADM" && 
+          <>
+            <h2>Engenharia</h2>
+
+            <ButtonContainer>
+              <Button onClick={() => startProject()}>Inicializar Projeto</Button>
+            </ButtonContainer>
+            <InnerContainer>
+
+            </InnerContainer>
+          </>
+        }          
       </Container>
     </motion.div>
   )

@@ -7,6 +7,7 @@ import { currentUrl } from '../../constants/global';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { storeProjects } from '../../store/modules/app_data/actions';
+import { motion } from 'framer-motion';
 
 const KanbanBoard = () => {
 
@@ -88,116 +89,123 @@ const KanbanBoard = () => {
   }, [updateComponent]);
 
   return (
-    <Container>
-      <Column showingColumn={showingColumn}
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'started')}
-      >
-        <h2>Iniciados</h2>
-        {projects.map((project) => {
-          if (project.status === 'started') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-      <Column
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'analysis')}
-      >
-        <h2>Análise de viabilidade</h2>
-        {projects.map((project) => {
-          if (project.status === 'analysis') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-      <Column
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'viability')}
-      >
-        <h2>Viabilidade concluída</h2>
-        {projects.map((project) => {
-          if (project.status === 'viability') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-      <Column
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'negotiation')}
-      >
-        <h2>Em negociação</h2>
-        {projects.map((project) => {
-          if (project.status === 'negotiation') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-      <Column
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'idle')}
-      >
-        <h2>Projeto aguardando</h2>
-        {projects.map((project) => {
-          if (project.status === 'idle') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-      <Column
-        onDragOver={handleDragOver}
-        onDrop={(e) => handleDrop(e, 'concluded')}
-      >
-        <h2>Projeto em andamento</h2>
-        {projects.map((project) => {
-          if (project.status === 'concluded') {
-            return (
-              <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                <h3>{project.title}</h3>
-                <p>project.description</p>
-              </Card>
-            );
-          } else {
-            return null; // or you can render something else here
-          }
-        })}
-      </Column>
-    </Container>
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{ duration: 0.8 }}
+    >
+      <Container>
+        <Column showingColumn={showingColumn}
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'started')}
+        >
+          <h2>Em espera</h2>
+          {projects.map((project) => {
+            if (project.status === 'started') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'analysis')}
+        >
+          <h2>Análise de viabilidade</h2>
+          {projects.map((project) => {
+            if (project.status === 'analysis') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'viability')}
+        >
+          <h2>Viabilidade concluída</h2>
+          {projects.map((project) => {
+            if (project.status === 'viability') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'negotiation')}
+        >
+          <h2>Em negociação</h2>
+          {projects.map((project) => {
+            if (project.status === 'negotiation') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'idle')}
+        >
+          <h2>Projeto aguardando</h2>
+          {projects.map((project) => {
+            if (project.status === 'idle') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'concluded')}
+        >
+          <h2>Projeto em andamento</h2>
+          {projects.map((project) => {
+            if (project.status === 'concluded') {
+              return (
+                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+      </Container>
+    </motion.div>
   );
 };
 

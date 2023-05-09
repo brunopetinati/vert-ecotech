@@ -41,7 +41,7 @@ const RegisterProjectStep2 = () => {
   const [thereIsNoCar, setThereIsNoCar] = useState(false);
   
   // SICAR
-  const [selectedCar, setSelectedCar] = useState(null);
+  const [selectedCar, setSelectedCar] = useState('');
 
   const optionsCar = [
     { value: "Ativo", label: "Ativo" },
@@ -50,16 +50,18 @@ const RegisterProjectStep2 = () => {
     { value: "Não possui CAR", label: "Não possui CAR" },
   ];
 
-  const handleOptionsCar = (selectedCar) => {
-    setSelectedCar(selectedCar.value);
-    if (selectedCar.value === "Não possui CAR") {
+  const handleOptionsCar = (event) => {
+    const selectedValue = event.target.value;
+    console.log(selectedValue);
+    setSelectedCar(selectedValue);
+    if (selectedValue === "Não possui CAR") {
       setThereIsNoCar(true);
       setSicarCode('Não possui');
     } else {
       setThereIsNoCar(false);
     }
   };
-
+  
   // Status Matrícula
   const [selectedMatriculaStatus, setSelectedMatriculaStatus] = useState('')
 

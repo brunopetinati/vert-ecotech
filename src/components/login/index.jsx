@@ -7,8 +7,7 @@ import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
-import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
-import Logo from '../../assets/logo-vert-white.png'
+import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -22,9 +21,6 @@ const Login = () => {
   const [showLoading, setShowLoading] = useState(false);
 
   const handleSubmit = async event => {
-
-
-  console.log('current app status', app_status);
 
     event.preventDefault();
     try {
