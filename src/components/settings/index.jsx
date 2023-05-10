@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectsCards, usersCards } from '../../store/modules/settings/actions';
 import { Container } from './styles'
 import { StyledButton } from '../default_button/styles';
+import Modal from '../default_modal';
+import ResetPassword from '../reset_password';
 
 const Settings = () => {
 
@@ -11,6 +13,7 @@ const Settings = () => {
   const collapsed = useSelector((state) => state.sidebar.status);
   const [isCheckedProject, setIsCheckedProject] = useState(false);
   const [isCheckedUser, setIsCheckedUser] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
@@ -50,12 +53,18 @@ const Settings = () => {
     window.location.reload();
   };
 
+  const handleShowResetPasswordModal = () => {
+    setShowResetPassword(!showResetPassword);
+  }
+
   return (
     <Container collapsed={collapsed}>
       <h1>Configurações</h1>
       {currentUser.user_type === 'ADM' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
       <ToggleSwitch label={"Habilitar visualização em cards para projetos"} checked={layoutProjects} onChange={handleChangeProjects}/>
-      <StyledButton onClick={handleLogout} style={{position: 'absolute', bottom: '32px', right: '32px'}}>Logout</StyledButton>
+      <StyledButton onClick={handleShowResetPasswordModal} style={{position: 'absolute', bottom: '32px', right: '160px'}}>Resetar Senha</StyledButton>
+      <StyledButton onClick={handleLogout} style={{position: 'absolute', bottom: '32px', right: '32px'}}>Deslogar</StyledButton>
+      {showResetPassword && <ResetPassword isOpen={showResetPassword} onClose={handleShowResetPasswordModal}/>}
     </Container>
   );
 };

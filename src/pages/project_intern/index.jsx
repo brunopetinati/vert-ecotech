@@ -1,14 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, DownloadButton } from './styles'
+import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from './styles'
 import { useState } from 'react'
 import { useLocation, useNavigate } from "react-router-dom";
-import { SideContainer } from './styles'
-import Profile from '../../components/profile'
-import Projects from "../../components/projects";
-import Users from "../../components/users"
-import Settings from "../../components/settings";
-import StockChart from "../../components/dashboard";
-import Sidebar from "../../components/sidebar";
+
 import { motion } from 'framer-motion';
 import { returnYesorNoforBoolean, returnUserName } from "../../constants/functions";
 import axios from "axios";
