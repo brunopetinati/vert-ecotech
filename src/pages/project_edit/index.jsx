@@ -241,6 +241,7 @@ const EditProject = () => {
           icon: 'success',
           confirmButtonText: 'OK'
         });
+        
         const projectIndex = projects.findIndex(p => p.id === response.data.id);
 
         console.log(response.data)
