@@ -62,9 +62,18 @@ const Register = () => {
       setValidPasswordConfirmation(true);
     };
 
+    if (!formState.cep) {
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Verifique o CEP e tente novamente. Caso o erro persista, contate nosso suporte.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+
     if (formState.cep.includes('_')) {
      setValidCEP(true);
-    } 
+    }
     
     const treatPhone = removeNonDigits(formState.phone);
     if (treatPhone.length < 10) {

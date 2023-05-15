@@ -8,6 +8,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { storeProjects } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const KanbanBoard = () => {
 
@@ -22,6 +23,8 @@ const KanbanBoard = () => {
   const [updateComponent, setUpdateComponent] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [showingColumn, setShowingColumn] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);
@@ -59,7 +62,6 @@ const KanbanBoard = () => {
   };
 
   useEffect(() => {
-
       const fetchProjects = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');
@@ -87,7 +89,11 @@ const KanbanBoard = () => {
       fetchProjects();
     
   }, [updateComponent]);
-
+  
+  const handleClick = (project) => {
+    navigate('/intern_project', { state: { project }} );
+  };
+  
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -100,11 +106,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'started')}
         >
-          <h2>Em espera</h2>
+          <h4>Em espera</h4>
           {projects.map((project) => {
             if (project.status === 'started') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>
@@ -118,11 +124,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'analysis')}
         >
-          <h2>Análise de viabilidade</h2>
+          <h4>Análise de viabilidade</h4>
           {projects.map((project) => {
             if (project.status === 'analysis') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>
@@ -136,11 +142,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'viability')}
         >
-          <h2>Viabilidade concluída</h2>
+          <h4>Viabilidade concluída</h4>
           {projects.map((project) => {
             if (project.status === 'viability') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>
@@ -154,11 +160,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'negotiation')}
         >
-          <h2>Em negociação</h2>
+          <h4>Em negociação</h4>
           {projects.map((project) => {
             if (project.status === 'negotiation') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>
@@ -172,11 +178,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'idle')}
         >
-          <h2>Projeto aguardando</h2>
+          <h4>Projeto aguardando</h4>
           {projects.map((project) => {
             if (project.status === 'idle') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>
@@ -190,11 +196,11 @@ const KanbanBoard = () => {
           onDragOver={handleDragOver}
           onDrop={(e) => handleDrop(e, 'concluded')}
         >
-          <h2>Projeto em andamento</h2>
+          <h4>Projeto em andamento</h4>
           {projects.map((project) => {
             if (project.status === 'concluded') {
               return (
-                <Card scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                   <h3>{project.title}</h3>
                   <p>project.description</p>
                 </Card>

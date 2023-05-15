@@ -1,16 +1,20 @@
 import styled from 'styled-components';
 
+//https://www.youtube.com/watch?v=pire3zYPKe0
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
 `;
 
 export const Column = styled.div`
   width: 300px;
   background-color: #f5f5f5;
+  margin-right: 8px;
+  position: relative;
   border-radius: 5px;
   padding: 10px;
+  height: 90vh;
 
   h2 {
     min-height: 80px;
@@ -19,6 +23,10 @@ export const Column = styled.div`
 
   h3 {
     text-transform: capitalize;
+  }
+
+  h4 {
+   text-align: center;
   }
 
   :hover {

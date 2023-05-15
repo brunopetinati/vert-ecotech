@@ -27,7 +27,7 @@ const ProjectIntern = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/welcome')
+    window.history.go(-1);
   };
 
   const handleRegister = () => {
