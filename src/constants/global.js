@@ -12,8 +12,12 @@ const localHost = 'localhost';
 
 export const currentUrl = awsUrl;
 
+
 // atenção: exemplo de url
 // `http://${currentUrl}:8000/api/reset-password/${currentUser.id}/`;
 
 
 //const currentUser = useDispatch((state) => state.user.currentUser);
+
+
+// insomnia "baseUrl": "http://18.218.97.13:8000/api"
