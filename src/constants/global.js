@@ -21,3 +21,19 @@ export const currentUrl = awsUrl;
 
 
 // insomnia "baseUrl": "http://18.218.97.13:8000/api"
+
+// "http://13.58.237.27:8000/api"
+
+// https://support.google.com/domains/answer/7630973?hl=pt-BR&sjid=13761335246896636095-NA#zippy=%2Creceber-um-certificado-ssltls-de-uma-autoridade-certificadora
+
+// https://alunos.kenzie.com.br/courses/39/assignments/7424?module_item_id=8522 => Lambda
+ 
+// https://alunos.kenzie.com.br/courses/39/assignments/7420?module_item_id=8518 => RDS
+
+
+
+// https://d2kcgtfad3ncth.cloudfront.net/api
+
+// `http://${currentUrl}:8000/api/login/`
+
+// ec2-13-58-237-27.us-east-2.compute.amazonaws.com
