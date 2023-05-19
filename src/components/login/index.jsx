@@ -156,7 +156,7 @@ const Login = () => {
                 onChange={event => setPassword(event.target.value)}
               />
               <div>
-                <Button type="submit">Login</Button>
+                <Button type="submit">Login teste1</Button>
                 <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
               </div>
             </LoginForm>}</motion.div>}
