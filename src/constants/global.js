@@ -22,7 +22,7 @@ export const currentUrl = awsUrl;
 
 // insomnia "baseUrl": "http://18.218.97.13:8000/api"
 
-// "http://13.58.237.27:8000/api"
+// "http://3.82.211.64:8000/api/login/"
 
 // https://support.google.com/domains/answer/7630973?hl=pt-BR&sjid=13761335246896636095-NA#zippy=%2Creceber-um-certificado-ssltls-de-uma-autoridade-certificadora
 
@@ -37,3 +37,8 @@ export const currentUrl = awsUrl;
 // `http://${currentUrl}:8000/api/login/`
 
 // ec2-13-58-237-27.us-east-2.compute.amazonaws.com
+
+
+// está funcionando
+
+// http://api.vertecotech.com:8000/api/login/
