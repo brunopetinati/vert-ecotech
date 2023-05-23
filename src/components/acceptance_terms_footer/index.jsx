@@ -5,28 +5,27 @@ import { userLogin } from "../../store/modules/login/actions";
 import axios from "axios";
 import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
+import { useSelector } from 'react-redux'; 
 
-
-const AcceptanceBar = ({path, func, handleSubmit, event, finalObject}) => {
+const AcceptanceBar = ({path, func, registerUser}) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const finalObject = useSelector((state) => state.app_data.user_first_access);
 
   const handleAccept = () => {
     if (func) {
       func();
     }
-    if (handleSubmit) {
 
-    event.preventDefault();
+    if (registerUser) {
+      //código axios aqui
     axios.post(`http://${currentUrl}:8000/api/signup/`, {...finalObject, accept_terms_of_use: true,
     accept_privacy_politics: true})
 
       .then(response => {
-        console.log('response.data.access', response.data.access);
         sessionStorage.setItem('Authorization', response.data.access);
-        dispatch(userLogin(response.data.access, response.data));
-        
+        dispatch(userLogin(response.data.access, response.data));        
       })
       .catch(error => {
         if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
@@ -46,7 +45,6 @@ const AcceptanceBar = ({path, func, handleSubmit, event, finalObject}) => {
         console.error('tracking the following error would be important',error);
       }
     });
-
     }
     navigate(path);
   };

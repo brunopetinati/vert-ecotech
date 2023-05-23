@@ -10,7 +10,7 @@ const awsUrlTest = '18.218.97.13';
 const localHost = 'localhost';
 //const localHost = 'localhost:8000/api';
 
-export const currentUrl = awsUrl;
+export const currentUrl = localHost;
 
 
 // atenção: exemplo de url

@@ -1,5 +1,5 @@
 import Projects from "../../../components/projects";
-import { STORE_PROJECT_ID, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
 
 export const storeProjectId = (project_id) => {
   return {
@@ -7,6 +7,13 @@ export const storeProjectId = (project_id) => {
     payload: project_id,
   };
 };
+
+export const storeUserFirstAccess = (user) => {
+  return {
+    type: STORE_USER_FIRST_ACCESS,
+    payload: user
+  }
+}
 
 export const storeOwnerId = (owner_id) => {
   return {

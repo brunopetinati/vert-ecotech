@@ -7,10 +7,7 @@ import { useLocation } from "react-router-dom";
 
 const PrivacyPolicy = () => {
 
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const encodedObject = searchParams.get("object");
-  const user = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.app_data.user_first_access);
   
   if (!user) {
     return
@@ -26,7 +23,7 @@ const PrivacyPolicy = () => {
       >
         <div dangerouslySetInnerHTML={{__html: privacyPolicyHTML}} />
       </motion.div>
-      <AcceptanceBar path={'/terms_of_use'} finalObject={encodedObject}/>
+      <AcceptanceBar path={'/terms_of_use'} />
     </Container>
   )
 };

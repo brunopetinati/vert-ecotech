@@ -12,6 +12,7 @@ import { handleCepChange } from '../../api/requests/cep';
 import { storeCEP } from '../../store/modules/app_data/actions';
 import { removeNonDigits } from '../../constants/functions';
 import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
+import { storeUserFirstAccess } from '../../store/modules/app_data/actions';
 
 const Register = () => {
 
@@ -88,37 +89,12 @@ const Register = () => {
      setValidCEP(true);
      return
     }
-    
-
-    axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
-      .then(response => {
-        console.log('response.data.access', response.data.access);
-        sessionStorage.setItem('Authorization', response.data.access);
-        dispatch(userLogin(response.data.access, response.data));
-        setShowLoading(true);
-        setTimeout(() => {
-          navigate('/privacy_policy');
-        }, 4000);
-      })
-      .catch(error => {
-        if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Verifique o CEP e tente novamente. Caso o erro persista, contate nosso suporte.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        } else {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Algo deu errado ao tentar processar sua requisição. Verifique os campos e tente novamente!',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-          console.error('tracking the following error would be important',error);
-        }
-      });    
-
+    // o user não está sendo salvo. Está sendo guardado no estado global para aceitar termos mais tarde
+    dispatch(storeUserFirstAccess(formState));
+    setShowLoading(true);
+    setTimeout(() => {
+      navigate('/privacy_policy');
+    }, 4000);
   };
 
   
@@ -166,7 +142,7 @@ const Register = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
-        ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1>
+        ><h1 style={{color: 'white'}}>Dados inseridos com sucesso! Continue para o registro</h1>
          </motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={handleSubmition}>
         <Input placeholder="Nome Completo" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         {validName && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira o nome completo.</div>}            

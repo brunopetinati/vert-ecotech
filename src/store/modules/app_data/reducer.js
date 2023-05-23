@@ -1,11 +1,12 @@
-import { STORE_PROJECT_ID, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
 
 const initialState = {
   project_id: null,
   owner_id: null,
   users: [],
   projects: [],
-  cep: null
+  cep: null,
+  user_first_access: [],
 };
 
 const currentAppData = (state = initialState, action) => {
@@ -15,6 +16,12 @@ const currentAppData = (state = initialState, action) => {
         ...state,
         project_id: action.payload,
       };
+    
+    case STORE_USER_FIRST_ACCESS:
+      return {
+        ...state,
+        user_first_access: action.payload
+      }
 
     case STORE_OWNER_ID:
       return {

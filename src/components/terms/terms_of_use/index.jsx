@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 const TermsOfUse = () => {
 
-  const user = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.app_data.user_first_access);
 
   if (!user) {
     return
@@ -27,7 +27,7 @@ const TermsOfUse = () => {
         >
         <div dangerouslySetInnerHTML={{__html: termsOfUse}} />
       </motion.div>
-      <AcceptanceBar path={'/welcome'} func={scrollWindow} handleSubmit={true}/>
+      <AcceptanceBar path={'/welcome'} func={scrollWindow} registerUser={true}/>
     </Container>
 )
 };
