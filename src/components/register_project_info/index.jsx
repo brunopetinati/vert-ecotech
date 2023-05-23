@@ -12,7 +12,7 @@ import { regularMaskforNumbers, extractNumbers } from '../../constants/functions
 import { currentUser } from '../../constants/global';
 import { addProjectToProjects } from '../../store/modules/app_data/actions';
 
-const RegisterProjectStep2 = () => {
+const RegisterProjectInfo = () => {
 
   const [users, setUsers] = useState([]);
 
@@ -175,7 +175,7 @@ const RegisterProjectStep2 = () => {
   // Rotas
   const dispatch = useDispatch();
 
-  const handleClick = () => {
+  const handleComeBack = () => {
     dispatch(appStatus('Projetos'));
     navigate('/welcome');
   };
@@ -310,6 +310,8 @@ const RegisterProjectStep2 = () => {
         return
       });
   };
+
+  //console.log('owner', owner);
   
   return (
     <motion.div
@@ -495,7 +497,7 @@ const RegisterProjectStep2 = () => {
             
         </Column>
         <ButtonContainer>
-          <Button onClick={() => handleClick()}>Voltar</Button>
+          <Button onClick={() => handleComeBack()}>Voltar</Button>
           <Button onClick={() => handleRegister()}>Confirmar</Button>
         </ButtonContainer>
       </Container>
@@ -503,7 +505,7 @@ const RegisterProjectStep2 = () => {
   )
 };
 
-export default RegisterProjectStep2;
+export default RegisterProjectInfo;
 
 
 /* 

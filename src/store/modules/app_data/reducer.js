@@ -1,4 +1,4 @@
-import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS, ERASE_ALL } from "./action-types";
 
 const initialState = {
   project_id: null,
@@ -69,6 +69,10 @@ const currentAppData = (state = initialState, action) => {
       return {
         ...state,
         projects: []
+      }
+    case ERASE_ALL:
+      return {
+        initialState
       }
 
     default:

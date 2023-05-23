@@ -6,6 +6,8 @@ import { Container } from './styles'
 import { StyledButton } from '../default_button/styles';
 import Modal from '../default_modal';
 import ResetPassword from '../reset_password';
+import { eraseAll } from '../../store/modules/app_data/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
 
@@ -18,6 +20,8 @@ const Settings = () => {
 
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const layoutUsers = useSelector((state) => state.layout.cardsLayoutUsers);
+
+  const navigate = useNavigate();
 
   useEffect(()=> {
     if (layoutProjects){
@@ -50,7 +54,8 @@ const Settings = () => {
   };
 
   const handleLogout = () => {
-    window.location.reload();
+    dispatch(eraseAll());
+    navigate('/');
   };
 
   const handleShowResetPasswordModal = () => {

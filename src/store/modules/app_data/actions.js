@@ -1,5 +1,5 @@
 import Projects from "../../../components/projects";
-import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS } from "./action-types";
+import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS, ERASE_ALL } from "./action-types";
 
 export const storeProjectId = (project_id) => {
   return {
@@ -67,5 +67,11 @@ export const resetProjects = (array) => {
 export const eraseProjects = () => {
   return {
     type: ERASE_PROJECTS
+  }
+}
+
+export const eraseAll = () => {
+  return {
+    type: ERASE_ALL
   }
 }

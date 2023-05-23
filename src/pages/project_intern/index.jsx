@@ -26,8 +26,8 @@ const ProjectIntern = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    window.history.go(-1);
+  const handleComeBack = () => {
+    navigate('/welcome')
   };
 
   const handleRegister = () => {
@@ -120,7 +120,7 @@ const ProjectIntern = () => {
         
         </Column>
         <ButtonContainer>
-          <Button onClick={() => handleClick()}>Voltar</Button>
+          <Button onClick={() => handleComeBack()}>Voltar</Button>
           <Button onClick={() => handleRegister()}>Editar Informações</Button>
         </ButtonContainer>
         {user.user_type === "ADM" && 

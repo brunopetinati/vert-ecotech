@@ -32,6 +32,7 @@ const AcceptanceBar = ({path, func, registerUser}) => {
         });
       })
       .catch(error => {
+        // função que zera o status redux aqui
         if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
           Swal.fire({
             title: 'Erro!',
@@ -55,6 +56,7 @@ const AcceptanceBar = ({path, func, registerUser}) => {
 
   const handleDecline = () => {
     navigate('/');
+    // função que zera redux aqui
   }
 
   return (

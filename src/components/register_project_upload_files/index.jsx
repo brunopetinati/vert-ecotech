@@ -2,7 +2,7 @@ import { Container, InnerContainer, ButtonContainer, Column, Button } from './st
 import FileUploader from "../register_project_file_uploader";
 import { useNavigate } from "react-router-dom";
 
-const RegisterProjectStep3 = () => {
+const RegisterProjectFileUpload = () => {
 
   const navigate = useNavigate();
   const handleRegister = () => {
@@ -24,4 +24,4 @@ const RegisterProjectStep3 = () => {
   )
 };
 
-export default RegisterProjectStep3;
+export default RegisterProjectFileUpload;
