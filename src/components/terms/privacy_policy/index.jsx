@@ -3,7 +3,7 @@ import { privacyPolicyHTML } from "./privacy_policy";
 import { Container } from './styles';
 import AcceptanceBar from "../../acceptance_terms_footer";
 import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+
 
 const PrivacyPolicy = () => {
 

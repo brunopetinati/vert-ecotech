@@ -38,7 +38,9 @@ const Register = () => {
     state:'',
     street:'',
     district:'',
-    user_type: 'Regular'
+    user_type: 'Regular', 
+    accept_terms_of_use: true,
+    accept_privacy_politics: true
   });
 
   const handleClick = () => {

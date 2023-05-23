@@ -19,13 +19,17 @@ const AcceptanceBar = ({path, func, registerUser}) => {
     }
 
     if (registerUser) {
-      //código axios aqui
-    axios.post(`http://${currentUrl}:8000/api/signup/`, {...finalObject, accept_terms_of_use: true,
-    accept_privacy_politics: true})
+    axios.post(`http://${currentUrl}:8000/api/signup/`, {...finalObject})
 
       .then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));        
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Parabéns pelo seu cadastro! Tudo ocorreu como o esperado! Insira os dados para logar.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
       })
       .catch(error => {
         if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
