@@ -16,6 +16,7 @@ const TermsOfUse = () => {
     window.scrollTo(0, 0);
   };
 
+
   return (
     <Container>
       <motion.div
@@ -26,7 +27,7 @@ const TermsOfUse = () => {
         >
         <div dangerouslySetInnerHTML={{__html: termsOfUse}} />
       </motion.div>
-      <AcceptanceBar path={'/welcome'} func={scrollWindow} />
+      <AcceptanceBar path={'/welcome'} func={scrollWindow} handleSubmit={true}/>
     </Container>
 )
 };

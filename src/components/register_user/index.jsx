@@ -44,23 +44,35 @@ const Register = () => {
     navigate('/');
   };
 
-  const handleSubmition = () => {
+  const handleSubmition = (event) => {
+    event.preventDefault();
 
     if (formState.full_name.length < 3) {
       setValidName(true);
+      return
     }
-
-    if (formState.password.length < 6) { 
-      setValidPassword(true);
-    };
 
     if (formState.email.length < 6) {
       setValidEmail(true);
+      return
     };
+
+    if (formState.password.length < 6) { 
+      setValidPassword(true);
+      return
+    };
+
 
     if (formState.password != passwordConfirmation ) {
       setValidPasswordConfirmation(true);
+      return
     };
+
+    const treatPhone = removeNonDigits(formState.phone);
+    if (treatPhone.length < 10) {
+      setValidPhone(true);
+      return
+    }
 
     if (!formState.cep) {
       Swal.fire({
@@ -69,21 +81,14 @@ const Register = () => {
         icon: 'error',
         confirmButtonText: 'OK'
       });
+      return
     }
 
     if (formState.cep.includes('_')) {
      setValidCEP(true);
+     return
     }
     
-    const treatPhone = removeNonDigits(formState.phone);
-    if (treatPhone.length < 10) {
-      setValidPhone(true);
-    }
-  };
-
-  const CreateUserForm = (event) => {
-    event.preventDefault();
-
 
     axios.post(`http://${currentUrl}:8000/api/signup/`, formState)
       .then(response => {
@@ -113,7 +118,9 @@ const Register = () => {
           console.error('tracking the following error would be important',error);
         }
       });    
+
   };
+
   
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -160,7 +167,7 @@ const Register = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.8 }}
         ><h1 style={{color: 'white'}}>Registrado com sucesso!</h1>
-         </motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={CreateUserForm}>
+         </motion.div> : <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><Img src={Logo} /><LoginForm onSubmit={handleSubmition}>
         <Input placeholder="Nome Completo" type="text" name="full_name" value={formState.full_name} onChange={handleInputChange} />
         {validName && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira o nome completo.</div>}            
         <Input placeholder="Email" type="email" name="email" value={formState.email} onChange={handleInputChange} />
@@ -187,7 +194,7 @@ const Register = () => {
         {validCEP && <div style={{ color: 'yellow', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Por favor, insira um CEP válido.</div>}            
         <div>
           <Button onClick={() => handleClick()}>Voltar</Button>
-          <Button onClick={() => handleSubmition()} type="submit">Cadastrar</Button>
+          <Button type="submit">Cadastrar</Button>
         </div>
       </LoginForm></div>}
     </motion.div>
