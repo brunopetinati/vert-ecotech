@@ -20,7 +20,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
-        const response = await axios.get(`https://${currentUrl}/api/users/`, {
+        const response = await axios.get(`${currentUrl}/api/users/`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

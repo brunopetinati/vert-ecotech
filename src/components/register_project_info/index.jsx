@@ -208,7 +208,7 @@ const RegisterProjectInfo = () => {
       const fetchUsers = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');
-          const response = await axios.get(`https://${currentUrl}/api/users/`, {
+          const response = await axios.get(`${currentUrl}/api/users/`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -286,7 +286,7 @@ const RegisterProjectInfo = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
-    axios.post(`https://${currentUrl}/api/projects/`, preparedObject, { headers })
+    axios.post(`${currentUrl}/api/projects/`, preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
         Swal.fire({

@@ -207,7 +207,7 @@ const EditProject = () => {
     const handleSave = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
-        const url = `https://${currentUrl}/api/projects/${project.id}/update/`;
+        const url = `${currentUrl}/api/projects/${project.id}/update/`;
     
         const formData = new FormData();
         if (selectedFiles?.pdf_matricula_certificate) {

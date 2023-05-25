@@ -8,7 +8,7 @@ export const getOwners = () => (dispatch, getState) => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
   };
-  fetch(`https://${currentUrl}/api/users/`, requestOptions)
+  fetch(`${currentUrl}/api/users/`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
       dispatch(storeUsers(data)); // Dispatch the action to update the store

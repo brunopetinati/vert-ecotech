@@ -24,7 +24,7 @@ const Login = () => {
 
     event.preventDefault();
     try {
-      axios.post(`https://${currentUrl}/api/login/`, {
+      axios.post(`${currentUrl}/api/login/`, {
         email,
         password,
       }).then(response => {
@@ -80,11 +80,11 @@ const Login = () => {
 
   const handleSendPasswordBack = (e) => {
     e.preventDefault();
-    axios.post(`https://${currentUrl}/api/recover-password/`) // send GET request to get CSRF token
+    axios.post(`${currentUrl}/api/recover-password/`) // send GET request to get CSRF token
       .then(response => {
         const csrfToken = response.data.csrfToken;
         axios.defaults.headers.post['X-CSRF-Token'] = csrfToken; // set CSRF token as a header in all subsequent POST requests
-        return axios.post(`https://${currentUrl}/api/recover-password/`, { email })
+        return axios.post(`${currentUrl}/api/recover-password/`, { email })
       })
       .then(response => {        
         Swal.fire({

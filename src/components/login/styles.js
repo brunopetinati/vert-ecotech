@@ -33,6 +33,11 @@ export const Input = styled.input`
   outline-style: none;
   border: none;
   border-bottom: solid #eeeeee 1px;
+
+  :hover {
+    font-size: 22px;
+    font-weight: bold; 
+  }
 `;
 
 export const Button = styled.button`

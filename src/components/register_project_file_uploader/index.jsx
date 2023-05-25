@@ -37,7 +37,7 @@ const FileUploader = () => {
 
   const handleUpload = async () => {
     const token = sessionStorage.getItem('Authorization');
-    const url = `https://${currentUrl}/api/projects/${projectID}/update/`;
+    const url = `${currentUrl}/api/projects/${projectID}/update/`;
   
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);

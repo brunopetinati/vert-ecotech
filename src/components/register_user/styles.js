@@ -28,11 +28,18 @@ export const Input = styled(InputMask)`
   border: none;
   font-size: 1rem;
   background-color: transparent;
-  color: #eeeeee;
+  color: #fff;
+  font-weight: normal;
+  font-size: 16px;
   outline: none;
   outline-style: none;
   border: none;
   border-bottom: solid #eeeeee 1px;
+
+  :hover {
+    font-size: 22px;
+    font-weight: bold; 
+  }
 `;
 
 export const Button = styled.button`

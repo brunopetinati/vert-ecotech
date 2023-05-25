@@ -19,7 +19,7 @@ const AcceptanceBar = ({path, func, registerUser}) => {
     }
 
     if (registerUser) {
-    axios.post(`https://${currentUrl}/api/signup/`, {...finalObject})
+    axios.post(`${currentUrl}/api/signup/`, {...finalObject})
 
       .then(response => {
         sessionStorage.setItem('Authorization', response.data.access);

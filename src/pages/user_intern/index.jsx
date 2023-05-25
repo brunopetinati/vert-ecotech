@@ -64,7 +64,7 @@ const UserIntern = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
-    axios.put(`https://${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
+    axios.put(`${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
       .then(response => {
         Swal.fire({
           title: 'Sucesso!',
