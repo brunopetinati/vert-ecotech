@@ -14,7 +14,7 @@ const ResetPassword = ({ isOpen, onClose, children }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
 
 
-  console.log(currentUser);
+  
 
   const handleSubmitPassword = () => {
 
@@ -32,7 +32,7 @@ const ResetPassword = ({ isOpen, onClose, children }) => {
     axios.put(url, data, { headers })
       .then(response => {
         // Handle successful response here
-        console.log('Password changed successfully!');
+        
         Swal.fire({
           title: 'Concluído',
           text: 'Sua senha foi alterada com sucesso',

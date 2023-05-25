@@ -29,7 +29,6 @@ const Sidebar = () => {
   };
 
   const handleItemClick = (status) => {
-    console.log('status passado na função', status)
     dispatch(appStatus(status));
   };
 

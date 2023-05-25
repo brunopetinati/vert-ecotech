@@ -65,8 +65,6 @@ const UserIntern = () => {
     
     axios.put(`https://${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
       .then(response => {
-        console.log('objeto registrado com sucesso');
-        console.log(response);
         dispatch(userUpdater(userUpdate));
       })
       .catch(error => {

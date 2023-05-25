@@ -52,7 +52,7 @@ const RegisterProjectInfo = () => {
 
   const handleOptionsCar = (event) => {
     const selectedValue = event.target.value;
-    console.log(selectedValue);
+    
     setSelectedCar(selectedValue);
     if (selectedValue === "Não possui CAR") {
       setThereIsNoCar(true);
@@ -228,7 +228,7 @@ const RegisterProjectInfo = () => {
   // REGISTRAR PROJETO
   const handleRegister = () => {
 
-    console.log('selectedCar', selectedCar);
+    
 
     if (totalArea) {
       setTotalAreaError('');
@@ -311,7 +311,7 @@ const RegisterProjectInfo = () => {
       });
   };
 
-  //console.log('owner', owner);
+  //
   
   return (
     <motion.div

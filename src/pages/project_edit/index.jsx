@@ -244,9 +244,6 @@ const EditProject = () => {
         
         const projectIndex = projects.findIndex(p => p.id === response.data.id);
 
-        console.log(response.data)
-        console.log(projects)
-
         if (projectIndex !== -1) {
           const updatedProjects = [...projects];
           updatedProjects.splice(projectIndex, 1);
@@ -254,8 +251,8 @@ const EditProject = () => {
           dispatch(resetProjects([...updatedProjects, response.data]));
           navigate('/welcome')
         } else {
-          // nunca vai existir isso
-          console.log("alert: danger. It shouldn't be here. Check it ASAP.");
+          console.log('checar erro importante');
+          // nunca vai existir isso          
           dispatch(addProjectToProjects(response.data));
         }
 

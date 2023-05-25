@@ -48,7 +48,6 @@ const ProjectIntern = () => {
     axios
     .put(`https://${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
     .then((response) => {
-      console.log(response);
       Swal.fire({
         title: 'Sucesso!',
         text: 'O projeto foi inicializado com sucesso!',

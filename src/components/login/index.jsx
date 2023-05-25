@@ -86,8 +86,7 @@ const Login = () => {
         axios.defaults.headers.post['X-CSRF-Token'] = csrfToken; // set CSRF token as a header in all subsequent POST requests
         return axios.post(`https://${currentUrl}/api/recover-password/`, { email })
       })
-      .then(response => {
-        console.log(response.data); // handle success response
+      .then(response => {        
         Swal.fire({
           title: 'Sucesso!',
           text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada ou spam.',

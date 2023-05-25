@@ -41,8 +41,8 @@ const KanbanBoard = () => {
     e.preventDefault();
     const currentStatus = e.dataTransfer.getData('text');
 
-    console.log('newStatus', newStatus);
-    console.log('currentStatus', currentStatus);
+    
+    
 
     if (currentStatus !== newStatus) {
 
@@ -52,7 +52,7 @@ const KanbanBoard = () => {
       axios
       .put(`https://${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
       .then((response) => {
-        console.log('response', response)
+        
         setUpdateComponent(!updateComponent);
       })
       .catch((error) => {
@@ -71,7 +71,7 @@ const KanbanBoard = () => {
                 Authorization: `Bearer ${token}`,
               },
             });
-            console.log(response, 'entrou no useEffect')
+            
 
             dispatch(storeProjects(response.data));
           } else {
@@ -83,7 +83,7 @@ const KanbanBoard = () => {
             dispatch(storeProjects(response.data));
           }
         } catch (error) {
-          console.error(error);
+          
         }
       };
       fetchProjects();

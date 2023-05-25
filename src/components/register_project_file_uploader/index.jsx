@@ -58,8 +58,7 @@ const FileUploader = () => {
         text: 'Os documentos escolhidos foram enviados com sucesso!',
         icon: 'success',
         confirmButtonText: 'OK'
-      });
-      console.log('Success:', response);
+      });      
         // se existe projeto com mesmo id no array, não adicionar, tratar isso
       dispatch(addProjectToProjects(response.data));
     } catch (error) {

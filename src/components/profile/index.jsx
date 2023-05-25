@@ -64,8 +64,7 @@ const Profile = () => {
     const headers = { Authorization: `Bearer ${token}`, };
     
     axios.put(`https://${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
-      .then(response => {
-        console.log(response);
+      .then(response => {        
         Swal.fire({
           title: 'Sucesso!',
           text: 'Sua requisição foi processada com sucesso.',
