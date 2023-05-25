@@ -37,7 +37,7 @@ const ProjectIntern = () => {
   const downloadPDF = (fieldName) => {
 
       //const token = sessionStorage.getItem('Authorization');
-      const downloadUrl = `http://${currentUrl}:8000/api/project/${project.id}/download/${fieldName}/`;
+      const downloadUrl = `https://${currentUrl}/api/project/${project.id}/download/${fieldName}/`;
       window.open(downloadUrl, '_blank');
     };
 
@@ -46,7 +46,7 @@ const ProjectIntern = () => {
     const headers = { Authorization: `Bearer ${token}`, };
     
     axios
-    .put(`http://${currentUrl}:8000/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
+    .put(`https://${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
     .then((response) => {
       console.log(response);
       Swal.fire({

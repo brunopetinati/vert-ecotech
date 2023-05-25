@@ -63,7 +63,7 @@ const Profile = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
-    axios.put(`http://${currentUrl}:8000/api/users/${user.id}/update/`, userUpdate, { headers })
+    axios.put(`https://${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
       .then(response => {
         console.log(response);
         Swal.fire({

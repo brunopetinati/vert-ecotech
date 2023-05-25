@@ -10,11 +10,11 @@ const awsUrlTest = '18.218.97.13';
 const localHost = 'localhost';
 //const localHost = 'localhost:8000/api';
 
-export const currentUrl = localHost;
+export const currentUrl = awsUrl;
 
 
 // atenção: exemplo de url
-// `http://${currentUrl}:8000/api/reset-password/${currentUser.id}/`;
+// `https://${currentUrl}/api/reset-password/${currentUser.id}/`;
 
 
 //const currentUser = useDispatch((state) => state.user.currentUser);
@@ -34,11 +34,11 @@ export const currentUrl = localHost;
 
 // https://d2kcgtfad3ncth.cloudfront.net/api
 
-// `http://${currentUrl}:8000/api/login/`
+// `https://${currentUrl}/api/login/`
 
 // ec2-13-58-237-27.us-east-2.compute.amazonaws.com
 
 
 // está funcionando
 
-// http://api.vertecotech.com:8000/api/login/
+// http://${currentUrl}:8000/api/login/

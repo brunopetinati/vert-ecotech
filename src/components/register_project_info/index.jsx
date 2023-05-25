@@ -286,7 +286,7 @@ const RegisterProjectInfo = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     
-    axios.post(`http://${currentUrl}:8000/api/projects/`, preparedObject, { headers })
+    axios.post(`https://${currentUrl}/api/projects/`, preparedObject, { headers })
       .then(response => {
         const projectId = response.data.id;
         Swal.fire({

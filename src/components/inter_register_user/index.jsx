@@ -104,7 +104,7 @@ const InternRegisterUser = () => {
       return;
     };
     
-    axios.post(`http://${currentUrl}:8000/api/signup/`, userObject, { headers })
+    axios.post(`https://${currentUrl}/api/signup/`, userObject, { headers })
       .then(response => {
         Swal.fire({
           title: 'Sucesso!',

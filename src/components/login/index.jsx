@@ -24,7 +24,7 @@ const Login = () => {
 
     event.preventDefault();
     try {
-      axios.post(`https://api.vertecotech.com/api/login/`, {
+      axios.post(`httpss://${currentUrl}/api/login/`, {
         email,
         password,
       }).then(response => {
@@ -80,11 +80,11 @@ const Login = () => {
 
   const handleSendPasswordBack = (e) => {
     e.preventDefault();
-    axios.post(`http://${currentUrl}:8000/api/recover-password/`) // send GET request to get CSRF token
+    axios.post(`https://${currentUrl}/api/recover-password/`) // send GET request to get CSRF token
       .then(response => {
         const csrfToken = response.data.csrfToken;
         axios.defaults.headers.post['X-CSRF-Token'] = csrfToken; // set CSRF token as a header in all subsequent POST requests
-        return axios.post(`http://${currentUrl}:8000/api/recover-password/`, { email })
+        return axios.post(`https://${currentUrl}/api/recover-password/`, { email })
       })
       .then(response => {
         console.log(response.data); // handle success response
@@ -156,7 +156,7 @@ const Login = () => {
                 onChange={event => setPassword(event.target.value)}
               />
               <div>
-                <Button type="submit">Login teste api</Button>
+                <Button type="submit">Login</Button>
                 <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
               </div>
             </LoginForm>}</motion.div>}

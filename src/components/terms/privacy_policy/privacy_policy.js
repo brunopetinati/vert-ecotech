@@ -22,7 +22,7 @@ export const privacyPolicyHTML = `<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Tr
 <body lang="pt-BR" link="#0000ff" vlink="#800000" dir="ltr">
 <div title="header"><p align="center" style="margin-bottom: 0cm; line-height: 100%">
 	    
-	<img src="Vert%20ecotech%20-%20POLI%CC%81TICA%20DE%20PRIVACIDADE_revisada_html_7433277f039049f8.png" name="Imagem 1628535846" align="bottom" width="154" height="87" border="0"/>
+	
 
 	                                                    
 	</p>

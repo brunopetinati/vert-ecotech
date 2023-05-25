@@ -50,7 +50,7 @@ const KanbanBoard = () => {
       const headers = { Authorization: `Bearer ${token}`, };
       
       axios
-      .put(`http://${currentUrl}:8000/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
+      .put(`https://${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
       .then((response) => {
         console.log('response', response)
         setUpdateComponent(!updateComponent);
@@ -66,7 +66,7 @@ const KanbanBoard = () => {
         try {
           const token = sessionStorage.getItem('Authorization');
           if (currentUser.user_type === 'ADM') {
-            const response = await axios.get(`http://${currentUrl}:8000/api/projects/`, {
+            const response = await axios.get(`https://${currentUrl}/api/projects/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
@@ -75,7 +75,7 @@ const KanbanBoard = () => {
 
             dispatch(storeProjects(response.data));
           } else {
-            const response = await axios.get(`http://${currentUrl}:8000/api/projects/${currentUser.id}/by_user/`, {
+            const response = await axios.get(`https://${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },

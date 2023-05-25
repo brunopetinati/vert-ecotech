@@ -23,7 +23,7 @@ export const termsOfUse = `
 <body lang="pt-BR" link="#0000ff" vlink="#800000" dir="ltr">
 <div title="header"><p align="center" style="margin-bottom: 0cm; line-height: 100%">
 	     
-	<img src="Vert%20ecotech%20-%20TERMOS%20DE%20USO_html_7433277f039049f8.png" name="Imagem 2138769266" align="bottom" width="154" height="87" border="0"/>
+	
 
 	                                                  
 	</p>

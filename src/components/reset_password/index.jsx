@@ -20,7 +20,7 @@ const ResetPassword = ({ isOpen, onClose, children }) => {
 
     const accessToken = sessionStorage.getItem('Authorization');
 
-    const url = `http://${currentUrl}:8000/api/reset-password/${currentUser.id}/`;
+    const url = `https://${currentUrl}/api/reset-password/${currentUser.id}/`;
     const headers = {
       Authorization: `Bearer ${accessToken}`,
     };
