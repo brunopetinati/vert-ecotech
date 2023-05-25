@@ -24,7 +24,7 @@ const Login = () => {
 
     event.preventDefault();
     try {
-      axios.post(`http://${currentUrl}:8000/api/login/`, {
+      axios.post(`https://api.vertecotech.com/api/login/`, {
         email,
         password,
       }).then(response => {
@@ -156,7 +156,7 @@ const Login = () => {
                 onChange={event => setPassword(event.target.value)}
               />
               <div>
-                <Button type="submit">Login</Button>
+                <Button type="submit">Login teste api</Button>
                 <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
               </div>
             </LoginForm>}</motion.div>}
