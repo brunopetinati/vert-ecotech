@@ -24,7 +24,7 @@ const Login = () => {
 
     event.preventDefault();
     try {
-      axios.post(`httpss://${currentUrl}/api/login/`, {
+      axios.post(`https://${currentUrl}/api/login/`, {
         email,
         password,
       }).then(response => {
