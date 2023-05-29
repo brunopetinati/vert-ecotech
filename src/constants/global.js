@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 //#054d00
 
 const awsUrl = 'https://api.vertecotech.com';
-const awsUrlTest = '18.218.97.13';
+const awsUrlTest = 'http://18.218.97.13:8000';
 //const awsUrl = '18.218.97.13:8000/api';
 const localHost = 'http://localhost:8000';
 //const localHost = 'localhost:8000/api';
