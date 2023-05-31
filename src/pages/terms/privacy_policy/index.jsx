@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { privacyPolicyHTML } from "./privacy_policy";
 import { Container } from './styles';
 import { motion } from "framer-motion";
@@ -6,11 +5,6 @@ import { motion } from "framer-motion";
 
 const PrivacyPolicyPage = () => {
 
-  const user = useSelector((state) => state.app_data.user_first_access);
-  
-  if (!user) {
-    return
-  }
 
   return (
     <Container>

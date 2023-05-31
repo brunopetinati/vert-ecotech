@@ -1,15 +1,9 @@
 import { termsOfUse } from './terms_of_use';
-import { useSelector } from "react-redux";
 import { Container } from './styles';
 import { motion } from 'framer-motion';
 
 const TermsOfUsePage = () => {
 
-  const user = useSelector((state) => state.app_data.user_first_access);
-
-  if (!user) {
-    return
-  }
   
   const scrollWindow = () => {
     window.scrollTo(0, 0);
