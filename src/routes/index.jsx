@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getOwners } from "../store/modules/app_data/thunk";
 import PrivacyPolicyPage from '../pages/terms/privacy_policy'; 
 import TermsOfUsePage from '../pages/terms/terms_of_use'; 
+import RegisterProjectFileUploadWebOpen from "../pages/outsider";
 
 const AppRoutes = () => {
 
@@ -29,7 +30,7 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page') {
+  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && location.pathname !== '/open_upload') {
     navigate('/');
     return (
       <AnimatePresence>
@@ -56,6 +57,7 @@ const AppRoutes = () => {
         <Route exact path="/analysis_and_development" element={<KanbanBoard />}></Route>
         <Route exact path="/privacy" element={<PrivacyPolicyPage />}></Route>
         <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />}></Route>
+        <Route exact path="/open_upload" element={<RegisterProjectFileUploadWebOpen />}></Route>
       </Routes>
     </AnimatePresence>
   );
