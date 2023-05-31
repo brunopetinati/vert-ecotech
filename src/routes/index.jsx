@@ -29,7 +29,7 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use') {
+  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page') {
     navigate('/');
     return (
       <AnimatePresence>
