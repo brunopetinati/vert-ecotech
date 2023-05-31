@@ -14,6 +14,8 @@ import KanbanBoard from "../components/kanban_board/";
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getOwners } from "../store/modules/app_data/thunk";
+import PrivacyPolicyPage from '../pages/terms/privacy_policy'; 
+import TermsOfUsePage from '../pages/terms/terms_of_use'; 
 
 const AppRoutes = () => {
 
@@ -52,6 +54,8 @@ const AppRoutes = () => {
         <Route exact path="/edit_intern_project" element={<EditProject />} />
         <Route exact path="/intern_user" element={<UserIntern />} />
         <Route exact path="/analysis_and_development" element={<KanbanBoard />}></Route>
+        <Route exact path="/privacy" element={<PrivacyPolicyPage />}></Route>
+        <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />}></Route>
       </Routes>
     </AnimatePresence>
   );
