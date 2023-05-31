@@ -30,7 +30,7 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && location.pathname !== '/open_upload') {
+  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && (!location.pathname.includes('/open_upload/') && location.pathname.length > 20)) {
     navigate('/');
     return (
       <AnimatePresence>
@@ -57,7 +57,7 @@ const AppRoutes = () => {
         <Route exact path="/analysis_and_development" element={<KanbanBoard />}></Route>
         <Route exact path="/privacy" element={<PrivacyPolicyPage />}></Route>
         <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />}></Route>
-        <Route exact path="/open_upload" element={<RegisterProjectFileUploadWebOpen />}></Route>
+        <Route exact path="/open_upload/:access" element={<RegisterProjectFileUploadWebOpen />}></Route>
       </Routes>
     </AnimatePresence>
   );
