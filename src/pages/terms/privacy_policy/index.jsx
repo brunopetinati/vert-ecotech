@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { privacyPolicyHTML } from "./privacy_policy";
 import { Container } from './styles';
-import AcceptanceBar from "../../acceptance_terms_footer";
 import { motion } from "framer-motion";
 
 

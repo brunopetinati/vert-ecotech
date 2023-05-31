@@ -1,7 +1,6 @@
 import { termsOfUse } from './terms_of_use';
 import { useSelector } from "react-redux";
 import { Container } from './styles';
-import AcceptanceBar from "../../acceptance_terms_footer";
 import { motion } from 'framer-motion';
 
 const TermsOfUsePage = () => {
