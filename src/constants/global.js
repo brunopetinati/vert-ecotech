@@ -12,7 +12,6 @@ const localHost = 'http://localhost:8000';
 
 export const currentUrl = awsUrl;
 
-
 // atenção: exemplo de url
 // `${currentUrl}/api/reset-password/${currentUser.id}/`;
 
