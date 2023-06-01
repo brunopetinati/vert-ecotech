@@ -194,9 +194,27 @@ const KanbanBoard = () => {
         </Column>
         <Column
           onDragOver={handleDragOver}
-          onDrop={(e) => handleDrop(e, 'concluded')}
+          onDrop={(e) => handleDrop(e, 'implementing')}
         >
           <h4>Projeto em andamento</h4>
+          {projects.map((project) => {
+            if (project.status === 'implementing') {
+              return (
+                <Card onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <h3>{project.title}</h3>
+                  <p>project.description</p>
+                </Card>
+              );
+            } else {
+              return null; // or you can render something else here
+            }
+          })}
+        </Column>
+        <Column
+          onDragOver={handleDragOver}
+          onDrop={(e) => handleDrop(e, 'concluded')}
+        >
+          <h4>Concluído</h4>
           {projects.map((project) => {
             if (project.status === 'concluded') {
               return (

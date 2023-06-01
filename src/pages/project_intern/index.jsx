@@ -124,7 +124,7 @@ const ProjectIntern = () => {
         </ButtonContainer>
         {user.user_type === "ADM" && 
           <>
-            <h2>Engenharia</h2>
+            <h2>Engenharia Ambiental</h2>
 
             <ButtonContainer>
               <Button onClick={() => startProject()}>Inicializar Projeto</Button>

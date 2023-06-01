@@ -30,31 +30,30 @@ const StockChart = () => {
   ];
 
   const data3 = [
-    { name: "Jan", inicializado: 377, concluído: 290 },
-    { name: "Feb", inicializado: 600, concluído: 560 },
-    { name: "Mar", inicializado: 800, concluído: 400 },
-    { name: "Apr", inicializado: 1230, concluído: 900 },
-    { name: "May", inicializado: 1890, concluído: 4800 },
-    { name: "Jun", inicializado: 2390, concluído: 3800 },
-    { name: "Jul", inicializado: 3490, concluído: 4300 },
+    { name: "Jan", ativos: 377, aposentados: 290 },
+    { name: "Feb", ativos: 600, aposentados: 560 },
+    { name: "Mar", ativos: 800, aposentados: 400 },
+    { name: "Apr", ativos: 1230, aposentados: 900 },
+    { name: "May", ativos: 1890, aposentados: 4800 },
+    { name: "Jun", ativos: 2390, aposentados: 3800 },
+    { name: "Jul", ativos: 3490, aposentados: 4300 },
   ];
 
   const data4 = [
-    { name: "Out", dollar: 4.50, euro: 6.30 },
-    { name: "Nov", dollar: 5.50, euro: 6.20 },
-    { name: "Dez", dollar: 5.55, euro: 6.10 },
-    { name: "Jan", dollar: 5.60, euro: 5.80 },
-    { name: "Fev", dollar: 5.80, euro: 5.90 },
-    { name: "Mar", dollar: 5.30, euro: 6.20 },
-    { name: "Abr", dollar: 5.24, euro: 6.50 },
+    { name: "Out", started: 1, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { name: "Nov", started: 2, analysis: 1, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { name: "Dez", started: 3, analysis: 2, viability: 1, negotiation: 0, implementing: 0, concluded: 0 },
+    { name: "Jan", started: 1, analysis: 0, viability: 5, negotiation: 0, implementing: 0, concluded: 0 },
+    { name: "Fev", started: 5, analysis: 0, viability: 0, negotiation: 6, implementing: 0, concluded: 0 },
+    { name: "Mar", started: 11, analysis: 5, viability: 0, negotiation: 0, implementing: 6, concluded: 0 },
+    { name: "Abr", started: 7, analysis: 2, viability: 3, negotiation: 0, implementing: 0, concluded: 6 },
   ];
-
   return (
     <Container>
       <Graph data={data}  title={'Acessos'} name={'name'} key_a={'pv'} key_b={'uv'} key_c={'amt'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} />
-      <Graph data={data2} title={'CO2'} name={'name'} key_a={'seq'} key_b={'emit'} key_c={'acm'} stroke_a={'#7eff00'} stroke_b={'#054d00'} stroke_c={'orange'}/>
-      <Graph data={data3} title={'Projetos'} name={'name'} key_a={'inicializado'} key_b={'concluído'}  stroke_a={'black'} stroke_b={'#7eff00'}/>
-      <Graph data={data4} title={'Moeda'} name={'name'} key_a={'dollar'} key_b={'euro'} stroke_a={'blue'} stroke_b={'violet'}/>
+      <Graph data={data2} title={'Sequestro de CO2 na atmosfera'} name={'name'} key_a={'seq'} key_b={'emit'} key_c={'acm'} stroke_a={'#7eff00'} stroke_b={'#054d00'} stroke_c={'orange'}/>
+      <Graph data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'#7eff00'} stroke_b={'black'} />
+      <Graph data={data4} title={'Projetos'} name={'name'} key_a={'started'} key_b={'analysis'} key_c={'viability'} key_d={'negotiation'} key_e={'idle'} key_f={'implementing'} key_g={'concluded'} stroke_a={'blue'} stroke_b={'violet'} stroke_c={'green'} stroke_d={'gold'} stroke_e={'grey'} stroke_f={'orange'} stroke_g={'brown'}/>
     </Container>
   );
 };
