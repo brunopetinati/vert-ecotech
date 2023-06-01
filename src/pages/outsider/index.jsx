@@ -23,9 +23,7 @@ const RegisterProjectFileUploadWebOpen = () => {
           <FileUploader />
         </Column>
       </InnerContainer>
-      <ButtonContainer>
-        <Button onClick={() => handleRegister()}>Voltar ao painel</Button>
-      </ButtonContainer>
+
     </Container>
   )
 };

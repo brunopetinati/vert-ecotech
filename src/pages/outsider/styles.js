@@ -5,13 +5,18 @@ export const Container = styled.div`
   border-radius: 20px;
   padding: 2em;
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: 620px;
   z-index: 2;
   background: #fff;
-  
+
   h3 {
-    color:#054D00;
+    color: #054D00;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    height: auto;
+    padding: 1em;
   }
 `;
 
@@ -21,6 +26,10 @@ export const InnerContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   max-width: 600px;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+  }
 `;
 
 export const Column = styled.div`
@@ -36,7 +45,6 @@ export const Label = styled.label`
 export const Input = styled.input`
   padding: 10px;
   margin-bottom: 20px;
-  
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 8px;
@@ -80,7 +88,13 @@ export const Button = styled.button`
   margin-right: 16px;
 
   :hover {
-  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-  transform: scale(1.02) ;
+    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    margin-right: 0;
+    width: 100%;
   }
 `;
