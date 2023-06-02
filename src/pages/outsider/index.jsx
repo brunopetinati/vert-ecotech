@@ -4,14 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 const RegisterProjectFileUploadWebOpen = () => {
 
-  if (window.location.pathname) {
-    console.log(window.location.pathname.split('/')[2])
-    console.log(window.location.pathname.slice('/'))
+
+  function separateInfo(data) {
+    const [constant1, constant2, constant3] = data.split("-");
+    return [constant1, constant2, constant3];
   }
 
-  const projectId = 'projectId'
-  const credentials = 'credentials'
-  const owner = 'owner'
+  let [projectId, credentials, owner] = null;
+  
+  if (window.location.pathname) {
+    const info = (window.location.pathname.split('/')[2]);
+    [projectId, credentials, owner] = separateInfo(info);
+  }
 
   return (
     <Container>
@@ -21,7 +25,8 @@ const RegisterProjectFileUploadWebOpen = () => {
           <FileUploaderWeb projectId={projectId} credentials={credentials} owner={owner}/>
         </Column>
       </InnerContainer>
-
+      <Button>Finalizar</Button>
+      <Button>Salvar e continuar mais tarde</Button>      
     </Container>
   )
 };

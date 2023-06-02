@@ -68,20 +68,33 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  border-radius: 8px;
-  padding: 16px;
-  width: 70%;
-  margin: 0 auto 8px auto;
-  background: #00ae00;
-  color: #fff;
-`;
+  background-color: #c2fbd7;
+  border-radius: 10px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-top: 50px;
+  margin-right: 16px;
 
-export const ButtonSecondary = styled.button`
-  border-radius: 8px;
-  padding: 16px;
-  width: 70%;
-  margin: 0 auto 8px auto;
-  background: transparent;
-  border: 1px solid #00ae00;
-  color: #00ae00;
+  :hover {
+    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+    transform: scale(1.02);
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+    margin-right: 0;
+    width: 100%;
+  }
 `;

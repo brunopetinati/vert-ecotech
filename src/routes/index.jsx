@@ -17,6 +17,8 @@ import { getOwners } from "../store/modules/app_data/thunk";
 import PrivacyPolicyPage from '../pages/terms/privacy_policy'; 
 import TermsOfUsePage from '../pages/terms/terms_of_use'; 
 import RegisterProjectFileUploadWebOpen from "../pages/outsider";
+import OutsiderSuccess from "../pages/outsider_success";
+import OutsiderCanceled from "../pages/outsider_canceled";
 
 const AppRoutes = () => {
 
@@ -30,7 +32,7 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && (!location.pathname.includes('/open_upload/') && location.pathname.length > 20)) {
+  if (!login.accessToken && location.pathname !== '/' && location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && (!location.pathname.includes('/open_upload/') && location.pathname.length > 20 && location.pathname !== 'upload_success' && location.pathname !== 'upload_canceled')) {
     navigate('/');
     return (
       <AnimatePresence>
@@ -58,6 +60,8 @@ const AppRoutes = () => {
         <Route exact path="/privacy" element={<PrivacyPolicyPage />}></Route>
         <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />}></Route>
         <Route exact path="/open_upload/:access" element={<RegisterProjectFileUploadWebOpen />}></Route>
+        <Route exact path="/upload_success" element={<OutsiderSuccess />}></Route>
+        <Route exact path="/upload_canceled" element={<OutsiderCanceled />}></Route> 
       </Routes>
     </AnimatePresence>
   );
