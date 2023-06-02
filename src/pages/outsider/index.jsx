@@ -15,7 +15,10 @@ const RegisterProjectFileUploadWebOpen = () => {
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
     [projectId, credentials, owner] = separateInfo(info);
+    console.log('dentro do if', projectId, credentials, owner)
   }
+
+  console.log('fora do if', projectId, credentials, owner)
 
   return (
     <Container>
