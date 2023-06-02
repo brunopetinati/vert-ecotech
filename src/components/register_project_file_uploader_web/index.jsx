@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 
 
-const FileUploader = (projectID, credentials, ownerID) => {
+const FileUploader = ({ ownerID, credentials, projectId}) => {
 
   // quando é o próprio usuário registrando o próprio projeto
   // const currentID = useSelector((state) => state.user.currentUser.id);
@@ -28,8 +28,10 @@ const FileUploader = (projectID, credentials, ownerID) => {
     }));
   };
 
+  
+
   const handleUpload = async () => {
-    const url = `${currentUrl}/api/projects/${projectID}/update/`;
+    const url = `${currentUrl}/api/projects/${projectId}/update/`;
   
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);

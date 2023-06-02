@@ -6,7 +6,7 @@ const RegisterProjectFileUploadWebOpen = () => {
 
 
   function separateInfo(data) {
-    const [constant1, constant2, constant3] = data.split("-");
+    const [constant1, constant2, constant3] = data.split("-vert-");
     return [constant1, constant2, constant3];
   }
 
@@ -14,7 +14,7 @@ const RegisterProjectFileUploadWebOpen = () => {
   
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
-    [projectId, credentials, owner] = separateInfo(info);
+    [owner, credentials, projectId] = separateInfo(info);
     console.log('dentro do if', projectId, credentials, owner)
   }
 
@@ -25,7 +25,7 @@ const RegisterProjectFileUploadWebOpen = () => {
       <h3>Informações Cadastrais</h3>
       <InnerContainer>
         <Column>
-          <FileUploaderWeb projectId={projectId} credentials={credentials} owner={owner}/>
+          <FileUploaderWeb projectId={projectId} credentials={credentials} ownerID={owner}/>
         </Column>
       </InnerContainer>
       <InnerContainer style={{marginTop: '16px'}}>
