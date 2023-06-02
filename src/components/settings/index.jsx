@@ -55,8 +55,11 @@ const Settings = () => {
 
   const handleLogout = () => {
     dispatch(eraseAll());
+    sessionStorage.clear();
+    localStorage.clear();
     navigate('/');
   };
+  
 
   const handleShowResetPasswordModal = () => {
     setShowResetPassword(!showResetPassword);

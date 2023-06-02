@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
-
+import { Button } from '../../pages/outsider/styles';
 
 
 const FileUploader = ({ ownerID, credentials, projectId}) => {
@@ -11,61 +11,7 @@ const FileUploader = ({ ownerID, credentials, projectId}) => {
   // const currentID = useSelector((state) => state.user.currentUser.id);
 
 
-  const [selectedFiles, setSelectedFiles] = useState({
-    pdf_matricula_certificate: null,
-    pdf_car: null,
-    property_polygon: null,
-    pdf_federal_debt_certificate: null,
-    pdf_ccir: null,
-    owner: ownerID // alterar essa linha
-  });
-
-
-  const handleFileInput = (fieldName, e) => {
-    setSelectedFiles((prevSelectedFiles) => ({
-      ...prevSelectedFiles,
-      [fieldName]: e.target.files[0],
-    }));
-  };
-
   
-
-  const handleUpload = async () => {
-    const url = `${currentUrl}/api/projects/${projectId}/update/`;
-  
-    const formData = new FormData();
-    formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
-    formData.append('pdf_car', selectedFiles.pdf_car);
-    formData.append('property_polygon', selectedFiles.property_polygon);
-    formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
-    formData.append('pdf_ccir', selectedFiles.pdf_ccir);
-  
-    try {
-      const response = await axios.put(url, selectedFiles, {
-        headers: {
-          Authorization: `Bearer ${credentials}`,
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      Swal.fire({
-        title: 'Sucesso!',
-        text: 'Os documentos escolhidos foram enviados com sucesso!',
-        icon: 'success',
-        confirmButtonText: 'OK'
-      });      
-        // se existe projeto com mesmo id no array, não adicionar, tratar isso
-    } catch (error) {
-      Swal.fire({
-        title: 'Erro!',
-        text: 'Algo deu errado ao tentar processar sua requisição.',
-        icon: 'error',
-        confirmButtonText: 'OK'
-      });
-      console.error('Error:', error);
-      // Add code to handle the error
-    }
-  };
-
   return (
     <>
       <div>
@@ -110,9 +56,9 @@ const FileUploader = ({ ownerID, credentials, projectId}) => {
           justifyContent: 'center',
         }}
       >
-        <button style={{ width: '170px' }} onClick={handleUpload}>
+        <Button style={{ width: '170px' }} onClick={handleUpload}>
           Registrar arquivos
-        </button>
+        </Button>
       </div>
     </>
   );
