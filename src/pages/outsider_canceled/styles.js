@@ -1,11 +1,15 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   border-radius: 20px;
   padding: 2em;
   border-radius: 20px;
-  height: 620px;
+  height: 100vh !important;
   z-index: 2;
   background: #fff;
 
@@ -14,7 +18,6 @@ export const Container = styled.div`
   }
 
   @media (max-width: 768px) {
-    width: 90vw;
     height: auto;
     padding: 1em;
   }

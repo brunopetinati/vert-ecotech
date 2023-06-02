@@ -1,22 +1,28 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 800px;
   border-radius: 20px;
   padding: 2em;
   border-radius: 20px;
-  height: 620px;
+  height: 100vh !important;
   z-index: 2;
   background: #fff;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
 
   h3 {
     color: #054D00;
   }
 
   @media (max-width: 768px) {
-    width: 90vw;
-    height: auto;
     padding: 1em;
+    width: 80%;
   }
 `;
 

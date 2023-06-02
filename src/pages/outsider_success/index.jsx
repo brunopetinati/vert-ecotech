@@ -1,5 +1,6 @@
 import { Container, InnerContainer, ButtonContainer, Column, Button } from './styles'
 import { motion } from 'framer-motion';
+import SuccessGif from '../../assets/gifs/success.gif';
 
 const OutsiderSuccess = () => {
 
@@ -12,8 +13,8 @@ const OutsiderSuccess = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
         >
-        <h3>Parabéns! O seu projeto foi registrado com sucesso!</h3>
-        
+        <img src={SuccessGif} alt={'gif'} style={{width: '80%'}}/>
+        <h3 style={{color: '#054d00'}}>Parabéns! O seu projeto foi registrado com sucesso!</h3>
       </motion.div>
     </Container>
   )
