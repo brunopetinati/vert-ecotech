@@ -1,4 +1,4 @@
-import { Container, InnerContainer, ButtonContainer, Column, Button } from './styles'
+import { Container, InnerContainer, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
 import FileUploaderWeb from "../../components/register_project_file_uploader_web";
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +10,7 @@ const RegisterProjectFileUploadWebOpen = () => {
     return [constant1, constant2, constant3];
   }
 
-  let [projectId, credentials, owner] = null;
+  let projectId, credentials, owner = null;
   
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
@@ -26,7 +26,7 @@ const RegisterProjectFileUploadWebOpen = () => {
         </Column>
       </InnerContainer>
       <Button>Finalizar</Button>
-      <Button>Salvar e continuar mais tarde</Button>      
+      <ButtonSecondary>Salvar e continuar mais tarde</ButtonSecondary>      
     </Container>
   )
 };

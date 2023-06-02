@@ -32,7 +32,7 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/' && location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && (!location.pathname.includes('/open_upload/') && location.pathname.length > 20 && location.pathname !== 'upload_success' && location.pathname !== 'upload_canceled')) {
+  if (!login.accessToken && location.pathname !== '/'&& location.pathname !== '/register' && location.pathname !== '/privacy_policy' && location.pathname !== '/terms_of_use' && location.pathname !== '/privacy' && location.pathname !== '/terms_of_use_page' && (!location.pathname.includes('/open_upload/') && location.pathname.length > 20) && location.pathname !== '/upload_success' && location.pathname !== '/upload_canceled') {
     navigate('/');
     return (
       <AnimatePresence>
