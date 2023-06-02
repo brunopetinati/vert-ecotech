@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterProjectFileUploadWebOpen = () => {
 
@@ -22,7 +23,7 @@ const RegisterProjectFileUploadWebOpen = () => {
 
   console.log('fora do if', projectId, credentials, owner)
 
-
+  const navigate = useNavigate();
 
   // colocando o FileUploaderWeb aqui
 
@@ -68,7 +69,7 @@ const RegisterProjectFileUploadWebOpen = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });      
-        // se existe projeto com mesmo id no array, não adicionar, tratar isso
+      navigate('/upload_success')
     } catch (error) {
       Swal.fire({
         title: 'Erro!',
@@ -80,6 +81,10 @@ const RegisterProjectFileUploadWebOpen = () => {
       // Add code to handle the error
     }
   };
+
+  const handleCancelUpload = () => {
+    navigate('/upload_canceled')
+  }
 
 
   return (
@@ -136,7 +141,7 @@ const RegisterProjectFileUploadWebOpen = () => {
       </InnerContainer>
       <InnerContainer style={{marginTop: '16px'}}>
         <Button onClick={handleUpload}>Finalizar</Button>
-        <ButtonSecondary>Salvar e continuar mais tarde</ButtonSecondary>      
+        <ButtonSecondary onClick={handleCancelUpload} >Salvar e continuar mais tarde</ButtonSecondary>      
       </InnerContainer>
     </Container>
   )
