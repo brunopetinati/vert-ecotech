@@ -28,8 +28,10 @@ const RegisterProjectFileUploadWebOpen = () => {
           <FileUploaderWeb projectId={projectId} credentials={credentials} owner={owner}/>
         </Column>
       </InnerContainer>
-      <Button>Finalizar</Button>
-      <ButtonSecondary>Salvar e continuar mais tarde</ButtonSecondary>      
+      <InnerContainer style={{marginTop: '16px'}}>
+        <Button>Finalizar</Button>
+        <ButtonSecondary>Salvar e continuar mais tarde</ButtonSecondary>      
+      </InnerContainer>
     </Container>
   )
 };
