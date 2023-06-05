@@ -69,7 +69,7 @@ const RegisterProjectFileUploadWebOpen = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });      
-      window.location.href('/upload_success')
+      window.location = '/upload_success'
     } catch (error) {
       Swal.fire({
         title: 'Erro!',
@@ -83,7 +83,7 @@ const RegisterProjectFileUploadWebOpen = () => {
   };
 
   const handleCancelUpload = () => {
-    window.location.href('/upload_canceled')
+    window.location = '/upload_canceled'
   }
 
 
