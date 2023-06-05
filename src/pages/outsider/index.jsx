@@ -1,4 +1,4 @@
-import { Container, InnerContainer, ImageContainer, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
+import { Container, InnerContainer, ImageContainer, StyledFileInput, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
@@ -99,14 +99,14 @@ const RegisterProjectFileUploadWebOpen = () => {
         <label>Anexar Certidão de Matrícula</label>
         <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
         <p />
-        <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
+        <StyledFileInput type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
       </ImageContainer>
       <p />
       <ImageContainer>
         {selectedFiles.pdf_car ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar PDF do CAR (SICAR)</label>
         <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
+        <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
       </ImageContainer>
       <p />
       <ImageContainer>
@@ -116,21 +116,21 @@ const RegisterProjectFileUploadWebOpen = () => {
           (Formatos aceitos: *.KMZ ou *.KML)
         </small>
         <p />
-        <input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
+        <StyledFileInput type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
       </ImageContainer>
       <p />
       <ImageContainer>
         {selectedFiles.pdf_ccir ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar cópia do CCIR</label>
         <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
+        <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
       </ImageContainer>
       <p />
       <ImageContainer>
         {selectedFiles.pdf_federal_debt_certificate ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar Certidão de Regularidade da Dívida Federal</label>
         <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
+        <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
       </ImageContainer>
       <p />
       <div

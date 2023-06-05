@@ -170,7 +170,7 @@ const addressString = addressParts.join(', ');
             <h2>Engenharia Ambiental</h2>
 
             <ButtonContainer>
-              <Button onClick={() => startProject()}>Inicializar Projeto</Button>
+              <Button onClick={() => startProject()}>Inicializar Processo</Button>
             </ButtonContainer>
             <InnerContainer>
 

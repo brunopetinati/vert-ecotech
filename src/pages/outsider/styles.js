@@ -93,3 +93,16 @@ export const ButtonSecondary = styled.button`
   border: 1px solid #00ae00;
   color: #00ae00;
 `;
+
+
+export const StyledFileInput = styled.input`
+
+  /* Styling for the custom button */
+  label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #054d00;
+    color: #7eff00;
+    cursor: pointer;
+  }
+`;
