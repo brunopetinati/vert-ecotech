@@ -20,6 +20,14 @@ export const Container = styled.div`
   }
 `;
 
+export const ImageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`;
+
 export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;

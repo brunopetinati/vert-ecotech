@@ -1,9 +1,11 @@
-import { Container, InnerContainer, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
+import { Container, InnerContainer, ImageContainer, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
+import addFile from '../../assets/icons/add_file.png'
+import uploadedFile from '../../assets/icons/secondary_file.png'
+
 
 const RegisterProjectFileUploadWebOpen = () => {
 
@@ -22,8 +24,6 @@ const RegisterProjectFileUploadWebOpen = () => {
   }
 
   console.log('fora do if', projectId, credentials, owner)
-
-  const navigate = useNavigate();
 
   // colocando o FileUploaderWeb aqui
 
@@ -69,7 +69,7 @@ const RegisterProjectFileUploadWebOpen = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });      
-      navigate('/upload_success')
+      window.location.href('/upload_success')
     } catch (error) {
       Swal.fire({
         title: 'Erro!',
@@ -83,7 +83,7 @@ const RegisterProjectFileUploadWebOpen = () => {
   };
 
   const handleCancelUpload = () => {
-    navigate('/upload_canceled')
+    window.location.href('/upload_canceled')
   }
 
 
@@ -93,39 +93,45 @@ const RegisterProjectFileUploadWebOpen = () => {
       <InnerContainer>
         <Column>
         <>
-      <div>
+
+      <ImageContainer>
+        {selectedFiles.pdf_matricula_certificate ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar Certidão de Matrícula</label>
         <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
         <p />
         <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
-      </div>
+      </ImageContainer>
       <p />
-      <div>
+      <ImageContainer>
+        {selectedFiles.pdf_car ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar PDF do CAR (SICAR)</label>
         <p />
         <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
-      </div>
+      </ImageContainer>
       <p />
-      <div>
+      <ImageContainer>
+        {selectedFiles.property_polygon ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar o Polígono da propriedade</label>
         <small style={{ marginLeft: '8px' }}>
           (Formatos aceitos: *.KMZ ou *.KML)
         </small>
         <p />
         <input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
-      </div>
+      </ImageContainer>
       <p />
-      <div>
+      <ImageContainer>
+        {selectedFiles.pdf_ccir ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar cópia do CCIR</label>
         <p />
         <input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
-      </div>
+      </ImageContainer>
       <p />
-      <div>
+      <ImageContainer>
+        {selectedFiles.pdf_federal_debt_certificate ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar Certidão de Regularidade da Dívida Federal</label>
         <p />
         <input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
-      </div>
+      </ImageContainer>
       <p />
       <div
         style={{
