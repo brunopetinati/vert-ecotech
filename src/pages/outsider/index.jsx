@@ -1,4 +1,4 @@
-import { Container, InnerContainer, ImageContainer, StyledFileInput, ButtonContainer, Column, Button, ButtonSecondary } from './styles'
+import { Container, InnerContainer, ImageContainer, StyledFileInput, Column, Button, ButtonSecondary } from './styles'
 import React, { useState } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
@@ -20,10 +20,7 @@ const RegisterProjectFileUploadWebOpen = () => {
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
     [owner, credentials, projectId] = separateInfo(info);
-    console.log('dentro do if', projectId, credentials, owner)
   }
-
-  console.log('fora do if', projectId, credentials, owner)
 
   // colocando o FileUploaderWeb aqui
 

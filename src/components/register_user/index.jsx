@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 import { motion } from "framer-motion";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
-import axios from "axios";
 import Logo from '../../assets/logo-vert-white.png'
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../store/modules/login/actions";
-import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { handleCepChange } from '../../api/requests/cep';
 import { storeCEP } from '../../store/modules/app_data/actions';
 import { removeNonDigits } from '../../constants/functions';
-import Loading from '../../assets/gifs/animation_500_lgnrtga8.gif'
 import { storeUserFirstAccess } from '../../store/modules/app_data/actions';
 
 const Register = () => {

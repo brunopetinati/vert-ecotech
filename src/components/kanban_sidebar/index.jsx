@@ -9,10 +9,13 @@ import { collapseSidebar } from '../../store/modules/sidebar/actions';
 import ExpandedLogo from '../../assets/logo-vert.png'
 import Logo from '../../assets/marca-vert.png'
 import Leaf from '../../assets/icons/leaf.svg';
+import ComeBack from '../../assets/gifs/comeback.gif';
 
 import { StyledUser, StyledUsers,  StyledStocks, StyledSettings, StyledWork } from './styles';
 
-const Sidebar = () => {
+
+
+const KanbanSidebar = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -76,12 +79,7 @@ const Sidebar = () => {
         {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
       </SidebarHeader>
       <SidebarMenu>
-        <SidebarMenuItem className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
-        {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
-        <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Projetos'}</SidebarMenuItem>
-        {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleNavigate("/analysis_and_development")}>{collapsed ? <StyledWork active={activeUsers} /> : 'Desenvolvimento'}</SidebarMenuItem>}
-        <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
-        <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "/Dashboard" ? "active" : ""} onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={ComeBack} alt="voltar" style={{width: '128px', marginLeft: '16px'}}/> : 'Menu'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
        {collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
@@ -90,4 +88,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default KanbanSidebar;
