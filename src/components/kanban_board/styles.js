@@ -1,14 +1,36 @@
 import styled from 'styled-components';
 
 
+export const Header = styled.div`
+  background: #054d00;
+  color: #7eff00;
+  width: 2400px;
+  height: 64px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 32px;
+
+
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: 25px;
+  letter-spacing: 1.5px;
+  word-spacing: 2px;
+  font-weight: normal;
+  text-decoration: rgb(68, 68, 68);
+`;
+
 export const Container = styled.div`
   display: flex;
   justify-content: space-between;
+  background: #F9FAFB;
+  width: 2400px;
 `;
 
 export const Column = styled.div`
   min-width: 300px;
-  background-color: #F9FAFB;
+  background-color: #FFF;
   margin-right: 8px;
   position: relative;
   border-radius: 5px;

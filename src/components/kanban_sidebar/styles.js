@@ -56,12 +56,10 @@ export const SidebarMenuItem = styled.li`
   cursor: pointer;
   padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
 
-
-
   li {
     background-color: red;
   }
-
+  
   &.active {
     background-color: #1D2228;
     color: white;

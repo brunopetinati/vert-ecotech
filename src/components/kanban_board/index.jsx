@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Column, Card } from './styles';
+import { Header, Container, Column, Card } from './styles';
 import { useSelector } from 'react-redux';
 import MiniCard from '../projects_cards_mini';
 import { getScoreColor } from '../../constants/functions';
@@ -132,6 +132,7 @@ const KanbanBoard = () => {
     transition={{ duration: 0.8 }}
     >
       <>
+        <Header>Painel Desenvolvimento de Projetos - Acesso administrativo</Header>
         <Container>
         <KanbanSidebar />
           <Column showingColumn={showingColumn}

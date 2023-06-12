@@ -8,9 +8,8 @@ import { collapseSidebar } from '../../store/modules/sidebar/actions';
 
 import ExpandedLogo from '../../assets/logo-vert.png'
 import Logo from '../../assets/marca-vert.png'
-import Leaf from '../../assets/icons/leaf.svg';
-import ComeBack from '../../assets/gifs/comeback.gif';
-
+import Exit from '../../assets/icons/exit.svg';
+import MagnifyingGlass from '../../assets/gifs/magnifyingglass.gif'
 import { StyledUser, StyledUsers,  StyledStocks, StyledSettings, StyledWork } from './styles';
 
 
@@ -72,6 +71,9 @@ const KanbanSidebar = () => {
     navigate(path);
   };
 
+  const ConsoleLog = () => {
+    console.log('clicou');
+  }
 
   return (
     <SidebarContainer collapsed={collapsed}>
@@ -79,10 +81,11 @@ const KanbanSidebar = () => {
         {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
       </SidebarHeader>
       <SidebarMenu>
-        <SidebarMenuItem className={app_status === "/Dashboard" ? "active" : ""} onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={ComeBack} alt="voltar" style={{width: '128px'}}/> : 'Menu'}</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "Pesquisar" ? "active" : ""} onClick={() => ConsoleLog()}>{collapsed ? <img src={MagnifyingGlass}  alt="pesquisar" style={{width: '64px'}}/> : 'Pesquisar'}</SidebarMenuItem>
+        <SidebarMenuItem onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={Exit} alt="voltar" style={{width: '32px'}}/> : 'Sair'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-       {collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
+       {/* collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span> */}
       </SidebarFooter>
     </SidebarContainer>
   );
