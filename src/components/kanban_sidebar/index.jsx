@@ -79,7 +79,7 @@ const KanbanSidebar = () => {
         {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
       </SidebarHeader>
       <SidebarMenu>
-        <SidebarMenuItem className={app_status === "/Dashboard" ? "active" : ""} onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={ComeBack} alt="voltar" style={{width: '128px', marginLeft: '16px'}}/> : 'Menu'}</SidebarMenuItem>
+        <SidebarMenuItem className={app_status === "/Dashboard" ? "active" : ""} onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={ComeBack} alt="voltar" style={{width: '128px'}}/> : 'Menu'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
        {collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}

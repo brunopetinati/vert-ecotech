@@ -21,10 +21,11 @@ export const SidebarContainerOriginal = styled.div`
 export const SidebarContainer = styled.div`
   background-color: #F9FAFB;
   height: 100vh;
-  width: ${({collapsed}) => collapsed ? "50px" : "250px"};
+  width: ${({collapsed}) => collapsed ? "50px" : "100px"};
   top: 0;
   left: 0;
   display: flex;
+  margin-left: 8px;
   flex-direction: column;
   justify-content: space-between;
   transition: width 0.5s ease-in-out;
@@ -73,6 +74,7 @@ export const SidebarFooter = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 8px;
 `;
 
 export const SidebarIcon = styled.img`

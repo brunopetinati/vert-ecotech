@@ -2,7 +2,7 @@ import { Wrapper, CardContainer, ImageContainer, Image, Title, Info, ScoreContai
 import { getStatusCARColor, getStatusMatriculaColor, getScoreColor, transformNumbersToHectares } from '../../constants/functions';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import DefaultForestImage from '../../assets/default-image2.webp';
+import DefaultForestImage from '../../assets/default-image2.png';
 
 export const MiniCard = ({filteredProjects}) => {
 
