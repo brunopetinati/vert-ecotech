@@ -59,7 +59,7 @@ const ProjectIntern = () => {
     });
   };
 
-  const addressParts = [];
+const addressParts = [];
 
 if (projectOwner.street) {
   addressParts.push('Rua ' + projectOwner.street);

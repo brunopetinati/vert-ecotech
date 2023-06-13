@@ -13,19 +13,21 @@ export const ModalContainer = styled.div`
   z-index: 9999; /* Set a higher z-index value */
 `;
 
-export const ModalBox = styled.div`
-  position: relative;
-  border-radius: 4px;
-  padding: 20px;
-`;
-
 export const CloseButton = styled.button`
   position: absolute;
-  top: 50px;
-  right: 50px;
-  transform: translate(50%, -50%);
+  top: 10px;
+  right: 10px;
   background-color: transparent;
   border: none;
   font-size: 20px;
   cursor: pointer;
+  color: #777;
+`;
+
+export const ModalBox = styled.div`
+  position: relative;
+  border-radius: 4px;
+  padding: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 `;
