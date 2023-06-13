@@ -24,6 +24,10 @@ const ProjectIntern = () => {
     navigate('/welcome')
   };
 
+  const handleComeBackKanBan = () => {
+    navigate('/analysis_and_development')
+  }
+
   const handleRegister = () => {
     navigate('/edit_intern_project', { state: { project }});
   };
@@ -162,6 +166,7 @@ const addressString = addressParts.join(', ');
         
         </Column>
         <ButtonContainer>
+          {user.user_type === "ADM" && <Button onClick={() => handleComeBackKanBan()}>Desenvolvimento</Button>}
           <Button onClick={() => handleComeBack()}>Voltar</Button>
           <Button onClick={() => handleRegister()}>Editar Informações</Button>
         </ButtonContainer>

@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import KanbanUserCard from '../kanban_user_card';
 import KanbanSidebar from '../kanban_sidebar';
+import KanbanUserCardModal from '../kanban_user_card_modal';
 
 const KanbanBoard = () => {
 
@@ -26,6 +27,8 @@ const KanbanBoard = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [showingColumn, setShowingColumn] = useState(false);
   const [newUsers, setNewUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -123,7 +126,18 @@ const KanbanBoard = () => {
     navigate('/intern_project', { state: { project }} );
   };
 
+  const handleClickUser = (user) => {
+    //navigate('/new_path', { state: { user }});
+    console.log('clicou aqui');
+    console.log(user);
+    setSelectedUser(user);
+    setIsOpen(!isOpen);
+  }
 
+  const handleOnClose = () => {
+    setIsOpen(!isOpen);
+  }
+  
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -148,14 +162,15 @@ const KanbanBoard = () => {
                     <p>Informações</p>
                   </Card>
                 );
-              } else {
+              } else {  
                 return null; // or you can render something else here
               }
             })}
 
-              {newUsers && newUsers.map((user, key) => {
-                return <KanbanUserCard full_name={user.full_name} city={user.city} state={user.state} />
+            {newUsers && newUsers.map((user, key) => {                
+                return <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}><KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state}  /></div>
               })}
+              {selectedUser && <KanbanUserCardModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
           <Column
             onDragOver={handleDragOver}

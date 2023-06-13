@@ -8,13 +8,9 @@ import { useSelector } from "react-redux";
 
 const ResetPassword = ({ isOpen, onClose, children }) => {
 
-
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
-
-
-  
 
   const handleSubmitPassword = () => {
 

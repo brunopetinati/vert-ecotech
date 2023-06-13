@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectsCards, usersCards } from '../../store/modules/settings/actions';
 import { Container } from './styles'
 import { StyledButton } from '../default_button/styles';
-import Modal from '../default_modal';
 import ResetPassword from '../reset_password';
 import { eraseAll } from '../../store/modules/app_data/actions';
 import { useNavigate } from 'react-router-dom';
