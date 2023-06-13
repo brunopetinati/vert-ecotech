@@ -10,14 +10,12 @@ export const SimpleModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 9999; /* Set a higher z-index value */
 `;
 
 export const ModalContent = styled.div`
-  background-color: #fff;
+  background-color: white;
   padding: 20px;
   border-radius: 8px;
-  z-index: 10000;
-  font-family: Arial, sans-serif;
-  color: #333;
+  z-index: 10000; /* Set a higher z-index value */
 `;

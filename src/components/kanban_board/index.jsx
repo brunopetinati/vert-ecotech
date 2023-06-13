@@ -105,11 +105,8 @@ const KanbanBoard = () => {
                 Authorization: `Bearer ${token}`,
               },
             });
-    
             // Dispatch or handle response.data here
-            console.log('response.data', response.data);
             setNewUsers(response.data);
-            console.log('novos usuários?', newUsers);
           }
           // Rest of the fetchProjects function code...
         } catch (error) {
@@ -137,6 +134,7 @@ const KanbanBoard = () => {
   const handleOnClose = () => {
     setIsOpen(!isOpen);
   }
+
   
   return (
     <motion.div

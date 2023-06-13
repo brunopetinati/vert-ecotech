@@ -21,10 +21,10 @@ const RegisterProjectInfo = () => {
   const [totalArea, setTotalArea] = useState('');
   const [totalReserveArea, setTotalReserveArea] = useState('');
   const [address, setAddress] = useState('');
-  const [owner, setOwner] = useState('');
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
   const [title, setTitle] = useState('');
+  const [owner, setOwner] = useState(currentUser.id);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -228,8 +228,6 @@ const RegisterProjectInfo = () => {
   // REGISTRAR PROJETO
   const handleRegister = () => {
 
-    
-
     if (totalArea) {
       setTotalAreaError('');
     }
@@ -311,7 +309,6 @@ const RegisterProjectInfo = () => {
       });
   };
 
-  //
   
   return (
     <motion.div

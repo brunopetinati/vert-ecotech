@@ -56,12 +56,12 @@ const AppRoutes = () => {
         <Route exact path="/intern_project" element={<ProjectIntern />} />
         <Route exact path="/edit_intern_project" element={<EditProject />} />
         <Route exact path="/intern_user" element={<UserIntern />} />
-        <Route exact path="/analysis_and_development" element={<KanbanBoard />}></Route>
-        <Route exact path="/privacy" element={<PrivacyPolicyPage />}></Route>
-        <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />}></Route>
-        <Route exact path="/open_upload/:access" element={<RegisterProjectFileUploadWebOpen />}></Route>
-        <Route exact path="/upload_success" element={<OutsiderSuccess />}></Route>
-        <Route exact path="/upload_canceled" element={<OutsiderCanceled />}></Route> 
+        <Route exact path="/analysis_and_development" element={<KanbanBoard />} />
+        <Route exact path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />} />
+        <Route exact path="/open_upload/:access" element={<RegisterProjectFileUploadWebOpen />} />
+        <Route exact path="/upload_success" element={<OutsiderSuccess />} />
+        <Route exact path="/upload_canceled" element={<OutsiderCanceled />} /> 
       </Routes>
     </AnimatePresence>
   );
