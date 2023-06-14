@@ -36,8 +36,7 @@ const Banco = ({ isOpen, onClose, children }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-        <InnerContainer>
-        <form onSubmit={handleSubmit}>
+        <InnerContainer onSubmit={handleSubmit}>
             <Column>
               <Label htmlFor="tipo_conta">Tipo de conta:</Label>
               <Input
@@ -82,11 +81,10 @@ const Banco = ({ isOpen, onClose, children }) => {
                 onChange={handleInputChange}
               />
             </Column>
-            <ButtonDisplay>
+        </InnerContainer>
+        <ButtonDisplay>
               <Button type="submit">Adicionar Informações</Button>
             </ButtonDisplay>
-          </form>
-        </InnerContainer>
       </Container>
     </Modal>
   );
