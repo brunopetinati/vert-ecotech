@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import  Banco from './banco';
+import  Banco from '../bank';
 import { StyledButton } from '../default_button/styles';
 import { MainContainer, ProfileContainerInfo, Row, Label, ShowInput, StyledSelect } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
@@ -262,7 +262,7 @@ const InternRegisterUser = () => {
               />
             </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-              {/* <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton> */}
+              <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton>
               <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Cadastrar</StyledButton>
               <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0px'}}>Voltar</StyledButton>
             </div>     
