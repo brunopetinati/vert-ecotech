@@ -20,6 +20,7 @@ const Banco = ({ isOpen, onClose, children }) => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('entrou aqui');
     e.preventDefault();
     try {
       const response = await axios.post(`${currentUrl}/api/bankinfo/`, {
@@ -83,8 +84,8 @@ const Banco = ({ isOpen, onClose, children }) => {
             </Column>
         </InnerContainer>
         <ButtonDisplay>
-              <Button type="submit">Adicionar Informações</Button>
-            </ButtonDisplay>
+          <Button type="submit" onClick={(e) => handleSubmit(e)}>Adicionar Informações</Button>
+        </ButtonDisplay>
       </Container>
     </Modal>
   );
