@@ -32,24 +32,15 @@ const AcceptanceBar = ({path, func, registerUser}) => {
         });
       })
       .catch(error => {
-        // função que zera o status redux aqui
-        if (error.response && error.response.data && error.response.data.city && error.response.data.city[0] === "This field may not be blank." && error.response.data.state && error.response.data.state[0] === "This field may not be blank.") {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Verifique o CEP e tente novamente. Caso o erro persista, contate nosso suporte.',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        } else {
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Algo deu errado ao tentar processar sua requisição. Verifique os campos e tente novamente!',
-            icon: 'error',
-            confirmButtonText: 'OK'
-        });
+        // função que zera o status redux aqui        
         console.error('tracking the following error would be important',error);
-      }
-    });
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
     }
     navigate(path);
   };
