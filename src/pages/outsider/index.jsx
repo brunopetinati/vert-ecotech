@@ -9,7 +9,6 @@ import uploadedFile from '../../assets/icons/secondary_file.png'
 
 const RegisterProjectFileUploadWebOpen = () => {
 
-
   function separateInfo(data) {
     const [constant1, constant2, constant3] = data.split("-vert-");
     return [constant1, constant2, constant3];
@@ -43,7 +42,7 @@ const RegisterProjectFileUploadWebOpen = () => {
 
   
 
-  const handleUpload = async () => {
+  const handleUpload = async (redirectPath) => {
     const url = `${currentUrl}/api/projects/${projectId}/update/`;
   
     const formData = new FormData();
@@ -66,7 +65,7 @@ const RegisterProjectFileUploadWebOpen = () => {
         icon: 'success',
         confirmButtonText: 'OK'
       });      
-      window.location = '/upload_success'
+      window.location = redirectPath
     } catch (error) {
       Swal.fire({
         title: 'Erro!',
@@ -79,18 +78,12 @@ const RegisterProjectFileUploadWebOpen = () => {
     }
   };
 
-  const handleCancelUpload = () => {
-    window.location = '/upload_canceled'
-  }
-
-
   return (
     <Container>
       <h3>Informações Cadastrais</h3>
       <InnerContainer>
         <Column>
-        <>
-
+    <>
       <ImageContainer>
         {selectedFiles.pdf_matricula_certificate ? <img src={uploadedFile} style={{width: '60px', marginBottom: '16px' }} alt="uploaded file" /> : <img src={addFile} alt="emptyFile" style={{width: '50px', marginBottom: '16px'}}/>}
         <label>Anexar Certidão de Matrícula</label>
@@ -143,8 +136,8 @@ const RegisterProjectFileUploadWebOpen = () => {
         </Column>
       </InnerContainer>
       <InnerContainer style={{marginTop: '16px'}}>
-        <Button onClick={handleUpload}>Finalizar</Button>
-        <ButtonSecondary onClick={handleCancelUpload} >Salvar e continuar mais tarde</ButtonSecondary>      
+        <Button onClick={handleUpload('/upload_success')}>Finalizar</Button>
+        <ButtonSecondary onClick={handleUpload('/upload_canceled')} >Salvar e continuar mais tarde</ButtonSecondary>      
       </InnerContainer>
     </Container>
   )
