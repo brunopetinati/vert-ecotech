@@ -30,6 +30,6 @@ export const Input = styled.input`
   width: 250px;
 
   &:focus {
-    border-color: #007bff;
+    border-color: #7eff00;
   }
 `;
