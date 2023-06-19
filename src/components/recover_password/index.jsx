@@ -48,7 +48,7 @@ const RecoverPassword = ({ }) => {
       />
       <Input
           type="password"
-          placeholder="Confirme a senha"
+          placeholder="Confirme a nova senha"
           value={password2}
           onChange={e => setPassword2(e.target.value)}
       />

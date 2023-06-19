@@ -4,15 +4,20 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
+import Swal from 'sweetalert2';
 
 const Banco = ({ isOpen, onClose, children }) => {
+
+
   const currentUser = useSelector((state) => state.user.currentUser);
+
   const [formData, setFormData] = useState({
     account_type: '',
     bank: '',
     account_number: '',
     agency: '',
-    pix_key: ''
+    pix_key: '',
+    user: currentUser.id
   });
 
   const handleInputChange = (e) => {
@@ -22,15 +27,31 @@ const Banco = ({ isOpen, onClose, children }) => {
   const handleSubmit = async (e) => {
     console.log('entrou aqui');
     e.preventDefault();
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}`, };
+
     try {
       const response = await axios.post(`${currentUrl}/api/bankinfo/`, {
-        ...formData,
-        user: currentUser
-      });
-      console.log(response.data); // Handle the response as needed
+        ...formData
+      }, { headers });
+      console.log(response.data);
+      console.log('verificar resposta acima');
+      Swal.fire({
+        title: 'Sucesso!',
+        text: 'Dados de banco foram inseridos com sucesso.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }); // Handle the response as needed
       onClose(); // Close the modal after successful submission
     } catch (error) {
       console.error(error); // Handle any errors
+      Swal.fire({
+        title: 'Erro!',
+        text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
 
