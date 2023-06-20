@@ -78,7 +78,7 @@ export const ButtonContainer = styled.div`
 export const Button = styled.button`
   border-radius: 8px;
   padding: 16px;
-  width: 70%;
+  width: 80%;
   margin: 0 auto 8px auto;
   background: #00ae00;
   color: #fff;
@@ -88,7 +88,7 @@ export const Button = styled.button`
 export const ButtonSecondary = styled.button`
   border-radius: 8px;
   padding: 16px;
-  width: 70%;
+  width: 80%;
   margin: 0 auto 8px auto;
   background: transparent;
   border: 1px solid #00ae00;
