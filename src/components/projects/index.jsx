@@ -10,34 +10,37 @@ import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
 
 const Projects = () => {
-
   const collapsed = useSelector((state) => state.sidebar.status);
   const app_status = useSelector((state) => state.app_status.status);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const dispatch = useDispatch();
-  const projects = useSelector((state) => state.app_data.projects);
   const currentUser = useSelector((state) => state.user.currentUser);
+
+  const [selectedColumn, setSelectedColumn] = useState('');
+  const [searchValue, setSearchValue] = useState('');
+  const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     if (projects.length === 0) {
       const fetchProjects = async () => {
         try {
           const token = sessionStorage.getItem('Authorization');
+          let response;
           if (currentUser.user_type === 'ADM') {
-            const response = await axios.get(`${currentUrl}/api/projects/`, {
+            response = await axios.get(`${currentUrl}/api/projects/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             });
-            dispatch(storeProjects(response.data));
           } else {
-            const response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
+            response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             });
-            dispatch(storeProjects(response.data));
           }
+          setProjects(response.data);
+          dispatch(storeProjects(response.data));
         } catch (error) {
           console.error(error);
         }
@@ -45,11 +48,6 @@ const Projects = () => {
       fetchProjects();
     }
   }, [app_status, currentUser.id, currentUser.user_type, currentUrl, dispatch, projects]);
-  
-
-
-  const [selectedColumn, setSelectedColumn] = useState('');
-  const [searchValue, setSearchValue] = useState('');
 
   const filteredProjects = projects.filter((project) => {
     if (!searchValue) {
@@ -73,7 +71,6 @@ const Projects = () => {
     if (selectedColumn === 'Status CAR' && project.status_car.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
-    
     return false;
   });
 
@@ -86,24 +83,24 @@ const Projects = () => {
   };
 
   return (
-    <Container collapsed={collapsed} >
+    <Container collapsed={collapsed}>
       <ButtonContainer>
         <div>
-        <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
-        <StyledSelect id="column-select" onChange={handleColumnChange}>
-          <option value="">---</option>
-          <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
-          <option value="Localidade">Localidade</option>
-          <option value="Status da Matrícula">Status da Matrícula</option>
-          <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
-          <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
-          <option value="Status CAR">Status CAR</option>
+          <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
+          <StyledSelect id="column-select" onChange={handleColumnChange}>
+            <option value="">---</option>
+            <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
+            <option value="Localidade">Localidade</option>
+            <option value="Status da Matrícula">Status da Matrícula</option>
+            <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
+            <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
+            <option value="Status CAR">Status CAR</option>
           </StyledSelect>
         </div>
         <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
       </ButtonContainer>
       <TableContainer>
-        {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} /> }
+        {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} />}
       </TableContainer>
     </Container>
   );
