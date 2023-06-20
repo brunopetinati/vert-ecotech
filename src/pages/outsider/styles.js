@@ -82,6 +82,7 @@ export const Button = styled.button`
   margin: 0 auto 8px auto;
   background: #00ae00;
   color: #fff;
+  font-size: 16px;
 `;
 
 export const ButtonSecondary = styled.button`
@@ -92,6 +93,7 @@ export const ButtonSecondary = styled.button`
   background: transparent;
   border: 1px solid #00ae00;
   color: #00ae00;
+  font-size: 16px;
 `;
 
 
