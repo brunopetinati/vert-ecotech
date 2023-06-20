@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 import addFile from '../../assets/icons/add_file.png'
 import uploadedFile from '../../assets/icons/secondary_file.png'
 
-
 const RegisterProjectFileUploadWebOpen = () => {
 
   function separateInfo(data) {
@@ -137,7 +136,7 @@ const RegisterProjectFileUploadWebOpen = () => {
       </InnerContainer>
       <InnerContainer style={{marginTop: '16px'}}>
         <Button onClick={handleUpload('/upload_success')}>Finalizar</Button>
-        <ButtonSecondary onClick={handleUpload('/upload_canceled')} >Salvar e continuar mais tarde</ButtonSecondary>      
+        <ButtonSecondary onClick={handleUpload('/upload_canceled')}>Salvar e continuar mais tarde</ButtonSecondary>      
       </InnerContainer>
     </Container>
   )

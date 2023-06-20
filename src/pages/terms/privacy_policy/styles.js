@@ -8,6 +8,14 @@ export const Container = styled.div`
   align-items: center;
 
   div {
-    width: 80vw;    
+    width: 80vw;
+  }
+
+  @media (max-width: 700px) { 
+    width: 100vw;
+
+    div {
+      width: 90vw;
+    }
   }
 `;
