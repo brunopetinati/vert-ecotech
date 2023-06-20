@@ -15,9 +15,7 @@ export const currentUrl = awsUrl;
 //  atenção: exemplo de url
 // `${currentUrl}/api/reset-password/${currentUser.id}/`;
 
-
 //const currentUser = useDispatch((state) => state.user.currentUser);
-
 
 // insomnia "baseUrl": "http://18.218.97.13:8000/api"
 
@@ -29,14 +27,11 @@ export const currentUrl = awsUrl;
  
 // https://alunos.kenzie.com.br/courses/39/assignments/7420?module_item_id=8518 => RDS
 
-
-
 // https://d2kcgtfad3ncth.cloudfront.net/api
 
 // `${currentUrl}/api/login/`
 
 // ec2-13-58-237-27.us-east-2.compute.amazonaws.com
-
 
 // está funcionando
 

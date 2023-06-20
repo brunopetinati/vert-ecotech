@@ -2,7 +2,7 @@ import { currentUrl } from '../../../constants/global';
 
 import { storeUsers } from './actions';
 
-export const getOwners = () => (dispatch, getState) => {
+/* export const getOwners = () => (dispatch, getState) => {
   const token = sessionStorage.getItem('Authorization');
   const requestOptions = {
     method: 'GET',
@@ -16,7 +16,7 @@ export const getOwners = () => (dispatch, getState) => {
     .catch((error) => {
       console.error('Error fetching owners', error);
     });
-};
+}; */
 
 
 export const getFullNameById = (ownerId, owners) => {
