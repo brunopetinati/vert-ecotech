@@ -28,6 +28,10 @@ const AppRoutes = () => {
   const dispatch = useDispatch();
 
   const login = useSelector((state) => state.user);
+
+  useEffect(() => {
+    dispatch(getOwners());
+  }, [login]);
   
   if (!login.accessToken && location.pathname !== '/'&&
     location.pathname !== '/register' &&
