@@ -136,8 +136,8 @@ const RegisterProjectFileUploadWebOpen = () => {
         </Column>
       </InnerContainer>
       <InnerContainer style={{marginTop: '16px'}}>
-        <Button onClick={handleUpload('/upload_success')}>Finalizar</Button>
-        <ButtonSecondary onClick={handleUpload('/upload_canceled')} >Salvar e continuar mais tarde</ButtonSecondary>      
+        <Button onClick={() => handleUpload('/upload_success')}>Finalizar</Button>
+        <ButtonSecondary onClick={() => handleUpload('/upload_canceled')} >Salvar e continuar mais tarde</ButtonSecondary>      
       </InnerContainer>
     </Container>
   )
