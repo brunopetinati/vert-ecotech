@@ -39,6 +39,7 @@ const RegisterProjectFileUploadWebOpen = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+
     const checkExistingFiles = async () => {
       const url = `${currentUrl}/api/projects/${projectId}/`;
       try {
@@ -72,17 +73,6 @@ const RegisterProjectFileUploadWebOpen = () => {
     checkExistingFiles();
   }, [projectId, credentials]);
 
-  const handleFileInput = (fieldName, e) => {
-    setSelectedFiles((prevSelectedFiles) => ({
-      ...prevSelectedFiles,
-      [fieldName]: e.target.files[0],
-    }));
-    setExistingFiles((prevSelectedFiles) => ({
-      ...prevSelectedFiles,
-      [fieldName]: e.target.files[0],
-    }));
-  };
-
   const handleUpload = async (redirectPath) => {
     const url = `${currentUrl}/api/projects/${projectId}/update/`;
 
@@ -111,13 +101,28 @@ const RegisterProjectFileUploadWebOpen = () => {
     }
   };
 
-  const resetFileState = (fieldName) => {
-    setExistingFiles(prevState => ({
-      ...prevState,
-      [fieldName]: false
+  const handleFileInput = (fieldName, e) => {
+    setSelectedFiles((prevSelectedFiles) => ({
+      ...prevSelectedFiles,
+      [fieldName]: e.target.files[0],
+    }));
+    setExistingFiles((prevSelectedFiles) => ({
+      ...prevSelectedFiles,
+      [fieldName]: e.target.files[0],
     }));
   };
 
+  const resetFileState = (fieldName) => {
+    setExistingFiles((prevState) => ({
+      ...prevState,
+      [fieldName]: false,
+    }));
+    setSelectedFiles((prevSelectedFiles) => ({
+      ...prevSelectedFiles,
+      [fieldName]: null,
+    }));
+  };
+  
   return (
     <>
       {loading ? (
@@ -139,7 +144,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                       <label>Certidão de Matrícula</label>
                       <button
                         style={{ margin: '16px' }}
-                        onClick={() => resetFileState('pdf_matricula_certificate')}
+                        onClick={(e) => resetFileState('pdf_matricula_certificate', e)}
                       >
                         Escolher outro arquivo
                       </button>
@@ -175,7 +180,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                       <label>PDF do CAR (SICAR)</label>
                       <button
                         style={{ margin: '16px' }}
-                        onClick={() => resetFileState('pdf_car')}
+                        onClick={(e) => resetFileState('pdf_car', e)}
                       >
                         Escolher outro arquivo
                       </button>
@@ -207,7 +212,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                       <label>Polígono da propriedade</label>
                       <button
                         style={{ margin: '16px' }}
-                        onClick={() => resetFileState('property_polygon')}
+                        onClick={(e) => resetFileState('property_polygon', e)}
                       >
                         Escolher outro arquivo
                       </button>
@@ -245,7 +250,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                       <label>Cópia do CCIR</label>
                       <button
                         style={{ margin: '16px' }}
-                        onClick={() => resetFileState('pdf_ccir')}
+                        onClick={(e) => resetFileState('pdf_ccir', e)}
                       >
                         Escolher outro arquivo
                       </button>
@@ -277,7 +282,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                       <label>Certidão de Regularidade da Dívida Federal</label>
                       <button
                         style={{ margin: '16px' }}
-                        onClick={() => resetFileState('pdf_federal_debt_certificate')}
+                        onClick={(e) => resetFileState('pdf_federal_debt_certificate', e)}
                       >
                         Escolher outro arquivo
                       </button>
@@ -324,4 +329,3 @@ const RegisterProjectFileUploadWebOpen = () => {
 };
 
 export default RegisterProjectFileUploadWebOpen;
-
