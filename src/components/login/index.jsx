@@ -159,7 +159,7 @@ const Login = () => {
                 <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
               </div>
             </LoginForm>}</motion.div>}
-        {app_status != 'forgot_password' && !showLoading && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
+          <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>
       </LoginContainer>
   );
 };
