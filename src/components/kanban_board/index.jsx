@@ -133,8 +133,7 @@ const KanbanBoard = () => {
 
   const handleOnClose = () => {
     setIsOpen(!isOpen);
-  }
-
+  };
   
   return (
     <motion.div
@@ -144,7 +143,7 @@ const KanbanBoard = () => {
     transition={{ duration: 0.8 }}
     >
       <>
-        <Header>Painel Desenvolvimento de Projetos - Acesso administrativo</Header>
+        <Header>Funil Produtor - Acesso administrativo</Header>
         <Container>
         <KanbanSidebar />
           <Column showingColumn={showingColumn}
@@ -192,7 +191,7 @@ const KanbanBoard = () => {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'viability')}
           >
-            <h4>Viabilidade concluída</h4>
+            <h4>Proposta</h4>
             {projects.map((project, key) => {
               if (project.status === 'viability') {
                 return (
@@ -228,7 +227,7 @@ const KanbanBoard = () => {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'idle')}
           >
-            <h4>Aguardando</h4>
+            <h4>Análise Jurídica</h4>
             {projects.map((project, key) => {
               if (project.status === 'idle') {
                 return (
@@ -246,7 +245,7 @@ const KanbanBoard = () => {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'implementing')}
           >
-            <h4>Em andamento</h4>
+            <h4>Contrato</h4>
             {projects.map((project, key) => {
               if (project.status === 'implementing') {
                 return (
@@ -267,6 +266,24 @@ const KanbanBoard = () => {
             <h4>Concluído</h4>
             {projects.map((project, key) => {
               if (project.status === 'concluded') {
+                return (
+                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <h3>{project.title}</h3>
+                    <p>Informações</p>
+                  </Card>
+                );
+              } else {
+                return null; // or you can render something else here
+              }
+            })}
+          </Column>
+          <Column
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, 'lost')}
+          >
+            <h4>Perdido</h4>
+            {projects.map((project, key) => {
+              if (project.status === 'lost') {
                 return (
                   <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
                     <h3>{project.title}</h3>
