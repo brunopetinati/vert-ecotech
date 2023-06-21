@@ -177,7 +177,7 @@ const addressString = addressParts.join(', ');
             <h2>Engenharia Ambiental</h2>
 
             <ButtonContainer>
-              { project.status === '' && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
+              { project.status === null && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
             </ButtonContainer>
             <InnerContainer>
 
