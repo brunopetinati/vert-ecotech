@@ -29,7 +29,7 @@ export const Card = ({filteredProjects}) => {
           <Image src={DefaultForestImage} alt="DefaultForestImage" />
         </ImageContainer>
         <InnerContainer>
-          <Title style={{color: getScoreColor(project.score)}}>{project.title === "default" ? '-' : project.title}</Title>
+          <Title style={{color: getScoreColor(project.score)}}>{project.title === "default" ? 'Sem Título' : project.title}</Title>
           <Info style={{ fontFamily: `"Times New Roman", Times, serif`, fontStyle: 'italic'}}>{transformNumbersToHectares(project.total_area)}</Info>
           <Info style={{ fontFamily: `"Times New Roman", Times, serif`, fontStyle: 'italic'}}>{transformNumbersToHectares(project.legal_reserve_area || '-')}</Info>
           <Info style={{ fontSize: '16px' }}>CAR: <span style={{ color: getStatusCARColor(project.status_car) }}>{project.status_car}</span></Info>

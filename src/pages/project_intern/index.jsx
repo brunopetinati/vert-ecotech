@@ -118,7 +118,7 @@ const addressString = addressParts.join(', ');
             </InnerContainer>
           </>
         }          
-        <h2>{project.title || '-'}</h2>
+        <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
