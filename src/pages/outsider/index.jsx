@@ -28,6 +28,7 @@ const RegisterProjectFileUploadWebOpen = () => {
     owner: owner
   });
 
+
   const [existingFiles, setExistingFiles] = useState({
     pdf_matricula_certificate: false,
     pdf_car: false,
@@ -35,6 +36,9 @@ const RegisterProjectFileUploadWebOpen = () => {
     pdf_federal_debt_certificate: false,
     pdf_ccir: false,
   });
+
+  console.log(existingFiles)
+
 
   const [loading, setLoading] = useState(false);
 
@@ -48,6 +52,7 @@ const RegisterProjectFileUploadWebOpen = () => {
             Authorization: `Bearer ${credentials}`,
           },
         });
+
         const { data } = response;
         const {
           pdf_matricula_certificate,
@@ -92,7 +97,11 @@ const RegisterProjectFileUploadWebOpen = () => {
         },
       });
       setLoading(true);
-    } catch (error) {
+      setTimeout(() => {
+        setLoading(false);
+        window.location = redirectPath;
+      }, 5000);
+    } catch (error){
       setLoading(false);
       alert('Algo deu errado. Por favor, contate nosso suporte: suporte@vertecotech.com');
       console.error('Error:', error);
@@ -141,7 +150,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         style={{ width: '60px', marginBottom: '16px' }}
                         alt="uploaded file"
                       />
-                      <label>Certidão de Matrícula</label>
+                      <label>{}</label>
                       <button
                         style={{ margin: '16px' }}
                         onClick={(e) => resetFileState('pdf_matricula_certificate', e)}
