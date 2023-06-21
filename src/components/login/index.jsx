@@ -72,24 +72,19 @@ const Login = () => {
     dispatch(appStatus('forgot_password'));
   };
 
-  const handleRememberPassword = (e) => {
+  const handleComeBack = (e) => {
     e.preventDefault();
     dispatch(appStatus(''));
   }
 
-
   const handleSendPasswordBack = (e) => {
     e.preventDefault();
-    axios.post(`${currentUrl}/api/recover-password/`) // send GET request to get CSRF token
+    axios.post(`${currentUrl}/api/password-reset/`, { email: email })
       .then(response => {
-        const csrfToken = response.data.csrfToken;
-        axios.defaults.headers.post['X-CSRF-Token'] = csrfToken; // set CSRF token as a header in all subsequent POST requests
-        return axios.post(`${currentUrl}/api/recover-password/`, { email })
-      })
-      .then(response => {        
+        console.log(response);
         Swal.fire({
-          title: 'Sucesso!',
-          text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada ou spam.',
+          title: 'Success!',
+          text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada, spam ou lixo eletrônico.',
           icon: 'success',
           confirmButtonText: 'OK'
         });
@@ -97,15 +92,14 @@ const Login = () => {
       .catch(error => {
         console.error(error); // handle error response
         Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado ao processar a requisição. Caso o erro persista, contate nosso suporte.',
+          title: 'Error!',
+          text:  'Algo deu errado ao tentar processar essa atividade. Por favor, contate nosso suporte. suporte@vertecotech.com',
           icon: 'error',
           confirmButtonText: 'OK'
         });
       });
   }
-  
-  
+    
   return (
      <LoginContainer>
         {showLoading ? <motion.div
@@ -137,10 +131,11 @@ const Login = () => {
                 />
                 <div>
                   <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
-                  <Button onClick={handleRememberPassword}>Voltar</Button>
+                  <Button onClick={handleComeBack}>Voltar</Button>
                 </div>
               </LoginForm>
-            </motion.div> :
+            </motion.div> 
+            :
             <LoginForm onSubmit={handleSubmit}>
               <Input
                 type="text"
