@@ -75,6 +75,10 @@ const RegisterProjectFileUploadWebOpen = () => {
       ...prevSelectedFiles,
       [fieldName]: e.target.files[0],
     }));
+    setExistingFiles((prevSelectedFiles) => ({
+      ...prevSelectedFiles,
+      [fieldName]: e.target.files[0],
+    }));
   };
 
   const handleUpload = async (redirectPath) => {
@@ -113,6 +117,22 @@ const RegisterProjectFileUploadWebOpen = () => {
     }
   };
 
+  const resetFileState = (fieldName) => {
+    setExistingFiles(prevState => ({
+      ...prevState,
+      [fieldName]: false
+    }));
+  };
+  
+
+  /* const [existingFiles, setExistingFiles] = useState({
+    pdf_matricula_certificate: false,
+    pdf_car: false,
+    property_polygon: false,
+    pdf_federal_debt_certificate: false,
+    pdf_ccir: false,
+  }); */
+
   return (
     <Container>
       <h3>Informações Cadastrais</h3>
@@ -121,12 +141,18 @@ const RegisterProjectFileUploadWebOpen = () => {
           <>
             <ImageContainer>
               {existingFiles.pdf_matricula_certificate ? (
+                <>
                 <img src={uploadedFile} style={{ width: '60px', marginBottom: '16px' }} alt="uploaded file" />
+                <label>Certidão de Matrícula</label>
+                <button style={{margin: '16px'}} onClick={() => resetFileState('pdf_matricula_certificate')}>Escolher outro arquivo</button>
+                </>
               ) : (
+                <>
                 <img src={addFile} alt="emptyFile" style={{ width: '50px', marginBottom: '16px' }} />
+                <label>Anexar Certidão de Matrícula</label>
+                <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
+                </>
               )}
-              <label>Anexar Certidão de Matrícula</label>
-              <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
               <p />
               {!existingFiles.pdf_matricula_certificate && (
                 <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
@@ -135,11 +161,17 @@ const RegisterProjectFileUploadWebOpen = () => {
             <p />
             <ImageContainer>
               {existingFiles.pdf_car ? (
+                <>
                 <img src={uploadedFile} style={{ width: '60px', marginBottom: '16px' }} alt="uploaded file" />
+                <label>PDF do CAR (SICAR)</label>
+                <button style={{margin: '16px'}} onClick={() => resetFileState('pdf_car')}>Escolher outro arquivo</button>
+                </>
               ) : (
+                <>
                 <img src={addFile} alt="emptyFile" style={{ width: '50px', marginBottom: '16px' }} />
+                <label>Anexar PDF do CAR (SICAR)</label>
+                </>
               )}
-              <label>Anexar PDF do CAR (SICAR)</label>
               <p />
               {!existingFiles.pdf_car && (
                 <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
@@ -148,14 +180,20 @@ const RegisterProjectFileUploadWebOpen = () => {
             <p />
             <ImageContainer>
               {existingFiles.property_polygon ? (
+                <>
                 <img src={uploadedFile} style={{ width: '60px', marginBottom: '16px' }} alt="uploaded file" />
+                <label>Polígono da propriedade</label>
+                <button style={{margin: '16px'}} onClick={() => resetFileState('property_polygon')}>Escolher outro arquivo</button>
+                </>
               ) : (
+                <>
                 <img src={addFile} alt="emptyFile" style={{ width: '50px', marginBottom: '16px' }} />
-              )}
-              <label>Anexar o Polígono da propriedade</label>
-              <small style={{ marginLeft: '8px' }}>
-                (Formatos aceitos: *.KMZ ou *.KML)
-              </small>
+                <label>Anexar o Polígono da propriedade</label>
+                <small style={{ marginLeft: '8px' }}>
+                  (Formatos aceitos: *.KMZ ou *.KML)
+                </small>
+                </>
+              )}              
               <p />
               {!existingFiles.property_polygon && (
                 <StyledFileInput type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
@@ -164,11 +202,17 @@ const RegisterProjectFileUploadWebOpen = () => {
             <p />
             <ImageContainer>
               {existingFiles.pdf_ccir ? (
+                <>
                 <img src={uploadedFile} style={{ width: '60px', marginBottom: '16px' }} alt="uploaded file" />
+                <label>Cópia do CCIR</label>
+                <button style={{margin: '16px'}} onClick={() => resetFileState('pdf_ccir')}>Escolher outro arquivo</button>
+                </>
               ) : (
+                <>
                 <img src={addFile} alt="emptyFile" style={{ width: '50px', marginBottom: '16px' }} />
+                <label>Anexar cópia do CCIR</label>
+                </>
               )}
-              <label>Anexar cópia do CCIR</label>
               <p />
               {!existingFiles.pdf_ccir && (
                 <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
@@ -177,11 +221,17 @@ const RegisterProjectFileUploadWebOpen = () => {
             <p />
             <ImageContainer>
               {existingFiles.pdf_federal_debt_certificate ? (
+                <>
                 <img src={uploadedFile} style={{ width: '60px', marginBottom: '16px' }} alt="uploaded file" />
+                <label>Certidão de Regularidade da Dívida Federal</label>
+                <button style={{margin: '16px'}} onClick={() => resetFileState('pdf_federal_debt_certificate')}>Escolher outro arquivo</button>
+                </>
               ) : (
+                <>
                 <img src={addFile} alt="emptyFile" style={{ width: '50px', marginBottom: '16px' }} />
+                <label>Anexar Certidão de Regularidade da Dívida Federal</label>
+                </>
               )}
-              <label>Anexar Certidão de Regularidade da Dívida Federal</label>
               <p />
               {!existingFiles.pdf_federal_debt_certificate && (
                 <StyledFileInput type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
