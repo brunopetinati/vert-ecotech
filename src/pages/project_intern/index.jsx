@@ -20,6 +20,8 @@ const ProjectIntern = () => {
 
   const navigate = useNavigate();
 
+  console.log('prestar atenção nesse console', project);
+
   const handleComeBack = () => {
     navigate('/welcome')
   };
@@ -175,7 +177,7 @@ const addressString = addressParts.join(', ');
             <h2>Engenharia Ambiental</h2>
 
             <ButtonContainer>
-              <Button onClick={() => startProject()}>Inicializar Processo</Button>
+              { project.status === '' && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
             </ButtonContainer>
             <InnerContainer>
 
