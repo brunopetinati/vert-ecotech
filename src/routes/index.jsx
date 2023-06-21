@@ -33,16 +33,16 @@ const AppRoutes = () => {
     dispatch(getOwners());
   }, [login]);
   
-  if (!login.accessToken && location.pathname !== '/'&&
+  if (!login.accessToken && location.pathname !== '/' &&
     location.pathname !== '/register' &&
     location.pathname !== '/privacy_policy' &&
     location.pathname !== '/terms_of_use' &&
     location.pathname !== '/privacy' &&
     location.pathname !== '/terms_of_use_page' &&
-    (!location.pathname.includes('/recover_password') &&
-    location.pathname.length > 5) &&
-    (!location.pathname.includes('/open_upload/') &&
-    location.pathname.length > 20) &&
+    !location.pathname.startsWith('/recover_password') &&
+    location.pathname.length > 5 &&
+    !location.pathname.startsWith('/open_upload/') &&
+    location.pathname.length > 20 &&
     location.pathname !== '/upload_success' &&
     location.pathname !== '/upload_canceled') {
     navigate('/');
@@ -75,7 +75,7 @@ const AppRoutes = () => {
         <Route exact path="/open_upload/:access" element={<RegisterProjectFileUploadWebOpen />} />
         <Route exact path="/upload_success" element={<OutsiderSuccess />} />
         <Route exact path="/upload_canceled" element={<OutsiderCanceled />} />
-        <Route exact path="/recover_password/:access" element={<RecoverPassword />} />
+        <Route exact path="/recover_password/:code/:hash" element={<RecoverPassword />} />
       </Routes>
     </AnimatePresence>
   );
