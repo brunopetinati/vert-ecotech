@@ -18,4 +18,5 @@ export const ModalContent = styled.div`
   padding: 20px;
   border-radius: 8px;
   z-index: 10000; /* Set a higher z-index value */
+  width: 300px;
 `;
