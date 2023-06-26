@@ -1,6 +1,7 @@
 import Modal from "../default_modal";
 import { SimpleModal, ModalContent} from './styles'
 import React, { useState } from 'react';
+import { StyledButton } from "../default_button/styles";
 
 const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, children }) => {
 
@@ -15,13 +16,13 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, c
     <Modal isOpen={isOpen} children={
       <SimpleModal isOpen={isOpen} onClick={onClose} >
         <ModalContent>
-         <h4>Deseja notificar o usuário? (Beta)</h4>
+         <h4>Deseja notificar o usuário?</h4>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
-            <button onClick={handleConfirmNotification} style={{width: '128px'}}>Sim</button>
-            <button style={{width: '128px'}}>Não</button>
+            <StyledButton onClick={handleConfirmNotification} style={{width: '128px'}}>Sim</StyledButton>
+            <StyledButton style={{width: '128px'}}>Não</StyledButton>
           </div>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: '32px', marginBottom: '32px'}}>
-            <button>Visualizar notificação</button>
+            <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }}>Visualizar notificação</span>
           </div>
         </ModalContent>
       </SimpleModal> }
