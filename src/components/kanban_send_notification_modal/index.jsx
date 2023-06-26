@@ -6,8 +6,8 @@ import { StyledButton } from "../default_button/styles";
 const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, children }) => {
 
   const handleConfirmNotification = () => {
-    onConfirmNotification(); // Call the provided handler function
-    onClose(); // Close the modal
+    onConfirmNotification(); 
+    onClose(); 
   };
 
   if (!isOpen) return null;
@@ -16,7 +16,7 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, c
     <Modal isOpen={isOpen} children={
       <SimpleModal isOpen={isOpen} onClick={onClose} >
         <ModalContent>
-         <h4>Deseja notificar o usuário?</h4>
+         <h4>Deseja notificar o usuário de seu novo status?</h4>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around'}}>
             <StyledButton onClick={handleConfirmNotification} style={{width: '128px'}}>Sim</StyledButton>
             <StyledButton style={{width: '128px'}}>Não</StyledButton>
