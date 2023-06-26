@@ -142,6 +142,10 @@ const KanbanBoard = () => {
   const handleOnCloseSendNotificationModal = () => {
     setShowModalSendNotification(!showModalSendNotification);
   };
+
+  const handleConfirmNotification = () => {
+    setSendNotification(true); // Update the sendNotification state to true
+  };
   
   return (
     <motion.div
@@ -304,7 +308,13 @@ const KanbanBoard = () => {
             })}
           </Column>
         </Container>
-        {showModalSendNotification && <KanbanSendNotificationModal isOpen={showModalSendNotification} onClose={handleOnCloseSendNotificationModal}></KanbanSendNotificationModal>}
+        {showModalSendNotification && (
+          <KanbanSendNotificationModal
+            isOpen={showModalSendNotification}
+            onClose={handleOnCloseSendNotificationModal}
+            onConfirmNotification={handleConfirmNotification} // Pass the handler function
+          />
+        )}
       </>
     </motion.div>
   );
