@@ -69,7 +69,7 @@ const KanbanBoard = () => {
       if (sendNotification) { axios.post(`${currentUrl}/api/send-notification/`, {
         user: currentOwnerID,
         notification_id: Math.floor(Math.random() * 5) + 1,
-      }, { headers } ).then(response => console.log(response)).catch(error => console.log(error))
+      }, { headers } ).then(response => console.log('resposta da notificação', response)).catch(error => console.log(error))
     }}
   };
 
@@ -313,6 +313,7 @@ const KanbanBoard = () => {
             isOpen={showModalSendNotification}
             onClose={handleOnCloseSendNotificationModal}
             onConfirmNotification={handleConfirmNotification} // Pass the handler function
+            notification={'mensagem de exemplo'}
           />
         )}
       </>
