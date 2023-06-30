@@ -27,7 +27,7 @@ const TermsOfUse = () => {
         >
         <div dangerouslySetInnerHTML={{__html: termsOfUse}} />
       </motion.div>
-      <AcceptanceBar path={'/welcome'} func={scrollWindow} registerUser={true}/>
+      <AcceptanceBar path={'/'} func={scrollWindow} registerUser={true}/>
     </Container>
 )
 };
