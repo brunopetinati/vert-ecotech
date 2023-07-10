@@ -11,13 +11,15 @@ import { userUpdater } from '../../store/modules/login/actions';
 import Swal from 'sweetalert2';
 
 
-const Profile = () => {
+const Profile = ({user}) => {
 
   const dispatch = useDispatch();
 
   const [showModalBanco, setShowModalBanco] = useState(false);
 
-  const user = useSelector((state) => state.user.currentUser);
+  if (!user) {
+    const user = useSelector((state) => state.user.currentUser);
+  }
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
