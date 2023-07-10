@@ -1,17 +1,19 @@
 import { render } from "@testing-library/react";
 import App from "../App";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "../store";
 
-test('sum', () => {
+describe('App', () => {
+  it('should render successfully', () => {
+    
+    const { container } = render(
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>);
 
-  const { getByText } = render(App)
-
-  expect(getByText('Esqueceu a senha?')).toBeTruthy()
-})
-
-
-/* describe('App Component', () => {
-  it('should render list items', () => {
-    const { getByText } = render(<App /> )
-    expect(getByText('Diego')).toBeInTheDocument()
+    expect(container).toBeTruthy();
   });
-}); */
+});

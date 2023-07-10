@@ -26,13 +26,15 @@
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.9",
     "sweetalert2": "^11.7.3",
+    "@toolz/allow": "^1.0.1",
+    "@toolz/is-a-regular-object-react": "^1.0.0",
     "web-vitals": "^2.1.4",
     "yup": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@toolz/allow-react)/\" --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -57,6 +59,7 @@
     "@babel/core": "^7.22.5",
     "@babel/plugin-syntax-jsx": "^7.22.5",
     "@babel/plugin-transform-react-jsx": "^7.22.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "babel-jest": "^29.5.0",
