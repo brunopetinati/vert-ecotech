@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 
 import configureStore from 'redux-mock-store';
 
+
 // Create a mock Redux store
 const mockStore = configureStore([]);
 const store = mockStore({
