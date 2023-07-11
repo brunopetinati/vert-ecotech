@@ -1,9 +1,12 @@
-import { render } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import Profile from "../../components/profile";
 import { Provider } from "react-redux";
 
 import configureStore from 'redux-mock-store';
 
+afterEach(() => { 
+  cleanup();
+});
 
 // Create a mock Redux store
 const mockStore = configureStore([]);
@@ -12,14 +15,14 @@ const store = mockStore({
     currentUser: {
       id: 1,
       full_name: 'Vert Desenvolvimento',
-      rg: '47.859.555-4',
-      cpf: '392.382.555-46',
-      phone: '19 9 9727-9784',
+      rg: '99.999.999-9',
+      cpf: '999.999.999.99',
+      phone: '19999999999',
       email: 'suporte@vertecotech.com',
       user_type: 'ADM',
-      cep: '13140544',
+      cep: '13104500',
       cnpj: '43.492,578/0001-40',
-      street: 'Rua Lúcio Hipólito Rosa',
+      street: 'Rua dos Amarais',
       number: '13',
       complement: '12A',
       district: 'Jardim Ipê',
