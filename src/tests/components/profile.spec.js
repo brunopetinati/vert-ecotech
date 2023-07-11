@@ -33,7 +33,7 @@ const store = mockStore({
 });
 
 describe('Profile', () => {
-  it('should render successfully', () => {
+  it('renders successfully', () => {
     const { container } = render(
       <Provider store={store}>
         <Profile />

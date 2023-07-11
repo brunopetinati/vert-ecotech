@@ -36,7 +36,7 @@ const store = mockStore({
 });
 
 describe('AcceptanceBar', () => {
-  it('should render successfully', () => {
+  it('renders successfully', () => {
     const { container } = render(
       <Provider store={store}>
         <BrowserRouter>
