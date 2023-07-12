@@ -2,7 +2,7 @@ import React from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
 
-const Graph = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key_g, stroke_a, stroke_b, stroke_c, stroke_d, stroke_e, stroke_f, stroke_g}) => (
+const Chart = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key_g, stroke_a, stroke_b, stroke_c, stroke_d, stroke_e, stroke_f, stroke_g}) => (
   <div>
     <h2 style={{color: '#054d00'}}>{title}</h2>
     <LineChart width={500} height={300} data={data}>
@@ -22,5 +22,5 @@ const Graph = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key
   </div>
 );
 
-export default Graph;
+export default Chart;
 

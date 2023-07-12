@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import KanbanUserCard from '../kanban_user_card';
 import KanbanSidebar from '../kanban_sidebar';
-import KanbanUserCardModal from '../kanban_user_card_modal';
+import KanbanUserCardDefaultModal from '../kanban_user_card_modal';
 import KanbanSendNotificationModal from '../kanban_send_notification_modal';
 
 const KanbanBoard = () => {
@@ -179,7 +179,7 @@ const KanbanBoard = () => {
             {newUsers && newUsers.map((user, key) => {                
                 return <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}><KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state}  /></div>
               })}
-              {selectedUser && <KanbanUserCardModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
+              {selectedUser && <KanbanUserCardDefaultModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
           <Column
             onDragOver={handleDragOver}

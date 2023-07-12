@@ -11,7 +11,7 @@ import Logo from '../../assets/marca-vert.png'
 import Exit from '../../assets/icons/exit.svg';
 import MagnifyingGlass from '../../assets/gifs/magnifyingglass.gif'
 import { StyledUser, StyledUsers,  StyledStocks, StyledSettings, StyledWork } from './styles';
-import Modal from "../default_modal";
+import DefaultModal from "../default_modal";
 
 
 const KanbanSidebar = () => {
@@ -99,9 +99,9 @@ const KanbanSidebar = () => {
       <SidebarFooter>
        {/* collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span> */}
       </SidebarFooter>
-      {/* <Modal isOpen={modalOpen} onClose={closeModal}>
+      {/* <DefaultModal isOpen={modalOpen} onClose={closeModal}>
         <h1>Nossa quanto conteúdo esse modal</h1>
-      </Modal> */}
+      </DefaultModal> */}
     </SidebarContainer>
   );
 };

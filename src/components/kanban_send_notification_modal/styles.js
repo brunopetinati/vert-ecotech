@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const SimpleModal = styled.div`
+export const SimpleDefaultModal = styled.div`
   position: fixed;
   top: 0;
   left: 0;

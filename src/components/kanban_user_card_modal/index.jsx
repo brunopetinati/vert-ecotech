@@ -1,5 +1,5 @@
-import Modal from "../default_modal";
-import { SimpleModal, ModalContent} from './styles'
+import DefaultModal from "../default_modal";
+import { SimpleDefaultModal, ModalContent} from './styles'
 import React, { useState } from 'react';
 
 const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
@@ -41,8 +41,8 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
   const addressString = addressParts.join(', ');
 
   return (
-    <Modal isOpen={isOpen} children={
-      <SimpleModal isOpen={isOpen} onClick={onClose} >
+    <DefaultModal isOpen={isOpen} children={
+      <SimpleDefaultModal isOpen={isOpen} onClick={onClose} >
         <ModalContent>
           <h2>{user.full_name}</h2>
           <p>Email: {user.email}</p>
@@ -50,9 +50,9 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
           <p>Endereço: {addressString}</p>
           {/* Display other user information here */}
         </ModalContent>
-      </SimpleModal> }
+      </SimpleDefaultModal> }
     >  
-    </Modal>
+    </DefaultModal>
   );
 };
 
