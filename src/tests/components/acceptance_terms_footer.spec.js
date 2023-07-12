@@ -3,6 +3,7 @@ import renderer from 'react-test-renderer';
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import AcceptanceBar from "../../components/acceptance_terms_footer";
+import store from '../mocks/store';
 
 afterEach(() => { 
   cleanup();

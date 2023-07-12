@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import WalkingVase from '../../assets/gifs/plant-gworing.gif';
 import Chart from '../chart';
 import { Container } from './styles';
 
 const Dashboard = () => {
-  //const [data, setData] = useState(null);
 
   const data = [
     { name: "Jan", uv: 0, pv: 0, amt: 0 },
