@@ -2,6 +2,12 @@ import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
 
+
+export const MasterContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 export const Container = styled.div`
   margin: 4em;
   h2 {

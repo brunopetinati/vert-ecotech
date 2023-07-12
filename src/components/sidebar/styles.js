@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
 import { ReactComponent as User } from '../../assets/icons/user.svg';
 import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
-import { ReactComponent as ShoppingCart } from '../../assets/icons/shopping-cart.svg';
 import { ReactComponent as Users } from '../../assets/icons/users.svg';
 import { ReactComponent as Work } from '../../assets/icons/work.svg';
 
@@ -20,7 +19,6 @@ export const SidebarContainerOriginal = styled.div`
 
 export const SidebarContainer = styled.div`
   background-color: #F9FAFB;
-  height: 100vh;
   width: ${({collapsed}) => collapsed ? "50px" : "250px"};
   top: 0;
   left: 0;
@@ -28,6 +26,7 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   transition: width 0.5s ease-in-out;
+  height: 100vh;
 `;
 
 export const SidebarHeader = styled.div`
@@ -124,4 +123,10 @@ export const StyledWork = styled(Work)`
   height: 32px;
   width: 10px;
   transform: scale(2.5);
+`;
+
+export const FakeBar = styled.div`
+  background: red;
+  height: 150vh;
+  width: ${({collapsed}) => collapsed ? "50px" : "250px"};
 `;

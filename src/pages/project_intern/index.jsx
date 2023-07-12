@@ -1,11 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ButtonContainer, Button } from "./styles";
+import { MasterContainer, Button } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
 import EnvironmentalEngineering from "./environmental_engineering";
-
+import Sidebar from "../../components/sidebar";
 
 const ProjectIntern = () => {
 
@@ -61,7 +61,10 @@ const ButtonContainer = () => {
 }
 
   return (
-    <ProjectTabs tabs={tabs} />
+    <MasterContainer>
+      <Sidebar />
+      <ProjectTabs tabs={tabs} />
+    </MasterContainer>
   )
 };
 

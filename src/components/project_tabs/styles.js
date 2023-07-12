@@ -17,8 +17,6 @@ export const Tab = styled.div`
   background-color: ${(props) => (props.active ? "#4CAF50" : "#8BC34A")};
   color: #fff;
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
-  border-radius: 4px;
-  margin-right: 5px;
 
   &:hover {
     background-color: ${(props) => (props.active ? "#4CAF50" : "#7CB342")};
@@ -28,5 +26,5 @@ export const Tab = styled.div`
 
 export const Content = styled.div`
   margin-top: 10px;
-  width: 100%;
+  width: 100vw;
 `;
