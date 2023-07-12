@@ -8,4 +8,4 @@ const awsUrlTest = 'http://18.216.226.85:8000';
 const localHost = 'http://localhost:8000';
 // const localHost = 'localhost:8000/api';
 
-export const currentUrl = localHost;
+export const currentUrl = awsUrl;
