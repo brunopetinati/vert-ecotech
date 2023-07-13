@@ -157,7 +157,6 @@ const KanbanBoard = () => {
     transition={{ duration: 0.8 }}
     >
       <>
-        <Header>Funil Produtor - Acesso administrativo</Header>
         <Container>
         <KanbanSidebar />
           <Column showingColumn={showingColumn}

@@ -6,6 +6,7 @@ import InputMask from "react-input-mask";
 export const MasterContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100vw;
 `;
 
 export const Container = styled.div`
