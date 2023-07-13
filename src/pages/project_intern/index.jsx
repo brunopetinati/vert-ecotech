@@ -76,7 +76,6 @@ const app_status = useSelector((state) => state.app_status.status);
       <Sidebar />
       <SideContainer>
         {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} />}
-        <NavButtons />
       </SideContainer>
     </MasterContainer>
   )
