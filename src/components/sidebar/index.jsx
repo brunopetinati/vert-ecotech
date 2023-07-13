@@ -2,7 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter, SidebarIcon, StyledIcon, FakeBar } from './styles'
+import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter, SidebarIcon } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions';
 import { collapseSidebar } from '../../store/modules/sidebar/actions';
 

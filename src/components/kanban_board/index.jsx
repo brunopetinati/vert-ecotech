@@ -13,6 +13,7 @@ import KanbanUserCard from '../kanban_user_card';
 import KanbanSidebar from '../kanban_sidebar';
 import KanbanUserCardDefaultModal from '../kanban_user_card_modal';
 import KanbanSendNotificationModal from '../kanban_send_notification_modal';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 const KanbanBoard = () => {
 
@@ -124,7 +125,8 @@ const KanbanBoard = () => {
   
   
   const handleClick = (project) => {
-    navigate('/intern_project', { state: { project }} );
+    dispatch(appStatus(''));
+    navigate('/intern_project', { state: { project }});
   };
 
   const handleClickUser = (user) => {

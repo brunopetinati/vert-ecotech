@@ -1,18 +1,22 @@
 import { getFullNameById } from '../../store/modules/app_data/thunk';
 import { Table, THead, TR, TH, TD, Wrapper} from './styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { transformNumbersToHectares } from '../../constants/functions';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 const ProjectsTable = ({filteredProjects}) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const users = useSelector((state) => state.app_data.users);
   const projects = useSelector((state) => state.app_data.projects);
   
 
   const handleClick = (project) => {
-    navigate('/intern_project', { state: { project }} );
+    dispatch(appStatus(''));
+    navigate('/intern_project', { state: { project }});
   };
   
 

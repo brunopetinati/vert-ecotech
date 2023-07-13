@@ -1,12 +1,14 @@
 import { Wrapper, CardContainer, ImageContainer, Image, Title, Info, ScoreContainer, InnerContainer } from "./styles";
 import { getStatusCARColor, getStatusMatriculaColor, getScoreColor, transformNumbersToHectares } from '../../constants/functions';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import DefaultForestImage from '../../assets/default-image2.png';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 export const Card = ({filteredProjects}) => {
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   
   function getRandomFloat() {
     const num = (Math.random() * 10).toFixed(1);
@@ -17,7 +19,8 @@ export const Card = ({filteredProjects}) => {
   const projects = useSelector((state) => state.app_data.projects);
 
   const handleClick = (project) => {
-    navigate('/intern_project', { state: { project }} );
+    dispatch(appStatus(''));
+    navigate('/intern_project', { state: { project }});
   };
 
 

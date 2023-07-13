@@ -27,6 +27,7 @@ export const SidebarContainer = styled.div`
   justify-content: space-between;
   transition: width 0.5s ease-in-out;
   height: 100vh;
+  position: sticky;
 `;
 
 export const SidebarHeader = styled.div`
@@ -35,6 +36,7 @@ export const SidebarHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const SidebarMenu = styled.ul`
