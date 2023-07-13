@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MasterContainer, Button } from "./styles";
+import { MasterContainer, Button, ButtonContainer } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
 import EnvironmentalEngineering from "./environmental_engineering";
@@ -58,9 +58,9 @@ const ProjectIntern = () => {
   }
 ];
 
-const ButtonContainer = () => {
+const NavButtons = () => {
   return (
-  <ButtonContainer>
+  <ButtonContainer style={{marginBottom: '250px !important'}}>
     {user.user_type === "ADM" && <Button onClick={() => handleComeBackKanBan()}>Desenvolvimento</Button>}
     <Button onClick={() => handleComeBack()}>Voltar</Button>
     <Button onClick={() => handleRegister()}>Editar Informações</Button>
@@ -76,6 +76,7 @@ const app_status = useSelector((state) => state.app_status.status);
       <Sidebar />
       <SideContainer>
         {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} />}
+        <NavButtons />
       </SideContainer>
     </MasterContainer>
   )

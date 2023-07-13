@@ -55,6 +55,7 @@ export const SidebarMenuItem = styled.li`
   color: #606F7B;
   cursor: pointer;
   padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
+  text-align: center;
 
   &:hover {
     background-color: #E5E5E5;
