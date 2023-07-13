@@ -13,3 +13,12 @@ export const SideContainer = styled.div`
   width: 100vw;
   background: #f9fafb;
 `;
+
+export const SideContainerFlexStart = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  background: #f9fafb;
+`;
