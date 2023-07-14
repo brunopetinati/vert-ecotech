@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MasterContainer, Button, ButtonContainer } from "./styles";
+import { MasterContainer, Button, ButtonContainer, InnerContainer } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
 import EnvironmentalEngineering from "./environmental_engineering";
@@ -22,16 +22,6 @@ const ProjectIntern = () => {
   const user = useSelector((state) => state.user.currentUser);
 
   const navigate = useNavigate();
-
-  console.log('prestar atenção nesse console', project);
-
-  const handleComeBack = () => {
-    navigate('/welcome')
-  };
-
-  const handleComeBackKanBan = () => {
-    navigate('/analysis_and_development')
-  }
 
   const handleRegister = () => {
     navigate('/edit_intern_project', { state: { project }});
@@ -58,16 +48,6 @@ const ProjectIntern = () => {
   }
 ];
 
-const NavButtons = () => {
-  return (
-  <ButtonContainer style={{marginBottom: '250px !important'}}>
-    {user.user_type === "ADM" && <Button onClick={() => handleComeBackKanBan()}>Desenvolvimento</Button>}
-    <Button onClick={() => handleComeBack()}>Voltar</Button>
-    <Button onClick={() => handleRegister()}>Editar Informações</Button>
-  </ButtonContainer>
-  )
-}
-
 const app_status = useSelector((state) => state.app_status.status);
 
 
@@ -75,7 +55,7 @@ const app_status = useSelector((state) => state.app_status.status);
     <Container>
       <Sidebar />
       <SideContainer>
-        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} />}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} />}
       </SideContainer>
     </Container>
   )

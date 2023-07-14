@@ -13,7 +13,7 @@ export const Container = styled.div`
 
 export const InnerContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   margin: 0 auto;
   width: 80%;
@@ -57,7 +57,10 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  width: 100%;
+  align-items: center;
+  height: 5vw;
+  width: 93vw;
+  margin-top: 32px;
 `;
 
 export const Button = styled.button`
@@ -77,7 +80,6 @@ export const Button = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-top: 50px;
   margin-right: 16px;
 
   :hover {

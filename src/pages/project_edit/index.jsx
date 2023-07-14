@@ -154,7 +154,7 @@ const EditProject = () => {
 
   // Rotas
 
-  const handleClick = (project) => {
+  const handleClick = () => {
     dispatch(appStatus(''));
     navigate('/intern_project', { state: { project }});
   };
