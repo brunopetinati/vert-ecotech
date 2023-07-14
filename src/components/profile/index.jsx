@@ -80,15 +80,17 @@ const Profile = () => {
       });
   };
 
+  const collapsed = useSelector((state) => state.sidebar);
+
   return (
-    <IndexContainer>
+    <IndexContainer collapsed={collapsed}>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <ProfileContainerInfo>
+        <ProfileContainerInfo collapsed={collapsed}>
           <div
             style={{
               overflowY: 'auto',

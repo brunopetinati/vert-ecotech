@@ -12,7 +12,7 @@ const Users = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const layoutUsers = useSelector((state) => state.layout.cardsLayoutUsers);
 
-  const collapsed = useSelector((state) => state.sidebar.status);
+  const collapsed = useSelector((state) => state.sidebar);
 
   const [users, setUsers] = useState([]);
 

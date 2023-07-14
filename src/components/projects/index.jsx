@@ -10,7 +10,7 @@ import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
 
 const Projects = () => {
-  const collapsed = useSelector((state) => state.sidebar.status);
+  const collapsed = useSelector((state) => state.sidebar);
   const app_status = useSelector((state) => state.app_status.status);
   const layoutProjects = useSelector((state) => state.layout.cardsLayoutProjects);
   const dispatch = useDispatch();

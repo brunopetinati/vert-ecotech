@@ -12,9 +12,10 @@ export const currentUrl = localHost;
 
 // sempre que for usar a sidebar, tratar da seguinte forma:
 
-// <Container>
+// <Container collapsed={collapsed}>
 //  <Sidebar />
-//  <InnerContainer 85vw>
+//  <InnerContainer collapsed ? 90vw : 85vw>
 //   <Content />
-//  </InnerContainer 85vw>
+//  </InnerContainer>
 // </Container>
+// por último

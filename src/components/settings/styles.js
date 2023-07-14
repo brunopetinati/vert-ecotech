@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background: white;
-  width: 85vw;
+  width: ${({collapsed}) => collapsed ? "100vw" : "85vw"};
   height: 100vh;
 `;
 

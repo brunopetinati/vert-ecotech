@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const Settings = () => {
 
   const dispatch = useDispatch();
-  const collapsed = useSelector((state) => state.sidebar.status);
+  const collapsed = useSelector((state) => state.sidebar);
   const [isCheckedProject, setIsCheckedProject] = useState(false);
   const [isCheckedUser, setIsCheckedUser] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(false);
