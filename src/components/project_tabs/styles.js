@@ -4,6 +4,7 @@ export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 85vw;
 `;
 
 export const LinearTabs = styled.div`

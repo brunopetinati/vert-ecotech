@@ -19,7 +19,7 @@ export const SidebarContainerOriginal = styled.div`
 
 export const SidebarContainer = styled.div`
   background-color: #F9FAFB;
-  width: ${({collapsed}) => collapsed ? "50px" : "250px"};
+  width: ${({collapsed}) => collapsed ? "5vw" : "20vw"};
   top: 0;
   left: 0;
   display: flex;

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { SideContainer } from './styles'
+import { Container, SideContainer } from './styles'
 import Profile from '../../components/profile'
 import Projects from "../../components/projects";
 import Users from "../../components/users"
@@ -7,7 +7,6 @@ import Settings from "../../components/settings";
 import Dashboard from "../../components/dashboard";
 import Sidebar from "../../components/sidebar";
 
-import { Container } from './styles';
 import KanbanBoard from "../../components/kanban_board";
 
 const Welcome = () => {

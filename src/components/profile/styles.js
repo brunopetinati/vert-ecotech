@@ -123,7 +123,7 @@ export const IndexContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9fafb;
-  width: 100%;
+  width: 85vw;
   height: 100%;
 `;
 
