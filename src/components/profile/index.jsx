@@ -282,12 +282,12 @@ const Profile = () => {
                 flexWrap: 'wrap',
               }}
             >
-              <StyledButton
+              {/* <StyledButton
                 onClick={handleModalBanco}
                 style={{ display: 'flex', alignSelf: 'flex-end', margin: '32px 0' }}
               >
                 Informações de banco
-              </StyledButton>
+              </StyledButton> */}
               <StyledButton
                 onClick={handleRegister}
                 style={{ display: 'flex', alignSelf: 'flex-end', margin: '32px 32px' }}

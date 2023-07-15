@@ -7,7 +7,7 @@ import { ReactComponent as Work } from '../../assets/icons/work.svg';
 
 
 export const SidebarContainerOriginal = styled.div`
-  background-color: #F9FAFB;
+  background-color: #f5f5f5;
   height: 100vh;
   width: 100%;
   top: 0;
@@ -18,7 +18,7 @@ export const SidebarContainerOriginal = styled.div`
 `;
 
 export const SidebarContainer = styled.div`
-  background-color: #F9FAFB;
+  background-color: #f5f5f5;
   width: ${({collapsed}) => collapsed ? "5vw" : "20vw"};
   top: 0;
   left: 0;
@@ -31,7 +31,7 @@ export const SidebarContainer = styled.div`
 `;
 
 export const SidebarHeader = styled.div`
-  background-color: #F9FAFB;
+  background-color: #f5f5f5;
   height: 60px;
   display: flex;
   justify-content: center;
@@ -73,7 +73,7 @@ export const SidebarMenuItem = styled.li`
 `;
 
 export const SidebarFooter = styled.div`
-  background-color: #F9FAFB;
+  background-color: #f5f5f5;
   height: 60px;
   display: flex;
   justify-content: center;
