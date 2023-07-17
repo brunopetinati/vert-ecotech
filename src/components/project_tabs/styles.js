@@ -15,16 +15,28 @@ export const LinearTabs = styled.div`
 `;
 
 export const Tab = styled.div`
+  position: relative;
   padding: 10px 20px;
   cursor: pointer;
   background-color: ${(props) => (props.active ? "#4CAF50" : "transparent")};
   color: #fff;
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
 
+  &::before {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 0;
+    height: 80%;
+    width: 1px;
+    background-color: #4CAF50;
+  }
+
   &:hover {
     background-color: ${(props) => (props.active ? "#4CAF50" : "#7CB342")};
   }
 `;
+
 
 export const Content = styled.div`
   width: 100vw;
