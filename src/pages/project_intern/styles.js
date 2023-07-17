@@ -17,6 +17,7 @@ export const InnerContainer = styled.div`
   justify-content: space-between;
   margin: 0 auto;
   width: 80%;
+  height: 100%;
 `;
 
 export const Column = styled.div`

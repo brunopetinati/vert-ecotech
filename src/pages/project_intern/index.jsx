@@ -40,11 +40,15 @@ const ProjectIntern = () => {
   },
   {
     label: "Comercial",
-    content: <p>Em desenvolvimento</p>
+    content: <p style={{height: '100vh'}}>Em desenvolvimento</p>
   },
   {
     label: "Jurídico",
-    content: <p>Em desenvolvimento</p>
+    content: <p style={{height: '100vh'}}>Em desenvolvimento</p>
+  },
+  {
+    label: "Consolidação",
+    content: <p style={{height: '100vh'}}>Em desenvolvimento</p>
   }
 ];
 

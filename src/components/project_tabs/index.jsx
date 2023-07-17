@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { TabContainer, LinearTabs, Tab, Content } from "./styles";
+import { TabContainer, LinearTabs, Tab, Content, TabItem, TabLink, CloseTab } from "./styles";
 import { Button, ButtonContainer } from '../../pages/project_intern/styles.js';
 
 const ProjectTabs = ({ tabs, handleRegister }) => {
