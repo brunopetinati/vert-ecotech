@@ -28,6 +28,7 @@ export const SidebarContainer = styled.div`
   transition: width 0.5s ease-in-out;
   height: 100vh;
   position: sticky;
+  z-index: 2;
 `;
 
 export const SidebarHeader = styled.div`
