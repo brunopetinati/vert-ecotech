@@ -150,7 +150,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         style={{ width: '60px', marginBottom: '16px' }}
                         alt="uploaded file"
                       />
-                      <label>{}</label>
+                      <label>Certidão de Matrícula</label>
                       <button
                         style={{ margin: '16px' }}
                         onClick={(e) => resetFileState('pdf_matricula_certificate', e)}
