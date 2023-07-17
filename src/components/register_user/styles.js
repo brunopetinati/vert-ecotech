@@ -36,7 +36,12 @@ export const Input = styled(InputMask)`
   border: none;
   border-bottom: solid #eeeeee 1px;
 
+  ::placeholder {
+    color: #ffffff;
+  }
+
   :hover {
+    color: #fff;
     font-size: 22px;
     font-weight: bold; 
   }
