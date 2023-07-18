@@ -89,7 +89,6 @@ const Projects = () => {
           <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
           <StyledSelect id="column-select" onChange={handleColumnChange}>
             <option value="">---</option>
-            <option value="Proprietário">Proprietário</option>
             <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
             <option value="Localidade">Localidade</option>
             <option value="Status da Matrícula">Status da Matrícula</option>
