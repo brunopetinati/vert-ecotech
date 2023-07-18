@@ -119,35 +119,23 @@ export const formatCPF = (cpf) => {
 };
 
 export const formatSICARCode = (inputString) => {
-  //Remove any existing format characters
+  // Remove any existing format characters
   const cleanedString = inputString.replace(/[\-\.]/g, '');
 
   // Check if the cleaned string already has the desired format
-  if (cleanedString.length === 48) {
+  if (cleanedString.length === 45) {
     return cleanedString.toUpperCase();
   }
 
   // Check if the cleaned string is incomplete
-  if (cleanedString.length < 48) {
+  if (cleanedString.length < 45) {
     const incompleteMessage = 'Código SICAR pode conter erro';
-    const formattedString = `${cleanedString.toUpperCase()} - ${incompleteMessage.charAt(0)}${incompleteMessage.slice(1)}`;
-    return formattedString;
+    const formattedString = `${cleanedString.slice(0, 2)}-${cleanedString.slice(2, 9)}-${cleanedString.slice(9, 13)}.${cleanedString.slice(13, 17)}.${cleanedString.slice(17, 21)}.${cleanedString.slice(21, 25)}.${cleanedString.slice(25, 29)}.${cleanedString.slice(29, 33)}.${cleanedString.slice(33, 37)}.${cleanedString.slice(37, 41)}`;
+    return formattedString.toUpperCase();
   }
 
-  // Split the cleaned string into groups
-  const firstGroup = cleanedString.slice(0, 2);
-  const secondGroup = cleanedString.slice(2, 9);
-  const thirdGroup = cleanedString.slice(9, 13);
-  const fourthGroup = cleanedString.slice(13, 17);
-  const fifthGroup = cleanedString.slice(17, 21);
-  const sixthGroup = cleanedString.slice(21, 25);
-  const seventhGroup = cleanedString.slice(25, 29);
-  const eighthGroup = cleanedString.slice(29, 33);
-  const ninthGroup = cleanedString.slice(33, 37);
-  const tenthGroup = cleanedString.slice(37, 41);
-
   // Construct the formatted string
-  const formattedString = `${firstGroup}-${secondGroup}-${thirdGroup}.${fourthGroup}.${fifthGroup}.${sixthGroup}.${seventhGroup}.${eighthGroup}.${ninthGroup}.${tenthGroup}`;
+  const formattedString = `${cleanedString.slice(0, 2)}-${cleanedString.slice(2, 9)}-${cleanedString.slice(9, 11)}.${cleanedString.slice(11, 15)}.${cleanedString.slice(15, 19)}.${cleanedString.slice(19, 23)}.${cleanedString.slice(23, 27)}.${cleanedString.slice(27, 31)}.${cleanedString.slice(31, 35)}.${cleanedString.slice(35, 39)}`;
 
   return formattedString.toUpperCase();
 };
