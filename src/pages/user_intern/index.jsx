@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import  Banco from '../../components/bank';
 import { StyledButton } from '../../components/default_button/styles'
@@ -7,6 +7,9 @@ import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { appStatus } from '../../store/modules/app_status/actions';
+
 import Swal from 'sweetalert2';
 
 const UserIntern = () => {
@@ -18,6 +21,7 @@ const UserIntern = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
@@ -41,6 +45,8 @@ const UserIntern = () => {
     state: user.state || '',
     city: user.city || '',
   });
+
+  const [userProjects, setUserProjects] = useState([]);
 
   const handleCepOnForm = async (cep) => {
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length -1))) {
@@ -88,6 +94,38 @@ const UserIntern = () => {
     navigate('/welcome');
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        const response = await axios.get(
+          `${currentUrl}/api/projects/${user.id}/by_user/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // por que o user.id está errado?
+        console.log('user.id',user.id);
+        console.log('userUpdate.id', userUpdate);
+        console.log('essa é a response', response.data)
+        setUserProjects(response.data);
+        console.log('userProjects', userProjects);
+      } catch (error) {
+        // Handle any errors here
+        console.error('errrouuu', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  const sendInternProject = (project) => {
+    dispatch(appStatus(''));
+    navigate('/intern_project', { state: { project }});
+  };
+
 
   return (
       <IndexContainer>
@@ -98,8 +136,12 @@ const UserIntern = () => {
         transition={{ duration: 0.8 }}
         >
         <ProfileContainerInfo>
-          <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Informações cadastrais: {userUpdate.full_name}</h3>
+          <div style={{overflowY: 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
+            {userProjects && <div>
+              <h3>Projetos</h3>
+              {userProjects.map((project) => <StyledButton style={{margin: '32px 32px 32px 0'}} onClick={() => sendInternProject(project)}>{project.title}</StyledButton>)}  
+            </div>}
+            <h3>Informações cadastrais - {userUpdate.full_name}</h3>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />
