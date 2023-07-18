@@ -100,6 +100,9 @@ export const convertPhone = (phoneNumber) => {
 };
 
 export const formatCPF = (cpf) => {
+
+  if (!cpf) {return ''};
+
   // Remove all non-digit characters from the CPF
   const cleanedCPF = cpf.replace(/\D/g, '');
 
@@ -119,6 +122,9 @@ export const formatCPF = (cpf) => {
 };
 
 export const formatSICARCode = (inputString) => {
+
+  if (!inputString) {return ''};
+
   // Remove any existing format characters
   const cleanedString = inputString.replace(/[\-\.]/g, '');
 
@@ -141,6 +147,9 @@ export const formatSICARCode = (inputString) => {
 };
 
 export const formatCEP = (cep) => {
+
+  if (!cep) {return ''};
+
   const digitsOnly = cep.replace(/\D/g, '');
 
   if (digitsOnly.length !== 8) {
