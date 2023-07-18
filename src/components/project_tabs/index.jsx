@@ -31,9 +31,9 @@ const ProjectTabs = ({ tabs, handleRegister }) => {
           ))}
         </LinearTabs>
 
-        <ButtonContainer style={{ marginTop: '100px !important' }}>
+        {activeTab === 0 && <ButtonContainer style={{ marginTop: '100px !important' }}>
           <Button onClick={handleRegister}>Editar Informações</Button>
-        </ButtonContainer>
+        </ButtonContainer>}
       
         <Content collapsed={collapsed}>
           {tabs[activeTab].content}
