@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 import { currentUser } from '../../constants/global';
 import { addProjectToProjects } from '../../store/modules/app_data/actions';
+import { convertPhone } from '../../constants/functions';
 
 const RegisterProjectInfo = () => {
 
@@ -338,7 +339,7 @@ const RegisterProjectInfo = () => {
             <StyledSelect value={owner} onChange={handleUserSelect}>
               {users.length > 0 ? (
                 users.map(user => (
-                  <option key={user.id} value={user.id}>{user.full_name}</option>
+                  <option key={user.id} value={user.id}>{user.full_name} - {user.email}, {user.city}, {user.state} - {convertPhone(user.phone)}</option>
                 ))
               ) : (
                 <option key={currentUser.id} value={currentUser.id}>{currentUser.full_name}</option>

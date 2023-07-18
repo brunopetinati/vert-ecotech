@@ -43,11 +43,12 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
   return (
     <DefaultModal isOpen={isOpen} children={
       <SimpleDefaultModal isOpen={isOpen} onClick={onClose} >
-        <ModalContent>
+        <ModalContent style={{display: 'grid', flexDirection: 'column'}}>
           <h2>{user.full_name}</h2>
           <p>Email: {user.email}</p>
           <p>Contato: {user.phone}</p>
           <p>Endereço: {addressString}</p>
+          <small style={{color: 'red', justifySelf: 'center', fontStyle: 'italic'}}>usuário atualmente sem projeto cadastrado</small>
           {/* Display other user information here */}
         </ModalContent>
       </SimpleDefaultModal> }

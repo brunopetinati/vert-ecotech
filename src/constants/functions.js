@@ -85,3 +85,15 @@ export const removeNonDigits = (phoneNumber) => {
   return digitsOnly;
 };
 
+export const convertPhone = (phoneNumber) => {
+  const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
+
+  const countryCode = cleanedPhoneNumber.slice(0, 2);
+  const areaCode = cleanedPhoneNumber.slice(2, 3);
+  const firstGroup = cleanedPhoneNumber.slice(3, 7);
+  const secondGroup = cleanedPhoneNumber.slice(7, 11);
+
+  const formattedPhoneNumber = `(${countryCode}) ${areaCode} ${firstGroup}-${secondGroup}`;
+
+  return formattedPhoneNumber;
+};
