@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from '../styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
 import { currentUrl } from '../../../constants/global';
-import { convertPhone, transformNumbersToHectares, formatCPF } from "../../../constants/functions";
+import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "../../../constants/functions";
 
 const Intel = ({user, project}) => {
 
@@ -44,7 +44,7 @@ if (projectOwner.state) {
 }
 
 if (projectOwner.cep) {
-  addressParts.push('CEP: ' + projectOwner.cep);
+  addressParts.push('CEP: ' + formatCEP(projectOwner.cep));
 }
 
 const addressString = addressParts.join(', ');

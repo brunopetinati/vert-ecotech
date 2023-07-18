@@ -139,3 +139,15 @@ export const formatSICARCode = (inputString) => {
 
   return formattedString.toUpperCase();
 };
+
+export const formatCEP = (cep) => {
+  const digitsOnly = cep.replace(/\D/g, '');
+
+  if (digitsOnly.length !== 8) {
+    throw new Error('Invalid CEP number. Expected 8 digits.');
+  }
+
+  const formattedCEP = `${digitsOnly.substr(0, 5)}-${digitsOnly.substr(5)}`;
+
+  return formattedCEP;
+};
