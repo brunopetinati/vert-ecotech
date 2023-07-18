@@ -28,6 +28,9 @@ const ProjectIntern = () => {
   };
 
 
+  // ATENÇÃO: AQUI ESTÃO OS COMPONENTES RENDERIZADOS NA TELA /intern_project;
+  // comentário para facilitar a localização dos componentes internos nas abas do projeto.
+
   const tabs = [
   {
     label: "Informações",

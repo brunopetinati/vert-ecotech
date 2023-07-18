@@ -1,8 +1,9 @@
 import {  useSelector } from "react-redux";
 import { motion } from 'framer-motion';
 import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from '../styles';
-import { returnYesorNoforBoolean, returnUserName } from "../../../constants/functions";
+import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
 import { currentUrl } from '../../../constants/global';
+import { convertPhone, transformNumbersToHectares, formatCPF } from "../../../constants/functions";
 
 const Intel = ({user, project}) => {
 
@@ -63,7 +64,7 @@ const addressString = addressParts.join(', ');
             <InnerContainer>
               <Column> 
                 <Label>Contato</Label>
-                <Span>Telefone: {projectOwner.phone}</Span>
+                <Span>Telefone: {convertPhone(projectOwner.phone)}</Span>
                 <Span>Email: {projectOwner.email || '-'}</Span>
                 <Label>Endereço</Label>
                 <Span>{addressString}</Span>
@@ -81,7 +82,7 @@ const addressString = addressParts.join(', ');
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <Span>{project.physical_or_legal_entity || '-'}</Span>        
             <Label>CNPJ ou CPF do proprietário</Label>
-            <Span>{project.cnpj || '-'}</Span>
+            <Span>{formatCPF(project.cnpj) || '-'}</Span>
             <Label>Qual o endereço da propriedade?</Label>
             <Span>{project.address || '-'}</Span>            
             <Label>Status da Matrícula</Label>
@@ -93,13 +94,13 @@ const addressString = addressParts.join(', ');
           </Column>
           <Column>
             <Label>Área total da propriedade (ha)?</Label>
-            <Span>{project.total_area || '-'}</Span>
+            <Span>{transformNumbersToHectares(project.total_area) || '-'}</Span>
             <Label>Área total da reserva legal (ha)?</Label>
-            <Span>{project.legal_reserve_area || '-'}</Span>  
+            <Span>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</Span>  
             <Label>Status do CAR</Label>
             <Span>{project.status_car || '-'}</Span>
             <Label>Código SICAR (CAR)</Label>
-            <Span>{project.sicar_code || '-'}</Span>
+            <Span>{formatSICARCode(project.sicar_code) || '-'}</Span>
             <Label>Status do georreferenciamento no SIGEF</Label>
             <Span>{project.georeferencing_status || '-'}</Span>
             <Label>Situação da reserva legal da propriedade:</Label>
