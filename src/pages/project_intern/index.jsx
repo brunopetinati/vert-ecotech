@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { MasterContainer, Button, ButtonContainer, InnerContainer } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
-import EnvironmentalEngineering from "./environmental_engineering";
+import ProjectTabBioAnalysis from "../../components/projects_t_bioanalysis";
 import Sidebar from "../../components/sidebar";
 
 import { Container, SideContainer } from "../main_display/styles";
@@ -36,7 +36,7 @@ const ProjectIntern = () => {
   },
   {
     label: "Engenharia Ambiental",
-    content: <EnvironmentalEngineering user={user} project={project} />
+    content: <ProjectTabBioAnalysis user={user} project={project} />
   },
   {
     label: "Comercial",
