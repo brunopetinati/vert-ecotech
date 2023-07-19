@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { MasterContainer, Button, ButtonContainer, InnerContainer } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
-import ProjectTabBioAnalysis from "../../components/projects_t_bioanalysis";
+import ProjectTabEngineering from "../../components/projects_t_engineering";
 import Sidebar from "../../components/sidebar";
 
 import { Container, SideContainer } from "../main_display/styles";
@@ -39,7 +39,7 @@ const ProjectIntern = () => {
   },
   {
     label: "Engenharia Ambiental",
-    content: <ProjectTabBioAnalysis user={user} project={project} />
+    content: <ProjectTabEngineering user={user} project={project} />
   },
   {
     label: "Comercial",
@@ -62,7 +62,7 @@ const app_status = useSelector((state) => state.app_status.status);
     <Container>
       <Sidebar />
       <SideContainer>
-        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} />}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} project={project}/>}
       </SideContainer>
     </Container>
   )

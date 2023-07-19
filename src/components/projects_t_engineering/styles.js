@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
 
-
 export const Container = styled.div`
   margin: 4em;
   h2 {
@@ -14,15 +13,16 @@ export const Container = styled.div`
 export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   margin: 0 auto;
-  width: 80%;
-  height: 100%;
+  width: 60vw;
 `;
 
 export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 32px;
 `;
 
 export const Label = styled.label`
@@ -162,3 +162,10 @@ export const DownloadButton = styled.button`
   margin: 16px;
   width: 100px;
 `; 
+
+export const FileInput = styled.input.attrs({ type: 'file' })`
+  /* Add your file input styles here */
+`;
+export const TextInput = styled.input.attrs({ type: 'text' })`
+  /* Add your text input styles here */
+`;

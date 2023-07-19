@@ -59,7 +59,7 @@ const addressString = addressParts.join(', ');
       <Container>
       {user.user_type === "ADM" && 
           <>
-            <h2>{projectOwner.full_name}</h2>
+            <h2 style={{marginTop: '-64px'}}>{projectOwner.full_name}</h2>
 
             <InnerContainer>
               <Column> 

@@ -6,14 +6,14 @@ export const Tab = styled.div`
   padding: 10px 20px;
   cursor: pointer;
   margin-right: 1px;
-  color: ${(props) => (props.active ? "#fff" : "#8bc34a")};
+  color: ${(props) => (props.active ? "#fff" : props.status === null ? "#ccc" : "#8bc34a")};
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
   background-color: ${(props) => (props.active ? "#8bc34a" : "transparent")};
   border-radius: 9px 9px 0 0;
   z-index: 1;
-  
+
   &:hover {
-    border: 1px solid ${(props) => (props.active ? "transparent " : "#8bc34a")};
+    border: ${(props) => (props.status !== null ? `1px solid ${props.active ? "transparent" : "#8bc34a"}` : "none")};
     border-bottom: none;
   }
 `;
