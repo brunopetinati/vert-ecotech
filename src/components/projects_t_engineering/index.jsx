@@ -43,7 +43,7 @@ const ProjectTabEngineering = ({user, project}) => {
           {project.status === null && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
         </ButtonContainer>
         <InnerContainer>
-        {user.user_type === 'ADM' ? (
+        {user.user_type === 'ADM' && project.status !== null ? (
           <>
           <h3>{project.title} - Documentos para consolidação</h3>
           <small>Status: {project.status}</small>
