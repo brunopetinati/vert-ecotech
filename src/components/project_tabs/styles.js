@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Tab = styled.div`
   position: relative;
   padding: 10px 20px;
-  cursor: pointer;
+  cursor: ${(props) => props.status !== null && 'pointer'};
   margin-right: 1px;
   color: ${(props) => (props.active ? "#fff" : props.status === null ? "#ccc" : "#8bc34a")};
   font-weight: ${(props) => (props.active ? "bold" : "normal")};
@@ -15,6 +15,7 @@ export const Tab = styled.div`
   &:hover {
     border: ${(props) => (props.status !== null ? `1px solid ${props.active ? "transparent" : "#8bc34a"}` : "none")};
     border-bottom: none;
+    cursor: ${(props) => (props.status === null && 'default' )};
   }
 `;
 

@@ -29,7 +29,7 @@ const ProjectIntern = () => {
 
 
   // ATENÇÃO: AQUI ESTÃO OS COMPONENTES RENDERIZADOS NA TELA /intern_project;
-  // comentário para facilitar a localização dos componentes internos nas abas do projeto.
+  // comentário para facilitar a localização dos componentes internos nas abas do projeto, quando habilitadas pela função startProject().
 
   const tabs = [
   {
@@ -62,7 +62,7 @@ const app_status = useSelector((state) => state.app_status.status);
     <Container>
       <Sidebar />
       <SideContainer>
-        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} project={project}/>}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} project={project} />}
       </SideContainer>
     </Container>
   )
