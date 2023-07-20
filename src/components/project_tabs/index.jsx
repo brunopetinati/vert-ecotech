@@ -66,7 +66,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
         </LinearTabs>
 
         {activeTab === 0 && <ButtonContainer style={{ marginTop: '100px !important' }}>
-          <Button onClick={handleRegister}>Editar Informações</Button>
+        <Button onClick={handleRegister}>Editar Informações</Button>
           {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
         </ButtonContainer>}
 
@@ -79,7 +79,3 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
 };
 
 export default ProjectTabs;
-
-<ButtonContainer>
-
-</ButtonContainer>
