@@ -20,7 +20,6 @@ import {
   FileInput,
   TextInput,
 } from './styles';
-import Swal from 'sweetalert2';
 
 
 const ProjectTabEngineering = ({ user, project }) => {
@@ -77,7 +76,7 @@ const ProjectTabEngineering = ({ user, project }) => {
                 <Button onClick={handleUpload}>Enviar Arquivos</Button>
               </ButtonContainer>
               <InnerContainer>
-                <h2>{project.title}</h2>
+                <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
                 <small>Status: {project.status}</small>
                 <Column>
                   <Label htmlFor="pdd_pdf">PDD:</Label>
