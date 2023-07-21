@@ -101,12 +101,17 @@ const Login = () => {
   }
     
   return (
+    <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 3 }}>
      <LoginContainer>
         {showLoading ? <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}><h1 style={{color: 'white'}}>Bem Vindo!</h1>
+            transition={{ duration: 0.8 }}><h1 style={{color: 'white', fontFamily: 'Arial'}}>Bem Vindo!</h1>
             </motion.div> : 
             <motion.div
             initial={{ opacity: 0 }}
@@ -156,6 +161,7 @@ const Login = () => {
             </LoginForm>}</motion.div>}
           {!showLoading && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
       </LoginContainer>
+    </motion.div> 
   );
 };
 

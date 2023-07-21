@@ -29,7 +29,7 @@ export const Column = styled.div`
 
 export const Label = styled.label`
   margin-bottom: 10px;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const Input = styled(InputMask)`
