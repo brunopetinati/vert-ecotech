@@ -102,66 +102,66 @@ const Login = () => {
     
   return (
     <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 3 }}>
-     <LoginContainer>
-        {showLoading ? <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}><h1 style={{color: 'white', fontFamily: 'Arial'}}>Bem Vindo!</h1>
-            </motion.div> : 
-            <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            >
-          <Img src={Logo} />
-          {app_status == 'forgot_password' ? 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              >
-              <LoginForm>
-                <Input
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={event => setUsername(event.target.value)}
-                />
-                <div>
-                  <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
-                  <Button onClick={handleComeBack}>Voltar</Button>
-                </div>
-              </LoginForm>
-            </motion.div> 
-            :
-            <LoginForm onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={event => setUsername(event.target.value)}
-              />
-              <Input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-              />
-              <div>
-                <Button type="submit">Login</Button>
-                <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
-              </div>
-            </LoginForm>}</motion.div>}
-          {!showLoading && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
-      </LoginContainer>
-    </motion.div> 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
+      >
+    <LoginContainer>
+    {showLoading ? (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 style={{ color: 'white' }}>Bem Vindo!</h1>
+      </motion.div>
+    ) : (
+      <>
+        <Img src={Logo} />
+        {app_status === 'forgot_password' ? (
+          <LoginForm>
+            <Input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <div>
+              <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
+              <Button onClick={handleComeBack}>Voltar</Button>
+            </div>
+          </LoginForm>
+        ) : (
+          <LoginForm onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+            />
+            <div>
+              <Button type="submit">Login</Button>
+              <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
+            </div>
+          </LoginForm>
+        )}
+        {!showLoading && app_status !== 'forgot_password' && (
+          <a href="" style={{ color: 'white' }} onClick={(e) => forgotPassword(e)}>
+            Esqueceu a senha?
+          </a>
+        )}
+      </>
+    )}
+  </LoginContainer>  
+  </motion.div>
   );
 };
 
