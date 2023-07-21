@@ -14,7 +14,7 @@ const Card = styled.div`
 const KanbanCard = ({ project }) => {
   return (
     <Card>
-       <h3>{project.title}</h3>                    
+       <h3>{project.title === 'default' ? 'Sem Título' : project.title}</h3>                    
         <p>SICAR: <span style={{color: getStatusCARColor(project.status_car)}}>{project.status_car}</span></p>
         <p style={{fontStyle: 'italic'}}>{transformNumbersToHectares(project.total_area)}</p>
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end'}} >
