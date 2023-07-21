@@ -6,6 +6,7 @@ import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
 import ProjectTabEngineering from "../../components/projects_t_engineering";
 import ProjectTabComercial from "../../components/projects_t_comercial";
+import ProjectTabLegal from "../../components/projects_t_legal";
 import Sidebar from "../../components/sidebar";
 
 import { Container, SideContainer } from "../main_display/styles";
@@ -44,11 +45,11 @@ const ProjectIntern = () => {
   },
   {
     label: "Comercial",
-    content: <p style={{height: '100vh'}}><ProjectTabComercial /></p>
+    content: <ProjectTabComercial user={user} project={project} />
   },
   {
     label: "Jurídico",
-    content: <p style={{height: '100vh'}}></p>
+    content: <ProjectTabLegal user={user} project={project} />
   },
   {
     label: "Consolidação",

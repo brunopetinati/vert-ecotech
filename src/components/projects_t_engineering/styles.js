@@ -8,6 +8,8 @@ export const Container = styled.div`
     color: #054d00;
     margin-bottom: 36px;
   }
+  height: 100vh;
+  width: 100vw;
 `;
 
 export const InnerContainer = styled.div`
