@@ -18,7 +18,7 @@ const Login = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showLoading, setShowLoading] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
 
   const handleSubmit = async event => {
 
@@ -115,7 +115,7 @@ const Login = () => {
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h1 style={{ color: 'white' }}>Bem Vindo!</h1>
+        <h1 style={{ color: 'white', fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: '700', fontSize: '48px', letterSpacing: '0' }}>Bem Vindo!</h1>
       </motion.div>
     ) : (
       <>
@@ -154,7 +154,7 @@ const Login = () => {
           </LoginForm>
         )}
         {!showLoading && app_status !== 'forgot_password' && (
-          <a href="" style={{ color: 'white' }} onClick={(e) => forgotPassword(e)}>
+          <a href="" style={{ color: 'white', fontFamily: 'Arial' }} onClick={(e) => forgotPassword(e)}>
             Esqueceu a senha?
           </a>
         )}
