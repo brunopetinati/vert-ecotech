@@ -20,6 +20,8 @@ import {
   FileInput,
   TextInput,
 } from './styles';
+import Swal from 'sweetalert2';
+
 
 const ProjectTabEngineering = ({ user, project }) => {
   const [file, setFile] = useState(null);
@@ -39,11 +41,21 @@ const ProjectTabEngineering = ({ user, project }) => {
         .post(`${currentUrl}/api/engineering/`, formData)
         .then((response) => {
           console.log('Upload successful!', response);
-          // Do something with the response if needed
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Seus arquivos foram enviados com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         })
         .catch((error) => {
           console.error('Upload failed!', error);
-          // Handle errors if necessary
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
     } else {
       console.warn('No file selected.');

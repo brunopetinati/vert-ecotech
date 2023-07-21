@@ -3,6 +3,8 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Label, FileInput, Container, InnerContainer, Column, Button, ButtonContainer } from '../projects_t_engineering/styles';
 import { currentUrl } from '../../constants/global';
+import Swal from 'sweetalert2';
+
 
 const ProjectTabLegal = ({ user, project }) => {
   const [file, setFile] = useState(null);
@@ -21,11 +23,21 @@ const ProjectTabLegal = ({ user, project }) => {
       axios.post(`${currentUrl}/api/engineering/`, formData)
         .then((response) => {
           console.log('Upload successful!', response);
-          // Do something with the response if needed
+          Swal.fire({
+            title: 'Sucesso!',
+            text: 'Seus arquivos foram enviados com sucesso!',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          });
         })
         .catch((error) => {
           console.error('Upload failed!', error);
-          // Handle errors if necessary
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
     } else {
       console.warn('No file selected.');
