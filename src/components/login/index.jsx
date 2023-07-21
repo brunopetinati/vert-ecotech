@@ -18,7 +18,7 @@ const Login = () => {
   const app_status = useSelector((state) => state.app_status.status);
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
 
   const handleSubmit = async event => {
 
