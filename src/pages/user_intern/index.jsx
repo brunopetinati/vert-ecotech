@@ -138,10 +138,10 @@ const UserIntern = () => {
         <ProfileContainerInfo>
           <div style={{overflowY: 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
             {userProjects.length > 0 && <div>
-              <h3>Projetos</h3>
+              <h2>Projetos</h2>
               {userProjects.map((project) => <StyledButton style={{margin: '32px 32px 32px 0'}} onClick={() => sendInternProject(project)}>{project.title}</StyledButton>)}  
             </div>}
-            <h3>Informações cadastrais - {userUpdate.full_name}</h3>
+            <h2>Informações cadastrais - {userUpdate.full_name}</h2>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />

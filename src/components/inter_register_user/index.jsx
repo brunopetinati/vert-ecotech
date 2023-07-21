@@ -149,7 +149,7 @@ const InternRegisterUser = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Cadastrar novo usuário</h3>
+            <h2>Cadastrar novo usuário</h2>
             <Row>
               <Label>Nome completo</Label>
               <div>

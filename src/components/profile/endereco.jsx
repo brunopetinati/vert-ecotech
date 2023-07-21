@@ -5,7 +5,7 @@ const Endereco = ({ isOpen, onClose, children }) => {
   return(
     <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-        <h3>Meu Perfil</h3>
+        <h2>Meu Perfil</h2>
         <InnerContainer>
           <Column>  
             <Label for="cep">CEP:</Label>

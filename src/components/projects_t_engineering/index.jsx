@@ -20,7 +20,7 @@ const ProjectTabEngineering = ({user, project}) => {
         <InnerContainer>
         {user.user_type === 'ADM' && project.status !== null ? (
           <>
-          <h3>{project.title} - Documentos para consolidação</h3>
+          <h2>{project.title} - Documentos para consolidação</h2>
           <small>Status: {project.status}</small>
           <Column>
             <Label htmlFor="pdd_pdf">PDD:</Label>

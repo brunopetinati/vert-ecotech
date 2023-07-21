@@ -6,7 +6,7 @@ const Info = ({ isOpen, onClose, children }) => {
   return (
     <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-      <h3>Meu Perfil</h3>
+      <h2>Meu Perfil</h2>
       <InnerContainer>
         <Row>  
           <Label for="rg">RG:</Label>

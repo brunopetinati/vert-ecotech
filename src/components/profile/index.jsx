@@ -100,7 +100,7 @@ const Profile = () => {
               padding: '16px',
             }}
           >
-            <h3>Meu perfil</h3>
+            <h2>Meu perfil</h2>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput
