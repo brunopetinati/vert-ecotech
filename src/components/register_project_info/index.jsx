@@ -223,7 +223,7 @@ const RegisterProjectInfo = () => {
     } else {
       setOwner(currentUser.id);
     }
-  }, [owner, preparedObject]);
+  }, [owner]);
 
 
   // REGISTRAR PROJETO
