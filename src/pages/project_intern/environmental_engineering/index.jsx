@@ -34,9 +34,6 @@ const EnvironmentalEngineering = ({user, project }) => {
     <div style={{ height: '100vh', width: '100vw'}}>
       {user.user_type === "ADM" && 
       <>        
-        <ButtonContainer>
-          {project.status === null && <Button onClick={() => startProject()}>Inicializar Processo / Enviar ao funil produtor</Button>}
-        </ButtonContainer>
         <InnerContainer>
         </InnerContainer>
       </>

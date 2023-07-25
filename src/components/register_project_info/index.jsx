@@ -282,6 +282,7 @@ const RegisterProjectInfo = () => {
       return;
     };
 
+
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
     

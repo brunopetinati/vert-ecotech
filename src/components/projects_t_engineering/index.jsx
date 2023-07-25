@@ -36,8 +36,11 @@ const ProjectTabEngineering = ({ user, project }) => {
       formData.append('project', project.id);
       formData.append('file', file);
 
+      const token = sessionStorage.getItem('Authorization');
+      const headers = { Authorization: `Bearer ${token}` };
+
       axios
-        .post(`${currentUrl}/api/engineering/`, formData)
+        .put(`${currentUrl}/api/engineering/${project.id}/update`, formData, { headers })
         .then((response) => {
           console.log('Upload successful!', response);
           Swal.fire({

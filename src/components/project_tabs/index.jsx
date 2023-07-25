@@ -32,6 +32,16 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
   const startProject = () => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
+
+
+    axios
+    .post(`${currentUrl}/api/engineering/`, { 'project': project.id }, { headers })
+    .then((response) => {
+      console.log('registered engineering table successfully');          
+    })
+    .catch((error) => {
+      console.error('registration failed!', error);          
+    });
     
     axios
     .put(`${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
