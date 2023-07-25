@@ -8,60 +8,62 @@ import {
   InnerContainer,
   Column,
   Label,
-  Input,
-  Span,
   Button,
   ButtonContainer,
-  TextArea,
-  ButtonLink,
-  StyledSelect,
-  StyledSelectForUser,
-  DownloadButton,
   FileInput,
-  TextInput,
 } from './styles';
 
-
 const ProjectTabEngineering = ({ user, project }) => {
-  const [file, setFile] = useState(null);
+  const [pddFile, setPddFile] = useState(null);
+  const [pddDraftFile, setPddDraftFile] = useState(null);
+  const [viabilityFile, setViabilityFile] = useState(null);
+  const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event, setFileFunc) => {
     const selectedFile = event.target.files[0];
-    setFile(selectedFile);
+    setFileFunc(selectedFile);
   };
 
   const handleUpload = () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append('project', project.id);
-      formData.append('file', file);
+    const formData = new FormData();
+    formData.append('project', project.id);
 
-      const token = sessionStorage.getItem('Authorization');
-      const headers = { Authorization: `Bearer ${token}` };
-
-      axios
-        .put(`${currentUrl}/api/engineering/${project.id}/update`, formData, { headers })
-        .then((response) => {
-          console.log('Upload successful!', response);
-          Swal.fire({
-            title: 'Sucesso!',
-            text: 'Seus arquivos foram enviados com sucesso!',
-            icon: 'success',
-            confirmButtonText: 'OK'
-          });
-        })
-        .catch((error) => {
-          console.error('Upload failed!', error);
-          Swal.fire({
-            title: 'Erro!',
-            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
-            icon: 'error',
-            confirmButtonText: 'OK'
-          });
-        });
-    } else {
-      console.warn('No file selected.');
+    if (pddFile) {
+      formData.append('pdd_pdf', pddFile);
     }
+    if (pddDraftFile) {
+      formData.append('pdd_draft', pddDraftFile);
+    }
+    if (viabilityFile) {
+      formData.append('viability_analysis', viabilityFile);
+    }
+    if (registrationWilderFile) {
+      formData.append('registration_wilder', registrationWilderFile);
+    }
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}` };
+
+    axios
+      .put(`${currentUrl}/api/engineering/${project.id}/update/`, formData, { headers })
+      .then((response) => {
+        console.log('Upload successful!', response);
+        Swal.fire({
+          title: 'Sucesso!',
+          text: 'Seus arquivos foram enviados com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      })
+      .catch((error) => {
+        console.error('Upload failed!', error);
+        Swal.fire({
+          title: 'Erro!',
+          text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
   };
 
   return (
@@ -73,8 +75,8 @@ const ProjectTabEngineering = ({ user, project }) => {
     >
       {user.user_type === 'ADM' ? (
         <Container>
-            {user.user_type === 'ADM' && project.status !== null ? (
-              <>
+          {user.user_type === 'ADM' && project.status !== null ? (
+            <>
               <ButtonContainer>
                 <Button onClick={handleUpload}>Enviar Arquivos</Button>
               </ButtonContainer>
@@ -83,35 +85,25 @@ const ProjectTabEngineering = ({ user, project }) => {
                 <small>Status: {project.status}</small>
                 <Column>
                   <Label htmlFor="pdd_pdf">PDD:</Label>
-                  <FileInput id="pdd_pdf" name="pdd_pdf" onChange={handleFileChange} />
+                  <FileInput id="pdd_pdf" name="pdd_pdf" onChange={(e) => handleFileChange(e, setPddFile)} />
 
                   <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
-                  <FileInput id="pdd_draft" name="pdd_draft" onChange={handleFileChange} />
+                  <FileInput id="pdd_draft" name="pdd_draft" onChange={(e) => handleFileChange(e, setPddDraftFile)} />
 
                   <Label htmlFor="viability_analisys">Análise de viabilidade:</Label>
-                  <FileInput
-                    id="viability_analisys"
-                    name="viability_analisys"
-                    onChange={handleFileChange}
-                  />
+                  <FileInput id="viability_analisys" name="viability_analisys" onChange={(e) => handleFileChange(e, setViabilityFile)} />
                 </Column>
                 <Column>
                   <Label htmlFor="registration_wilder">Registration Wilder:</Label>
-                  <FileInput
-                    id="registration_wilder"
-                    name="registration_wilder"
-                    onChange={handleFileChange}
-                  />
+                  <FileInput id="registration_wilder" name="registration_wilder" onChange={(e) => handleFileChange(e, setRegistrationWilderFile)} />
 
-                  <Label htmlFor="aditional_info">Informações adicionais: </Label>
-                  <TextInput id="aditional_info" name="aditional_info" />
+                  {/* Rest of the component */}
                 </Column>
               </InnerContainer>
-
-              </>
-            ) : (
-              <h1></h1>
-            )}
+            </>
+          ) : (
+            <h1></h1>
+          )}
         </Container>
       ) : (
         <h1></h1>

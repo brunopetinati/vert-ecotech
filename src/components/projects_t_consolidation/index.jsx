@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import { currentUrl } from '../../constants/global';
 import {
   Container,
   InnerContainer,
@@ -23,11 +24,13 @@ import {
 const ProjectTabConsolidation = ({user, project}) => {
   const [fileStatus, setFileStatus] = useState({});
 
-  useEffect(() => {
-    const currentUrl = window.location.origin; // Assuming the API is on the same origin as the frontend
+  const token = sessionStorage.getItem('Authorization');
+  const headers = { Authorization: `Bearer ${token}` };
 
+  useEffect(() => {
+    console.log('entrou aqui')
     // Make the API request
-    axios.get(`${currentUrl}/api/engineering/${project.id}/update`)
+    axios.get(`${currentUrl}/api/engineering/${project.id}/`, { headers })
       .then((response) => {
         // Assuming the response is an object containing field names as keys and file presence as values
         setFileStatus(response.data);
