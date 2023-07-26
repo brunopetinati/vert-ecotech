@@ -178,3 +178,39 @@ export const FileInput = styled.input.attrs({ type: 'file' })`
 export const TextInput = styled.textarea`
   height: 150px;
 `;
+
+
+export const List = styled.ul`
+  list-style: none;
+  padding: 0;
+`;
+
+export const ListItem = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  width: 80vw;
+  margin: 32px;
+  height: 64px;
+
+  &:hover {
+    background-color: #e0f2f1;
+  }
+
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+  }
+
+  span {
+    font-size: 20px;
+  }
+`;

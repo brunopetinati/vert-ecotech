@@ -26,6 +26,35 @@ const KanbanBoard = () => {
 
   const projects = useSelector((state) => state.app_data.projects);
 
+  if (!projects) {
+
+    const fetchProjects = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        let response;
+  
+        if (currentUser.user_type === 'ADM') {
+          response = await axios.get(`${currentUrl}/api/projects/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        } else {
+          response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        }
+  
+        dispatch(storeProjects(response.data));
+      } catch (error) {
+        // Handle error
+      }
+    };
+    fetchProjects();
+  };
+
   const [currentOwnerID, setCurrentOwnerID] = useState('');
   const [currentProjectID, setCurrentProjectID] = useState('');
   const [updateComponent, setUpdateComponent] = useState(false);
@@ -80,34 +109,11 @@ const KanbanBoard = () => {
 
   useEffect(() => {
     const fetchProjects = async () => {
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        let response;
-  
-        if (currentUser.user_type === 'ADM') {
-          response = await axios.get(`${currentUrl}/api/projects/`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        } else {
-          response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        }
-  
-        dispatch(storeProjects(response.data));
-      } catch (error) {
-        // Handle error
-      }
-  
       if (currentUser.user_type === 'ADM') {
         try {
           const token = sessionStorage.getItem('Authorization');
           let response;
-    
+  
           if (currentUser.user_type === 'ADM' && newUsers.length === 0) {
             response = await axios.get(`${currentUrl}/api/users_without_projects/`, {
               headers: {
@@ -124,8 +130,10 @@ const KanbanBoard = () => {
       }
     };
   
-    fetchProjects();
+    fetchProjects(); // Call the async function immediately
+  
   }, [updateComponent, newUsers]);
+  
   
   
   const handleClick = (project) => {

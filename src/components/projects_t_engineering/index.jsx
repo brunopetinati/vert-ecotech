@@ -18,10 +18,15 @@ const ProjectTabEngineering = ({ user, project }) => {
   const [pddDraftFile, setPddDraftFile] = useState(null);
   const [viabilityFile, setViabilityFile] = useState(null);
   const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
+  const [additionalInformation, setAdditionalInformation] = useState('');
 
   const handleFileChange = (event, setFileFunc) => {
     const selectedFile = event.target.files[0];
     setFileFunc(selectedFile);
+  };
+
+  const handleAdditionalInformationChange = (event) => {
+    setAdditionalInformation(event.target.value);
   };
 
   const handleUpload = () => {
@@ -39,6 +44,9 @@ const ProjectTabEngineering = ({ user, project }) => {
     }
     if (registrationWilderFile) {
       formData.append('registration_wilder', registrationWilderFile);
+    }
+    if (additionalInformation) {
+      formData.append('additional_information', additionalInformation);
     }
 
     const token = sessionStorage.getItem('Authorization');
@@ -96,9 +104,16 @@ const ProjectTabEngineering = ({ user, project }) => {
                 <Column>
                   <Label htmlFor="registration_wilder">Registration Wilder:</Label>
                   <FileInput id="registration_wilder" name="registration_wilder" onChange={(e) => handleFileChange(e, setRegistrationWilderFile)} />
-
-                  {/* Rest of the component */}
                 </Column>
+                <Column>
+                  <Label htmlFor="additional_information">Informações adicionais:</Label>
+                  <textarea
+                    id="additional_information"
+                    name="additional_information"
+                    value={additionalInformation}
+                    onChange={handleAdditionalInformationChange}
+                  />
+              </Column>
               </InnerContainer>
             </>
           ) : (
