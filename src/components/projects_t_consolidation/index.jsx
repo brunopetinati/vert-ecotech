@@ -50,7 +50,7 @@ const ProjectTabConsolidation = ({user, project}) => {
     }
   };
 
-  const handleDownload = (fileField) => {
+  const handleEngineeringDownload = (fileField) => {
     axios
       .get(`${currentUrl}/api/engineering/${project.id}/download/${fileField}/`, {
         headers,
@@ -75,6 +75,13 @@ const ProjectTabConsolidation = ({user, project}) => {
       });
   };
 
+  const downloadPDF = (fieldName) => {
+
+    //const token = sessionStorage.getItem('Authorization');
+    const downloadUrl = `${currentUrl}/api/project/${project.id}/download/${fieldName}/`;
+    window.open(downloadUrl, '_blank');
+  };
+
   console.log('fileStatus.registration_wilder', fileStatus.registration_wilder);
 
   return (
@@ -87,34 +94,54 @@ const ProjectTabConsolidation = ({user, project}) => {
       <Container>
       <List>
         <ListItem>
-          <div> PDD PDF: </div>
+          <div>Certificado de Matrícula</div>
+          <div>{getFileStatusIcon(project.pdf_matricula_certificate)}</div>
+          <div>{project.pdf_matricula_certificate && <StyledButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>CAR (SICAR)</div>
+          <div>{getFileStatusIcon(project.pdf_car)}</div>
+          <div>{project.pdf_car && <StyledButton onClick={() => downloadPDF('pdf_car')}>PDF CAR</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>CCIR</div>
+          <div>{getFileStatusIcon(project.pdf_ccir)}</div>
+          <div>{project.pdf_ccir && <StyledButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>Polígono da propriedade</div>
+          <div>{getFileStatusIcon(project.property_polygon)}</div>
+          <div>{project.property_polygon && <StyledButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>Regularização com a Dívida Federal</div>
+          <div>{getFileStatusIcon(project.pdf_federal_debt_certificate)}</div>
+          <div>{project.pdf_federal_debt_certificate && <StyledButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div> PDD PDF</div>
           <div>{getFileStatusIcon(fileStatus.pdd_pdf)}</div>
-          <div>{fileStatus.pdd_pdf && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('pdd_pdf')}>Download</StyledButton>}</div>
+          <div>{fileStatus.pdd_pdf && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('pdd_pdf')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>PDD Draft: </div>
+          <div>PDD Draft</div>
           <div>{getFileStatusIcon(fileStatus.pdd_draft)}</div>
-          <div>{fileStatus.pdd_draft && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('pdd_draft')}>Download</StyledButton>}</div>
+          <div>{fileStatus.pdd_draft && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('pdd_draft')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>Viability Analysis: </div>
+          <div>Viability Analysis</div>
           <div>{getFileStatusIcon(fileStatus.viability_analysis)}</div>
-          <div>{fileStatus.viability_analysis && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('viability_analysis')}>Download</StyledButton>}</div>
+          <div>{fileStatus.viability_analysis && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('viability_analysis')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>Registration Wilder: </div>
+          <div>Registration Wilder</div>
           <div>{getFileStatusIcon(fileStatus.registration_wilder)}</div>
-          <div>{fileStatus.registration_wilder && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('registration_wilder')}>Download</StyledButton>}</div>
+          <div>{fileStatus.registration_wilder && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('registration_wilder')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>Due Diligence: </div>
+          <div>Due Diligence</div>
           <div>{getFileStatusIcon(fileStatus.due_diligence)}</div>
-          <div>{fileStatus.due_diligence && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('due_diligence')}>Download</StyledButton>}</div>
-        </ListItem>
-        <ListItem>
-          <div>Additional Information: </div>
-          <div>{getFileStatusIcon(!!fileStatus.additional_information)}</div>
-          <div>{fileStatus.additional_information && <StyledButton style={{width: '256px'}} onClick={() => handleDownload('pdd_pdf')}>Download</StyledButton>}</div>
+          <div>{fileStatus.due_diligence && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('due_diligence')}>Download</StyledButton>}</div>
         </ListItem>
       </List>
       </Container>
@@ -123,3 +150,7 @@ const ProjectTabConsolidation = ({user, project}) => {
 };
 
 export default ProjectTabConsolidation;
+
+
+
+
