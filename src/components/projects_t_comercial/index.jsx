@@ -102,7 +102,7 @@ const ProjectTabComercial = ({ user, project }) => {
               </List>
             </div>
           ) : (
-            <p style={{marginBottom: '160px'}}>No proposals found.</p>
+            <p style={{marginBottom: '160px'}}>Não há propostas para esse projeto.</p>
           )}
         </div>
 
