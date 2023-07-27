@@ -92,8 +92,9 @@ const ProjectTabConsolidation = ({user, project}) => {
     transition={{ duration: 0.8 }}
     >
       <Container>
+      <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '32px' }}>
       <List>
-        <ListItem>
+        <ListItem style={{marginTop: '564px'}}>
           <div>Certificado de Matrícula</div>
           <div>{getFileStatusIcon(project.pdf_matricula_certificate)}</div>
           <div>{project.pdf_matricula_certificate && <StyledButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</StyledButton>}</div>
@@ -144,6 +145,7 @@ const ProjectTabConsolidation = ({user, project}) => {
           <div>{fileStatus.due_diligence && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('due_diligence')}>Download</StyledButton>}</div>
         </ListItem>
       </List>
+      </div>
       </Container>
     </motion.div>
   );

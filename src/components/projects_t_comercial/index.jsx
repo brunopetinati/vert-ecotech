@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
-import { Container, ButtonContainer, Button, InnerContainer, FileInput } from './styles';
+import { Container, ButtonContainer, Button, InnerContainer, FileInput, List, ListItem } from './styles';
 import DefaultSecondaryModal from '../../components/default_secondary_modal';
 import Swal from 'sweetalert2';
 
@@ -14,6 +14,12 @@ const ProjectTabComercial = ({ user, project }) => {
 
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
+  const [proposals, setProposals] = useState([]);
+  
+
+  const handleFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+  };
 
   useEffect(() => {
     axios.get(`${currentUrl}/api/proposals/list/`, { headers })
@@ -24,10 +30,16 @@ const ProjectTabComercial = ({ user, project }) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, [project.id]);
+  }, [project.id, proposals]);
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const fetchProposals = () => {
+    axios.get(`${currentUrl}/api/proposals/list/`, { headers })
+      .then((response) => {
+        setProposals(response.data); // Update the list of proposals
+      })
+      .catch((error) => {
+        console.error('Error fetching proposals:', error);
+      });
   };
 
   const handleUpload = () => {
@@ -44,6 +56,8 @@ const ProjectTabComercial = ({ user, project }) => {
           confirmButtonText: 'OK'
         });
         setIsModalOpen(false);
+        fetchProposals(); // Fetch updated proposals after successful upload
+        
       })
       .catch((error) => {
         console.error('Error uploading file:', error);
@@ -55,6 +69,7 @@ const ProjectTabComercial = ({ user, project }) => {
         });
       });
   };
+
 
   return (
     <motion.div
@@ -68,25 +83,25 @@ const ProjectTabComercial = ({ user, project }) => {
           <Button onClick={() => setIsModalOpen(true)}>Adicionar Proposta</Button>
         </ButtonContainer>
 
-        <InnerContainer>
+        <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           {fileStatus && fileStatus.length > 0 ? (
             <div>
-              <h3>Existing Proposals(beta):</h3>
-              <ul>
+              <List>
                 {fileStatus.map((proposal) => (
-                  <li key={proposal.id}>
-                    <span>{proposal.proposal.name}</span>
+                  <ListItem key={proposal.id}>
+                    <ul>{project.title}</ul>
+                    <span style={{color: '#8bc34a'}}>Proposta Comercial</span>
                     <a href={`${currentUrl}${proposal.proposal.url}`} download>
                       <Button>Download</Button>
                     </a>
-                  </li>
+                  </ListItem>
                 ))}
-              </ul>
+              </List>
             </div>
           ) : (
             <p>No proposals found.</p>
           )}
-        </InnerContainer>
+        </div>
 
         {isModalOpen && (
           <DefaultSecondaryModal isOpen={isModalOpen} onClose={setIsModalOpen}>
