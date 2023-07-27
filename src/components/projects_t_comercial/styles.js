@@ -187,7 +187,7 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   border: 2px solid #ddd;
   border-radius: 50px;

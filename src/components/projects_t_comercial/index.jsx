@@ -5,6 +5,7 @@ import { currentUrl } from '../../constants/global';
 import { Container, ButtonContainer, Button, InnerContainer, FileInput, List, ListItem } from './styles';
 import DefaultSecondaryModal from '../../components/default_secondary_modal';
 import Swal from 'sweetalert2';
+import { getProposalStatusInfo } from '../../constants/functions';
 
 
 const ProjectTabComercial = ({ user, project }) => {
@@ -70,7 +71,6 @@ const ProjectTabComercial = ({ user, project }) => {
       });
   };
 
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -90,10 +90,13 @@ const ProjectTabComercial = ({ user, project }) => {
                 {fileStatus.map((proposal) => (
                   <ListItem key={proposal.id}>
                     <ul>{project.title}</ul>
-                    <span style={{color: '#8bc34a'}}>Proposta Comercial</span>
-                    <a href={`${currentUrl}${proposal.proposal.url}`} download>
-                      <Button>Download</Button>
-                    </a>
+                    <span style={{ color: '#8bc34a' }}>Proposta Comercial</span>
+                      <a href={`${currentUrl}${proposal.proposal.url}`} download>
+                        <Button>Download</Button>
+                      </a>
+                    <div style={{ color: getProposalStatusInfo(proposal.acceptance).color }}>
+                      {getProposalStatusInfo(proposal.acceptance).text}
+                    </div>
                   </ListItem>
                 ))}
               </List>
