@@ -40,34 +40,6 @@ const KanbanBoard = () => {
 
   const navigate = useNavigate();
 
-  if (projects.length === 0) {
-    const fetchProjects = async () => {
-      try {
-        const token = sessionStorage.getItem('Authorization');
-        let response;
-  
-        if (currentUser.user_type === 'ADM') {
-          response = await axios.get(`${currentUrl}/api/projects/`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        } else {
-          response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        }
-        console.log(response)
-        dispatch(storeProjects(response.data));
-      } catch (error) {
-        // Handle error
-      }
-    };
-    fetchProjects();
-  };
-
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);
     setCurrentOwnerID(owner);
@@ -105,6 +77,34 @@ const KanbanBoard = () => {
       }, { headers } ).then(response => console.log('resposta da notificação', response)).catch(error => console.log(error))
     }}
   };
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const token = sessionStorage.getItem('Authorization');
+        let response;
+
+        if (currentUser.user_type === 'ADM') {
+          response = await axios.get(`${currentUrl}/api/projects/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        } else {
+          response = await axios.get(`${currentUrl}/api/projects/${currentUser.id}/by_user/`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        }
+        console.log(response);
+        dispatch(storeProjects(response.data));
+      } catch (error) {
+        // Handle error
+      }
+    };
+    fetchProjects();
+  }, []);
 
   useEffect(() => {
     const fetchProjects = async () => {

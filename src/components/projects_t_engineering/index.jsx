@@ -21,11 +21,19 @@ const ProjectTabEngineering = ({ user, project }) => {
   const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
   const [additionalInformation, setAdditionalInformation] = useState('');
 
-  const engineering = useSelector((state) => state.app_status.engineering);
-  const commercial = useSelector((state) => state.app_data.commercial);
+  const engineering = useSelector((state) => state.app_data.engineering);
+  const matchObjectd = engineering.find(item => item.project === project.id);
+
+  let matchObjectId = null;
+  
+  if (matchObjectd) {
+    matchObjectId = matchObjectd.id;
+    console.log('O ID do objeto desejado é:', matchObjectId);
+  } else {
+    console.log('Nenhum objeto encontrado com o project_id correspondente.');
+  }
 
   console.log(engineering);
-  console.log(commercial);
 
   const handleFileChange = (event, setFileFunc) => {
     const selectedFile = event.target.files[0];
@@ -60,7 +68,7 @@ const ProjectTabEngineering = ({ user, project }) => {
     const headers = { Authorization: `Bearer ${token}` };
 
     axios
-      .put(`${currentUrl}/api/engineering/${project.id}/update/`, formData, { headers })
+      .put(`${currentUrl}/api/engineering/${matchObjectId}/update/`, formData, { headers })
       .then((response) => {
         console.log('Upload successful!', response);
         Swal.fire({

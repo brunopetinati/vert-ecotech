@@ -35,9 +35,9 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
 
 
     axios
-    .post(`${currentUrl}/api/engineering/`, { 'project': project.id }, { headers })
+    .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started' }, { headers })
     .then((response) => {
-      console.log('registered engineering table successfully');          
+      console.log('registered engineering table successfully, project_id:', project.id);          
     })
     .catch((error) => {
       console.error('registration failed!', error);          

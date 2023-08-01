@@ -11,7 +11,7 @@ export const getOwners = () => (dispatch, getState) => {
   fetch(`${currentUrl}/api/users/`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      dispatch(storeUsers(data)); // Dispatch the action to update the store
+      dispatch(storeUsers(data));
     })
     .catch((error) => {
       console.error('Error fetching owners', error);
@@ -27,7 +27,7 @@ export const getCommercialTable = () => (dispatch, getState) => {
   fetch(`${currentUrl}/api/proposals/list/`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      dispatch(storeCommercialTable(data)); // Dispatch the action to update the store
+      dispatch(storeCommercialTable(data));
     })
     .catch((error) => {
       console.error('Error fetching commercial table', error);
@@ -40,10 +40,10 @@ export const getEngineeringTable = () => (dispatch, getState) => {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
   };
-  fetch(`${currentUrl}/api/engineering/`, requestOptions)
+  fetch(`${currentUrl}/api/engineering/list`, requestOptions)
     .then((response) => response.json())
     .then((data) => {
-      dispatch(storeEngineeringTable(data)); // Dispatch the action to update the store
+      dispatch(storeEngineeringTable(data));
     })
     .catch((error) => {
       console.error('Error fetching engineering table', error);

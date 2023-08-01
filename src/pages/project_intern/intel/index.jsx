@@ -12,10 +12,6 @@ const Intel = ({user, project}) => {
   const users = useSelector((state) => state.app_data.users);
   const projectOwner = users.find(user => user.id === project.owner);
 
-  console.log('users', users);
-  console.log('project', project);
-  console.log('project owner', project.owner);
-
   const downloadPDF = (fieldName) => {
 
       //const token = sessionStorage.getItem('Authorization');

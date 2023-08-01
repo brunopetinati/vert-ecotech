@@ -85,7 +85,7 @@ const currentAppData = (state = initialState, action) => {
         ...state,
         engineering: action.payload
       }
-
+      
     case STORE_COMMERCIAL_TABLE:
       return {
         ...state,
