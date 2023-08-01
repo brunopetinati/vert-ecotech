@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
-
 export const Tab = styled.div`
   position: relative;
   padding: 10px 20px;
   cursor: ${(props) => props.status !== null && 'pointer'};
   margin-right: 1px;
   color: ${(props) => (props.active ? "#fff" : props.status === null ? "#ccc" : "#8bc34a")};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+  font-weight: ${(props) => (props.active ? "normal" : "normal")};
   background-color: ${(props) => (props.active ? "#8bc34a" : "transparent")};
   border-radius: 9px 9px 0 0;
   z-index: 1;

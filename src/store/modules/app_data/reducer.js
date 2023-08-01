@@ -1,10 +1,25 @@
-import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_OWNER_ID, STORE_USERS, STORE_PROJECTS, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS, ERASE_ALL } from "./action-types";
+import { 
+  STORE_PROJECT_ID, 
+  STORE_USER_FIRST_ACCESS, 
+  STORE_OWNER_ID, 
+  STORE_USERS, 
+  STORE_PROJECTS, 
+  STORE_USER_TO_USERS, 
+  STORE_CEP, 
+  STORE_PROJECT_TO_PROJECTS, 
+  STORE_ENGINEERING_TABLE, 
+  STORE_COMMERCIAL_TABLE,
+  RESET_PROJECTS, 
+  ERASE_PROJECTS, 
+  ERASE_ALL } from "./action-types";
 
 const initialState = {
   project_id: null,
   owner_id: null,
   users: [],
   projects: [],
+  engineering: [],
+  commercial: [],
   cep: null,
   user_first_access: [],
 };
@@ -63,6 +78,18 @@ const currentAppData = (state = initialState, action) => {
       return {
         ...state,
         projects: action.payload
+      }
+    
+    case STORE_ENGINEERING_TABLE:
+      return {
+        ...state,
+        engineering: action.payload
+      }
+
+    case STORE_COMMERCIAL_TABLE:
+      return {
+        ...state,
+        commercial: action.payload
       }
     
     case ERASE_PROJECTS:

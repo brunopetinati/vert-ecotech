@@ -45,6 +45,7 @@ const Dashboard = () => {
     { name: "Mar", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
     { name: "Abr", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
   ];
+  
   return (
     <Container>
       <Chart data={data}  title={'Acessos'} name={'name'} key_a={'pv'} key_b={'uv'} key_c={'amt'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} />

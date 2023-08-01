@@ -26,8 +26,21 @@ const KanbanBoard = () => {
 
   const projects = useSelector((state) => state.app_data.projects);
 
-  if (!projects) {
+  const [currentOwnerID, setCurrentOwnerID] = useState('');
+  const [currentProjectID, setCurrentProjectID] = useState('');
+  const [updateComponent, setUpdateComponent] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const [showingColumn, setShowingColumn] = useState(false);
+  const [newUsers, setNewUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showModalSendNotification, setShowModalSendNotification] = useState(false);
+  const [sendNotification, setSendNotification] = useState(false);
+  const users = useSelector((state) => state.app_data.users);
 
+  const navigate = useNavigate();
+
+  if (projects.length === 0) {
     const fetchProjects = async () => {
       try {
         const token = sessionStorage.getItem('Authorization');
@@ -46,7 +59,7 @@ const KanbanBoard = () => {
             },
           });
         }
-  
+        console.log(response)
         dispatch(storeProjects(response.data));
       } catch (error) {
         // Handle error
@@ -54,20 +67,6 @@ const KanbanBoard = () => {
     };
     fetchProjects();
   };
-
-  const [currentOwnerID, setCurrentOwnerID] = useState('');
-  const [currentProjectID, setCurrentProjectID] = useState('');
-  const [updateComponent, setUpdateComponent] = useState(false);
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const [showingColumn, setShowingColumn] = useState(false);
-  const [newUsers, setNewUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
-  const [showModalSendNotification, setShowModalSendNotification] = useState(false);
-  const [sendNotification, setSendNotification] = useState(false);
-  const users = useSelector((state) => state.app_data.users);
-
-  const navigate = useNavigate();
 
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);

@@ -1,5 +1,17 @@
 import Projects from "../../../components/projects";
-import { STORE_PROJECT_ID, STORE_USER_FIRST_ACCESS, STORE_USERS, STORE_PROJECTS, STORE_OWNER_ID, STORE_USER_TO_USERS, STORE_CEP, STORE_PROJECT_TO_PROJECTS, RESET_PROJECTS, ERASE_PROJECTS, ERASE_ALL } from "./action-types";
+import { STORE_PROJECT_ID, 
+  STORE_USER_FIRST_ACCESS, 
+  STORE_USERS, STORE_PROJECTS, 
+  STORE_OWNER_ID, 
+  STORE_USER_TO_USERS, 
+  STORE_CEP, 
+  STORE_PROJECT_TO_PROJECTS, 
+  STORE_ENGINEERING_TABLE, 
+  STORE_COMMERCIAL_TABLE, 
+  RESET_PROJECTS, 
+  ERASE_PROJECTS, 
+  ERASE_ALL } 
+  from "./action-types";
 
 export const storeProjectId = (project_id) => {
   return {
@@ -57,6 +69,20 @@ export const addProjectToProjects = (project) => {
   }
 }
 
+export const storeEngineeringTable = (engineering) => {
+  return {
+    type: STORE_ENGINEERING_TABLE,
+    payload: engineering
+  }
+}
+
+export const storeCommercialTable = (commercial) => {
+  return {
+    type: STORE_COMMERCIAL_TABLE,
+    payload: commercial
+  }
+}
+
 export const resetProjects = (array) => {
   return {
     type: RESET_PROJECTS,
@@ -69,6 +95,8 @@ export const eraseProjects = () => {
     type: ERASE_PROJECTS
   }
 }
+
+
 
 export const eraseAll = () => {
   return {

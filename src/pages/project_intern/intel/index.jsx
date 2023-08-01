@@ -7,8 +7,14 @@ import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "
 
 const Intel = ({user, project}) => {
 
+  console.log('começando os calculos')
+
   const users = useSelector((state) => state.app_data.users);
   const projectOwner = users.find(user => user.id === project.owner);
+
+  console.log('users', users);
+  console.log('project', project);
+  console.log('project owner', project.owner);
 
   const downloadPDF = (fieldName) => {
 

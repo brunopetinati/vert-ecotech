@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
@@ -19,6 +20,12 @@ const ProjectTabEngineering = ({ user, project }) => {
   const [viabilityFile, setViabilityFile] = useState(null);
   const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
   const [additionalInformation, setAdditionalInformation] = useState('');
+
+  const engineering = useSelector((state) => state.app_status.engineering);
+  const commercial = useSelector((state) => state.app_data.commercial);
+
+  console.log(engineering);
+  console.log(commercial);
 
   const handleFileChange = (event, setFileFunc) => {
     const selectedFile = event.target.files[0];
@@ -73,6 +80,8 @@ const ProjectTabEngineering = ({ user, project }) => {
         });
       });
   };
+
+
 
   return (
     <motion.div

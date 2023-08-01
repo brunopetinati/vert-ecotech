@@ -1,6 +1,6 @@
 import { currentUrl } from '../../../constants/global';
 
-import { storeUsers } from './actions';
+import { storeUsers, storeCommercialTable, storeEngineeringTable } from './actions';
 
 export const getOwners = () => (dispatch, getState) => {
   const token = sessionStorage.getItem('Authorization');
@@ -15,6 +15,38 @@ export const getOwners = () => (dispatch, getState) => {
     })
     .catch((error) => {
       console.error('Error fetching owners', error);
+    });
+};
+
+export const getCommercialTable = () => (dispatch, getState) => {
+  const token = sessionStorage.getItem('Authorization');
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+  };
+  fetch(`${currentUrl}/api/proposals/list/`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch(storeCommercialTable(data)); // Dispatch the action to update the store
+    })
+    .catch((error) => {
+      console.error('Error fetching commercial table', error);
+    });
+};
+
+export const getEngineeringTable = () => (dispatch, getState) => {
+  const token = sessionStorage.getItem('Authorization');
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+  };
+  fetch(`${currentUrl}/api/engineering/`, requestOptions)
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch(storeEngineeringTable(data)); // Dispatch the action to update the store
+    })
+    .catch((error) => {
+      console.error('Error fetching engineering table', error);
     });
 };
 
