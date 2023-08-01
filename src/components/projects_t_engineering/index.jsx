@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -20,7 +20,7 @@ const ProjectTabEngineering = ({ user, project }) => {
   const [viabilityFile, setViabilityFile] = useState(null);
   const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
   const [additionalInformation, setAdditionalInformation] = useState('');
-
+  const [fileStatus, setFileStatus] = useState({});
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObjectd = engineering.find(item => item.project === project.id);
 
@@ -89,7 +89,32 @@ const ProjectTabEngineering = ({ user, project }) => {
       });
   };
 
+  useEffect(() => {
+    
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}` };
 
+    axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
+      .then((response) => {
+        setFileStatus(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+
+  const switchField = (fieldName) => {
+    setFileStatus(fileStatus[fieldName] === '')
+  };
+
+  const renderFileInputOrMessage = (fieldName) => {
+    if (fileStatus[fieldName]) {
+      return <small style={{ color: 'green' }} onClick={() => switchField(fieldName)}>Arquivo consolidado</small>;
+    } else {
+      return <FileInput id={fieldName} name={fieldName} onChange={(e) => handleFileChange(e, fieldName)} />;
+    }
+  };
 
   return (
     <motion.div
@@ -109,18 +134,19 @@ const ProjectTabEngineering = ({ user, project }) => {
                 <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
                 <small>Status: {project.status}</small>
                 <Column>
+
                   <Label htmlFor="pdd_pdf">PDD:</Label>
-                  <FileInput id="pdd_pdf" name="pdd_pdf" onChange={(e) => handleFileChange(e, setPddFile)} />
+                  {renderFileInputOrMessage('pdd_pdf')}
 
                   <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
-                  <FileInput id="pdd_draft" name="pdd_draft" onChange={(e) => handleFileChange(e, setPddDraftFile)} />
+                  {renderFileInputOrMessage('pdd_draft')}
 
                   <Label htmlFor="viability_analisys">Análise de viabilidade:</Label>
-                  <FileInput id="viability_analisys" name="viability_analisys" onChange={(e) => handleFileChange(e, setViabilityFile)} />
+                  {renderFileInputOrMessage('viability_analisys')}
                 </Column>
                 <Column>
                   <Label htmlFor="registration_wilder">Registration Wilder:</Label>
-                  <FileInput id="registration_wilder" name="registration_wilder" onChange={(e) => handleFileChange(e, setRegistrationWilderFile)} />
+                  {renderFileInputOrMessage('registration_wilder')}
                 </Column>
                 <Column>
                   <Label htmlFor="additional_information">Informações adicionais:</Label>

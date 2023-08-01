@@ -11,7 +11,7 @@ import { getProposalStatusInfo } from '../../constants/functions';
 const ProjectTabComercial = ({ user, project }) => {
   const [fileStatus, setFileStatus] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
@@ -34,7 +34,7 @@ const ProjectTabComercial = ({ user, project }) => {
   }, [project.id, proposals]);
 
   const fetchProposals = () => {
-    axios.get(`${currentUrl}/api/proposals/list/`, { headers })
+    axios.get(`${currentUrl}/api/projects/${project.id}/proposals`, { headers })
       .then((response) => {
         setProposals(response.data); // Update the list of proposals
       })
@@ -83,7 +83,7 @@ const ProjectTabComercial = ({ user, project }) => {
           <Button onClick={() => setIsModalOpen(true)}>Adicionar Proposta</Button>
         </ButtonContainer>
 
-        <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
           {fileStatus && fileStatus.length > 0 ? (
             <div>
               <List>

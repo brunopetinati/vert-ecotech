@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { currentUrl } from '../../constants/global';
@@ -31,8 +32,22 @@ const ProjectTabConsolidation = ({user, project}) => {
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
 
+
+  const engineering = useSelector((state) => state.app_data.engineering);
+  const matchObjectd = engineering.find(item => item.project === project.id);
+
+  let matchObjectId = null;
+  
+  if (matchObjectd) {
+    matchObjectId = matchObjectd.id;
+    console.log('O ID do objeto desejado é:', matchObjectId);
+  } else {
+    console.log('Nenhum objeto encontrado com o project_id correspondente.');
+  }
+
+
   useEffect(() => {
-    axios.get(`${currentUrl}/api/engineering/${project.id}/`, { headers })
+    axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
       .then((response) => {
         // Assuming the response is an object containing field names as keys and file presence as values
         setFileStatus(response.data);

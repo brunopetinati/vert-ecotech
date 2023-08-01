@@ -31,7 +31,6 @@ const AppRoutes = () => {
 
   useEffect(() => {
     dispatch(getOwners());
-    dispatch(getCommercialTable());
     dispatch(getEngineeringTable());
   }, [login]);
   
