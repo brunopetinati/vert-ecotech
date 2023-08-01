@@ -66,6 +66,9 @@ const ProjectTabConsolidation = ({user, project}) => {
   };
 
   const handleEngineeringDownload = (fileField) => {
+
+    console.log('aeeeeeeeeeeewlkejwkljasl', project.id);
+
     axios
       .get(`${currentUrl}/api/engineering/${project.id}/download/${fileField}/`, {
         headers,

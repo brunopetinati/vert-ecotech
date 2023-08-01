@@ -15,19 +15,20 @@ import {
 } from './styles';
 
 const ProjectTabEngineering = ({ user, project }) => {
-  const [pddFile, setPddFile] = useState(null);
-  const [pddDraftFile, setPddDraftFile] = useState(null);
-  const [viabilityFile, setViabilityFile] = useState(null);
-  const [registrationWilderFile, setRegistrationWilderFile] = useState(null);
-  const [additionalInformation, setAdditionalInformation] = useState('');
-  const [fileStatus, setFileStatus] = useState({});
-  const engineering = useSelector((state) => state.app_data.engineering);
-  const matchObjectd = engineering.find(item => item.project === project.id);
+  const [fileStates, setFileStates] = useState({
+    pddFile: null,
+    pddDraftFile: null,
+    viabilityFile: null,
+    registrationWilderFile: null,
+    additionalInformation: '',
+  });
 
+  const engineering = useSelector((state) => state.app_data.engineering);
+  const matchObject = engineering.find(item => item.project === project.id);
   let matchObjectId = null;
   
-  if (matchObjectd) {
-    matchObjectId = matchObjectd.id;
+  if (matchObject) {
+    matchObjectId = matchObject.id;
     console.log('O ID do objeto desejado é:', matchObjectId);
   } else {
     console.log('Nenhum objeto encontrado com o project_id correspondente.');
@@ -35,40 +36,48 @@ const ProjectTabEngineering = ({ user, project }) => {
 
   console.log(engineering);
 
-  const handleFileChange = (event, setFileFunc) => {
+  const handleFileChange = (event, fieldName) => {
     const selectedFile = event.target.files[0];
-    setFileFunc(selectedFile);
+    setFileStates(prevState => ({
+      ...prevState,
+      [fieldName]: selectedFile,
+    }));
   };
 
   const handleAdditionalInformationChange = (event) => {
-    setAdditionalInformation(event.target.value);
+    setFileStates(prevState => ({
+      ...prevState,
+      additionalInformation: event.target.value,
+    }));
   };
 
   const handleUpload = () => {
     const formData = new FormData();
     formData.append('project', project.id);
 
-    if (pddFile) {
-      formData.append('pdd_pdf', pddFile);
+    if (fileStates.pddFile) {
+      formData.append('pdd_pdf', fileStates.pddFile);
     }
-    if (pddDraftFile) {
-      formData.append('pdd_draft', pddDraftFile);
+    if (fileStates.pddDraftFile) {
+      formData.append('pdd_draft', fileStates.pddDraftFile);
     }
-    if (viabilityFile) {
-      formData.append('viability_analysis', viabilityFile);
+    if (fileStates.viabilityFile) {
+      formData.append('viability_analysis', fileStates.viabilityFile);
     }
-    if (registrationWilderFile) {
-      formData.append('registration_wilder', registrationWilderFile);
+    if (fileStates.registrationWilderFile) {
+      formData.append('registration_wilder', fileStates.registrationWilderFile);
     }
-    if (additionalInformation) {
-      formData.append('additional_information', additionalInformation);
+    if (fileStates.additionalInformation) {
+      formData.append('additional_information', fileStates.additionalInformation);
     }
 
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}` };
 
+    console.log('verificar esse matchObjectId', matchObjectId);
+
     axios
-      .put(`${currentUrl}/api/engineering/${matchObjectId}/update/`, formData, { headers })
+      .put(`${currentUrl}/api/engineering/5/update/`, formData, { headers })
       .then((response) => {
         console.log('Upload successful!', response);
         Swal.fire({
@@ -90,26 +99,30 @@ const ProjectTabEngineering = ({ user, project }) => {
   };
 
   useEffect(() => {
-    
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}` };
 
     axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
       .then((response) => {
-        setFileStatus(response.data);
+        setFileStates(prevState => ({
+          ...prevState,
+          ...response.data,
+        }));
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, []);
 
-
   const switchField = (fieldName) => {
-    setFileStatus(fileStatus[fieldName] === '')
+    setFileStates(prevState => ({
+      ...prevState,
+      [fieldName]: !prevState[fieldName],
+    }));
   };
 
   const renderFileInputOrMessage = (fieldName) => {
-    if (fileStatus[fieldName]) {
+    if (fileStates[fieldName]) {
       return <small style={{ color: 'green' }} onClick={() => switchField(fieldName)}>Arquivo consolidado</small>;
     } else {
       return <FileInput id={fieldName} name={fieldName} onChange={(e) => handleFileChange(e, fieldName)} />;
@@ -134,26 +147,25 @@ const ProjectTabEngineering = ({ user, project }) => {
                 <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
                 <small>Status: {project.status}</small>
                 <Column>
-
                   <Label htmlFor="pdd_pdf">PDD:</Label>
-                  {renderFileInputOrMessage('pdd_pdf')}
+                  {renderFileInputOrMessage('pddFile')}
 
                   <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
-                  {renderFileInputOrMessage('pdd_draft')}
+                  {renderFileInputOrMessage('pddDraftFile')}
 
                   <Label htmlFor="viability_analisys">Análise de viabilidade:</Label>
-                  {renderFileInputOrMessage('viability_analisys')}
+                  {renderFileInputOrMessage('viabilityFile')}
                 </Column>
                 <Column>
                   <Label htmlFor="registration_wilder">Registration Wilder:</Label>
-                  {renderFileInputOrMessage('registration_wilder')}
+                  {renderFileInputOrMessage('registrationWilderFile')}
                 </Column>
                 <Column>
                   <Label htmlFor="additional_information">Informações adicionais:</Label>
                   <textarea
                     id="additional_information"
                     name="additional_information"
-                    value={additionalInformation}
+                    value={fileStates.additionalInformation}
                     onChange={handleAdditionalInformationChange}
                   />
               </Column>
