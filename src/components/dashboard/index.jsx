@@ -35,13 +35,13 @@ const Dashboard = () => {
   ];
 
   const data4 = [
-    { name: "Out", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Nov", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Dez", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Jan", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Fev", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Mar", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { name: "Abr", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Out", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Nov", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Dez", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Jan", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Fev", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Mar", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
+    { month: "Abr", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
   ];
   
   return (
