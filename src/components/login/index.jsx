@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
-import { getOwners, getEngineeringTable } from '../../store/modules/app_data/thunk';
+import { getOwners, getProjects, getEngineeringTable } from '../../store/modules/app_data/thunk';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
@@ -32,14 +32,16 @@ const Login = () => {
         password,
       }).then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
+        const token = response.data.access;
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
-          dispatch(userLogin(response.data.access, response.data));
+          dispatch(userLogin(token, response.data));
+          dispatch(getOwners(token));
+          dispatch(getProjects(token));
+          dispatch(getEngineeringTable(token));
         }, 4000);
         dispatch(appStatus('Dashboard'));
-        dispatch(getOwners());
-        dispatch(getEngineeringTable());
       }).catch(error => {
         console.error('Login failed:', error.message);
         Swal.fire({
@@ -93,7 +95,7 @@ const Login = () => {
         });
       })
       .catch(error => {
-        console.error(error); // handle error response
+        console.error(error); 
         Swal.fire({
           title: 'Error!',
           text:  'Algo deu errado ao tentar processar essa atividade. Por favor, contate nosso suporte. suporte@vertecotech.com',

@@ -1,9 +1,8 @@
 import { currentUrl } from '../../../constants/global';
+import axios from 'axios';
+import { storeUsers, storeProjects, storeCommercialTable, storeEngineeringTable } from './actions';
 
-import { storeUsers, storeCommercialTable, storeEngineeringTable } from './actions';
-
-export const getOwners = () => (dispatch, getState) => {
-  const token = sessionStorage.getItem('Authorization');
+export const getOwners = (token) => (dispatch) => {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -17,6 +16,22 @@ export const getOwners = () => (dispatch, getState) => {
       console.error('Error fetching owners', error);
     });
 };
+
+export const getProjects = (token) => (dispatch) => {
+
+  axios.get(`${currentUrl}/api/projects/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      dispatch(storeProjects(response.data));
+    })
+    .catch((error) => {
+      console.error('Error fetching projects', error);
+    });
+};
+
 
 export const getCommercialTable = () => (dispatch, getState) => {
   const token = sessionStorage.getItem('Authorization');
@@ -34,8 +49,7 @@ export const getCommercialTable = () => (dispatch, getState) => {
     });
 };
 
-export const getEngineeringTable = () => (dispatch, getState) => {
-  const token = sessionStorage.getItem('Authorization');
+export const getEngineeringTable = (token) => (dispatch) => {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
@@ -60,3 +74,5 @@ export const getFullNameById = (ownerId, owners) => {
   }};
   return 'unknown';
 };
+
+

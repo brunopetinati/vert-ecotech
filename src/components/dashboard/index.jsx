@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Chart from '../chart';
 import { Container } from './styles';
+import { getTotalAreaByMonth } from './carbon';
 
 const Dashboard = () => {
+
+  const projects = useSelector((state) => state.app_data.projects);
+  console.log('meeeu deus', projects);
 
   const data = [
     { name: "Jan", uv: 0, pv: 0, amt: 0 },
@@ -17,14 +22,16 @@ const Dashboard = () => {
 
 
   const data2 = [
-    { name: "Out", seq: 0, emit: 0, acm: 0 },
-    { name: "Nov", seq: 0, emit: 0, acm: 0 },
-    { name: "Dez", seq: 0, emit: 0, acm: 0 },
-    { name: "Jan", seq: 0, emit: 0, acm: 0 },
-    { name: "Fev", seq: 0, emit: 0, acm: 0 },
-    { name: "Mar", seq: 0, emit: 0, acm: 0 },
-    { name: "Abr", seq: 0, emit: 0, acm: 0 },
+    { name: "Out", seq: 0 },
+    { name: "Nov", seq: 0 },
+    { name: "Dez", seq: 0 },
+    { name: "Jan", seq: 0 },
+    { name: "Fev", seq: 0 },
+    { name: "Mar", seq: 0 },
+    { name: "Abr", seq: 0 }
   ];
+
+
 
   const data3 = [
     { name: "Out", ativos: 0, aposentados: 0 },
