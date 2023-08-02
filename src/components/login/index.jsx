@@ -5,10 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
+import { getOwners, getEngineeringTable } from '../../store/modules/app_data/thunk';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
+
+
 
 const Login = () => {
 
@@ -28,15 +31,15 @@ const Login = () => {
         email,
         password,
       }).then(response => {
-        // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.access);
-        // Navigate to the welcome page on successful login
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
           dispatch(userLogin(response.data.access, response.data));
         }, 4000);
         dispatch(appStatus('Dashboard'));
+        dispatch(getOwners());
+        dispatch(getEngineeringTable());
       }).catch(error => {
         console.error('Login failed:', error.message);
         Swal.fire({

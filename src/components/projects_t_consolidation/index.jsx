@@ -70,7 +70,7 @@ const ProjectTabConsolidation = ({user, project}) => {
     console.log('aeeeeeeeeeeewlkejwkljasl', project.id);
 
     axios
-      .get(`${currentUrl}/api/engineering/${project.id}/download/${fileField}/`, {
+      .post(`${currentUrl}/api/engineering/21/download/${fileField}/`, {
         headers,
         responseType: 'blob',
       })
