@@ -1,17 +1,17 @@
 const getMonthName = (monthNumber) => {
   const months = [
-    "Janeiro",
-    "Fevereiro",
-    "Março",
-    "Abril",
-    "Maio",
-    "Junho",
-    "Julho",
-    "Agosto",
-    "Setembro",
-    "Outubro",
-    "Novembro",
-    "Dezembro",
+    "janeiro",
+    "fevereiro",
+    "março",
+    "abril",
+    "maio",
+    "junho",
+    "julho",
+    "agosto",
+    "setembro",
+    "outubro",
+    "novembro",
+    "dezembro",
   ];
   return months[monthNumber - 1];
 };
@@ -21,16 +21,18 @@ export const calculateTotalAreaByMonth = (projects) => {
 
   projects.forEach((project) => {
     const date = new Date(project.created_at);
-    const monthYear = `${getMonthName(date.getMonth() + 1)}`; 
+    const monthYear = `${getMonthName(date.getMonth() + 1)}`;
     if (!totalsByMonth[monthYear]) {
       totalsByMonth[monthYear] = 0;
     }
     totalsByMonth[monthYear] += project.total_area;
   });
 
+  let cumulativeTotal = 0;
   const result = [];
   for (const monthYear in totalsByMonth) {
-    result.push({ month: monthYear, hectares: totalsByMonth[monthYear] });
+    cumulativeTotal += totalsByMonth[monthYear];
+    result.push({ month: monthYear, hectares: cumulativeTotal });
   }
 
   return result;

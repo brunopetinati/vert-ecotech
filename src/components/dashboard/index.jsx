@@ -9,6 +9,7 @@ const Dashboard = () => {
   const projects = useSelector((state) => state.app_data.projects);
   const data2 = calculateTotalAreaByMonth(projects);
 
+  console.log(data2)
 
   const data = [
     { name: "Jan", uv: 0, pv: 0, amt: 0 },
