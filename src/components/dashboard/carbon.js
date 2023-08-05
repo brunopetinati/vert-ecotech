@@ -54,6 +54,9 @@ export const calculateTotalRealAreaByMonth = (projects) => {
 export const mergeCarbonData = (carbon_1, carbon_2) => {
   const mergedData = {};
 
+  if (!carbon_1) return;
+  if (!carbon_2) return;
+
   // Função para adicionar um item ao objeto mergedData, garantindo a ordem correta e acumulando os valores
   const addItem = (item) => {
     const { month, estimativa, em_processo } = item;

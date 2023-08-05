@@ -8,6 +8,8 @@ import { groupByUserType } from './users';
 
 const Dashboard = () => {
 
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   // sequestro de carbono na atmosfera
   const projects = useSelector((state) => state.app_data.projects);
   const users = useSelector((state) => state.app_data.users);
@@ -16,7 +18,6 @@ const Dashboard = () => {
   let data = groupByUserType(users);
   let data2 = mergeCarbonData(carbon_1, carbon_2);
 
-  console.log('tristeza ja',data2);
 
   /* const data = [
     { name: "Jan", uv: 0, pv: 0, amt: 0 },
@@ -55,10 +56,10 @@ const Dashboard = () => {
   
   return (
     <Container>
-      <Chart data={data}  title={'Acessos'} name={'month'} key_a={'Regular'} key_b={'ADM'} key_c={'COM'} key_d={'ENG'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} stroke_d={'orange'}/>
+      {currentUser.user_type === "ADM" && <Chart data={data}  title={'Acessos'} name={'month'} key_a={'Regular'} key_b={'ADM'} key_c={'COM'} key_d={'ENG'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} stroke_d={'orange'}/>}
       <Chart data={data2} title={'Sequestro de Carbono na Atmosfera (ha)'} name={'month'} key_a={'em_processo'} stroke_a={'#7eff00'} key_b={'estimativa'} stroke_b={'#054d00'}/>
       <Chart data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'#7eff00'} stroke_b={'black'} />
-      <Chart data={data4} title={'Projetos'} name={'month'} key_a={'started'} key_b={'analysis'} key_c={'viability'} key_d={'negotiation'} key_e={'idle'} key_f={'implementing'} key_g={'concluded'} stroke_a={'blue'} stroke_b={'violet'} stroke_c={'green'} stroke_d={'gold'} stroke_e={'grey'} stroke_f={'orange'} stroke_g={'brown'}/>
+      {currentUser.user_type === "ADM" && <Chart data={data4} title={'Projetos'} name={'month'} key_a={'started'} key_b={'analysis'} key_c={'viability'} key_d={'negotiation'} key_e={'idle'} key_f={'implementing'} key_g={'concluded'} stroke_a={'blue'} stroke_b={'violet'} stroke_c={'green'} stroke_d={'gold'} stroke_e={'grey'} stroke_f={'orange'} stroke_g={'brown'}/> }
     </Container>
   );
 };

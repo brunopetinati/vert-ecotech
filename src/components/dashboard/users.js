@@ -3,7 +3,10 @@ import { getMonthName } from "./months";
 export const groupByUserType = (users) => {
   const totalUsers = {};
   
-  if (!users) return;
+  if (!Array.isArray(users)) {
+    console.error("O parâmetro 'users' não é um array válido.");
+    return [];
+  }
 
   users.forEach((user) => {
     const date = new Date(user.created_at);
@@ -26,20 +29,3 @@ export const groupByUserType = (users) => {
   const result = Object.values(totalUsers);
   return result.reverse();
 };
-
-
-
-// Exemplo de uso:
-const users = [
-  { id: 1, user_type: "adm", created_at: "2023-06-10" },
-  { id: 2, user_type: "com", created_at: "2023-06-15" },
-  { id: 3, user_type: "eng", created_at: "2023-06-20" },
-  { id: 4, user_type: "com", created_at: "2023-07-05" },
-  { id: 5, user_type: "reg", created_at: "2023-07-10" },
-  { id: 6, user_type: "eng", created_at: "2023-07-20" },
-  { id: 7, user_type: "com", created_at: "2023-08-02" },
-  { id: 8, user_type: "adm", created_at: "2023-08-15" },
-];
-
-const userCountsByMonthAndType = groupByUserType(users);
-console.log(userCountsByMonthAndType);
