@@ -1,21 +1,60 @@
+import axios from 'axios';
+import { currentUrl } from '../../constants/global';
+import { useSelector } from 'react-redux';
 import DefaultModal from "../default_modal";
 import { SimpleDefaultModal, ModalContent } from './styles';
 import React, { useState } from 'react';
 import { StyledButton } from "../default_button/styles";
 
-const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, notification, children }) => {
+
+const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, notification, currentOwnerID, notificationID, children }) => {
+
+
+  const sendNotificationNow = () => {
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}`, };
+
+      console.log('oi chatGPT. Faça esse console.log aparecer ao clicar Sim no modal de enviar notificação')
+      console.log('verificar notificationID', notificationID);
+      axios
+        .post(`${currentUrl}/update-expo-push-token/`, {
+          user: currentOwnerID,
+          token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
+        }, { headers })
+        .then(response => console.log('criar token ExponentPushToken resposta:', response))
+        .catch(error => console.log(error));
+    
+      axios
+        .post(`${currentUrl}/api/send-notification/`, {
+          user: currentOwnerID,
+          notification_id: notificationID,
+        }, { headers })
+        .then(response => console.log('resposta da notificação', response))
+        .catch(error => console.log(error)
+      )
+  }
+
+
   const [showNotificationMessage, setShowNotificationMessage] = useState(false);
 
+  const handleContentClick = (event) => {
+    event.stopPropagation();
+  };
+
   const handleConfirmNotification = () => {
+    console.log('ta entrando aqui? o lugar dos true')
     onConfirmNotification();
+    onClose();
+    sendNotificationNow();
+  };
+
+  const handleCancelNotification = () => {
     onClose();
   };
 
   if (!isOpen) return null;
 
-  const handleContentClick = (event) => {
-    event.stopPropagation();
-  };
 
   return (
     <DefaultModal isOpen={isOpen} onClose={onClose}>
@@ -24,7 +63,7 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
           <h4>Deseja notificar o usuário de seu novo status?</h4>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around' }}>
             <StyledButton onClick={handleConfirmNotification} style={{ width: '128px' }}>Sim</StyledButton>
-            <StyledButton style={{ width: '128px' }}>Não</StyledButton>
+            <StyledButton onClick={handleCancelNotification} style={{ width: '128px' }}>Não</StyledButton>
           </div>
           <div
             style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', marginTop: '32px', marginBottom: '32px' }}
@@ -42,4 +81,3 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
 };
 
 export default KanbanSendNotificationModal;
-

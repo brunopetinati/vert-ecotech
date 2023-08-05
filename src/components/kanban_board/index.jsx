@@ -25,6 +25,7 @@ const KanbanBoard = () => {
   const [status, setStatus] = useState('started');
 
   const projects = useSelector((state) => state.app_data.projects);
+  
 
   const [currentOwnerID, setCurrentOwnerID] = useState('');
   const [currentProjectID, setCurrentProjectID] = useState('');
@@ -35,10 +36,22 @@ const KanbanBoard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showModalSendNotification, setShowModalSendNotification] = useState(false);
-  const [sendNotification, setSendNotification] = useState(false);
   const users = useSelector((state) => state.app_data.users);
+  const [newStatusProp, setNewStatusProp] = useState(null);
+  const [notificationID, setNotificationID] = useState(null);
 
   const navigate = useNavigate();
+
+  const columnToNotificationIDMap = {
+    'started': 2,
+    'analysis': 3,
+    'viability': 4,
+    'negotiation': 5,
+    'idle': 6,
+    'implementing': 7,
+    'concluded': 8,
+    'lost': 9,
+  };
 
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);
@@ -51,8 +64,10 @@ const KanbanBoard = () => {
     setShowingColumn(!showingColumn);
   };
 
+
   
   const handleDrop = (e, newStatus) => {
+
     e.preventDefault();
     const currentStatus = e.dataTransfer.getData('text');
 
@@ -65,17 +80,14 @@ const KanbanBoard = () => {
       .put(`${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
       .then((response) => {
         setUpdateComponent(!updateComponent)
-
       })
       .catch((error) => {
-        // Handle the error if any
       });
       setShowModalSendNotification(!showModalSendNotification);
-      if (sendNotification) { axios.post(`${currentUrl}/api/send-notification/`, {
-        user: currentOwnerID,
-        notification_id: Math.floor(Math.random() * 5) + 1,
-      }, { headers } ).then(response => console.log('resposta da notificação', response)).catch(error => console.log(error))
-    }}
+    }
+    const notificationID = columnToNotificationIDMap[newStatus];
+    setNotificationID(notificationID);
+    console.log('fala pra mim que deu certo por favor', notificationID);
   };
 
   useEffect(() => {
@@ -97,10 +109,8 @@ const KanbanBoard = () => {
             },
           });
         }
-        console.log(response);
         dispatch(storeProjects(response.data));
       } catch (error) {
-        // Handle error
       }
     };
     fetchProjects();
@@ -119,19 +129,16 @@ const KanbanBoard = () => {
                 Authorization: `Bearer ${token}`,
               },
             });
-            // Dispatch or handle response.data here
             setNewUsers(response.data);
           }
-          // Rest of the fetchProjects function code...
         } catch (error) {
-          // Handle error
         }
       }
     };
   
     fetchProjects(); // Call the async function immediately
   
-  }, [updateComponent, newUsers]);
+  }, [updateComponent, newUsers, newStatusProp]);
   
   
   
@@ -141,9 +148,6 @@ const KanbanBoard = () => {
   };
 
   const handleClickUser = (user) => {
-    //navigate('/new_path', { state: { user }});
-    console.log('clicou aqui');
-    console.log(user);
     setSelectedUser(user);
     setIsOpen(!isOpen);
   }
@@ -152,12 +156,14 @@ const KanbanBoard = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOnCloseSendNotificationModal = () => {
-    setShowModalSendNotification(!showModalSendNotification);
-  };
 
   const handleConfirmNotification = () => {
-    setSendNotification(true); // Update the sendNotification state to true
+    setShowModalSendNotification(false);
+  };
+
+
+  const handleOnCloseSendNotificationModal = () => {
+    setShowModalSendNotification(!showModalSendNotification);
   };
   
   return (
@@ -316,8 +322,10 @@ const KanbanBoard = () => {
           <KanbanSendNotificationModal
             isOpen={showModalSendNotification}
             onClose={handleOnCloseSendNotificationModal}
-            onConfirmNotification={handleConfirmNotification} // Pass the handler function
+            onConfirmNotification={handleConfirmNotification}
             notification={'mensagem de exemplo'}
+            currentOwnerID={currentOwnerID}
+            notificationID={notificationID}
           />
         )}
       </>
