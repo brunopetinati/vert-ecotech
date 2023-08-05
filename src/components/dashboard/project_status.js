@@ -3,6 +3,8 @@ import { getMonthName } from './months';
 export const groupByMonthAndStatus = (projects) => {
   const totalsByMonthAndStatus = {};
 
+  if (!projects) return;
+
   projects.forEach((project) => {
     const date = new Date(project.created_at);
     const monthYear = `${getMonthName(date.getMonth() + 1)}`;
@@ -21,7 +23,16 @@ export const groupByMonthAndStatus = (projects) => {
       };
     }
 
+    // Incrementando o status do projeto para o mês atual
     totalsByMonthAndStatus[monthYear][status] += 1;
+
+    // Acumulando os valores do status para os meses anteriores
+    const months = Object.keys(totalsByMonthAndStatus).sort((a, b) => new Date(a) - new Date(b));
+    for (const m of months) {
+      if (m !== monthYear) {
+        totalsByMonthAndStatus[monthYear][status] += totalsByMonthAndStatus[m][status];
+      }
+    }
   });
 
   const result = Object.values(totalsByMonthAndStatus);
@@ -39,4 +50,3 @@ const projects = [
 ];
 
 const groupedData = groupByMonthAndStatus(projects);
-console.log(groupedData);
