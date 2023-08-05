@@ -104,7 +104,7 @@ const KanbanBoard = () => {
       }
     };
     fetchProjects();
-  }, []);
+  }, [projects]);
 
   useEffect(() => {
     const fetchProjects = async () => {
