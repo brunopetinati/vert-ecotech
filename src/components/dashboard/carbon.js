@@ -1,20 +1,4 @@
-const getMonthName = (monthNumber) => {
-  const months = [
-    "janeiro",
-    "fevereiro",
-    "março",
-    "abril",
-    "maio",
-    "junho",
-    "julho",
-    "agosto",
-    "setembro",
-    "outubro",
-    "novembro",
-    "dezembro",
-  ];
-  return months[monthNumber - 1];
-};
+import { getMonthName } from './months';
 
 export const calculateTotalAreaByMonth = (projects) => {
   
@@ -33,7 +17,7 @@ export const calculateTotalAreaByMonth = (projects) => {
   const result = [];
   for (const monthYear in totalsByMonth) {
     cumulativeTotal += totalsByMonth[monthYear];
-    result.push({ month: monthYear, estimate_ha: cumulativeTotal });
+    result.push({ month: monthYear, estimativa: cumulativeTotal });
   }
 
   return result;
@@ -57,37 +41,33 @@ export const calculateTotalRealAreaByMonth = (projects) => {
   const result = [];
   for (const monthYear in totalsByMonth) {
     cumulativeTotal += totalsByMonth[monthYear];
-    result.push({ month: monthYear, hectares: cumulativeTotal });
+    result.push({ month: monthYear, em_processo: cumulativeTotal });
   }
 
   return result;
 };
 
 export const mergeCarbonData = (carbon_1, carbon_2) => {
-  // Cria um objeto para armazenar os dados mesclados usando o mês como chave
   const mergedData = {};
 
-  // Itera sobre o array carbon_1 e adiciona as informações no objeto mesclado
   carbon_1.forEach((item) => {
-    const { month, estimate_ha } = item;
+    const { month, estimativa } = item;
     if (!mergedData[month]) {
-      mergedData[month] = { month, estimate_ha, hectares: null };
+      mergedData[month] = { month, estimativa, em_processo: null };
     } else {
-      mergedData[month].estimate_ha += estimate_ha;
+      mergedData[month].estimativa += estimativa;
     }
   });
 
-  // Itera sobre o array carbon_2 e adiciona as informações no objeto mesclado
   carbon_2.forEach((item) => {
-    const { month, hectares } = item;
+    const { month, em_processo } = item;
     if (!mergedData[month]) {
-      mergedData[month] = { month, estimate_ha: null, hectares };
+      mergedData[month] = { month, estimativa: null, em_processo };
     } else {
-      mergedData[month].hectares = hectares;
+      mergedData[month].em_processo = em_processo;
     }
   });
 
-  // Converte o objeto mesclado em um array
   const result = Object.values(mergedData);
 
   return result;

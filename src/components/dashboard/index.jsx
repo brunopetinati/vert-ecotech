@@ -3,19 +3,16 @@ import { useSelector } from 'react-redux';
 import Chart from '../chart';
 import { Container } from './styles';
 import { calculateTotalAreaByMonth, calculateTotalRealAreaByMonth, mergeCarbonData } from './carbon';
+import { groupByMonthAndStatus } from './project_status';
 
 const Dashboard = () => {
 
+  // sequestro de carbono na atmosfera
   const projects = useSelector((state) => state.app_data.projects);
   const carbon_1 = calculateTotalAreaByMonth(projects);
   const carbon_2 = calculateTotalRealAreaByMonth(projects);
-
-  console.log(carbon_1);
-  console.log(carbon_2);
-
   let data2 = mergeCarbonData(carbon_1, carbon_2);
 
-  console.log(data2);
 
   const data = [
     { name: "Jan", uv: 0, pv: 0, amt: 0 },
@@ -23,6 +20,10 @@ const Dashboard = () => {
     { name: "Mar", uv: 0, pv: 0, amt: 0 },
     { name: "Apr", uv: 0, pv: 0, amt: 0 },
   ];
+
+  // status dos projetos
+
+  let data4 = groupByMonthAndStatus(projects);
 
   // uv: short for "unique visitors", refers to the number of distinct individuals who visited a website or other online platform during a given time period.
   // pv: short for "page views", refers to the total number of times a webpage or other digital content was viewed or accessed during a given time period.
@@ -38,7 +39,7 @@ const Dashboard = () => {
     { name: "Abr", ativos: 0, aposentados: 0 },
   ];
 
-  const data4 = [
+  /* const data5 = [
     { month: "Out", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
     { month: "Nov", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
     { month: "Dez", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
@@ -46,12 +47,12 @@ const Dashboard = () => {
     { month: "Fev", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
     { month: "Mar", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
     { month: "Abr", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-  ];
+  ]; */
   
   return (
     <Container>
       <Chart data={data}  title={'Acessos'} name={'name'} key_a={'pv'} key_b={'uv'} key_c={'amt'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} />
-      <Chart data={data2} title={'Sequestro de Carbono na Atmosfera (ha)'} name={'month'} key_a={'hectares'} stroke_a={'#7eff00'} key_b={'estimate_ha'} stroke_b={'#054d00'}/>
+      <Chart data={data2} title={'Sequestro de Carbono na Atmosfera (ha)'} name={'month'} key_a={'em_processo'} stroke_a={'#7eff00'} key_b={'estimativa'} stroke_b={'#054d00'}/>
       <Chart data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'#7eff00'} stroke_b={'black'} />
       <Chart data={data4} title={'Projetos'} name={'name'} key_a={'started'} key_b={'analysis'} key_c={'viability'} key_d={'negotiation'} key_e={'idle'} key_f={'implementing'} key_g={'concluded'} stroke_a={'blue'} stroke_b={'violet'} stroke_c={'green'} stroke_d={'gold'} stroke_e={'grey'} stroke_f={'orange'} stroke_g={'brown'}/>
     </Container>
