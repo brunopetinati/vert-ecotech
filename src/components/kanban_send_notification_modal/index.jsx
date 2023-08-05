@@ -13,26 +13,26 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
   const sendNotificationNow = () => {
 
     const token = sessionStorage.getItem('Authorization');
-    const headers = { Authorization: `Bearer ${token}`, };
-
-      console.log('oi chatGPT. Faça esse console.log aparecer ao clicar Sim no modal de enviar notificação')
-      console.log('verificar notificationID', notificationID);
-      axios
-        .post(`${currentUrl}/update-expo-push-token/`, {
-          user: currentOwnerID,
-          token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
-        }, { headers })
-        .then(response => console.log('criar token ExponentPushToken resposta:', response))
-        .catch(error => console.log(error));
+    const headers = { Authorization: `Bearer ${token}`};
     
-      axios
-        .post(`${currentUrl}/api/send-notification/`, {
-          user: currentOwnerID,
-          notification_id: notificationID,
-        }, { headers })
-        .then(response => console.log('resposta da notificação', response))
-        .catch(error => console.log(error)
-      )
+    console.log('identificando aqui, deve aparecer 24', currentOwnerID); // deu muito certo
+    console.log('verificar notificationID', notificationID); // também está super certo
+    axios // isso aqui não está funcionando, PROBLEMA AQUI
+      .post(`${currentUrl}/update-expo-push-token/`, {
+        user: currentOwnerID,
+        token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
+      }, { headers })
+      .then(response => console.log('criar token ExponentPushToken resposta:', response))
+      .catch(error => console.log('ja deu errado aqui hausiehiasuehsuia',error));
+  
+    axios
+      .post(`${currentUrl}/api/send-notification/`, {
+        user: currentOwnerID,
+        notification_id: notificationID,
+      }, { headers })
+      .then(response => console.log('resposta da notificação', response))
+      .catch(error => console.log(error)
+    )
   }
 
 
@@ -43,7 +43,6 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
   };
 
   const handleConfirmNotification = () => {
-    console.log('ta entrando aqui? o lugar dos true')
     onConfirmNotification();
     onClose();
     sendNotificationNow();
