@@ -1,4 +1,4 @@
-import Modal from '../../components/default_modal';
+import DefaultModal from '../../components/default_modal';
 import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span, ButtonDisplay } from './styles'
 import React, { useState } from 'react';
 import axios from 'axios';
@@ -56,7 +56,7 @@ const Banco = ({ isOpen, onClose, children }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} children={children}>
+    <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
         <InnerContainer onSubmit={handleSubmit}>
             <Column>
@@ -108,7 +108,7 @@ const Banco = ({ isOpen, onClose, children }) => {
           <Button type="submit" onClick={(e) => handleSubmit(e)}>Adicionar Informações</Button>
         </ButtonDisplay>
       </Container>
-    </Modal>
+    </DefaultModal>
   );
 };
 

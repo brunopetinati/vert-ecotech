@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Header, Container, Column, Card } from './styles';
+import { Header, Container, Column, CardContainer } from './styles';
 import { useSelector } from 'react-redux';
 import MiniCard from '../projects_cards_mini';
 import { getScoreColor } from '../../constants/functions';
@@ -9,10 +9,14 @@ import { useDispatch } from 'react-redux';
 import { storeProjects } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import KanbanCard from '../kanban_card';
 import KanbanUserCard from '../kanban_user_card';
 import KanbanSidebar from '../kanban_sidebar';
-import KanbanUserCardModal from '../kanban_user_card_modal';
+import KanbanUserCardDefaultModal from '../kanban_user_card_modal';
 import KanbanSendNotificationModal from '../kanban_send_notification_modal';
+import { appStatus } from '../../store/modules/app_status/actions';
+
+import { transformNumbersToHectares, getStatusCARColor } from '../../constants/functions';
 
 const KanbanBoard = () => {
 
@@ -21,6 +25,7 @@ const KanbanBoard = () => {
   const [status, setStatus] = useState('started');
 
   const projects = useSelector((state) => state.app_data.projects);
+  
 
   const [currentOwnerID, setCurrentOwnerID] = useState('');
   const [currentProjectID, setCurrentProjectID] = useState('');
@@ -31,9 +36,22 @@ const KanbanBoard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showModalSendNotification, setShowModalSendNotification] = useState(false);
-  const [sendNotification, setSendNotification] = useState(false);
+  const users = useSelector((state) => state.app_data.users);
+  const [newStatusProp, setNewStatusProp] = useState(null);
+  const [notificationID, setNotificationID] = useState(null);
 
   const navigate = useNavigate();
+
+  const columnToNotificationIDMap = {
+    'started': 2,
+    'analysis': 3,
+    'viability': 4,
+    'negotiation': 5,
+    'idle': 6,
+    'implementing': 7,
+    'concluded': 8,
+    'lost': 9,
+  };
 
   const handleDragStart = (e, owner, projectID, projectStatus) => {
     e.dataTransfer.setData('text/plain', projectStatus);
@@ -46,8 +64,10 @@ const KanbanBoard = () => {
     setShowingColumn(!showingColumn);
   };
 
+
   
   const handleDrop = (e, newStatus) => {
+
     e.preventDefault();
     const currentStatus = e.dataTransfer.getData('text');
 
@@ -60,17 +80,14 @@ const KanbanBoard = () => {
       .put(`${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
       .then((response) => {
         setUpdateComponent(!updateComponent)
-
       })
       .catch((error) => {
-        // Handle the error if any
       });
       setShowModalSendNotification(!showModalSendNotification);
-      if (sendNotification) { axios.post(`${currentUrl}/api/send-notification/`, {
-        user: currentOwnerID,
-        notification_id: Math.floor(Math.random() * 5) + 1,
-      }, { headers } ).then(response => console.log('resposta da notificação', response)).catch(error => console.log(error))
-    }}
+    }
+    const notificationID = columnToNotificationIDMap[newStatus];
+    setNotificationID(notificationID);
+    console.log('fala pra mim que deu certo por favor', notificationID);
   };
 
   useEffect(() => {
@@ -78,7 +95,7 @@ const KanbanBoard = () => {
       try {
         const token = sessionStorage.getItem('Authorization');
         let response;
-  
+
         if (currentUser.user_type === 'ADM') {
           response = await axios.get(`${currentUrl}/api/projects/`, {
             headers: {
@@ -92,45 +109,45 @@ const KanbanBoard = () => {
             },
           });
         }
-  
         dispatch(storeProjects(response.data));
       } catch (error) {
-        // Handle error
       }
-  
+    };
+    fetchProjects();
+  }, [projects]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
       if (currentUser.user_type === 'ADM') {
         try {
           const token = sessionStorage.getItem('Authorization');
           let response;
-    
+  
           if (currentUser.user_type === 'ADM' && newUsers.length === 0) {
             response = await axios.get(`${currentUrl}/api/users_without_projects/`, {
               headers: {
                 Authorization: `Bearer ${token}`,
               },
             });
-            // Dispatch or handle response.data here
             setNewUsers(response.data);
           }
-          // Rest of the fetchProjects function code...
         } catch (error) {
-          // Handle error
         }
       }
     };
   
-    fetchProjects();
-  }, [updateComponent, newUsers]);
+    fetchProjects(); // Call the async function immediately
+  
+  }, [updateComponent, newUsers, newStatusProp]);
+  
   
   
   const handleClick = (project) => {
-    navigate('/intern_project', { state: { project }} );
+    dispatch(appStatus(''));
+    navigate('/intern_project', { state: { project }});
   };
 
   const handleClickUser = (user) => {
-    //navigate('/new_path', { state: { user }});
-    console.log('clicou aqui');
-    console.log(user);
     setSelectedUser(user);
     setIsOpen(!isOpen);
   }
@@ -139,12 +156,14 @@ const KanbanBoard = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleOnCloseSendNotificationModal = () => {
-    setShowModalSendNotification(!showModalSendNotification);
-  };
 
   const handleConfirmNotification = () => {
-    setSendNotification(true); // Update the sendNotification state to true
+    setShowModalSendNotification(false);
+  };
+
+
+  const handleOnCloseSendNotificationModal = () => {
+    setShowModalSendNotification(!showModalSendNotification);
   };
   
   return (
@@ -155,7 +174,6 @@ const KanbanBoard = () => {
     transition={{ duration: 0.8 }}
     >
       <>
-        <Header>Funil Produtor - Acesso administrativo</Header>
         <Container>
         <KanbanSidebar />
           <Column showingColumn={showingColumn}
@@ -166,11 +184,10 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'started') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
-                );
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
+                );  
               } else {  
                 return null; // or you can render something else here
               }
@@ -179,7 +196,7 @@ const KanbanBoard = () => {
             {newUsers && newUsers.map((user, key) => {                
                 return <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}><KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state}  /></div>
               })}
-              {selectedUser && <KanbanUserCardModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
+              {selectedUser && <KanbanUserCardDefaultModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
           <Column
             onDragOver={handleDragOver}
@@ -189,10 +206,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'analysis') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -207,10 +223,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'viability') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -225,10 +240,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'negotiation') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -243,10 +257,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'idle') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -261,10 +274,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'implementing') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -279,10 +291,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'concluded') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -297,10 +308,9 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'lost') {
                 return (
-                  <Card key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
-                    <h3>{project.title}</h3>
-                    <p>Informações</p>
-                  </Card>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                    <KanbanCard project={project} />
+                  </CardContainer>
                 );
               } else {
                 return null; // or you can render something else here
@@ -312,8 +322,10 @@ const KanbanBoard = () => {
           <KanbanSendNotificationModal
             isOpen={showModalSendNotification}
             onClose={handleOnCloseSendNotificationModal}
-            onConfirmNotification={handleConfirmNotification} // Pass the handler function
+            onConfirmNotification={handleConfirmNotification}
             notification={'mensagem de exemplo'}
+            currentOwnerID={currentOwnerID}
+            notificationID={notificationID}
           />
         )}
       </>

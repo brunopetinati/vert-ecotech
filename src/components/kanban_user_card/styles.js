@@ -24,6 +24,7 @@ export const DisplayColumn = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  max-width: 130px;
 `;
 
 export const ImgContainer = styled.div`

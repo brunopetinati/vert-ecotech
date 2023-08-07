@@ -123,7 +123,7 @@ export const IndexContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9fafb;
-  width: 100%;
+  width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
   height: 100%;
 `;
 
@@ -132,13 +132,13 @@ export const ProfileContainerInfo = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  width: 900px;
   padding: 4em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 2;
   background: #fff;
-  max-height: 500px;
+  max-height: 550px;
+  width: ${({collapsed}) => collapsed ? "80vw" : "70vw"};
 
   h3 {
     display: flex;

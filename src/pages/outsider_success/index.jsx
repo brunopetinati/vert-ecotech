@@ -14,7 +14,7 @@ const OutsiderSuccess = () => {
         transition={{ duration: 0.8 }}
         >
         <img src={SuccessGif} alt={'gif'} style={{width: '80%'}}/>
-        <h3 style={{color: '#054d00'}}>Parabéns! O seu projeto foi registrado com sucesso!</h3>
+        <h2 style={{color: '#054d00'}}>Parabéns! O seu projeto foi registrado com sucesso!</h2>
       </motion.div>
     </Container>
   )

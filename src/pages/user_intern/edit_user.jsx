@@ -85,7 +85,7 @@ const UserIntern = () => {
         >
         <ProfileContainerInfo>
           <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            <h3>Meu perfil</h3>
+            <h2>Meu perfil</h2>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />

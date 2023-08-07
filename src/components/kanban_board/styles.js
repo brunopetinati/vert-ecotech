@@ -59,7 +59,7 @@ export const Column = styled.div`
   }
 `;
 
-export const Card = styled.div`
+export const CardContainer = styled.div`
   background-color: ${(props) => props.showingColumn ? 'red' : '#fff'};
   border-radius: 5px;
   padding: 10px;

@@ -71,6 +71,7 @@ export const regularMaskforNumbers = (event, onChangeFunction) => {
   onChangeFunction(formattedValue);
 };
 
+
 export const extractNumbers = (num) => {
   const str = num.toString();
   if (str.length < 4) {
@@ -85,3 +86,87 @@ export const removeNonDigits = (phoneNumber) => {
   return digitsOnly;
 };
 
+export const convertPhone = (phoneNumber) => {
+  const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
+
+  const countryCode = cleanedPhoneNumber.slice(0, 2);
+  const areaCode = cleanedPhoneNumber.slice(2, 3);
+  const firstGroup = cleanedPhoneNumber.slice(3, 7);
+  const secondGroup = cleanedPhoneNumber.slice(7, 11);
+
+  const formattedPhoneNumber = `(${countryCode}) ${areaCode} ${firstGroup}-${secondGroup}`;
+
+  return formattedPhoneNumber;
+};
+
+export const formatCPF = (cpf) => {
+
+  if (!cpf) {return ''};
+
+  // Remove all non-digit characters from the CPF
+  const cleanedCPF = cpf.replace(/\D/g, '');
+
+  // Extract the first 11 digits
+  const extractedDigits = cleanedCPF.slice(0, 11);
+
+  // Split the digits into groups of 3, 3, and 2
+  const firstGroup = extractedDigits.slice(0, 3);
+  const secondGroup = extractedDigits.slice(3, 6);
+  const thirdGroup = extractedDigits.slice(6, 9);
+  const lastGroup = extractedDigits.slice(9, 11);
+
+  // Construct the formatted CPF
+  const formattedCPF = `${firstGroup}.${secondGroup}.${thirdGroup}-${lastGroup}`;
+
+  return formattedCPF;
+};
+
+export const formatSICARCode = (inputString) => {
+
+  if (!inputString) {return ''};
+
+  // Remove any existing format characters
+  const cleanedString = inputString.replace(/[\-\.]/g, '');
+
+  // Check if the cleaned string already has the desired format
+  if (cleanedString.length === 45) {
+    return cleanedString.toUpperCase();
+  }
+
+  // Check if the cleaned string is incomplete
+  if (cleanedString.length < 45) {
+    const incompleteMessage = 'Código SICAR pode conter erro';
+    const formattedString = `${cleanedString.slice(0, 2)}-${cleanedString.slice(2, 9)}-${cleanedString.slice(9, 13)}.${cleanedString.slice(13, 17)}.${cleanedString.slice(17, 21)}.${cleanedString.slice(21, 25)}.${cleanedString.slice(25, 29)}.${cleanedString.slice(29, 33)}.${cleanedString.slice(33, 37)}.${cleanedString.slice(37, 41)}`;
+    return formattedString.toUpperCase();
+  }
+
+  // Construct the formatted string
+  const formattedString = `${cleanedString.slice(0, 2)}-${cleanedString.slice(2, 9)}-${cleanedString.slice(9, 11)}.${cleanedString.slice(11, 15)}.${cleanedString.slice(15, 19)}.${cleanedString.slice(19, 23)}.${cleanedString.slice(23, 27)}.${cleanedString.slice(27, 31)}.${cleanedString.slice(31, 35)}.${cleanedString.slice(35, 39)}`;
+
+  return formattedString.toUpperCase();
+};
+
+export const formatCEP = (cep) => {
+
+  if (!cep) {return ''};
+
+  const digitsOnly = cep.replace(/\D/g, '');
+
+  if (digitsOnly.length !== 8) {
+    throw new Error('Invalid CEP number. Expected 8 digits.');
+  }
+
+  const formattedCEP = `${digitsOnly.substr(0, 5)}-${digitsOnly.substr(5)}`;
+
+  return formattedCEP;
+};
+
+export const getProposalStatusInfo = (acceptance) => {
+  if (acceptance === true) {
+    return { text: "Aceita", color: "#00c853" }; // Green for "Aceita"
+  } else if (acceptance === false) {
+    return { text: "Pendente", color: "gray" }; // Red for "Recusada" #e53935
+  } else {
+    return { text: "Pendente", color: "#b9f7d0" }; // Gray for "Pendente" original: #757575
+  }
+};

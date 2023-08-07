@@ -2,7 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getOwners } from "../store/modules/app_data/thunk";
+import { getCommercialTable, getEngineeringTable, getOwners } from "../store/modules/app_data/thunk";
 import Welcome from '../pages/main_display';
 import Login from '../components/login';
 import Register from '../components/register_user';
@@ -29,9 +29,6 @@ const AppRoutes = () => {
 
   const login = useSelector((state) => state.user);
 
-  useEffect(() => {
-    dispatch(getOwners());
-  }, [login]);
   
   if (!login.accessToken && location.pathname !== '/' &&
     location.pathname !== '/register' &&
@@ -46,7 +43,6 @@ const AppRoutes = () => {
     location.pathname !== '/upload_success' &&
     location.pathname !== '/upload_canceled') {
     navigate('/');
-    console.log('entrou aqui');
     return (
       <AnimatePresence>
         <Routes>

@@ -1,11 +1,11 @@
-import Modal from "../default_modal";
+import DefaultModal from "../default_modal";
 import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span, ButtonDisplay } from './styles'
 
 const Endereco = ({ isOpen, onClose, children }) => {
   return(
-    <Modal isOpen={isOpen} onClose={onClose} children={children}>
+    <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-        <h3>Meu Perfil</h3>
+        <h2>Meu Perfil</h2>
         <InnerContainer>
           <Column>  
             <Label for="cep">CEP:</Label>
@@ -29,7 +29,7 @@ const Endereco = ({ isOpen, onClose, children }) => {
         <Button>Adicionar Endereço</Button>
       </ButtonDisplay>
       </Container>
-    </Modal>
+    </DefaultModal>
   )
 }
 

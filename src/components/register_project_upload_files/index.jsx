@@ -11,7 +11,7 @@ const RegisterProjectFileUpload = () => {
 
   return (
     <Container>
-      <h3>Informações Cadastrais</h3>
+      <h2>Informações Cadastrais</h2>
       <InnerContainer>
         <Column>
           <FileUploader />

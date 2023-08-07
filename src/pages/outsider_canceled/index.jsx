@@ -14,7 +14,7 @@ const OutsiderCanceled = () => {
           transition={{ duration: 0.8 }}
         >
           <img src={GrowingPlantGif} alt={'gif'} style={{width: '80%'}}/>
-          <h3 style={{color: '#054d00'}}>Tudo bem! Seu projeto foi salvo com sucesso. Continue mais tarde.</h3>
+          <h2 style={{color: '#054d00'}}>Tudo bem! Seu projeto foi salvo com sucesso. Continue mais tarde.</h2>
         </motion.div>
     </Container>
   )

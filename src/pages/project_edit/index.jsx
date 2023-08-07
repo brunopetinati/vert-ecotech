@@ -1,16 +1,16 @@
 import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { storeOwnerId } from '../../store/modules/app_data/actions';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { returnYesorNoforBoolean, returnUserName } from '../../constants/functions';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 import { addProjectToProjects, resetProjects, eraseProjects } from '../../store/modules/app_data/actions';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 const EditProject = () => {
 
@@ -155,7 +155,7 @@ const EditProject = () => {
   // Rotas
 
   const handleClick = () => {
-    //dispatch(appStatus('Projetos'));
+    dispatch(appStatus(''));
     navigate('/intern_project', { state: { project }});
   };
   

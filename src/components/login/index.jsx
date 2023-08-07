@@ -5,10 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
+import { getOwners, getProjects, getEngineeringTable } from '../../store/modules/app_data/thunk';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
+
+
 
 const Login = () => {
 
@@ -28,13 +31,15 @@ const Login = () => {
         email,
         password,
       }).then(response => {
-        // Store the token in the sessionStorage
         sessionStorage.setItem('Authorization', response.data.access);
-        // Navigate to the welcome page on successful login
+        const token = response.data.access;
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
-          dispatch(userLogin(response.data.access, response.data));
+          dispatch(userLogin(token, response.data));
+          dispatch(getOwners(token));
+          dispatch(getProjects(token));
+          dispatch(getEngineeringTable(token));
         }, 4000);
         dispatch(appStatus('Dashboard'));
       }).catch(error => {
@@ -90,7 +95,7 @@ const Login = () => {
         });
       })
       .catch(error => {
-        console.error(error); // handle error response
+        console.error(error); 
         Swal.fire({
           title: 'Error!',
           text:  'Algo deu errado ao tentar processar essa atividade. Por favor, contate nosso suporte. suporte@vertecotech.com',
@@ -101,61 +106,67 @@ const Login = () => {
   }
     
   return (
-     <LoginContainer>
-        {showLoading ? <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}><h1 style={{color: 'white'}}>Bem Vindo!</h1>
-            </motion.div> : 
-            <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            >
-          <Img src={Logo} />
-          {app_status == 'forgot_password' ? 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8 }}
-              >
-              <LoginForm>
-                <Input
-                  type="text"
-                  placeholder="Email"
-                  value={email}
-                  onChange={event => setUsername(event.target.value)}
-                />
-                <div>
-                  <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
-                  <Button onClick={handleComeBack}>Voltar</Button>
-                </div>
-              </LoginForm>
-            </motion.div> 
-            :
-            <LoginForm onSubmit={handleSubmit}>
-              <Input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={event => setUsername(event.target.value)}
-              />
-              <Input
-                type="password"
-                placeholder="Senha"
-                value={password}
-                onChange={event => setPassword(event.target.value)}
-              />
-              <div>
-                <Button type="submit">Login</Button>
-                <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
-              </div>
-            </LoginForm>}</motion.div>}
-          {!showLoading && <a href="" style={{color: 'white'}} onClick={(e) => forgotPassword(e)} >Esqueceu a senha?</a>}
-      </LoginContainer>
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
+      >
+    <LoginContainer>
+    {showLoading ? (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h1 style={{ color: 'white', fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: '700', fontSize: '48px', letterSpacing: '0' }}>Bem Vindo!</h1>
+      </motion.div>
+    ) : (
+      <>
+        <Img src={Logo} />
+        {app_status === 'forgot_password' ? (
+          <LoginForm>
+            <Input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <div>
+              <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
+              <Button onClick={handleComeBack}>Voltar</Button>
+            </div>
+          </LoginForm>
+        ) : (
+          <LoginForm onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={event => setUsername(event.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+            />
+            <div>
+              <Button type="submit">Login</Button>
+              <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
+            </div>
+          </LoginForm>
+        )}
+        {!showLoading && app_status !== 'forgot_password' && (
+          <a href="" style={{ color: 'white', fontFamily: 'Arial' }} onClick={(e) => forgotPassword(e)}>
+            Esqueceu a senha?
+          </a>
+        )}
+      </>
+    )}
+  </LoginContainer>  
+  </motion.div>
   );
 };
 

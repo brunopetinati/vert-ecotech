@@ -1,4 +1,4 @@
-import Modal from "../default_modal";
+import DefaultModal from "../default_modal";
 import { Container, InnerContainer, ButtonContainer, Column, Label, Input, Button, Span, ButtonDisplay } from './styles'
 import { currentUrl } from "../../constants/global";
 import Swal from "sweetalert2";
@@ -49,7 +49,7 @@ const ResetPassword = ({ isOpen, onClose, children }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} children={children}>
+    <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
         <InnerContainer>
           <Column>
@@ -77,7 +77,7 @@ const ResetPassword = ({ isOpen, onClose, children }) => {
           <Button onClick={handleSubmitPassword}>Salvar</Button>
         </ButtonDisplay>
       </Container>
-    </Modal>
+    </DefaultModal>
   );
 };
 

@@ -1,12 +1,12 @@
-import Modal from "../default_modal";
+import DefaultModal from "../default_modal";
 import { Container, InnerContainer, Row, Label, Input, Button, ButtonDisplay} from './styles'
 
 const Info = ({ isOpen, onClose, children }) => {
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} children={children}>
+    <DefaultModal isOpen={isOpen} onClose={onClose} children={children}>
       <Container>
-      <h3>Meu Perfil</h3>
+      <h2>Meu Perfil</h2>
       <InnerContainer>
         <Row>  
           <Label for="rg">RG:</Label>
@@ -23,7 +23,7 @@ const Info = ({ isOpen, onClose, children }) => {
         <Button>Adicionar Informações</Button>
       </ButtonDisplay>
     </Container>
-  </Modal>
+  </DefaultModal>
   )
 };
 
