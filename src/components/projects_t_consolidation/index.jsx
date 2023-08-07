@@ -24,6 +24,7 @@ import {
   List,
   ListItem
 } from './styles';
+import PasswordModal from './password_modal';
 
 
 const ProjectTabConsolidation = ({user, project}) => {
@@ -31,10 +32,11 @@ const ProjectTabConsolidation = ({user, project}) => {
 
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
-
-
+  const currentUser = useSelector((state) => state.user.currentUser);
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObjectd = engineering.find(item => item.project === project.id);
+
+  const [password, setPassword] = useState(null);
 
   let matchObjectId = null;
   
@@ -44,6 +46,16 @@ const ProjectTabConsolidation = ({user, project}) => {
   } else {
     console.log('Nenhum objeto encontrado com o project_id correspondente.');
   }
+
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
+  const openPasswordModal = () => {
+    setIsPasswordModalOpen(true);
+  };
+
+  const closePasswordModal = () => {
+    setIsPasswordModalOpen(false);
+  };
 
 
   useEffect(() => {
@@ -65,12 +77,16 @@ const ProjectTabConsolidation = ({user, project}) => {
     }
   };
 
-  const handleEngineeringDownload = (fileField) => {
+  //download engenharia
 
-    console.log('aeeeeeeeeeeewlkejwkljasl', project.id);
+  const handleEngineeringDownload = (fileField, password) => {
 
-    axios
-      .post(`${currentUrl}/api/engineering/21/download/${fileField}/`, {
+    console.log('sera que o id do projeto está certo?', project.id);
+
+    if (currentUser.user_type === "ADM") {
+      console.log('entrou aqui!')
+      axios
+      .post(`${currentUrl}/api/environmental-engineering/${project.id}/download/${fileField}/`, { password }, {
         headers,
         responseType: 'blob',
       })
@@ -91,16 +107,51 @@ const ProjectTabConsolidation = ({user, project}) => {
           confirmButtonText: 'OK',
         });
       });
+    } else {
+
+    if (!password) {
+      openPasswordModal();
+      return;
+    }
+
+    axios
+      .post(`${currentUrl}/api/environmental-engineering/${project.id}/download/${fileField}/`, { password }, {
+        headers,
+        responseType: 'blob',
+      })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${fileField}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error('Error downloading file:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to download the file. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
+    }
   };
 
-  const downloadPDF = (fieldName) => {
+  // download projetos
+
+  const downloadPDF = (fieldName, password) => {
+
+    if (!password) {
+      openPasswordModal();
+      return;
+    }
 
     //const token = sessionStorage.getItem('Authorization');
     const downloadUrl = `${currentUrl}/api/project/${project.id}/download/${fieldName}/`;
     window.open(downloadUrl, '_blank');
-  };
-
-  console.log('fileStatus.registration_wilder', fileStatus.registration_wilder);
+  };  
 
   return (
   <motion.div
@@ -164,6 +215,12 @@ const ProjectTabConsolidation = ({user, project}) => {
         </ListItem>
       </List>
       </div>
+      {isPasswordModalOpen && (
+        <PasswordModal onConfirm={(password) => {
+          setPassword(password);
+          closePasswordModal();
+        }} />
+      )}
       </Container>
     </motion.div>
   );
