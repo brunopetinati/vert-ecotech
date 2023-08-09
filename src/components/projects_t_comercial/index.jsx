@@ -71,6 +71,35 @@ const ProjectTabComercial = ({ user, project }) => {
       });
   };
 
+  const handleDownload = (proposalID) => {
+    const downloadUrl = `${currentUrl}/api/proposal/${proposalID}/download/`;
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}` };
+    let password;
+
+    axios.post(downloadUrl, { password }, { headers, responseType: 'blob' })
+      .then(response => {
+        // Criar um link temporário para download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `vert-ecotech-proposta-${proposalID}-.pdf`); // Nome do arquivo a ser baixado
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch(error => {
+        console.error('Erro ao baixar o arquivo:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to download the file. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -91,9 +120,7 @@ const ProjectTabComercial = ({ user, project }) => {
                   <ListItem key={proposal.id}>
                     <ul>{project.title}</ul>
                     <span style={{ color: '#8bc34a' }}>Proposta Comercial</span>
-                      <a href={`${currentUrl}${proposal.proposal.url}`} download>
-                        <Button>Download</Button>
-                      </a>
+                      <Button onClick={() => handleDownload(proposal.id)}>Download</Button>
                     <div style={{ color: getProposalStatusInfo(proposal.acceptance).color }}>
                       {getProposalStatusInfo(proposal.acceptance).text}
                     </div>
