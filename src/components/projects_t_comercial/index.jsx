@@ -71,6 +71,34 @@ const ProjectTabComercial = ({ user, project }) => {
       });
   };
 
+  const handleDownload = async (proposalID) => {
+    try {
+      
+      const requestData = { project: project.id };
+  
+      // Faz a requisição POST para a API com os dados necessários
+      const response = await axios.post(`${currentUrl}/api/proposal/${proposalID}/download/`, requestData, {
+        responseType: 'blob', // Define o tipo de resposta como blob, para receber o arquivo binário
+      });
+  
+      // Cria um objeto URL temporário para o arquivo de resposta
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+  
+      // Cria um link e faz o download do arquivo
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `proposta-vert-${proposalID}-.pdf`); // Defina o nome do arquivo a ser baixado
+      document.body.appendChild(link);
+      link.click();
+  
+      // Limpa o objeto URL temporário
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Erro ao fazer o download:', error);
+      // Trate o erro aqui, se necessário
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -91,9 +119,7 @@ const ProjectTabComercial = ({ user, project }) => {
                   <ListItem key={proposal.id}>
                     <ul>{project.title}</ul>
                     <span style={{ color: '#8bc34a' }}>Proposta Comercial</span>
-                      <a href={`${currentUrl}${proposal.proposal.url}`} download>
-                        <Button>Download</Button>
-                      </a>
+                      <Button onClick={() => handleDownload(proposal.id)}>Download</Button>
                     <div style={{ color: getProposalStatusInfo(proposal.acceptance).color }}>
                       {getProposalStatusInfo(proposal.acceptance).text}
                     </div>

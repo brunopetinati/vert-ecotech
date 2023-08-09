@@ -166,27 +166,27 @@ const ProjectTabConsolidation = ({user, project}) => {
         <ListItem style={{marginTop: '564px'}}>
           <div>Certificado de Matrícula</div>
           <div>{getFileStatusIcon(project.pdf_matricula_certificate)}</div>
-          <div>{project.pdf_matricula_certificate && <StyledButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</StyledButton>}</div>
+          <div>{project.pdf_matricula_certificate && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_matricula_certificate')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>CAR (SICAR)</div>
           <div>{getFileStatusIcon(project.pdf_car)}</div>
-          <div>{project.pdf_car && <StyledButton onClick={() => downloadPDF('pdf_car')}>PDF CAR</StyledButton>}</div>
+          <div>{project.pdf_car && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_car')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>CCIR</div>
           <div>{getFileStatusIcon(project.pdf_ccir)}</div>
-          <div>{project.pdf_ccir && <StyledButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</StyledButton>}</div>
+          <div>{project.pdf_ccir && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_ccir')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>Polígono da propriedade</div>
           <div>{getFileStatusIcon(project.property_polygon)}</div>
-          <div>{project.property_polygon && <StyledButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</StyledButton>}</div>
+          <div>{project.property_polygon && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('property_polygon')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>Regularização com a Dívida Federal</div>
           <div>{getFileStatusIcon(project.pdf_federal_debt_certificate)}</div>
-          <div>{project.pdf_federal_debt_certificate && <StyledButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</StyledButton>}</div>
+          <div>{project.pdf_federal_debt_certificate && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div> PDD PDF</div>
@@ -199,7 +199,7 @@ const ProjectTabConsolidation = ({user, project}) => {
           <div>{fileStatus.pdd_draft && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('pdd_draft')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>Viability Analysis</div>
+          <div>Análise de Viabilidade</div>
           <div>{getFileStatusIcon(fileStatus.viability_analysis)}</div>
           <div>{fileStatus.viability_analysis && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('viability_analysis')}>Download</StyledButton>}</div>
         </ListItem>
