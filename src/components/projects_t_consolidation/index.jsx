@@ -102,7 +102,7 @@ const ProjectTabConsolidation = ({user, project}) => {
         console.error('Error downloading file:', error);
         Swal.fire({
           title: 'Error!',
-          text: 'Failed to download the file. Please try again later.',
+          text: 'Erro ao fazer download do arquivo. Estamos trabalhando para resolver o problema o mais breve possível.',
           icon: 'error',
           confirmButtonText: 'OK',
         });

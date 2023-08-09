@@ -71,33 +71,34 @@ const ProjectTabComercial = ({ user, project }) => {
       });
   };
 
-  const handleDownload = async (proposalID) => {
-    try {
-      
-      const requestData = { project: project.id };
-  
-      // Faz a requisição POST para a API com os dados necessários
-      const response = await axios.post(`${currentUrl}/api/proposal/${proposalID}/download/`, requestData, {
-        responseType: 'blob', // Define o tipo de resposta como blob, para receber o arquivo binário
+  const handleDownload = (proposalID) => {
+    const downloadUrl = `${currentUrl}/api/proposal/${proposalID}/download/`;
+
+    const token = sessionStorage.getItem('Authorization');
+    const headers = { Authorization: `Bearer ${token}` };
+    let password;
+
+    axios.post(downloadUrl, { password }, { headers, responseType: 'blob' })
+      .then(response => {
+        // Criar um link temporário para download
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `vert-ecotech-proposta-${proposalID}-.pdf`); // Nome do arquivo a ser baixado
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch(error => {
+        console.error('Erro ao baixar o arquivo:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to download the file. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       });
-  
-      // Cria um objeto URL temporário para o arquivo de resposta
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-  
-      // Cria um link e faz o download do arquivo
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', `proposta-vert-${proposalID}-.pdf`); // Defina o nome do arquivo a ser baixado
-      document.body.appendChild(link);
-      link.click();
-  
-      // Limpa o objeto URL temporário
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error('Erro ao fazer o download:', error);
-      // Trate o erro aqui, se necessário
-    }
-  };
+  }
 
   return (
     <motion.div
