@@ -1,13 +1,16 @@
 import React from "react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from "recharts";
 
+const formatValueWithCommas = (value) => {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 
 const Chart = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key_g, stroke_a, stroke_b, stroke_c, stroke_d, stroke_e, stroke_f, stroke_g}) => (
   <div>
-    <h2 style={{color: '#054d00'}}>{title}</h2>
+    <h3>{title}</h3>
     <LineChart width={500} height={300} data={data}>
       <XAxis dataKey={name} />
-      <YAxis />
+      <YAxis tickFormatter={formatValueWithCommas} />
       <CartesianGrid stroke="#ccc" />
       <Tooltip />
       <Legend />
@@ -23,4 +26,3 @@ const Chart = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key
 );
 
 export default Chart;
-

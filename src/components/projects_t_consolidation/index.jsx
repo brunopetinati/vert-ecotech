@@ -42,10 +42,7 @@ const ProjectTabConsolidation = ({user, project}) => {
   
   if (matchObjectd) {
     matchObjectId = matchObjectd.id;
-    console.log('O ID do objeto desejado é:', matchObjectId);
-  } else {
-    console.log('Nenhum objeto encontrado com o project_id correspondente.');
-  }
+  };
 
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
@@ -61,7 +58,6 @@ const ProjectTabConsolidation = ({user, project}) => {
   useEffect(() => {
     axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
       .then((response) => {
-        // Assuming the response is an object containing field names as keys and file presence as values
         setFileStatus(response.data);
       })
       .catch((error) => {
@@ -143,10 +139,13 @@ const ProjectTabConsolidation = ({user, project}) => {
 
   const downloadPDF = (fieldName, password) => {
 
+    console.log('ausihdaisuh')
+
     if (!password) {
       openPasswordModal();
       return;
     }
+
 
     //const token = sessionStorage.getItem('Authorization');
     const downloadUrl = `${currentUrl}/api/project/${project.id}/download/${fieldName}/`;
