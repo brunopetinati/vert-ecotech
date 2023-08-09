@@ -6,5 +6,5 @@ export const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  width: 90vw;
+  width: 85vw;
 `;
