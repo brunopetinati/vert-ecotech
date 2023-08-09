@@ -77,8 +77,6 @@ const ProjectTabConsolidation = ({user, project}) => {
 
   const handleEngineeringDownload = (fileField, password) => {
 
-    console.log('sera que o id do projeto está certo?', project.id);
-
     if (currentUser.user_type === "ADM") {
       console.log('entrou aqui!')
       axios
@@ -137,19 +135,62 @@ const ProjectTabConsolidation = ({user, project}) => {
 
   // download projetos
 
-  const downloadPDF = (fieldName, password) => {
+  const handleDownloadProjectFiles = (fileField, password) => {
 
-    console.log('ausihdaisuh')
+    if (currentUser.user_type === "ADM") {
+      console.log('entrou aqui!')
+      axios
+      .post(`${currentUrl}/api/project/${project.id}/download/${fileField}/`, { password }, {
+        headers,
+        responseType: 'blob',
+      })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${fileField}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error('Error downloading file:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Erro ao fazer download do arquivo. Estamos trabalhando para resolver o problema o mais breve possível.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
+    } else {
 
     if (!password) {
       openPasswordModal();
       return;
     }
 
-
-    //const token = sessionStorage.getItem('Authorization');
-    const downloadUrl = `${currentUrl}/api/project/${project.id}/download/${fieldName}/`;
-    window.open(downloadUrl, '_blank');
+    axios
+      .post(`${currentUrl}/api/project/${project.id}/download/${fileField}/`, { password }, {
+        headers,
+        responseType: 'blob',
+      })
+      .then((response) => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `${fileField}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((error) => {
+        console.error('Error downloading file:', error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to download the file. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
+      });
+    }
   };  
 
   return (
@@ -165,27 +206,27 @@ const ProjectTabConsolidation = ({user, project}) => {
         <ListItem style={{marginTop: '564px'}}>
           <div>Certificado de Matrícula</div>
           <div>{getFileStatusIcon(project.pdf_matricula_certificate)}</div>
-          <div>{project.pdf_matricula_certificate && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_matricula_certificate')}>Download</StyledButton>}</div>
+          <div>{project.pdf_matricula_certificate && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('pdf_matricula_certificate')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>CAR (SICAR)</div>
           <div>{getFileStatusIcon(project.pdf_car)}</div>
-          <div>{project.pdf_car && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_car')}>Download</StyledButton>}</div>
+          <div>{project.pdf_car && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('pdf_car')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>CCIR</div>
           <div>{getFileStatusIcon(project.pdf_ccir)}</div>
-          <div>{project.pdf_ccir && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_ccir')}>Download</StyledButton>}</div>
+          <div>{project.pdf_ccir && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('pdf_ccir')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>Polígono da propriedade</div>
           <div>{getFileStatusIcon(project.property_polygon)}</div>
-          <div>{project.property_polygon && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('property_polygon')}>Download</StyledButton>}</div>
+          <div>{project.property_polygon && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('property_polygon')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div>Regularização com a Dívida Federal</div>
           <div>{getFileStatusIcon(project.pdf_federal_debt_certificate)}</div>
-          <div>{project.pdf_federal_debt_certificate && <StyledButton style={{width: '256px'}} onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Download</StyledButton>}</div>
+          <div>{project.pdf_federal_debt_certificate && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('pdf_federal_debt_certificate')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
           <div> PDD PDF</div>
