@@ -28,7 +28,7 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
           }, { headers });
         } else {
           throw new Error('Atualização de token falhou');
-          console.log('as requisições de envio de notificação deram errado, veriricar')
+          console.log('as requisições de envio de notificação deram errado, verificar')
         }
       })
       .then(notificationResponse => {
