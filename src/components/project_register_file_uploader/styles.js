@@ -38,5 +38,6 @@ export const Input = styled.input`
 
 export const SmallText = styled.small`
   color: #777;
+  margin-bottom: 8px;
 `;
 

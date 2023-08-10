@@ -27,6 +27,7 @@ const FileUploader = () => {
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
+    project_image: null,
     owner: ownerID // alterar essa linha
   });
 
@@ -48,6 +49,7 @@ const FileUploader = () => {
     formData.append('property_polygon', selectedFiles.property_polygon);
     formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
     formData.append('pdf_ccir', selectedFiles.pdf_ccir);
+    formData.append('project_image', selectedFiles.project_image);
   
     try {
       const response = await axios.put(url, selectedFiles, {

@@ -1,4 +1,4 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
+import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, FileContainer, InputLabel, SmallText, SubContainer } from './styles'
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { storeOwnerId } from '../../store/modules/app_data/actions';
@@ -403,56 +403,43 @@ const EditProject = () => {
         </Column>
         
         {/* file uploader */}
-        <h2>Arquivos</h2>
-        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', marginTop: '16px'}}>
-          <div>
-            <div>
-              <label>Anexar Certidão de Matrícula</label>
-              <p />
-              <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
-            </div>
-            <p />
-            <div>
-              <label>Anexar PDF do CAR(SICAR)</label>
-              <p />
-              <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
-            </div>
-            <p />
-            <div>
-              <label>Anexar o Polígono da propriedade</label>
-              <small style={{ marginLeft: '8px' }}>
-                (Formatos aceitos: *.KMZ ou *.KML)
-              </small>
-              <p />
-              <input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
-            </div>
-            <p />
-          </div>
-          <div>
-            <div>
-              <label>Anexar cópia do CCIR</label>
-              <p />
-              <input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
-            </div>
-            <p />
-            <div>
-              <label>Anexar Certidão de Regularidade da Dívida Federal</label>
-              <p />
-              <input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
-            </div>
-            <p />
-          </div>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >    
-          </div>
-        </div>
-
+        <h2>Arquivos necessários para consolidação</h2>
+        <SubContainer>
+        <Column>
+          <FileContainer>
+            <InputLabel>Certidão de Matrícula</InputLabel><br />
+            <SmallText>(atualizada em até 180 dias)</SmallText>
+            <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
+          </FileContainer>
+          <FileContainer>
+            <InputLabel>PDF do CAR (SICAR)</InputLabel>
+            <SmallText />
+            <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
+          </FileContainer>
+          <FileContainer>
+            <InputLabel>Polígono da propriedade</InputLabel><br />
+            <SmallText>(Formatos aceitos: *.KMZ ou *.KML)</SmallText>
+            <Input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
+          </FileContainer>
+        </Column>
+        <Column>
+          <FileContainer>
+            <InputLabel>Cópia do CCIR</InputLabel>
+            <SmallText />
+            <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
+          </FileContainer>
+          <FileContainer>
+            <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
+            <SmallText />
+            <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
+          </FileContainer>
+          <FileContainer>
+            <InputLabel>Imagem Representativa do Projeto</InputLabel><br />
+            <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText><br />
+            <Input type="file" onChange={(e) => handleFileInput('project_image', e)} />
+          </FileContainer>     
+        </Column>
+        </SubContainer>
         <ButtonContainer>
           <Button onClick={() => handleClick()}>Voltar</Button>
           <Button onClick={() => handleSave()}>Confirmar</Button>
@@ -464,21 +451,3 @@ const EditProject = () => {
 };
 
 export default EditProject;
-
-
-/* 
- owner
- totalArea
- totalReserveArea
- CNPJ
- address
- selectedCar
- selectedMatriculaStatus
- codeSicar
- selectedGeorreferenciamentoStatus
- selectedReservaSituation
- selectedUnidadeConservacao
- selectedPossuiDivida
- selectedPossuiDeficit
- ownerActionsToPreserveForest 
- */

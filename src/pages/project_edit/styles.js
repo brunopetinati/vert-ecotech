@@ -157,3 +157,29 @@ export const StyledSelectForUser = styled.select`
     border-color: #7eff00;
   }
 `;
+
+export const FileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 512px;
+  height: 128px;
+  margin: 0 auto;
+`;
+
+export const InputLabel = styled.label`
+  font-weight: 700;
+  margin-bottom: 8px;
+`;
+
+export const SmallText = styled.small`
+  color: #777;
+  margin-bottom: 8px;
+`;
+
+export const SubContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  margin-top: 32px;
+`;
