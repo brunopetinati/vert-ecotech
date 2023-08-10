@@ -4,8 +4,11 @@ import { useSelector } from 'react-redux';
 import { currentUrl } from '../../constants/global';
 import Swal from 'sweetalert2';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addProjectToProjects } from '../../store/modules/app_data/actions';
-
+import { Container, Column, FileContainer, InputLabel, Input, SmallText } from './styles';
+import { Button } from '../project_register_upload_files/styles';
+import { ButtonContainer } from '../project_register_info/styles';
 
 const FileUploader = () => {
 
@@ -73,55 +76,49 @@ const FileUploader = () => {
     }
   };
 
+  const navigate = useNavigate();
+  const handleComeBack = () => {
+    navigate('/welcome');
+  };
+
   return (
-    <>
-      <div>
-        <label>Anexar Certidão de Matrícula</label>
-        <small style={{ marginLeft: '8px' }}>(atualizada em até 180 dias)</small>
-        <p />
-        <input type="file"  onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
-      </div>
-      <p />
-      <div>
-        <label>Anexar PDF do CAR (SICAR)</label>
-        <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
-      </div>
-      <p />
-      <div>
-        <label>Anexar o Polígono da propriedade</label>
-        <small style={{ marginLeft: '8px' }}>
-          (Formatos aceitos: *.KMZ ou *.KML)
-        </small>
-        <p />
-        <input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
-      </div>
-      <p />
-      <div>
-        <label>Anexar cópia do CCIR</label>
-        <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
-      </div>
-      <p />
-      <div>
-        <label>Anexar Certidão de Regularidade da Dívida Federal</label>
-        <p />
-        <input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
-      </div>
-      <p />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <button style={{ width: '170px' }} onClick={handleUpload}>
-          Registrar arquivos
-        </button>
-      </div>
-    </>
+  <Container>
+    <Column>
+      <FileContainer>
+        <InputLabel>Certidão de Matrícula</InputLabel><br />
+        <SmallText>(atualizada em até 180 dias)</SmallText>
+        <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
+      </FileContainer>
+      <FileContainer>
+        <InputLabel>PDF do CAR (SICAR)</InputLabel>
+        <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
+      </FileContainer>
+      <FileContainer>
+        <InputLabel>Polígono da propriedade</InputLabel><br />
+        <SmallText>(Formatos aceitos: *.KMZ ou *.KML)</SmallText>
+        <Input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
+      </FileContainer>
+    </Column>
+    <Column>
+      <FileContainer>
+        <InputLabel>Cópia do CCIR</InputLabel>
+        <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
+      </FileContainer>
+      <FileContainer>
+        <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
+        <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
+      </FileContainer>
+      <FileContainer>
+        <InputLabel>Imagem Representativa do Projeto</InputLabel><br />
+        <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText><br />
+        <Input type="file" onChange={(e) => handleFileInput('project_image', e)} />
+      </FileContainer>     
+      <ButtonContainer>
+        <Button onClick={handleUpload}>Registrar arquivos</Button>
+        <Button onClick={handleComeBack}>Voltar ao Painel</Button>
+      </ButtonContainer>
+    </Column>
+  </Container>
   );
 };
 

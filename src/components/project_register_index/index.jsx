@@ -1,8 +1,8 @@
 import { Container, InnerContainer } from './styles'
 import React from 'react';
 import { useSelector } from "react-redux";
-import RegisterProjectInfo from '../register_project_info'
-import RegisterProjectFileUpload from '../register_project_upload_files'
+import RegisterProjectInfo from '../project_register_info'
+import RegisterProjectFileUpload from '../project_register_upload_files'
 
 
 const RegisterProject = () => {

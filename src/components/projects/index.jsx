@@ -97,7 +97,7 @@ const Projects = () => {
             <option value="Status CAR">Status CAR</option>
           </StyledSelect>
         </div>
-        <DefaultButton text={'Adicionar Projeto'} path={'/register_project'} />
+        <DefaultButton text={'Adicionar Projeto'} path={'/project_register'} />
       </ButtonContainer>
       <TableContainer>
         {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} />}

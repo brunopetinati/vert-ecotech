@@ -8,7 +8,7 @@ import Login from '../components/login';
 import Register from '../components/register_user';
 import PrivacyPolicy from '../components/terms/privacy_policy'; 
 import TermsOfUse from '../components/terms/terms_of_use'; 
-import RegisterProject from '../components/register_project_index';
+import RegisterProject from '../components/project_register_index';
 import InternRegisterUser from '../components/inter_register_user';
 import ProjectIntern from "../pages/project_intern";
 import EditProject from "../pages/project_edit/";
@@ -59,7 +59,7 @@ const AppRoutes = () => {
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
         <Route exact path="/terms_of_use" element={<TermsOfUse />} />
-        <Route exact path="/register_project" element={<RegisterProject />} />
+        <Route exact path="/project_register" element={<RegisterProject />} />
         <Route exact path="/welcome" element={<Welcome />} />
         <Route exact path="/intern_client_register" element={<InternRegisterUser />} />
         <Route exact path="/intern_project" element={<ProjectIntern />} />
