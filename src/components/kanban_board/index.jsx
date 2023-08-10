@@ -87,7 +87,6 @@ const KanbanBoard = () => {
     }
     const notificationID = columnToNotificationIDMap[newStatus];
     setNotificationID(notificationID);
-    console.log('fala pra mim que deu certo por favor', notificationID);
   };
 
   useEffect(() => {
