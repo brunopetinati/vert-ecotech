@@ -170,6 +170,7 @@ const EditProject = () => {
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
+    project_image: null,
     owner: ownerID // alterar essa linha
   });
 
@@ -224,6 +225,9 @@ const EditProject = () => {
         }
         if (selectedFiles?.pdf_ccir) {
           formData.append('pdf_ccir', selectedFiles.pdf_ccir);
+        }
+        if (selectedFiles?.project_image) {
+          formData.append('project_image', selectedFiles.project_image);
         }
     
         const headers = {
