@@ -253,7 +253,8 @@ const EditProject = () => {
           updatedProjects.splice(projectIndex, 1);
           dispatch(eraseProjects());
           dispatch(resetProjects([...updatedProjects, response.data]));
-          navigate('/welcome')
+          navigate('/welcome');
+          dispatch(appStatus('Dashboard'));
         } else {
           console.log('checar erro importante');
           // nunca vai existir isso          
@@ -417,7 +418,7 @@ const EditProject = () => {
           </FileContainer>
           <FileContainer>
             <InputLabel>PDF do CAR (SICAR)</InputLabel>
-            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
           </FileContainer>
           <FileContainer>
@@ -429,12 +430,12 @@ const EditProject = () => {
         <Column>
           <FileContainer>
             <InputLabel>Cópia do CCIR</InputLabel>
-            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
           </FileContainer>
           <FileContainer>
             <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
-            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
           </FileContainer>
           <FileContainer>

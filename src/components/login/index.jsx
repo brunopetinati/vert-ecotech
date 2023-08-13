@@ -11,8 +11,6 @@ import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
 
-
-
 const Login = () => {
 
   const navigate = useNavigate();
@@ -174,7 +172,8 @@ const Login = () => {
                   >
           <a href="" style={{ color: 'white', fontFamily: 'Arial' }} onClick={(e) => forgotPassword(e)}>
             Esqueceu a senha?
-          </a></motion.div>
+          </a>
+        </motion.div>
         )}
       </>
     )}

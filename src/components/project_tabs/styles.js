@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Tab = styled.div`
-  position: relative;
   padding: 10px 20px;
   cursor: ${(props) => props.status !== null && 'pointer'};
   margin-right: 1px;
