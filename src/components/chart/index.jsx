@@ -6,7 +6,7 @@ const Chart = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key
   <div >
     <h3 style={{color: '#054d00'}}>{title}</h3>
     <LineChart width={500} height={300} data={data}>
-      <XAxis dataKey={name} style={{ width : '600px'}} />
+      <XAxis dataKey={name} style={{ width: '600px' }} />
       <YAxis />
       <CartesianGrid stroke="#ccc" />
       <Tooltip />

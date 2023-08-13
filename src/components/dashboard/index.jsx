@@ -9,24 +9,26 @@ import { groupByUserType } from './users';
 const Dashboard = () => {
 
   const currentUser = useSelector((state) => state.user.currentUser);
-
-  // sequestro de carbono na atmosfera
   const projects = useSelector((state) => state.app_data.projects);
   const users = useSelector((state) => state.app_data.users);
+
+
   const carbon_1 = calculateTotalAreaByMonth(projects);
   const carbon_2 = calculateTotalRealAreaByMonth(projects);
+
   let data = groupByUserType(users);
+
   let data2 = mergeCarbonData(carbon_1, carbon_2);
 
-
-  /* const data = [
-    { name: "Jan", uv: 0, pv: 0, amt: 0 },
-    { name: "Feb", uv: 0, pv: 0, amt: 0 },
-    { name: "Mar", uv: 0, pv: 0, amt: 0 },
-    { name: "Apr", uv: 0, pv: 0, amt: 0 },
-  ]; */
-
-  // status dos projetos
+  const data3 = [
+    { name: "Maio", ativos: 0, aposentados: 0 },
+    { name: "Abril", ativos: 0, aposentados: 0 },
+    { name: "Maio", ativos: 0, aposentados: 0 },
+    { name: "Junho", ativos: 0, aposentados: 0 },
+    { name: "Julho", ativos: 0, aposentados: 0 },
+    { name: "Agosto", ativos: 0, aposentados: 0 },
+    { name: "Setembro", ativos: 0, aposentados: 0 },
+  ];
 
   let data4 = groupByMonthAndStatus(projects);
 
@@ -34,26 +36,8 @@ const Dashboard = () => {
   // pv: short for "page views", refers to the total number of times a webpage or other digital content was viewed or accessed during a given time period.
   // amt: short for "amount", refers to the total monetary value of transactions or other financial activity that occurred during a given time period.
 
-  const data3 = [
-    { name: "Out", ativos: 0, aposentados: 0 },
-    { name: "Nov", ativos: 0, aposentados: 0 },
-    { name: "Dez", ativos: 0, aposentados: 0 },
-    { name: "Jan", ativos: 0, aposentados: 0 },
-    { name: "Fev", ativos: 0, aposentados: 0 },
-    { name: "Mar", ativos: 0, aposentados: 0 },
-    { name: "Abr", ativos: 0, aposentados: 0 },
-  ];
+  console.log(data)
 
-  /* const data5 = [
-    { month: "Out", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Nov", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Dez", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Jan", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Fev", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Mar", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-    { month: "Abr", started: 0, analysis: 0, viability: 0, negotiation: 0, implementing: 0, concluded: 0 },
-  ]; */
-  
   return (
     <Container>
       {currentUser.user_type === "ADM" && <Chart data={data}  title={'Acessos'} name={'month'} key_a={'Regular'} key_b={'ADM'} key_c={'COM'} key_d={'ENG'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} stroke_d={'orange'}/>}

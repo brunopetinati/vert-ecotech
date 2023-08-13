@@ -16,7 +16,6 @@ export const FileContainer = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
   width: 512px;
-  height: 128px;
   margin: 0 auto;
 `;
 

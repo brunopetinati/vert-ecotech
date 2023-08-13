@@ -411,17 +411,17 @@ const EditProject = () => {
         <SubContainer>
         <Column>
           <FileContainer>
-            <InputLabel>Certidão de Matrícula</InputLabel><br />
+            <InputLabel>Certidão de Matrícula</InputLabel>
             <SmallText>(atualizada em até 180 dias)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
           </FileContainer>
           <FileContainer>
             <InputLabel>PDF do CAR (SICAR)</InputLabel>
-            <SmallText />
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
           </FileContainer>
           <FileContainer>
-            <InputLabel>Polígono da propriedade</InputLabel><br />
+            <InputLabel>Polígono da propriedade</InputLabel>
             <SmallText>(Formatos aceitos: *.KMZ ou *.KML)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
           </FileContainer>
@@ -429,17 +429,17 @@ const EditProject = () => {
         <Column>
           <FileContainer>
             <InputLabel>Cópia do CCIR</InputLabel>
-            <SmallText />
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
           </FileContainer>
           <FileContainer>
             <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
-            <SmallText />
+            <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de arquivos.)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
           </FileContainer>
           <FileContainer>
-            <InputLabel>Imagem Representativa do Projeto</InputLabel><br />
-            <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText><br />
+            <InputLabel>Imagem Representativa do Projeto</InputLabel>
+            <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText> 
             <Input type="file" onChange={(e) => handleFileInput('project_image', e)} />
           </FileContainer>     
         </Column>
