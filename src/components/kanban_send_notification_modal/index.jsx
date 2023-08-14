@@ -11,29 +11,34 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
 
 
   const sendNotificationNow = () => {
-
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`};
     
-    console.log('identificando aqui, deve aparecer 24', currentOwnerID); // deu muito certo
-    console.log('verificar notificationID', notificationID); // também está super certo
-    axios // isso aqui não está funcionando, PROBLEMA AQUI
-      .post(`${currentUrl}/update-expo-push-token/`, {
+    axios
+      .post(`${currentUrl}/api/update-expo-push-token/`, {
         user: currentOwnerID,
         token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
       }, { headers })
-      .then(response => console.log('criar token ExponentPushToken resposta:', response))
-      .catch(error => console.log('ja deu errado aqui hausiehiasuehsuia',error));
-  
-    axios
-      .post(`${currentUrl}/api/send-notification/`, {
-        user: currentOwnerID,
-        notification_id: notificationID,
-      }, { headers })
-      .then(response => console.log('resposta da notificação', response))
-      .catch(error => console.log(error)
-    )
+      .then(response => {
+        console.log('criar token ExponentPushToken resposta:', response);
+        if (response.status === 200) {
+          return axios.post(`${currentUrl}/api/send-notification/`, {
+            user: currentOwnerID,
+            notification_id: notificationID,
+          }, { headers });
+        } else {
+          throw new Error('Atualização de token falhou');
+          console.log('as requisições de envio de notificação deram errado, verificar')
+        }
+      })
+      .then(notificationResponse => {
+        console.log('resposta da notificação', notificationResponse);
+      })
+      .catch(error => {
+        console.log('Erro:', error);
+      });
   }
+  
 
 
   const [showNotificationMessage, setShowNotificationMessage] = useState(false);

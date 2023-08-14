@@ -51,6 +51,10 @@ export const Input = styled(InputMask)`
   &:focus {
     border-color: #007bff;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const Span = styled.span`
@@ -156,4 +160,33 @@ export const StyledSelectForUser = styled.select`
   &:focus {
     border-color: #7eff00;
   }
+`;
+
+export const FileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 512px;
+  height: 128px;
+  padding: 8px;
+`;
+
+export const InputLabel = styled.label`
+  font-weight: 700;
+  margin-bottom: 8px;
+`;
+
+export const SmallText = styled.small`
+  color: #777;
+  margin-bottom: 8px;
+`;
+
+export const SubContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100vw;
+  margin-top: 32px;
 `;

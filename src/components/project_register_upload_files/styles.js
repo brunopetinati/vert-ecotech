@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 800px;
   border-radius: 20px;
-  padding: 2em;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  height: 620px;
   z-index: 2;
   background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 64px;
   
+  h2 {
+    margin-left: 32px;
+  }
+
+  span {
+    margin-left: 32px;
+  }
+
   h3 {
     color:#054D00;
   }
@@ -19,8 +26,7 @@ export const InnerContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 auto;
-  max-width: 600px;
+  margin-top: 24px;
 `;
 
 export const Column = styled.div`

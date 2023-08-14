@@ -11,8 +11,6 @@ import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
 
-
-
 const Login = () => {
 
   const navigate = useNavigate();
@@ -139,6 +137,13 @@ const Login = () => {
             </div>
           </LoginForm>
         ) : (
+
+          <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 5 }}
+      >
           <LoginForm onSubmit={handleSubmit}>
             <Input
               type="text"
@@ -156,12 +161,19 @@ const Login = () => {
               <Button type="submit">Login</Button>
               <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
             </div>
-          </LoginForm>
+          </LoginForm></motion.div>
         )}
         {!showLoading && app_status !== 'forgot_password' && (
+                    <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 5 }}
+                  >
           <a href="" style={{ color: 'white', fontFamily: 'Arial' }} onClick={(e) => forgotPassword(e)}>
             Esqueceu a senha?
           </a>
+        </motion.div>
         )}
       </>
     )}

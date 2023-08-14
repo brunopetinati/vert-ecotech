@@ -165,7 +165,7 @@ export const getProposalStatusInfo = (acceptance) => {
   if (acceptance === true) {
     return { text: "Aceita", color: "#00c853" }; // Green for "Aceita"
   } else if (acceptance === false) {
-    return { text: "Pendente", color: "gray" }; // Red for "Recusada" #e53935
+    return { text: "Recusada", color: " #e53935" }; // Red for "Recusada"
   } else {
     return { text: "Pendente", color: "#b9f7d0" }; // Gray for "Pendente" original: #757575
   }
