@@ -25,7 +25,6 @@ const Banco = ({ isOpen, onClose, children }) => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('entrou aqui');
     e.preventDefault();
 
     const token = sessionStorage.getItem('Authorization');
@@ -35,8 +34,6 @@ const Banco = ({ isOpen, onClose, children }) => {
       const response = await axios.post(`${currentUrl}/api/bankinfo/`, {
         ...formData
       }, { headers });
-      console.log(response.data);
-      console.log('verificar resposta acima');
       Swal.fire({
         title: 'Sucesso!',
         text: 'Dados de banco foram inseridos com sucesso.',

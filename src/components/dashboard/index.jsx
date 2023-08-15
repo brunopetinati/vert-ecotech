@@ -36,7 +36,6 @@ const Dashboard = () => {
   // pv: short for "page views", refers to the total number of times a webpage or other digital content was viewed or accessed during a given time period.
   // amt: short for "amount", refers to the total monetary value of transactions or other financial activity that occurred during a given time period.
 
-  console.log(data)
 
   return (
     <Container>

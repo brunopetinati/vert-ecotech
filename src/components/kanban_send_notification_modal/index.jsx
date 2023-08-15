@@ -20,7 +20,7 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
         token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
       }, { headers })
       .then(response => {
-        console.log('criar token ExponentPushToken resposta:', response);
+
         if (response.status === 200) {
           return axios.post(`${currentUrl}/api/send-notification/`, {
             user: currentOwnerID,
@@ -28,14 +28,14 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
           }, { headers });
         } else {
           throw new Error('Atualização de token falhou');
-          console.log('as requisições de envio de notificação deram errado, verificar')
+  
         }
       })
       .then(notificationResponse => {
-        console.log('resposta da notificação', notificationResponse);
+        console.log("Resposta da notificação:",notificationResponse);
       })
       .catch(error => {
-        console.log('Erro:', error);
+        console.error('Erro:', error);
       });
   }
   

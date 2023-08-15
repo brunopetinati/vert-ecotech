@@ -71,9 +71,6 @@ const KanbanSidebar = () => {
     navigate(path);
   };
 
-  const ConsoleLog = () => {
-    console.log('clicou');
-  }
 
   // modal pesquisar
 

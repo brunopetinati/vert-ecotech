@@ -6,8 +6,6 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
 
   if (!isOpen) return null;
 
-  console.log('olha que user bonito', user);
-
   const addressParts = [];
 
   if (user.street) {

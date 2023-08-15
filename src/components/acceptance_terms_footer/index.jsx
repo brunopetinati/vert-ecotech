@@ -24,7 +24,6 @@ const AcceptanceBar = ({path, func, registerUser}) => {
       .then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
         dispatch(userLogin(response.data.access, response.data));
-        console.log('vamos checar se a response está vindo com os dados necessários para manter o usuário logado', response)        
         Swal.fire({
           title: 'Sucesso!',
           text: 'Seu cadastro foi realizado com sucesso!',

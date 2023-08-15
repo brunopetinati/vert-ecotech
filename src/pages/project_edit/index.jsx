@@ -256,7 +256,6 @@ const EditProject = () => {
           navigate('/welcome');
           dispatch(appStatus('Dashboard'));
         } else {
-          console.log('checar erro importante');
           // nunca vai existir isso          
           dispatch(addProjectToProjects(response.data));
         }

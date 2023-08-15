@@ -84,7 +84,6 @@ const Login = () => {
     e.preventDefault();
     axios.post(`${currentUrl}/api/password-reset/`, { email: email })
       .then(response => {
-        console.log(response);
         Swal.fire({
           title: 'Success!',
           text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada, spam ou lixo eletrônico.',

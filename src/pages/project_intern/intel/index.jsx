@@ -11,7 +11,6 @@ import PasswordModal from "../../../components/projects_t_consolidation/password
 
 const Intel = ({user, project}) => {
 
-  console.log('começando os calculos');
 
   const users = useSelector((state) => state.app_data.users);
   const projectOwner = users.find(user => user.id === project.owner);
@@ -34,7 +33,6 @@ const Intel = ({user, project}) => {
     const headers = { Authorization: `Bearer ${token}` };
 
     if (currentUser.user_type === "ADM") {
-      console.log('entrou aqui!')
       axios
       .post(`${currentUrl}/api/project/${project.id}/download/${fileField}/`, { password }, {
         headers,

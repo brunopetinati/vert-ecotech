@@ -191,10 +191,16 @@ const KanbanBoard = () => {
                 return null; // or you can render something else here
               }
             })}
-
-            {newUsers && newUsers.map((user, key) => {                
-                return <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}><KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state}  /></div>
-              })}
+            {newUsers && newUsers.map((user, key) => {
+                if (user.user_type === "Regular") {
+                    return (
+                        <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}>
+                            <KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state} />
+                        </div>
+                    );
+                }
+                return null; // Ignora outros tipos de usuários
+            })}
               {selectedUser && <KanbanUserCardDefaultModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
           <Column

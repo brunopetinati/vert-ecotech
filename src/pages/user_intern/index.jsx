@@ -106,15 +106,10 @@ const UserIntern = () => {
             },
           }
         );
-        // por que o user.id está errado?
-        console.log('user.id',user.id);
-        console.log('userUpdate.id', userUpdate);
-        console.log('essa é a response', response.data)
         setUserProjects(response.data);
-        console.log('userProjects', userProjects);
       } catch (error) {
         // Handle any errors here
-        console.error('errrouuu', error);
+        console.error('error', error);
       }
     };
   
