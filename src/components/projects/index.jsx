@@ -53,6 +53,9 @@ const Projects = () => {
     if (!searchValue) {
       return true;
     }
+    if (selectedColumn === 'Título' && project.title.toLowerCase().includes(searchValue.toLowerCase())) {
+      return true;
+    }
     if (selectedColumn === 'Localidade' && project.address.toLowerCase().includes(searchValue.toLowerCase())) {
       return true;
     }
@@ -88,7 +91,7 @@ const Projects = () => {
         <div>
           <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
           <StyledSelect id="column-select" onChange={handleColumnChange}>
-            <option value="">---</option>
+            <option value="Título">Título</option>
             <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
             <option value="Localidade">Localidade</option>
             <option value="Status da Matrícula">Status da Matrícula</option>
