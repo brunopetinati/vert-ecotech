@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header, Container, Column, CardContainer } from './styles';
 import { useSelector } from 'react-redux';
-import MiniCard from '../projects_cards_mini';
+import MiniCard from '../projects_cards_mini'; // ainda não implementado
 import { getScoreColor } from '../../constants/functions';
 import { currentUrl } from '../../constants/global';
 import axios from 'axios';
