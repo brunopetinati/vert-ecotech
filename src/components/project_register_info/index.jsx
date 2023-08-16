@@ -13,7 +13,7 @@ import { currentUser } from '../../constants/global';
 import { addProjectToProjects } from '../../store/modules/app_data/actions';
 import { convertPhone } from '../../constants/functions';
 
-const RegisterProjectInfo = () => {
+const RegisterProjectInfo = ({ newOwner }) => {
 
   const [users, setUsers] = useState([]);
 
@@ -25,7 +25,7 @@ const RegisterProjectInfo = () => {
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
   const [title, setTitle] = useState('');
-  const [owner, setOwner] = useState(currentUser.id);
+  const [owner, setOwner] = useState(newOwner ? newOwner.id : currentUser.id);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);

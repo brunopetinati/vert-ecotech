@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import DefaultModal from "../default_modal";
+import { StyledButton } from '../default_button/styles';
 import { SimpleDefaultModal, ModalContent} from './styles'
 import React, { useState } from 'react';
 
 const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
+
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
@@ -38,6 +42,10 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
 
   const addressString = addressParts.join(', ');
 
+  const handleRegisterNewProject = (newOwner) => {
+    navigate('/project_register', { state: {newOwner}})
+  };
+
   return (
     <DefaultModal isOpen={isOpen} children={
       <SimpleDefaultModal isOpen={isOpen} onClick={onClose} >
@@ -47,6 +55,8 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
           <p>Contato: {user.phone}</p>
           <p>Endereço: {addressString}</p>
           <small style={{color: 'red', justifySelf: 'center', fontStyle: 'italic'}}>usuário atualmente sem projeto cadastrado</small>
+          <small style={{color: 'green', justifySelf: 'center', fontStyle: 'italic', marginTop: '16px'}}>Deseja cadastrar um projeto para esse usuário?</small>
+          <StyledButton style={{ marginTop: '32px'}} onClick={() => handleRegisterNewProject(user)}>Cadastrar novo projeto</StyledButton>
         </ModalContent>
       </SimpleDefaultModal> }
     >  
