@@ -9,6 +9,7 @@ import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
 import Swal from 'sweetalert2';
+import WarningButton from '../default_warning_button';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -81,6 +82,10 @@ const Profile = () => {
   };
 
   const collapsed = useSelector((state) => state.sidebar);
+
+  const handleDelete = () => {
+    console.log('Deleting the account'); // Replace with your actual delete function
+  };
 
   return (
     <IndexContainer collapsed={collapsed}>
@@ -282,17 +287,12 @@ const Profile = () => {
                 flexWrap: 'wrap',
               }}
             >
-              {/* <StyledButton
-                onClick={handleModalBanco}
-                style={{ display: 'flex', alignSelf: 'flex-end', margin: '32px 0' }}
-              >
-                Informações de banco
-              </StyledButton> */}
+              <WarningButton text={'Deletar'} path={'users'} id={user.id} />
               <StyledButton
                 onClick={handleRegister}
-                style={{ display: 'flex', alignSelf: 'flex-end', margin: '32px 32px' }}
+                style={{ width: '250px' }}
               >
-                Salvar
+                Salvar Alterações
               </StyledButton>
             </div>
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}

@@ -14,9 +14,11 @@ export const Column = styled.div`
 export const FileContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-bottom: 20px;
   width: 512px;
-  margin: 0 auto;
+  height: 128px;
+  padding: 8px;
 `;
 
 export const InputLabel = styled.label`
