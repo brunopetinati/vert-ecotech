@@ -5,7 +5,7 @@ import DefaultModal from "../default_modal";
 import { SimpleDefaultModal, ModalContent } from './styles';
 import React, { useState } from 'react';
 import { StyledButton } from "../default_button/styles";
-
+import CurrentNotifications from '../current_notifitcations';
 
 const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, notification, currentOwnerID, notificationID, children }) => {
 
@@ -74,10 +74,10 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
             onClick={handleContentClick} // Handle click event for the modal content area
           >
             <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setShowNotificationMessage(!showNotificationMessage)}>
-              Visualizar notificação
+            {showNotificationMessage ? "Colapsar notificações" : "Visualizar notificações"}
             </span>
           </div>
-          {showNotificationMessage && <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><span style={{fontStyle: 'italic', fontSize: '14px'}}>"{notification}"</span></div>}
+          {showNotificationMessage && <CurrentNotifications />}
         </ModalContent>
       </SimpleDefaultModal>
     </DefaultModal>

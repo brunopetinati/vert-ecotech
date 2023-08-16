@@ -10,13 +10,16 @@ export const SimpleDefaultModal = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* Set a higher z-index value */
+  z-index: 9999;
+  overflow-y: auto; 
 `;
 
 export const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   border-radius: 8px;
-  z-index: 10000; /* Set a higher z-index value */
+  z-index: 10000;
   width: 300px;
+  overflow-y: auto; 
+  max-height: 600px;
 `;

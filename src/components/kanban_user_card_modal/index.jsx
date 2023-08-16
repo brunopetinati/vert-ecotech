@@ -47,7 +47,6 @@ const KanbanUserCardModal = ({ user, isOpen, onClose, children }) => {
           <p>Contato: {user.phone}</p>
           <p>Endereço: {addressString}</p>
           <small style={{color: 'red', justifySelf: 'center', fontStyle: 'italic'}}>usuário atualmente sem projeto cadastrado</small>
-          {/* Display other user information here */}
         </ModalContent>
       </SimpleDefaultModal> }
     >  
