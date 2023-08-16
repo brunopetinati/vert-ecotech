@@ -9,7 +9,7 @@ import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
 import { userUpdater } from '../../store/modules/login/actions';
 import Swal from 'sweetalert2';
-import WarningButton from '../default_warning_button';
+import WarningDeleteModal from '../warning_delete_modal';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -287,7 +287,7 @@ const Profile = () => {
                 flexWrap: 'wrap',
               }}
             >
-              <WarningButton text={'Deletar'} path={'users'} id={user.id} />
+              <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} />
               <StyledButton
                 onClick={handleRegister}
                 style={{ width: '250px' }}

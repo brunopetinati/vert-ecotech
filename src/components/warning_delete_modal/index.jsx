@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { appStatus } from '../../store/modules/app_status/actions';
 
-const WarningButton = ({ text, path, id, width, height }) => {
+const WarningDeleteModal = ({ text, path, id, width, height }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -66,4 +66,4 @@ const WarningButton = ({ text, path, id, width, height }) => {
   );
 };
 
-export default WarningButton;
+export default WarningDeleteModal;
