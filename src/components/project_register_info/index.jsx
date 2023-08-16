@@ -349,7 +349,7 @@ const RegisterProjectInfo = () => {
 
             {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
             
-            <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
+            <Label>A propriedade pertence a uma pessoa física ou jurídica?</Label>
             <StyledSelect
               onChange={handlePessoaFisicaOuJuridica}
               options={optionsPessoaJuridicaOuFisica}

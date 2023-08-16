@@ -34,9 +34,7 @@ const Users = () => {
     fetchUsers();
   }, [app_status]);
 
-
-
-  const [selectedColumn, setSelectedColumn] = useState('');
+  const [selectedColumn, setSelectedColumn] = useState('Nome');
   const [searchValue, setSearchValue] = useState('');
 
 
@@ -77,7 +75,6 @@ const Users = () => {
         <div>
         <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
         <StyledSelect id="column-select" onChange={handleColumnChange}>
-          <option value="">---</option>
           <option value="Nome">Nome</option>
           <option value="Email">Email</option>
           <option value="Whatsapp">Whatsapp</option>

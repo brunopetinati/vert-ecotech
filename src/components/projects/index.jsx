@@ -16,7 +16,7 @@ const Projects = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.user.currentUser);
 
-  const [selectedColumn, setSelectedColumn] = useState('');
+  const [selectedColumn, setSelectedColumn] = useState('Nome');
   const [searchValue, setSearchValue] = useState('');
   const [projects, setProjects] = useState([]);
 

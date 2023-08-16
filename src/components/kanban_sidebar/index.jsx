@@ -69,6 +69,7 @@ const KanbanSidebar = () => {
 
   const handleNavigate = (path) => {
     navigate(path);
+    dispatch(appStatus('Projetos'));
   };
 
 
