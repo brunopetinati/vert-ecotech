@@ -6,17 +6,6 @@ import { ReactComponent as Users } from '../../assets/icons/users.svg';
 import { ReactComponent as Work } from '../../assets/icons/work.svg';
 
 
-export const SidebarContainerOriginal = styled.div`
-  background-color: #f6f6f6;
-  height: 100vh;
-  width: 100%;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 export const SidebarContainer = styled.div`
   background-color: #f6f6f6;
   width: ${({collapsed}) => collapsed ? "5vw" : "20vw"};
@@ -29,6 +18,10 @@ export const SidebarContainer = styled.div`
   height: 100vh;
   position: sticky;
   z-index: 2;
+
+  @media screen and (max-width: 768px) {
+    width: 15vw;
+  }
 `;
 
 export const SidebarHeader = styled.div`
@@ -38,6 +31,10 @@ export const SidebarHeader = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SidebarMenu = styled.ul`
@@ -71,6 +68,11 @@ export const SidebarMenuItem = styled.li`
     background-color: #1D2228;
     color: white;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 8px;
+    word-wrap: break-word;
+  }
 `;
 
 export const SidebarFooter = styled.div`
@@ -80,6 +82,10 @@ export const SidebarFooter = styled.div`
   justify-content: center;
   align-items: center;
   margin-left: 8px;
+
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 export const SidebarIcon = styled.img`
@@ -99,14 +105,6 @@ export const StyledStocks = styled(Stocks)`
   width: 10px;
   transform: scale(2.5);
 `;
-
-/* export const StyledShoppingCart = styled(ShoppingCart)`
-  fill: ${({active}) => active ? "#fff" : "#000"};
-  height: 32px;
-  width: 10px;
-  transform: scale(2.5);
-`; */
-
 
 export const StyledUsers = styled(Users)`
   fill: ${({active}) => active ? "#fff" : "#000"};

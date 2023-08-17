@@ -97,9 +97,6 @@ const KanbanSidebar = () => {
       <SidebarFooter>
        {/* collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span> */}
       </SidebarFooter>
-      {/* <DefaultModal isOpen={modalOpen} onClose={closeModal}>
-        <h1>Nossa quanto conteúdo esse modal</h1>
-      </DefaultModal> */}
     </SidebarContainer>
   );
 };

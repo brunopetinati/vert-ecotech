@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { appStatus } from '../../store/modules/app_status/actions';
 import WarningDeleteModal from '../../components/warning_delete_modal';
-
 import Swal from 'sweetalert2';
 
 const UserIntern = () => {
@@ -229,7 +228,6 @@ const UserIntern = () => {
 
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <WarningDeleteModal text={'Deletar Usuário'} path={'users'} id={user.id} width={'150px'} height={'35px'} />
-              {/* <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton> */}
               <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '0 32px'}}>Editar</StyledButton>
               <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '0 0px'}}>Voltar</StyledButton>
             </div>     
