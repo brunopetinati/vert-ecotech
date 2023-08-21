@@ -11,7 +11,7 @@ const Dashboard = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const projects = useSelector((state) => state.app_data.projects);
   const users = useSelector((state) => state.app_data.users);
-
+  const collapsed = useSelector((state) => state.sidebar);
 
   const carbon_1 = calculateTotalAreaByMonth(projects);
   const carbon_2 = calculateTotalRealAreaByMonth(projects);
@@ -38,7 +38,7 @@ const Dashboard = () => {
 
 
   return (
-    <Container>
+    <Container collapsed={collapsed}>
       {currentUser.user_type === "ADM" && <Chart data={data}  title={'Acessos'} name={'month'} key_a={'Regular'} key_b={'ADM'} key_c={'COM'} key_d={'ENG'} stroke_a={'#8884d8'} stroke_b={'#82ca9d'} stroke_c={'brown'} stroke_d={'orange'}/>}
       <Chart data={data2} title={'Área total (ha):: Projetos de sequestro de CO2'} name={'month'} key_a={'em_processo'} stroke_a={'#7eff00'} key_b={'estimativa'} stroke_b={'#054d00'}/>
       <Chart data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'#7eff00'} stroke_b={'black'} />

@@ -6,7 +6,7 @@ export const Container = styled.div`
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  width: 85vw;
+  width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
 
   @media screen and (max-width: 768px) {
     display: flex;
