@@ -18,12 +18,6 @@ export const Tab = styled.div`
 `;
 
 
-export const TabContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: ${({ collapsed }) => (collapsed ? "95vw" : "85vw")};
-`;
 
 export const LinearTabs = styled.ul`
   display: flex;
@@ -67,6 +61,15 @@ export const CloseTab = styled.a`
   &:hover {
     background: #dae0e7;
   }
+`;
+
+// os dois css a seguir estão juntos, pois correspondem 
+
+export const TabContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
 `;
 
 export const Content = styled.div`

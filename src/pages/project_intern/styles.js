@@ -3,13 +3,23 @@ import Select from "react-select";
 import InputMask from "react-input-mask";
 
 
+// caso você queira transformar o css da parte interna de projetos, mais espeficiamente para suas abas
+// verificar o arquivo /project_tabs/styles.js
+// aqui de nada alterará lá
+
 export const Container = styled.div`
-  margin: 4em;
-  h2 {
-    color: #054d00;
-    margin-bottom: 36px;
-  }
+  display:flex;
+  flex-direction: column;
+  width: ${({collapsed}) => collapsed ? "110vw" : "120vw"};
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100vw;
+  }  
 `;
+
 
 export const InnerContainer = styled.div`
   display: flex;

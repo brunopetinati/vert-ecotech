@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    display:flex;
-    width: 100%;
+  display:flex;
+  width: ${({collapsed}) => collapsed ? "90vw" : "100vw"};
+  background: #F9FAFB;
 
   @media screen and (max-width: 768px) {
     display: flex;

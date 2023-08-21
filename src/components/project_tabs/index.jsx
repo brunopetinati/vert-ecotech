@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { currentUrl } from "../../constants/global";
 import { TabContainer, LinearTabs, Tab, Content, TabItem, TabLink, CloseTab } from "./styles";
-import { Button, ButtonContainer } from '../../pages/project_intern/styles.js';
+import { ButtonContainer, Button } from '../../pages/project_intern/styles.js';
 
 const ProjectTabs = ({ tabs, handleRegister, project }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -60,8 +60,8 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
 
   return (
     <>
-      <TabContainer>
-        <LinearTabs collapsed={collapsed}>
+      <TabContainer collapsed={collapsed}>
+        <LinearTabs>
           {tabs.map((tab, index) => (
             <Tab
               key={index}
@@ -74,9 +74,10 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
           ))}
         </LinearTabs>
 
-        {activeTab === 0 && <ButtonContainer style={{ marginTop: '100px !important' }}>
-        <Button onClick={handleRegister}>Editar Informações</Button>
-          {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
+        {activeTab === 0 && 
+        <ButtonContainer style={{ marginTop: '100px !important' }}>
+          <Button onClick={handleRegister}>Editar Informações</Button>
+            {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
         </ButtonContainer>}
 
         <Content collapsed={collapsed}>

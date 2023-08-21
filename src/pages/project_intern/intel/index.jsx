@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
 import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from '../styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
@@ -129,7 +129,7 @@ const addressString = addressParts.join(', ');
       <Container>
       {user.user_type === "ADM" && 
           <>
-            <h2 style={{marginTop: '-64px'}}>{projectOwner.full_name}</h2>
+            <h2>{projectOwner.full_name}</h2>
 
             <InnerContainer>
               <Column> 
