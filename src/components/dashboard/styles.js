@@ -7,4 +7,13 @@ export const Container = styled.div`
   align-items: center;
   flex-wrap: wrap;
   width: 85vw;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: auto;
+    white-space: nowrap;
+  }  
 `;
