@@ -17,8 +17,6 @@ export const Tab = styled.div`
   }
 `;
 
-
-
 export const LinearTabs = styled.ul`
   display: flex;
   flex-direction: row;

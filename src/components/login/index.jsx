@@ -31,6 +31,8 @@ const Login = () => {
       }).then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
         const token = response.data.access;
+        sessionStorage.setItem('Email', email);
+        sessionStorage.setItem('Password', password);
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
