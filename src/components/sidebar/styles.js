@@ -21,8 +21,11 @@ export const SidebarContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 15vw;
+    height: 100%;
   }
 `;
+
+// mexer nessa altura de 153vh;
 
 export const SidebarHeader = styled.div`
   background-color: #f6f6f6;
