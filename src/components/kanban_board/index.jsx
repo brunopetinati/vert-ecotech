@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header, Container, Column, CardContainer } from './styles';
 import { useSelector } from 'react-redux';
-import MiniCard from '../projects_cards_mini';
+import MiniCard from '../projects_cards_mini'; // ainda não implementado
 import { getScoreColor } from '../../constants/functions';
 import { currentUrl } from '../../constants/global';
 import axios from 'axios';
@@ -191,10 +191,16 @@ const KanbanBoard = () => {
                 return null; // or you can render something else here
               }
             })}
-
-            {newUsers && newUsers.map((user, key) => {                
-                return <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}><KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state}  /></div>
-              })}
+            {newUsers && newUsers.map((user, key) => {
+                if (user.user_type === "Regular") {
+                    return (
+                        <div onClick={() => handleClickUser(newUsers.find(storedUser => storedUser.id === user.id))}>
+                            <KanbanUserCard key={user.id} full_name={user.full_name} city={user.city} state={user.state} />
+                        </div>
+                    );
+                }
+                return null; // Ignora outros tipos de usuários
+            })}
               {selectedUser && <KanbanUserCardDefaultModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
           <Column

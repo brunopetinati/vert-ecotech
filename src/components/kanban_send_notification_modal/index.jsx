@@ -5,7 +5,7 @@ import DefaultModal from "../default_modal";
 import { SimpleDefaultModal, ModalContent } from './styles';
 import React, { useState } from 'react';
 import { StyledButton } from "../default_button/styles";
-
+import CurrentNotifications from '../current_notifitcations';
 
 const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, notification, currentOwnerID, notificationID, children }) => {
 
@@ -20,7 +20,7 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
         token: "ExponentPushToken[ebpVLBJTGyx0B3U8pbCmUL]"
       }, { headers })
       .then(response => {
-        console.log('criar token ExponentPushToken resposta:', response);
+
         if (response.status === 200) {
           return axios.post(`${currentUrl}/api/send-notification/`, {
             user: currentOwnerID,
@@ -28,14 +28,14 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
           }, { headers });
         } else {
           throw new Error('Atualização de token falhou');
-          console.log('as requisições de envio de notificação deram errado, verificar')
+  
         }
       })
       .then(notificationResponse => {
-        console.log('resposta da notificação', notificationResponse);
+        console.log("Resposta da notificação:",notificationResponse);
       })
       .catch(error => {
-        console.log('Erro:', error);
+        console.error('Erro:', error);
       });
   }
   
@@ -74,10 +74,10 @@ const KanbanSendNotificationModal = ({ isOpen, onClose, onConfirmNotification, n
             onClick={handleContentClick} // Handle click event for the modal content area
           >
             <span style={{ color: 'blue', textDecoration: 'underline', cursor: 'pointer' }} onClick={() => setShowNotificationMessage(!showNotificationMessage)}>
-              Visualizar notificação
+            {showNotificationMessage ? "Colapsar notificações" : "Visualizar notificações"}
             </span>
           </div>
-          {showNotificationMessage && <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}><span style={{fontStyle: 'italic', fontSize: '14px'}}>"{notification}"</span></div>}
+          {showNotificationMessage && <CurrentNotifications />}
         </ModalContent>
       </SimpleDefaultModal>
     </DefaultModal>

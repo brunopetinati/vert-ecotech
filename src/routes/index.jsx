@@ -23,14 +23,11 @@ import RecoverPassword from "../components/recover_password";
 
 const AppRoutes = () => {
 
+
   const navigate = useNavigate();
   const location = useLocation();
-  const dispatch = useDispatch();
-
-  const login = useSelector((state) => state.user);
-
   
-  if (!login.accessToken && location.pathname !== '/' &&
+  if (!sessionStorage.Authorization && location.pathname !== '/' &&
     location.pathname !== '/register' &&
     location.pathname !== '/privacy_policy' &&
     location.pathname !== '/terms_of_use' &&
@@ -42,7 +39,10 @@ const AppRoutes = () => {
     location.pathname.length > 20 &&
     location.pathname !== '/upload_success' &&
     location.pathname !== '/upload_canceled') {
+
+    console.log('entrou aqui dentro da função');
     navigate('/');
+
     return (
       <AnimatePresence>
         <Routes>

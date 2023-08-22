@@ -31,6 +31,8 @@ const Login = () => {
       }).then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
         const token = response.data.access;
+        sessionStorage.setItem('Email', email);
+        sessionStorage.setItem('Password', password);
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
@@ -84,7 +86,6 @@ const Login = () => {
     e.preventDefault();
     axios.post(`${currentUrl}/api/password-reset/`, { email: email })
       .then(response => {
-        console.log(response);
         Swal.fire({
           title: 'Success!',
           text: 'Seu email foi enviado com sucesso! Cheque sua caixa de entrada, spam ou lixo eletrônico.',

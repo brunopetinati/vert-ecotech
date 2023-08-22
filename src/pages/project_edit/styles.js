@@ -65,6 +65,7 @@ export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   width: 100%;
 `;
 
@@ -85,7 +86,6 @@ export const Button = styled.button`
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-top: 50px;
   margin-right: 16px;
 
   :hover {

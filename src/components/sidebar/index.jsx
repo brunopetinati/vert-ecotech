@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import axios from "axios";
 import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter, SidebarIcon } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions';
 import { collapseSidebar } from '../../store/modules/sidebar/actions';
@@ -14,6 +15,12 @@ import ArrowLeft from '../../assets/icons/arrow_left.svg'
 
 import { StyledUser, StyledUsers,  StyledStocks, StyledSettings, StyledWork } from './styles';
 
+import { currentUrl } from "../../constants/global";
+import { userLogin } from "../../store/modules/login/actions";
+import { getOwners } from "../../store/modules/app_data/thunk";
+import { getProjects } from "../../store/modules/app_data/thunk";
+import { getEngineeringTable } from "../../store/modules/app_data/thunk";
+
 const Sidebar = () => {
 
   const navigate = useNavigate();
@@ -22,6 +29,34 @@ const Sidebar = () => {
   const collapsed = useSelector((state) => state.sidebar);
   const currentUser = useSelector((state) => state.user.currentUser);
 
+  const handleLogin = async () => {
+
+
+    if (!currentUser) { 
+      const token = sessionStorage.Authorization;
+      const email = sessionStorage.Email;
+      const password = sessionStorage.Password;
+
+      try {
+        const response = await axios.post(`${currentUrl}/api/login/`, {
+          email,
+          password,
+        });
+  
+        dispatch(userLogin(token, response.data));
+        await Promise.all([
+          dispatch(getOwners(token)),
+          dispatch(getProjects(token)),
+          dispatch(getEngineeringTable(token)),
+        ]);
+      } catch (error) {
+        console.error('Erro ao recuperar dados:', error);
+      }
+    }
+  };
+  
+  // Chame a função assíncrona handleLogin em algum ponto apropriado do seu código
+  
 
   const setCollapsed = (state) => {
     dispatch(collapseSidebar(state))
@@ -29,10 +64,6 @@ const Sidebar = () => {
 
   const handleItemClick = (status) => {
     dispatch(appStatus(status));
-  };
-
-  const handleSecret = () => {
-    return
   };
 
 
@@ -64,7 +95,8 @@ const Sidebar = () => {
 
   useEffect(() => {
     handleActiveIcon();
-  }, [app_status])
+    handleLogin();
+  }, [app_status, currentUser])
 
 
   const handleNavigate = (path) => {
@@ -80,15 +112,15 @@ const Sidebar = () => {
         </SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem  style={{marginTop: '64px'}} className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
-          {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
-          {currentUser.user_type === "ADM" ? <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Prospect'}</SidebarMenuItem> : <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Meus Projetos'}</SidebarMenuItem>}
-          {currentUser.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleNavigate("/analysis_and_development")}>{collapsed ? <StyledWork active={activeUsers} /> : 'Funil Produtor'}</SidebarMenuItem>}
+          {currentUser?.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
+          {currentUser?.user_type === "ADM" ? <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Prospect'}</SidebarMenuItem> : <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Meus Projetos'}</SidebarMenuItem>}
+          {currentUser?.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleNavigate("/analysis_and_development")}>{collapsed ? <StyledWork active={activeUsers} /> : 'Funil Produtor'}</SidebarMenuItem>}
           <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
           <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
         </SidebarMenu>
         <SidebarMenuItem style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}>{collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }</SidebarMenuItem>
         <SidebarFooter>
-        {collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
+        {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
         </SidebarFooter>
       </SidebarContainer>
     </>

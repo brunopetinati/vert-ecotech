@@ -25,7 +25,6 @@ const ProjectTabComercial = ({ user, project }) => {
   useEffect(() => {
     axios.get(`${currentUrl}/api/proposals/list/`, { headers })
       .then((response) => {
-        console.log('response', response)
         setFileStatus(response.data);
       })
       .catch((error) => {

@@ -23,6 +23,7 @@ const ProjectIntern = () => {
   const location = useLocation();
   const project = location.state.project;
   const user = useSelector((state) => state.user.currentUser);
+  const collapsed = useSelector((state) => state.sidebar);
 
   const navigate = useNavigate();
 
@@ -62,7 +63,7 @@ const app_status = useSelector((state) => state.app_status.status);
 
 
   return (
-    <Container>
+    <Container collapsed={collapsed} >
       <Sidebar />
       <SideContainer>
         {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} project={project} />}

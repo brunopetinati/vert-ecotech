@@ -23,13 +23,12 @@ export const Header = styled.div`
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
   background: #F9FAFB;
-  width: 2400px;
+  width: 98vw;
 `;
 
 export const Column = styled.div`
-  min-width: 300px;
+  width: 10vw;
   background-color: #FFF;
   margin-right: 8px;
   position: relative;
@@ -41,22 +40,14 @@ export const Column = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  h2 {
-    min-height: 80px;
-    text-align: center;
-  }
-
-  h3 {
-    text-transform: capitalize;
-  }
 
   h4 {
    text-align: center;
+   min-height: 50px; 
+   border-bottom: 1px solid black;
+   font-weight: 400;
   }
 
-  :hover {
-
-  }
 `;
 
 export const CardContainer = styled.div`
@@ -67,7 +58,7 @@ export const CardContainer = styled.div`
   border-radius: 8px;
   margin-bottom: 8px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  width: 250px;
+  width: 130px;
 
   h3 {
     color: ${(props) => props.scoreColor};

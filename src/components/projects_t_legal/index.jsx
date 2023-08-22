@@ -22,7 +22,6 @@ const ProjectTabLegal = ({ user, project }) => {
 
       axios.post(`${currentUrl}/api/engineering/`, formData)
         .then((response) => {
-          console.log('Upload successful!', response);
           Swal.fire({
             title: 'Sucesso!',
             text: 'Seus arquivos foram enviados com sucesso!',

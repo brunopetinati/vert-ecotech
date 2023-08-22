@@ -28,14 +28,10 @@ const ProjectTabEngineering = ({ user, project }) => {
   let matchObjectId = null;
   
   if (matchObject) {
-    console.log('eita caralha olha esse objeto que lindo ve se tem algo mais nele', matchObject);
     matchObjectId = matchObject.id;
-    console.log('O ID do objeto desejado é:', matchObjectId);
   } else {
-    console.log('Nenhum objeto encontrado com o project_id correspondente.');
+    console.error('Nenhum objeto encontrado com o project_id correspondente.');
   }
-
-  console.log(engineering);
 
   const handleFileChange = (event, fieldName) => {
     const selectedFile = event.target.files[0];
@@ -75,12 +71,9 @@ const ProjectTabEngineering = ({ user, project }) => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}` };
 
-    console.log('esse matchObjectID é a tentativa de pegar o ID na tabela de engenharia pelo ID do projeto dessa página. ou seja, não é o ID do projeto, mas sim o ID correspondente na tabela de engenharia', matchObjectId);
-
     axios
       .put(`${currentUrl}/api/engineering/${matchObjectId}/update/`, formData, { headers })
       .then((response) => {
-        console.log('Upload successful!', response);
         Swal.fire({
           title: 'Sucesso!',
           text: 'Seus arquivos foram enviados com sucesso!',

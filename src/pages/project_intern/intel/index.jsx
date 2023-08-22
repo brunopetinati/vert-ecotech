@@ -1,7 +1,7 @@
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useState } from "react";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
 import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from '../styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
@@ -11,7 +11,6 @@ import PasswordModal from "../../../components/projects_t_consolidation/password
 
 const Intel = ({user, project}) => {
 
-  console.log('começando os calculos');
 
   const users = useSelector((state) => state.app_data.users);
   const projectOwner = users.find(user => user.id === project.owner);
@@ -34,7 +33,6 @@ const Intel = ({user, project}) => {
     const headers = { Authorization: `Bearer ${token}` };
 
     if (currentUser.user_type === "ADM") {
-      console.log('entrou aqui!')
       axios
       .post(`${currentUrl}/api/project/${project.id}/download/${fileField}/`, { password }, {
         headers,
@@ -131,7 +129,7 @@ const addressString = addressParts.join(', ');
       <Container>
       {user.user_type === "ADM" && 
           <>
-            <h2 style={{marginTop: '-64px'}}>{projectOwner.full_name}</h2>
+            <h2>{projectOwner.full_name}</h2>
 
             <InnerContainer>
               <Column> 

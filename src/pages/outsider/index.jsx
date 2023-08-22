@@ -37,9 +37,6 @@ const RegisterProjectFileUploadWebOpen = () => {
     pdf_ccir: false,
   });
 
-  console.log(existingFiles)
-
-
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

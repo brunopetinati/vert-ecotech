@@ -1,10 +1,19 @@
+import styled from "styled-components";
 import AppRoutes from "./routes"
-import './App.css'
+
+const ContainerWrapper = styled.div`
+@media screen and (max-width: 768px) {
+  max-width: 768px; 
+  max-height: 100vh;
+}
+`;
 
 function App() {
   
   return (
+    <ContainerWrapper>
       <AppRoutes />
+    </ContainerWrapper>
   );
 };
 

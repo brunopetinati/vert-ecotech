@@ -78,7 +78,6 @@ const ProjectTabConsolidation = ({user, project}) => {
   const handleEngineeringDownload = (fileField, password) => {
 
     if (currentUser.user_type === "ADM") {
-      console.log('entrou aqui!')
       axios
       .post(`${currentUrl}/api/environmental-engineering/${project.id}/download/${fileField}/`, { password }, {
         headers,
@@ -138,7 +137,6 @@ const ProjectTabConsolidation = ({user, project}) => {
   const handleDownloadProjectFiles = (fileField, password) => {
 
     if (currentUser.user_type === "ADM") {
-      console.log('entrou aqui!')
       axios
       .post(`${currentUrl}/api/project/${project.id}/download/${fileField}/`, { password }, {
         headers,

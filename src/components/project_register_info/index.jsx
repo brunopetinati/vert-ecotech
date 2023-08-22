@@ -13,7 +13,7 @@ import { currentUser } from '../../constants/global';
 import { addProjectToProjects } from '../../store/modules/app_data/actions';
 import { convertPhone } from '../../constants/functions';
 
-const RegisterProjectInfo = () => {
+const RegisterProjectInfo = ({ newOwner }) => {
 
   const [users, setUsers] = useState([]);
 
@@ -25,7 +25,7 @@ const RegisterProjectInfo = () => {
   const [ownerActionsToPreserveForest, setOwnerActionsToPreserveForest] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
   const [title, setTitle] = useState('');
-  const [owner, setOwner] = useState(currentUser.id);
+  const [owner, setOwner] = useState(newOwner ? newOwner.id : currentUser.id);
 
   const handleUserSelect = (event) => {
     setOwner(event.target.value);
@@ -349,7 +349,7 @@ const RegisterProjectInfo = () => {
 
             {ownerError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{ownerError}</div>}
             
-            <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
+            <Label>A propriedade pertence a uma pessoa física ou jurídica?</Label>
             <StyledSelect
               onChange={handlePessoaFisicaOuJuridica}
               options={optionsPessoaJuridicaOuFisica}

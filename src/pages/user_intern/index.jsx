@@ -9,7 +9,7 @@ import { motion } from 'framer-motion';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { appStatus } from '../../store/modules/app_status/actions';
-
+import WarningDeleteModal from '../../components/warning_delete_modal';
 import Swal from 'sweetalert2';
 
 const UserIntern = () => {
@@ -106,15 +106,10 @@ const UserIntern = () => {
             },
           }
         );
-        // por que o user.id está errado?
-        console.log('user.id',user.id);
-        console.log('userUpdate.id', userUpdate);
-        console.log('essa é a response', response.data)
         setUserProjects(response.data);
-        console.log('userProjects', userProjects);
       } catch (error) {
         // Handle any errors here
-        console.error('errrouuu', error);
+        console.error('error', error);
       }
     };
   
@@ -230,10 +225,11 @@ const UserIntern = () => {
               onChange={(e) => setUserUpdate({...userUpdate, password: e.target.value})}
               />
             </Row> */}
+
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-              {/* <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton> */}
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Editar</StyledButton>
-              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0px'}}>Voltar</StyledButton>
+              <WarningDeleteModal text={'Deletar Usuário'} path={'users'} id={user.id} width={'150px'} height={'35px'} />
+              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '0 32px'}}>Editar</StyledButton>
+              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '0 0px'}}>Voltar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>

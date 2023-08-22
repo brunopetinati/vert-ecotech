@@ -1,6 +1,6 @@
 import { SIDEBAR } from "./action-types";
 
-const sidebarReducer = (state = false, action) => {
+const sidebarReducer = (state = true, action) => {
   switch (action.type) {
 
     case SIDEBAR:

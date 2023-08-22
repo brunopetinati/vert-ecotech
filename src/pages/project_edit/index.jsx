@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { regularMaskforNumbers, extractNumbers } from '../../constants/functions';
 import { addProjectToProjects, resetProjects, eraseProjects } from '../../store/modules/app_data/actions';
 import { appStatus } from '../../store/modules/app_status/actions';
+import WarningDeleteModal from '../../components/warning_delete_modal';
 
 const EditProject = () => {
 
@@ -256,7 +257,6 @@ const EditProject = () => {
           navigate('/welcome');
           dispatch(appStatus('Dashboard'));
         } else {
-          console.log('checar erro importante');
           // nunca vai existir isso          
           dispatch(addProjectToProjects(response.data));
         }
@@ -446,6 +446,7 @@ const EditProject = () => {
         </Column>
         </SubContainer>
         <ButtonContainer>
+          <WarningDeleteModal text={'Deletar Projeto'} path={'projects'} id={project.id} width={'200px'} height={'35px'} />
           <Button onClick={() => handleClick()}>Voltar</Button>
           <Button onClick={() => handleSave()}>Confirmar</Button>
         </ButtonContainer>

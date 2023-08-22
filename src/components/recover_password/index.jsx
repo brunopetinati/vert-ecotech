@@ -25,7 +25,6 @@ const RecoverPassword = () => {
         password,
         password2,
       });
-      console.log(response.data);
       Swal.fire({
         title: 'Sucesso!',
         text: 'Parabéns pelo seu cadastro! Tudo ocorreu como o esperado! Insira os dados para logar.',

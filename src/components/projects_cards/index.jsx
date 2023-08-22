@@ -29,7 +29,8 @@ export const Card = ({filteredProjects}) => {
       {filteredProjects.map((project, index) => (
       <CardContainer key={index} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}}>
         <ImageContainer>
-          <Image src={DefaultForestImage} alt="DefaultForestImage" />
+          <Image  src={project.project_image || DefaultForestImage}
+          alt={project.title === "default" ? 'Sem Título' : project.title} />
         </ImageContainer>
         <InnerContainer>
           <Title style={{color: getScoreColor(project.score)}}>{project.title === "default" ? 'Sem Título' : project.title}</Title>
