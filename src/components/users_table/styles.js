@@ -46,4 +46,8 @@ export const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   height: 79vh;
+
+  @media screen and (max-width: 768px) {
+    height: 65vh;
+  }
 `;

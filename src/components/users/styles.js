@@ -46,10 +46,14 @@ export const TableContainer = styled.div`
   width: 90%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+    margin: 0 auto;
+  }
 `;
 
 export const Input = styled.input`
-  padding: 10px;
   width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -73,7 +77,6 @@ export const Input = styled.input`
 `;
 
 export const StyledSelect = styled.select`
-  padding: 10px;
   width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
