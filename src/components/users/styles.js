@@ -97,7 +97,7 @@ export const StyledSelect = styled.select`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 32px;
-    width: 81%; /* errado */
+    width: 82%; /* errado */
   }
 `;
 
