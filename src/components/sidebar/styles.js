@@ -23,7 +23,7 @@ export const SidebarContainer = styled.div`
     width: ${({ showSidebar }) => (showSidebar ? "15vw" : "0")};
     height: ${({ showSidebar }) => (showSidebar ? "100%" : "0")};
     opacity: ${({ showSidebar }) => (showSidebar ? 1 : 0)};
-    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: height 2.5s ease-in-out, opacity 0.5s ease-in-out;
     overflow: hidden;
   }
 `;
@@ -172,6 +172,7 @@ export const FakeBar = styled.div`
 
 export const ButtonForCellPhoneToOpenSidebar = styled.button`
   display: none;
+
   @media screen and (max-width: 768px) {
     display: block;
     width: 40px;
@@ -179,8 +180,8 @@ export const ButtonForCellPhoneToOpenSidebar = styled.button`
     height: 40px;
     border-radius: 100px;
     margin: 8px;
-    position: absolute;
-    top: 10px;
+    position: fixed;
+    top: 4px;
     z-index: 3;
   }
 `;
