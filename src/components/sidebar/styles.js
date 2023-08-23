@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
 import { ReactComponent as User } from '../../assets/icons/user.svg';
 import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
@@ -170,18 +170,33 @@ export const FakeBar = styled.div`
   width: ${({collapsed}) => collapsed ? "50px" : "250px"};
 `;
 
+const rotateAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 export const ButtonForCellPhoneToOpenSidebar = styled.button`
   display: none;
+  transform: rotate(0deg);
+  transition: transform 0.5s ease;
 
   @media screen and (max-width: 768px) {
     display: block;
     width: 40px;
-    background: #7eff00;
+    background: #054d00;
     height: 40px;
+    border: 2px solid #7eff00;
     border-radius: 100px;
     margin: 8px;
     position: fixed;
     top: 4px;
     z-index: 3;
+
+    &.rotate {
+      transform: rotate(360deg);
+    }
   }
 `;

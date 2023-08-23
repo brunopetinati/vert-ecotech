@@ -117,9 +117,11 @@ const Sidebar = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 5.0 }}
+        transition={{ duration: 0.2 }}
         >
-      <ButtonForCellPhoneToOpenSidebar onClick={() => handleSetShowSidebar()}/>
+      <ButtonForCellPhoneToOpenSidebar className={showSidebar ? 'rotate' : ''} onClick={() => handleSetShowSidebar()}>
+        <img src={Logo} alt="0" style={{width: '20px'}}/>
+      </ButtonForCellPhoneToOpenSidebar>
       <SidebarContainer collapsed={collapsed} showSidebar={showSidebar}>
         <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
