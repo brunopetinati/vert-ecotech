@@ -24,6 +24,7 @@ export const SideContainer = styled.div`
     display: flex;
     flex-direction: row;
     height: 100%;
+    align-items: flex-start;
   }
 `;
 
