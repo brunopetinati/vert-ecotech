@@ -15,7 +15,7 @@ const Chart = ({data, title, name, key_a, key_b, key_c, key_d, key_e, key_f, key
   <ChartContainer>
     <h3 style={{color: '#054d00'}}>{title}</h3>
       <ResponsiveChartContainer>
-      <ResponsiveContainer width="100%" height={300}>
+      <ResponsiveContainer width="100%" height={250}>
         <LineChart data={data}>
           <XAxis dataKey={name} />
           <YAxis />
