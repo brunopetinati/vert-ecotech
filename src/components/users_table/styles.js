@@ -30,6 +30,11 @@ export const TH = styled.th`
   width: 100px;
   text-align: center;
   width: 150px;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    width: 80px;
+  }
 `;
 
 export const TD = styled.td`
@@ -39,6 +44,11 @@ export const TD = styled.td`
   border-right: 1px solid #ddd;
   text-align: center;
   word-wrap: break-word;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    font-size: 12px;
+  }
 `;
 
 
