@@ -68,7 +68,7 @@ export const Input = styled.input`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 64px;
-    width: 75%;
+    width: 60vw;
     font-size: 12px;
     
     ::placeholder {
@@ -99,7 +99,7 @@ export const StyledSelect = styled.select`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 64px;
-    width: 81%;
+    width: 65vw;
     font-size: 12px;
     
     ::placeholder {
