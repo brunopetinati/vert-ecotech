@@ -6,6 +6,8 @@ import addFile from '../../assets/icons/add_file.png'
 import uploadedFile from '../../assets/icons/secondary_file.png'
 import LoadingComponent from '../../components/loading_component';
 
+import he from 'he'; 
+
 const RegisterProjectFileUploadWebOpen = () => {
   function separateInfo(data) {
     const [constant1, constant2, constant3, constant4] = data.split("-vert-");
@@ -18,6 +20,9 @@ const RegisterProjectFileUploadWebOpen = () => {
     const info = (window.location.pathname.split('/')[2]);
     [owner, credentials, projectId, title] = separateInfo(info);
   }
+
+  title = decodeURIComponent(title.replace(/\+/g, ' '));
+  title = he.decode(title);
 
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,

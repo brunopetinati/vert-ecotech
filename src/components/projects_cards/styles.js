@@ -21,10 +21,17 @@ export const CardContainer = styled.div`
   padding: 16px;
   margin-right: 8px;
   cursor: pointer;
+
+  @media screen and (max-width: 768px) {
+    width: 50px;
+    height: 100px;
+  } 
 `;
 
 export const ImageContainer = styled.div`
   margin-right: 16px;
+
+  
 `;
 
 export const Image = styled.img`
@@ -32,6 +39,11 @@ export const Image = styled.img`
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+
+  @media screen and (max-width: 768px) {
+    width: 35px;
+    height: 35px;  
+  }
 `;
 
 export const InnerContainer = styled.div`
@@ -48,11 +60,19 @@ export const Title = styled.h2`
   margin-bottom: 8px;
   color: #054d00;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  
+  @media screen and (max-width: 768px) {
+    display: none;  
+  }
 `;
 
 export const Info = styled.p`
   font-size: 16px;
   margin-bottom: 4px;
+
+  @media screen and (max-width: 768px) {
+    display: none;  
+  }
 `;
 
 export const ScoreContainer = styled.div`
@@ -66,4 +86,8 @@ export const ScoreContainer = styled.div`
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   font-size: 24px;
   font-weight: bold;
+
+  @media screen and (max-width: 768px) {
+    display: none;  
+  }
 `;

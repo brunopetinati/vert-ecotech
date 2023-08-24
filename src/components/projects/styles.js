@@ -68,7 +68,12 @@ export const Input = styled.input`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 64px;
-    width: 75%; /* errado */
+    width: 75%;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
   }
 `;
 
@@ -93,8 +98,13 @@ export const StyledSelect = styled.select`
 
   @media screen and (max-width: 768px) {
     margin-left: 20px;
-    margin-top: 32px;
-    width: 82%; /* errado */
+    margin-top: 64px;
+    width: 75%;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
   }
 `;
 

@@ -34,6 +34,9 @@ export const TH = styled.th`
   @media screen and (max-width: 768px) {
     padding: 8px;
     width: 80px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #054d00;
   }
 `;
 

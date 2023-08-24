@@ -5,7 +5,7 @@ import DefaultButton from "../default_button";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect, MarginForCelphone } from "./styles";
 import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
 
@@ -100,13 +100,14 @@ const Projects = () => {
             <option value="Status CAR">Status C.A.R</option>
           </StyledSelect>
         </div>
+        <MarginForCelphone />
         <DefaultButton text={'Adicionar Projeto'} path={'/project_register'} />
       </ButtonContainer>
 
       <TableContainer>
         {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} />}
       </TableContainer>
-      
+
     </Container>
   );
 };
