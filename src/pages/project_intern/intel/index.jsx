@@ -167,9 +167,9 @@ const addressString = addressParts.join(', ');
             <Span>{transformNumbersToHectares(project.total_area) || '-'}</Span>
             <Label>Área total da reserva legal (ha)?</Label>
             <Span>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</Span>  
-            <Label>Status do CAR</Label>
+            <Label>Status do C.A.R</Label>
             <Span>{project.status_car || '-'}</Span>
-            <Label>Código SICAR (CAR)</Label>
+            <Label>Código SICAR (C.A.R)</Label>
             <Span>{formatSICARCode(project.sicar_code) || '-'}</Span>
             <Label>Status do georreferenciamento no SIGEF</Label>
             <Span>{project.georeferencing_status || '-'}</Span>
@@ -186,7 +186,7 @@ const addressString = addressParts.join(', ');
 
         <ButtonContainer>
           {project.pdf_matricula_certificate && <DownloadButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
-          {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF CAR</DownloadButton>}
+          {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF C.A.R</DownloadButton>}
           {project.pdf_ccir && <DownloadButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
           {project.property_polygon && <DownloadButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
           {project.pdf_federal_debt_certificate && <DownloadButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}

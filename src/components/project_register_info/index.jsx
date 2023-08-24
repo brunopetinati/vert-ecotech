@@ -429,7 +429,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
                 onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
             {legalReserveAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{legalReserveAreaError}</div>}            
-            <Label>Status do CAR</Label>
+            <Label>Status do C.A.R</Label>
             <StyledSelect
               onChange={handleOptionsCar}
               defaultValue={""}
@@ -441,7 +441,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
             ))}
             </StyledSelect>
             {selectedCarError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{selectedCarError}</div>}
-            <Label>Código SICAR (CAR)</Label>
+            <Label>Código SICAR (C.A.R)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
               maskplaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
