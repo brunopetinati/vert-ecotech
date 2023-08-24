@@ -97,14 +97,16 @@ const Projects = () => {
             <option value="Status da Matrícula">Status da Matrícula</option>
             <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
             <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
-            <option value="Status CAR">Status CAR</option>
+            <option value="Status CAR">Status C.A.R</option>
           </StyledSelect>
         </div>
         <DefaultButton text={'Adicionar Projeto'} path={'/project_register'} />
       </ButtonContainer>
+
       <TableContainer>
         {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} />}
       </TableContainer>
+      
     </Container>
   );
 };

@@ -8,15 +8,15 @@ import LoadingComponent from '../../components/loading_component';
 
 const RegisterProjectFileUploadWebOpen = () => {
   function separateInfo(data) {
-    const [constant1, constant2, constant3] = data.split("-vert-");
-    return [constant1, constant2, constant3];
+    const [constant1, constant2, constant3, constant4] = data.split("-vert-");
+    return [constant1, constant2, constant3, constant4];
   }
-
-  let projectId, credentials, owner = null;
-
+  
+  let projectId, credentials, owner, title = null;
+  
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
-    [owner, credentials, projectId] = separateInfo(info);
+    [owner, credentials, projectId, title] = separateInfo(info);
   }
 
   const [selectedFiles, setSelectedFiles] = useState({
@@ -25,7 +25,8 @@ const RegisterProjectFileUploadWebOpen = () => {
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
-    owner: owner
+    owner: owner,
+    title: title
   });
 
 
