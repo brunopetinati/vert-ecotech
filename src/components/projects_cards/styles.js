@@ -25,13 +25,19 @@ export const CardContainer = styled.div`
   @media screen and (max-width: 768px) {
     width: 50px;
     height: 100px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0;
+    flex-direction: column-reverse;
   } 
 `;
 
 export const ImageContainer = styled.div`
   margin-right: 16px;
 
-  
+  @media screen and (max-width: 768px) {
+     margin-right: 0;
+  }
 `;
 
 export const Image = styled.img`
@@ -41,8 +47,8 @@ export const Image = styled.img`
   border-radius: 4px;
 
   @media screen and (max-width: 768px) {
-    width: 35px;
-    height: 35px;  
+    width: 60px;
+    height: 60px;  
   }
 `;
 
@@ -52,6 +58,13 @@ export const InnerContainer = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 50%;
+
+  @media screen and (max-width: 768px) {
+    align-items: center;
+    width: 75px;
+    height: 100%;
+    overflow: scroll;
+  }
 `;
 
 export const Title = styled.h2`
@@ -60,9 +73,10 @@ export const Title = styled.h2`
   margin-bottom: 8px;
   color: #054d00;
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-  
+
   @media screen and (max-width: 768px) {
-    display: none;  
+    font-size: 8px;
+    text-align: center;
   }
 `;
 
@@ -88,6 +102,26 @@ export const ScoreContainer = styled.div`
   font-weight: bold;
 
   @media screen and (max-width: 768px) {
-    display: none;  
+    display: none;
+  }
+`;
+
+
+export const ScoreContainerForCellPhone = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  font-weight: bold;
+
+  @media screen and (max-width: 768px) {
+    width: 10px;
+    height: 10px;
+    font-size: 8px;
   }
 `;

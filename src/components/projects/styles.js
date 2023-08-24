@@ -99,7 +99,7 @@ export const StyledSelect = styled.select`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 64px;
-    width: 75%;
+    width: 81%;
     font-size: 12px;
     
     ::placeholder {
