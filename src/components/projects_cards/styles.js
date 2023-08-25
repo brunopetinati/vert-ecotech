@@ -49,6 +49,7 @@ export const Image = styled.img`
   @media screen and (max-width: 768px) {
     width: 60px;
     height: 60px;  
+    margin: 0 auto;
   }
 `;
 
@@ -61,9 +62,11 @@ export const InnerContainer = styled.div`
 
   @media screen and (max-width: 768px) {
     align-items: center;
+    justify-content: space-between;
     width: 75px;
-    height: 100%;
     overflow: scroll;
+    height: 28px;
+    margin-top: -8px;
   }
 `;
 
@@ -77,6 +80,8 @@ export const Title = styled.h2`
   @media screen and (max-width: 768px) {
     font-size: 8px;
     text-align: center;
+    margin-bottom: 0;
+    margin: 0 auto;
   }
 `;
 
@@ -106,22 +111,22 @@ export const ScoreContainer = styled.div`
   }
 `;
 
-
-export const ScoreContainerForCellPhone = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-  height: 50px;
-  background-color: #fff;
-  border-radius: 50%;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  font-size: 24px;
-  font-weight: bold;
-
+export const MobileScoreContainer = styled.div`
   @media screen and (max-width: 768px) {
-    width: 10px;
-    height: 10px;
+    display: flex;
+    -moz-box-align: center;
+    align-items: center;
+    -moz-box-pack: center;
+    justify-content: center;
+    width: 17px;
+    height: 20px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
     font-size: 8px;
+    font-weight: 700;
+    position: relative;
+    bottom: 12px;
+    left: 28px;
   }
 `;

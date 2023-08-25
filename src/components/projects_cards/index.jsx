@@ -1,4 +1,4 @@
-import { Wrapper, CardContainer, ImageContainer, Image, Title, Info, ScoreContainer, InnerContainer } from "./styles";
+import { Wrapper, CardContainer, ImageContainer, Image, Title, Info, ScoreContainer, InnerContainer, MobileScoreContainer } from "./styles";
 import { getStatusCARColor, getStatusMatriculaColor, getScoreColor, transformNumbersToHectares } from '../../constants/functions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,6 +28,7 @@ export const Card = ({filteredProjects}) => {
     <Wrapper>
       {filteredProjects.map((project, index) => (
       <CardContainer key={index} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}}>
+        <MobileScoreContainer style={{color: getScoreColor(project.score)}} score={project.score || '0'}>{project.score || '0'}</MobileScoreContainer>
         <ImageContainer>
           <Image  src={project.project_image || DefaultForestImage}
           alt={project.title === "default" ? 'Sem Título' : project.title} />
