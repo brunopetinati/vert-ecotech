@@ -112,6 +112,8 @@ export const ScoreContainer = styled.div`
 `;
 
 export const MobileScoreContainer = styled.div`
+  display: none;
+  
   @media screen and (max-width: 768px) {
     display: flex;
     -moz-box-align: center;

@@ -35,7 +35,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
 
 
     axios
-    .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started' }, { headers })
+    .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started', 'title': project.title }, { headers })
     .then((response) => {
     })
     .catch((error) => {
