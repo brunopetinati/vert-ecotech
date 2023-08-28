@@ -33,9 +33,10 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
 
+    console.log('project.title', project.title);
 
     axios
-    .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started', 'title': project.title }, { headers })
+    .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started' }, { headers })
     .then((response) => {
     })
     .catch((error) => {
@@ -43,7 +44,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
     });
     
     axios
-    .put(`${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
+    .put(`${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner, 'title': project.title }, { headers } )
     .then((response) => {
       Swal.fire({
         title: 'Sucesso!',

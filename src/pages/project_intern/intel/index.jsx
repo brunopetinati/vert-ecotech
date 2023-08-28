@@ -13,11 +13,15 @@ const Intel = ({user, project}) => {
 
 
   const users = useSelector((state) => state.app_data.users);
-  const projectOwner = users.find(user => user.id === project.owner);
   const [password, setPassword] = useState('');
   const currentUser = useSelector((state) => state.user.currentUser);
-
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
+
+  let projectOwner = currentUser.id;
+
+  if (currentUser.user_type !== "Regular") {
+    projectOwner = users.find(user => user.id === project.owner);
+  }
 
   const openPasswordModal = () => {
     setIsPasswordModalOpen(true);
@@ -148,7 +152,11 @@ const addressString = addressParts.join(', ');
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            <Span>{returnUserName(project.owner, users) || '-'}</Span>
+            <Span>{
+                  currentUser.user_type === "ADM"
+                  ? returnUserName(project.owner, users) || '-'
+                  : currentUser.full_name} 
+            </Span>
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <Span>{project.physical_or_legal_entity || '-'}</Span>        
             <Label>CNPJ ou CPF do proprietário</Label>
