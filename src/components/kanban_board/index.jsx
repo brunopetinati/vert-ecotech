@@ -39,6 +39,7 @@ const KanbanBoard = () => {
   const users = useSelector((state) => state.app_data.users);
   const [newStatusProp, setNewStatusProp] = useState(null);
   const [notificationID, setNotificationID] = useState(null);
+  const [projectTitle, setProjectTitle] = useState('');
 
   const navigate = useNavigate();
 
@@ -53,10 +54,11 @@ const KanbanBoard = () => {
     'lost': 9,
   };
 
-  const handleDragStart = (e, owner, projectID, projectStatus) => {
+  const handleDragStart = (e, owner, projectID, projectStatus, projectTitle) => {
     e.dataTransfer.setData('text/plain', projectStatus);
     setCurrentOwnerID(owner);
     setCurrentProjectID(projectID);
+    setProjectTitle(projectTitle);
   };
 
   const handleDragOver = (e) => {
@@ -77,7 +79,7 @@ const KanbanBoard = () => {
       const headers = { Authorization: `Bearer ${token}`, };
       
       axios
-      .put(`${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID }, { headers } )
+      .put(`${currentUrl}/api/projects/${currentProjectID}/update/`, { status: newStatus, owner: currentOwnerID, title: projectTitle }, { headers } )
       .then((response) => {
         setUpdateComponent(!updateComponent)
       })
@@ -183,7 +185,7 @@ const KanbanBoard = () => {
             {projects.map((project, key) => {
               if (project.status === 'started') {
                 return (
-                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status)}>
+                  <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status, project.title)}>
                     <KanbanCard project={project} />
                   </CardContainer>
                 );  
