@@ -28,6 +28,7 @@ const EditProject = () => {
   const [owner, setOwner] = useState(project.owner);
   const [users, setUsers] = useState([]);
   const [title, setTitle] = useState(project.title);
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   // SICAR
   const [selectedCar, setSelectedCar] = useState(project.status_car);
@@ -297,7 +298,7 @@ const EditProject = () => {
         <InnerContainer>
           <Column> 
             <Label>Proprietário da área:</Label>
-            <div style={{marginBottom: '32px', marginTop: '8px'}}>{returnUserName(project.owner, userNames)}</div>
+            <div style={{marginBottom: '32px', marginTop: '8px'}}>{currentUser.user_type === "Regular" ? currentUser.full_name : returnUserName(project.owner, userNames)}</div>
             <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
             <StyledSelect
               onChange={handlePessoaFisicaOuJuridica}
