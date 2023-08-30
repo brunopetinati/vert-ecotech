@@ -7,6 +7,11 @@ export const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   height: 79vh;
+
+  @media screen and (max-width: 768px) {
+    flex-wrap: wrap;
+    height: auto;
+  }
 `;
 
 export const CardContainer = styled.div`
@@ -23,8 +28,8 @@ export const CardContainer = styled.div`
   cursor: pointer;
 
   @media screen and (max-width: 768px) {
-    width: 50px;
-    height: 100px;
+    width: 100px;
+    height: 130px;
     align-items: center;
     justify-content: center;
     margin-right: 0;
@@ -47,8 +52,8 @@ export const Image = styled.img`
   border-radius: 4px;
 
   @media screen and (max-width: 768px) {
-    width: 60px;
-    height: 60px;  
+    width: 70px;
+    height: 80px;  
     margin: 0 auto;
   }
 `;
@@ -120,12 +125,12 @@ export const MobileScoreContainer = styled.div`
     align-items: center;
     -moz-box-pack: center;
     justify-content: center;
-    width: 17px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-color: rgb(255, 255, 255);
     border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 2px;
-    font-size: 8px;
+    font-size: 12px;
     font-weight: 700;
     position: relative;
     bottom: 12px;
