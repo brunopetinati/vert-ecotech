@@ -3,10 +3,22 @@ import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Label, FileInput, Container, InnerContainer, Column, Button, ButtonContainer } from '../projects_t_engineering/styles';
 import { currentUrl } from '../../constants/global';
+import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 
 
 const ProjectTabLegal = ({ user, project }) => {
+
+  const engineering = useSelector((state) => state.app_data.engineering);
+  const matchObject = engineering.find(item => item.project === project.id);
+  let matchObjectId = null;
+  
+  if (matchObject) {
+    matchObjectId = matchObject.id;
+  } else {
+    console.error('Nenhum objeto encontrado com o project_id correspondente.');
+  }
+
   const [file, setFile] = useState(null);
 
   const handleFileChange = (event) => {
@@ -18,9 +30,14 @@ const ProjectTabLegal = ({ user, project }) => {
     if (file) {
       const formData = new FormData();
       formData.append('project', project.id);
-      formData.append('duediligence', file);
+      formData.append('due_diligence', file);
+      formData.append('title', project.title);
 
-      axios.post(`${currentUrl}/api/engineering/`, formData)
+      const token = sessionStorage.getItem('Authorization');
+      const headers = { Authorization: `Bearer ${token}` };
+  
+      axios
+        .put(`${currentUrl}/api/engineering/${matchObjectId}/update/`, formData, { headers })
         .then((response) => {
           Swal.fire({
             title: 'Sucesso!',
