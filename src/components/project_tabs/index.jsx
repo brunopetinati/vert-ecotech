@@ -76,7 +76,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
         {activeTab === 0 && 
         <ButtonContainer style={{ marginTop: '100px !important' }}>
           <Button onClick={handleRegister}>Editar Informações</Button>
-            {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
+          {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
         </ButtonContainer>}
 
         <Content collapsed={collapsed}>
