@@ -66,6 +66,7 @@ export const getEngineeringTable = (token) => (dispatch) => {
 
 
 export const getFullNameById = (ownerId, owners) => {
+
   if (owners) {
     const ownerObj = owners.find(user => user.id === ownerId);
   

@@ -12,7 +12,7 @@ const ProjectsTable = ({filteredProjects}) => {
 
   const users = useSelector((state) => state.app_data.users);
   const projects = useSelector((state) => state.app_data.projects);
-  
+  const currentUser = useSelector((state) => state.user.currentUser);
 
   const handleClick = (project) => {
     dispatch(appStatus(''));
@@ -41,7 +41,7 @@ const ProjectsTable = ({filteredProjects}) => {
         <tbody>
           {filteredProjects.map((row, index) => (
             <TR key={index}>
-              <TD>{getFullNameById(row.owner, users)}</TD>
+              <TD>{currentUser.user_type === "Regular" ? currentUser.full_name : getFullNameById(row.owner, users)}</TD>
               <TD>{transformNumbersToHectares(row.legal_reserve_area)}</TD>
               <TD>{transformNumbersToHectares(row.total_area)}</TD>
               <TD>{row.address}</TD>
