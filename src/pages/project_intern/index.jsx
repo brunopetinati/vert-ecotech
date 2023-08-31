@@ -66,8 +66,7 @@ const tabsForRegularUser = [
     label: "Informações",
     content: <Intel user={user} project={project} />
 
-  },
-  
+  }
 ];
 
 const app_status = useSelector((state) => state.app_status.status);

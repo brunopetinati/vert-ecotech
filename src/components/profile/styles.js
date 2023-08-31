@@ -14,13 +14,6 @@ export const Container = styled.div`
   }
 `;
 
-export const InnerContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
-  max-width: 600px;
-`;
-
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,6 +26,10 @@ export const Row = styled.div`
   justify-content: space-between;
   width: 80%;
   padding: 16px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 export const Label = styled.label`
@@ -53,6 +50,10 @@ export const ShowInput = styled(InputMask)`
 
   &:focus {
     border-color: #007bff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
   }
 `;
 
@@ -81,6 +82,13 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   width: 100%;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const ButtonDisplay = styled.div`
@@ -125,6 +133,10 @@ export const IndexContainer = styled.div`
   background: #f9fafb;
   width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
   height: 100%;
+
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+  }
 `;
 
 export const ProfileContainerInfo = styled.div`
@@ -145,6 +157,10 @@ export const ProfileContainerInfo = styled.div`
     align-self: flex-start;
     color: #054D00;
   }
+
+  @media screen and (max-width: 768px) {
+    max-height: 139vh;
+  }
 `;
 
 export const ButtonContainerIndex = styled.div`
@@ -161,5 +177,16 @@ export const ButtonContainerIndex = styled.div`
 
   h3 {
     color:#054D00;
+  }
+`;
+
+export const InnerContainer = styled.div`
+  overflow-y: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  @media screen and (max-width: 768px) {
   }
 `;
