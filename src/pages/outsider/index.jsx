@@ -6,18 +6,23 @@ import addFile from '../../assets/icons/add_file.png'
 import uploadedFile from '../../assets/icons/secondary_file.png'
 import LoadingComponent from '../../components/loading_component';
 
+import he from 'he'; 
+
 const RegisterProjectFileUploadWebOpen = () => {
   function separateInfo(data) {
-    const [constant1, constant2, constant3] = data.split("-vert-");
-    return [constant1, constant2, constant3];
+    const [constant1, constant2, constant3, constant4] = data.split("-vert-");
+    return [constant1, constant2, constant3, constant4];
   }
-
-  let projectId, credentials, owner = null;
-
+  
+  let projectId, credentials, owner, title = null;
+  
   if (window.location.pathname) {
     const info = (window.location.pathname.split('/')[2]);
-    [owner, credentials, projectId] = separateInfo(info);
+    [owner, credentials, projectId, title] = separateInfo(info);
   }
+
+  title = decodeURIComponent(title.replace(/\+/g, ' '));
+  title = he.decode(title);
 
   const [selectedFiles, setSelectedFiles] = useState({
     pdf_matricula_certificate: null,
@@ -25,7 +30,8 @@ const RegisterProjectFileUploadWebOpen = () => {
     property_polygon: null,
     pdf_federal_debt_certificate: null,
     pdf_ccir: null,
-    owner: owner
+    owner: owner,
+    title: title
   });
 
 
@@ -183,7 +189,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         style={{ width: '60px', marginBottom: '16px' }}
                         alt="uploaded file"
                       />
-                      <label>PDF do CAR (SICAR)</label>
+                      <label>PDF do C.A.R (SICAR)</label>
                       <button
                         style={{ margin: '16px' }}
                         onClick={(e) => resetFileState('pdf_car', e)}
@@ -198,7 +204,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         alt="emptyFile"
                         style={{ width: '50px', marginBottom: '16px' }}
                       />
-                      <label>Anexar PDF do CAR (SICAR)</label>
+                      <label>Anexar PDF do C.A.R (SICAR)</label>
                     </>
                   )}
                   <p />

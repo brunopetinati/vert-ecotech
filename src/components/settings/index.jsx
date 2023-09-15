@@ -70,7 +70,7 @@ const Settings = () => {
         <h1>Configurações</h1>
         {currentUser.user_type === 'ADM' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
         <ToggleSwitch label={"Habilitar visualização em cards para projetos"} checked={layoutProjects} onChange={handleChangeProjects}/>
-        <StyledButton onClick={handleShowResetPasswordModal} style={{position: 'absolute', bottom: '32px', right: '160px'}}>Resetar Senha</StyledButton>
+        <StyledButton onClick={handleShowResetPasswordModal} style={{position: 'absolute', bottom: '32px', right: '160px'}}>Alterar Senha</StyledButton>
         <StyledButton onClick={handleLogout} style={{position: 'absolute', bottom: '32px', right: '32px'}}>Deslogar</StyledButton>
         {showResetPassword && <ResetPassword isOpen={showResetPassword} onClose={handleShowResetPasswordModal}/>}
       </InnerContainer>

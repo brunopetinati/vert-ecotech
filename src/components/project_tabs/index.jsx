@@ -33,7 +33,6 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}`, };
 
-
     axios
     .post(`${currentUrl}/api/engineering/`, { 'project': project.id, 'status': 'started' }, { headers })
     .then((response) => {
@@ -43,7 +42,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
     });
     
     axios
-    .put(`${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner }, { headers } )
+    .put(`${currentUrl}/api/projects/${project.id}/update/`, { status: 'started', owner: project.owner, 'title': project.title }, { headers } )
     .then((response) => {
       Swal.fire({
         title: 'Sucesso!',
@@ -77,7 +76,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
         {activeTab === 0 && 
         <ButtonContainer style={{ marginTop: '100px !important' }}>
           <Button onClick={handleRegister}>Editar Informações</Button>
-            {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
+          {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
         </ButtonContainer>}
 
         <Content collapsed={collapsed}>

@@ -40,7 +40,6 @@ const AppRoutes = () => {
     location.pathname !== '/upload_success' &&
     location.pathname !== '/upload_canceled') {
 
-    console.log('entrou aqui dentro da função');
     navigate('/');
 
     return (

@@ -87,6 +87,11 @@ export const removeNonDigits = (phoneNumber) => {
 };
 
 export const convertPhone = (phoneNumber) => {
+
+  if (!phoneNumber) {
+    return 'Telefone não cadastrado'
+  }
+
   const cleanedPhoneNumber = phoneNumber.replace(/\D/g, '');
 
   const countryCode = cleanedPhoneNumber.slice(0, 2);

@@ -228,7 +228,7 @@ const UserIntern = () => {
 
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
               <WarningDeleteModal text={'Deletar Usuário'} path={'users'} id={user.id} width={'150px'} height={'35px'} />
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '0 32px'}}>Editar</StyledButton>
+              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '0 32px'}}>Salvar</StyledButton>
               <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '0 0px'}}>Voltar</StyledButton>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}

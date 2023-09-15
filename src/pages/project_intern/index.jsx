@@ -20,6 +20,8 @@ import Dashboard from "../../components/dashboard";
 
 const ProjectIntern = () => {
 
+
+  const currentUser = useSelector((state) => state.user.currentUser);
   const location = useLocation();
   const project = location.state.project;
   const user = useSelector((state) => state.user.currentUser);
@@ -59,6 +61,14 @@ const ProjectIntern = () => {
   }
 ];
 
+const tabsForRegularUser = [
+  {
+    label: "Informações",
+    content: <Intel user={user} project={project} />
+
+  }
+];
+
 const app_status = useSelector((state) => state.app_status.status);
 
 
@@ -66,7 +76,7 @@ const app_status = useSelector((state) => state.app_status.status);
     <Container collapsed={collapsed} >
       <Sidebar />
       <SideContainer>
-        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={tabs} handleRegister={handleRegister} project={project} />}
+        {app_status === 'Projetos' ? <Projects /> : app_status === 'Usuários' ? <Users /> : app_status === 'Meu Perfil' ? <Profile /> : app_status === "Desenvolvimento" ? <KanbanBoard /> : app_status === "Configurações" ? <Settings /> : app_status === "Dashboard" ? <Dashboard /> : <ProjectTabs tabs={currentUser.user_type === "Regular" ? tabsForRegularUser : tabs} handleRegister={handleRegister} project={project} />}
       </SideContainer>
     </Container>
   )

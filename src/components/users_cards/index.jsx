@@ -13,7 +13,7 @@ const UsersCard = ({filteredUsers}) => {
             <p>{user.phone}</p>
             <p>{user.city + ', ' + user.state}</p>
           </CardBody>
-          <CardFooter>Footer</CardFooter>
+          <CardFooter></CardFooter>
         </Card>
       ))}
     </Wrapper>

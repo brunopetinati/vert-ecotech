@@ -1,7 +1,7 @@
 import UsersTable from "../users_table/index";
 import UsersCard from "../users_cards";
 import DefaultButton from "../default_button";
-import { Container, ButtonContainer, TableContainer, Input, StyledSelect } from "./styles";
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect, MarginForCelphone } from "./styles";
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -82,6 +82,7 @@ const Users = () => {
           <option value="Acesso">Acesso</option>
         </StyledSelect>
         </div>
+        <MarginForCelphone />
         <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
       </ButtonContainer>
       <TableContainer>

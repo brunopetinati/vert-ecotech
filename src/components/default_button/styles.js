@@ -22,4 +22,8 @@ export const StyledButton = styled.button`
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.02) ;
   }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
+  }
 `;

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarFooter, SidebarIcon } from './styles'
+import { motion } from "framer-motion";
+import { SidebarContainer, SidebarHeader, SidebarMenu, SidebarMenuItem, SidebarMenuItemDiffer, SidebarFooter, SidebarIcon, ButtonForCellPhoneToOpenSidebar } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions';
 import { collapseSidebar } from '../../store/modules/sidebar/actions';
 
@@ -103,10 +104,25 @@ const Sidebar = () => {
     navigate(path);
   };
 
+  
+// aplicar aqui  um botão para mostrar a barra lateral ou não no celular
+  const [showSidebar, setShowSidebar] = useState(true);
+
+  const handleSetShowSidebar = () => {
+    setShowSidebar(!showSidebar);
+  };
 
   return (
-    <>
-      <SidebarContainer collapsed={collapsed}>
+    <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        >
+      <ButtonForCellPhoneToOpenSidebar className={showSidebar ? 'rotate' : ''} onClick={() => handleSetShowSidebar()}>
+        <img src={Logo} alt="0" style={{width: '20px'}}/>
+      </ButtonForCellPhoneToOpenSidebar>
+      <SidebarContainer collapsed={collapsed} showSidebar={showSidebar}>
         <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
         </SidebarHeader>
@@ -118,12 +134,12 @@ const Sidebar = () => {
           <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
           <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
         </SidebarMenu>
-        <SidebarMenuItem style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}>{collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }</SidebarMenuItem>
+        <SidebarMenuItemDiffer style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}> {collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }</SidebarMenuItemDiffer>
         <SidebarFooter>
         {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
         </SidebarFooter>
       </SidebarContainer>
-    </>
+    </motion.div>
   );
 };
 

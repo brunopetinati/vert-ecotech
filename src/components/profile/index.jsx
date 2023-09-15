@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Banco from '../bank';
 import { StyledButton } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles';
+import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer } from './styles';
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
@@ -96,15 +96,7 @@ const Profile = () => {
         transition={{ duration: 0.8 }}
       >
         <ProfileContainerInfo collapsed={collapsed}>
-          <div
-            style={{
-              overflowY: 'auto',
-              width: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              padding: '16px',
-            }}
-          >
+          <InnerContainer>
             <h2>Meu perfil</h2>
             <Row>
               <Label>Nome completo</Label>
@@ -278,15 +270,7 @@ const Profile = () => {
                 }
               />
             </Row>
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                width: '100%',
-                justifyContent: 'flex-end',
-                flexWrap: 'wrap',
-              }}
-            >
+            <ButtonContainer>
               <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} />
               <StyledButton
                 onClick={handleRegister}
@@ -294,9 +278,9 @@ const Profile = () => {
               >
                 Salvar Alterações
               </StyledButton>
-            </div>
+            </ButtonContainer>
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
-          </div>
+          </InnerContainer>
         </ProfileContainerInfo>
         <p />
       </motion.div>

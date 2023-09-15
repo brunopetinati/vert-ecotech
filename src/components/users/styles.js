@@ -8,6 +8,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -26,6 +32,13 @@ export const ButtonContainer = styled.div`
   align-items: center;
   width: 90%;
   margin-bottom: 32px;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const TableContainer = styled.div`
@@ -33,10 +46,14 @@ export const TableContainer = styled.div`
   width: 90%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+    margin: 0 auto;
+  }
 `;
 
 export const Input = styled.input`
-  padding: 10px;
   width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -51,10 +68,20 @@ export const Input = styled.input`
   &:focus {
     border-color: #7eff00;
   }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 20px;
+    margin-top: 64px;
+    width: 75%;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
+  }
 `;
 
 export const StyledSelect = styled.select`
-  padding: 10px;
   width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -70,5 +97,22 @@ export const StyledSelect = styled.select`
 
   &:focus {
     border-color: #7eff00;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 20px;
+    margin-top: 64px;
+    width: 81%;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
+  }
+`;
+
+export const MarginForCelphone = styled.div`
+  @media screen and (max-width: 768px) {
+    margin-top: 32px;
   }
 `;

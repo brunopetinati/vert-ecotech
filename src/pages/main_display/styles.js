@@ -8,8 +8,7 @@ export const Container = styled.div`
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: row;
-    height: 100%;
-    width: 100vw;
+    height: 153vh;
   }  
 `;
 
@@ -20,6 +19,13 @@ export const SideContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9fafb;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    align-items: flex-start;
+  }
 `;
 
 export const SideContainerFlexStart = styled.div`

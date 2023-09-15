@@ -30,6 +30,14 @@ export const TH = styled.th`
   width: 100px;
   text-align: center;
   width: 150px;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    width: 80px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #054d00;
+  }
 `;
 
 export const TD = styled.td`
@@ -39,6 +47,11 @@ export const TD = styled.td`
   border-right: 1px solid #ddd;
   text-align: center;
   word-wrap: break-word;
+
+  @media screen and (max-width: 768px) {
+    padding: 8px;
+    font-size: 12px;
+  }
 `;
 
 
@@ -46,4 +59,8 @@ export const Wrapper = styled.div`
   overflow-x: auto;
   overflow-y: auto;
   height: 79vh;
+
+  @media screen and (max-width: 768px) {
+    height: 100vh;
+  }
 `;

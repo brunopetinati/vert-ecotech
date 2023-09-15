@@ -8,6 +8,12 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 
 export const TitleContainer = styled.div`
@@ -26,6 +32,13 @@ export const ButtonContainer = styled.div`
   align-items: center;
   width: 90%;
   margin-bottom: 32px;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export const TableContainer = styled.div`
@@ -51,6 +64,17 @@ export const Input = styled.input`
   &:focus {
     border-color: #7eff00;
   }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 20px;
+    margin-top: 64px;
+    width: 60vw;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
+  }
 `;
 
 export const StyledSelect = styled.select`
@@ -70,5 +94,22 @@ export const StyledSelect = styled.select`
 
   &:focus {
     border-color: #7eff00;
+  }
+
+  @media screen and (max-width: 768px) {
+    margin-left: 20px;
+    margin-top: 64px;
+    width: 65vw;
+    font-size: 12px;
+    
+    ::placeholder {
+      font-size: 12px; 
+    }
+  }
+`;
+
+export const MarginForCelphone = styled.div`
+  @media screen and (max-width: 768px) {
+    margin-top: 32px;
   }
 `;
