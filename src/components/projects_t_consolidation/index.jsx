@@ -201,7 +201,7 @@ const ProjectTabConsolidation = ({user, project}) => {
       <Container>
       <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginTop: '32px' }}>
       <List>
-        <ListItem style={{marginTop: '564px'}}>
+        <ListItem style={{marginTop: '1900px'}}>
           <div>Certificado de Matrícula</div>
           <div>{getFileStatusIcon(project.pdf_matricula_certificate)}</div>
           <div>{project.pdf_matricula_certificate && <StyledButton style={{width: '256px'}} onClick={() => handleDownloadProjectFiles('pdf_matricula_certificate')}>Download</StyledButton>}</div>
@@ -237,7 +237,12 @@ const ProjectTabConsolidation = ({user, project}) => {
           <div>{fileStatus.pdd_draft && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('pdd_draft')}>Download</StyledButton>}</div>
         </ListItem>
         <ListItem>
-          <div>Análise de Viabilidade</div>
+          <div>Pre-Análise de Viabilidade</div>
+          <div>{getFileStatusIcon(fileStatus.pre_analise_viabilidade)}</div>
+          <div>{fileStatus.pre_analise_viabilidade && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('pre_analise_viabilidade')}>Download</StyledButton>}</div>
+        </ListItem>        
+        <ListItem>
+          <div>Análise de Viabilidade / PIN</div>
           <div>{getFileStatusIcon(fileStatus.viability_analysis)}</div>
           <div>{fileStatus.viability_analysis && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('viability_analysis')}>Download</StyledButton>}</div>
         </ListItem>
@@ -250,7 +255,117 @@ const ProjectTabConsolidation = ({user, project}) => {
           <div>Due Diligence</div>
           <div>{getFileStatusIcon(fileStatus.due_diligence)}</div>
           <div>{fileStatus.due_diligence && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('due_diligence')}>Download</StyledButton>}</div>
+        </ListItem>   
+        <ListItem>
+          <div>Imagens de Satélite</div>
+          <div>{getFileStatusIcon(fileStatus.imagens_de_satelite)}</div>
+          <div>{fileStatus.imagens_de_satelite && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('imagens_de_satelite')}>Download</StyledButton>}</div>
+        </ListItem>  
+        <ListItem>
+          <div>Licenciamento Ambiental</div>
+          <div>{getFileStatusIcon(fileStatus.licenciamento_ambiental)}</div>
+          <div>{fileStatus.licenciamento_ambiental && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('licenciamento_ambiental')}>Download</StyledButton>}</div>
+        </ListItem>    
+        <ListItem>
+          <div>Autorizações</div>
+          <div>{getFileStatusIcon(fileStatus.autorizacoes)}</div>
+          <div>{fileStatus.autorizacoes && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('autorizacoes')}>Download</StyledButton>}</div>
+        </ListItem>   
+        <ListItem>
+          <div>Débitos Ambientais</div>
+          <div>{getFileStatusIcon(fileStatus.debitos_ambientais)}</div>
+          <div>{fileStatus.debitos_ambientais && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('debitos_ambientais')}>Download</StyledButton>}</div>
+        </ListItem>  
+        <ListItem>
+          <div>Projetos ambientais, sociais, econômicos</div>
+          <div>{getFileStatusIcon(fileStatus.projetos_amb_soc_eco)}</div>
+          <div>{fileStatus.projetos_amb_soc_eco && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('projetos_amb_soc_eco')}>Download</StyledButton>}</div>
+        </ListItem>  
+        <ListItem>
+          <div>Relecionamento com Stakeholders</div>
+          <div>{getFileStatusIcon(fileStatus.relacionamento_stakeholders)}</div>
+          <div>{fileStatus.relacionamento_stakeholders && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relacionamento_stakeholders')}>Download</StyledButton>}</div>
+        </ListItem>   
+        <ListItem>
+          <div>Relatório de Monitoramento</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_de_monitoramento)}</div>
+          <div>{fileStatus.relatorio_de_monitoramento && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_de_monitoramento')}>Download</StyledButton>}</div>
+        </ListItem>    
+        <ListItem>
+          <div>Arquivo do Drone</div>
+          <div>{getFileStatusIcon(fileStatus.arquivo_do_drone)}</div>
+          <div>{fileStatus.arquivo_do_drone && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('arquivo_do_drone')}>Download</StyledButton>}</div>
+        </ListItem> 
+        <ListItem>
+          <div>Relatório de Validação</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_de_validacao)}</div>
+          <div>{fileStatus.relatorio_de_validacao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_de_validacao')}>Download</StyledButton>}</div>
+        </ListItem>    
+        <ListItem>
+          <div>Relatório de Verificação</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_de_verificacao)}</div>
+          <div>{fileStatus.relatorio_de_verificacao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_de_verificacao')}>Download</StyledButton>}</div>
+        </ListItem>       
+        <ListItem>
+          <div>Relatório Conjunto (Validação/Verificação)</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_conjunto)}</div>
+          <div>{fileStatus.relatorio_conjunto && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_conjunto')}>Download</StyledButton>}</div>
+        </ListItem>   
+        <ListItem>
+          <div>Representação de Registro (PP Único)</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_registro)}</div>
+          <div>{fileStatus.representacao_de_registro && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_registro')}>Download</StyledButton>}</div>
+        </ListItem>  
+        <ListItem>
+          <div>Representação de Registro (Vários PPs)</div>
+          <div>{getFileStatusIcon(fileStatus.rep_varios_registros)}</div>
+          <div>{fileStatus.rep_varios_registros && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('rep_varios_registros')}>Download</StyledButton>}</div>
+        </ListItem>    
+        <ListItem>
+          <div>Representação de conversão da SCU</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_conversao)}</div>
+          <div>{fileStatus.representacao_conversao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_conversao')}>Download</StyledButton>}</div>
         </ListItem>
+        <ListItem>
+          <div>Representação de emissão (PP único)</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_emissao)}</div>
+          <div>{fileStatus.representacao_de_emissao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_emissao')}>Download</StyledButton>}</div>
+        </ListItem> 
+        <ListItem>
+          <div>Representação de emissão (múltiplos PPs)</div>
+          <div>{getFileStatusIcon(fileStatus.rep_varias_emissoes)}</div>
+          <div>{fileStatus.rep_varias_emissoes && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('rep_varias_emissoes')}>Download</StyledButton>}</div>
+        </ListItem>    
+        <ListItem>
+          <div>Representação de validação</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_validacao)}</div>
+          <div>{fileStatus.representacao_de_validacao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_validacao')}>Download</StyledButton>}</div>
+        </ListItem>   
+        <ListItem>
+          <div>Representação de verificação</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_verificacao)}</div>
+          <div>{fileStatus.representacao_de_verificacao && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_verificacao')}>Download</StyledButton>}</div>
+        </ListItem>  
+        <ListItem>
+          <div>Tabela de cálculo de risco de não permanência (AFOLU)</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_de_risco_afolu)}</div>
+          <div>{fileStatus.relatorio_de_risco_afolu && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_de_risco_afolu')}>Download</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>Representação de eventos de perda (AFOLU)</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_eventos_afolu)}</div>
+          <div>{fileStatus.representacao_de_eventos_afolu && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_eventos_afolu')}>Download</StyledButton>}</div>
+        </ListItem>
+        <ListItem>
+          <div>Relatório de evento de perda</div>
+          <div>{getFileStatusIcon(fileStatus.relatorio_de_evento_de_perda)}</div>
+          <div>{fileStatus.relatorio_de_evento_de_perda && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('relatorio_de_evento_de_perda')}>Download</StyledButton>}</div>
+        </ListItem>        
+        <ListItem>
+          <div>Representação de acesso</div>
+          <div>{getFileStatusIcon(fileStatus.representacao_de_acesso)}</div>
+          <div>{fileStatus.representacao_de_acesso && <StyledButton style={{width: '256px'}} onClick={() => handleEngineeringDownload('representacao_de_acesso')}>Download</StyledButton>}</div>
+        </ListItem>        
       </List>
       </div>
       {isPasswordModalOpen && (
