@@ -68,7 +68,7 @@ export const ButtonContainer = styled.div`
   align-items: center;
   height: 5vw;
   width: 93vw;
-  margin-top: 32px;
+  --margin-top: 32px;
 `;
 
 export const Button = styled.button`

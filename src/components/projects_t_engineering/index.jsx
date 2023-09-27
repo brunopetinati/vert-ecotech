@@ -4,6 +4,29 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
 import { currentUrl } from '../../constants/global';
+import styled from 'styled-components';
+
+import imageTopo from '../../assets/ods/topo.png';
+import image01 from '../../assets/ods/erradicao-pobreza.png';
+import image02 from '../../assets/ods/fome-zero.png';
+import image03 from '../../assets/ods/saude-bem-estar.png';
+import image04 from '../../assets/ods/educacao-qualidade.png';
+import image05 from '../../assets/ods/igualdade-genero.png';
+import image06 from '../../assets/ods/agua-potavel-saneamento.png';
+import image07 from '../../assets/ods/energia-limpa.png';
+import image08 from '../../assets/ods/trabalho-decente.png';
+import image09 from '../../assets/ods/industria-inovacao.png';
+import image10 from '../../assets/ods/reducao-desigualdade.png';
+import image11 from '../../assets/ods/cidades-comunidades.png';
+import image12 from '../../assets/ods/consumo-producao.png';
+import image13 from '../../assets/ods/mudanca-do-clima.png';
+import image14 from '../../assets/ods/vida-na-agua.png';
+import image15 from '../../assets/ods/vida-terrestre.png';
+import image16 from '../../assets/ods/paz-justica.png';
+import image17 from '../../assets/ods/parcerias.png';
+import image18 from '../../assets/ods/objetivos.png';
+import CardButtonInsert from './CardButtonInsert';
+
 import {
   Container,
   InnerContainer,
@@ -15,6 +38,7 @@ import {
 } from './styles';
 
 const ProjectTabEngineering = ({ user, project }) => {
+  const [selectedCards, setSelectedCards] = useState([]);  
   const [fileStates, setFileStates] = useState({
     pddFile: null,
     pddDraftFile: null,
@@ -75,6 +99,7 @@ const ProjectTabEngineering = ({ user, project }) => {
   const handleUpload = () => {
     const formData = new FormData();
     formData.append('project', project.id);
+
 
     if (fileStates.pddFile) {
       formData.append('pdd_pdf', fileStates.pddFile);
@@ -202,7 +227,7 @@ const ProjectTabEngineering = ({ user, project }) => {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [matchObjectId]);
 
   const switchField = (fieldName) => {
     setFileStates(prevState => ({
@@ -219,153 +244,231 @@ const ProjectTabEngineering = ({ user, project }) => {
     }
   };
 
+  const MainContainer = styled.div`
+    float: left;
+    width: 100%;
+    text-align: center;
+    min-height: 600px;
+  `;  
+
+  const CardTopo = styled.div`
+    max-width: 645px;
+    position: absolute;
+    top: 100px;
+    left: 46%;
+    transform: translate(-50%, -50%);
+
+    @media (max-width: 768px) {
+      max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
+      top: 50px; /* Cambia la posición superior para dispositivos móviles */
+      transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
+    }
+  `;
+
+  const CardContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 645px;
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translate(-57%, -8%); 
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      top: 150px;
+      transform: translate(-50%, 0); 
+      flex-direction: row; /* Mudança para duas colunas */
+      align-items: flex-start; /* Alinhamento dos elementos na parte superior */
+      
+      & > div {
+        flex-basis: 48%; /* Largura de 48% para cada card */
+        margin-bottom: 10px; /* Espaço entre os cards */
+      }
+    }    
+  `;  
+
+  const UploadsContainer = styled.div`
+    margin-top: 500px;
+  `;
+
+      
+
+
+
+  
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      {user.user_type === 'ADM' ? (
-        <Container>
-          {user.user_type === 'ADM' && project.status !== null ? (
-            <>
-              <ButtonContainer>
-                <Button onClick={handleUpload}>Enviar Arquivos</Button>
-              </ButtonContainer>
-              <InnerContainer>
-                <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
-                <small>Status: {project.status}</small>
-                <Column>
-                  <Label htmlFor="pdd_pdf">PDD:</Label>
-                  {renderFileInputOrMessage('pddFile')}
-                </Column>
-                <Column>
-                  <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
-                  {renderFileInputOrMessage('pddDraftFile')}
-                </Column>
-                <Column>
-                  <Label htmlFor="pre_analise_viabilidade">Pre-Análise de viabilidade:</Label>
-                  {renderFileInputOrMessage('pre_analise_viabilidade_File')}                  
-                </Column>
-                <Column>
-                  <Label htmlFor="viability_analisys">Análise de viabilidade / PIN:</Label>
-                  {renderFileInputOrMessage('viabilityFile')}
-                </Column>
-                <Column>
-                  <Label htmlFor="registration_wilder">Registration Wilder:</Label>
-                  {renderFileInputOrMessage('registrationWilderFile')}
-                </Column>             
-                <Column>
-                  <Label htmlFor="additional_information">Informações adicionais:</Label>
-                  <textarea
-                    id="additional_information"
-                    name="additional_information"
-                    value={fileStates.additionalInformation}
-                    onChange={handleAdditionalInformationChange}
-                  />
-                </Column>
-                <Column>
-                  <Label htmlFor="due_diligence">Due Diligence:</Label>
-                  {renderFileInputOrMessage('due_diligence_File')}
-                </Column>                   
-                <Column>
-                  <Label htmlFor="imagens_de_satelite">Imagens de Satélite:</Label>
-                  {renderFileInputOrMessage('imagens_de_satelite_File')}
-                </Column>      
-                <Column>
-                  <Label htmlFor="licenciamento_ambiental">Licenciamento Ambiental:</Label>
-                  {renderFileInputOrMessage('licenciamento_ambiental_File')}
-                </Column>   
-                <Column>
-                  <Label htmlFor="autorizacoes">Autorizações:</Label>
-                  {renderFileInputOrMessage('autorizacoes_File')}
-                </Column>  
-                <Column>
-                  <Label htmlFor="debitos_ambientais">Débitos Ambientais:</Label>
-                  {renderFileInputOrMessage('debitos_ambientais_File')}
-                </Column>  
-                <Column>
-                  <Label htmlFor="projetos_amb_soc_eco">Projetos ambientais, sociais e econômicos:</Label>
-                  {renderFileInputOrMessage('projetos_amb_soc_eco_File')}
-                </Column>  
-                <Column>
-                  <Label htmlFor="relacionamento_stakeholders">Relacionamento com Stakeholders:</Label>
-                  {renderFileInputOrMessage('relacionamento_stakeholders_File')}
-                </Column>  
-                <Column>
-                  <Label htmlFor="relatorio_de_monitoramento">Relatório de Monitoramento:</Label>
-                  {renderFileInputOrMessage('relatorio_de_monitoramento_File')}
-                </Column>   
-                <Column>
-                  <Label htmlFor="arquivo_do_drone">Arquivo do Drone:</Label>
-                  {renderFileInputOrMessage('arquivo_do_drone_File')}
-                </Column> 
-                <Column>
-                  <Label htmlFor="relatorio_de_validacao">Relatório de Validação:</Label>
-                  {renderFileInputOrMessage('relatorio_de_validacao_File')}
-                </Column>    
-                <Column>
-                  <Label htmlFor="relatorio_de_verificacao">Relatório de Verificação:</Label>
-                  {renderFileInputOrMessage('relatorio_de_verificacao_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="relatorio_conjunto">Relatório Conjunto (Validação/Verificação):</Label>
-                  {renderFileInputOrMessage('relatorio_conjunto_File')}
-                </Column>    
-                <Column>
-                  <Label htmlFor="representacao_de_registro">Representação de Registro (PP Único):</Label>
-                  {renderFileInputOrMessage('representacao_de_registro_File')}
-                </Column>  
-                <Column>
-                  <Label htmlFor="rep_varios_registros">Representação de Registro (Vários PPs):</Label>
-                  {renderFileInputOrMessage('rep_varios_registros_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_conversao">Representação de conversão da SCU:</Label>
-                  {renderFileInputOrMessage('representacao_conversao_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_de_emissao">Representação de emissão (PP único):</Label>
-                  {renderFileInputOrMessage('representacao_de_emissao_File')}
-                </Column>      
-                <Column>
-                  <Label htmlFor="rep_varias_emissoes">Representação de emissão (múltiplos PPs):</Label>
-                  {renderFileInputOrMessage('rep_varias_emissoes_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_de_validacao">Representação de validação:</Label>
-                  {renderFileInputOrMessage('representacao_de_validacao_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_de_verificacao">Representação de verificação:</Label>
-                  {renderFileInputOrMessage('representacao_de_verificacao_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="relatorio_de_risco_afolu">Tabela de cálculo de risco de não permanência (AFOLU):</Label>
-                  {renderFileInputOrMessage('relatorio_de_risco_afolu_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_de_eventos_afolu">Representação de eventos de perda (AFOLU):</Label>
-                  {renderFileInputOrMessage('representacao_de_eventos_afolu_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="relatorio_de_evento_de_perda">Relatório de evento de perda:</Label>
-                  {renderFileInputOrMessage('relatorio_de_evento_de_perda_File')}
-                </Column>
-                <Column>
-                  <Label htmlFor="representacao_de_acesso">Representação de acesso:</Label>
-                  {renderFileInputOrMessage('representacao_de_acesso_File')}
-                </Column>
-              </InnerContainer>
-            </>
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>    
+      <MainContainer>
+        <CardTopo>
+          <img src={imageTopo} alt="Imagem" />
+        </CardTopo>
+
+        <CardContainer>
+          <CardButtonInsert image={image01} project_id={project.id} card_name={'erradicao-pobreza'} />
+          <CardButtonInsert image={image02} project_id={project.id} card_name={'fome-zero'}/>
+          <CardButtonInsert image={image03} project_id={project.id} card_name={'saude-bem-estar'}/>
+          <CardButtonInsert image={image04} project_id={project.id} card_name={'educacao-qualidade'}/>
+          <CardButtonInsert image={image05} project_id={project.id} card_name={'igualdade-genero'}/>
+          <CardButtonInsert image={image06} project_id={project.id} card_name={'agua-potavel-saneamento'}/>
+          <CardButtonInsert image={image07} project_id={project.id} card_name={'energia-limpa'}/>
+          <CardButtonInsert image={image08} project_id={project.id} card_name={'trabalho-decente'}/>
+          <CardButtonInsert image={image09} project_id={project.id} card_name={'industria-inovacao'}/>
+          <CardButtonInsert image={image10} project_id={project.id} card_name={'reducao-desigualdade'}/>
+          <CardButtonInsert image={image11} project_id={project.id} card_name={'cidades-comunidades'}/>
+          <CardButtonInsert image={image12} project_id={project.id} card_name={'consumo-producao'}/>
+          <CardButtonInsert image={image13} project_id={project.id} card_name={'mudanca-do-clima'}/>
+          <CardButtonInsert image={image14} project_id={project.id} card_name={'vida-na-agua'}/>
+          <CardButtonInsert image={image15} project_id={project.id} card_name={'vida-terrestre'}/>
+          <CardButtonInsert image={image16} project_id={project.id} card_name={'paz-justica'}/>
+          <CardButtonInsert image={image17} project_id={project.id} card_name={'parcerias'}/>
+          <img src={image18} alt="Imagem"/>
+        </CardContainer>
+
+        <UploadsContainer>
+          {user.user_type === 'ADM' ? (
+            <Container>
+              {user.user_type === 'ADM' && project.status !== null ? (
+                <>
+                  <ButtonContainer>
+                    <Button onClick={handleUpload}>Enviar Arquivos</Button>
+                  </ButtonContainer>
+                  <InnerContainer>
+                    <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
+                    <small>Status: {project.status}</small>
+                    <Column>
+                      <Label htmlFor="pdd_pdf">PDD:</Label>
+                      {renderFileInputOrMessage('pddFile')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
+                      {renderFileInputOrMessage('pddDraftFile')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="pre_analise_viabilidade">Pre-Análise de viabilidade:</Label>
+                      {renderFileInputOrMessage('pre_analise_viabilidade_File')}                  
+                    </Column>
+                    <Column>
+                      <Label htmlFor="viability_analisys">Análise de viabilidade / PIN:</Label>
+                      {renderFileInputOrMessage('viabilityFile')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="registration_wilder">Registration Wilder:</Label>
+                      {renderFileInputOrMessage('registrationWilderFile')}
+                    </Column>             
+                    <Column>
+                      <Label htmlFor="additional_information">Informações adicionais:</Label>
+                      <textarea
+                        id="additional_information"
+                        name="additional_information"
+                        value={fileStates.additionalInformation}
+                        onChange={handleAdditionalInformationChange}
+                      />
+                    </Column>
+                    <Column>
+                      <Label htmlFor="due_diligence">Due Diligence:</Label>
+                      {renderFileInputOrMessage('due_diligence_File')}
+                    </Column>                   
+                    <Column>
+                      <Label htmlFor="imagens_de_satelite">Imagens de Satélite:</Label>
+                      {renderFileInputOrMessage('imagens_de_satelite_File')}
+                    </Column>      
+                    <Column>
+                      <Label htmlFor="licenciamento_ambiental">Licenciamento Ambiental:</Label>
+                      {renderFileInputOrMessage('licenciamento_ambiental_File')}
+                    </Column>   
+                    <Column>
+                      <Label htmlFor="autorizacoes">Autorizações:</Label>
+                      {renderFileInputOrMessage('autorizacoes_File')}
+                    </Column>  
+                    <Column>
+                      <Label htmlFor="debitos_ambientais">Débitos Ambientais:</Label>
+                      {renderFileInputOrMessage('debitos_ambientais_File')}
+                    </Column>  
+                    <Column>
+                      <Label htmlFor="projetos_amb_soc_eco">Projetos ambientais, sociais e econômicos:</Label>
+                      {renderFileInputOrMessage('projetos_amb_soc_eco_File')}
+                    </Column>  
+                    <Column>
+                      <Label htmlFor="relacionamento_stakeholders">Relacionamento com Stakeholders:</Label>
+                      {renderFileInputOrMessage('relacionamento_stakeholders_File')}
+                    </Column>  
+                    <Column>
+                      <Label htmlFor="relatorio_de_monitoramento">Relatório de Monitoramento:</Label>
+                      {renderFileInputOrMessage('relatorio_de_monitoramento_File')}
+                    </Column>   
+                    <Column>
+                      <Label htmlFor="arquivo_do_drone">Arquivo do Drone:</Label>
+                      {renderFileInputOrMessage('arquivo_do_drone_File')}
+                    </Column> 
+                    <Column>
+                      <Label htmlFor="relatorio_de_validacao">Relatório de Validação:</Label>
+                      {renderFileInputOrMessage('relatorio_de_validacao_File')}
+                    </Column>    
+                    <Column>
+                      <Label htmlFor="relatorio_de_verificacao">Relatório de Verificação:</Label>
+                      {renderFileInputOrMessage('relatorio_de_verificacao_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="relatorio_conjunto">Relatório Conjunto (Validação/Verificação):</Label>
+                      {renderFileInputOrMessage('relatorio_conjunto_File')}
+                    </Column>    
+                    <Column>
+                      <Label htmlFor="representacao_de_registro">Representação de Registro (PP Único):</Label>
+                      {renderFileInputOrMessage('representacao_de_registro_File')}
+                    </Column>  
+                    <Column>
+                      <Label htmlFor="rep_varios_registros">Representação de Registro (Vários PPs):</Label>
+                      {renderFileInputOrMessage('rep_varios_registros_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_conversao">Representação de conversão da SCU:</Label>
+                      {renderFileInputOrMessage('representacao_conversao_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_de_emissao">Representação de emissão (PP único):</Label>
+                      {renderFileInputOrMessage('representacao_de_emissao_File')}
+                    </Column>      
+                    <Column>
+                      <Label htmlFor="rep_varias_emissoes">Representação de emissão (múltiplos PPs):</Label>
+                      {renderFileInputOrMessage('rep_varias_emissoes_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_de_validacao">Representação de validação:</Label>
+                      {renderFileInputOrMessage('representacao_de_validacao_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_de_verificacao">Representação de verificação:</Label>
+                      {renderFileInputOrMessage('representacao_de_verificacao_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="relatorio_de_risco_afolu">Tabela de cálculo de risco de não permanência (AFOLU):</Label>
+                      {renderFileInputOrMessage('relatorio_de_risco_afolu_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_de_eventos_afolu">Representação de eventos de perda (AFOLU):</Label>
+                      {renderFileInputOrMessage('representacao_de_eventos_afolu_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="relatorio_de_evento_de_perda">Relatório de evento de perda:</Label>
+                      {renderFileInputOrMessage('relatorio_de_evento_de_perda_File')}
+                    </Column>
+                    <Column>
+                      <Label htmlFor="representacao_de_acesso">Representação de acesso:</Label>
+                      {renderFileInputOrMessage('representacao_de_acesso_File')}
+                    </Column>
+                  </InnerContainer>
+                </>
+              ) : (
+                <h1></h1>
+              )}
+            </Container>
           ) : (
             <h1></h1>
           )}
-        </Container>
-      ) : (
-        <h1></h1>
-      )}
+        </UploadsContainer>
+      </MainContainer>    
     </motion.div>
   );
 };
