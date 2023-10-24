@@ -72,17 +72,19 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
             </Tab>
           ))}
         </LinearTabs>
-
-        {activeTab === 0 && 
-        <ButtonContainer style={{ marginTop: '100px !important' }}>
-          <Button onClick={handleRegister}>Editar Informações</Button>
-          {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
-        </ButtonContainer>}
-
         <Content collapsed={collapsed}>
           {tabs[activeTab].content}
         </Content>
       </TabContainer>
+
+      <div style={{ marginLeft: '0px' }}>
+        {activeTab === 0 && 
+          <ButtonContainer style={{ marginTop: '100px !important' }}>
+            <Button onClick={handleRegister}>Editar Informações</Button>
+            {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
+          </ButtonContainer>}        
+      </div>
+
     </>
   );
 };

@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
-import { Container, InnerContainer, Column, Label, Button, ButtonContainer, Span, DownloadButton } from '../styles';
+import { Container, InnerContainer, Column, Label, ListItem, ListItemText, ButtonContainer, Span, DownloadButton } from '../styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
 import { currentUrl } from '../../../constants/global';
 import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "../../../constants/functions";
@@ -131,81 +131,228 @@ const addressString = addressParts.join(', ');
         transition={{ duration: 0.8 }}
           >
       <Container>
-      {user.user_type === "ADM" && 
-          <>
-            <h2>{projectOwner.full_name}</h2>
+        <div style={{ overflowY: "auto", 
+          width: '100vw', display: 'flex', 
+          flexDirection: 'column', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          marginLeft: '-70px',
+          marginTop: '16px',
+        }}>
+          {user.user_type === "ADM" && 
+              <div>
+                  
+                <ListItem style={{marginTop: '0px', backgroundColor: 'lightgrey' }}>
+                    <div style={{ marginLeft: '50px', marginTop: '-10px' }}>
+                      <h4>{ projectOwner.full_name }</h4>
+                    </div>
+                </ListItem>        
 
-            <InnerContainer>
-              <Column> 
-                <Label>Contato</Label>
-                <Span>Telefone: {convertPhone(projectOwner.phone)}</Span>
-                <Span>Email: {projectOwner.email || '-'}</Span>
-                <Label>Endereço</Label>
-                <Span>{addressString}</Span>
-                <Label>Informações de Banco</Label>
-                <Span>Não possui</Span>
-              </Column>
-            </InnerContainer>
-          </>
-        }          
-        <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
-        <InnerContainer>
-          <Column> 
-            <Label>Proprietário da área:</Label>
-            <Span>{
-                  currentUser.user_type === "ADM"
-                  ? returnUserName(project.owner, users) || '-'
-                  : currentUser.full_name} 
-            </Span>
-            <Label>A propriedade está sob domínio de uma pessoa física ou jurídica?</Label>
-            <Span>{project.physical_or_legal_entity || '-'}</Span>        
-            <Label>CNPJ ou CPF do proprietário</Label>
-            <Span>{formatCPF(project.cnpj) || '-'}</Span>
-            <Label>Qual o endereço da propriedade?</Label>
-            <Span>{project.address || '-'}</Span>            
-            <Label>Status da Matrícula</Label>
-            <Span>{project.matricula_status || '-'}</Span>                        
-            <Label>Possui déficit de reserva legal?</Label>
-            <Span>{returnYesorNoforBoolean(project.legal_reserve_deficit) || '-'}</Span>
-            <Label>Possui dívida federal pelo não pagamento de tributos?</Label>
-            <Span>{returnYesorNoforBoolean(project.has_federal_debt) || '-'}</Span>
-          </Column>
-          <Column>
-            <Label>Área total da propriedade (ha)?</Label>
-            <Span>{transformNumbersToHectares(project.total_area) || '-'}</Span>
-            <Label>Área total da reserva legal (ha)?</Label>
-            <Span>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</Span>  
-            <Label>Status do C.A.R</Label>
-            <Span>{project.status_car || '-'}</Span>
-            <Label>Código SICAR (C.A.R)</Label>
-            <Span>{formatSICARCode(project.sicar_code) || '-'}</Span>
-            <Label>Status do georreferenciamento no SIGEF</Label>
-            <Span>{project.georeferencing_status || '-'}</Span>
-            <Label>Situação da reserva legal da propriedade:</Label>
-            <Span>{project.reserve_legal_status || '-'}</Span>
-            <Label>Possui Unidade de Conservação (UC) no imóvel?</Label>
-            <Span>{project.conservation_unit || '-'}</Span>
-          </Column>
-        </InnerContainer>
-        <Column style={{ marginTop: '36px'}}>
-            <Label>Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?</Label>
-            <Span>{project.owner_actions_to_preserve_forest}</Span>
-            <p />
+                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                  <ListItemText style={{ color: 'black' }}>Contato</ListItemText>
+                </ListItem>
 
-        <ButtonContainer>
-          {project.pdf_matricula_certificate && <DownloadButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
-          {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF C.A.R</DownloadButton>}
-          {project.pdf_ccir && <DownloadButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
-          {project.property_polygon && <DownloadButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
-          {project.pdf_federal_debt_certificate && <DownloadButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}
-        </ButtonContainer>                  
-        </Column>
-        {isPasswordModalOpen && (
-        <PasswordModal onConfirm={(password) => {
-          setPassword(password);
-          closePasswordModal();
-        }} />
-      )}
+                <ListItem>
+                  <ListItemText>Telefone: {convertPhone(projectOwner.phone)}</ListItemText>
+                </ListItem>
+                
+                <ListItem>
+                  <ListItemText>Email: {projectOwner.email || '-'}</ListItemText>
+                </ListItem>
+
+                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                  <ListItemText style={{ color: 'black' }}>Endereço</ListItemText>
+                </ListItem>     
+
+                <ListItem>
+                  <ListItemText>{addressString}</ListItemText>
+                </ListItem>   
+
+                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                  <ListItemText style={{ color: 'black' }}>Informações de Banco</ListItemText>
+                </ListItem>
+
+                <ListItem>
+                  <ListItemText>Não possui</ListItemText>
+                </ListItem>               
+
+              </div>
+            }          
+
+            <ListItem style={{marginTop: '0px', backgroundColor: 'lightgrey' }}>
+                <div style={{ marginLeft: '50px', marginTop: '-10px' }}>
+                  <h4>{ project.title === 'default' ? 'Sem Título' : project.title }</h4>
+                </div>
+            </ListItem>    
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>Proprietário da área</ListItemText>
+            </ListItem>        
+
+            <ListItem>
+              <ListItemText>
+              { currentUser.user_type === "ADM"
+                ? returnUserName(project.owner, users) || '-'
+                : currentUser.full_name }             
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                A propriedade está sob domínio de uma pessoa física ou jurídica?
+              </ListItemText>
+            </ListItem>  
+
+            <ListItem>
+              <ListItemText>{project.physical_or_legal_entity || '-'}</ListItemText>
+            </ListItem>    
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                CNPJ ou CPF do proprietário
+              </ListItemText>
+            </ListItem>        
+
+            <ListItem>
+              <ListItemText>{formatCPF(project.cnpj) || '-'}</ListItemText>
+            </ListItem>    
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Qual o endereço da propriedade?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.address || '-'}</ListItemText>
+            </ListItem>         
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Status da Matrícula
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.matricula_status || '-'}</ListItemText>
+            </ListItem>
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Possui déficit de reserva legal?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{returnYesorNoforBoolean(project.legal_reserve_deficit) || '-'}</ListItemText>
+            </ListItem>    
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Possui dívida federal pelo não pagamento de tributos?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{returnYesorNoforBoolean(project.has_federal_debt) || '-'}</ListItemText>
+            </ListItem>  
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Área total da propriedade (ha)?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{transformNumbersToHectares(project.total_area) || '-'}</ListItemText>
+            </ListItem>
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Área total da reserva legal (ha)?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</ListItemText>
+            </ListItem>
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Status do C.A.R
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.status_car || '-'}</ListItemText>
+            </ListItem>
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Código SICAR (C.A.R)
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{formatSICARCode(project.sicar_code) || '-'}</ListItemText>
+            </ListItem>      
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Status do georreferenciamento no SIGEF
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.georeferencing_status || '-'}</ListItemText>
+            </ListItem>             
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Situação da reserva legal da propriedade:
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.reserve_legal_status || '-'}</ListItemText>
+            </ListItem>        
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Possui Unidade de Conservação (UC) no imóvel?
+              </ListItemText>
+            </ListItem>     
+
+            <ListItem>
+              <ListItemText>{project.conservation_unit || '-'}</ListItemText>
+            </ListItem>     
+
+            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+              <ListItemText style={{ color: 'black' }}>
+                Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?
+              </ListItemText>
+            </ListItem>   
+
+            <ListItem>
+              <ListItemText>{project.owner_actions_to_preserve_forest || '-'}</ListItemText>
+            </ListItem>                               
+
+            <Column style={{ marginTop: '36px'}}>
+              <ButtonContainer>
+                {project.pdf_matricula_certificate && <DownloadButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
+                {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF C.A.R</DownloadButton>}
+                {project.pdf_ccir && <DownloadButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
+                {project.property_polygon && <DownloadButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
+                {project.pdf_federal_debt_certificate && <DownloadButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}
+              </ButtonContainer>                  
+            </Column>
+            {isPasswordModalOpen && (
+            <PasswordModal onConfirm={(password) => {
+              setPassword(password);
+              closePasswordModal();
+            }} />
+          )}
+        </div>
       </Container>
     </motion.div>
   )

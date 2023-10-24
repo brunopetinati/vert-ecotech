@@ -41,7 +41,6 @@ const ProjectIntern = () => {
   {
     label: "Informações",
     content: <Intel user={user} project={project} />
-
   },
   {
     label: "Engenharia Ambiental",

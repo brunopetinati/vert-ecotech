@@ -172,3 +172,44 @@ export const DownloadButton = styled.button`
   margin: 16px;
   width: 100px;
 `; 
+
+export const ListItem = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 50px;
+  transition: background-color 0.3s;
+  align-text: left;
+
+  width: 65vw;
+  margin: 10px;
+  height: 40px;
+
+  &:hover {
+    background-color: #e0f2f1;
+  }
+
+  div {
+    --width: 100%;
+    --display: flex;
+    --flex-direction: row;
+    --align-items: center;
+    --justify-content: center;    
+  }
+
+  span {
+    font-size: 20px;
+  }
+`;
+
+export const ListItemText = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left !important;
+  margin-left: 50px;
+  color: rgb(79,79,79);
+  font-size: 11pt;
+  width: 700px;
+`;
