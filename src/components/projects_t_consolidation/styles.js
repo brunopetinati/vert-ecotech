@@ -2,6 +2,25 @@ import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
 
+export const ListItemText = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left !important;
+  margin-left: 50px;
+  color: rgb(79,79,79);
+  font-size: 11pt;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+  height: 20px; 
+  border: 0px solid #ccc;
+`;
+
 export const Container = styled.div`
   
   height: 100vh;
@@ -183,6 +202,7 @@ export const TextInput = styled.textarea`
 export const List = styled.ul`
   list-style: none;
   padding: 0;
+  margin-top: 42px;
 `;
 
 export const ListItem = styled.li`
@@ -191,23 +211,23 @@ export const ListItem = styled.li`
   align-items: center;
   border: 2px solid #ddd;
   border-radius: 50px;
-  cursor: pointer;
   transition: background-color 0.3s;
+  align-text: left;
 
-  width: 80vw;
-  margin: 32px;
-  height: 64px;
+  width: 65vw;
+  margin: 10px;
+  height: 40px;
 
   &:hover {
     background-color: #e0f2f1;
   }
 
   div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;    
+    --width: 100%;
+    --display: flex;
+    --flex-direction: row;
+    --align-items: center;
+    --justify-content: center;    
   }
 
   span {

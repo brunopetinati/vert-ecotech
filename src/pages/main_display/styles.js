@@ -19,6 +19,9 @@ export const SideContainer = styled.div`
   justify-content: center;
   align-items: center;
   background: #f9fafb;
+  position: absolute;
+  left: 50px;
+  width: 1450px;
 
   @media screen and (max-width: 768px) {
     display: flex;

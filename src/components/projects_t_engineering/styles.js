@@ -4,12 +4,12 @@ import InputMask from "react-input-mask";
 
 export const Container = styled.div`
   
-  height: 100vh;
-  width: 90vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  --height: 100vh;
+  --width: 90vw;
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: flex-start;
+  --align-items: center;
 
   h2 {
     color: #054d00;
@@ -23,13 +23,15 @@ export const InnerContainer = styled.div`
   justify-content: center;
   width: 60vw;
   margin-left: 64px;
+  text-align: left;
 `;
 
 export const Column = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin: 32px;
+  margin: 10px;
+  width: 630px;
 `;
 
 export const Label = styled.label`
@@ -64,11 +66,15 @@ export const Span = styled.span`
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-  height: 5vw;
-  width: 93vw;
-  --margin-top: 32px;
+  --justify-content: flex-end;
+  --align-items: center;
+  --height: 5vw;
+  --width: 93vw;
+  margin-top: 32px;
+  margin-bottom: 50px;
+  padding-bottom: 50px;
+  margin-left: 90px;
+  float: left;
 `;
 
 export const Button = styled.button`
@@ -171,10 +177,104 @@ export const DownloadButton = styled.button`
 `; 
 
 export const FileInput = styled.input.attrs({ type: 'file' })`
-  /* Add your file input styles here */
-
+  margin-left: 80px;
 `;
 
 export const TextInput = styled.textarea`
   height: 150px;
 `;
+
+const MainContainer = styled.div`
+  float: left;
+  width: 100%;
+  text-align: center;
+  min-height: 600px;
+`;  
+
+const CardTopo = styled.div`
+  max-width: 645px;
+  position: absolute;
+  top: 100px;
+  left: 46%;
+  transform: translate(-50%, -50%);
+
+  @media (max-width: 768px) {
+    max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
+    top: 50px; /* Cambia la posición superior para dispositivos móviles */
+    transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
+  }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 645px;
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translate(-57%, -8%); 
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    top: 150px;
+    transform: translate(-50%, 0); 
+    flex-direction: row; /* Mudança para duas colunas */
+    align-items: flex-start; /* Alinhamento dos elementos na parte superior */
+    
+    & > div {
+      flex-basis: 48%; /* Largura de 48% para cada card */
+      margin-bottom: 10px; /* Espaço entre os cards */
+    }
+  }    
+`; 
+
+const UploadsContainer = styled.div`
+  margin-top: 70px;
+`;
+
+export const List = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-left: -140px;
+  margin-top: 5px;
+`;
+
+export const List2 = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin-left: -10px;
+  margin-top: 0px;
+`;
+
+export const ListItem = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 50px;  
+  transition: background-color 0.3s;
+  align-text: left;
+  color: rgb(79,79,79);
+
+  width: 65vw;
+  margin: 10px;
+  height: 40px;
+
+  &:hover {
+    background-color: #e0f2f1;
+  }
+
+  div {
+    --width: 100%;
+    --display: flex;
+    --flex-direction: row;
+    --align-items: center;
+    --justify-content: center;    
+  }
+
+  span {
+    font-size: 20px;
+  }
+`;
+

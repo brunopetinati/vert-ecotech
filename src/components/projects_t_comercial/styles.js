@@ -67,7 +67,7 @@ export const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 5vw;
-  width: 93vw;
+  width: 50vw;
   margin-top: 32px;
 `;
 
@@ -93,6 +93,36 @@ export const Button = styled.button`
   :hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
   transform: scale(1.02) ;
+  }
+`;
+
+export const StyledButton = styled.button`
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  color: green;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 200px;
+  width: 150px;
+
+  :hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 12px;
   }
 `;
 
@@ -187,27 +217,29 @@ export const List = styled.ul`
 
 export const ListItem = styled.li`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   border: 2px solid #ddd;
   border-radius: 50px;
-  cursor: pointer;
   transition: background-color 0.3s;
+  align-text: left;
+  color: rgb(79,79,79);
+  --width: 300px;
 
-  width: 80vw;
-  margin: 32px;
-  height: 64px;
+  width: 65vw;
+  margin: 10px;
+  height: 40px;
 
   &:hover {
     background-color: #e0f2f1;
   }
 
   div {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;    
+    --width: 100%;
+    --display: flex;
+    --flex-direction: row;
+    --align-items: center;
+    --justify-content: center;    
   }
 
   span {

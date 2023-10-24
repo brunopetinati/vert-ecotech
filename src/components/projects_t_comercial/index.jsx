@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
-import { Container, ButtonContainer, Button, InnerContainer, FileInput, List, ListItem } from './styles';
+import { Container, ButtonContainer, Button, StyledButton, InnerContainer, FileInput, List, ListItem } from './styles';
 import DefaultSecondaryModal from '../../components/default_secondary_modal';
 import Swal from 'sweetalert2';
 import { getProposalStatusInfo } from '../../constants/functions';
@@ -107,25 +107,31 @@ const ProjectTabComercial = ({ user, project }) => {
       transition={{ duration: 0.8 }}
     >
       <Container>
-        <ButtonContainer>
-          <Button onClick={() => setIsModalOpen(true)}>Adicionar Proposta</Button>
-        </ButtonContainer>
-
         <div style={{ height: "80vh", overflowY: "auto", width: '100vw', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
           {fileStatus && fileStatus.length > 0 ? (
             <div>
               <List>
+                <ListItem style={{marginTop: '0px', backgroundColor: 'lightgrey' }}>
+                  <div style={{ marginLeft: '50px', marginTop: '-10px' }}><h4>Descrição</h4></div>
+                  <div style={{ marginLeft: '220px', marginTop: '-10px' }}><h4>Ação</h4></div>
+                </ListItem>   
                 {fileStatus.map((proposal) => (
                   <ListItem key={proposal.id}>
                     <ul>{project.title}</ul>
-                    <span style={{ color: '#8bc34a' }}>Proposta Comercial</span>
-                      <Button onClick={() => handleDownload(proposal.id)}>Download</Button>
+                      <StyledButton onClick={() => handleDownload(proposal.id)}>Download</StyledButton>
                     <div style={{ color: getProposalStatusInfo(proposal.acceptance).color }}>
                       {getProposalStatusInfo(proposal.acceptance).text}
                     </div>
                   </ListItem>
                 ))}
               </List>
+
+              <div>
+                <ButtonContainer>
+                  <Button onClick={() => setIsModalOpen(true)}>Adicionar Proposta</Button>
+                </ButtonContainer>          
+              </div>              
+              
             </div>
           ) : (
             <p style={{marginBottom: '160px'}}>Não há propostas para esse projeto.</p>

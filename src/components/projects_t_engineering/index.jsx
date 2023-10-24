@@ -1,11 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { motion } from 'framer-motion';
-import { currentUrl } from '../../constants/global';
-import styled from 'styled-components';
-
+import CreditoCarbono from './CreditoCarbono/CreditoCarbono';
+import GeographicCoordinates from './GeographicCoordinates/GeographicCoordinates';
 import imageTopo from '../../assets/ods/topo.png';
 import image01 from '../../assets/ods/erradicao-pobreza.png';
 import image02 from '../../assets/ods/fome-zero.png';
@@ -25,52 +21,20 @@ import image15 from '../../assets/ods/vida-terrestre.png';
 import image16 from '../../assets/ods/paz-justica.png';
 import image17 from '../../assets/ods/parcerias.png';
 import image18 from '../../assets/ods/objetivos.png';
-import CardButtonInsert from './CardButtonInsert';
+import CardButton from './CardButton/CardButton';
+import styled from 'styled-components';
+import ProjectTokensList1 from './ProjectTokensList1';
+import ProjectTokensList2 from './ProjectTokensList2';
+import ProjectTokensList3 from './ProjectTokensList3';
+import './TabletMenu.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import FileUpload from './FileUpload/FileUpload';
+import AdditionalInformation from './AdditionalInformation/AdditionalInformation';
 
-import {
-  Container,
-  InnerContainer,
-  Column,
-  Label,
-  Button,
-  ButtonContainer,
-  FileInput,
-} from './styles';
 
 const ProjectTabEngineering = ({ user, project }) => {
-  const [selectedCards, setSelectedCards] = useState([]);  
-  const [fileStates, setFileStates] = useState({
-    pddFile: null,
-    pddDraftFile: null,
-    viabilityFile: null,
-    registrationWilderFile: null,
-    additionalInformation: '',
-    pre_analise_viabilidade_File: null,
-    due_diligence_File: null,
-    imagens_de_satelite_File: null,
-    licenciamento_ambiental_File: null,
-    autorizacoes_File: null,
-    debitos_ambientais_File: null,
-    projetos_amb_soc_eco_File: null,
-    relacionamento_stakeholders_File: null,
-    relatorio_de_monitoramento_File: null,
-    arquivo_do_drone_File: null,
-    relatorio_de_validacao_File: null,
-    relatorio_de_verificacao_File: null,
-    relatorio_conjunto_File: null,
-    representacao_de_registro_File: null,
-    rep_varios_registros_File: null,
-    representacao_conversao_File: null,
-    representacao_de_emissao_File: null,
-    rep_varias_emissoes_File: null,
-    representacao_de_validacao_File: null,
-    representacao_de_verificacao_File: null,
-    relatorio_de_risco_afolu_File: null,
-    representacao_de_eventos_afolu_File: null,
-    relatorio_de_evento_de_perda_File: null,
-    representacao_de_acesso_File: null,
-  });
-
+  const [telaAtiva, setTelaAtiva] = useState('cardsContainer');
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find(item => item.project === project.id);
   let matchObjectId = null;
@@ -80,190 +44,6 @@ const ProjectTabEngineering = ({ user, project }) => {
   } else {
     console.error('Nenhum objeto encontrado com o project_id correspondente.');
   }
-
-  const handleFileChange = (event, fieldName) => {
-    const selectedFile = event.target.files[0];
-    setFileStates(prevState => ({
-      ...prevState,
-      [fieldName]: selectedFile,
-    }));
-  };
-
-  const handleAdditionalInformationChange = (event) => {
-    setFileStates(prevState => ({
-      ...prevState,
-      additionalInformation: event.target.value,
-    }));
-  };
-
-  const handleUpload = () => {
-    const formData = new FormData();
-    formData.append('project', project.id);
-
-
-    if (fileStates.pddFile) {
-      formData.append('pdd_pdf', fileStates.pddFile);
-    }
-    if (fileStates.pddDraftFile) {
-      formData.append('pdd_draft', fileStates.pddDraftFile);
-    }
-    if (fileStates.pre_analise_viabilidade_File) {
-      formData.append('pre_analise_viabilidade', fileStates.pre_analise_viabilidade_File);
-    }    
-    if (fileStates.viabilityFile) {
-      formData.append('viability_analysis', fileStates.viabilityFile);
-    }
-    if (fileStates.registrationWilderFile) {
-      formData.append('registration_wilder', fileStates.registrationWilderFile);
-    }
-    if (fileStates.additionalInformation) {
-      formData.append('additional_information', fileStates.additionalInformation);
-    }
-    if (fileStates.due_diligence_File) {
-      formData.append('due_diligence', fileStates.due_diligence_File);
-    }
-    if (fileStates.imagens_de_satelite_File) {
-      formData.append('imagens_de_satelite', fileStates.imagens_de_satelite_File);
-    }  
-    if (fileStates.licenciamento_ambiental_File) {
-      formData.append('licenciamento_ambiental', fileStates.licenciamento_ambiental_File);
-    }    
-    if (fileStates.autorizacoes_File) {
-      formData.append('autorizacoes', fileStates.autorizacoes_File);
-    }       
-    if (fileStates.debitos_ambientais_File) {
-      formData.append('debitos_ambientais', fileStates.debitos_ambientais_File);
-    }     
-    if (fileStates.projetos_amb_soc_eco_File) {
-      formData.append('projetos_amb_soc_eco', fileStates.projetos_amb_soc_eco_File);
-    }  
-    if (fileStates.relacionamento_stakeholders_File) {
-      formData.append('relacionamento_stakeholders', fileStates.relacionamento_stakeholders_File);
-    }     
-    if (fileStates.relatorio_de_monitoramento_File) {
-      formData.append('relatorio_de_monitoramento', fileStates.relatorio_de_monitoramento_File);
-    } 
-    if (fileStates.arquivo_do_drone_File) {
-      formData.append('arquivo_do_drone', fileStates.arquivo_do_drone_File);
-    }
-    if (fileStates.relatorio_de_validacao_File) {
-      formData.append('relatorio_de_validacao', fileStates.relatorio_de_validacao_File);
-    }
-    if (fileStates.relatorio_de_verificacao_File) {
-      formData.append('relatorio_de_verificacao', fileStates.relatorio_de_verificacao_File);
-    }
-    if (fileStates.relatorio_conjunto_File) {
-      formData.append('relatorio_conjunto', fileStates.relatorio_conjunto_File);
-    }
-    if (fileStates.representacao_de_registro_File) {
-      formData.append('representacao_de_registro', fileStates.representacao_de_registro_File);
-    }
-    if (fileStates.rep_varios_registros_File) {
-      formData.append('rep_varios_registros', fileStates.rep_varios_registros_File);
-    }
-    if (fileStates.representacao_conversao_File) {
-      formData.append('representacao_conversao', fileStates.representacao_conversao_File);
-    }
-    if (fileStates.representacao_de_emissao_File) {
-      formData.append('representacao_de_emissao', fileStates.representacao_de_emissao_File);
-    }
-    if (fileStates.rep_varias_emissoes_File) {
-      formData.append('rep_varias_emissoes', fileStates.rep_varias_emissoes_File);
-    }
-    if (fileStates.representacao_de_validacao_File) {
-      formData.append('representacao_de_validacao', fileStates.representacao_de_validacao_File);
-    }
-    if (fileStates.representacao_de_verificacao_File) {
-      formData.append('representacao_de_verificacao', fileStates.representacao_de_verificacao_File);
-    }
-    if (fileStates.relatorio_de_risco_afolu_File) {
-      formData.append('relatorio_de_risco_afolu', fileStates.relatorio_de_risco_afolu_File);
-    }
-    if (fileStates.representacao_de_eventos_afolu_File) {
-      formData.append('representacao_de_eventos_afolu', fileStates.representacao_de_eventos_afolu_File);
-    }
-    if (fileStates.relatorio_de_evento_de_perda_File) {
-      formData.append('relatorio_de_evento_de_perda', fileStates.relatorio_de_evento_de_perda_File);
-    }
-    if (fileStates.representacao_de_acesso_File) {
-      formData.append('representacao_de_acesso', fileStates.representacao_de_acesso_File);
-    }
-
-    const token = sessionStorage.getItem('Authorization');
-    const headers = { Authorization: `Bearer ${token}` };
-
-    axios
-      .put(`${currentUrl}/api/engineering/${matchObjectId}/update/`, formData, { headers })
-      .then((response) => {
-        Swal.fire({
-          title: 'Sucesso!',
-          text: 'Seus arquivos foram enviados com sucesso!',
-          icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      })
-      .catch((error) => {
-        console.error('Upload failed!', error);
-        Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
-          icon: 'error',
-          confirmButtonText: 'OK'
-        });
-      });
-  };
-
-  useEffect(() => {
-    const token = sessionStorage.getItem('Authorization');
-    const headers = { Authorization: `Bearer ${token}` };
-
-    axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
-      .then((response) => {
-        setFileStates(prevState => ({
-          ...prevState,
-          ...response.data,
-        }));
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, [matchObjectId]);
-
-  const switchField = (fieldName) => {
-    setFileStates(prevState => ({
-      ...prevState,
-      [fieldName]: !prevState[fieldName],
-    }));
-  };
-
-  const renderFileInputOrMessage = (fieldName) => {
-    if (fileStates[fieldName]) {
-      return <small style={{ color: 'green' }} onClick={() => switchField(fieldName)}>Arquivo consolidado</small>;
-    } else {
-      return <FileInput id={fieldName} name={fieldName} onChange={(e) => handleFileChange(e, fieldName)} />;
-    }
-  };
-
-  const MainContainer = styled.div`
-    float: left;
-    width: 100%;
-    text-align: center;
-    min-height: 600px;
-  `;  
-
-  const CardTopo = styled.div`
-    max-width: 645px;
-    position: absolute;
-    top: 100px;
-    left: 46%;
-    transform: translate(-50%, -50%);
-
-    @media (max-width: 768px) {
-      max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
-      top: 50px; /* Cambia la posición superior para dispositivos móviles */
-      transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
-    }
-  `;
 
   const CardContainer = styled.div`
     display: flex;
@@ -287,189 +67,142 @@ const ProjectTabEngineering = ({ user, project }) => {
         margin-bottom: 10px; /* Espaço entre os cards */
       }
     }    
+  `; 
+
+  const CardTopo = styled.div`
+    max-width: 645px;
+    position: absolute;
+    top: 100px;
+    left: 46%;
+    transform: translate(-50%, -50%);
+
+    @media (max-width: 768px) {
+      max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
+      top: 50px; /* Cambia la posición superior para dispositivos móviles */
+      transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
+    }
   `;  
 
-  const UploadsContainer = styled.div`
-    margin-top: 500px;
-  `;
+  const renderizarTela = () => {
+    switch (telaAtiva) {
+        case 'cardsContainer':
+          return (
+            <div className="pagina">
+              <CardTopo>
+                <img src={imageTopo} alt="Imagem" />
+              </CardTopo>
+              {/* Conteúdo da Página 3 */}
+              <CardContainer>
+                <CardButton image={image01} project_id={project.id} card_name={'erradicao-pobreza'} />
+                <CardButton image={image02} project_id={project.id} card_name={'fome-zero'}/>
+                <CardButton image={image03} project_id={project.id} card_name={'saude-bem-estar'}/>
+                <CardButton image={image04} project_id={project.id} card_name={'educacao-qualidade'}/>
+                <CardButton image={image05} project_id={project.id} card_name={'igualdade-genero'}/>
+                <CardButton image={image06} project_id={project.id} card_name={'agua-potavel-saneamento'}/>
+                <CardButton image={image07} project_id={project.id} card_name={'energia-limpa'}/>
+                <CardButton image={image08} project_id={project.id} card_name={'trabalho-decente'}/>
+                <CardButton image={image09} project_id={project.id} card_name={'industria-inovacao'}/>
+                <CardButton image={image10} project_id={project.id} card_name={'reducao-desigualdade'}/>
+                <CardButton image={image11} project_id={project.id} card_name={'cidades-comunidades'}/>
+                <CardButton image={image12} project_id={project.id} card_name={'consumo-producao'}/>
+                <CardButton image={image13} project_id={project.id} card_name={'mudanca-do-clima'}/>
+                <CardButton image={image14} project_id={project.id} card_name={'vida-na-agua'}/>
+                <CardButton image={image15} project_id={project.id} card_name={'vida-terrestre'}/>
+                <CardButton image={image16} project_id={project.id} card_name={'paz-justica'}/>
+                <CardButton image={image17} project_id={project.id} card_name={'parcerias'}/>
+                <img src={image18} alt="Imagem"/>
+              </CardContainer>
+            </div>
+          );
+        case 'geographicCoordinates':
+          return (
+            <div className="pagina">
+              {/* Conteúdo da Página 3 */}
+              <GeographicCoordinates project_id={project.id}/>
+            </div>
+          );
+        case 'creditoCarbono':
+          return (
+            <div className="pagina">
+              {/* Conteúdo do cálculo de crédito de carbono */}
+              <CreditoCarbono project_id={project.id} />
+            </div>
+          );
+        case 'projectTokensList2':
+          return (
+            <div className="pagina">
+              {/* Conteúdo da Página 1 */}
+              <ProjectTokensList2 project_id={project.id} />
+            </div>
+          );
+        case 'projectTokensList3':
+          return (
+            <div className="pagina">
+              {/* Conteúdo da Página 2 */}
+              <ProjectTokensList3 project_id={project.id} />
+            </div>
+          );
+        case 'projectTokensList1':
+          return (
+            <div className="pagina">
+              {/* Conteúdo da Página 2 */}
+              <ProjectTokensList1 project_id={project.id} />
+            </div>
+          );
+        case 'uploadsSave':
+          return (
+            <div className="pagina">
+              <FileUpload project_id={project.id} matchObjectId={matchObjectId} />
+            </div>
+          );
+        case 'additionalInformation':
+          return (
+            <div className="pagina">
+              <AdditionalInformation project_id={project.id} matchObjectId={matchObjectId} />
+            </div>
+          );          
+      default:
+        return null;
+    }
+  };
 
-      
-
-
-
-  
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }}>    
-      <MainContainer>
-        <CardTopo>
-          <img src={imageTopo} alt="Imagem" />
-        </CardTopo>
-
-        <CardContainer>
-          <CardButtonInsert image={image01} project_id={project.id} card_name={'erradicao-pobreza'} />
-          <CardButtonInsert image={image02} project_id={project.id} card_name={'fome-zero'}/>
-          <CardButtonInsert image={image03} project_id={project.id} card_name={'saude-bem-estar'}/>
-          <CardButtonInsert image={image04} project_id={project.id} card_name={'educacao-qualidade'}/>
-          <CardButtonInsert image={image05} project_id={project.id} card_name={'igualdade-genero'}/>
-          <CardButtonInsert image={image06} project_id={project.id} card_name={'agua-potavel-saneamento'}/>
-          <CardButtonInsert image={image07} project_id={project.id} card_name={'energia-limpa'}/>
-          <CardButtonInsert image={image08} project_id={project.id} card_name={'trabalho-decente'}/>
-          <CardButtonInsert image={image09} project_id={project.id} card_name={'industria-inovacao'}/>
-          <CardButtonInsert image={image10} project_id={project.id} card_name={'reducao-desigualdade'}/>
-          <CardButtonInsert image={image11} project_id={project.id} card_name={'cidades-comunidades'}/>
-          <CardButtonInsert image={image12} project_id={project.id} card_name={'consumo-producao'}/>
-          <CardButtonInsert image={image13} project_id={project.id} card_name={'mudanca-do-clima'}/>
-          <CardButtonInsert image={image14} project_id={project.id} card_name={'vida-na-agua'}/>
-          <CardButtonInsert image={image15} project_id={project.id} card_name={'vida-terrestre'}/>
-          <CardButtonInsert image={image16} project_id={project.id} card_name={'paz-justica'}/>
-          <CardButtonInsert image={image17} project_id={project.id} card_name={'parcerias'}/>
-          <img src={image18} alt="Imagem"/>
-        </CardContainer>
-
-        <UploadsContainer>
-          {user.user_type === 'ADM' ? (
-            <Container>
-              {user.user_type === 'ADM' && project.status !== null ? (
-                <>
-                  <ButtonContainer>
-                    <Button onClick={handleUpload}>Enviar Arquivos</Button>
-                  </ButtonContainer>
-                  <InnerContainer>
-                    <h2>{project.title === 'default' ? 'Sem Título' : project.title}</h2>
-                    <small>Status: {project.status}</small>
-                    <Column>
-                      <Label htmlFor="pdd_pdf">PDD:</Label>
-                      {renderFileInputOrMessage('pddFile')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="pdd_draft">PDD Rascunho:</Label>
-                      {renderFileInputOrMessage('pddDraftFile')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="pre_analise_viabilidade">Pre-Análise de viabilidade:</Label>
-                      {renderFileInputOrMessage('pre_analise_viabilidade_File')}                  
-                    </Column>
-                    <Column>
-                      <Label htmlFor="viability_analisys">Análise de viabilidade / PIN:</Label>
-                      {renderFileInputOrMessage('viabilityFile')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="registration_wilder">Registration Wilder:</Label>
-                      {renderFileInputOrMessage('registrationWilderFile')}
-                    </Column>             
-                    <Column>
-                      <Label htmlFor="additional_information">Informações adicionais:</Label>
-                      <textarea
-                        id="additional_information"
-                        name="additional_information"
-                        value={fileStates.additionalInformation}
-                        onChange={handleAdditionalInformationChange}
-                      />
-                    </Column>
-                    <Column>
-                      <Label htmlFor="due_diligence">Due Diligence:</Label>
-                      {renderFileInputOrMessage('due_diligence_File')}
-                    </Column>                   
-                    <Column>
-                      <Label htmlFor="imagens_de_satelite">Imagens de Satélite:</Label>
-                      {renderFileInputOrMessage('imagens_de_satelite_File')}
-                    </Column>      
-                    <Column>
-                      <Label htmlFor="licenciamento_ambiental">Licenciamento Ambiental:</Label>
-                      {renderFileInputOrMessage('licenciamento_ambiental_File')}
-                    </Column>   
-                    <Column>
-                      <Label htmlFor="autorizacoes">Autorizações:</Label>
-                      {renderFileInputOrMessage('autorizacoes_File')}
-                    </Column>  
-                    <Column>
-                      <Label htmlFor="debitos_ambientais">Débitos Ambientais:</Label>
-                      {renderFileInputOrMessage('debitos_ambientais_File')}
-                    </Column>  
-                    <Column>
-                      <Label htmlFor="projetos_amb_soc_eco">Projetos ambientais, sociais e econômicos:</Label>
-                      {renderFileInputOrMessage('projetos_amb_soc_eco_File')}
-                    </Column>  
-                    <Column>
-                      <Label htmlFor="relacionamento_stakeholders">Relacionamento com Stakeholders:</Label>
-                      {renderFileInputOrMessage('relacionamento_stakeholders_File')}
-                    </Column>  
-                    <Column>
-                      <Label htmlFor="relatorio_de_monitoramento">Relatório de Monitoramento:</Label>
-                      {renderFileInputOrMessage('relatorio_de_monitoramento_File')}
-                    </Column>   
-                    <Column>
-                      <Label htmlFor="arquivo_do_drone">Arquivo do Drone:</Label>
-                      {renderFileInputOrMessage('arquivo_do_drone_File')}
-                    </Column> 
-                    <Column>
-                      <Label htmlFor="relatorio_de_validacao">Relatório de Validação:</Label>
-                      {renderFileInputOrMessage('relatorio_de_validacao_File')}
-                    </Column>    
-                    <Column>
-                      <Label htmlFor="relatorio_de_verificacao">Relatório de Verificação:</Label>
-                      {renderFileInputOrMessage('relatorio_de_verificacao_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="relatorio_conjunto">Relatório Conjunto (Validação/Verificação):</Label>
-                      {renderFileInputOrMessage('relatorio_conjunto_File')}
-                    </Column>    
-                    <Column>
-                      <Label htmlFor="representacao_de_registro">Representação de Registro (PP Único):</Label>
-                      {renderFileInputOrMessage('representacao_de_registro_File')}
-                    </Column>  
-                    <Column>
-                      <Label htmlFor="rep_varios_registros">Representação de Registro (Vários PPs):</Label>
-                      {renderFileInputOrMessage('rep_varios_registros_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_conversao">Representação de conversão da SCU:</Label>
-                      {renderFileInputOrMessage('representacao_conversao_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_de_emissao">Representação de emissão (PP único):</Label>
-                      {renderFileInputOrMessage('representacao_de_emissao_File')}
-                    </Column>      
-                    <Column>
-                      <Label htmlFor="rep_varias_emissoes">Representação de emissão (múltiplos PPs):</Label>
-                      {renderFileInputOrMessage('rep_varias_emissoes_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_de_validacao">Representação de validação:</Label>
-                      {renderFileInputOrMessage('representacao_de_validacao_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_de_verificacao">Representação de verificação:</Label>
-                      {renderFileInputOrMessage('representacao_de_verificacao_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="relatorio_de_risco_afolu">Tabela de cálculo de risco de não permanência (AFOLU):</Label>
-                      {renderFileInputOrMessage('relatorio_de_risco_afolu_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_de_eventos_afolu">Representação de eventos de perda (AFOLU):</Label>
-                      {renderFileInputOrMessage('representacao_de_eventos_afolu_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="relatorio_de_evento_de_perda">Relatório de evento de perda:</Label>
-                      {renderFileInputOrMessage('relatorio_de_evento_de_perda_File')}
-                    </Column>
-                    <Column>
-                      <Label htmlFor="representacao_de_acesso">Representação de acesso:</Label>
-                      {renderFileInputOrMessage('representacao_de_acesso_File')}
-                    </Column>
-                  </InnerContainer>
-                </>
-              ) : (
-                <h1></h1>
-              )}
-            </Container>
-          ) : (
-            <h1></h1>
-          )}
-        </UploadsContainer>
-      </MainContainer>    
-    </motion.div>
+    <div className="tablet-menu">
+      <div className="menu-item" onClick={() => setTelaAtiva('cardsContainer')}>
+        <FontAwesomeIcon icon={faUser} style={{ color: "green" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Objetivos Desenv. Sust.</div>
+      </div>      
+      <div className="menu-item" onClick={() => setTelaAtiva('geographicCoordinates')}>
+        <FontAwesomeIcon icon={faGlobe} style={{ color: "red" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Coordenada Geográfica</div>
+      </div>
+      <div className="menu-item" onClick={() => setTelaAtiva('additionalInformation')}>
+        <FontAwesomeIcon icon={faInfoCircle} style={{ color: "orange" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Informações PDD</div>
+      </div>        
+      <div className="menu-item" onClick={() => setTelaAtiva('creditoCarbono')}>
+        <FontAwesomeIcon icon={faCalculator} style={{ color: "blue" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Crédito de Carbono</div>
+      </div>
+      <div className="menu-item" onClick={() => setTelaAtiva('projectTokensList2')}>
+        <FontAwesomeIcon icon={faChartBar} style={{ color: "purple" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Visão Mensal</div>
+      </div>
+      <div className="menu-item" onClick={() => setTelaAtiva('projectTokensList3')}>
+        <FontAwesomeIcon icon={faTable} style={{ color: "orange" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Visão Anual</div>
+      </div>
+      <div className="menu-item" onClick={() => setTelaAtiva('projectTokensList1')}>
+        <FontAwesomeIcon icon={faList} style={{ color: "brown" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Aposentadoria</div>
+      </div>    
+      <div className="menu-item" onClick={() => setTelaAtiva('uploadsSave')}>
+        <FontAwesomeIcon icon={faUpload} style={{ color: "gold" }} /> 
+        <div style={{ paddingLeft: "8px", color: "grey" }}>Uploads de Arquivos</div>
+      </div>
+    
+      {renderizarTela()}
+    </div>
   );
 };
 

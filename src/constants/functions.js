@@ -72,13 +72,27 @@ export const regularMaskforNumbers = (event, onChangeFunction) => {
 };
 
 
+//export const extractNumbers = (num) => {
+//  const str = num.toString();
+//  if (str.length < 4) {
+//    return parseInt(str);
+//  }
+//  const withoutPoints = str.replace(/\./g, '');
+//  return parseInt(withoutPoints);
+//};
+
 export const extractNumbers = (num) => {
+  if (num == null) {
+    return null;
+  }
+
   const str = num.toString();
   if (str.length < 4) {
-    return parseInt(str);
+    return parseInt(str, 10) || null;
   }
+
   const withoutPoints = str.replace(/\./g, '');
-  return parseInt(withoutPoints);
+  return parseInt(withoutPoints, 10) || null;
 };
 
 export const removeNonDigits = (phoneNumber) => {
