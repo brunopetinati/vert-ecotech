@@ -5,9 +5,10 @@ import DefaultButton from "../default_button";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, ButtonContainer, TableContainer, Input, StyledSelect, MarginForCelphone } from "./styles";
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect, MarginForCelphone, StyledButtonAdicionarProjeto, Label } from "./styles";
 import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
   const collapsed = useSelector((state) => state.sidebar);
@@ -85,23 +86,35 @@ const Projects = () => {
     setSearchValue(event.target.value);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/project_register');
+  }  
+
   return (
     <Container collapsed={collapsed}>
       <ButtonContainer>
-        <div>
-          <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
-          <StyledSelect id="column-select" onChange={handleColumnChange}>
-            <option value="Nome">Nome - Título do Projeto</option>
-            <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
-            <option value="Localidade">Localidade</option>
-            <option value="Status da Matrícula">Status da Matrícula</option>
-            <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
-            <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
-            <option value="Status CAR">Status C.A.R</option>
-          </StyledSelect>
+        <div style={{ float: 'left' }}>
+          <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>
+              <Label style={{ color: '#363636' }}>Campo </Label>
+              <StyledSelect id="column-select" onChange={handleColumnChange}>
+                  <option value="Nome">Nome - Título do Projeto</option>
+                  <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
+                  <option value="Localidade">Localidade</option>
+                  <option value="Status da Matrícula">Status da Matrícula</option>
+                  <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
+                  <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
+                  <option value="Status CAR">Status CAR</option>
+              </StyledSelect>      
+            </div>    
+            <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>            
+              <Label style={{ color: '#363636' }}>Valor </Label>
+              <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
+            </div>
         </div>
         <MarginForCelphone />
-        <DefaultButton text={'Adicionar Projeto'} path={'/project_register'} />
+        <StyledButtonAdicionarProjeto onClick={() => handleClick()} style={{ margin: '-30px 400px 0px 0px' }}>Adicionar Projeto</StyledButtonAdicionarProjeto>
       </ButtonContainer>
 
       <TableContainer>

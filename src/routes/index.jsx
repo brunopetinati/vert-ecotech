@@ -20,12 +20,35 @@ import RegisterProjectFileUploadWebOpen from "../pages/outsider";
 import OutsiderSuccess from "../pages/outsider_success";
 import OutsiderCanceled from "../pages/outsider_canceled";
 import RecoverPassword from "../components/recover_password";
+import { WagmiConfig, configureChains, createConfig, useAccount } from "wagmi";
+import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { polygon, polygonMumbai } from '@wagmi/core/chains';
+import { createPublicClient, http } from 'viem';
+import { getAdminByWallet, getUnapprovedProjects } from "redux";
+import { setIsAdmin } from "redux";
+import { useModal } from "./useModal";
+import React, { useState } from "react";
+import Web3 from "web3";
+
 
 const AppRoutes = () => {
 
+  const dispatch = useDispatch();
+  const [stateModal, setStateModal] = useState(false);
+  const [isOpenModal, openModal, closeModal] = useModal();
+  const client = createPublicClient({
+    chain: polygon,
+    transport: http('https://polygon-rpc.com')
+  })
+
+  const { address } = useAccount();
+
+ 
 
   const navigate = useNavigate();
   const location = useLocation();
+
+
   
   if (!sessionStorage.Authorization && location.pathname !== '/' &&
     location.pathname !== '/register' &&
@@ -54,16 +77,16 @@ const AppRoutes = () => {
   return (
     <AnimatePresence>
       <Routes>
-        <Route exact path="/" element={<Login />} />        
+        <Route exact path="/" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/privacy_policy" element={<PrivacyPolicy />} />
         <Route exact path="/terms_of_use" element={<TermsOfUse />} />
         <Route exact path="/project_register" element={<RegisterProject />} />
         <Route exact path="/welcome" element={<Welcome />} />
-        <Route exact path="/intern_client_register" element={<InternRegisterUser />} />
+        {/*<Route exact path="/intern_client_register" element={<InternRegisterUser />} />*/}
         <Route exact path="/intern_project" element={<ProjectIntern />} />
         <Route exact path="/edit_intern_project" element={<EditProject />} />
-        <Route exact path="/intern_user" element={<UserIntern />} />
+       {/*<Route exact path="/intern_user" element={<UserIntern />} />*/}
         <Route exact path="/analysis_and_development" element={<KanbanBoard />} />
         <Route exact path="/privacy" element={<PrivacyPolicyPage />} />
         <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />} />

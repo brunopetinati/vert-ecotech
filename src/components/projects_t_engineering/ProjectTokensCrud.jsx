@@ -201,7 +201,7 @@ const ProjectTokensCrud = ({ project_id }) => {
         </tbody>
       </table>
       <div>
-        <span>Page: </span>
+        <span>Página: </span>
         {pages.map((page) => (
           <button
             key={page}

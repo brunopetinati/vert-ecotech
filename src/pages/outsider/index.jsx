@@ -189,7 +189,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         style={{ width: '60px', marginBottom: '16px' }}
                         alt="uploaded file"
                       />
-                      <label>PDF do C.A.R (SICAR)</label>
+                      <label>PDF do CAR (SICAR)</label>
                       <button
                         style={{ margin: '16px' }}
                         onClick={(e) => resetFileState('pdf_car', e)}
@@ -204,7 +204,7 @@ const RegisterProjectFileUploadWebOpen = () => {
                         alt="emptyFile"
                         style={{ width: '50px', marginBottom: '16px' }}
                       />
-                      <label>Anexar PDF do C.A.R (SICAR)</label>
+                      <label>Anexar PDF do CAR (SICAR)</label>
                     </>
                   )}
                   <p />

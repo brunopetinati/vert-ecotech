@@ -4,7 +4,8 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import { ChartContainer, ChartTitle } from './styles';
 
 const ResponsiveChartContainer = styled.div`
-  width: 610px;
+  width: 500px;
+  margin-left: -0px;
 
   @media screen and (max-width: 768px) {
     width: 100%; 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2'; // Importe Swal
 import { currentUrl } from '../../constants/global';
-import { Button, Input } from './styles2';
+import { Button, ButtonAposentar, ButtonAposentados, Input } from './styles2';
 
 const ProjectTokensList1 = ({ project_id }) => {
   const [items, setItems] = useState([]);
@@ -119,7 +119,7 @@ const ProjectTokensList1 = ({ project_id }) => {
   }
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '350px' }}>
+    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
       <h2>Tokens Aposentadoria</h2>
       <div>
         <input
@@ -156,9 +156,9 @@ const ProjectTokensList1 = ({ project_id }) => {
                 <td style={cellStyle}>{item.status ? 'Ativo' : 'Inativo'}</td>
                 <td style={cellStyle}>
                   {item.status ? (
-                    <Button onClick={() => aposentarItem(item)}>Aposentar</Button>
+                    <ButtonAposentar style={{ margin: 'auto', display: 'block' }} onClick={() => aposentarItem(item)}>Aposentar</ButtonAposentar>
                   ) : (
-                    <button disabled>Aposentado</button>
+                    <ButtonAposentados style={{ margin: 'auto', display: 'block' }} disabled>Aposentado</ButtonAposentados>
                   )}
                 </td>
               </tr>
@@ -167,7 +167,7 @@ const ProjectTokensList1 = ({ project_id }) => {
         </tbody>
       </table>
       <div>
-        <span>Page: </span>
+        <span>Página: </span>
         {pages.map((page) => (
           <button
             key={page}

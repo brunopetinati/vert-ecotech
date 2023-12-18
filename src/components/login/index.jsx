@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom"; 
 import { useDispatch, useSelector } from "react-redux";
-import { LoginContainer, LoginForm, Input, Button, Img } from './styles'
+import { LoginContainer, LoginForm, Input, Button, Img, StyledButtonLogin, StyledButtonCadastro, StyledButtonEnviarEmail, StyledButtonVoltar } from './styles'
 import { appStatus } from '../../store/modules/app_status/actions'
 import { userLogin } from '../../store/modules/login/actions';
 import { getOwners, getProjects, getEngineeringTable } from '../../store/modules/app_data/thunk';
@@ -31,8 +31,10 @@ const Login = () => {
       }).then(response => {
         sessionStorage.setItem('Authorization', response.data.access);
         const token = response.data.access;
+        const usuario_id = response.data.id;
         sessionStorage.setItem('Email', email);
         sessionStorage.setItem('Password', password);
+        sessionStorage.setItem('usuario_id', usuario_id);
         setShowLoading(true);
         setTimeout(() => {
           handleLoginClick(response); 
@@ -40,7 +42,7 @@ const Login = () => {
           dispatch(getOwners(token));
           dispatch(getProjects(token));
           dispatch(getEngineeringTable(token));
-        }, 4000);
+        }, 500);
         dispatch(appStatus('Dashboard'));
       }).catch(error => {
         console.error('Login failed:', error.message);
@@ -106,18 +108,18 @@ const Login = () => {
     
   return (
     <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 0.1 }}
       >
     <LoginContainer>
     {showLoading ? (
       <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.1 }}
       >
         <h1 style={{ color: 'white', fontFamily: 'Arial, Helvetica, sans-serif', fontWeight: '700', fontSize: '48px', letterSpacing: '0' }}>Bem Vindo!</h1>
       </motion.div>
@@ -132,18 +134,18 @@ const Login = () => {
               value={email}
               onChange={event => setUsername(event.target.value)}
             />
-            <div>
-              <Button onClick={handleSendPasswordBack}>Enviar Email</Button>
-              <Button onClick={handleComeBack}>Voltar</Button>
+            <div style={{ marginTop: '20px' }}>
+              <StyledButtonEnviarEmail onClick={handleSendPasswordBack} style={{ margin: '0 15px' }}>Enviar e-mail</StyledButtonEnviarEmail>
+              <StyledButtonVoltar onClick={handleComeBack} style={{ margin: '0px 15px 0px 0px' }}>Voltar</StyledButtonVoltar>
             </div>
           </LoginForm>
         ) : (
 
           <motion.div
-        initial={{ opacity: 0 }}
+        initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 5 }}
+        exit={{ opacity: 0.5 }}
+        transition={{ duration: 0.1 }}
       >
           <LoginForm onSubmit={handleSubmit}>
             <Input
@@ -158,9 +160,9 @@ const Login = () => {
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
-            <div>
-              <Button type="submit">Login</Button>
-              <Button onClick={() => handleRegisterClick()}>Cadastre-se aqui</Button>
+            <div style={{ marginTop: '20px' }}>
+              <StyledButtonLogin type="submit" style={{ margin: '0 15px' }}>Login</StyledButtonLogin>
+              <StyledButtonCadastro onClick={() => handleRegisterClick()} style={{ margin: '0px 15px 0px 0px' }}>Cadastre-se aqui</StyledButtonCadastro>
             </div>
           </LoginForm></motion.div>
         )}
@@ -171,7 +173,7 @@ const Login = () => {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 5 }}
                   >
-          <a href="" style={{ color: 'white', fontFamily: 'Arial' }} onClick={(e) => forgotPassword(e)}>
+          <a href="" style={{ color: 'white', fontFamily: 'Arial', textDecoration: 'none', fontStyle: 'italic' }} onClick={(e) => forgotPassword(e)}>
             Esqueceu a senha?
           </a>
         </motion.div>

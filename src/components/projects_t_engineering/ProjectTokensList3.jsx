@@ -58,7 +58,7 @@ const ProjectTokensList3 = ({ project_id }) => {
   }
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '350px' }}>
+    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
       <h2>Tokens Visão Anual</h2>
       <table>
         <thead>
@@ -85,7 +85,7 @@ const ProjectTokensList3 = ({ project_id }) => {
         </tbody>
       </table>
       <div>
-        <span>Page: </span>
+        <span>Página: </span>
         {pages.map((page) => (
           <button
             key={page}

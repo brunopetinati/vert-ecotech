@@ -181,11 +181,14 @@ export const formatCEP = (cep) => {
 };
 
 export const getProposalStatusInfo = (acceptance) => {
-  if (acceptance === true) {
-    return { text: "Aceita", color: "#00c853" }; // Green for "Aceita"
-  } else if (acceptance === false) {
-    return { text: "Recusada", color: " #e53935" }; // Red for "Recusada"
-  } else {
-    return { text: "Pendente", color: "#b9f7d0" }; // Gray for "Pendente" original: #757575
-  }
+
+  return { text: "", color: "" };
+
+  //if (acceptance === true) {
+  //  return { text: "Aceita", color: "black" }; // Green for "Aceita"
+  //} else if (acceptance === false) {
+  //  return { text: "Recusada", color: "black" }; // Red for "Recusada"
+  //} else {
+  //  return { text: "Pendente", color: "black" }; // Gray for "Pendente" original: #757575
+  //}
 };

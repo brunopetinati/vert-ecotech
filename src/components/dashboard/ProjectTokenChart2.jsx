@@ -26,7 +26,7 @@ const ProjectTokenChart2 = () => {
         const response = await axios.post(`${currentUrl}/api/project_tokens/get_by_years`, requestData, { headers });
 
         if (Array.isArray(response.data)) {
-          console.log('Resposta da API:', response.data);
+          //console.log('Resposta da API:', response.data);
           setData3(response.data);
         } else {
           console.error('Dados da API inválidos');
@@ -43,7 +43,7 @@ const ProjectTokenChart2 = () => {
     <Container collapsed={collapsed}>
       <div style={{ width: '600px' }}>
         <div>
-          <Chart data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
+          <Chart data={data3} title={'Tokens Visão Anual'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
         </div>
       </div>
     </Container>

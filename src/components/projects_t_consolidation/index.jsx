@@ -195,7 +195,7 @@ const ProjectTabConsolidation = ({user, project}) => {
             <div>{project.pdf_matricula_certificate && <StyledButton style={{ width: '200px', height: '30px' }} onClick={() => handleDownloadProjectFiles('pdf_matricula_certificate')}>Download</StyledButton>}</div>
           </ListItem>
           <ListItem>
-            <ListItemText>C.A.R (SICAR)</ListItemText>
+            <ListItemText>CAR (SICAR)</ListItemText>
             <IconContainer>{getFileStatusIcon(project.pdf_car)}</IconContainer>
             <div>{project.pdf_car && <StyledButton style={{ width: '200px', height: '30px' }} onClick={() => handleDownloadProjectFiles('pdf_car')}>Download</StyledButton>}</div>
           </ListItem>

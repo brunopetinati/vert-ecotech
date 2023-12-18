@@ -1,4 +1,4 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser } from './styles'
+import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, StyledButtonConfirmar, StyledButtonVoltar } from './styles'
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -429,7 +429,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
                 onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
             {legalReserveAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{legalReserveAreaError}</div>}            
-            <Label>Status do C.A.R</Label>
+            <Label>Status do CAR</Label>
             <StyledSelect
               onChange={handleOptionsCar}
               defaultValue={""}
@@ -441,7 +441,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
             ))}
             </StyledSelect>
             {selectedCarError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{selectedCarError}</div>}
-            <Label>Código SICAR (C.A.R)</Label>
+            <Label>Código SICAR (CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
               maskplaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
@@ -496,8 +496,8 @@ const RegisterProjectInfo = ({ newOwner }) => {
             
         </Column>
         <ButtonContainer>
-          <Button onClick={() => handleComeBack()}>Voltar</Button>
-          <Button onClick={() => handleRegister()}>Confirmar</Button>
+          <StyledButtonConfirmar onClick={() => handleRegister()} style={{ margin: '0 15px' }}>Confirmar</StyledButtonConfirmar>
+          <StyledButtonVoltar onClick={() => handleComeBack()} style={{ margin: '0px 0px 0px 0px' }}>Voltar</StyledButtonVoltar>          
         </ButtonContainer>
       </Container>
     </motion.div>

@@ -1,10 +1,10 @@
 import styled, { keyframes } from 'styled-components';
-import { ReactComponent as Settings } from '../../assets/icons/settings.svg';
-import { ReactComponent as User } from '../../assets/icons/user.svg';
-import { ReactComponent as Stocks } from '../../assets/icons/stocks.svg';
-import { ReactComponent as Users } from '../../assets/icons/users.svg';
-import { ReactComponent as Work } from '../../assets/icons/work.svg';
 
+import { ReactComponent as Stocks } from '../../assets/icons/bar-chart-graph-svgrepo-com.svg';
+import { ReactComponent as User } from '../../assets/icons/user1.svg';
+import { ReactComponent as Users } from '../../assets/icons/users1.svg';
+import { ReactComponent as Work } from '../../assets/icons/carbon1.svg';
+import { ReactComponent as Settings } from '../../assets/icons/configuracoes7.svg';
 
 export const SidebarContainer = styled.div`
   background-color: #f6f6f6;
@@ -49,36 +49,63 @@ export const SidebarMenu = styled.ul`
   margin: 0;
 `;
 
-export const SidebarMenuItem = styled.li` 
+export const SidebarMenuItem = styled.li`
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 10px;
   font-weight: 500;
-  color: #606F7B;
+  color: #606f7b;
   cursor: pointer;
-  padding: ${({collapsed}) => collapsed ? "10px" : "10px 20px"};
+  padding: ${({ collapsed }) => (collapsed ? '10px' : '10px 20px')};
   text-align: center;
+  position: relative;
 
-  &:hover {
-    background-color: #E5E5E5;
-    color: #333;
+  &::after {
+    width: 80px;
+    height: 10px;
+    content: attr(data-label);
+    position: absolute;
+    background-color: rgba(0, 80, 0, 0.7);
+    color: white;
+    padding: 8px;
+    border-radius: 10px;
+    top: 10%;
+    left: 120px;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    visibility: ${({ collapsed }) => (collapsed ? 'visible' : 'hidden' )};
+    box-shadow: 2mm 2mm 2mm rgba(0, 0, 0, 0.5);
   }
 
-  li {
-    background-color: red;
+  &:hover {
+    background-color: lightgrey;
+    color: #333;
+
+    &::after {
+      opacity: 1;
+    }
   }
 
   &.active {
-    background-color: #1D2228;
+    background-color: silver;
     color: white;
   }
 
   @media screen and (max-width: 768px) {
-      font-size: 8px;
-      word-wrap: break-word;
+    font-size: 8px;
+    word-wrap: break-word;
   }
+
+  /* Remova a função de clique e a mudança de cursor no label */
+  &::after {
+    pointer-events: none; /* Isso impede que o label receba cliques */
+    cursor: default; /* Isso define o cursor de volta para o padrão */
+  }  
 `;
 
 export const SidebarMenuItemDiffer = styled.li` 
@@ -132,35 +159,35 @@ export const SidebarIcon = styled.img`
 export const StyledUser = styled(User)`
   fill: ${({active}) => active ? "#fff" : "#fff"};
   height: 32px;
-  width: 10px;
+  width: 12px;
   transform: scale(2.5);
 `;
 
 export const StyledStocks = styled(Stocks)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 10px;
+  width: 12px;
   transform: scale(2.5);
 `;
 
 export const StyledUsers = styled(Users)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 10px;
+  width: 12px;
   transform: scale(2.5);
 `;
 
 export const StyledSettings = styled(Settings)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 10px;
+  width: 12px;
   transform: scale(2.5);
 `;
 
 export const StyledWork = styled(Work)`
   fill: ${({active}) => active ? "#fff" : "#000"};
   height: 32px;
-  width: 10px;
+  width: 12px;
   transform: scale(2.5);
 `;
 

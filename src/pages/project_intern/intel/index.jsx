@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
-import { Container, InnerContainer, Column, Label, ListItem, ListItemText, ButtonContainer, Span, DownloadButton } from '../styles';
+import { Container, InnerContainer, Column, Button, ListItem, ListItemText, ListItemTextResposta, ButtonContainer, Span, DownloadButton } from '../styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
 import { currentUrl } from '../../../constants/global';
 import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "../../../constants/functions";
@@ -129,230 +129,234 @@ const addressString = addressParts.join(', ');
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
+        style={{ float: 'left', marginTop: '0px', marginLeft: '-100px' }}
           >
+
+      <div style={{ marginLeft: '218px', marginTop: '-10px' }}>
+        <h2>Informações</h2>
+      </div>
+
       <Container>
-        <div style={{ overflowY: "auto", 
-          width: '100vw', display: 'flex', 
-          flexDirection: 'column', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          marginLeft: '-70px',
-          marginTop: '16px',
-        }}>
-          {user.user_type === "ADM" && 
-              <div>
-                  
-                <ListItem style={{marginTop: '0px', backgroundColor: 'lightgrey' }}>
-                    <div style={{ marginLeft: '50px', marginTop: '-10px' }}>
-                      <h4>{ projectOwner.full_name }</h4>
-                    </div>
-                </ListItem>        
+        {user.user_type === "ADM" && 
+            <div>
+              <ListItem style={{ backgroundColor: 'lightgrey' }}>
+                  <div style={{ marginLeft: '20px' }}>
+                    <span style={{ fontWeight: 'bold', color: '#363636', fontSize: '12pt' }}>
+                      { projectOwner.full_name }
+                    </span>
+                  </div>
+              </ListItem>
 
-                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-                  <ListItemText style={{ color: 'black' }}>Contato</ListItemText>
-                </ListItem>
+              <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                <ListItemText>Contato</ListItemText>
+              </ListItem>
 
-                <ListItem>
-                  <ListItemText>Telefone: {convertPhone(projectOwner.phone)}</ListItemText>
-                </ListItem>
-                
-                <ListItem>
-                  <ListItemText>Email: {projectOwner.email || '-'}</ListItemText>
-                </ListItem>
+              <ListItem>
+                <ListItemTextResposta>Telefone: {convertPhone(projectOwner.phone)}</ListItemTextResposta>
+              </ListItem>
+              
+              <ListItem>
+                <ListItemTextResposta>Email: {projectOwner.email || '-'}</ListItemTextResposta>
+              </ListItem>
 
-                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-                  <ListItemText style={{ color: 'black' }}>Endereço</ListItemText>
-                </ListItem>     
+              <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                <ListItemText>Endereço</ListItemText>
+              </ListItem>     
 
-                <ListItem>
-                  <ListItemText>{addressString}</ListItemText>
-                </ListItem>   
+              <ListItem>
+                <ListItemTextResposta>{addressString}</ListItemTextResposta>
+              </ListItem>   
 
-                <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-                  <ListItemText style={{ color: 'black' }}>Informações de Banco</ListItemText>
-                </ListItem>
+              <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+                <ListItemText>Informações de Banco</ListItemText>
+              </ListItem>
 
-                <ListItem>
-                  <ListItemText>Não possui</ListItemText>
-                </ListItem>               
+              <ListItem>
+                <ListItemTextResposta>Não possui</ListItemTextResposta>
+              </ListItem>     
 
+            </div>
+          }        
+
+          <ListItem style={{ backgroundColor: 'lightgrey', marginTop: '20px' }}>
+              <div style={{ marginLeft: '20px' }}>
+                <span style={{ fontWeight: 'bold', color: '#363636', fontSize: '12pt' }}>
+                { project.title === 'default' ? 'Sem Título' : project.title }
+                </span>
               </div>
-            }          
+          </ListItem>
 
-            <ListItem style={{marginTop: '0px', backgroundColor: 'lightgrey' }}>
-                <div style={{ marginLeft: '50px', marginTop: '-10px' }}>
-                  <h4>{ project.title === 'default' ? 'Sem Título' : project.title }</h4>
-                </div>
-            </ListItem>    
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>Proprietário da área</ListItemText>
+          </ListItem>        
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>Proprietário da área</ListItemText>
-            </ListItem>        
+          <ListItem>
+            <ListItemTextResposta>
+            { currentUser.user_type === "ADM"
+              ? returnUserName(project.owner, users) || '-'
+              : currentUser.full_name }             
+            </ListItemTextResposta>
+          </ListItem>     
 
-            <ListItem>
-              <ListItemText>
-              { currentUser.user_type === "ADM"
-                ? returnUserName(project.owner, users) || '-'
-                : currentUser.full_name }             
-              </ListItemText>
-            </ListItem>     
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText style={{ color: 'black' }}>
+              A propriedade está sob domínio de uma pessoa física ou jurídica?
+            </ListItemText>
+          </ListItem>  
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                A propriedade está sob domínio de uma pessoa física ou jurídica?
-              </ListItemText>
-            </ListItem>  
+          <ListItem>
+            <ListItemTextResposta>{project.physical_or_legal_entity || '-'}</ListItemTextResposta>
+          </ListItem>    
 
-            <ListItem>
-              <ListItemText>{project.physical_or_legal_entity || '-'}</ListItemText>
-            </ListItem>    
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              CNPJ ou CPF do proprietário
+            </ListItemText>
+          </ListItem>        
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                CNPJ ou CPF do proprietário
-              </ListItemText>
-            </ListItem>        
+          <ListItem>
+            <ListItemTextResposta>{formatCPF(project.cnpj) || '-'}</ListItemTextResposta>
+          </ListItem>    
 
-            <ListItem>
-              <ListItemText>{formatCPF(project.cnpj) || '-'}</ListItemText>
-            </ListItem>    
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Qual o endereço da propriedade?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Qual o endereço da propriedade?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.address || '-'}</ListItemTextResposta>
+          </ListItem>         
 
-            <ListItem>
-              <ListItemText>{project.address || '-'}</ListItemText>
-            </ListItem>         
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Status da Matrícula
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Status da Matrícula
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.matricula_status || '-'}</ListItemTextResposta>
+          </ListItem>
 
-            <ListItem>
-              <ListItemText>{project.matricula_status || '-'}</ListItemText>
-            </ListItem>
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Possui déficit de reserva legal?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Possui déficit de reserva legal?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{returnYesorNoforBoolean(project.legal_reserve_deficit) || '-'}</ListItemTextResposta>
+          </ListItem>    
 
-            <ListItem>
-              <ListItemText>{returnYesorNoforBoolean(project.legal_reserve_deficit) || '-'}</ListItemText>
-            </ListItem>    
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Possui dívida federal pelo não pagamento de tributos?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Possui dívida federal pelo não pagamento de tributos?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{returnYesorNoforBoolean(project.has_federal_debt) || '-'}</ListItemTextResposta>
+          </ListItem>  
 
-            <ListItem>
-              <ListItemText>{returnYesorNoforBoolean(project.has_federal_debt) || '-'}</ListItemText>
-            </ListItem>  
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Área total da propriedade (ha)?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Área total da propriedade (ha)?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{transformNumbersToHectares(project.total_area) || '-'}</ListItemTextResposta>
+          </ListItem>
 
-            <ListItem>
-              <ListItemText>{transformNumbersToHectares(project.total_area) || '-'}</ListItemText>
-            </ListItem>
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Área total da reserva legal (ha)?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Área total da reserva legal (ha)?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</ListItemTextResposta>
+          </ListItem>
 
-            <ListItem>
-              <ListItemText>{transformNumbersToHectares(project.legal_reserve_area) || '-'}</ListItemText>
-            </ListItem>
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Status do CAR
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Status do C.A.R
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.status_car || '-'}</ListItemTextResposta>
+          </ListItem>
 
-            <ListItem>
-              <ListItemText>{project.status_car || '-'}</ListItemText>
-            </ListItem>
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Código SICAR (CAR)
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Código SICAR (C.A.R)
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{formatSICARCode(project.sicar_code) || '-'}</ListItemTextResposta>
+          </ListItem>      
 
-            <ListItem>
-              <ListItemText>{formatSICARCode(project.sicar_code) || '-'}</ListItemText>
-            </ListItem>      
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Status do georreferenciamento no SIGEF
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Status do georreferenciamento no SIGEF
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.georeferencing_status || '-'}</ListItemTextResposta>
+          </ListItem>             
 
-            <ListItem>
-              <ListItemText>{project.georeferencing_status || '-'}</ListItemText>
-            </ListItem>             
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Situação da reserva legal da propriedade:
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Situação da reserva legal da propriedade:
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.reserve_legal_status || '-'}</ListItemTextResposta>
+          </ListItem>        
 
-            <ListItem>
-              <ListItemText>{project.reserve_legal_status || '-'}</ListItemText>
-            </ListItem>        
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Possui Unidade de Conservação (UC) no imóvel?
+            </ListItemText>
+          </ListItem>     
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Possui Unidade de Conservação (UC) no imóvel?
-              </ListItemText>
-            </ListItem>     
+          <ListItem>
+            <ListItemTextResposta>{project.conservation_unit || '-'}</ListItemTextResposta>
+          </ListItem>     
 
-            <ListItem>
-              <ListItemText>{project.conservation_unit || '-'}</ListItemText>
-            </ListItem>     
+          <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
+            <ListItemText>
+              Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?
+            </ListItemText>
+          </ListItem>   
 
-            <ListItem style={{ backgroundColor: 'rgb(235,235,235)' }}>
-              <ListItemText style={{ color: 'black' }}>
-                Existem ações tomadas pelo proprietário para garantir a preservação das florestas existentes no imóvel?
-              </ListItemText>
-            </ListItem>   
+          <ListItem>
+            <ListItemTextResposta>{project.owner_actions_to_preserve_forest || '-'}</ListItemTextResposta>
+          </ListItem>                               
 
-            <ListItem>
-              <ListItemText>{project.owner_actions_to_preserve_forest || '-'}</ListItemText>
-            </ListItem>                               
-
-            <Column style={{ marginTop: '36px'}}>
-              <ButtonContainer>
-                {project.pdf_matricula_certificate && <DownloadButton onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</DownloadButton>}
-                {project.pdf_car && <DownloadButton onClick={() => downloadPDF('pdf_car')}>PDF C.A.R</DownloadButton>}
-                {project.pdf_ccir && <DownloadButton onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</DownloadButton>}
-                {project.property_polygon && <DownloadButton onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</DownloadButton>}
-                {project.pdf_federal_debt_certificate && <DownloadButton onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</DownloadButton>}
-              </ButtonContainer>                  
-            </Column>
-            {isPasswordModalOpen && (
-            <PasswordModal onConfirm={(password) => {
-              setPassword(password);
-              closePasswordModal();
-            }} />
-          )}
-        </div>
+          <Column style={{ marginTop: '-36px' }}>
+            <ButtonContainer>
+              <div style={{ marginLeft: '50px', marginTop: '-50px' }}>
+                {/*}
+                {<Button onClick={() => downloadPDF('pdf_matricula_certificate')}>Certificado de Matrícula</Button>}
+                {<Button onClick={() => downloadPDF('pdf_car')}>PDF CAR</Button>}
+                {<Button onClick={() => downloadPDF('pdf_ccir')}>PDF CCIR</Button>}
+                {<Button onClick={() => downloadPDF('property_polygon')}>Polígono da Propridade</Button>}
+                {<Button onClick={() => downloadPDF('pdf_federal_debt_certificate')}>Certificado Dívida Federal</Button>}
+                {*/}
+              </div>
+            </ButtonContainer>                  
+          </Column>
+          {isPasswordModalOpen && (
+          <PasswordModal onConfirm={(password) => {
+            setPassword(password);
+            closePasswordModal();
+          }} />
+        )}
       </Container>
     </motion.div>
   )

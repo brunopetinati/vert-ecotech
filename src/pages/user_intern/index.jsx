@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import  Banco from '../../components/bank';
-import { StyledButton } from '../../components/default_button/styles'
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput } from './styles'
+import { StyledButtonSalvar, StyledButtonVoltar, StyledButtonProjetos } from '../../components/default_button/styles'
+import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, BackgroundImage } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
@@ -11,12 +11,12 @@ import { useDispatch } from 'react-redux';
 import { appStatus } from '../../store/modules/app_status/actions';
 import WarningDeleteModal from '../../components/warning_delete_modal';
 import Swal from 'sweetalert2';
+import folha1 from '../../assets/icons/folha1.png';
 
 const UserIntern = () => {
 
   const location = useLocation();
-
-  const user = location.state.user;
+  const user = location.state?.user || {};   
 
   const [showModalBanco, setShowModalBanco] = useState(false);
 
@@ -34,6 +34,7 @@ const UserIntern = () => {
     full_name: user.full_name || '',
     rg: user.rg || '',
     cpf: user.cpf || '',
+    cnpj: user.cnpj || '',
     phone: user.phone || '',
     email: user.email || '',
     user_type: user.user_type || '',
@@ -91,6 +92,7 @@ const UserIntern = () => {
 
 
   const handleComeBack = () =>{
+    dispatch(appStatus('Usuários'));
     navigate('/welcome');
   }
 
@@ -118,12 +120,24 @@ const UserIntern = () => {
   
   const sendInternProject = (project) => {
     dispatch(appStatus(''));
-    navigate('/intern_project', { state: { project }});
+    navigate('/intern_project', { state: { project, user } });
   };
 
 
   return (
       <IndexContainer>
+        <BackgroundImage
+          className="background-image"
+          style={{
+            backgroundImage: `url(${folha1})`,
+            backgroundSize: 'cover', 
+            backgroundRepeat: 'no-repeat',
+            width: '500px',
+            height: '500px',
+            marginTop: '60px',
+            marginLeft: '60px'
+          }}
+        />      
         <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -131,12 +145,8 @@ const UserIntern = () => {
         transition={{ duration: 0.8 }}
         >
         <ProfileContainerInfo>
-          <div style={{overflowY: 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
-            {userProjects.length > 0 && <div>
-              <h2>Projetos</h2>
-              {userProjects.map((project) => <StyledButton style={{margin: '32px 32px 32px 0'}} onClick={() => sendInternProject(project)}>{project.title}</StyledButton>)}  
-            </div>}
-            <h2>Informações cadastrais - {userUpdate.full_name}</h2>
+          <div style={{overflowY: 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px 0px 50px 0px', marginTop: '-20px' }}>
+            <h2>Informações Cadastrais</h2>
             <Row>
               <Label>Nome completo</Label>
               <ShowInput type="text" defaultValue={userUpdate.full_name} onChange={(e) => setUserUpdate({...userUpdate, full_name: e.target.value})} />
@@ -219,20 +229,25 @@ const UserIntern = () => {
               <Label for="uf">UF:</Label>
               <ShowInput type="text" id="uf" name="uf" value={userUpdate.state} disabled placeholder="Preencha o CEP para preenchimento automático" onChange={(e) => setUserUpdate({...userUpdate, state: e.target.value})}/>         
             </Row>
-            {/* <Row>            
-              <Label for="cnpj">Senha:</Label>
-              <ShowInput type="text" id="cnpj" name="cnpj" 
-              onChange={(e) => setUserUpdate({...userUpdate, password: e.target.value})}
-              />
-            </Row> */}
 
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-              <WarningDeleteModal text={'Deletar Usuário'} path={'users'} id={user.id} width={'150px'} height={'35px'} />
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '0 32px'}}>Salvar</StyledButton>
-              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '0 0px'}}>Voltar</StyledButton>
-            </div>     
+              <WarningDeleteModal text={'Deletar Usuário'} path={'users'} id={ user.id } />
+              <StyledButtonSalvar onClick={handleRegister} style={{ margin: '0 15px' }}>Salvar</StyledButtonSalvar>
+              <StyledButtonVoltar onClick={handleComeBack} style={{ margin: '0px 65px 0px 0px' }}>Voltar</StyledButtonVoltar>
+            </div>
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>
+          {userProjects.length > 0 && 
+            <div style={{ marginTop: '-25px' }}>
+              <div style={{ float: 'left'}}>
+                <h3 style={{ float: 'left', height: '20px', width: '325px', float: 'left' }}>Projetos de Crédito de Carbono</h3>
+                <div style={{ float: 'left', width: '25px', height: '25px', marginTop: '15px', backgroundImage: `url(${folha1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}></div>
+              </div>
+              <div style={{ float: 'left', width: '100%' }}>
+                {userProjects.map((project) => <StyledButtonProjetos style={{margin: '0px 32px 32px 0'}} onClick={() => sendInternProject(project)}>{project.title.toUpperCase()}</StyledButtonProjetos>)}  
+              </div>
+            </div>
+          }
         </ProfileContainerInfo>
         <p />
         </motion.div >

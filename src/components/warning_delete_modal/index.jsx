@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyledButton } from './styles';
+import { StyledButton, StyledButtonDelete } from './styles';
 import Swal from 'sweetalert2';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
@@ -61,7 +61,7 @@ const WarningDeleteModal = ({ text, path, id, width, height }) => {
 
   return (
     <>
-      <StyledButton onClick={showDeleteWarning} width={width} height={height}>{text}</StyledButton>
+      <StyledButtonDelete onClick={showDeleteWarning} width={width} height={height}>{text}</StyledButtonDelete>
     </>
   );
 };

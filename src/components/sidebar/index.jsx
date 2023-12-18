@@ -10,7 +10,7 @@ import { collapseSidebar } from '../../store/modules/sidebar/actions';
 
 import ExpandedLogo from '../../assets/logo-vert.png'
 import Logo from '../../assets/marca-vert.png'
-import Leaf from '../../assets/icons/leaf.svg';
+import Leaf from '../../assets/icons/folha1.svg';
 import ArrowRight from '../../assets/icons/arrow_right.svg'
 import ArrowLeft from '../../assets/icons/arrow_left.svg'
 
@@ -122,22 +122,55 @@ const Sidebar = () => {
       <ButtonForCellPhoneToOpenSidebar className={showSidebar ? 'rotate' : ''} onClick={() => handleSetShowSidebar()}>
         <img src={Logo} alt="0" style={{width: '20px'}}/>
       </ButtonForCellPhoneToOpenSidebar>
+      
       <SidebarContainer collapsed={collapsed} showSidebar={showSidebar}>
+
         <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
           {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
         </SidebarHeader>
+
         <SidebarMenu>
-          <SidebarMenuItem  style={{marginTop: '64px'}} className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>{collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}</SidebarMenuItem>
-          {currentUser?.user_type === "ADM" && <SidebarMenuItem className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>{collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}</SidebarMenuItem>}
-          {currentUser?.user_type === "ADM" ? <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Prospect'}</SidebarMenuItem> : <SidebarMenuItem className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>{collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Meus Projetos'}</SidebarMenuItem>}
-          {currentUser?.user_type === "ADM" && <SidebarMenuItem className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleNavigate("/analysis_and_development")}>{collapsed ? <StyledWork active={activeUsers} /> : 'Funil Produtor'}</SidebarMenuItem>}
-          <SidebarMenuItem className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>{collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}</SidebarMenuItem>
-          <SidebarMenuItem className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>{collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}</SidebarMenuItem>
+
+          <SidebarMenuItem collapsed={collapsed} data-label="Dashboard" style={{marginTop: '64px'}} className={app_status === "Dashboard" ? "active" : ""} onClick={() => handleItemClick("Dashboard")}>
+            {collapsed ? <StyledStocks active={activeDashboard} /> : 'Dashboard'}
+          </SidebarMenuItem>
+
+          {currentUser?.user_type === "ADM" && 
+          <SidebarMenuItem collapsed={collapsed} data-label="Usuários" className={app_status === "Usuários" ? "active" : ""} onClick={() => handleItemClick("Usuários")}>
+            {collapsed ? <StyledUsers active={activeUsers} /> : 'Usuários'}
+          </SidebarMenuItem>}
+
+          {currentUser?.user_type === "ADM" ? 
+          <SidebarMenuItem collapsed={collapsed} data-label="Prospecção" className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>
+            {collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Prospecção'}
+          </SidebarMenuItem> : 
+          <SidebarMenuItem collapsed={collapsed} data-label="Meus Projetos" className={app_status === "Projetos" ? "active" : ""} onClick={() => handleItemClick("Projetos")}>
+            {collapsed ? <SidebarIcon src={Leaf} alt=""/> : 'Meus Projetos'}
+          </SidebarMenuItem>}
+          
+          {currentUser?.user_type === "ADM" && 
+          <SidebarMenuItem collapsed={collapsed} data-label="Projetos" className={app_status === "Desenvolvimento" ? "active" : ""} onClick={() => handleNavigate("/analysis_and_development")}>
+            {collapsed ? <StyledWork active={activeUsers} /> : 'Projetos'}
+          </SidebarMenuItem>}
+          
+          <SidebarMenuItem collapsed={collapsed} data-label="Meu Perfil" className={app_status === "Meu Perfil" ? "active" : ""} onClick={() => handleItemClick("Meu Perfil")}>
+            {collapsed ? <StyledUser active={activeUser} /> : 'Meu Perfil'}
+          </SidebarMenuItem>
+
+          <SidebarMenuItem collapsed={collapsed} data-label="Configurações" className={app_status === "Configurações" ? "active" : ""} onClick={() => handleItemClick("Configurações")}>
+            {collapsed ? <StyledSettings active={activeSettings}/>  : 'Configurações'}
+          </SidebarMenuItem>
+        
         </SidebarMenu>
-        <SidebarMenuItemDiffer style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}> {collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }</SidebarMenuItemDiffer>
+
+        <SidebarMenuItemDiffer style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}> 
+          {collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }
+        </SidebarMenuItemDiffer>
+
         <SidebarFooter>
-        {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
+          {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
         </SidebarFooter>
+
       </SidebarContainer>
     </motion.div>
   );

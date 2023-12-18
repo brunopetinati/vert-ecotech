@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from "framer-motion";
-import { LoginContainer, LoginForm, Input, Button, Img } from './styles';
+import { LoginContainer, LoginForm, Input, Button, Img, StyledButtonVoltar, StyledButtonCadastrar, Span } from './styles';
 import Logo from '../../assets/logo-vert-white.png';
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -132,14 +132,14 @@ const Register = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.2 }}
       >
         {showLoading ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.2 }}
           >
             <h1 style={{ color: 'white' }}>Dados inseridos com sucesso! Continue para o registro</h1>
           </motion.div>
@@ -147,7 +147,7 @@ const Register = () => {
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
             <Img src={Logo} />
             <LoginForm onSubmit={handleSubmition}>
-              <div>
+              <div style={{ marginBottom: '20px' }}>
                 <label>
                   <input
                     type="radio"
@@ -156,7 +156,7 @@ const Register = () => {
                     checked={personType === 'fisica'}
                     onChange={() => setPersonType('fisica')}
                   />
-                  <span style={{ fontWeight: 'bold', color: 'white' }}>Pessoa Física</span>
+                  <Span style={{ fontWeight: 'bold', color: 'white' }}>Pessoa Física</Span>
                 </label>
                 <label>
                   <input
@@ -166,7 +166,7 @@ const Register = () => {
                     checked={personType === 'juridica'}
                     onChange={() => setPersonType('juridica')}
                   />                  
-                  <span style={{ fontWeight: 'bold', color: 'white' }}>Pessoa Jurídica</span>
+                  <Span style={{ fontWeight: 'bold', color: 'white' }}>Pessoa Jurídica</Span>
                 </label>
               </div>
               {personType === 'fisica' ? (
@@ -203,8 +203,8 @@ const Register = () => {
                 mask={"99999-999"}
               />
               <div>
-                <Button onClick={() => handleClick()}>Voltar</Button>
-                <Button type="submit">Cadastrar</Button>
+                <StyledButtonVoltar onClick={() => handleClick()} style={{ margin: '0 15px' }}>Voltar</StyledButtonVoltar>
+                <StyledButtonCadastrar type="submit" style={{ margin: '0px 15px 0px 0px' }}>Cadastrar</StyledButtonCadastrar>
               </div>
             </LoginForm>
           </div>

@@ -69,7 +69,7 @@ const Search = ({ onCloseModal, PreencheItem }) => {
     onCloseModal();
   };
 
-  const handleBtnDelete = (item) => {    
+  const handleBtnDelete = (item) => {
     onCloseModal();
   };
 
@@ -77,7 +77,7 @@ const Search = ({ onCloseModal, PreencheItem }) => {
     if (e.key === 'Enter') {
       handleSearchBySafra(searchTerm);
     }
-  };  
+  };
 
   return (
     <div style={{ height: '380px' }}>

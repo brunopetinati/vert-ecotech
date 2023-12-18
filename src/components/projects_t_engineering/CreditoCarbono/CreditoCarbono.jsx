@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Button } from './../styles';
+import { Button, StyledButtonSalvar, StyledButtonNovo, StyledButtonPesquisar } from './../styles';
 import Swal from 'sweetalert2';
 import { currentUrl } from '../../../../src/constants/global';
 import { useNavigate } from 'react-router-dom';
@@ -21,9 +21,10 @@ const CreditoCarbonoContainer = styled.div`
 `;
 
 const Label = styled.label`
-  display: block;
-  margin-bottom: 8px;
-  /* Outros estilos de label, como cor ou tamanho de fonte, podem ser adicionados aqui */
+  --margin-bottom: 10px;
+  --font-weight: 700;
+  font-size: 10pt;
+  color: rgb(54, 54, 54);
 `;
 
 const ButtonContainer = styled.div`
@@ -33,15 +34,14 @@ const ButtonContainer = styled.div`
 `;
 
 export const Input = styled.input`
-  padding: 10px;
-  margin-bottom: 20px;
-  
-  border: 2px solid #ccc;
+  margin-bottom: 5px;
+  border: 2px solid rgb(204, 204, 204);
   border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  font-size: 12px;
   outline: none;
-  width: 250px;
+  width: 400px;
+  background: rgba(245, 245, 245, 0.2); 
+  margin-top: 5px;
 
   &:focus {
     border-color: #007bff;
@@ -140,36 +140,40 @@ const CreditoCarbono = ({ project_id }) => {
 
   
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '350px' }}>
+    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
       <CreditoCarbonoContainer>
         <h2>Crédito de Carbono</h2>
         <div>
           <Label htmlFor="safra1">SAFRA</Label>
-          <Input
-            style={{ width: '335px' }}
-            type="text"
-            id="safra1"
-            name="safra1"
-            value={safra}
-            onChange={(e) => setSafra(e.target.value)}
-            ref={safra1Ref}
-          />
+          <div>
+            <Input
+              style={{ width: '335px' }}
+              type="text"
+              id="safra1"
+              name="safra1"
+              value={safra}
+              onChange={(e) => setSafra(e.target.value)}
+              ref={safra1Ref}
+            />
+          </div>
         </div>
         <div>
           <Label htmlFor="quantidade">QUANTIDADE</Label>
-          <Input
-            style={{ width: '335px' }}
-            type="text"
-            id="quantidade"
-            name="quantidade"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-          />
+          <div>
+            <Input
+              style={{ width: '335px' }}
+              type="text"
+              id="quantidade"
+              name="quantidade"
+              value={quantidade}
+              onChange={(e) => setQuantidade(e.target.value)}
+            />
+          </div>
         </div>
         <ButtonContainer>
-          <Button style={{width: '110px'}} onClick={handleSalvarClick}>Salvar</Button>
-          <Button style={{width: '110px'}} onClick={handleNovoClick}>Novo</Button>
-          <Button style={{width: '110px'}} onClick={handlePesquisarClick}>Pesquisar</Button>
+          <StyledButtonSalvar style={{width: '110px'}} onClick={handleSalvarClick}>Salvar</StyledButtonSalvar>
+          <StyledButtonNovo style={{width: '110px'}} onClick={handleNovoClick}>Novo</StyledButtonNovo>
+          <StyledButtonPesquisar style={{width: '110px'}} onClick={handlePesquisarClick}>Pesquisar</StyledButtonPesquisar>
         </ButtonContainer>  
 
         {isModalOpen && (

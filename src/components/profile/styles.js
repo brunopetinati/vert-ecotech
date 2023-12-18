@@ -24,8 +24,9 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
-  padding: 16px;
+  width: 90%;
+  --padding: 16px;
+  z-index: 1;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
@@ -33,20 +34,21 @@ export const Row = styled.div`
 `;
 
 export const Label = styled.label`
-  margin-bottom: 10px;
-  font-weight: 700;
+  --margin-bottom: 10px;
+  --font-weight: 700;
+  font-size: 10pt;
+  color: rgb(54, 54, 54);
 `;
 
 export const ShowInput = styled(InputMask)`
-  padding: 10px;
-  margin-bottom: 20px;
-  
-  border: 2px solid #ccc;
+  margin-bottom: 5px;
+  border: 2px solid rgb(204, 204, 204);
   border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  font-size: 12px;
   outline: none;
-  width: 350px;
+  width: 400px;
+  background: rgba(245, 245, 245, 0.2);
+  margin-top: 5px;
 
   &:focus {
     border-color: #007bff;
@@ -126,31 +128,28 @@ export const Button = styled.button`
 `;
 
 export const IndexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #f9fafb;
-  width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: center;
+  --align-items: center;
+  --background: #f5f5f5;
+  width: 100%;
   height: 100%;
-
-  @media screen and (max-width: 768px) {
-    justify-content: flex-start;
-  }
+  --margin-left: 200px;
 `;
 
 export const ProfileContainerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  padding: 4em;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 2;
-  background: #fff;
-  max-height: 550px;
-  width: ${({collapsed}) => collapsed ? "80vw" : "70vw"};
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: space-around;
+  --align-items: center;
+  --padding: 4em;
+  --border-radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  --z-index: 2;
+  --background: #fff;
+  --max-height: 550px;
+  --width: ${({collapsed}) => collapsed ? "80vw" : "70vw"};
 
   h3 {
     display: flex;
@@ -181,12 +180,20 @@ export const ButtonContainerIndex = styled.div`
 `;
 
 export const InnerContainer = styled.div`
-  overflow-y: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: space-around;
+  --align-items: center;
+  width: 650px;
+  padding: 10px;
+  --background: #fff;
+  margin-top: 30px;
+  -border-radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-  @media screen and (max-width: 768px) {
+  h3 {
+    display: flex;
+    align-self: flex-start;
+    color: #054D00;
   }
 `;

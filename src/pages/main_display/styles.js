@@ -14,14 +14,15 @@ export const Container = styled.div`
 
 
 export const SideContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: center;
+  --align-items: center;
   background: #f9fafb;
   position: absolute;
   left: 50px;
   width: 1450px;
+  margin-left: 100px;
 
   @media screen and (max-width: 768px) {
     display: flex;

@@ -92,7 +92,7 @@ const FileUploader = () => {
         <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
       </FileContainer>
       <FileContainer>
-        <InputLabel>PDF do C.A.R (SICAR)</InputLabel>
+        <InputLabel>PDF do CAR (SICAR)</InputLabel>
         <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
       </FileContainer>
       <FileContainer>

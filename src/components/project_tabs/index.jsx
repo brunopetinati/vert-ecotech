@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { appStatus } from '../../store/modules/app_status/actions';
+import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { currentUrl } from "../../constants/global";
 import { TabContainer, LinearTabs, Tab, Content, TabItem, TabLink, CloseTab } from "./styles";
-import { ButtonContainer, Button } from '../../pages/project_intern/styles.js';
+import { ButtonContainer, Button, StyledButtonEditar,StyledButtonVoltar } from '../../pages/project_intern/styles.js';
 
 const ProjectTabs = ({ tabs, handleRegister, project }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -57,8 +58,28 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
     });
   };
 
+  // Rotas
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const user = location?.state?.user;
+
+  const handleComeBack = () => {
+
+    if(user)
+    {
+      dispatch(appStatus('edit_user'));
+      navigate('/welcome', { state: { user }});
+    }
+    else
+    {
+      dispatch(appStatus('Desenvolvimento'));
+      navigate('/analysis_and_development');
+    }
+
+  };
+
   return (
-    <>
+    <div>
       <TabContainer collapsed={collapsed}>
         <LinearTabs>
           {tabs.map((tab, index) => (
@@ -77,15 +98,16 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
         </Content>
       </TabContainer>
 
-      <div style={{ marginLeft: '0px' }}>
+       <div style={{ paddingBottom: '50px'}}>
         {activeTab === 0 && 
-          <ButtonContainer style={{ marginTop: '100px !important' }}>
-            <Button onClick={handleRegister}>Editar Informações</Button>
+          <ButtonContainer>
+            <StyledButtonEditar onClick={handleRegister} style={{ margin: '0px 10px 0px 0px' }}>Editar Informações</StyledButtonEditar>
+            <StyledButtonVoltar onClick={() => handleComeBack()} style={{ margin: '0px 10px 0px 0px' }}>Voltar</StyledButtonVoltar>
             {project.status === null && currentUser.user_type === "ADM" && <Button onClick={() => startProject()}>Inicializar Processo</Button>}
           </ButtonContainer>}        
       </div>
 
-    </>
+    </div>
   );
 };
 

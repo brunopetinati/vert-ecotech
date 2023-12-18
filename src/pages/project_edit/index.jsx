@@ -1,4 +1,10 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, FileContainer, InputLabel, SmallText, SubContainer } from './styles'
+import { Container, InnerContainer, Column, Label, Input, 
+          TextArea, Span, Button, ButtonContainer, 
+          ButtonLink, StyledSelect, StyledSelectForUser, 
+          FileContainer, InputLabel, SmallText, SubContainer,
+          StyledButtonSalvar, StyledButtonVoltar
+        } from './styles'
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { storeOwnerId } from '../../store/modules/app_data/actions';
@@ -37,7 +43,7 @@ const EditProject = () => {
     { value: "Ativo", label: "Ativo" },
     { value: "Pendente", label: "Pendente" },
     { value: "Cancelado", label: "Cancelado" },
-    { value: null, label: "Não possui C.A.R" }
+    { value: null, label: "Não possui CAR" }
   ];
 
   const handleOptionsCar = (selectedCar) => {
@@ -360,14 +366,14 @@ const EditProject = () => {
                 value={totalReserveArea}
                 onChange={(event) => regularMaskforNumbers(event, setTotalReserveArea)}
               />
-            <Label>Status do C.A.R</Label>
+            <Label>Status do CAR</Label>
             <StyledSelect
               onChange={handleOptionsCar}
               options={optionsCar}
               placeholder={'Selecione uma opção'}
               defaultValue={{ value: project.status_car, label: project.status_car }}
             />
-            <Label>Código SICAR (C.A.R)</Label>
+            <Label>Código SICAR (CAR)</Label>
             <Input type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
               maskPlaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
@@ -418,7 +424,7 @@ const EditProject = () => {
             <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
           </FileContainer>
           <FileContainer>
-            <InputLabel>PDF do C.A.R (SICAR)</InputLabel>
+            <InputLabel>PDF do CAR (SICAR)</InputLabel>
             <SmallText>(Preferencialmente PDF. Mas aceita outros tipos de)</SmallText>
             <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
           </FileContainer>
@@ -448,8 +454,8 @@ const EditProject = () => {
         </SubContainer>
         <ButtonContainer>
           <WarningDeleteModal text={'Deletar Projeto'} path={'projects'} id={project.id} width={'200px'} height={'35px'} />
-          <Button onClick={() => handleClick()}>Voltar</Button>
-          <Button onClick={() => handleSave()}>Confirmar</Button>
+          <StyledButtonSalvar onClick={() => handleSave()} style={{ margin: '0 15px' }}>Salvar</StyledButtonSalvar>
+          <StyledButtonVoltar onClick={() => handleClick()} style={{ margin: '0px 65px 0px 0px' }}>Voltar</StyledButtonVoltar>          
         </ButtonContainer>
 
       </Container>

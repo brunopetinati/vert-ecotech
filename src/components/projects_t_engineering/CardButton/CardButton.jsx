@@ -58,7 +58,7 @@ const CardButton = ({ image, project_id, card_name }) => {
         const headers = { Authorization: `Bearer ${token}` };
         const response = await axios.post(`${apiUrlSelect}/${project_id}/${card_name}`, {}, { headers });
 
-        console.log(response.data['selected_card_id']);
+        //console.log(response.data['selected_card_id']);
 
         if (response.data['selected_card_id'] > 0) {
           setIsSelected(true);
@@ -99,11 +99,11 @@ const CardButton = ({ image, project_id, card_name }) => {
 
       if (!isSelected) {
         const response = await axios.post(apiUrlInsert, formData, { headers });
-        console.log('Resposta da API:', response.data);
+        //console.log('Resposta da API:', response.data);
         setIsSelected(true);
       } else {
         const response = await axios.delete(`${apiUrlDelete}/${project_id}/${card_name}`, { headers });
-        console.log('Resposta da API:', response.data);
+        //console.log('Resposta da API:', response.data);
         setIsSelected(false);
       }
     } catch (error) {

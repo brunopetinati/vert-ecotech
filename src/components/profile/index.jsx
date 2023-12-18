@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Banco from '../bank';
-import { StyledButton } from '../default_button/styles';
+import { StyledButton, StyledButtonSalvar } from '../default_button/styles';
 import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer } from './styles';
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
@@ -271,13 +271,8 @@ const Profile = () => {
               />
             </Row>
             <ButtonContainer>
-              <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} />
-              <StyledButton
-                onClick={handleRegister}
-                style={{ width: '250px' }}
-              >
-                Salvar Alterações
-              </StyledButton>
+              <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} style={{ margin: '0px 15px 0px 0px' }}/>
+              <StyledButtonSalvar onClick={handleRegister} style={{ margin: '0px 65px 20px 15px' }}>Salvar Alterações</StyledButtonSalvar>
             </ButtonContainer>
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </InnerContainer>

@@ -11,10 +11,12 @@ export const Container = styled.div`
   display:flex;
   flex-direction: column;
   width: ${({collapsed}) => collapsed ? "110vw" : "120vw"};
+  floa: left;
+  margin-left: 220px;
 
   @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
+    --display: flex;
+    --flex-direction: row;
     height: 100%;
     width: 100vw;
   }  
@@ -70,8 +72,8 @@ export const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   height: 5vw;
-  width: 93vw;
-  margin-top: 32px;
+  width: 69vw;
+  margin-top: -20px;
 `;
 
 export const Button = styled.button`
@@ -178,13 +180,14 @@ export const ListItem = styled.li`
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   border: 2px solid #ddd;
-  border-radius: 50px;
+  border-radius: 50px;  
   transition: background-color 0.3s;
   align-text: left;
+  color: rgb(79,79,79);
 
-  width: 65vw;
-  margin: 10px;
-  height: 40px;
+  width: 57vw;
+  margin-top: 5px;
+  min-height: 25px;
 
   &:hover {
     background-color: #e0f2f1;
@@ -208,8 +211,84 @@ export const ListItemText = styled.div`
   justify-content: flex-start;
   align-items: center;
   text-align: left !important;
+  margin-left: 35px;
+  color: #363636;
+  font-size: 9pt;
+  width: 450px;
+`;
+
+export const ListItemTextResposta = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left !important;
   margin-left: 50px;
   color: rgb(79,79,79);
-  font-size: 11pt;
-  width: 700px;
+  font-size: 8pt;
+  width: 450px;
+`;
+
+export const StyledButtonEditar = styled.button`
+  --background-color: #98FB98;
+  background-color: rgba(0, 80, 0, 0.7);
+  border-radius: 100px;
+  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 65px;
+  width: 120px;
+  height: 25px;
+  z-index: 1;
+
+  :hover {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const StyledButtonVoltar = styled.button`
+  background-color: #4682B4;
+  border-radius: 100px;
+  box-shadow: rgba(70,130,180, .2) 0 -25px 18px -14px inset,rgba(70,130,180, .15) 0 1px 2px,rgba(70,130,180, .15) 0 2px 4px,rgba(70,130,180, .15) 0 4px 8px,rgba(70,130,180, .15) 0 8px 16px,rgba(70,130,180, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 65px;
+  width: 60px;
+  height: 25px;
+  z-index: 1;
+
+  :hover {
+    box-shadow: rgba(70,130,180,.35) 0 -25px 18px -14px inset,rgba(70,130,180,.35) 0 1px 2px,rgba(70,130,180,.35) 0 2px 4px,rgba(70,130,180,.35) 0 4px 8px,rgba(70,130,180,.35) 0 8px 16px,rgba(70,130,180,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
 `;

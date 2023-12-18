@@ -29,7 +29,7 @@ const ProjectsTable = ({filteredProjects}) => {
             <TH>Área de Reserva Legal (ha)</TH>
             <TH>Área Total (ha)</TH>
             <TH>Localidade</TH>
-            <TH>Status C.A.R</TH>
+            <TH>Status CAR</TH>
             <TH>Status da matrícula</TH>
             <TH>Status de georreferenciamento no SIGEF</TH>
             <TH>Situação da Reserva Legal</TH>

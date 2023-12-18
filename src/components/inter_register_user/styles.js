@@ -4,13 +4,14 @@ import Select from 'react-select';
 
 
 export const MainContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  background: #f5f5f5;
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: center;
+  --align-items: center;
+  --background: #f5f5f5;
+  width: 100%;
+  height: 100%;
+  --margin-left: 200px;
 `;
 
 export const Container = styled.div`
@@ -43,25 +44,27 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
-  padding: 16px;
+  width: 90%;
+  --padding: 16px;
+  z-index: 1;
 `;
 
 export const Label = styled.label`
-  margin-bottom: 10px;
-  font-weight: 700;
+  --margin-bottom: 10px;
+  --font-weight: 700;
+  font-size: 10pt;
+  color: rgb(54, 54, 54);
 `;
 
 export const ShowInput = styled(InputMask)`
-  padding: 10px;
-  margin-bottom: 20px;
-  
-  border: 2px solid #ccc;
+  margin-bottom: 5px;
+  border: 2px solid rgb(204, 204, 204);
   border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  font-size: 12px;
   outline: none;
-  width: 350px;
+  width: 400px;
+  background: rgba(245, 245, 245, 0.2); 
+  margin-top: 5px;
 
   &:focus {
     border-color: #007bff;
@@ -140,18 +143,17 @@ export const IndexContainer = styled.div`
 `;
 
 export const ProfileContainerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  width: 900px;
-  height: 1200px;
-  padding: 4em;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 2;
-  background: #fff;
-  max-height: 500px;
+  --display: flex;
+  --flex-direction: column;
+  --justify-content: space-around;
+  --align-items: center;
+  width: 650px;
+  padding: 10px;
+  --background: #fff;
+  margin-top: 30px;
+  -border-radius: 20px;
+  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  height: 600px;
 
   h3 {
     display: flex;
@@ -198,11 +200,13 @@ export const ButtonContainerIndex = styled.div`
 `;
 
 export const StyledSelect = styled(Select)`
-  margin-bottom: 20px;
-  width: 370px  ;
+  margin-bottom: 10px;
+  border: 2px solid rgb(204, 204, 204);
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 12px;
   outline: none;
+  width: 400px;
+  background: rgba(245, 245, 245, 0.2);   
 
   &:focus {
     border-color: #007bff;

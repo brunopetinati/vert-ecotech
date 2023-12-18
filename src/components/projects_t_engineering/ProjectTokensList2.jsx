@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
-import { Button, Input } from './styles2';
+import { ButtonProximo, ButtonAposentar, Input } from './styles2';
 
 const ProjectTokensList2 = ({ project_id }) => {
   const [items, setItems] = useState([]);
@@ -64,7 +64,7 @@ const ProjectTokensList2 = ({ project_id }) => {
   };  
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '350px' }}>      
+    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>      
       <h2>Tokens Visão Mensal</h2>
       <table>
         <thead>
@@ -91,7 +91,7 @@ const ProjectTokensList2 = ({ project_id }) => {
         </tbody>
       </table>
       <div>
-        <span>Page: </span>
+        <span>Página: </span>
         {pages.map((page) => (
           <button
             key={page}
@@ -104,9 +104,9 @@ const ProjectTokensList2 = ({ project_id }) => {
       </div>
       <div style={{ width: '100%', position: 'absolute', left: '165px' }}>
         <div style={{ width: '300px' }}>
-          <Button onClick={handlePrevYear}>{'<<'}</Button>
+          <ButtonProximo onClick={handlePrevYear} style={{ margin: '0px 20px 0px 0px' }}>{'<<'}</ButtonProximo>
           <Input type="text" value={currentYear} disabled style={{ width: '50px' }} />
-          <Button onClick={handleNextYear}>{'>>'}</Button>
+          <ButtonProximo onClick={handleNextYear} style={{ margin: '0px 15px 10px 20px' }}>{'>>'}</ButtonProximo>
         </div>
       </div>
     </div>

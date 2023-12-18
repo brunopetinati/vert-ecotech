@@ -22,7 +22,7 @@ const ProjectTokenChart1 = () => {
         const response = await axios.post(`${currentUrl}/api/project_tokens/get_by_months`, requestData, { headers });
 
         if (Array.isArray(response.data)) {
-          console.log('Resposta da API:', response.data);
+          //console.log('Resposta da API:', response.data);
           setData3(response.data);
         } else {
           console.error('Dados da API inválidos');
@@ -49,13 +49,13 @@ const ProjectTokenChart1 = () => {
     <Container collapsed={collapsed}>
       <div style={{ width: '600px' }}>
         <div>
-          <Chart data={data3} title={'Tokens'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
+          <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
         </div>
         <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <div style={{ width: '150px' }}>
-            <Button onClick={handlePrevYear}>{'<<'}</Button>
+          <div style={{ width: '300px', marginLeft: '120px' }}>
+            <Button onClick={handlePrevYear} style={{ margin: '0px 20px 0px 0px' }}>{'<<'}</Button>
             <Input type="text" value={currentYear} disabled style={{ width: '50px' }} />
-            <Button onClick={handleNextYear}>{'>>'}</Button>
+            <Button onClick={handleNextYear} style={{ margin: '0px 15px 10px 20px' }}>{'>>'}</Button>
           </div>
         </div>  
       </div>    

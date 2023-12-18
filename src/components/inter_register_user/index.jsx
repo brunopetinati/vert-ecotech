@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import  Banco from '../bank';
-import { StyledButton } from '../default_button/styles';
+import { StyledButton, StyledButtonSalvar, StyledButtonVoltar } from '../default_button/styles';
 import { MainContainer, ProfileContainerInfo, Row, Label, ShowInput, StyledSelect } from './styles'
 import { handleCepChange } from '../../api/requests/cep';
 import { motion } from 'framer-motion';
@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { currentUrl } from '../../constants/global';
 import { addUserToUsers } from '../../store/modules/app_data/actions';
 import { useDispatch } from 'react-redux';
+import { appStatus } from '../../store/modules/app_status/actions';
 
 const InternRegisterUser = () => {
 
@@ -129,6 +130,7 @@ const InternRegisterUser = () => {
 
 
   const handleComeBack = () =>{
+    dispatch(appStatus('Usuários'));
     navigate('/welcome');
   }
 
@@ -148,20 +150,20 @@ const InternRegisterUser = () => {
         transition={{ duration: 0.8 }}
         >
         <ProfileContainerInfo>
-          <div style={{'overflow-y': 'auto', width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
+          <div style={{width: '100%', display: 'flex', flexDirection: 'column', padding: '16px'}}>
             <h2>Cadastrar novo usuário</h2>
             <Row>
               <Label>Nome completo</Label>
               <div>
                 <ShowInput type="text" defaultValue={userObject.full_name} onChange={(e) => setUserObject({...userObject, full_name: e.target.value})} />              
-                {verifyName && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+                {verifyName && !userObject.full_name && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-28px', marginLeft: '10px', fontStyle: 'italic', fontSize: '10px' }}>Esse campo é necessário</div>}
               </div>
             </Row>
             <Row>
               <Label>Email</Label>
               <div>
                 <ShowInput type="text" defaultValue={userObject.email} onChange={(e) => setUserObject({...userObject, email: e.target.value})}/>
-                {verifyEmail && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+                {verifyEmail && !userObject.email && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-28px', marginLeft: '10px', fontStyle: 'italic', fontSize: '10px' }}>Esse campo é necessário</div>}
               </div>
             </Row>
             <Row>
@@ -174,7 +176,7 @@ const InternRegisterUser = () => {
                   alwaysShowMask={false}
                   defaultValue={userObject.phone}
                 />
-                {verifyPhone && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}                
+                {verifyPhone && !userObject.phone && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-28px', marginLeft: '10px', fontStyle: 'italic', fontSize: '10px' }}>Esse campo é necessário</div>}                
               </div>
             </Row>
             <Row>
@@ -216,7 +218,7 @@ const InternRegisterUser = () => {
                   maskPlaceholder="13140-989"
                   alwaysShowMask={false}
                 />
-                {verifyCEP && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}                
+                {verifyCEP && !userObject.cep && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-28px', marginLeft: '10px', fontStyle: 'italic', fontSize: '10px' }}>Esse campo é necessário</div>}                
               </div>
 
             </Row>
@@ -252,19 +254,12 @@ const InternRegisterUser = () => {
                   placeholder={'Selecione uma opção'}
                   onChange={handleAccesTypeChange}
                 />
-                {verifyAccessType && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>Esse campo é necessário</div>}
+                {verifyAccessType && <div style={{ color: 'red', marginBottom: '16px', marginTop: '0px', marginLeft: '10px', fontStyle: 'italic', fontSize: '10px' }}>Esse campo é necessário</div>}
               </div>
             </Row>
-            {/* <Row>            
-              <Label for="cnpj">Senha:</Label>
-              <ShowInput type="text" id="cnpj" name="cnpj" 
-              onChange={(e) => setUserObject({...userObject, password: e.target.value})}
-              />
-            </Row> */}
             <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-              {/* <StyledButton onClick={handleModalBanco} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0'}}>Informações de banco</StyledButton> */}
-              <StyledButton onClick={handleRegister} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 32px'}}>Cadastrar</StyledButton>
-              <StyledButton onClick={handleComeBack} style={{display:'flex', alignSelf: 'flex-end', margin: '32px 0px'}}>Voltar</StyledButton>
+              <StyledButtonSalvar onClick={handleRegister} style={{ margin: '0 15px' }}>Cadastrar</StyledButtonSalvar>
+              <StyledButtonVoltar onClick={handleComeBack} style={{ margin: '0px 65px 0px 0px' }}>Voltar</StyledButtonVoltar>
             </div>     
             {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
           </div>

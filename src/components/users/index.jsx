@@ -1,11 +1,13 @@
 import UsersTable from "../users_table/index";
 import UsersCard from "../users_cards";
 import DefaultButton from "../default_button";
-import { Container, ButtonContainer, TableContainer, Input, StyledSelect, MarginForCelphone } from "./styles";
+import { Container, ButtonContainer, TableContainer, Input, StyledSelect, Label, StyledButtonAdicionarUser } from "./styles";
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { currentUrl } from '../../constants/global';
+import { useNavigate } from "react-router-dom";
+import { appStatus } from '../../store/modules/app_status/actions';
 
 const Users = () => {
 
@@ -15,6 +17,7 @@ const Users = () => {
   const collapsed = useSelector((state) => state.sidebar);
 
   const [users, setUsers] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -69,25 +72,45 @@ const Users = () => {
     setSearchValue(event.target.value);
   };
   
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    dispatch(appStatus('cad_new_user'));
+    navigate('/welcome');
+  }
+
   return (
     <Container collapsed={collapsed} >
-      <ButtonContainer>
-        <div>
-        <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
-        <StyledSelect id="column-select" onChange={handleColumnChange}>
-          <option value="Nome">Nome</option>
-          <option value="Email">Email</option>
-          <option value="Whatsapp">Whatsapp</option>
-          <option value="Localidade">Localidade</option>
-          <option value="Acesso">Acesso</option>
-        </StyledSelect>
+
+      <div style={{ float: 'left', width: '65vw', height: '80px', textAlign: 'center', marginLeft: '0px' }}>
+        <h2>Usuários</h2>
+      </div>
+      <div style={{ float: 'left' }}>
+        <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>
+          <Label style={{ color: '#363636' }}>Campo </Label>
+          <StyledSelect id="column-select" onChange={handleColumnChange}>
+            <option value="Nome">Nome</option>
+            <option value="Email">Email</option>
+            <option value="Whatsapp">Whatsapp</option>
+            <option value="Localidade">Localidade</option>
+            <option value="Acesso">Acesso</option>
+          </StyledSelect>
         </div>
-        <MarginForCelphone />
-        <DefaultButton text={'Adicionar Usuário'} path={'/intern_client_register'}/>
-      </ButtonContainer>
+        <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>
+          <Label style={{ color: '#363636' }}>Valor </Label>
+          <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />          
+        </div>
+        <ButtonContainer>
+          <StyledButtonAdicionarUser onClick={() => handleClick()}>Novo Usuário</StyledButtonAdicionarUser>
+        </ButtonContainer>        
+      </div>
+      
       <TableContainer>
         {layoutUsers ? <UsersCard filteredUsers={filteredUsers} /> : <UsersTable filteredUsers={filteredUsers} /> }
       </TableContainer>
+
+
+
     </Container>
   );
 };

@@ -32,6 +32,7 @@ export const ButtonContainer = styled.div`
   align-items: center;
   width: 90%;
   margin-bottom: 32px;
+  margin-top: 50px;
 
   @media screen and (max-width: 768px) {
     display: flex;
@@ -49,44 +50,21 @@ export const TableContainer = styled.div`
 `;
 
 export const Input = styled.input`
-  padding: 10px;
-  width: 350px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
-  outline: none;
-
-  ::placeholder {
-    font-size: 16px;
-  }
-
-  &:focus {
-    border-color: #7eff00;
-  }
-
-  @media screen and (max-width: 768px) {
-    margin-left: 20px;
-    margin-top: 64px;
-    width: 60vw;
-    font-size: 12px;
-    
-    ::placeholder {
-      font-size: 12px; 
-    }
-  }
+  color: #363636;
+  font-size: 9pt;
 `;
 
 export const StyledSelect = styled.select`
-  padding: 10px;
   width: 350px;
   border: 2px solid #ccc;
   border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  --padding: 8px;
+  font-size: 12px;
   outline: none;
-  margin-left: 16px;
+  margin-left: 0px;
   background: white;
+  width: 250px;
+  height: 25px;
 
   ::placeholder {
     font-size: 16px;
@@ -99,7 +77,7 @@ export const StyledSelect = styled.select`
   @media screen and (max-width: 768px) {
     margin-left: 20px;
     margin-top: 64px;
-    width: 65vw;
+    width: 81%;
     font-size: 12px;
     
     ::placeholder {
@@ -112,4 +90,41 @@ export const MarginForCelphone = styled.div`
   @media screen and (max-width: 768px) {
     margin-top: 32px;
   }
+`;
+
+export const StyledButtonAdicionarProjeto = styled.button`
+  --background-color: #98FB98;
+  background-color: rgba(0, 80, 0, 0.7);
+  border-radius: 100px;
+  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 65px;
+  width: 170px;
+  height: 24px;
+
+  :hover {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const Label = styled.label`
+  color: #363636;
+  font-size: 9pt;
 `;

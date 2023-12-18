@@ -1,27 +1,38 @@
-import { Table, THead, TR, TH, TD, Wrapper} from './styles'
 import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { appStatus } from '../../store/modules/app_status/actions';
+
+import {
+  StyledTable as Table,
+  StyledTableHead as THead,
+  StyledTableRow as TR,
+  StyledTableHeader as TH,
+  StyledTableCell as TD,
+  StyledViewLink as ViewLink,
+  StyledButtonVisualizar
+} from './styles';
 
 const UsersTable = ({filteredUsers}) => {
 
   const navigate = useNavigate();
   const users = useSelector((state) => state.app_data.users);
+  const dispatch = useDispatch();
 
   const handleClick = (user) => {
-    navigate('/intern_user', { state: { user }} );
+    dispatch(appStatus('edit_user'));
+    navigate('/welcome', { state: { user }});
   };
 
   return (
-    <Wrapper>
       <Table>
         <THead>
           <TR>
             <TH>Nome</TH>
-            <TH>Email</TH>
+            <TH>e-mail</TH>
             <TH>Whatsapp</TH>
             <TH>Localidade</TH>
             <TH>Acesso</TH>
-            <TH></TH>
+            <TH>Ação</TH>
           </TR>
         </THead>
         <tbody>
@@ -32,12 +43,16 @@ const UsersTable = ({filteredUsers}) => {
               <TD>{row.phone}</TD>
               <TD>{row.city + ', ' + row.state}</TD>
               <TD>{row.user_type}</TD>
-              <TD style={{color: 'blue', textDecoration: 'underline', cursor: 'pointer'}} onClick={() => {handleClick(users.find(user => user.id === row.id))}}>Visualizar</TD>
+              <TD>
+                <StyledButtonVisualizar onClick={() => {handleClick(users.find(user => user.id === row.id))}} style={{ cursor: 'pointer' }}>
+                  Visualizar
+                </StyledButtonVisualizar>                
+              </TD>
             </TR>
           ))}
         </tbody>
       </Table>
-    </Wrapper>);
+  );
 };
 
 export default UsersTable;
