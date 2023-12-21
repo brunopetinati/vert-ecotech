@@ -28,9 +28,10 @@ import ProjectTokensList2 from './ProjectTokensList2';
 import ProjectTokensList3 from './ProjectTokensList3';
 import './TabletMenu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHistory, faThumbTack, faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import FileUploadBlockchain from './FileUpload/FileUploadBlockchain';
 import AdditionalInformation from './AdditionalInformation/AdditionalInformation';
+import Rastreability from './PolygonScan/Rastreability';
 
 
 const ProjectTabEngineering = ({ user, project }) => {
@@ -67,7 +68,7 @@ const ProjectTabEngineering = ({ user, project }) => {
         margin-bottom: 10px; /* Espaço entre os cards */
       }
     }    
-  `; 
+  `;
 
   const CardTopo = styled.div`
     max-width: 645px;
@@ -81,7 +82,7 @@ const ProjectTabEngineering = ({ user, project }) => {
       top: 50px; /* Cambia la posición superior para dispositivos móviles */
       transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
     }
-  `;  
+  `;
 
   const renderizarTela = () => {
     switch (telaAtiva) {
@@ -163,7 +164,13 @@ const ProjectTabEngineering = ({ user, project }) => {
             <div className="pagina">
               <AdditionalInformation project_id={project.id} matchObjectId={matchObjectId} />
             </div>
-          );          
+          );
+          case 'Rastreality':
+            return (
+              <div className="pagina">
+                <Rastreability />
+              </div>
+            );
       default:
         return null;
     }
@@ -204,7 +211,10 @@ const ProjectTabEngineering = ({ user, project }) => {
           <FontAwesomeIcon icon={faUpload} style={{ color: "gold" }} /> 
           <div style={{ paddingLeft: "8px", color: "grey" }}>Gerenciar Projeto</div>
         </div>
-      
+        <div className="menu-item" onClick={() => setTelaAtiva('Rastreality')}>
+          <FontAwesomeIcon icon={faHistory} style={{ color: "green" }} /> 
+          <div style={{ paddingLeft: "8px", color: "grey" }}>Rastreabilidade</div>
+        </div>
         {renderizarTela()}
       </div>
     </div>

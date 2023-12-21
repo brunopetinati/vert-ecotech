@@ -89,7 +89,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         [fieldName]: {
           id: guid,
           name_guid_ext: guid,
-          path: `environmental_engineering/${guid}.${ext}`,
+          path: `contractfiles/${guid}.${ext}`,
           ativo: true,
           project_id: project_id,
           name_orig_ext: selectedFile.name,
@@ -452,7 +452,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   const handleConfirmacaoDocumentos = (_topico_id) => {
 
-
     if(!isChecked)
     {
       Swal.fire({
@@ -569,36 +568,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     return isDocConfirmed;
   };
 
-  const startContract = async () => {
-
-    const requestData = {
-      project: project_id,
-      token: '56786786578567856788' 
-    };
-
-    const formData = new FormData();
-    formData.append('token', 'asdfsadf13242134');
-    formData.append('project', parseInt(project_id));
-
-    const token = sessionStorage.getItem('Authorization');
-    const headers = { Authorization: `Bearer ${token}` };
-
-    const response = await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers });
-
-    console.log(response);
-
-    //recarregar
-    axios
-    .get(`${currentUrl}/api/documentmodels2/${modelo_GUID}/data/`, { headers, params: { project_id: project_id } })
-    .then((response2) => {
-      setData2({ ...response2.data });
-    })
-    .catch((error) => {
-      console.error('Erro ao recarregar dados da tela:', error);
-    });
-    
-  };
-
   const [isContractConfirmed, setContractConfirmed] = useState(false);
 
   const getContract = () => {
@@ -632,23 +601,167 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     return isContractConfirmed;
   }; 
 
+  const recarregarTela = () => {
+    axios
+    .get(`${currentUrl}/api/documentmodels2/${modelo_GUID}/data/`, { headers, params: { project_id: project_id } })
+    .then((response) => {
+      setData2({ ...response.data });
+    })
+    .catch((error) => {
+      console.error('Erro ao recarregar dados da tela:', error);
+    });
+  }
+
+  const criarContract = async () => {
+
+    //buscar dados do projeto
+    const requestDatainfo = {
+      project_id: project_id,
+    };
+
+    await axios
+    .post(`${currentUrl}/api/getinfoproject/select/`, requestDatainfo, { headers })
+    .then(async (response0) => {
+
+      console.log(response0);
+
+      const requestData = {
+        project: project_id,
+        ProjectName: response0.data.project.title,
+        ProjectOwner: response0.data.user.owner_name,
+        ProjectCAR: response0.data.project.sicar_code,
+        ProjectCnpjCpf: response0.data.user.ProjectCnpjCpf, 
+      };
+
+      //const token = sessionStorage.getItem('Authorization');
+      //const headers = { Authorization: `Bearer ${token}` };
+
+      await axios
+      .post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
+      .then(async (response1) => {
+
+        console.log(response1);
+
+
+        //chama criacao dos enderecos blockchain 6 / 14
+        const enderecos1 = "x000000000001";
+        const enderecos2 = "x000000000002";
+
+        //timer aguardando o retorno com os enderecos
+        //fazer busca no blockchain com os enderecos retornados para encontrar o id do contrato
+        //inserir levels
+
+        console.log('Chave BD do contrato: ' + response1.data.id, 'project_id: ' + response1.data.project);
+
+
+        //inserir level 6
+        const requestDataLevel6 = {
+          project: project_id,
+          Contract: response1.data.id,
+          Topic: 'aabbccdd-1234-5678-90ab-cdef12345678',
+          Level: '6',
+          Address: enderecos1
+        };
+
+        await axios
+          .post(`${currentUrl}/api/filemanagerlevel/insert/`, requestDataLevel6, { headers })
+          .then((response2) => {
+
+            console.log(response2);
+
+          })
+          .catch((error) => {
+            console.error('Erro ao criar o level 6:', error);
+            return false;
+          });
+
+
+        //inserir level 14
+        const requestDataLevel14 = {
+          project: project_id,
+          Contract: response1.data.id,
+          Topic: '08d887a1-1b5e-483d-bd86-6c3f8752bd3a',
+          Level: '14',
+          Address: enderecos2
+        };
+
+        await axios
+          .post(`${currentUrl}/api/filemanagerlevel/insert/`, requestDataLevel14, { headers })
+          .then((response3) => {
+
+            console.log(response3);
+
+          })
+          .catch((error) => {
+            console.error('Erro ao criar o level 14:', error);
+            return false;
+          });          
+
+      })
+      .catch((error) => {
+        console.error('Erro ao criar o contrato:', error);
+        //atualiza o registro criado do contrato "file_manager_contract", com response e marca is_error = true
+        return false;
+      });
+
+      recarregarTela();      
+
+    })
+    .catch((error) => {
+      console.error('Erro ao buscar info project:', error);
+      return false;
+    });
+
+  };  
+
+  const startContract = async () => {
+
+    //inserir documentos/nfts no blockchan das 
+    //etapas/levels que foram iniciadas
+
+    const requestData = {
+      project_id: project_id
+    };
+
+    await axios
+    .post(`${currentUrl}/api/filemanagernftetapa1/`, requestData, { headers })
+    .then((response) => {
+
+      console.log(response);
+
+    })
+    .catch((error) => {
+      console.error('Erro ao selecionar os levels:', error);
+      return false;
+    }); 
+
+  };
+
   return (
     <div className="uploads-save" style={{ position: 'absolute', top: '0px', left: '-100px' }}>
       <div style={styles.formContainer}>
-        
+
         <h2>{tela_name}</h2>
 
         <div>blockchain</div>
 
-        {((verificarDocsConfirmados() && !getContract() &&
-        (<div>
-          <div>
-            <ConnectButton/>
+        <div>
+          <ConnectButton/>
+        </div>
+
+        <div style={{ float: 'left', height: '25px', width: '300px' }}>
+          <div style={{ float: 'left', height: '25px', width: '120px' }}>
+            <button onClick={() => criarContract()}>Criar contract</button>              
           </div>
-          <div>
-            <button onClick={() => startContract()}>Iniciar contract</button>
-          </div>             
-        </div>)
+          <div style={{ float: 'left', height: '25px', width: '120px' }}>
+            <button onClick={() => startContract()}>Iniciar contract</button>              
+          </div>     
+        </div>
+
+        {((verificarDocsConfirmados() && !getContract() &&
+          (
+            <div></div>
+          )
         ))}
 
         <ProgressBar data={data2} />
