@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import CreditoCarbono from './CreditoCarbono/CreditoCarbono';
 import GeographicCoordinates from './GeographicCoordinates/GeographicCoordinates';
@@ -28,10 +28,19 @@ import ProjectTokensList2 from './ProjectTokensList2';
 import ProjectTokensList3 from './ProjectTokensList3';
 import './TabletMenu.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHistory, faThumbTack, faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHistory, faThumbTack, faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import FileUploadBlockchain from './FileUpload/FileUploadBlockchain';
 import AdditionalInformation from './AdditionalInformation/AdditionalInformation';
-import Rastreability from './PolygonScan/Rastreability';
+//import Rastreability from './PolygonScan/Rastreability';
+//import TestEstadoVar from './PolygonScan/TestEstadoVar';
+//import MintNft from './PolygonScan/MintNFT_v6';
+//import MintNft from './PolygonScan/Contract02';
+//import TesteAssinatura from './PolygonScan/MintNFT_v4_Contrato_Vert2';
+//import Exemplo from './PolygonScan/contratos/Exemplo07';
+//import MintNFTComponent from './PolygonScan/contratos/Exemplo08';
+import ContasWilder from './ContasWilder/ContasWilder';
+import Moedas from './CryptoMoeda/CryptoMoeda';
+//import Exemplo from './PolygonScan/contratos/Exemplo14';
 
 
 const ProjectTabEngineering = ({ user, project }) => {
@@ -168,12 +177,30 @@ const ProjectTabEngineering = ({ user, project }) => {
           case 'Rastreality':
             return (
               <div className="pagina">
-                <Rastreability />
+                <ContasWilder/>
               </div>
             );
+            case 'Moedas':
+              return (
+                <div className="pagina">
+                  <Moedas/>
+                </div>
+              );
       default:
         return null;
     }
+  };
+
+  const mintNFTRef = useRef(null);
+
+  const handleSignButtonClick = (e) => {
+    e.preventDefault();
+    mintNFTRef.current && mintNFTRef.current.handleSign(e);
+  };
+
+  const mintNFTButtonClick = (e) => {
+    e.preventDefault();
+    mintNFTRef.current && mintNFTRef.current.mintNFT();
   };
 
   return (
@@ -213,7 +240,11 @@ const ProjectTabEngineering = ({ user, project }) => {
         </div>
         <div className="menu-item" onClick={() => setTelaAtiva('Rastreality')}>
           <FontAwesomeIcon icon={faHistory} style={{ color: "green" }} /> 
-          <div style={{ paddingLeft: "8px", color: "grey" }}>Rastreabilidade</div>
+          <div style={{ paddingLeft: "8px", color: "grey" }}>Contas Wilder</div>
+        </div>
+        <div className="menu-item" onClick={() => setTelaAtiva('Moedas')}>
+          <FontAwesomeIcon icon={faMoneyBill} style={{ color: "green" }} /> 
+          <div style={{ paddingLeft: "8px", color: "grey" }}>Vert Carbon Credit</div>
         </div>
         {renderizarTela()}
       </div>

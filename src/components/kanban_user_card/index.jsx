@@ -10,11 +10,11 @@ const KanbanUserCard = ({ full_name, city, state }) => {
     <Card>
       <InfoContainer>
         <DisplayColumn>
-          <h3>{full_name}</h3>
+          <div style={{ fontSize: '8pt', zIndex: '1' }}>{full_name}</div>
         </DisplayColumn>
       </InfoContainer>
       <ImgContainer>
-        <Img src={NewLead} alt="new_lead" style={{width: '55px', height: '45px' }} />
+        <Img src={NewLead} alt="new_lead" style={{ width: '90px', marginTop: '-10px', zIndex: '0' }} />
       </ImgContainer>
     </Card>
   );

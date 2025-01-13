@@ -1,0 +1,18 @@
+[Unit]
+Description=Vert API Python 3.9 Django 4.1.7
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash /srv/ftp/vert-api/start-vertapi39.sh
+WorkingDirectory=/srv/ftp/vert-api
+StandardOutput=append:/srv/ftp/vert-api/start-vertapi39.log
+StandardError=append:/srv/ftp/vert-api/start-vertapi39.log
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=NODE_ENV=development
+
+[Install]
+WantedBy=multi-user.target

@@ -10,6 +10,7 @@ import axios from 'axios';
 import { currentUrl } from '../../constants/global';
 import Logo from '../../assets/logo-vert-white.png';
 import Swal from 'sweetalert2';
+import { verifyUser } from '../projects_t_engineering/SmartContract/verifyUser';
 
 const Login = () => {
 
@@ -21,6 +22,9 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showLoading, setShowLoading] = useState(false);
 
+  const token = sessionStorage.getItem('Authorization');
+  const headers = { Authorization: `Bearer ${token}` };
+
   const handleSubmit = async event => {
 
     event.preventDefault();
@@ -28,22 +32,38 @@ const Login = () => {
       axios.post(`${currentUrl}/api/login/`, {
         email,
         password,
-      }).then(response => {
-        sessionStorage.setItem('Authorization', response.data.access);
-        const token = response.data.access;
-        const usuario_id = response.data.id;
-        sessionStorage.setItem('Email', email);
-        sessionStorage.setItem('Password', password);
-        sessionStorage.setItem('usuario_id', usuario_id);
-        setShowLoading(true);
-        setTimeout(() => {
-          handleLoginClick(response); 
-          dispatch(userLogin(token, response.data));
-          dispatch(getOwners(token));
-          dispatch(getProjects(token));
-          dispatch(getEngineeringTable(token));
-        }, 500);
-        dispatch(appStatus('Dashboard'));
+      }).then(async response => {
+
+        const retornoVerifyUser = await verifyUser(response.data.carteira_meta_mask, email);
+
+        if(retornoVerifyUser.is_assinatura_ok)
+        {
+          sessionStorage.setItem('Authorization', response.data.access);
+          const token = response.data.access;
+          const usuario_id = response.data.id;
+          sessionStorage.setItem('Email', email);
+          sessionStorage.setItem('Password', password);
+          sessionStorage.setItem('usuario_id', usuario_id);
+          setShowLoading(true);
+          setTimeout(() => {
+            handleLoginClick(response); 
+            dispatch(userLogin(token, response.data));
+            dispatch(getOwners(token));
+            dispatch(getProjects(token));
+            dispatch(getEngineeringTable(token));
+          }, 500);
+          dispatch(appStatus('Dashboard'));
+        }
+        else 
+        {
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível logar, carteira MetaMask invalida.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          }); 
+        }
+        
       }).catch(error => {
         console.error('Login failed:', error.message);
         Swal.fire({
@@ -63,7 +83,7 @@ const Login = () => {
       });
     }
   };
-  
+
 
   const handleLoginClick = () => {
     navigate('/welcome');
@@ -125,7 +145,15 @@ const Login = () => {
       </motion.div>
     ) : (
       <>
-        <Img src={Logo} />
+        <div style={{ overflow: 'hidden' }}>
+          <Img 
+            src={Logo} 
+            style={{
+              filter: 'drop-shadow(3px 3px 1px rgba(255, 255, 255, 0.9))',
+              borderRadius: '10px' // Adicione bordas arredondadas se desejar
+            }} 
+          />
+        </div>
         {app_status === 'forgot_password' ? (
           <LoginForm>
             <Input

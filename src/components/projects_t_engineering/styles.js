@@ -317,7 +317,7 @@ export const ContainerNewButton = styled.li`
 export const StyledButtonCancelar = styled.button`
   background-color: #FFA07A;
   border-radius: 100px;
-  box-shadow: rgba(255,0,0, .2) 0 -25px 18px -14px inset,rgba(255,0,0, .15) 0 1px 2px,rgba(255,0,0, .15) 0 2px 4px,rgba(255,0,0, .15) 0 4px 8px,rgba(255,0,0, .15) 0 8px 16px,rgba(255,0,0, .15) 0 16px 32px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
   color: #363636;
   cursor: pointer;
   display: inline-block;
@@ -332,11 +332,11 @@ export const StyledButtonCancelar = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-left: 0px;
-  width: 60px;
+  width: 55px;
   height: 20px;
 
   :hover {
-    box-shadow: rgba(255,0,0,.35) 0 -25px 18px -14px inset,rgba(255,0,0,.25) 0 1px 2px,rgba(255,0,0,.25) 0 2px 4px,rgba(255,0,0,.25) 0 4px 8px,rgba(255,0,0,.25) 0 8px 16px,rgba(255,0,0,.25) 0 16px 32px;
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
     transform: scale(1.02) ;
   }
 
@@ -346,9 +346,9 @@ export const StyledButtonCancelar = styled.button`
 `;
 
 export const StyledButtonDownload = styled.button`
-  background-color: #98FB98;
+  background-color: #00FF7F;
   border-radius: 100px;
-  box-shadow: rgba(0,255,0, .2) 0 -25px 18px -14px inset,rgba(0,255,0, .15) 0 1px 2px,rgba(0,255,0, .15) 0 2px 4px,rgba(0,255,0, .15) 0 4px 8px,rgba(0,255,0, .15) 0 8px 16px,rgba(0,255,0, .15) 0 16px 32px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
   color: #363636;
   cursor: pointer;
   display: inline-block;
@@ -363,11 +363,11 @@ export const StyledButtonDownload = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-left: 0px;
-  width: 60px;
+  width: 55px;
   height: 20px;
 
   :hover {
-    box-shadow: rgba(0,255,0,.35) 0 -25px 18px -14px inset,rgba(0,255,0,.35) 0 1px 2px,rgba(0,255,0,.35) 0 2px 4px,rgba(0,255,0,.35) 0 4px 8px,rgba(0,255,0,.35) 0 8px 16px,rgba(0,255,0,.35) 0 16px 32px;
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
     transform: scale(1.02) ;
   }
 
@@ -379,7 +379,7 @@ export const StyledButtonDownload = styled.button`
 export const StyledButtonLogs = styled.button`
   background-color: #D8BFD8;
   border-radius: 100px;
-  box-shadow: rgba(186,85,211, .2) 0 -25px 18px -14px inset,rgba(186,85,211, .15) 0 1px 2px,rgba(186,85,211, .15) 0 2px 4px,rgba(186,85,211, .15) 0 4px 8px,rgba(186,85,211, .15) 0 8px 16px,rgba(186,85,211, .15) 0 16px 32px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
   color: #363636;
   cursor: pointer;
   display: inline-block;
@@ -394,11 +394,11 @@ export const StyledButtonLogs = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-left: 0px;
-  width: 60px;
+  width: 55px;
   height: 20px;
 
   :hover {
-    box-shadow: rgba(186,85,211,.35) 0 -25px 18px -14px inset,rgba(186,85,211,.35) 0 1px 2px,rgba(186,85,211,.35) 0 2px 4px,rgba(186,85,211,.35) 0 4px 8px,rgba(186,85,211,.35) 0 8px 16px,rgba(186,85,211,.35) 0 16px 32px;
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
     transform: scale(1.02) ;
   }
 
@@ -413,6 +413,37 @@ export const ListItemDiv = styled.div`
   align-items: center;
   border: 2px solid #ddd;
   border-radius: 50px;  
+  transition: background-color 0.3s;
+  align-text: left;
+  color: rgb(79,79,79);
+
+  width: 65vw;
+  margin-top: 3px;
+  min-height: 25px;
+
+  &:hover {
+    background-color: #e0f2f1;
+  }
+
+  div {
+    --width: 100%;
+    --display: flex;
+    --flex-direction: row;
+    --align-items: center;
+    --justify-content: center;    
+  }
+
+  span {
+    font-size: 20px;
+  }
+`;
+
+export const ListItemDivContract = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border: 2px solid #ddd;
+  border-radius: 10px;  
   transition: background-color 0.3s;
   align-text: left;
   color: rgb(79,79,79);
@@ -651,6 +682,130 @@ export const StyledButtonIniciado = styled.button`
 
   :hover {
     box-shadow: rgba(255,255,0,.35) 0 -25px 18px -14px inset,rgba(255,255,0,.35) 0 1px 2px,rgba(255,255,0,.35) 0 2px 4px,rgba(255,255,0,.35) 0 4px 8px,rgba(255,255,0,.35) 0 8px 16px,rgba(255,255,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const StyledButtonCriarContract = styled.button`
+  background-color: #98FB98;
+  border-radius: 100px;
+  box-shadow: rgba(0,255,0, .2) 0 -25px 18px -14px inset,rgba(0,255,0, .15) 0 1px 2px,rgba(0,255,0, .15) 0 2px 4px,rgba(0,255,0, .15) 0 4px 8px,rgba(0,255,0, .15) 0 8px 16px,rgba(0,255,0, .15) 0 16px 32px;
+  color: #363636;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 0px;
+  width: 80px;
+  height: 20px;
+
+  :hover {
+    box-shadow: rgba(0,255,0,.35) 0 -25px 18px -14px inset,rgba(0,255,0,.35) 0 1px 2px,rgba(0,255,0,.35) 0 2px 4px,rgba(0,255,0,.35) 0 4px 8px,rgba(0,255,0,.35) 0 8px 16px,rgba(0,255,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const StyledButtonMintNft = styled.button`
+  background-color: #F5DEB3;
+  border-radius: 100px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
+  color: #363636;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 0px;
+  width: 55px;
+  height: 20px;
+
+  :hover {
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const StyledButtonShowNft = styled.button`
+  background-color: #7FFF00;
+  border-radius: 100px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
+  color: #363636;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 0px;
+  width: 55px;
+  height: 20px;
+
+  :hover {
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+  }
+
+  @media screen and (max-width: 768px) {
+    font-size: 10px;
+  }
+`;
+
+export const StyledButtonSubstituirNft = styled.button`
+  background-color: #FFFF00;
+  border-radius: 100px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
+  color: #363636;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  --padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 0px;
+  width: 55px;
+  height: 20px;
+
+  :hover {
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
     transform: scale(1.02) ;
   }
 

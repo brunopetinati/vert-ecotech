@@ -1,0 +1,18 @@
+[Unit]
+Description=Ganache Ethereum Blockchain
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash /srv/ftp/vert-api/start-ganache.sh
+WorkingDirectory=/srv/ftp/vert-api
+StandardOutput=append:/srv/ftp/vert-api/start-ganache.log
+StandardError=append:/srv/ftp/vert-api/start-ganache.log
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+Environment=NODE_ENV=development
+
+[Install]
+WantedBy=multi-user.target

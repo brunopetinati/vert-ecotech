@@ -83,7 +83,7 @@ const KanbanBoard = () => {
       })
       .catch((error) => {
       });
-      setShowModalSendNotification(!showModalSendNotification);
+      //setShowModalSendNotification(!showModalSendNotification);
     }
     const notificationID = columnToNotificationIDMap[newStatus];
     setNotificationID(notificationID);
@@ -174,7 +174,8 @@ const KanbanBoard = () => {
     >
       <>
         <Container>
-        <KanbanSidebar />
+          <KanbanSidebar />
+
           <Column showingColumn={showingColumn}
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'started')}
@@ -203,11 +204,12 @@ const KanbanBoard = () => {
             })}
               {selectedUser && <KanbanUserCardDefaultModal user={selectedUser} isOpen={isOpen} onClose={handleOnClose} />}
           </Column>
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'analysis')}
           >
-            <h4>Análise de viabilidade</h4>
+            <h4>Pré-viabilidade</h4>
             {projects.map((project, key) => {
               if (project.status === 'analysis') {
                 return (
@@ -220,6 +222,7 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'viability')}
@@ -237,6 +240,7 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'negotiation')}
@@ -254,6 +258,7 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'idle')}
@@ -271,13 +276,15 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
+
           <Column
             onDragOver={handleDragOver}
-            onDrop={(e) => handleDrop(e, 'implementing')}
+            onDrop={(e) => handleDrop(e, 'progress')}
           >
-            <h4>Contrato</h4>
+            <h4>Andamento</h4>
             {projects.map((project, key) => {
-              if (project.status === 'implementing') {
+              if (project.status === 'progress') {
                 return (
                   <CardContainer key={key} onClick={() => {handleClick(projects.find(storedProject => storedProject.id === project.id))}} scoreColor={getScoreColor(project.score)} draggable onDragStart={(e) => handleDragStart(e, project.owner, project.id, project.status, project.title)}>
                     <KanbanCard project={project} />
@@ -288,6 +295,8 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'concluded')}
@@ -305,6 +314,7 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
           <Column
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, 'lost')}
@@ -322,7 +332,9 @@ const KanbanBoard = () => {
               }
             })}
           </Column>
+
         </Container>
+
         {showModalSendNotification && (
           <KanbanSendNotificationModal
             isOpen={showModalSendNotification}

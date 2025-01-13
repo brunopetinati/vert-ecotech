@@ -7,6 +7,7 @@ import { StyledButton } from '../default_button/styles';
 import ResetPassword from '../reset_password';
 import { eraseAll } from '../../store/modules/app_data/actions';
 import { useNavigate } from 'react-router-dom';
+import AddGanacheNetwork from '../projects_t_engineering/SmartContract/AddGanacheNetwork';
 
 const Settings = () => {
 
@@ -73,6 +74,10 @@ const Settings = () => {
         <StyledButton onClick={handleShowResetPasswordModal} style={{position: 'absolute', bottom: '32px', right: '160px'}}>Alterar Senha</StyledButton>
         <StyledButton onClick={handleLogout} style={{position: 'absolute', bottom: '32px', right: '32px'}}>Deslogar</StyledButton>
         {showResetPassword && <ResetPassword isOpen={showResetPassword} onClose={handleShowResetPasswordModal}/>}
+        <div>
+          <h1>Adicionar Rede Ganache-QA-SP à MetaMask</h1>
+          <AddGanacheNetwork />
+        </div>        
       </InnerContainer>
     </Container>
   );

@@ -3,14 +3,15 @@ import styled from "styled-components";
 export const Card = styled.div`
   color: #7eff00;
   background-color: #054d00;
-  border-radius: 8px;
-  box-shadow: 0 1px 0 rgba(9,30,66,.25);
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.30) 3px 3px 8px 3px;
   padding: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
   cursor: pointer;
-  min-width: 110px;
-  max-width: 110px;
-  height: 110px;
+  min-width: 90px;
+  max-width: 90px;
+  height: 90px;
+  border: 5px solid #e3831d;
 `;
 
 export const InfoContainer = styled.div`

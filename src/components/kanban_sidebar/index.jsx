@@ -95,7 +95,7 @@ const KanbanSidebar = () => {
         <SidebarMenuItem onClick={() => handleNavigate("/welcome")}>{collapsed ? <img src={Exit} alt="voltar" style={{width: '32px'}}/> : 'Voltar'}</SidebarMenuItem>
       </SidebarMenu>
       <SidebarFooter>
-       {/* collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span> */}
+       {/* collapsed ? <span style={{color: '#054d00'}} onClick={handleSecret}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2024</span> */}
       </SidebarFooter>
     </SidebarContainer>
   );

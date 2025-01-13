@@ -20,35 +20,12 @@ import RegisterProjectFileUploadWebOpen from "../pages/outsider";
 import OutsiderSuccess from "../pages/outsider_success";
 import OutsiderCanceled from "../pages/outsider_canceled";
 import RecoverPassword from "../components/recover_password";
-import { WagmiConfig, configureChains, createConfig, useAccount } from "wagmi";
-import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
-import { polygon, polygonMumbai } from '@wagmi/core/chains';
-import { createPublicClient, http } from 'viem';
-import { getAdminByWallet, getUnapprovedProjects } from "redux";
-import { setIsAdmin } from "redux";
-import { useModal } from "./useModal";
-import React, { useState } from "react";
-import Web3 from "web3";
-
 
 const AppRoutes = () => {
 
-  const dispatch = useDispatch();
-  const [stateModal, setStateModal] = useState(false);
-  const [isOpenModal, openModal, closeModal] = useModal();
-  const client = createPublicClient({
-    chain: polygon,
-    transport: http('https://polygon-rpc.com')
-  })
-
-  const { address } = useAccount();
-
- 
 
   const navigate = useNavigate();
   const location = useLocation();
-
-
   
   if (!sessionStorage.Authorization && location.pathname !== '/' &&
     location.pathname !== '/register' &&

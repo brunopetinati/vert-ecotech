@@ -120,13 +120,13 @@ const Sidebar = () => {
         transition={{ duration: 0.2 }}
         >
       <ButtonForCellPhoneToOpenSidebar className={showSidebar ? 'rotate' : ''} onClick={() => handleSetShowSidebar()}>
-        <img src={Logo} alt="0" style={{width: '20px'}}/>
+        <img src={Logo} alt="0" style={{width: 'px'}}/>
       </ButtonForCellPhoneToOpenSidebar>
       
       <SidebarContainer collapsed={collapsed} showSidebar={showSidebar}>
 
         <SidebarHeader onClick={() => setCollapsed(!collapsed)}>
-          {collapsed ? <img src={Logo} alt="0" style={{width: '20px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '100px', marginTop: '32px'}}/> }
+          {collapsed ? <img src={Logo} alt="0" style={{width: '38px', marginTop: '32px'}}/> :  <img src={ExpandedLogo} alt="0" style={{width: '200px', marginTop: '32px'}}/> }
         </SidebarHeader>
 
         <SidebarMenu>
@@ -168,7 +168,7 @@ const Sidebar = () => {
         </SidebarMenuItemDiffer>
 
         <SidebarFooter>
-          {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2023</span>}
+          {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2024</span>}
         </SidebarFooter>
 
       </SidebarContainer>

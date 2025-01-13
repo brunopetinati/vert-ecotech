@@ -28,12 +28,12 @@ export const Container = styled.div`
 `;
 
 export const Column = styled.div`
-  width: 10vw;
-  background-color: #FFF;
+  width: 110px;
+  background-color: #E9F9EC;
   margin-right: 8px;
   position: relative;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
 
   display: flex;
   flex-direction: column;
@@ -42,10 +42,13 @@ export const Column = styled.div`
 
 
   h4 {
-   text-align: center;
-   min-height: 50px; 
-   border-bottom: 1px solid black;
-   font-weight: 400;
+    text-align: center;
+    min-height: 30px;
+    border-bottom: 1px solid silver;
+    font-weight: 400;
+    font-size: 9pt;
+    color: #1bb55e;
+    margin-bottom: 25px;
   }
 
 `;
@@ -55,10 +58,10 @@ export const CardContainer = styled.div`
   border-radius: 5px;
   padding: 10px;
   cursor: move;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-  width: 130px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.30) 3px 3px 8px 3px;
+  width: 90px;
 
   h3 {
     color: ${(props) => props.scoreColor};

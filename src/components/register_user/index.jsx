@@ -145,7 +145,16 @@ const Register = () => {
           </motion.div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-            <Img src={Logo} />
+          <div style={{ overflow: 'hidden' }}>
+            <Img 
+              src={Logo} 
+              style={{
+                height: 80,
+                filter: 'drop-shadow(3px 3px 1px rgba(255, 255, 255, 0.9))',
+                borderRadius: '10px' // Adicione bordas arredondadas se desejar
+              }} 
+            />
+          </div>
             <LoginForm onSubmit={handleSubmition}>
               <div style={{ marginBottom: '20px' }}>
                 <label>

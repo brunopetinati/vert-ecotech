@@ -9,7 +9,7 @@ const FileInput = styled.input.attrs({ type: 'file' })`
 export const StyledButtonUpload = styled.button`
   background-color: #87CEFA;
   border-radius: 100px;
-  box-shadow: rgba(0,255,255, .2) 0 -25px 18px -14px inset,rgba(0,255,255, .15) 0 1px 2px,rgba(0,255,255, .15) 0 2px 4px,rgba(0,255,255, .15) 0 4px 8px,rgba(0,255,255, .15) 0 8px 16px,rgba(0,255,255, .15) 0 16px 32px;
+  box-shadow: rgba(255,20,147, .2) 0 -25px 18px -14px inset,rgba(255,20,147, .15) 0 1px 2px,rgba(255,20,147, .15) 0 2px 4px,rgba(255,20,147, .15) 0 4px 8px,rgba(255,20,147, .15) 0 8px 16px,rgba(255,20,147, .15) 0 16px 32px;
   color: #363636;
   cursor: pointer;
   display: inline-block;
@@ -24,12 +24,11 @@ export const StyledButtonUpload = styled.button`
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-left: 0px;
-  width: 60px;
+  width: 55px;
   height: 20px;
-  float: left;
 
   :hover {
-    box-shadow: rgba(0,255,255,.35) 0 -25px 18px -14px inset,rgba(0,255,255,.35) 0 1px 2px,rgba(0,255,255,.35) 0 2px 4px,rgba(0,255,255,.35) 0 4px 8px,rgba(0,255,255,.35) 0 8px 16px,rgba(0,255,255,.35) 0 16px 32px;
+    box-shadow: rgba(255,20,147,.35) 0 -25px 18px -14px inset,rgba(255,20,147,.35) 0 1px 2px,rgba(255,20,147,.35) 0 2px 4px,rgba(255,20,147,.35) 0 4px 8px,rgba(255,20,147,.35) 0 8px 16px,rgba(255,20,147,.35) 0 16px 32px;
     transform: scale(1.02) ;
   }
 

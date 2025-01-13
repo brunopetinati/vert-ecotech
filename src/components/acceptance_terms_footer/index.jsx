@@ -52,7 +52,7 @@ const AcceptanceBar = ({path, func, registerUser}) => {
 
   return (
     <FooterContainer>
-      <div>Copyright © 2023</div>
+      <div>Copyright © 2024</div>
       <div style={{ marginBottom: '64px'}}>
         <Button onClick={handleAccept}>Aceitar</Button>
         <Button onClick={handleDecline}>Declinar</Button>

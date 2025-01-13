@@ -11,5 +11,11 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    alias: {
+      '@wagmi/core': require.resolve('@wagmi/core'),
+      '@web3modal/core': require.resolve('@web3modal/core'),
+    },
+  },  
 
 };
