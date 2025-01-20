@@ -37,7 +37,7 @@ export const Factory = async (nomePropriedade, nomeProprietario, cnpjcpf, car, f
     console.log({ signature });
 
     //inicio chamada da geracao da instancia do contrato cliente
-    const contractAddress = '0x4e72770760c011647d4873f60a3cf6cdea896cd8';
+    const contractAddress = '0x5f58053f00ac33e2557368daca06bab5f2ae0049';
     const contract = new web3.eth.Contract(contractAbi, contractAddress);
 
     const gasLimit = 6721975;

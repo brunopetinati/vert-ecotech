@@ -162,7 +162,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     axios.get(`${currentUrl}/api/documentmodels2/${modelo_GUID}/data/`, { headers, params: { project_id: project_id } })
       .then((response) => {
         setData2({ ...response.data });
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -1006,7 +1006,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       .post(`${currentUrl}/api/getconfirmeddocumentscount/`, requestData, { headers })
       .then((response) => {
         //console.log(response.data.confirmed_documents_count);
-        if (parseInt(response.data.confirmed_documents_count, 10) === 26) { setDocConfirmed(true); }
+        if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true); }
       })
       .catch((error) => {
         console.error('Erro ao buscar documentos:', error);
@@ -1799,7 +1799,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         <ProgressBar data={data2} />
 
         <div style={{ float: 'left', width: '900px' }}>
-          {Object.keys(data2).map((topic) => (
+          {Object.keys(data2).sort((a, b) => parseInt(a) - parseInt(b)).map((topic) => (
             <div key={topic} className="collapsible">
               <ListItemDiv style={{ backgroundColor: 'rgb(235,235,235)', width: '800px' }}>
                 <div style={{ cursor: 'pointer', float: 'left', marginLeft: '10px', width: '20px', height: '20px' }} className="header" onClick={() => toggleTopic(topic)}>

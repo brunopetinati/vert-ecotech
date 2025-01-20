@@ -16,6 +16,9 @@ function ProgressBar2({ data, __topico }) {
       {__topico.includes('06') && <ProgressBarFilho data={data} __topico={"06"} />}
       {__topico.includes('07') && <ProgressBarFilho data={data} __topico={"07"} />}
       {__topico.includes('08') && <ProgressBarFilho data={data} __topico={"08"} />}
+      {__topico.includes('09') && <ProgressBarFilho data={data} __topico={"09"} />}
+      {__topico.includes('10') && <ProgressBarFilho data={data} __topico={"10"} />}
+      {__topico.includes('11') && <ProgressBarFilho data={data} __topico={"11"} />}
     </div>
   );
 }
