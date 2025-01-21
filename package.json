@@ -15,7 +15,7 @@
     "@toolz/allow": "^1.0.1",
     "@toolz/is-a-regular-object-react": "^1.0.0",
     "@web3modal/react": "^2.7.1",
-    "axios": "^1.3.5",
+    "axios": "^0.27.2",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "chart.js": "^4.2.1",
@@ -38,7 +38,7 @@
     "react-modal": "^3.16.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
     "react-select": "^5.7.2",
     "react-spinners": "^0.13.8",
     "react-test-renderer": "^18.2.0",
@@ -48,9 +48,9 @@
     "redux-thunk": "^2.4.2",
     "stream-browserify": "^3.0.0",
     "styled-components": "^5.3.11",
-    "sweetalert2": "^11.7.3",
+    "sweetalert2": "^11.6.13",
     "web-vitals": "^2.1.4",
-    "web3": "^1.10.4",
+    "web3": "^4.16.0",
     "yup": "^1.1.1"
   },
   "scripts": {
@@ -58,7 +58,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!@toolz/allow-react)/\" --env=jsdom",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage --watchAll --collectCoverageFrom='src/components/**/*.{js,jsx}' --coveragePathIgnorePatterns='/styles\\.js$'"
+    "coverage": "npm test -- --coverage --watchAll --collectCoverageFrom='src/components/**/*.{js,jsx}' --coveragePathIgnorePatterns='/styles\\.js$'",
+    "lint": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -86,13 +87,18 @@
     "@babel/plugin-transform-react-jsx": "^7.22.5",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.22.5",
+    "@eslint/js": "^9.18.0",
     "@types/react-modal": "^3.16.1",
     "babel-jest": "^29.5.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react": "^7.37.4",
+    "globals": "^15.14.0",
     "jest": "^27.5.1",
     "react-app-rewired": "^2.2.1",
     "source-map-loader": "^4.0.1",
     "typescript": "4.9.5",
-    "webpack": "^5.89.0",
+    "vite-plugin-node-stdlib-browser": "^0.2.1",
+    "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
   },
   "jest": {
