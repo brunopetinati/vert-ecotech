@@ -31,16 +31,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHistory, faThumbTack, faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle, faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import FileUploadBlockchain from './FileUpload/FileUploadBlockchain';
 import AdditionalInformation from './AdditionalInformation/AdditionalInformation';
-//import Rastreability from './PolygonScan/Rastreability';
-//import TestEstadoVar from './PolygonScan/TestEstadoVar';
-//import MintNft from './PolygonScan/MintNFT_v6';
-//import MintNft from './PolygonScan/Contract02';
-//import TesteAssinatura from './PolygonScan/MintNFT_v4_Contrato_Vert2';
-//import Exemplo from './PolygonScan/contratos/Exemplo07';
-//import MintNFTComponent from './PolygonScan/contratos/Exemplo08';
 import ContasWilder from './ContasWilder/ContasWilder';
 import Moedas from './CryptoMoeda/CryptoMoeda';
-//import Exemplo from './PolygonScan/contratos/Exemplo14';
 
 
 const ProjectTabEngineering = ({ user, project }) => {
@@ -234,6 +226,7 @@ const ProjectTabEngineering = ({ user, project }) => {
           <FontAwesomeIcon icon={faList} style={{ color: "brown" }} /> 
           <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Aposentadoria</div>
         </div>    
+        <p>ESSAAAAAA É A TELAAAA</p>
         <div className="menu-item" onClick={() => setTelaAtiva('uploadsSave')}>
           <FontAwesomeIcon icon={faUpload} style={{ color: "gold" }} /> 
           <div style={{ paddingLeft: "8px", color: "grey" }}>Gerenciar Projeto</div>

@@ -8,25 +8,31 @@ import { ReactComponent as Settings } from '../../assets/icons/configuracoes7.sv
 
 export const SidebarContainer = styled.div`
   background-color: #f6f6f6;
-  width: ${({collapsed}) => collapsed ? "5vw" : "15vw"};
+  width: ${({ collapsed }) => (collapsed ? "5vw" : "15vw")};
+  min-height: 100vh; /* Garante altura mínima de 100% da viewport */
   top: 0;
   left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: width 0.5s ease-in-out;
-  height: 100vh;
-  position: sticky;
-  z-index: 2;
+  transition: width 0.3s ease-in-out;
+  position: relative; /* Permite empurrar o conteúdo */
+
+  /* Garante que o conteúdo principal se ajuste ao lado do sidebar */
+  & + main {
+    margin-left: ${({ collapsed }) => (collapsed ? "5vw" : "15vw")};
+    transition: margin-left 0.3s ease-in-out;
+  }
 
   @media screen and (max-width: 768px) {
-    width: ${({ showSidebar }) => (showSidebar ? "15vw" : "0")};
-    height: ${({ showSidebar }) => (showSidebar ? "100%" : "0")};
+    width: ${({ showSidebar }) => (showSidebar ? "65vw" : "0")};
+    min-height: 100vh; /* Continua com altura mínima de 100% da tela */
     opacity: ${({ showSidebar }) => (showSidebar ? 1 : 0)};
-    transition: height 2.5s ease-in-out, opacity 0.5s ease-in-out;
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
     overflow: hidden;
   }
 `;
+
 
 // mexer nessa altura de 153vh;
 
@@ -52,16 +58,15 @@ export const SidebarMenu = styled.ul`
 export const SidebarMenuItem = styled.li`
   position: relative;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+  flex-direction: column; /* Centraliza o texto ao alterar a direção */
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  padding: ${({ collapsed }) => (collapsed ? "10px" : "10px 20px")};
+  font-size: ${({ collapsed }) => (collapsed ? "12px" : "16px")};
   font-weight: 500;
   color: #606f7b;
   cursor: pointer;
-  padding: ${({ collapsed }) => (collapsed ? '10px' : '10px 20px')};
   text-align: center;
-  position: relative;
 
   &::after {
     width: 80px;
@@ -73,12 +78,12 @@ export const SidebarMenuItem = styled.li`
     padding: 8px;
     border-radius: 10px;
     top: 10%;
-    left: 120px;
+    left: 50%; /* Alinha no centro horizontal */
     transform: translateX(-50%);
     z-index: 1;
     opacity: 0;
     transition: opacity 0.8s ease-in-out;
-    visibility: ${({ collapsed }) => (collapsed ? 'visible' : 'hidden' )};
+    visibility: ${({ collapsed }) => (collapsed ? "visible" : "hidden")};
     box-shadow: 2mm 2mm 2mm rgba(0, 0, 0, 0.5);
   }
 
@@ -105,8 +110,9 @@ export const SidebarMenuItem = styled.li`
   &::after {
     pointer-events: none; /* Isso impede que o label receba cliques */
     cursor: default; /* Isso define o cursor de volta para o padrão */
-  }  
+  }
 `;
+
 
 export const SidebarMenuItemDiffer = styled.li` 
   display: flex;
@@ -157,7 +163,7 @@ export const SidebarIcon = styled.img`
 `;
 
 export const StyledUser = styled(User)`
-  fill: ${({active}) => active ? "#fff" : "#fff"};
+  fill: ${({ active }) => (active ? "#fff" : "#000")};
   height: 32px;
   width: 12px;
   transform: scale(2.5);

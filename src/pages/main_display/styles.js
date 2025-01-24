@@ -14,6 +14,8 @@ export const Container = styled.div`
 
 
 export const SideContainer = styled.div`
+ 
+   /*overflow-x: hidden;  overflow-y: auto; Remove a rolagem horizontal */
   background: #f9fafb;
   position: relative; 
   width: calc(100% - ${({ collapsed }) => (collapsed ? "5vw" : "20vw")}); /* Ajusta largura */

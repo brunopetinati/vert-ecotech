@@ -1,18 +1,13 @@
 import { AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
 import { useLocation, useNavigate, Routes, Route } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCommercialTable, getEngineeringTable, getOwners } from "../store/modules/app_data/thunk";
 import Welcome from '../pages/main_display';
 import Login from '../components/login';
 import Register from '../components/register_user';
 import PrivacyPolicy from '../components/terms/privacy_policy'; 
 import TermsOfUse from '../components/terms/terms_of_use'; 
 import RegisterProject from '../components/project_register_index';
-import InternRegisterUser from '../components/inter_register_user';
 import ProjectIntern from "../pages/project_intern";
 import EditProject from "../pages/project_edit/";
-import UserIntern from "../pages/user_intern";
 import KanbanBoard from "../components/kanban_board/";
 import PrivacyPolicyPage from '../pages/terms/privacy_policy'; 
 import TermsOfUsePage from '../pages/terms/terms_of_use'; 
@@ -60,10 +55,8 @@ const AppRoutes = () => {
         <Route exact path="/terms_of_use" element={<TermsOfUse />} />
         <Route exact path="/project_register" element={<RegisterProject />} />
         <Route exact path="/welcome" element={<Welcome />} />
-        {/*<Route exact path="/intern_client_register" element={<InternRegisterUser />} />*/}
         <Route exact path="/intern_project" element={<ProjectIntern />} />
         <Route exact path="/edit_intern_project" element={<EditProject />} />
-       {/*<Route exact path="/intern_user" element={<UserIntern />} />*/}
         <Route exact path="/analysis_and_development" element={<KanbanBoard />} />
         <Route exact path="/privacy" element={<PrivacyPolicyPage />} />
         <Route exact path="/terms_of_use_page" element={<TermsOfUsePage />} />
