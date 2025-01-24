@@ -8,7 +8,7 @@ import { ReactComponent as Settings } from '../../assets/icons/configuracoes7.sv
 
 export const SidebarContainer = styled.div`
   background-color: #f6f6f6;
-  width: ${({collapsed}) => collapsed ? "5vw" : "20vw"};
+  width: ${({collapsed}) => collapsed ? "5vw" : "15vw"};
   top: 0;
   left: 0;
   display: flex;
@@ -55,7 +55,7 @@ export const SidebarMenuItem = styled.li`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 500;
   color: #606f7b;
   cursor: pointer;

@@ -14,23 +14,19 @@ export const Container = styled.div`
 
 
 export const SideContainer = styled.div`
-  --display: flex;
-  --flex-direction: column;
-  --justify-content: center;
-  --align-items: center;
   background: #f9fafb;
-  position: absolute;
-  left: 50px;
-  width: 1450px;
-  margin-left: 100px;
+  position: relative; 
+  width: calc(100% - ${({ collapsed }) => (collapsed ? "5vw" : "20vw")}); /* Ajusta largura */
+  margin-left: ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}; /* Ajusta a posição do conteúdo */
+  transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out; /* Adiciona transições suaves */
 
   @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    align-items: flex-start;
+    margin-left: ${({ showSidebar }) => (showSidebar ? "15vw" : "0")};
+    width: ${({ showSidebar }) => (showSidebar ? "85vw" : "100vw")};
+    transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out;
   }
 `;
+
 
 export const SideContainerFlexStart = styled.div`
   display: flex;
