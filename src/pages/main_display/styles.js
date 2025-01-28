@@ -14,20 +14,21 @@ export const Container = styled.div`
 
 
 export const SideContainer = styled.div`
- 
-   /*overflow-x: hidden;  overflow-y: auto; Remove a rolagem horizontal */
+  scrollbar-width: none; 
+  overflow-y: auto; 
+  overflow-x: hidden; 
   background: #f9fafb;
   position: relative; 
-  width: calc(100% - ${({ collapsed }) => (collapsed ? "5vw" : "20vw")}); /* Ajusta largura */
-  margin-left: ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}; /* Ajusta a posição do conteúdo */
-  transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out; /* Adiciona transições suaves */
+  height: 100vh; 
+  min-height: 100vh; /* Garante que sempre tenha a altura mínima */
+  width: calc(100% - ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}); /* Cálculo direto de largura */
+  margin-left: ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}; 
+  transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out; 
 
-  @media screen and (max-width: 768px) {
-    margin-left: ${({ showSidebar }) => (showSidebar ? "15vw" : "0")};
-    width: ${({ showSidebar }) => (showSidebar ? "85vw" : "100vw")};
-    transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out;
+  &::-webkit-scrollbar {
+    display: none; /* Remove scrollbar no Chrome/Safari */
   }
-`;
+`; 
 
 
 export const SideContainerFlexStart = styled.div`
