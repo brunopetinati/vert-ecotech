@@ -185,55 +185,6 @@ export const TextInput = styled.textarea`
   height: 150px;
 `;
 
-const MainContainer = styled.div`
-  float: left;
-  width: 100%;
-  text-align: center;
-  min-height: 600px;
-`;  
-
-const CardTopo = styled.div`
-  max-width: 645px;
-  position: absolute;
-  top: 100px;
-  left: 46%;
-  transform: translate(-50%, -50%);
-
-  @media (max-width: 768px) {
-    max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
-    top: 50px; /* Cambia la posición superior para dispositivos móviles */
-    transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
-  }
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 645px;
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  transform: translate(-57%, -8%); 
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    top: 150px;
-    transform: translate(-50%, 0); 
-    flex-direction: row; /* Mudança para duas colunas */
-    align-items: flex-start; /* Alinhamento dos elementos na parte superior */
-    
-    & > div {
-      flex-basis: 48%; /* Largura de 48% para cada card */
-      margin-bottom: 10px; /* Espaço entre os cards */
-    }
-  }    
-`; 
-
-const UploadsContainer = styled.div`
-  margin-top: 70px;
-`;
-
 export const List = styled.ul`
   list-style: none;
   padding: 0;
@@ -813,3 +764,83 @@ export const StyledButtonSubstituirNft = styled.button`
     font-size: 10px;
   }
 `;
+//estou mexendo aquiiii
+export const CardContainer = styled.div`
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+max-width: 645px;
+position: absolute;
+top: 140px;
+left: 55%;
+transform: translate(-57%, -8%); 
+
+@media (max-width: 768px) {
+  max-width: 100%;
+  top: 150px;
+  transform: translate(-50%, 0); 
+  flex-direction: row; /* Mudança para duas colunas */
+  align-items: flex-start; /* Alinhamento dos elementos na parte superior */
+  
+  & > div {
+    flex-basis: 48%; /* Largura de 48% para cada card */
+    margin-bottom: 10px; /* Espaço entre os cards */
+  }
+}    
+`;
+
+export const CardTopo = styled.div`
+max-width: 645px;
+position: absolute;
+top: 100px;
+left: 38%;
+transform: translate(-50%, -50%);
+
+@media (max-width: 768px) {
+  max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
+  top: 50px; /* Cambia la posición superior para dispositivos móviles */
+  transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
+}
+`;
+
+export const styles = {
+  tabletMenu: {
+    width: '1200px', // Mantém a largura do menu
+    backgroundColor: 'var(--background-color, #f0f0f0)',
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0 auto', 
+    position: 'relative',// Faz o menu "flutuar" em relação à tela
+    bottom: '0', // Alinha o menu à parte inferior da tela
+    left: '50%', // Centraliza horizontalmente
+    transform: 'translateX(-50%)',
+    height: '500px',
+    top: '50px',
+  },
+  menuItem: {
+    cursor: 'pointer',
+    padding: '10px',
+    display: 'flex',
+    alignItems: 'center',
+    width: '240px',
+  },
+  menuItemHover: {
+    backgroundColor: 'silver',
+    color: '#fff',
+  },
+  icon: {
+    marginRight: '10px',
+  },
+  pagina: {
+    width: '800px',
+    padding: '20px',
+    margin: '0 auto', // Centraliza horizontalmente
+    flexDirection: 'column', // Alinha os itens verticalmente
+    alignItems: 'center', // Centraliza os itens horizontalmente
+    backgroundColor: 'var(--background-color, #f0f0f0)',
+  },
+  h2: {
+    color: '#007BFF',
+  },
+};
