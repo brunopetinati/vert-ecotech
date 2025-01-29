@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
-import imgExcluir from '../../../src/assets/icons/delete.png';
+
 
 export const Container = styled.div`
   
@@ -766,47 +766,49 @@ export const StyledButtonSubstituirNft = styled.button`
 `;
 //estou mexendo aquiiii
 export const CardContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
-max-width: 645px;
-position: absolute;
-top: 140px;
-left: 55%;
-transform: translate(-57%, -8%); 
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+  grid-template-rows: repeat(3, auto); /* 3 fileiras */
+  gap: 10px; /* Espaçamento entre os elementos */
+  max-width: 1000px; /* Ajuste conforme necessário */
+  position: absolute;
+  top: 90px;
+  left: 55%;
+  transform: translateX(-50%);
 
-@media (max-width: 768px) {
-  max-width: 100%;
-  top: 150px;
-  transform: translate(-50%, 0); 
-  flex-direction: row; /* Mudança para duas colunas */
-  align-items: flex-start; /* Alinhamento dos elementos na parte superior */
-  
-  & > div {
-    flex-basis: 48%; /* Largura de 48% para cada card */
-    margin-bottom: 10px; /* Espaço entre os cards */
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas menores */
+    grid-template-rows: repeat(6, auto); /* 6 fileiras */
   }
-}    
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas para telas pequenas */
+    grid-template-rows: auto;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr); /* 1 coluna para telas muito pequenas */
+  }
 `;
+
 
 export const CardTopo = styled.div`
 max-width: 645px;
 position: absolute;
-top: 100px;
-left: 38%;
+top: 65px;
+left: 53.5%;
 transform: translate(-50%, -50%);
 
 @media (max-width: 768px) {
-  max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
-  top: 50px; /* Cambia la posición superior para dispositivos móviles */
-  transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
+  max-width: 80%; 
+  top: 50px; 
+  transform: translate(-50%, 0); 
 }
 `;
 
 export const styles = {
   tabletMenu: {
-    width: '1200px', // Mantém a largura do menu
-    backgroundColor: 'var(--background-color, #f0f0f0)',
+    width: '1200px', 
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
@@ -818,28 +820,39 @@ export const styles = {
     height: '500px',
     top: '50px',
   },
+  menu:{
+    marginBottom: '12px', 
+    marginTop: '14px',
+  },
+
   menuItem: {
     cursor: 'pointer',
     padding: '10px',
     display: 'flex',
     alignItems: 'center',
-    width: '240px',
+    width: '240px',  
   },
+
   menuItemHover: {
     backgroundColor: 'silver',
     color: '#fff',
   },
+
+  pagina: {
+    display: 'flex',  // Adicionando o `:` e corrigindo o erro de sintaxe
+    flexDirection: 'column',  // Adicionando o `:` e corrigindo o erro de sintaxe
+    justifyContent: 'center',
+    width: '60vw',
+    position: 'relative',
+    left: '300px', // Move para a direita 
+    marginTop: '-410px', // Ajuste para mover para cima 
+    textAlign: 'left',
+  },
+
   icon: {
     marginRight: '10px',
   },
-  pagina: {
-    width: '800px',
-    padding: '20px',
-    margin: '0 auto', // Centraliza horizontalmente
-    flexDirection: 'column', // Alinha os itens verticalmente
-    alignItems: 'center', // Centraliza os itens horizontalmente
-    backgroundColor: 'var(--background-color, #f0f0f0)',
-  },
+
   h2: {
     color: '#007BFF',
   },

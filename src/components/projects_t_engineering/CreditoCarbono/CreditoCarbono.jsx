@@ -1,52 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
-import { Button, StyledButtonSalvar, StyledButtonNovo, StyledButtonPesquisar } from './../styles';
+import {StyledButtonSalvar, StyledButtonNovo, StyledButtonPesquisar } from './../styles';
 import Swal from 'sweetalert2';
 import { currentUrl } from '../../../../src/constants/global';
-import { useNavigate } from 'react-router-dom';
+import { Label, ButtonContainer, Input } from './style';
 import Search from './Search';
 import CloseButton from './CloseButton';
 
-
-const CreditoCarbonoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  -moz-box-pack: center;
-  justify-content: center;
-  width: 60vw;
-  --margin-left: 230px;
-  text-align: left;
-  --margin-top: 400px;
-`;
-
-const Label = styled.label`
-  --margin-bottom: 10px;
-  --font-weight: 700;
-  font-size: 10pt;
-  color: rgb(54, 54, 54);
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-`;
-
-export const Input = styled.input`
-  margin-bottom: 5px;
-  border: 2px solid rgb(204, 204, 204);
-  border-radius: 4px;
-  font-size: 12px;
-  outline: none;
-  width: 400px;
-  background: rgba(245, 245, 245, 0.2); 
-  margin-top: 5px;
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
 
 const CreditoCarbono = ({ project_id }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -140,8 +100,7 @@ const CreditoCarbono = ({ project_id }) => {
 
   
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
-      <CreditoCarbonoContainer>
+    <div >
         <h2>Crédito de Carbono</h2>
         <div>
           <Label htmlFor="safra1">SAFRA</Label>
@@ -206,7 +165,6 @@ const CreditoCarbono = ({ project_id }) => {
             </div>
           </div>
         )}      
-      </CreditoCarbonoContainer>
     </div>
   );
 };

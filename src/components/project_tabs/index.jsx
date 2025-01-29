@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { currentUrl } from "../../constants/global";
-import { TabContainer, LinearTabs, Tab, Content, TabItem, TabLink, CloseTab } from "./styles";
+import { TabContainer, LinearTabs, Tab, Content} from "./styles";
 import { ButtonContainer, Button, StyledButtonEditar,StyledButtonVoltar } from '../../pages/project_intern/styles.js';
 
 const ProjectTabs = ({ tabs, handleRegister, project }) => {

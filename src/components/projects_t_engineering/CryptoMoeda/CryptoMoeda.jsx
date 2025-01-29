@@ -6,17 +6,6 @@ import { Purchase } from './Purchase';
 import { Collaterals } from './Collaterals';
 import Swal from 'sweetalert2';
 
-const CryptoMoedaContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  -moz-box-pack: center;
-  justify-content: center;
-  width: 60vw;
-  --margin-left: 230px;
-  text-align: left;
-  --margin-top: 100px;
-`;
-
 const Label = styled.label`
   margin-bottom: 10px;
   font-weight: 700;
@@ -120,8 +109,7 @@ const CryptoMoeda = () => {
 
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
-      <CryptoMoedaContainer>
+    <div>
         <h2>Cunhar Moeda Digital</h2>
         <div>
           <Label htmlFor="addressTo">Endereço</Label>
@@ -229,8 +217,7 @@ const CryptoMoeda = () => {
         <br/>
 
         <br/> 
-
-      </CryptoMoedaContainer>    
+   
     </div>
   );
 };

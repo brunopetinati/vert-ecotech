@@ -1742,9 +1742,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
   return (
-    <div className="uploads-save" style={{ position: 'absolute', top: '0px', left: '-100px' }}>
-      <div style={styles.formContainer}>
-
+    <div>
+      <div >
         <h2>{tela_name}</h2>
 
         <div>

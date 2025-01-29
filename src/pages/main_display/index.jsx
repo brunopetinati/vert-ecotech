@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Container, SideContainer } from './styles'
 import Profile from '../../components/profile'
 import Projects from "../../components/projects";
