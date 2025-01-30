@@ -773,8 +773,8 @@ export const CardContainer = styled.div`
   max-width: 1000px; /* Ajuste conforme necessário */
   position: absolute;
   top: 90px;
-  left: 55%;
-  transform: translateX(-50%);
+  left: -0.5%;
+  //transform: translateX(-50%);
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas menores */
@@ -794,10 +794,10 @@ export const CardContainer = styled.div`
 
 export const CardTopo = styled.div`
 max-width: 645px;
-position: absolute;
-top: 65px;
-left: 53.5%;
-transform: translate(-50%, -50%);
+//position: absolute;
+//top: 65px;
+//left: 53.5%;
+//transform: translate(-50%, -50%);
 
 @media (max-width: 768px) {
   max-width: 80%; 
@@ -808,21 +808,25 @@ transform: translate(-50%, -50%);
 
 export const styles = {
   tabletMenu: {
-    width: '1200px', 
+    width: '1300px', 
+    height: '600px',
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto', 
     position: 'relative',// Faz o menu "flutuar" em relação à tela
     bottom: '0', // Alinha o menu à parte inferior da tela
-    left: '50%', // Centraliza horizontalmente
-    transform: 'translateX(-50%)',
-    height: '500px',
-    top: '50px',
+    left: '-2%', // Centrali horizontalmente
+    //transform: 'translateX(-50%)',
+    top: '1px',
   },
+
   menu:{
+    position: 'relative',
     marginBottom: '12px', 
     marginTop: '14px',
+    //backgroundColor: 'red',
+
   },
 
   menuItem: {
@@ -833,27 +837,17 @@ export const styles = {
     width: '240px',  
   },
 
-  menuItemHover: {
-    backgroundColor: 'silver',
-    color: '#fff',
-  },
-
   pagina: {
     display: 'flex',  // Adicionando o `:` e corrigindo o erro de sintaxe
     flexDirection: 'column',  // Adicionando o `:` e corrigindo o erro de sintaxe
     justifyContent: 'center',
     width: '60vw',
     position: 'relative',
-    left: '300px', // Move para a direita 
-    marginTop: '-410px', // Ajuste para mover para cima 
+    left: '90px', // Move para a direita 
+    marginTop: '-60px', // Ajuste para mover para cima 
+    marginLeft: '100px',
     textAlign: 'left',
   },
 
-  icon: {
-    marginRight: '10px',
-  },
-
-  h2: {
-    color: '#007BFF',
-  },
+  
 };

@@ -61,7 +61,7 @@ const ProjectTabEngineering = ({ project }) => {
     switch (telaAtiva) {
       case 'cardsContainer':
         return (
-          <div >
+          <div style={styles.pagina} >
             <CardTopo>
               <img src={imageTopo} alt="Imagem" />
             </CardTopo>
@@ -203,9 +203,11 @@ const ProjectTabEngineering = ({ project }) => {
             <FontAwesomeIcon icon={faMoneyBill} style={{ color: "green" }} />
             <div style={{ paddingLeft: "8px", color: "grey" }}>Vert Carbon Credit</div>
           </div>
-          {renderizarTela()}
         </div>
       </div>
+      <div style={styles.pagina}>
+      {renderizarTela()}
+    </div>
     </div>
   );
 };

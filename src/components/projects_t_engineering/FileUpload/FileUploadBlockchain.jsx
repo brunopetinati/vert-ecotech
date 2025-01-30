@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { createRoot } from 'react-dom/client';
@@ -11,7 +11,6 @@ import {
   ListItemDiv,
   ListItemDivContract,
   StyledButtonSalvar,
-  StyledButtonSalvarUnico,
   StyledButtonConfirmarDocs,
   StyledButtonIniciarEtapa,
   StyledButtonIniciado,
@@ -39,9 +38,8 @@ import { protectPDF } from '../SmartContract/protectPDF';
 const styles = {
   formContainer: {
     position: 'absolute',
-    //width: '722px',
     top: '65px',
-    left: '350px'
+    left: '350000px'
   },
   label: {
     display: 'block',
@@ -149,7 +147,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       }));
     };
 
-    reader.readAsBinaryString(selectedFile);
+    //"reader.readAsBinaryString(selectedFile);" versão antiga
+    reader.readAsArrayBuffer(selectedFile);
     return fileStates[fieldName];
   };
 
@@ -190,7 +189,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
 
     const fileKeys = Object.keys(docs);
-  
+
     for (const key of fileKeys) {
       const fileData = fileStates[key];
       try {
@@ -199,8 +198,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         console.error(`Erro ao enviar o arquivo ${key}:`, error);
       }
     }
-  
-    console.log('Todos os arquivos foram enviados.'); 
+
+    console.log('Todos os arquivos foram enviados.');
     recarregarTela1();
   };
 
@@ -227,20 +226,20 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           }));
         }
       })
-      .then(async (response1) => {
+        .then(async (response1) => {
 
-        console.log("arquivo enviado");
-        
-      })
-      .catch((error) => {
-        console.error('Upload failed!', error);
-        Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
-          icon: 'error',
-          confirmButtonText: 'OK'
+          console.log("arquivo enviado");
+
+        })
+        .catch((error) => {
+          console.error('Upload failed!', error);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
-      });
 
       setUploadSuccess((prev) => ({ ...prev, [fieldName]: true }));  // Marca sucesso após o envio
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload
@@ -251,7 +250,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   }
 
-  const recarregarTela1 = async () =>{
+  const recarregarTela1 = async () => {
     setBotaoSalvar(true);
 
     axios
@@ -1621,7 +1620,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         //console.log(fileStatesLocal);
       };
 
-      reader.readAsBinaryString(selectedFile);
+      //"reader.readAsBinaryString(selectedFile);" versão antiga 
+      reader.readAsArrayBuffer(selectedFile);
     };
 
     Swal.fire({
@@ -1664,10 +1664,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         if (result && result.isConfirmed) {
 
           try {
-
             //verifica user na blockchain antes de upar o doc
             const retornoVerifyUser = await verifyUser(contract_wallet_owner, __item.file_manager_nft_dt.nft_file_manager_nft_id);
-
             try {
 
               if (retornoVerifyUser.is_assinatura_ok) {
@@ -1745,14 +1743,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     <div>
       <div >
         <h2>{tela_name}</h2>
-
-        <div>
-          {/*} <ConnectButton/>                          
-         <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
-        {*/}
-        </div>
-
-        {((verificarDocsConfirmados() && 
+        {((verificarDocsConfirmados() &&
           (
             <div>
               <div style={{ color: 'rgb(79,79,79)', fontSize: '10pt', marginLeft: '10px' }}>blockchain</div>
@@ -1783,12 +1774,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                       <div>{contract_cnpj_cpf}</div>
                     </div>
                   </div>
-
-                  {/*}
-                  <div style={{ float: 'left', height: '25px', width: '120px' }}>
-                    <button onClick={() => startContract()}>Iniciar contract</button>              
-                  </div>
-                  {*/}
                 </div>
               </ListItemDivContract>
             </div>
