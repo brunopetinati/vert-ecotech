@@ -3,7 +3,7 @@ import FileUploadBlockchain from './../projects_t_engineering/FileUpload/FileUpl
 
 const ProjectTabLegal = ({ user, project }) => {
   return (
-    <div className="pagina" style={{ position: 'absolute', marginTop: '-75px', marginLeft: '-300px' }}>
+    <div >
       <FileUploadBlockchain 
         project_id={project.id} 
         tela_name={'Jurídico'} 

@@ -2,7 +2,7 @@ import FileUploadBlockchain from './../projects_t_engineering/FileUpload/FileUpl
 
 const ProjectTabAdministration = ({ user, project }) => {
   return (
-    <div className="pagina" style={{ position: 'absolute', marginTop: '-75px', marginLeft: '-300px' }}>
+    <div>
       <FileUploadBlockchain project_id={project.id} 
       tela_name={'Administrativo'} 
       modelo_GUID='907a2a72-8ef4-4da4-8465-93f8a062af10'

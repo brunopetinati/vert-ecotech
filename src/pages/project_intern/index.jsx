@@ -87,4 +87,4 @@ const   ProjectIntern = () => {
 
 };
 
-export default ProjectIntern;
+export default ProjectIntern ;

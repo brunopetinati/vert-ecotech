@@ -160,7 +160,7 @@ const ProjectTabEngineering = ({ project }) => {
   };
 
   return (
-    <div style={{ float: 'left', marginLeft: '100px' }}>
+    <div >
       <div style={styles.tabletMenu}>
         <div style={styles.menu}>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('cardsContainer')}>

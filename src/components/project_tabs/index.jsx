@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { currentUrl } from "../../constants/global";
 import { TabContainer, LinearTabs, Tab, Content} from "./styles";
-import { ButtonContainer, Button, StyledButtonEditar,StyledButtonVoltar } from '../../pages/project_intern/styles.js';
+import { ButtonContainer, Button, StyledButtonEditar,StyledButtonVoltar } from '../../pages/project_intern/intel/styles.js';
 
 const ProjectTabs = ({ tabs, handleRegister, project }) => {
   const currentUser = useSelector((state) => state.user.currentUser);

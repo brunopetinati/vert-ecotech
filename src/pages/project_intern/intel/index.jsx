@@ -3,7 +3,12 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { motion } from 'framer-motion';
-import { Container, InnerContainer, Column, Button, ListItem, ListItemText, ListItemTextResposta, ButtonContainer, Span, DownloadButton } from '../styles';
+import { Container,
+         Column, 
+         ListItem, 
+         ListItemText, 
+         ListItemTextResposta, 
+         ButtonContainer} from './styles';
 import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../../constants/functions";
 import { currentUrl } from '../../../constants/global';
 import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "../../../constants/functions";
