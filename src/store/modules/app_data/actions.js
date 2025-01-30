@@ -1,4 +1,3 @@
-import Projects from "../../../components/projects";
 import { STORE_PROJECT_ID, 
   STORE_USER_FIRST_ACCESS, 
   STORE_USERS, STORE_PROJECTS, 
