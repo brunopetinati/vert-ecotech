@@ -103,7 +103,7 @@ export const Button = styled.button`
   }
 `;
 
-export const TextArea = styled.textarea `
+export const TextArea = styled.textarea`
   padding: 10px;
   margin-bottom: 20px;
 
@@ -175,7 +175,7 @@ export const StyledSelectForUser = styled.select`
 export const DownloadButton = styled.button`
   margin: 16px;
   width: 100px;
-`; 
+`;
 
 export const FileInput = styled.input.attrs({ type: 'file' })`
   margin-left: 80px;
@@ -765,89 +765,88 @@ export const StyledButtonSubstituirNft = styled.button`
   }
 `;
 //estou mexendo aquiiii
+
 export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 colunas */
-  grid-template-rows: repeat(3, auto); /* 3 fileiras */
-  gap: 10px; /* Espaçamento entre os elementos */
-  max-width: 1000px; /* Ajuste conforme necessário */
-  position: absolute;
-  top: 90px;
-  left: -0.5%;
-  //transform: translateX(-50%);
-
+  grid-template-rows: repeat(3, auto);
+  gap: 1px;
+  max-width: 615px; 
+  width: 100%; /* Para garantir que ocupe a largura do container */
+  //justify-content: center; /* Centraliza os cards */
+  position: relative; 
+  justify-content: start; 
+  
   @media (max-width: 1024px) {
-    grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas menores */
-    grid-template-rows: repeat(6, auto); /* 6 fileiras */
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, auto);
   }
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr); /* 2 colunas para telas pequenas */
-    grid-template-rows: auto;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: 480px) {
-    grid-template-columns: repeat(1, 1fr); /* 1 coluna para telas muito pequenas */
+    grid-template-columns: repeat(1, 1fr);
   }
 `;
 
-
 export const CardTopo = styled.div`
-max-width: 645px;
-//position: absolute;
-//top: 65px;
-//left: 53.5%;
-//transform: translate(-50%, -50%);
-
-@media (max-width: 768px) {
-  max-width: 80%; 
-  top: 50px; 
-  transform: translate(-50%, 0); 
-}
+  width: 100%;
+  margin-left: -13px;
+  position: relative; 
 `;
 
 export const styles = {
   tabletMenu: {
-    width: '1300px', 
+    width: '1300px',
     height: '600px',
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto', 
-    position: 'relative',// Faz o menu "flutuar" em relação à tela
-    bottom: '0', // Alinha o menu à parte inferior da tela
-    left: '-2%', // Centrali horizontalmente
-    //transform: 'translateX(-50%)',
-    top: '1px',
+    margin: '0 auto',
+    position: 'relative', // Faz o menu ficar dentro do container
+    top: '0', // Garante que o container comece no topo
   },
 
-  menu:{
+  menu: {
     position: 'relative',
-    marginBottom: '12px', 
-    marginTop: '14px',
-    //backgroundColor: 'red',
-
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)', // 5 colunas
+    gridTemplateRows: 'repeat(2, auto)', // 2 linhas
+    gap: '5px', // Espaço entre os itens
+    justifyContent: 'center', // Centraliza os itens
+    alignItems: 'center',
+    width: '100%', // Para ocupar toda a largura do container
+    alignSelf: 'flex-start', // Fixa o menu no topo do container
   },
 
   menuItem: {
     cursor: 'pointer',
-    padding: '10px',
+    padding: '1px',
     display: 'flex',
+    flexDirection: 'row', // Ícone e texto na mesma linha
     alignItems: 'center',
-    width: '240px',  
+    justifyContent: 'center',
+    textAlign: 'left',
+    width: '250px',
+    height: '35px',
+    borderRadius: '8px',
+    backgroundColor: '#f8f8f8',
+    boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+    transition: 'background 0.3s',
+    gap: '8px',
   },
 
   pagina: {
-    display: 'flex',  // Adicionando o `:` e corrigindo o erro de sintaxe
-    flexDirection: 'column',  // Adicionando o `:` e corrigindo o erro de sintaxe
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     width: '60vw',
     position: 'relative',
-    left: '90px', // Move para a direita 
-    marginTop: '-60px', // Ajuste para mover para cima 
+    left: '75px',
+    marginTop: '-240px', // Diminui a margem para que o conteúdo fique abaixo do menu
     marginLeft: '100px',
     textAlign: 'left',
   },
-
-  
 };

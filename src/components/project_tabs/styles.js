@@ -9,11 +9,20 @@ export const Tab = styled.div`
   color: ${(props) => (props.active ? "#fff" : props.status === null ? "#ccc" : "#8bc34a")};
   font-weight: ${(props) => (props.active ? "normal" : "normal")};
   background-color: ${(props) => (props.active ? "#8bc34a" : "transparent")};
-  border-radius: 9px 9px 0 0;
+  border-radius: 15px 15px 0 0;
   z-index: 1;
+  //margin: 0 auto;
 
+  display: flex;
+  padding-left: 15px;/* Move o label para a direita */
+  text-align: right; /* Garante alinhamento do texto */
+  //width: 100%; /* Para ocupar toda a largura do contêiner */
+
+
+/*
   left: ${(props) => (props.position === 'right' ? 'auto' : props.position === 'left' ? '0' : '-10%')};
   transform: ${(props) => (props.position === 'left' ? 'none' : 'translateX(-50%)')};
+*/
 
   &:hover {
     border: ${(props) => (props.status !== null ? `1px solid ${props.active ? "transparent" : "#8bc34a"}` : "none")};
@@ -24,18 +33,20 @@ export const Tab = styled.div`
 
 
 export const LinearTabs = styled.ul`
+  position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: center; /* Centraliza os itens */
+  justify-content: center; /* Mantém os itens centralizados */
   align-items: center;
-  border-bottom: 1px solid #dae0e7;
+  border-bottom: 2px solid #8bc34a; /* Deixa a linha mais visível */
   background: #f9f9f9;
   list-style-type: none;
-  width: 50%; /* Garante que ocupe todo o espaço disponível */
+  width: 100%; /* Linha ocupa toda a largura */
   margin: 0 auto; /* Centraliza o contêiner */
-  margin-bottom: 10px;
-  padding-left: 230px; /* Para ajustar conforme necessário */
+  //margin-right: 2000px;
+  padding: 0; /* Remove padding lateral */
 `;
+
 
 export const TabItem = styled.li`
   position: relative;
@@ -76,8 +87,9 @@ export const CloseTab = styled.a`
 export const TabContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
+  //margin: 0 auto;
 `;
 
 export const Content = styled.div`

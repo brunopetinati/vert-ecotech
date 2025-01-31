@@ -10,6 +10,7 @@ import ProjectTabLegal from "../../components/projects_t_legal";
 import Sidebar from "../../components/sidebar";
 
 import { Container, SideContainer } from "../main_display/styles";
+import { Label } from "./styles";
 import Projects from "../../components/projects";
 import Users from "../../components/users";
 import Profile from "../../components/profile";
