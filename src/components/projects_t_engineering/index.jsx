@@ -26,18 +26,7 @@ import ProjectTokensList1 from './ProjectTokensList1';
 import ProjectTokensList2 from './ProjectTokensList2';
 import ProjectTokensList3 from './ProjectTokensList3';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHistory,
-  faGlobe,
-  faUser,
-  faCalculator,
-  faChartBar,
-  faTable,
-  faList,
-  faUpload,
-  faInfoCircle,
-  faMoneyBill
-} from '@fortawesome/free-solid-svg-icons';
+import {faHistory, faGlobe, faUser, faCalculator, faChartBar, faTable, faList, faUpload, faInfoCircle, faMoneyBill} from '@fortawesome/free-solid-svg-icons';
 import { CardTopo, CardContainer, styles } from './styles';
 import FileUploadBlockchain from './FileUpload/FileUploadBlockchain';
 import AdditionalInformation from './AdditionalInformation/AdditionalInformation';

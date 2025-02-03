@@ -825,19 +825,20 @@ export const styles = {
     cursor: 'pointer',
     padding: '1px',
     display: 'flex',
-    flexDirection: 'row', // Ícone e texto na mesma linha
+    flexDirection: 'row', 
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     textAlign: 'left',
+    paddingLeft: '15px',
     width: '250px',
     height: '35px',
     borderRadius: '8px',
     backgroundColor: '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
     transition: 'background 0.3s',
-    gap: '8px',
+    gap: '8px'
   },
-
+  
   pagina: {
     display: 'flex',
     flexDirection: 'column',
