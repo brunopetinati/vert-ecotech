@@ -237,33 +237,35 @@ export const ContainerNewButton = styled.li`
   border: 2px solid #ddd;
   border-radius: 50px;  
   transition: background-color 0.3s;
-  align-text: left;
+  text-align: left;
   color: rgb(79,79,79);
-
-  background-color: lightgrey;
+  background-color: white; /* Alterado para branco */
   width: 89%;
-  margin-top: 20px;
-  float: left;
   min-height: 25px;
   height: 50px;
+  margin-top: 20px;
   margin-bottom: 50px;
+  float: left;
+  position: relative; /* Mantendo o posicionamento relativo */
+  top: 50px; /* Movendo para baixo */
 
   &:hover {
     background-color: #e0f2f1;
   }
 
   div {
-    --width: 100%;
-    --display: flex;
-    --flex-direction: row;
-    --align-items: center;
-    --justify-content: center;    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
   }
 
   span {
     font-size: 20px;
   }
-`
+`;
+
 
 export const StyledButtonCancelar = styled.button`
   background-color: #FFA07A;
@@ -452,14 +454,17 @@ export const StyledButtonConfirmarDocs = styled.button`
 `;
 
 export const StyledButtonSalvar = styled.button`
-  --background-color: #98FB98;
+  --background-color: #98fb98;
   background-color: rgba(0, 80, 0, 0.7);
   border-radius: 100px;
-  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
-  color: white;
-  cursor: pointer;
+  box-shadow: rgba(0, 128, 0, 0.2) 0 -25px 18px -14px inset,
+    rgba(0, 128, 0, 0.15) 0 1px 2px, rgba(0, 128, 0, 0.15) 0 2px 4px,
+    rgba(0, 128, 0, 0.15) 0 4px 8px, rgba(0, 128, 0, 0.15) 0 8px 16px,
+    rgba(0, 128, 0, 0.15) 0 16px 32px;
+  color: ${(props) => (props.disabled ? "" : "white")};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   padding: 3px 5px;
   text-align: center;
   text-decoration: none;
@@ -473,9 +478,14 @@ export const StyledButtonSalvar = styled.button`
   width: 120px;
   height: 25px;
 
+
+
   :hover {
-    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
-    transform: scale(1.02) ;
+    box-shadow: rgba(0, 128, 0, 0.35) 0 -25px 18px -14px inset,
+      rgba(0, 128, 0, 0.35) 0 1px 2px, rgba(0, 128, 0, 0.35) 0 2px 4px,
+      rgba(0, 128, 0, 0.35) 0 4px 8px, rgba(0, 128, 0, 0.35) 0 8px 16px,
+      rgba(0, 128, 0, 0.35) 0 16px 32px;
+    transform: scale(1.02);
   }
 
   @media screen and (max-width: 768px) {
@@ -850,4 +860,37 @@ export const styles = {
     marginLeft: '100px',
     textAlign: 'left',
   },
+
+  //css do fileUpload
+  centerTitle: {
+    textAlign: 'center',
+  },
+
+  containerFileUpload: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+    minHeight: '300px',
+    border: '2px dashed #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#fafafa',
+    padding: '20px',
+    marginTop: '-5px',
+    textAlign: 'center',
+    boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+    position: 'relative',
+    maxWidth: '1200px',
+    transform: 'translateX(-200px)', // Move 100px para a esquerda
+  },
+
+  buttonContainer: {
+    float: 'left',
+    backgroundColor: 'lightgrey',
+    height: '50px',
+    borderRadius: '100px 0px 0px 100px',
+    width: '180px',
+  },
+  
 };

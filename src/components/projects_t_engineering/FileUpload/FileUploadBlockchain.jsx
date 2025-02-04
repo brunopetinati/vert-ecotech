@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { createRoot } from 'react-dom/client';
@@ -17,7 +17,8 @@ import {
   StyledButtonCriarContract,
   StyledButtonMintNft,
   StyledButtonShowNft,
-  StyledButtonSubstituirNft
+  StyledButtonSubstituirNft,
+  styles
 } from '../styles';
 
 //import FileUploadComponent from './FileUploadComponent';
@@ -34,33 +35,6 @@ import { updateNFT } from '../SmartContract/updateNFT';
 import { burnNFT } from '../SmartContract/burnNFT';
 import { verifyUser } from '../SmartContract/verifyUser';
 import { protectPDF } from '../SmartContract/protectPDF';
-
-const styles = {
-  formContainer: {
-    position: 'absolute',
-    top: '65px',
-    left: '350000px'
-  },
-  label: {
-    display: 'block',
-    marginTop: '10px',
-  },
-  input: {
-    width: '450px',
-    padding: '5px',
-  },
-  fileInput: {
-    marginTop: '10px',
-  },
-  button: {
-    marginTop: '20px',
-    padding: '10px 15px',
-    backgroundColor: 'blue',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-  },
-};
 
 const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_doc = false }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -1741,13 +1715,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   return (
     <div>
-      <div >
-        <h2>{tela_name}</h2>
+      <div style={styles.containerFileUpload}>
+        <h2 style={styles.centerTitle}>{tela_name}</h2>
         {((verificarDocsConfirmados() &&
           (
             <div>
               <div style={{ color: 'rgb(79,79,79)', fontSize: '10pt', marginLeft: '10px' }}>blockchain</div>
-              <ListItemDivContract style={{ backgroundColor: 'white', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
+              <ListItemDivContract style={{ backgroundColor: 'red', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
                 <div style={{ float: 'left', minHeight: '20px', width: '760px' }}>
                   <div style={{ float: 'left', minHeight: '5px', width: '100px', display: contract_contract_address_client == '' ? 'block' : 'none' }}>
                     <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
@@ -1948,21 +1922,23 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           ))}
         </div>
 
-        <ContainerNewButton style={{ backgroundColor: 'white' }}>
-          <div style={{
-            float: 'left',
-            backgroundColor: 'lightgrey',
-            height: '50px',
-            borderRadius: '100px 0px 0px 100px',
-            width: '180px'
-          }}>
-            <StyledButtonSalvar style={{ float: 'left', marginTop: '12px', marginLeft: '20px', color: isBotaoSalvar ? 'white' : '' }}
+        <ContainerNewButton>
+          <div style={styles.buttonContainer}>
+            <StyledButtonSalvar
               disabled={isBotaoSalvar}
-              type="button" onClick={() => handleUpload()}>
+              type="button"
+              onClick={() => handleUpload()}
+            >
               Salvar
             </StyledButtonSalvar>
           </div>
-          <small style={{ float: 'left', width: '80px', color: 'green', display: isBotaoSalvar ? true : 'none' }} >Salvando...</small>
+          <small
+            style={{
+              float: 'left',
+              width: '80px',
+              color: 'green',
+              display: isBotaoSalvar ? true : 'none'
+            }} >Salvando...</small>
         </ContainerNewButton>
       </div>
     </div>
