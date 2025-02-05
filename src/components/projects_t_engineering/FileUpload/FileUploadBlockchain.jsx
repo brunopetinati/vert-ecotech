@@ -18,7 +18,7 @@ import {
   StyledButtonMintNft,
   StyledButtonShowNft,
   StyledButtonSubstituirNft,
-  styles
+  sytleFileUpload
 } from '../styles';
 
 //import FileUploadComponent from './FileUploadComponent';
@@ -1715,8 +1715,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   return (
     <div>
-      <div style={styles.containerFileUpload}>
-        <h2 style={styles.centerTitle}>{tela_name}</h2>
+      <div style={sytleFileUpload.containerFileUpload}>
+        <h2 style={sytleFileUpload.centerTitle}>{tela_name}</h2>
+        {/*Não sei oque é daqui ate...*/}
         {((verificarDocsConfirmados() &&
           (
             <div>
@@ -1750,23 +1751,24 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   </div>
                 </div>
               </ListItemDivContract>
+              {/*Aquii*/}
             </div>
           )
         ))}
 
         <ProgressBar data={data2} />
 
-        <div style={{ float: 'left', width: '900px' }}>
+        <div /*aquii tinha style, essa div mexe nos topicos */>
           {Object.keys(data2).sort((a, b) => parseInt(a) - parseInt(b)).map((topic) => (
             <div key={topic} className="collapsible">
-              <ListItemDiv style={{ backgroundColor: 'rgb(235,235,235)', width: '800px' }}>
-                <div style={{ cursor: 'pointer', float: 'left', marginLeft: '10px', width: '20px', height: '20px' }} className="header" onClick={() => toggleTopic(topic)}>
+              <ListItemDiv>
+                <div style={sytleFileUpload.containerTopico} className="header" onClick={() => toggleTopic(topic)}>
                   {expandedTopics.includes(topic) ? ` - ` : ` + `}
                 </div>
-                <div style={{ width: '900px', height: '20px' }}>
-                  <div style={{ float: 'left', width: '35px' }}>{data2[topic].titulo ? `${topic}) ` : ``}</div>
-                  <div style={{ float: 'left', width: '205px' }}>{data2[topic].titulo ? <ProgressBar2 data={data2} __topico={[topic]} /> : ``}</div>
-                  <div style={{ float: 'left', minWidth: '420px', height: '35px', fontSize: '10pt' }}>{data2[topic].titulo ? `${data2[topic].titulo.label}` : ``}</div>
+                <div style={sytleFileUpload.progressBarContainer}>
+                  <div style={sytleFileUpload.progressBarTitle}>{data2[topic].titulo ? `${topic}) ` : ``}</div>
+                  <div style={sytleFileUpload.progressBar} >{data2[topic].titulo ? <ProgressBar2 data={data2} __topico={[topic]} /> : ``}</div>
+                  <div style={sytleFileUpload.progressBarLabel}> {data2[topic].titulo ? `${data2[topic].titulo.label}` : ``}</div>
 
                   {
                     (confirmacao_doc ?
@@ -1775,31 +1777,31 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc)
                           && verificarUploadVisivel(data2, '01')
                           && !verificarUploadVisivel(data2, topic))) ?
-                        (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                        (<div /*style={{ float: 'left', width: '500px', marginTop: '-3px' }}*/>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :
                         ((contarDocumentNamePreenchidos(data2, '01') === TopicoCount(data2, '01')
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc) ||
                           (topic === '01' && verificarUploadVisivel(data2, '01'))) &&
-                          (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                          (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                             <StyledButtonIniciado onClick={() => handleEtapaIniciada(topic)}>Iniciado</StyledButtonIniciado>
                           </div>)))
                       :
                       getContract() && verificarDocsConfirmados() && !verificarUploadVisivel(data2, topic) ?
-                        (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                        (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :
                         (getContract() && verificarDocsConfirmados() &&
-                          (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                          (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                             <StyledButtonIniciado onClick={() => handleEtapaIniciada(topic)}>Iniciado</StyledButtonIniciado>
                           </div>))
                     )
                   }
-
                 </div>
               </ListItemDiv>
+
               {expandedTopics.includes(topic) && (
                 <div className="content">
                   <ul style={{ fontSize: '8pt', listStyleType: 'none' }}>
@@ -1923,7 +1925,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         </div>
 
         <ContainerNewButton>
-          <div style={styles.buttonContainer}>
+          <div style={sytleFileUpload.buttonContainer}>
             <StyledButtonSalvar
               disabled={isBotaoSalvar}
               type="button"
@@ -1934,11 +1936,10 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           </div>
           <small
             style={{
-              float: 'left',
-              width: '80px',
-              color: 'green',
-              display: isBotaoSalvar ? true : 'none'
-            }} >Salvando...</small>
+              ...sytleFileUpload.styleSmall, // Aplica os estilos de styleSmall
+              display: isBotaoSalvar ? 'inline' : 'none', // Controla a visibilidade
+            }}
+          >Salvando...</small>
         </ContainerNewButton>
       </div>
     </div>

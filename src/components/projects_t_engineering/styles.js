@@ -359,7 +359,7 @@ export const StyledButtonLogs = styled.button`
     font-size: 10px;
   }
 `;
-
+//file upload
 export const ListItemDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -370,7 +370,8 @@ export const ListItemDiv = styled.div`
   align-text: left;
   color: rgb(79,79,79);
 
-  width: 65vw;
+  width: 1000px;  // Define a largura diretamente aqui
+  background-color: rgb(235,235,235);  // Define a cor de fundo diretamente aqui
   margin-top: 3px;
   min-height: 25px;
 
@@ -378,18 +379,12 @@ export const ListItemDiv = styled.div`
     background-color: #e0f2f1;
   }
 
-  div {
-    --width: 100%;
-    --display: flex;
-    --flex-direction: row;
-    --align-items: center;
-    --justify-content: center;    
-  }
 
   span {
     font-size: 20px;
   }
 `;
+
 
 export const ListItemDivContract = styled.div`
   display: grid;
@@ -775,7 +770,6 @@ export const StyledButtonSubstituirNft = styled.button`
   }
 `;
 //estou mexendo aquiiii
-
 export const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 6 colunas */
@@ -806,6 +800,91 @@ export const CardTopo = styled.div`
   margin-left: -13px;
   position: relative; 
 `;
+
+export const sytleFileUpload = {
+  //css do fileUpload
+  centerTitle: {
+    textAlign: 'center',
+  },
+
+  containerFileUpload: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+    minHeight: '300px',
+    border: '2px dashed #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#fafafa',
+    padding: '20px',
+    marginTop: '-5px',
+    textAlign: 'center',
+    boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+    position: 'relative',
+    maxWidth: '1200px',
+    transform: 'translateX(-200px)', // Move 100px para a esquerda
+  },
+
+  buttonContainer: {
+    float: 'left',
+    backgroundColor: 'lightgrey',
+    height: '50px',
+    borderRadius: '100px 0px 0px 100px',
+    width: '180px',
+  },
+  
+  styleSmall: {
+    float: 'left',
+    width: '80px',
+    color: 'green',
+  },
+
+  containerTopico: {
+    cursor: 'pointer', 
+    float: 'left', 
+    marginLeft: '-80px', 
+    width: '200px', 
+    height: '20px',
+  },
+
+  // Estilo para a barra de progresso
+  progressBarContainer: {
+    width: '900px',
+    height: '35px', // Aumento da altura para melhor acomodação
+    //backgroundColor: 'green',
+    marginLeft: '-90px',
+    display: 'flex',
+    alignItems: 'center', // Alinha os itens verticalmente no centro
+    justifyContent: 'flex-start', // Alinha todos os itens à esquerda
+    gap: '70px', // Espaço entre os elementos
+    paddingLeft: '10px', // Pequeno espaço na esquerda para não grudar
+  },
+  
+
+  progressBarTitle: {
+    //textAlign: 'left',
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: '10px',
+    //marginLeft: '-10px', // Ajuste conforme necessário
+  },
+  
+  progressBarLabel: {
+    //float: 'left',
+    //Width: '420px',
+    //height: '35px',
+    fontSize: '8.6pt',
+    //backgroundColor: 'pink',
+    marginLeft: '-100px',
+  },
+
+  progressBar: {
+    marginLeft: '-60px', // Ajusta a posição da barra de progresso
+    width: '250px'
+  },
+  
+};
 
 export const styles = {
   tabletMenu: {
@@ -861,36 +940,4 @@ export const styles = {
     textAlign: 'left',
   },
 
-  //css do fileUpload
-  centerTitle: {
-    textAlign: 'center',
-  },
-
-  containerFileUpload: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    width: '100%',
-    minHeight: '300px',
-    border: '2px dashed #ccc',
-    borderRadius: '8px',
-    backgroundColor: '#fafafa',
-    padding: '20px',
-    marginTop: '-5px',
-    textAlign: 'center',
-    boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
-    position: 'relative',
-    maxWidth: '1200px',
-    transform: 'translateX(-200px)', // Move 100px para a esquerda
-  },
-
-  buttonContainer: {
-    float: 'left',
-    backgroundColor: 'lightgrey',
-    height: '50px',
-    borderRadius: '100px 0px 0px 100px',
-    width: '180px',
-  },
-  
 };
