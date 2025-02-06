@@ -10,3 +10,14 @@ export const Label = styled.label`
   font-size: 14px;
   color: #333;
 `;
+
+export const stylesPgMenuInf = {
+  container: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '1000px', // Isso faz com que ocupe toda a altura da tela
+    width: '100%',  // Isso faz com que ocupe toda a largura
+    backgroundColor: 'red', // Substitua pelo código da cor desejada
+  },
+};

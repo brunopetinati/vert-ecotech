@@ -1,9 +1,9 @@
 import FileUploadBlockchain from './../projects_t_engineering/FileUpload/FileUploadBlockchain';
-
+import {stylesPgMenuInf} from '../styles'
 
 const ProjectTabLegal = ({ user, project }) => {
   return (
-    <div >
+    <div style={stylesPgMenuInf.container}>
       <FileUploadBlockchain 
         project_id={project.id} 
         tela_name={'Jurídico'} 

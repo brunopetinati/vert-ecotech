@@ -134,7 +134,7 @@ const addressString = addressParts.join(', ');
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.8 }}
-        style={{ float: 'left', marginTop: '0px', marginLeft: '-100px' }}
+        style={{ float: 'left', marginTop: '0px', marginLeft: '-60px' }}
           >
 
       <div style={{ marginLeft: '218px', marginTop: '-10px' }}>
