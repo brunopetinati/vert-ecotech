@@ -168,7 +168,7 @@ const Sidebar = () => {
         </SidebarMenuItemDiffer>
 
         <SidebarFooter>
-          {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2024</span>}
+          {collapsed ? <span style={{color: '#054d00'}}>V.E  &copy;</span> : <span style={{color: '#054d00'}}>Vert Ecotech &copy; 2025</span>}
         </SidebarFooter>
 
       </SidebarContainer>

@@ -14,23 +14,22 @@ export const Container = styled.div`
 
 
 export const SideContainer = styled.div`
-  --display: flex;
-  --flex-direction: column;
-  --justify-content: center;
-  --align-items: center;
+  scrollbar-width: none; 
+  overflow-y: auto; 
+  overflow-x: hidden; 
   background: #f9fafb;
-  position: absolute;
-  left: 50px;
-  width: 1450px;
-  margin-left: 100px;
+  position: relative; 
+  height: 100vh; 
+  min-height: 100vh; /* Garante que sempre tenha a altura mínima */
+  width: calc(100% - ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}); /* Cálculo direto de largura */
+  margin-left: ${({ collapsed }) => (collapsed ? "15vw" : "6vw")}; 
+  transition: margin-left 0.5s ease-in-out, width 0.5s ease-in-out; 
 
-  @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    align-items: flex-start;
+  &::-webkit-scrollbar {
+    display: none; /* Remove scrollbar no Chrome/Safari */
   }
-`;
+`; 
+
 
 export const SideContainerFlexStart = styled.div`
   display: flex;

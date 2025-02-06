@@ -1,17 +1,16 @@
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { MasterContainer, Button, ButtonContainer, InnerContainer } from "./styles";
 import ProjectTabs from "../../components/project_tabs";
 import Intel from "./intel";
 import ProjectTabAdministration from "../../components/projects_t_administration";
 import ProjectTabEngineering from "../../components/projects_t_engineering";
 import ProjectTabComercial from "../../components/projects_t_comercial";
 import ProjectTabLegal from "../../components/projects_t_legal";
-import ProjectTabConsolidation from "../../components/projects_t_consolidation";
 import Sidebar from "../../components/sidebar";
 
 import { Container, SideContainer } from "../main_display/styles";
+import { Label } from "./styles";
 import Projects from "../../components/projects";
 import Users from "../../components/users";
 import Profile from "../../components/profile";
@@ -57,10 +56,7 @@ const   ProjectIntern = () => {
       label: "Jurídico",
       content: <ProjectTabLegal user={user} project={project} />
     },
-    //{
-    //  label: "Consolidação",
-    //  content: <ProjectTabConsolidation user={user} project={project} />
-    //}
+
   ];
 
   const tabsForRegularUser = [
@@ -92,4 +88,4 @@ const   ProjectIntern = () => {
 
 };
 
-export default ProjectIntern;
+export default ProjectIntern ;

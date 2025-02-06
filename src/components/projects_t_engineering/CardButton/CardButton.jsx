@@ -1,48 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import styled from 'styled-components';
+import Swal from 'sweetalert2'
 import { currentUrl } from '../../../../src/constants/global';
+import {Card} from './styles';
 
-const Card = styled.div`
-  border-radius: 3px;
-  box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-  --padding: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
-  cursor: pointer;
-  width: 90px;
-  height: 90px;
-  float: left;
-  transition: border-color 0.3s, background-color 0.3s, opacity 0.3s;
-  opacity: ${props => (props.isSelected ? '1' : '0.3')};
-  border: ${props => (props.isSelected ? '5px solid White' : '5px solid transparent')}; /* Adiciona uma borda amarela quando isSelected é verdadeiro */
 
-  img {
-    width: 90px;
-    height: 90px;
-  }
-
-  &:hover {
-    border-color: green;
-    background-color: lightblue;
-  }
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    background: rgba(255, 255, 255, 0.5);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-  }
-
-  &:hover::before {
-    opacity: 1;
-  }
-`;
 
 const CardButton = ({ image, project_id, card_name }) => {
   const [isSelected, setIsSelected] = useState(false);

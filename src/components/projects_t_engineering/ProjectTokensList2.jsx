@@ -64,7 +64,7 @@ const ProjectTokensList2 = ({ project_id }) => {
   };  
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>      
+    <div >      
       <h2>Tokens Visão Mensal</h2>
       <table>
         <thead>

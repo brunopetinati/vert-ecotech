@@ -119,7 +119,7 @@ const ProjectTokensList1 = ({ project_id }) => {
   }
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
+    <div >
       <h2>Tokens Aposentadoria</h2>
       <div>
         <input

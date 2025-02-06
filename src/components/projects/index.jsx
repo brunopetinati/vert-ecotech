@@ -1,7 +1,5 @@
 import ProjectsTable from "../projects_table";
-import ProjectsCard from "../projects_cards";
-import Card from "../projects_cards";
-import DefaultButton from "../default_button";
+import Card from "../projects_cards"; 
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

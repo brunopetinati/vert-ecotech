@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import Select from "react-select";
 import InputMask from "react-input-mask";
-import imgExcluir from '../../../src/assets/icons/delete.png';
+
+
 
 export const Container = styled.div`
   
@@ -103,7 +104,7 @@ export const Button = styled.button`
   }
 `;
 
-export const TextArea = styled.textarea `
+export const TextArea = styled.textarea`
   padding: 10px;
   margin-bottom: 20px;
 
@@ -175,7 +176,7 @@ export const StyledSelectForUser = styled.select`
 export const DownloadButton = styled.button`
   margin: 16px;
   width: 100px;
-`; 
+`;
 
 export const FileInput = styled.input.attrs({ type: 'file' })`
   margin-left: 80px;
@@ -183,55 +184,6 @@ export const FileInput = styled.input.attrs({ type: 'file' })`
 
 export const TextInput = styled.textarea`
   height: 150px;
-`;
-
-const MainContainer = styled.div`
-  float: left;
-  width: 100%;
-  text-align: center;
-  min-height: 600px;
-`;  
-
-const CardTopo = styled.div`
-  max-width: 645px;
-  position: absolute;
-  top: 100px;
-  left: 46%;
-  transform: translate(-50%, -50%);
-
-  @media (max-width: 768px) {
-    max-width: 80%; /* Cambia el ancho máximo para dispositivos móviles */
-    top: 50px; /* Cambia la posición superior para dispositivos móviles */
-    transform: translate(-50%, 0); /* Cambia la transformación para dispositivos móviles */
-  }
-`;
-
-const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 645px;
-  position: absolute;
-  top: 160px;
-  left: 50%;
-  transform: translate(-57%, -8%); 
-
-  @media (max-width: 768px) {
-    max-width: 100%;
-    top: 150px;
-    transform: translate(-50%, 0); 
-    flex-direction: row; /* Mudança para duas colunas */
-    align-items: flex-start; /* Alinhamento dos elementos na parte superior */
-    
-    & > div {
-      flex-basis: 48%; /* Largura de 48% para cada card */
-      margin-bottom: 10px; /* Espaço entre os cards */
-    }
-  }    
-`; 
-
-const UploadsContainer = styled.div`
-  margin-top: 70px;
 `;
 
 export const List = styled.ul`
@@ -286,33 +238,35 @@ export const ContainerNewButton = styled.li`
   border: 2px solid #ddd;
   border-radius: 50px;  
   transition: background-color 0.3s;
-  align-text: left;
+  text-align: left;
   color: rgb(79,79,79);
-
-  background-color: lightgrey;
+  background-color: white; /* Alterado para branco */
   width: 89%;
-  margin-top: 20px;
-  float: left;
   min-height: 25px;
   height: 50px;
+  margin-top: 20px;
   margin-bottom: 50px;
+  float: left;
+  position: relative; /* Mantendo o posicionamento relativo */
+  top: 50px; /* Movendo para baixo */
 
   &:hover {
     background-color: #e0f2f1;
   }
 
   div {
-    --width: 100%;
-    --display: flex;
-    --flex-direction: row;
-    --align-items: center;
-    --justify-content: center;    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;    
+    width: 100%;
   }
 
   span {
     font-size: 20px;
   }
-`
+`;
+
 
 export const StyledButtonCancelar = styled.button`
   background-color: #FFA07A;
@@ -406,7 +360,7 @@ export const StyledButtonLogs = styled.button`
     font-size: 10px;
   }
 `;
-
+//file upload
 export const ListItemDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -417,7 +371,8 @@ export const ListItemDiv = styled.div`
   align-text: left;
   color: rgb(79,79,79);
 
-  width: 65vw;
+  width: 1000px;  // Define a largura diretamente aqui
+  background-color: rgb(235,235,235);  // Define a cor de fundo diretamente aqui
   margin-top: 3px;
   min-height: 25px;
 
@@ -425,18 +380,12 @@ export const ListItemDiv = styled.div`
     background-color: #e0f2f1;
   }
 
-  div {
-    --width: 100%;
-    --display: flex;
-    --flex-direction: row;
-    --align-items: center;
-    --justify-content: center;    
-  }
 
   span {
     font-size: 20px;
   }
 `;
+
 
 export const ListItemDivContract = styled.div`
   display: grid;
@@ -501,14 +450,17 @@ export const StyledButtonConfirmarDocs = styled.button`
 `;
 
 export const StyledButtonSalvar = styled.button`
-  --background-color: #98FB98;
+  --background-color: #98fb98;
   background-color: rgba(0, 80, 0, 0.7);
   border-radius: 100px;
-  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
-  color: white;
-  cursor: pointer;
+  box-shadow: rgba(0, 128, 0, 0.2) 0 -25px 18px -14px inset,
+    rgba(0, 128, 0, 0.15) 0 1px 2px, rgba(0, 128, 0, 0.15) 0 2px 4px,
+    rgba(0, 128, 0, 0.15) 0 4px 8px, rgba(0, 128, 0, 0.15) 0 8px 16px,
+    rgba(0, 128, 0, 0.15) 0 16px 32px;
+  color: ${(props) => (props.disabled ? "" : "white")};
+  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
   padding: 3px 5px;
   text-align: center;
   text-decoration: none;
@@ -522,9 +474,14 @@ export const StyledButtonSalvar = styled.button`
   width: 120px;
   height: 25px;
 
+
+
   :hover {
-    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
-    transform: scale(1.02) ;
+    box-shadow: rgba(0, 128, 0, 0.35) 0 -25px 18px -14px inset,
+      rgba(0, 128, 0, 0.35) 0 1px 2px, rgba(0, 128, 0, 0.35) 0 2px 4px,
+      rgba(0, 128, 0, 0.35) 0 4px 8px, rgba(0, 128, 0, 0.35) 0 8px 16px,
+      rgba(0, 128, 0, 0.35) 0 16px 32px;
+    transform: scale(1.02);
   }
 
   @media screen and (max-width: 768px) {
@@ -813,3 +770,175 @@ export const StyledButtonSubstituirNft = styled.button`
     font-size: 10px;
   }
 `;
+//estou mexendo aquiiii
+export const CardContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+  grid-template-rows: repeat(3, auto);
+  gap: 1px;
+  max-width: 615px; 
+  width: 100%; /* Para garantir que ocupe a largura do container */
+  //justify-content: center; /* Centraliza os cards */
+  position: relative; 
+  justify-content: start; 
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, auto);
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+`;
+
+export const CardTopo = styled.div`
+  width: 100%;
+  margin-left: -13px;
+  position: relative; 
+`;
+
+export const sytleFileUpload = {
+  //css do fileUpload
+  centerTitle: {
+    textAlign: 'center',
+  },
+
+  containerFileUpload: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    width: '100%',
+    minHeight: '300px',
+    border: '2px dashed #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#fafafa',
+    padding: '20px',
+    marginTop: '-5px',
+    textAlign: 'center',
+    boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+    position: 'relative',
+    maxWidth: '1200px',
+    transform: 'translateX(-200px)', // Move 100px para a esquerda
+  },
+
+  buttonContainer: {
+    float: 'left',
+    backgroundColor: 'lightgrey',
+    height: '50px',
+    borderRadius: '100px 0px 0px 100px',
+    width: '180px',
+  },
+  
+  styleSmall: {
+    float: 'left',
+    width: '80px',
+    color: 'green',
+  },
+
+  containerTopico: {
+    cursor: 'pointer', 
+    float: 'left', 
+    marginLeft: '-80px', 
+    width: '200px', 
+    height: '20px',
+  },
+
+  // Estilo para a barra de progresso
+  progressBarContainer: {
+    width: '900px',
+    height: '35px', // Aumento da altura para melhor acomodação
+    //backgroundColor: 'green',
+    marginLeft: '-90px',
+    display: 'flex',
+    alignItems: 'center', // Alinha os itens verticalmente no centro
+    justifyContent: 'flex-start', // Alinha todos os itens à esquerda
+    gap: '70px', // Espaço entre os elementos
+    paddingLeft: '10px', // Pequeno espaço na esquerda para não grudar
+  },
+  
+
+  progressBarTitle: {
+    //textAlign: 'left',
+    fontWeight: 'bold',
+    color: 'black',
+    marginLeft: '10px',
+    //marginLeft: '-10px', // Ajuste conforme necessário
+  },
+  
+  progressBarLabel: {
+    //float: 'left',
+    //Width: '420px',
+    //height: '35px',
+    fontSize: '8.6pt',
+    //backgroundColor: 'pink',
+    marginLeft: '-100px',
+  },
+
+  progressBar: {
+    marginLeft: '-60px', // Ajusta a posição da barra de progresso
+    width: '250px'
+  },
+  
+};
+
+export const styles = {
+  tabletMenu: {
+    width: '1300px',
+    height: '600px',
+    padding: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: '0 auto',
+    position: 'relative', // Faz o menu ficar dentro do container
+    top: '0', // Garante que o container comece no topo
+  },
+
+  menu: {
+    position: 'relative',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(5, 1fr)', // 5 colunas
+    gridTemplateRows: 'repeat(2, auto)', // 2 linhas
+    gap: '5px', // Espaço entre os itens
+    justifyContent: 'center', // Centraliza os itens
+    alignItems: 'center',
+    width: '100%', // Para ocupar toda a largura do container
+    alignSelf: 'flex-start', // Fixa o menu no topo do container
+  },
+
+  menuItem: {
+    cursor: 'pointer',
+    padding: '1px',
+    display: 'flex',
+    flexDirection: 'row', 
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    textAlign: 'left',
+    paddingLeft: '15px',
+    width: '250px',
+    height: '35px',
+    borderRadius: '8px',
+    backgroundColor: '#f8f8f8',
+    boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+    transition: 'background 0.3s',
+    gap: '8px'
+  },
+  
+  pagina: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '60vw',
+    position: 'relative',
+    left: '75px',
+    marginTop: '-240px', // Diminui a margem para que o conteúdo fique abaixo do menu
+    marginLeft: '100px',
+    textAlign: 'left',
+  },
+
+};

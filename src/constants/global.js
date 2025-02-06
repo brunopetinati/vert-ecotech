@@ -15,12 +15,12 @@
 //export const currentUrl = prod;
 
 //localhost
-const localHost = 'http://localhost:8000';
-export const currentUrl = localHost;
+//const localHost = 'http://localhost:8000';
+//export const currentUrl = localHost;
 
 //quality
-//const suse_sp = 'http://54.232.128.9:8000';
-//export const currentUrl = suse_sp;
+const remote_server = 'http://18.231.255.96:8000';
+export const currentUrl = remote_server;
 
 // atenção:
 

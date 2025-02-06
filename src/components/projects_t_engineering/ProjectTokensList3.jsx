@@ -58,7 +58,7 @@ const ProjectTokensList3 = ({ project_id }) => {
   }
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
+    <div >
       <h2>Tokens Visão Anual</h2>
       <table>
         <thead>

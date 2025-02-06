@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { createRoot } from 'react-dom/client';
@@ -11,14 +11,14 @@ import {
   ListItemDiv,
   ListItemDivContract,
   StyledButtonSalvar,
-  StyledButtonSalvarUnico,
   StyledButtonConfirmarDocs,
   StyledButtonIniciarEtapa,
   StyledButtonIniciado,
   StyledButtonCriarContract,
   StyledButtonMintNft,
   StyledButtonShowNft,
-  StyledButtonSubstituirNft
+  StyledButtonSubstituirNft,
+  sytleFileUpload
 } from '../styles';
 
 //import FileUploadComponent from './FileUploadComponent';
@@ -35,34 +35,6 @@ import { updateNFT } from '../SmartContract/updateNFT';
 import { burnNFT } from '../SmartContract/burnNFT';
 import { verifyUser } from '../SmartContract/verifyUser';
 import { protectPDF } from '../SmartContract/protectPDF';
-
-const styles = {
-  formContainer: {
-    position: 'absolute',
-    //width: '722px',
-    top: '65px',
-    left: '350px'
-  },
-  label: {
-    display: 'block',
-    marginTop: '10px',
-  },
-  input: {
-    width: '450px',
-    padding: '5px',
-  },
-  fileInput: {
-    marginTop: '10px',
-  },
-  button: {
-    marginTop: '20px',
-    padding: '10px 15px',
-    backgroundColor: 'blue',
-    color: 'white',
-    border: 'none',
-    cursor: 'pointer',
-  },
-};
 
 const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_doc = false }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -149,7 +121,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       }));
     };
 
-    reader.readAsBinaryString(selectedFile);
+    //"reader.readAsBinaryString(selectedFile);" versão antiga
+    reader.readAsArrayBuffer(selectedFile);
     return fileStates[fieldName];
   };
 
@@ -162,7 +135,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     axios.get(`${currentUrl}/api/documentmodels2/${modelo_GUID}/data/`, { headers, params: { project_id: project_id } })
       .then((response) => {
         setData2({ ...response.data });
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -190,7 +163,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
 
     const fileKeys = Object.keys(docs);
-  
+
     for (const key of fileKeys) {
       const fileData = fileStates[key];
       try {
@@ -199,8 +172,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         console.error(`Erro ao enviar o arquivo ${key}:`, error);
       }
     }
-  
-    console.log('Todos os arquivos foram enviados.'); 
+
+    console.log('Todos os arquivos foram enviados.');
     recarregarTela1();
   };
 
@@ -227,20 +200,20 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           }));
         }
       })
-      .then(async (response1) => {
+        .then(async (response1) => {
 
-        console.log("arquivo enviado");
-        
-      })
-      .catch((error) => {
-        console.error('Upload failed!', error);
-        Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
-          icon: 'error',
-          confirmButtonText: 'OK'
+          console.log("arquivo enviado");
+
+        })
+        .catch((error) => {
+          console.error('Upload failed!', error);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         });
-      });
 
       setUploadSuccess((prev) => ({ ...prev, [fieldName]: true }));  // Marca sucesso após o envio
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload
@@ -251,7 +224,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   }
 
-  const recarregarTela1 = async () =>{
+  const recarregarTela1 = async () => {
     setBotaoSalvar(true);
 
     axios
@@ -1006,7 +979,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       .post(`${currentUrl}/api/getconfirmeddocumentscount/`, requestData, { headers })
       .then((response) => {
         //console.log(response.data.confirmed_documents_count);
-        if (parseInt(response.data.confirmed_documents_count, 10) === 26) { setDocConfirmed(true); }
+        if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true); }
       })
       .catch((error) => {
         console.error('Erro ao buscar documentos:', error);
@@ -1621,7 +1594,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         //console.log(fileStatesLocal);
       };
 
-      reader.readAsBinaryString(selectedFile);
+      //"reader.readAsBinaryString(selectedFile);" versão antiga 
+      reader.readAsArrayBuffer(selectedFile);
     };
 
     Swal.fire({
@@ -1664,10 +1638,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         if (result && result.isConfirmed) {
 
           try {
-
             //verifica user na blockchain antes de upar o doc
             const retornoVerifyUser = await verifyUser(contract_wallet_owner, __item.file_manager_nft_dt.nft_file_manager_nft_id);
-
             try {
 
               if (retornoVerifyUser.is_assinatura_ok) {
@@ -1742,22 +1714,15 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
   return (
-    <div className="uploads-save" style={{ position: 'absolute', top: '0px', left: '-100px' }}>
-      <div style={styles.formContainer}>
-
-        <h2>{tela_name}</h2>
-
-        <div>
-          {/*} <ConnectButton/>                          
-         <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
-        {*/}
-        </div>
-
-        {((verificarDocsConfirmados() && 
+    <div>
+      <div style={sytleFileUpload.containerFileUpload}>
+        <h2 style={sytleFileUpload.centerTitle}>{tela_name}</h2>
+        {/*Não sei oque é daqui ate...*/}
+        {((verificarDocsConfirmados() &&
           (
             <div>
               <div style={{ color: 'rgb(79,79,79)', fontSize: '10pt', marginLeft: '10px' }}>blockchain</div>
-              <ListItemDivContract style={{ backgroundColor: 'white', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
+              <ListItemDivContract style={{ backgroundColor: 'red', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
                 <div style={{ float: 'left', minHeight: '20px', width: '760px' }}>
                   <div style={{ float: 'left', minHeight: '5px', width: '100px', display: contract_contract_address_client == '' ? 'block' : 'none' }}>
                     <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
@@ -1784,31 +1749,26 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                       <div>{contract_cnpj_cpf}</div>
                     </div>
                   </div>
-
-                  {/*}
-                  <div style={{ float: 'left', height: '25px', width: '120px' }}>
-                    <button onClick={() => startContract()}>Iniciar contract</button>              
-                  </div>
-                  {*/}
                 </div>
               </ListItemDivContract>
+              {/*Aquii*/}
             </div>
           )
         ))}
 
         <ProgressBar data={data2} />
 
-        <div style={{ float: 'left', width: '900px' }}>
-          {Object.keys(data2).map((topic) => (
+        <div /*aquii tinha style, essa div mexe nos topicos */>
+          {Object.keys(data2).sort((a, b) => parseInt(a) - parseInt(b)).map((topic) => (
             <div key={topic} className="collapsible">
-              <ListItemDiv style={{ backgroundColor: 'rgb(235,235,235)', width: '800px' }}>
-                <div style={{ cursor: 'pointer', float: 'left', marginLeft: '10px', width: '20px', height: '20px' }} className="header" onClick={() => toggleTopic(topic)}>
+              <ListItemDiv>
+                <div style={sytleFileUpload.containerTopico} className="header" onClick={() => toggleTopic(topic)}>
                   {expandedTopics.includes(topic) ? ` - ` : ` + `}
                 </div>
-                <div style={{ width: '900px', height: '20px' }}>
-                  <div style={{ float: 'left', width: '35px' }}>{data2[topic].titulo ? `${topic}) ` : ``}</div>
-                  <div style={{ float: 'left', width: '205px' }}>{data2[topic].titulo ? <ProgressBar2 data={data2} __topico={[topic]} /> : ``}</div>
-                  <div style={{ float: 'left', minWidth: '420px', height: '35px', fontSize: '10pt' }}>{data2[topic].titulo ? `${data2[topic].titulo.label}` : ``}</div>
+                <div style={sytleFileUpload.progressBarContainer}>
+                  <div style={sytleFileUpload.progressBarTitle}>{data2[topic].titulo ? `${topic}) ` : ``}</div>
+                  <div style={sytleFileUpload.progressBar} >{data2[topic].titulo ? <ProgressBar2 data={data2} __topico={[topic]} /> : ``}</div>
+                  <div style={sytleFileUpload.progressBarLabel}> {data2[topic].titulo ? `${data2[topic].titulo.label}` : ``}</div>
 
                   {
                     (confirmacao_doc ?
@@ -1817,31 +1777,31 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc)
                           && verificarUploadVisivel(data2, '01')
                           && !verificarUploadVisivel(data2, topic))) ?
-                        (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                        (<div /*style={{ float: 'left', width: '500px', marginTop: '-3px' }}*/>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :
                         ((contarDocumentNamePreenchidos(data2, '01') === TopicoCount(data2, '01')
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc) ||
                           (topic === '01' && verificarUploadVisivel(data2, '01'))) &&
-                          (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                          (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                             <StyledButtonIniciado onClick={() => handleEtapaIniciada(topic)}>Iniciado</StyledButtonIniciado>
                           </div>)))
                       :
                       getContract() && verificarDocsConfirmados() && !verificarUploadVisivel(data2, topic) ?
-                        (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                        (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :
                         (getContract() && verificarDocsConfirmados() &&
-                          (<div style={{ float: 'left', width: '50px', marginTop: '-3px' }}>
+                          (<div /*style={{ float: 'left', width: '50px', marginTop: '-3px' }}*/>
                             <StyledButtonIniciado onClick={() => handleEtapaIniciada(topic)}>Iniciado</StyledButtonIniciado>
                           </div>))
                     )
                   }
-
                 </div>
               </ListItemDiv>
+
               {expandedTopics.includes(topic) && (
                 <div className="content">
                   <ul style={{ fontSize: '8pt', listStyleType: 'none' }}>
@@ -1964,21 +1924,22 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           ))}
         </div>
 
-        <ContainerNewButton style={{ backgroundColor: 'white' }}>
-          <div style={{
-            float: 'left',
-            backgroundColor: 'lightgrey',
-            height: '50px',
-            borderRadius: '100px 0px 0px 100px',
-            width: '180px'
-          }}>
-            <StyledButtonSalvar style={{ float: 'left', marginTop: '12px', marginLeft: '20px', color: isBotaoSalvar ? 'white' : '' }}
+        <ContainerNewButton>
+          <div style={sytleFileUpload.buttonContainer}>
+            <StyledButtonSalvar
               disabled={isBotaoSalvar}
-              type="button" onClick={() => handleUpload()}>
+              type="button"
+              onClick={() => handleUpload()}
+            >
               Salvar
             </StyledButtonSalvar>
           </div>
-          <small style={{ float: 'left', width: '80px', color: 'green', display: isBotaoSalvar ? true : 'none' }} >Salvando...</small>
+          <small
+            style={{
+              ...sytleFileUpload.styleSmall, // Aplica os estilos de styleSmall
+              display: isBotaoSalvar ? 'inline' : 'none', // Controla a visibilidade
+            }}
+          >Salvando...</small>
         </ContainerNewButton>
       </div>
     </div>

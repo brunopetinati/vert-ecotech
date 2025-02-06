@@ -965,9 +965,8 @@ const ContasWilder = () => {
 
 
   return (
-    <div style={{ position: 'absolute', width: '722px', top: '65px', left: '250px' }}>
+    <div>
       <h2>Contas Wilder (Social Carbon)</h2>
-      {/*}<LoadingBar ref={loadingBarRef} totalFiles={totalFiles} />{*/}
       {accounts_data && <Accounts data={accounts_data} />}
     </div>
   );

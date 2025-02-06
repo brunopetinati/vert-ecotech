@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { currentUrl } from '../../constants/global';
 
 const GeographicCoordinatesCrud = ({ project_id }) => {
