@@ -2,23 +2,49 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
-  margin-left: -115px;
+  flex-direction: column; /* Empilha os gráficos em telas pequenas */
+  align-items: center; /* Centraliza o conteúdo */
+  width: ${({ collapsed }) => (collapsed ? "95vw" : "85vw")};
+  //margin-left: 0;
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    //margin-left: 0;
+  }
 
   @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw;
-    overflow-x: auto;
-    white-space: nowrap;
-  }  
+    width: 100%;
+    //margin-left: 0;
+  }
 `;
 
+export const GraphsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Coloca os gráficos em duas colunas em telas grandes */
+  gap: 5px; /* Espaçamento entre os gráficos */
+  justify-content: center; /* Centraliza os gráficos */
+  width: 100%;
+
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr; /* Empilha os gráficos em telas menores */
+    padding: 10px;
+  }
+`;
+
+
+export const GraphWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Garantir que o gráfico se ajuste ao espaço disponível */
+  width: 100%;
+  height: 100%;
+`;
+
+
+
+//
 export const Button = styled.button`
   --background-color: #98FB98;
   background-color: rgba(0, 80, 0, 0.7);
