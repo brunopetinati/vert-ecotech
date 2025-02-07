@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
-import { Container,GraphWrapper,GraphsContainer } from './styles';
-import ProjectTokenChart1 from './ProjectTokenChart1';
-import ProjectTokenChart2 from './ProjectTokenChart2';
+import { Container,GraphsContainer } from './styles';
+import ProjectTokenChart1 from './ProjectToken/ProjectTokenChart1';
+import ProjectTokenChart2 from './ProjectToken/ProjectTokenChart2';
 import Chart from '../chart';
 import { calculateTotalAreaByMonth, calculateTotalRealAreaByMonth, mergeCarbonData } from './carbon';
 import { groupByMonthAndStatus } from './project_status';
@@ -40,16 +40,16 @@ const Dashboard = () => {
       </div>
   
       <GraphsContainer>
-        <GraphWrapper>
+        <div>
           <ProjectTokenChart1 />
-        </GraphWrapper>
-        <GraphWrapper>
+        </div>
+        <div>
           <ProjectTokenChart2 />
-        </GraphWrapper>
+        </div>
       </GraphsContainer>
   
       <GraphsContainer>
-        <GraphWrapper>
+        <div>
           {currentUser.user_type === "ADM" && (
             <Chart
               data={data}
@@ -65,9 +65,9 @@ const Dashboard = () => {
               stroke_d={'orange'}
             />
           )}
-        </GraphWrapper>
+        </div>
   
-        <GraphWrapper>
+        <div>
           <Chart
             data={data2}
             title={'Área de cobertura (ha)'}
@@ -77,11 +77,11 @@ const Dashboard = () => {
             key_b={'estimativa'}
             stroke_b={'#054d00'}
           />
-        </GraphWrapper>
+        </div>
       </GraphsContainer>
   
       <GraphsContainer>
-        <GraphWrapper>
+        <div>
           <Chart
             data={data3}
             title={'Oferta X Demanda'}
@@ -91,9 +91,9 @@ const Dashboard = () => {
             stroke_a={'#7eff00'}
             stroke_b={'black'}
           />
-        </GraphWrapper>
+        </div>
   
-        <GraphWrapper>
+        <div>
           {currentUser.user_type === "ADM" && (
             <Chart
               data={data4}
@@ -115,7 +115,7 @@ const Dashboard = () => {
               stroke_g={'brown'}
             />
           )}
-        </GraphWrapper>
+        </div>
       </GraphsContainer>
     </Container>
   );

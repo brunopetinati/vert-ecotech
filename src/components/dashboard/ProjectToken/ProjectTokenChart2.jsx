@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Chart from '../chart';
+import Chart from '../../chart';
 import { Container, Button, Input } from './styles';
-import { currentUrl } from '../../constants/global';
+import { currentUrl } from '../../../constants/global';
 import axios from 'axios';
 
 const ProjectTokenChart2 = () => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Chart from '../chart';
-import { Container, Button, Input } from './styles';
-import { currentUrl } from '../../constants/global';
+import Chart from '../../chart';
+import { Container, Button, Input, ControlsContainer } from './styles';
+import { currentUrl } from '../../../constants/global';
 import axios from 'axios';
 
 const ProjectTokenChart1 = () => {
@@ -46,20 +46,14 @@ const ProjectTokenChart1 = () => {
   };
 
   return (
-    <div collapsed={collapsed}>
-      <div /*style={{ width: '600px' }}*/>
-        <div>
-          <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
-        </div>
-        <div /*style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}*/>
-          <div /*style={{ width: '300px', marginLeft: '120px' }}*/>
-            <Button onClick={handlePrevYear} /*style={{ margin: '0px 20px 0px 0px' }}*/>{'<<'}</Button>
-            <Input type="text" value={currentYear} disabled /*style={{ width: '50px' }}*/ />
-            <Button onClick={handleNextYear} /*style={{ margin: '0px 15px 10px 20px' }}*/>{'>>'}</Button>
-          </div>
-        </div>  
-      </div>    
-    </div>
+    <Container collapsed={collapsed}>
+      <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
+      <ControlsContainer>
+        <Button onClick={handlePrevYear}>{'<<'}</Button>
+        <Input type="text" value={currentYear} disabled />
+        <Button onClick={handleNextYear}>{'>>'}</Button>
+      </ControlsContainer>
+    </Container>
   );
 };
 

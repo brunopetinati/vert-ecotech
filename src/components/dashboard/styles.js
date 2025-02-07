@@ -3,9 +3,10 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   flex-direction: column; /* Empilha os gráficos em telas pequenas */
-  align-items: center; /* Centraliza o conteúdo */
-  width: ${({ collapsed }) => (collapsed ? "95vw" : "85vw")};
-  //margin-left: 0;
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  width: ${({ collapsed }) => (collapsed ? "85vw" : "85vw")};
+  margin: 0 auto; /* Garante que o container fique centralizado */
 
   @media screen and (max-width: 1024px) {
     width: 100%;
@@ -21,9 +22,10 @@ export const Container = styled.div`
 export const GraphsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Coloca os gráficos em duas colunas em telas grandes */
-  gap: 5px; /* Espaçamento entre os gráficos */
+  gap: 20px; /* Espaçamento entre os gráficos */
   justify-content: center; /* Centraliza os gráficos */
-  width: 100%;
+  width: 50%;
+  margin: 20px 0; /* Adiciona margem superior e inferior */
 
   @media screen and (max-width: 1024px) {
     grid-template-columns: 1fr; /* Empilha os gráficos em telas menores */
@@ -39,7 +41,7 @@ export const GraphWrapper = styled.div`
 
   /* Garantir que o gráfico se ajuste ao espaço disponível */
   width: 100%;
-  height: 100%;
+  //height: 80%;
 `;
 
 
