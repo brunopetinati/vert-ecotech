@@ -813,19 +813,21 @@ export const sytleFileUpload = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '100%',
+    width: '100%',  // Ajusta a largura para 90% da tela
+    maxWidth: '1200px', // Limita a largura máxima
     minHeight: '300px',
     border: '2px dashed #ccc',
     borderRadius: '8px',
     backgroundColor: '#fafafa',
     padding: '20px',
-    marginTop: '-5px',
+    marginTop: '20px',  // Margem superior ajustada
     textAlign: 'center',
     boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
     position: 'relative',
-    maxWidth: '1200px',
-    transform: 'translateX(-200px)', // Move 100px para a esquerda
+    margin: '0 auto',  // Centraliza horizontalmente
+    // Remove o 'transform' para garantir que o contêiner não se mova
   },
+  
 
   buttonContainer: {
     float: 'left',
