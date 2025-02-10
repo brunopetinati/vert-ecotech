@@ -40,16 +40,11 @@ const Dashboard = () => {
       </div>
   
       <GraphsContainer>
-        <div>
           <ProjectTokenChart1 />
-        </div>
-        <div>
           <ProjectTokenChart2 />
-        </div>
-      </GraphsContainer>
+     </GraphsContainer>
   
       <GraphsContainer>
-        <div>
           {currentUser.user_type === "ADM" && (
             <Chart
               data={data}
@@ -65,9 +60,6 @@ const Dashboard = () => {
               stroke_d={'orange'}
             />
           )}
-        </div>
-  
-        <div>
           <Chart
             data={data2}
             title={'Área de cobertura (ha)'}
@@ -77,11 +69,9 @@ const Dashboard = () => {
             key_b={'estimativa'}
             stroke_b={'#054d00'}
           />
-        </div>
       </GraphsContainer>
   
       <GraphsContainer>
-        <div>
           <Chart
             data={data3}
             title={'Oferta X Demanda'}
@@ -91,9 +81,7 @@ const Dashboard = () => {
             stroke_a={'#7eff00'}
             stroke_b={'black'}
           />
-        </div>
-  
-        <div>
+
           {currentUser.user_type === "ADM" && (
             <Chart
               data={data4}
@@ -115,7 +103,6 @@ const Dashboard = () => {
               stroke_g={'brown'}
             />
           )}
-        </div>
       </GraphsContainer>
     </Container>
   );

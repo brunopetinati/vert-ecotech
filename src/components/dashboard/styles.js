@@ -21,16 +21,10 @@ export const Container = styled.div`
 
 export const GraphsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Coloca os gráficos em duas colunas em telas grandes */
-  gap: 20px; /* Espaçamento entre os gráficos */
-  justify-content: center; /* Centraliza os gráficos */
-  width: 50%;
-  margin: 20px 0; /* Adiciona margem superior e inferior */
-
-  @media screen and (max-width: 1024px) {
-    grid-template-columns: 1fr; /* Empilha os gráficos em telas menores */
-    padding: 10px;
-  }
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  gap: 5px; /* Pequeno espaçamento entre os gráficos */
+  margin-bottom: 20px; /* Espaçamento entre fileiras */
+  width: 100%;
 `;
 
 

@@ -46,8 +46,9 @@ export const SideContainer = styled.div`
   }
 
   @media screen and (max-width: 1024px) {
-    width: 100%;
-    margin-left: 0; /* Remove a margem lateral */
+    width: ${({ collapsed }) => (collapsed ? "80vw" : "100%")}; /* Usa uma largura maior quando colapsado */
+    height: auto;
+    min-height: 100vh;
   }
 
   @media screen and (max-width: 768px) {

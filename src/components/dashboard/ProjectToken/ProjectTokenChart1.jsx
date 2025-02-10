@@ -46,14 +46,14 @@ const ProjectTokenChart1 = () => {
   };
 
   return (
-    <Container collapsed={collapsed}>
+    <div collapsed={collapsed}>
       <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
       <ControlsContainer>
         <Button onClick={handlePrevYear}>{'<<'}</Button>
         <Input type="text" value={currentYear} disabled />
         <Button onClick={handleNextYear}>{'>>'}</Button>
       </ControlsContainer>
-    </Container>
+    </div>
   );
 };
 

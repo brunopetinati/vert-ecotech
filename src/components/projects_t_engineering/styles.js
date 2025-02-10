@@ -776,8 +776,8 @@ export const CardContainer = styled.div`
   grid-template-columns: repeat(6, 1fr); /* 6 colunas */
   grid-template-rows: repeat(3, auto);
   gap: 1px;
-  max-width: 615px; 
-  width: 100%; /* Para garantir que ocupe a largura do container */
+  //max-width: 615px; 
+  //width: 100%; /* Para garantir que ocupe a largura do container */
   //justify-content: center; /* Centraliza os cards */
   position: relative; 
   justify-content: start; 
@@ -797,8 +797,8 @@ export const CardContainer = styled.div`
 `;
 
 export const CardTopo = styled.div`
-  width: 100%;
-  margin-left: -13px;
+  //width: 100%;
+  //margin-left: -13px;
   position: relative; 
 `;
 
@@ -889,56 +889,103 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
-    width: '1300px',
-    height: '600px',
-    padding: '20px',
+    width: '100%', 
+    //maxWidth: '100%', 
+    padding: '10px',
     display: 'flex',
     flexDirection: 'column',
     margin: '0 auto',
-    position: 'relative', // Faz o menu ficar dentro do container
-    top: '0', // Garante que o container comece no topo
+    position: 'relative',
+    top: '0', 
+    //background: 'green',
+    maxHeight: '100vh',
+    boxSizing: 'border-box',
+    justifyContent: 'center', /* Centraliza horizontalmente */
+    alignItems: 'center',     /* Centraliza verticalmente */
+    overflow: 'hidden',
   },
-
   menu: {
     position: 'relative',
     display: 'grid',
-    gridTemplateColumns: 'repeat(5, 1fr)', // 5 colunas
-    gridTemplateRows: 'repeat(2, auto)', // 2 linhas
-    gap: '5px', // Espaço entre os itens
-    justifyContent: 'center', // Centraliza os itens
+    gridTemplateColumns: 'repeat(5, 1fr)', 
+    gridTemplateRows: 'repeat(2, auto)',   
+    gap: '5px',
+    justifyContent: 'center',
     alignItems: 'center',
-    width: '100%', // Para ocupar toda a largura do container
-    alignSelf: 'flex-start', // Fixa o menu no topo do container
+    width: '80vw', /* Largura relativa à largura da tela */
+    maxWidth: '80vw', 
+    height: '20vh', /* Altura relativa à altura da tela */
+    padding: '0 0px',
   },
+  
 
   menuItem: {
     cursor: 'pointer',
-    padding: '1px',
     display: 'flex',
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
-    paddingLeft: '15px',
-    width: '250px',
-    height: '35px',
-    borderRadius: '8px',
+    padding: '1vw',  // Ajusta o padding de acordo com o viewport
+    width: '90vw',  // Largura baseada no viewport
+    maxWidth: '15vw', // Limita a largura a 20% da largura da tela
+    minWidth: '10vw', // Garantir que a largura mínima seja adequada para o conteúdo
+    height: '1vw',  // Altura baseada no viewport
+    borderRadius: '10px',
     backgroundColor: '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-    transition: 'background 0.3s',
-    gap: '8px'
+  
+    // Responsividade para telas menores com media queries
+    '@media (max-width: 1024px)': {
+      padding: '2vw', // Ajuste o padding para telas médias
+      width: '80vw', // Ajuste a largura para que fique mais proporcional
+      height: '6vw', // Ajuste a altura proporcionalmente
+    },
+  
+    '@media (max-width: 768px)': {
+      padding: '3vw', // Mais padding para telas menores
+      width: '70vw', // Ajusta a largura em telas menores
+      height: '7vw',  // Ajusta a altura em telas menores
+    },
+  
+    '@media (max-width: 480px)': {
+      padding: '4vw', // Aumenta o padding em telas muito pequenas
+      width: '60vw', // Ajusta a largura para telas de celular
+      height: '8vw',  // Ajuste de altura no mobile
+    },
   },
   
   pagina: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
-    width: '60vw',
-    position: 'relative',
-    left: '75px',
-    marginTop: '-240px', // Diminui a margem para que o conteúdo fique abaixo do menu
-    marginLeft: '100px',
+    //justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center', // Centraliza horizontalmente
+    width: '100%',  // Ocupa toda a largura disponível
+    maxWidth: '60vw',  // Limita a largura máxima
+    marginTop: '20px', // Espaço superior para separar do menu
+    marginLeft: 'auto',
+    marginRight: 'auto', // Centraliza horizontalmente
     textAlign: 'left',
-  },
+    minHeight: '100vh', // Garante que a altura mínima ocupe toda a tela
+    
+    // Responsividade:
+    '@media screen and (max-width: 1024px)': {
+      maxWidth: '80vw',  // Aumenta a largura em telas menores
+      marginTop: '20px', // Ajusta a margem superior
+      marginLeft: '10px',
+      marginRight: '10px',
+    },
+    
+    '@media screen and (max-width: 768px)': {
+      maxWidth: '90vw',  // Ajusta ainda mais a largura
+      marginTop: '10px',
+    },
 
+    '@media screen and (max-width: 480px)': {
+      maxWidth: '100vw',  // Ocupa toda a largura da tela em dispositivos pequenos
+      marginTop: '0', 
+    },
+  },
+  
 };
+  
