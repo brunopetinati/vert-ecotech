@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Chart from '../chart';
+import Chart from '../../chart';
 import { Container, Button, Input } from './styles';
-import { currentUrl } from '../../constants/global';
+import { currentUrl } from '../../../constants/global';
 import axios from 'axios';
 
 const ProjectTokenChart2 = () => {
@@ -40,13 +40,9 @@ const ProjectTokenChart2 = () => {
   }, []); // Não é necessário depender do 'currentYear' aqui
 
   return (
-    <Container collapsed={collapsed}>
-      <div style={{ width: '600px' }}>
-        <div>
+     <div collapsed={collapsed}>
           <Chart data={data3} title={'Tokens Visão Anual'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
-        </div>
       </div>
-    </Container>
   );
 };
 

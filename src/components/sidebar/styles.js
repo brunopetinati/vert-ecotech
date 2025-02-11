@@ -19,10 +19,11 @@ export const SidebarContainer = styled.div`
   position: relative; /* Permite empurrar o conteúdo */
 
   /* Garante que o conteúdo principal se ajuste ao lado do sidebar */
-  & + main {
-    margin-left: ${({ collapsed }) => (collapsed ? "5vw" : "15vw")};
-    transition: margin-left 0.3s ease-in-out;
-  }
+ & + main {
+  margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")}; /* Ajuste os valores aqui */
+  transition: margin-left 0.3s ease-in-out;
+}
+
 
   @media screen and (max-width: 768px) {
     width: ${({ showSidebar }) => (showSidebar ? "65vw" : "0")};

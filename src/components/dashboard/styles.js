@@ -2,23 +2,45 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  flex-wrap: wrap;
-  width: ${({collapsed}) => collapsed ? "95vw" : "85vw"};
-  margin-left: -115px;
+  flex-direction: column; /* Empilha os gráficos em telas pequenas */
+  align-items: center; /* Centraliza o conteúdo horizontalmente */
+  justify-content: center; /* Centraliza o conteúdo verticalmente */
+  width: ${({ collapsed }) => (collapsed ? "85vw" : "85vw")};
+  margin: 0 auto; /* Garante que o container fique centralizado */
+
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    //margin-left: 0;
+  }
 
   @media screen and (max-width: 768px) {
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    width: 100vw;
-    overflow-x: auto;
-    white-space: nowrap;
-  }  
+    width: 100%;
+    //margin-left: 0;
+  }
 `;
 
+export const GraphsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  gap: 5px; /* Pequeno espaçamento entre os gráficos */
+  margin-bottom: 20px; /* Espaçamento entre fileiras */
+  width: 100%;
+`;
+
+
+export const GraphWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Garantir que o gráfico se ajuste ao espaço disponível */
+  width: 100%;
+  //height: 80%;
+`;
+
+
+
+//
 export const Button = styled.button`
   --background-color: #98FB98;
   background-color: rgba(0, 80, 0, 0.7);
