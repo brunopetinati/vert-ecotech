@@ -65,31 +65,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }));
   };
 
-  /*
-  const handleFileChange = (event, fieldName, modelo_item_id) => {
-    const selectedFile = event.target.files[0];
-    const guid = uuidv4();
-    const ext = selectedFile.name.split('.').pop();
-
-    setFileStates((prevState) => ({
-      ...prevState,
-      [fieldName]: {
-        id: guid,
-        name_guid_ext: guid,
-        path: `contractfiles/${guid}.${ext}`,
-        ativo: true,
-        project_id: project_id,
-        name_orig_ext: selectedFile.name,
-        modelo_item_id: modelo_item_id,
-        name_ext_ext: ext,
-        arquivo_fisico: selectedFile, // Armazena o arquivo diretamente como Blob
-      },
-    }));
-
-    return fileStates[fieldName];
-  };
-  */
-
   const handleFileChange = (event, fieldName, modelo_item_id) => {
     const selectedFile = event.target.files[0];
     const guid = uuidv4();
@@ -312,53 +287,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   }
 
-  /*
-  function abrirDocumentoNavegadorDoBanco( guid, mime_type ) {
-    axios.get(`${currentUrl}/api/documentdownload/${guid}/`, { headers, params: { project_id: project_id } })
-    .then((response) => {
-
-      console.log(response);
-
-      const base64String = response.data.item_data.arquivo_fisico
-      const tipoMIME = mime_type;
-
-      // Construa a URL do Data URI
-      const dataURI = `data:${tipoMIME || 'application/octet-stream'};base64,${base64String}`;
-    
-      // Abra a URL em uma nova janela do navegador
-      const novaJanela = window.open();
-      novaJanela.document.write('<iframe width="100%" height="100%" src="' + dataURI + '"></iframe>');
-    })
-    .catch((error) => {
-      console.error('Error fetching data:', error);
-    });
-  }
-
-
-  function abrirDocumentoNavegadorDoBanco(file, mime_type) {
-    axios.get(`http://localhost:5000/download/${file}/`, {
-      headers,
-      responseType: 'blob' // Receber o arquivo como um Blob diretamente
-    })
-    .then((response) => {
-      const tipoMIME = mime_type || response.data.type || 'application/octet-stream';
-  
-      // Cria um URL para o Blob
-      const fileURL = URL.createObjectURL(new Blob([response.data], { type: tipoMIME }));
-  
-      // Abre o arquivo em uma nova janela do navegador
-      const novaJanela = window.open();
-      if (novaJanela) {
-        novaJanela.document.write(`<iframe width="100%" height="100%" src="${fileURL}"></iframe>`);
-      } else {
-        console.error('Falha ao abrir uma nova janela do navegador.');
-      }
-    })
-    .catch((error) => {
-      console.error('Erro ao buscar o arquivo:', error);
-    });
-  }
-  */
 
   async function abrirDocumentoNavegadorDoBanco(guid, ext, mime_type) {
 
@@ -394,91 +322,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         console.error('Erro ao buscar o arquivo:', error);
       });
   }
-
-  /*
-    function downloadDocumentoDoBanco( guid, name ) {
-      axios.get(`${currentUrl}/api/documentdownload/${guid}/`, { headers, params: { project_id: project_id } })
-      .then((response) => {
-  
-        //console.log(response);
-  
-        const base64String = response.data.item_data.arquivo_fisico;
-        const fileName = name;
-  
-        // Decodifique a string base64 para obter a representação binária do arquivo
-        const binaryString = atob(base64String);
-      
-        // Converta a representação binária para um array de bytes
-        const bytes = new Uint8Array(binaryString.length);
-        for (let i = 0; i < binaryString.length; i++) {
-          bytes[i] = binaryString.charCodeAt(i);
-        }
-      
-        // Crie um Blob (objeto binário) a partir do array de bytes
-        const blob = new Blob([bytes], { type: 'application/octet-stream' });
-      
-        // Crie uma URL temporária para o Blob
-        const blobURL = URL.createObjectURL(blob);
-      
-        // Crie um link de download
-        const downloadLink = document.createElement('a');
-        downloadLink.href = blobURL;
-      
-        // Defina apenas o nome padrão do arquivo (o usuário pode alterá-lo ao salvar)
-        downloadLink.download = fileName || 'file';
-      
-        // Adicione o link ao documento
-        document.body.appendChild(downloadLink);
-      
-        // Simule um clique no link para iniciar o download
-        downloadLink.click();
-      
-        // Remova o link do documento após o download
-        document.body.removeChild(downloadLink);
-      
-        // Lembre-se de liberar a URL temporária após o uso para evitar vazamentos de memória
-        URL.revokeObjectURL(blobURL);
-  
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-    }
-  
-  
-    function downloadDocumentoDoBanco(file, name) {
-      axios.get(`http://localhost:5000/download/${file}/`, {
-        responseType: 'blob' // Receber o arquivo como Blob diretamente
-      })
-      .then((response) => {
-        const fileName = name || 'file'; // Nome padrão caso não seja fornecido
-  
-        // Cria um Blob com o tipo MIME correto (do servidor Node)
-        const blob = new Blob([response.data], { type: response.data.type || 'application/octet-stream' });
-  
-        // Cria uma URL temporária para o Blob
-        const blobURL = URL.createObjectURL(blob);
-  
-        // Cria um link de download
-        const downloadLink = document.createElement('a');
-        downloadLink.href = blobURL;
-        downloadLink.download = fileName;
-  
-        // Adiciona o link ao documento e simula um clique para iniciar o download
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-  
-        // Remove o link do DOM após o clique
-        document.body.removeChild(downloadLink);
-  
-        // Libera a URL temporária para evitar vazamentos de memória
-        URL.revokeObjectURL(blobURL);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar o arquivo:', error);
-      });
-    }
-  */
 
   async function downloadDocumentoDoBanco(guid, ext, name) {
 
