@@ -3,21 +3,10 @@ export const stylesPgMenuInf = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '150px',  // Ajuste a altura em pixels
-    width: '80%',  // Ajuste a largura em pixels ou porcentagem
-    //margin: '20px auto', // Margem superior e inferior de 20px, centralizando horizontalmente
-    //marginLeft: '30px',  // Margem à esquerda
-    //marginRight: '30px', // Margem à direita
-    //backgroundColor: 'red', // Cor de fundo
-
-    // Move o elemento (substitua os valores conforme necessário)
-    position: 'relative', // Necessário para mover com top, bottom, left, right
-    top: '250px',  // Move para cima (valores positivos movem para baixo)
-    left: '325px',  // Move para a direita (valores negativos movem para a esquerda)
-    
-    // Alternativa usando transform:
-    // transform: 'translate(10px, -20px)', // X (direita/esquerda), Y (cima/baixo)
+    height: '100%', // Agora ocupa toda a altura do container pai
+    width: '100%', // Mantém a largura dentro do container
+    position: 'relative', // Evita que saia do fluxo do layout
+    overflow: 'hidden', // Garante que não transborde
+    marginTop: '20px', // Define a margem superior
   },
 };
-
-

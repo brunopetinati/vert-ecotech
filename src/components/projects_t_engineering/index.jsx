@@ -154,47 +154,47 @@ const ProjectTabEngineering = ({ project }) => {
         <div style={styles.menu}>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('cardsContainer')}>
             <FontAwesomeIcon icon={faUser} style={{ color: "green" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Objetivos Desenv. Sust.</div>
+            <div style={{paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Objetivos Desenv. Sust.</div>
           </div>
           <div style={styles.menuItem} className="menu-item" onClick={() => setTelaAtiva('geographicCoordinates')}>
             <FontAwesomeIcon icon={faGlobe} style={{ color: "red" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Coordenada Geográfica</div>
+            <div style={{paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Coordenada Geográfica</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('additionalInformation')}>
             <FontAwesomeIcon icon={faInfoCircle} style={{ color: "orange" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Informações PDD</div>
+            <div style={{paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Informações PDD</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('creditoCarbono')}>
             <FontAwesomeIcon icon={faCalculator} style={{ color: "blue" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Crédito de Carbono</div>
+            <div style={{paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Crédito de Carbono</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('projectTokensList2')}>
             <FontAwesomeIcon icon={faChartBar} style={{ color: "purple" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Visão Mensal</div>
+            <div style={{paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Tokens Visão Mensal</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('projectTokensList3')}>
             <FontAwesomeIcon icon={faTable} style={{ color: "orange" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Visão Anual</div>
+            <div style={{ paddingLeft: "5px", color: "grey" , fontSize: '14px'}}>Tokens Visão Anual</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('projectTokensList1')}>
             <FontAwesomeIcon icon={faList} style={{ color: "brown" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Tokens Aposentadoria</div>
+            <div style={{ paddingLeft: "8px", color: "grey", fontSize: '14px' }}>Tokens Aposentadoria</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('uploadsSave')}>
             <FontAwesomeIcon icon={faUpload} style={{ color: "gold" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Gerenciar Projeto</div>
+            <div style={{ paddingLeft: "8px", color: "grey" , fontSize: '14px'}}>Gerenciar Projeto</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('Rastreality')}>
             <FontAwesomeIcon icon={faHistory} style={{ color: "green" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Contas Wilder</div>
+            <div style={{ paddingLeft: "8px", color: "grey" , fontSize: '14px'}}>Contas Wilder</div>
           </div>
           <div style={styles.menuItem} onClick={() => setTelaAtiva('Moedas')}>
             <FontAwesomeIcon icon={faMoneyBill} style={{ color: "green" }} />
-            <div style={{ paddingLeft: "8px", color: "grey" }}>Vert Carbon Credit</div>
+            <div style={{ paddingLeft: "8px", color: "grey" , fontSize: '14px'}}>Vert Carbon Credit</div>
           </div>
         </div>
       </div>
-      <div style={styles.pagina}>
+      <div /*style={styles.pagina}*/>
       {renderizarTela()}
     </div>
     </div>

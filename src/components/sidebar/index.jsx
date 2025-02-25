@@ -163,7 +163,7 @@ const Sidebar = () => {
         
         </SidebarMenu>
 
-        <SidebarMenuItemDiffer style={{marginTop: '-32px'}} onClick={() => setCollapsed(!collapsed)}> 
+        <SidebarMenuItemDiffer style={{marginTop: '-25px'}} onClick={() => setCollapsed(!collapsed)}> 
           {collapsed ? <img src={ArrowRight} alt="0" style={{width: '60px'}}/> :  <img src={ArrowLeft} alt="0" style={{width: '60px'}}/> }
         </SidebarMenuItemDiffer>
 
