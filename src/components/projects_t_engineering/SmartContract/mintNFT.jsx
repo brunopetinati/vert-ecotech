@@ -1,4 +1,6 @@
 import Web3 from 'web3';
+
+//local da ABI
 import contractAbi2 from './abi_level.json';
 
 

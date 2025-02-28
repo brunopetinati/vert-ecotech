@@ -21,7 +21,6 @@ import {
   sytleFileUpload
 } from '../styles';
 
-//import FileUploadComponent from './FileUploadComponent';
 import FileUploadComponentPDF from './FileUploadComponentPDF';
 import { useSelector } from 'react-redux';
 import ProgressBar from './ProgressBar';
@@ -259,6 +258,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
     return updatedStates;
   };
 
+  //upload de PDF
   const handleUploadTemp = (docs, _motivo) => {
     return new Promise((resolve, reject) => {
       axios.post(`${currentUrl}/api/sendfilesupload/`, { file_states: docs }, {
@@ -291,7 +291,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
 
           Swal.fire({
             title: 'Erro!',
-            text: error.response.data.error + ', Por favor, contate nosso suporte! suporte@vertecotech.com',
+            text: error.response.data.error + ', Por favor, contate nosso suporte! suporte@vertecotech.com ',
             icon: 'error',
             confirmButtonText: 'OK'
           });
@@ -1163,7 +1163,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
     }
   };
 
-
+  //mintagem do arquivo
   const mintNft = async (document_guid, document_name, file_manager_topic_id, item_document_path, file_manager_control_id, modelo_item_id) => {
     try {
       const confirmacao = await Swal.fire({
@@ -1201,7 +1201,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         };
         //console.log(requestData);
 
-        //implement
+        //implementação para inserir informação no banco "/api/filemanagernft/insert/`"
         await axios.post(`${currentUrl}/api/filemanagernft/insert/`, requestData, { headers })
           .then(async (response1) => {
             const file_manager_nft_id = response1.data.id;
@@ -1744,7 +1744,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                                 (<div style={{ float: 'left', marginLeft: '5px' }}>
                                   {item.document_name ? <StyledButtonDownload disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#00FF7F' : 'white' }} onClick={() => downloadDocumentoDoBanco(item.document_guid, item.document_ext, item.document_name)}>Download</StyledButtonDownload> : ''}
                                 </div>)}
-
+                              {/* botão para mintagem de arquivo */}
                               {item.file_manager_control.visible_mint_nft && contract_contract_address_client &&
                                 (<div style={{ float: 'left', marginLeft: '5px' }}>
                                   {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }} onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}

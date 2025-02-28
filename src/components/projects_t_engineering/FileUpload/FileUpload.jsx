@@ -9,6 +9,7 @@ import ProgressBar from './ProgressBar';
 import ProgressBar2 from './ProgressBar2';
 import { v4 as uuidv4 } from 'uuid';
 
+/* NÃO ESTÁ SENDO USADO */
 
 const styles = {
   formContainer: {

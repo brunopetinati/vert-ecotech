@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import InputMask from 'react-input-mask';
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
+/* NÃO ESTÁ SENDO USADO EM NENHUM LUGAR */
 
 const styles = {
   formContainer: {
