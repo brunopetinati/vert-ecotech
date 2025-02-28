@@ -128,76 +128,100 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [uploadSuccess, setUploadSuccess] = useState({});
 
 
+  function convertFileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            const base64String = reader.result.split(',')[1]; // Remove o prefixo "data:application/pdf;base64,"
+            resolve(base64String);
+        };
+        reader.onerror = (error) => reject(error);
+    });
+  }
 
   const handleUpload = async (_item = null, _name = null) => {
+      var docs = fileStates;
 
-    var docs = fileStates;
-
-    if (_item !== null && _name !== null) {
-      docs = { [_name]: _item };
-    }
-
-    const fileKeys = Object.keys(docs);
-
-    for (const key of fileKeys) {
-      const fileData = fileStates[key];
-      try {
-        await envia_arquivo_pythondoc(fileData, key);
-      } catch (error) {
-        console.error(`Erro ao enviar o arquivo ${key}:`, error);
+      if (_item !== null && _name !== null) {
+          docs = { [_name]: _item };
       }
-    }
 
-    console.log('Todos os arquivos foram enviados.');
-    recarregarTela1();
+      const fileKeys = Object.keys(docs);
+
+      for (const key of fileKeys) {
+          const fileData = fileStates[key];
+
+          // 🔥 Garante que o arquivo seja realmente um File antes de converter para Base64
+          if (fileData.arquivo_fisico && fileData.arquivo_fisico instanceof File) {
+              try {
+                  fileData.arquivo_fisico = await convertFileToBase64(fileData.arquivo_fisico);
+                  console.log("✅ Base64 gerado corretamente:", fileData.arquivo_fisico.substring(0, 50) + "..."); // Mostra os primeiros 50 caracteres
+              } catch (error) {
+                  console.error(`Erro ao converter ${fileData.name_orig_ext} para Base64:`, error);
+                  continue;
+              }
+          } else {
+              console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
+          }
+
+          try {
+              await envia_arquivo_pythondoc(fileData, key);
+          } catch (error) {
+              console.error(`Erro ao enviar o arquivo ${key}:`, error);
+          }
+      }
+
+      console.log("Todos os arquivos foram enviados.");
+      recarregarTela1();
   };
 
-  async function envia_arquivo_pythondoc(fileData, fieldName) {
 
-    //console.log(fieldName);
-    //console.log(fileData);
 
-    try {
+async function envia_arquivo_pythondoc(fileData, fieldName) {
+  try {
+      console.log("📤 Dados enviados para o backend:", JSON.stringify(fileData, null, 2)); // Exibe os dados formatados
+
       setUploading((prev) => ({ ...prev, [fieldName]: true }));
 
       const doc = { [fieldName]: fileData };
 
       const response = await axios.post(`${currentUrl}/api/sendfilesupload/`, { file_states: doc }, {
-        headers,
-        params: {
-          usuario_id: sessionStorage.getItem('usuario_id')
-        },
-        onUploadProgress: (progressEvent) => {
-          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-          setUploadProgresses((prevProgress) => ({
-            ...prevProgress,
-            [fieldName]: progress,
-          }));
-        }
+          headers,
+          params: {
+              usuario_id: sessionStorage.getItem('usuario_id')
+          },
+          onUploadProgress: (progressEvent) => {
+              const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+              setUploadProgresses((prevProgress) => ({
+                  ...prevProgress,
+                  [fieldName]: progress,
+              }));
+          }
       })
-        .then(async (response1) => {
-
-          console.log("arquivo enviado");
-
-        })
-        .catch((error) => {
-          console.error('Upload failed!', error);
+      .then(async (response1) => {
+          console.log("Arquivo enviado com sucesso.");
+      })
+      .catch((error) => {
+          console.error("Upload falhou!", error);
           Swal.fire({
-            title: 'Erro!',
-            text: 'Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com',
-            icon: 'error',
-            confirmButtonText: 'OK'
+              title: "Erro!",
+              text: "Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com",
+              icon: "error",
+              confirmButtonText: "OK"
           });
-        });
+      });
 
       setUploadSuccess((prev) => ({ ...prev, [fieldName]: true }));  // Marca sucesso após o envio
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload
       console.log(`Upload do arquivo ${fileData.name_orig_ext} realizado com sucesso.`);
-    } catch (error) {
+  } catch (error) {
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload em caso de erro
       console.error(`Erro ao enviar o arquivo ${fileData.name_orig_ext}:`, error);
-    }
   }
+}
+
+
 
   const recarregarTela1 = async () => {
     setBotaoSalvar(true);
@@ -1181,17 +1205,10 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         await axios.post(`${currentUrl}/api/filemanagernft/insert/`, requestData, { headers })
           .then(async (response1) => {
             const file_manager_nft_id = response1.data.id;
-            //console.log(file_manager_nft_id);
-            //console.log(response1.data)
 
             try {
-
               //chamada para gerar a nft
               const retorno = await mintNFT(contract_contract_address_client, contract_wallet_owner, _nftTitle, _nftDescription, _nftPrice, _nftRoyaltyPercentage, _nftImageUrl, file_manager_nft_id);
-
-              //console.log(retorno);
-              //console.log(retorno.tokenId);
-              //console.log(retorno.file_manager_nft_id);
 
               //implement
               //atualiza json_response com file_manager_contract_id
