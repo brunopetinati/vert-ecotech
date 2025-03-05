@@ -129,56 +129,56 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   function convertFileToBase64(file) {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            const base64String = reader.result.split(',')[1]; // Remove o prefixo "data:application/pdf;base64,"
-            resolve(base64String);
-        };
-        reader.onerror = (error) => reject(error);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result.split(',')[1]; // Remove o prefixo "data:application/pdf;base64,"
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject(error);
     });
   }
 
   const handleUpload = async (_item = null, _name = null) => {
-      var docs = fileStates;
+    var docs = fileStates;
 
-      if (_item !== null && _name !== null) {
-          docs = { [_name]: _item };
+    if (_item !== null && _name !== null) {
+      docs = { [_name]: _item };
+    }
+
+    const fileKeys = Object.keys(docs);
+
+    for (const key of fileKeys) {
+      const fileData = fileStates[key];
+
+      // 🔥 Garante que o arquivo seja realmente um File antes de converter para Base64
+      if (fileData.arquivo_fisico && fileData.arquivo_fisico instanceof File) {
+        try {
+          fileData.arquivo_fisico = await convertFileToBase64(fileData.arquivo_fisico);
+          console.log("✅ Base64 gerado corretamente:", fileData.arquivo_fisico.substring(0, 50) + "..."); // Mostra os primeiros 50 caracteres
+        } catch (error) {
+          console.error(`Erro ao converter ${fileData.name_orig_ext} para Base64:`, error);
+          continue;
+        }
+      } else {
+        console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
       }
 
-      const fileKeys = Object.keys(docs);
-
-      for (const key of fileKeys) {
-          const fileData = fileStates[key];
-
-          // 🔥 Garante que o arquivo seja realmente um File antes de converter para Base64
-          if (fileData.arquivo_fisico && fileData.arquivo_fisico instanceof File) {
-              try {
-                  fileData.arquivo_fisico = await convertFileToBase64(fileData.arquivo_fisico);
-                  console.log("✅ Base64 gerado corretamente:", fileData.arquivo_fisico.substring(0, 50) + "..."); // Mostra os primeiros 50 caracteres
-              } catch (error) {
-                  console.error(`Erro ao converter ${fileData.name_orig_ext} para Base64:`, error);
-                  continue;
-              }
-          } else {
-              console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
-          }
-
-          try {
-              await envia_arquivo_pythondoc(fileData, key);
-          } catch (error) {
-              console.error(`Erro ao enviar o arquivo ${key}:`, error);
-          }
+      try {
+        await envia_arquivo_pythondoc(fileData, key);
+      } catch (error) {
+        console.error(`Erro ao enviar o arquivo ${key}:`, error);
       }
+    }
 
-      console.log("Todos os arquivos foram enviados.");
-      recarregarTela1();
+    console.log("Todos os arquivos foram enviados.");
+    recarregarTela1();
   };
 
 
 
-async function envia_arquivo_pythondoc(fileData, fieldName) {
-  try {
+  async function envia_arquivo_pythondoc(fileData, fieldName) {
+    try {
       console.log("📤 Dados enviados para o backend:", JSON.stringify(fileData, null, 2)); // Exibe os dados formatados
 
       setUploading((prev) => ({ ...prev, [fieldName]: true }));
@@ -186,39 +186,39 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
       const doc = { [fieldName]: fileData };
 
       const response = await axios.post(`${currentUrl}/api/sendfilesupload/`, { file_states: doc }, {
-          headers,
-          params: {
-              usuario_id: sessionStorage.getItem('usuario_id')
-          },
-          onUploadProgress: (progressEvent) => {
-              const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              setUploadProgresses((prevProgress) => ({
-                  ...prevProgress,
-                  [fieldName]: progress,
-              }));
-          }
+        headers,
+        params: {
+          usuario_id: sessionStorage.getItem('usuario_id')
+        },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadProgresses((prevProgress) => ({
+            ...prevProgress,
+            [fieldName]: progress,
+          }));
+        }
       })
-      .then(async (response1) => {
+        .then(async (response1) => {
           console.log("Arquivo enviado com sucesso.");
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.error("Upload falhou!", error);
           Swal.fire({
-              title: "Erro!",
-              text: "Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com",
-              icon: "error",
-              confirmButtonText: "OK"
+            title: "Erro!",
+            text: "Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com",
+            icon: "error",
+            confirmButtonText: "OK"
           });
-      });
+        });
 
       setUploadSuccess((prev) => ({ ...prev, [fieldName]: true }));  // Marca sucesso após o envio
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload
       console.log(`Upload do arquivo ${fileData.name_orig_ext} realizado com sucesso.`);
-  } catch (error) {
+    } catch (error) {
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload em caso de erro
       console.error(`Erro ao enviar o arquivo ${fileData.name_orig_ext}:`, error);
+    }
   }
-}
 
 
 
@@ -837,6 +837,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
+    console.log("entrou para confirmar");
 
     const requestData = {
       project_id: project_id
@@ -1662,6 +1663,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                 </div>
               </ListItemDiv>
 
+              {/* aqui mexe com na expanção dos documentos "subTopicos" */}
               {expandedTopics.includes(topic) && (
                 <div className="content">
                   <ul style={{ fontSize: '8pt', listStyleType: 'none' }}>
@@ -1669,7 +1671,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                       <li key={item.questao}>
                         <ListItemDiv style={{ width: '750px' }}>
                           <div style={{ float: 'left', marginLeft: '30px', marginTop: '5px', width: '380px', minHeight: '20px', paddingBottom: '5px' }}>
-                            <strong style={{ color: 'black', fontSize: '8pt' }}>{topic}.{item.questao})</strong> {item.label} {item.document_name ?
+                            <strong style={{ color: 'black', fontSize: '8pt' }}>{topic}.{item.questao}</strong> {item.label} {item.document_name ?
                               <div style={{ cursor: 'pointer' }} onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
                                 <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>(Documento: {item.document_name})</b>
                               </div> : ""}
@@ -1747,7 +1749,9 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                               {/* botão para mintagem de arquivo */}
                               {item.file_manager_control.visible_mint_nft && contract_contract_address_client &&
                                 (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                  {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }} onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
+                                  {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo}
+                                    style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }}
+                                    onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
                                 </div>)}
 
                               {item.file_manager_control.visible_show_nft && contract_contract_address_client &&
@@ -1784,6 +1788,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
           ))}
         </div>
 
+        {/* salvando todos os topicos de documentação*/}
         <ContainerNewButton>
           <div style={sytleFileUpload.buttonContainer}>
             <StyledButtonSalvar

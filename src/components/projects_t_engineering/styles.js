@@ -396,6 +396,7 @@ export const ListItemDivContract = styled.div`
   transition: background-color 0.3s;
   align-text: left;
   color: rgb(79,79,79);
+  background-color:rgb(216, 30, 6);
 
   width: 65vw;
   margin-top: 3px;
