@@ -18,7 +18,12 @@ import {
   StyledButtonMintNft,
   StyledButtonShowNft,
   StyledButtonSubstituirNft,
-  sytleFileUpload
+  sytleFileUpload,
+  ContractContainer,
+  ContractDetails,
+  ContractLabels,
+  ContractValues,
+  BlockchainText
 } from '../styles';
 
 import FileUploadComponentPDF from './FileUploadComponentPDF';
@@ -246,7 +251,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       });
   }
 
-
+  //NÃO ESTÁ SENDO USADO 
   const createCopyWithoutFileContent = (fileStates) => {
     // Mapeia cada item de fileStates, removendo o campo 'arquivo_fisico'
     const updatedStates = Object.keys(fileStates).reduce((acc, key) => {
@@ -847,7 +852,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       .post(`${currentUrl}/api/getconfirmeddocumentscount/`, requestData, { headers })
       .then((response) => {
         //console.log(response.data.confirmed_documents_count);
-        if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true); }
+        //if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true);}
+        if (parseInt(response.data.confirmed_documents_count, 10) === 6) { setDocConfirmed(true); }
       })
       .catch((error) => {
         console.error('Erro ao buscar documentos:', error);
@@ -1582,35 +1588,38 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         {((verificarDocsConfirmados() &&
           (
             <div>
-              <div style={{ color: 'rgb(79,79,79)', fontSize: '10pt', marginLeft: '10px' }}>blockchain</div>
-              <ListItemDivContract style={{ backgroundColor: 'red', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
-                <div style={{ float: 'left', minHeight: '20px', width: '760px' }}>
-                  <div style={{ float: 'left', minHeight: '5px', width: '100px', display: contract_contract_address_client == '' ? 'block' : 'none' }}>
-                    <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
-                  </div>
-                  <div style={{ display: contract_contract_address_client != '' ? 'block' : 'none' }}>
-                    <div style={{ float: 'left', minHeight: '80px', width: '160px', color: 'rgb(79,79,79)', fontSize: '8pt' }}>
-                      <div>File Manager Contract:</div>
-                      <div>Contract Address Deploy:</div>
-                      <div>Contract Address Client:</div>
-                      <div>Wallet Owner:</div>
-                      <div>Project Name:</div>
-                      <div>Project Owner:</div>
-                      <div>CAR:</div>
-                      <div>CNPJ / CPF:</div>
-                    </div>
-                    <div style={{ float: 'left', minHeight: '80px', width: '490px', color: 'rgb(79,79,79)', fontSize: '8pt' }}>
-                      <div>{contract_file_manager_contract}</div>
-                      <div>{contract_contract_address_deploy}</div>
-                      <div>{contract_contract_address_client}</div>
-                      <div>{contract_wallet_owner}</div>
-                      <div>{contract_project_name}</div>
-                      <div>{contract_project_owner}</div>
-                      <div>{contract_car}</div>
-                      <div>{contract_cnpj_cpf}</div>
-                    </div>
-                  </div>
-                </div>
+              <ListItemDivContract>
+              <BlockchainText>Blockchain</BlockchainText>
+                {contract_contract_address_client === "" ? (
+                  <StyledButtonCriarContract onClick={() => criarContract()}>
+                    Criar Contract
+                  </StyledButtonCriarContract>
+                ) : (
+                  <ContractContainer>
+                    <ContractDetails>
+                      <ContractLabels>
+                        <div>File Manager Contract:</div>
+                        <div>Contract Address Deploy:</div>
+                        <div>Contract Address Client:</div>
+                        <div>Wallet Owner:</div>
+                        <div>Project Name:</div>
+                        <div>Project Owner:</div>
+                        <div>CAR:</div>
+                        <div>CNPJ / CPF:</div>
+                      </ContractLabels>
+                      <ContractValues>
+                        <div>{contract_file_manager_contract}</div>
+                        <div>{contract_contract_address_deploy}</div>
+                        <div>{contract_contract_address_client}</div>
+                        <div>{contract_wallet_owner}</div>
+                        <div>{contract_project_name}</div>
+                        <div>{contract_project_owner}</div>
+                        <div>{contract_car}</div>
+                        <div>{contract_cnpj_cpf}</div>
+                      </ContractValues>
+                    </ContractDetails>
+                  </ContractContainer>
+                )}
               </ListItemDivContract>
               {/*Aquii*/}
             </div>
@@ -1665,24 +1674,26 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
               {/* aqui mexe com na expanção dos documentos "subTopicos" */}
               {expandedTopics.includes(topic) && (
-                <div className="content">
+                <div >
                   <ul style={{ fontSize: '8pt', listStyleType: 'none' }}>
                     {data2[topic].questoes.map((item) => (
                       <li key={item.questao}>
-                        <ListItemDiv style={{ width: '750px' }}>
-                          <div style={{ float: 'left', marginLeft: '30px', marginTop: '5px', width: '380px', minHeight: '20px', paddingBottom: '5px' }}>
+                        <ListItemDiv>
+                          {/* Aquii fica o css da lateral onde fica escrita */}
+                          <div style={{ backgroundColor: 'red',float: 'left', marginLeft: '30px', marginTop: '5px', width: '380px', minHeight: '20px', paddingBottom: '5px' }}>
                             <strong style={{ color: 'black', fontSize: '8pt' }}>{topic}.{item.questao}</strong> {item.label} {item.document_name ?
                               <div style={{ cursor: 'pointer' }} onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
                                 <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>(Documento: {item.document_name})</b>
                               </div> : ""}
                           </div>
                           {(
-                            <div style={{ float: 'left', width: '380px', height: '20px', marginLeft: '15px' }}>
+                            <div style={{ background: 'green',float: 'left', width: '380px', height: '20px', marginLeft: '15px' }}>
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>
                                   {fileStates[item.fileNameFile] ? (
                                     <div style={{ float: 'left', width: '60px', height: '25px' }}>
+
                                       {/* Exibe a barra de progresso apenas se o upload estiver em andamento */}
                                       {uploading[item.fileNameFile] && (
                                         <progress value={uploadProgresses[item.fileNameFile] || 0} max="100">
