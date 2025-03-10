@@ -28,7 +28,7 @@ export const Container = styled.div`
 `;
 
 export const Column = styled.div`
-  width: 110px;
+  width: 300px;
   background-color: #E9F9EC;
   margin-right: 8px;
   position: relative;
@@ -46,7 +46,7 @@ export const Column = styled.div`
     min-height: 30px;
     border-bottom: 1px solid silver;
     font-weight: 400;
-    font-size: 9pt;
+    font-size: 12pt;
     color: #1bb55e;
     margin-bottom: 25px;
   }

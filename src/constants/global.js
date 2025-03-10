@@ -15,7 +15,7 @@
 //export const currentUrl = prod;
 
 //localhost
-//const localHost = 'http://localhost:8000';
+const localHost = 'http://localhost:8000';
 //export const currentUrl = localHost;
 
 //quality
@@ -32,5 +32,4 @@ export const currentUrl = remote_server;
 //   <Content />
 //  </InnerContainer>
 // </Container>
-
 // 

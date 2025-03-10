@@ -64,3 +64,32 @@ export const StyledButton = styled.button`
   }
 `;
 
+export const Card = styled.div`
+background-color: #fff;
+border: 1px solid #ddd;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+margin: 5px;
+padding: 10px;
+max-width: 200px;
+min-height: 400px;
+float: left;
+`;
+
+export const CardHeader = styled.h2`
+font-size: 8pt;
+margin-bottom: 10px;
+word-wrap: break-word; 
+`;
+
+export const CardContent = styled.div`
+font-size: 8pt;
+margin-bottom: 5px;
+word-wrap: break-word; 
+`;
+
+export const CardTitle = styled.h1`
+font-size: 8pt;
+text-align: center;
+word-wrap: break-word; 
+`;

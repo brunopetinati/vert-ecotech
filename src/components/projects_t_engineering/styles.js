@@ -388,35 +388,69 @@ export const ListItemDiv = styled.div`
 
 
 export const ListItemDivContract = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   border: 2px solid #ddd;
-  border-radius: 10px;  
+  border-radius: 10px;
   transition: background-color 0.3s;
-  align-text: left;
-  color: rgb(79,79,79);
-
+  color: rgb(79, 79, 79);
   width: 65vw;
   margin-top: 3px;
   min-height: 25px;
+  padding: 10px 20px;
 
   &:hover {
     background-color: #e0f2f1;
   }
-
-  div {
-    --width: 100%;
-    --display: flex;
-    --flex-direction: row;
-    --align-items: center;
-    --justify-content: center;    
-  }
-
-  span {
-    font-size: 20px;
-  }
 `;
+
+export const ContractContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 20px;
+`;
+
+export const ContractDetails = styled.div`
+ display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Centraliza verticalmente */
+  text-align: center;
+  width: 100%;
+  gap: 20px; /* Espaçamento entre os blocos */
+`;
+
+export const ContractLabels = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Alinha os textos à direita */
+  text-align: right;
+  color: rgb(79,79,79);
+  font-size: 10pt;
+`;
+
+export const ContractValues = styled.div`
+   display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha os valores à esquerda */
+  text-align: left;
+  color: rgb(79,79,79);
+  font-size: 10pt;
+`;
+
+export const BlockchainText = styled.div`
+  color: rgb(79, 79, 79);
+  font-size: 10pt;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* Garante centralização dentro do container */
+`;
+
+
 
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
@@ -773,12 +807,9 @@ export const StyledButtonSubstituirNft = styled.button`
 //estou mexendo aquiiii
 export const CardContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 6 colunas */
+  grid-template-columns: repeat(6, 1fr); 
   grid-template-rows: repeat(3, auto);
   gap: 1px;
-  //max-width: 615px; 
-  //width: 100%; /* Para garantir que ocupe a largura do container */
-  //justify-content: center; /* Centraliza os cards */
   position: relative; 
   justify-content: start; 
   

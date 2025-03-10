@@ -52,6 +52,7 @@ contract contrato_projeto_level1 is ERC721, Ownable {
         //executa mint
         uint256 timestamp = block.timestamp;
         uint256 tokenId = _tokenIdCounter;
+        //gera de fato a mintagem 
         _safeMint(msg.sender, tokenId);
         _tokenIdCounter++;
 
