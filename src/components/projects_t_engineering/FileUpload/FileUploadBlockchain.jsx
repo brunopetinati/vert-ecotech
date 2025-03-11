@@ -1059,11 +1059,15 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
-<<<<<<< Updated upstream
+
             console.log("Resquest Data" + requestData)
 =======
 >>>>>>> Stashed changes
 
+=======
+            console.log("Resquest Data" + requestData)
+
+>>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
@@ -1072,6 +1076,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                 console.log(file_manager_contract_id);
                 try {
 
+<<<<<<< HEAD
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1096,25 +1101,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
-=======
-                try {
 
-                  //chamada para gerar contrato da nft
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                 
-
-                  //atualiza json_response com file_manager_contract_id
-                  const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
-                    retorno.contratoAddress, retorno.contratoClienteAddress,
-                    retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-                    console.log('chegou aquiiiiiiiiiiiiiiii');
-
-
-                  //distribui dados para o modelo
-                  const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
-
->>>>>>> Stashed changes
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
