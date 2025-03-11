@@ -838,10 +838,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-<<<<<<< Updated upstream
-    //console.log("entrou para confirmar");
-=======
->>>>>>> Stashed changes
+    console.log("entrou para confirmar");
 
     const requestData = {
       project_id: project_id

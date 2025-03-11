@@ -17,6 +17,7 @@ export const SidebarContainer = styled.div`
   justify-content: space-between;
   transition: width 0.3s ease-in-out;
   position: relative; /* Permite empurrar o conteúdo */
+  overflow: hidden;
 
   /* Garante que o conteúdo principal se ajuste ao lado do sidebar */
  & + main {
@@ -89,7 +90,7 @@ export const SidebarMenuItem = styled.li`
   }
 
   &:hover {
-    background-color: lightgrey;
+    background-color: #E5E5E5;
     color: #333;
 
     &::after {
