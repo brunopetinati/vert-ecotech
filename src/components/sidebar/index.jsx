@@ -67,6 +67,7 @@ const Sidebar = () => {
     }
   };
 
+
   const currentYear = new Date().getFullYear();
   // Chame a função assíncrona handleLogin em algum ponto apropriado do seu código
 
