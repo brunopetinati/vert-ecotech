@@ -1049,15 +1049,20 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             console.log("Resquest Data" + requestData)
 =======
 >>>>>>> Stashed changes
+=======
+            console.log("Resquest Data" + requestData)
+>>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                 console.log(file_manager_contract_id);
                 try {
@@ -1086,11 +1091,19 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     console.error("Erro durante a execução sequencial:", error);
                   }
 =======
+=======
+                console.log(file_manager_contract_id);
+>>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
                 try {
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
+<<<<<<< HEAD
                  
+=======
+
+                  console.log(retorno);
+>>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
@@ -1098,10 +1111,14 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
                     console.log('chegou aquiiiiiiiiiiiiiiii');
 
+<<<<<<< HEAD
+=======
+                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
+>>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
+                  console.log("Recebendo retorno " + data2);
 
 >>>>>>> Stashed changes
                   //recarrega tela

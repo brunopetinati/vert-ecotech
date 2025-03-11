@@ -1000,7 +1000,7 @@ export const styles = {
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', //teste  '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-  
+
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
       padding: '2vw', // Ajuste o padding para telas médias
