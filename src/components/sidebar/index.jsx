@@ -69,6 +69,7 @@ const Sidebar = () => {
 
 
   const currentYear = new Date().getFullYear();
+
   // Chame a função assíncrona handleLogin em algum ponto apropriado do seu código
 
   const setCollapsed = (state) => {
@@ -351,38 +352,39 @@ const Sidebar = () => {
         </SidebarMenuItemDiffer>
 
         <SidebarFooter
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        overflow: "hidden",
-      }}
-    >
-      <AnimatePresence mode="wait">
-        {collapsed ? (
-          <motion.span
-            key="collapsed"
-            style={{ color: "#054d00", position: "absolute" }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            V.E &copy;
-          </motion.span>
-        ) : (
-          <motion.span
-            key="expanded"
-            style={{ color: "#054d00", position: "absolute" }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            Vert Ecotech &copy; {currentYear}
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </SidebarFooter>
+
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            overflow: "hidden",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            {collapsed ? (
+              <motion.span
+                key="collapsed"
+                style={{ color: "#054d00", position: "absolute" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                V.E &copy;
+              </motion.span>
+            ) : (
+              <motion.span
+                key="expanded"
+                style={{ color: "#054d00", position: "absolute" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                Vert Ecotech &copy; {currentYear}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </SidebarFooter>
       </SidebarContainer>
     </motion.div>
   );
