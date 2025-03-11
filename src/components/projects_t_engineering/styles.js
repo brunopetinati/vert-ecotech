@@ -431,6 +431,7 @@ export const BlockchainText = styled.div`
   align-items: center;
   text-align: center;
   width: 100%; /* Garante centralização dentro do container */
+<<<<<<< HEAD
   border: 2px solid #ddd;
   border-radius: 10px;
   transition: background-color 0.3s;
@@ -950,10 +951,11 @@ export const styles = {
   tabletMenu: {
     overflow: 'hidden',
     width: '100%',
-    //padding: '10px',
+    padding: '10px',
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
+
     top: '55px',
     maxHeight: '100vh',
     justifyContent: 'center', 
