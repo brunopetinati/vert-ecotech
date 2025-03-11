@@ -431,7 +431,6 @@ export const BlockchainText = styled.div`
   align-items: center;
   text-align: center;
   width: 100%; /* Garante centralização dentro do container */
-<<<<<<< HEAD
   border: 2px solid #ddd;
   border-radius: 10px;
   transition: background-color 0.3s;
@@ -486,6 +485,7 @@ export const ContractValue = styled.div`
   text-align: left;
   //background-color: rgb(17, 223, 223); /* Correção aqui */
 `;
+
 
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
@@ -949,12 +949,14 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
+
     overflow: 'hidden',
     width: '100%',
     padding: '10px',
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
+
     top: '55px', 
     maxHeight: '100vh',
     justifyContent: 'center', 
@@ -975,13 +977,15 @@ export const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
     gridTemplateRows: 'repeat(2, auto)',
-    gap: '4px',
+    gap: '5px',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '90%', 
-    height: '20vh',
-    marginLeft: '-50px', 
+    width: '80vw', /* Largura relativa à largura da tela */
+    maxWidth: '80vw',
+    height: '20vh', /* Altura relativa à altura da tela */
+    padding: '0 0px',
   },
+
 
   menuItem: {
     cursor: 'pointer',
@@ -993,15 +997,6 @@ export const styles = {
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-
-    menuItemHover: {
-      backgroundColor: "#f0f0f0", // Cor ao passar o mouse
-    },
-    menuItemActive: {
-      backgroundColor: "#d0d0d0", // Cor ao clicar
-    },
-  
-
 
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {

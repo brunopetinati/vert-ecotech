@@ -839,7 +839,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   const verificarDocsConfirmados = () => {
 
-
     const requestData = {
       project_id: project_id
     };
@@ -1058,8 +1057,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
+
                 console.log("contrato id" , file_manager_contract_id);
-                try {
+
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1084,6 +1084,11 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
+
+
+                console.log(file_manager_contract_id);
+                try {
+
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
