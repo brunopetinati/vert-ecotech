@@ -1086,33 +1086,31 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
                 console.log(file_manager_contract_id);
 
-                try {
-                  console.log("Iniciando Factory...");
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                  console.log("Factory concluída. Retorno:", retorno);
+                  try {
+                    console.log("Iniciando Factory...");
+                    const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
+                    console.log("Factory concluída. Retorno:", retorno);
+                  
+                    console.log("Iniciando atualizarJsonResponseContract...");
+                    const respostaAtualizacao = await atualizarJsonResponseContract(
+                      retorno.file_manager_contract_id, 
+                      retorno,
+                      retorno.contratoAddress, 
+                      retorno.contratoClienteAddress,
+                      retorno.signerGeral, 
+                      retorno.signature, 
+                      retorno.hashedMessage
+                    );
+                    console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
+                  
+                    console.log("Iniciando atualizarData2Contract...");
+                    const data2 = await atualizarData2Contract(retorno);
+                    console.log("atualizarData2Contract concluída. Data2:", data2);
+                    
+                  } catch (error) {
+                    console.error("Erro durante a execução sequencial:", error);
+                  }
 
-                  console.log("Iniciando atualizarJsonResponseContract...");
-                  const respostaAtualizacao = await atualizarJsonResponseContract(
-                    retorno.file_manager_contract_id,
-                    retorno,
-                    retorno.contratoAddress,
-                    retorno.contratoClienteAddress,
-                    retorno.signerGeral,
-                    retorno.signature,
-                    retorno.hashedMessage
-                  );
-                  console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
-
-
-                  console.log(retorno);
-
-
-                  console.log("Iniciando atualizarData2Contract...");
-                  const data2 = await atualizarData2Contract(retorno);
-                  console.log("atualizarData2Contract concluída. Data2:", data2);
-                } catch (error) {
-                  console.error("Erro durante a execução sequencial:", error);
-                }
                 try {
 
                   //chamada para gerar contrato da nft
