@@ -992,11 +992,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { headers }
       );
 
-<<<<<<< HEAD
       console.log(response.data);
 
-=======
->>>>>>> 6e36a19 (menu ambiental fixed)
+
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1055,7 +1053,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
             console.log("Resquest Data" + requestData)
 
-
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
@@ -1090,7 +1087,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
                 console.log(file_manager_contract_id);
-   
 
                   try {
                     console.log("Iniciando Factory...");
@@ -1109,6 +1105,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     );
                     console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
 
+                  console.log(retorno);
+
+
                     console.log("Iniciando atualizarData2Contract...");
                     const data2 = await atualizarData2Contract(retorno);
                     console.log("atualizarData2Contract concluída. Data2:", data2);
@@ -1116,7 +1115,11 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     console.error("Erro durante a execução sequencial:", error);
                   }
 
+
                 try {
+
+                  try {
+
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1128,20 +1131,40 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
                     console.log('chegou aquiiiiiiiiiiiiiiii');
 
+                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
 
-                  //distribui dados para o modelo
-                  const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
+                    //distribui dados para o modelo
+                    const data2 = await atualizarData2Contract(retorno);
+                    //console.log(data2);
+
+                  //recarrega tela
+                  recarregarTela();
+                  recarregarContract();
+
+                  console.log('Smart Contract - Gerado com Sucesso!');
+
+                  Swal.fire({
+                    title: 'Sucesso!',
+                    text: 'Smart Contract - Gerado com Sucesso!',
+                    icon: 'success',
+                    confirmButtonText: 'OK',
+                  });
+
+
+                } catch (error) {
+                  console.log("Entrou no catch")
+                  //implement update file_manager_contract->is_error = true
+                  const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
+                  console.error('Erro ao criar o contrato:', error);
+                    //distribui dados para o modelo
+                    const data2 = await atualizarData2Contract(retorno);
+                    //console.log(data2);
 
 
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
-=======
-                    //recarrega tela
-                    recarregarTela();
-                    recarregarContract();
->>>>>>> 6e36a19 (menu ambiental fixed)
+
 
                     console.log('Smart Contract - Gerado com Sucesso!');
 
@@ -1797,12 +1820,14 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                             minHeight: '20px',
                             paddingBottom: '3px',
                             textAlign: 'left'
+
                           }}>
                             <strong style={{
                               color: 'black',
                               fontSize: '8pt',
                               //marginLeft: '4px',  
                               marginRight: '2px',
+
                               //backgroundColor: 'pink',
                               //marginBottom: '10px', // Margem abaixo
                               //display: 'inline-block' // Permite aplicar margin-bottom corretamente
@@ -1832,6 +1857,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                               height: '30px',
                               marginLeft: '10px'
                             }}>
+
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>
