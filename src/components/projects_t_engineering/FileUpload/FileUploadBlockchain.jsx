@@ -1090,6 +1090,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
                 console.log(file_manager_contract_id);
+
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1114,6 +1115,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
+
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
 
@@ -1129,6 +1131,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
                   console.log("Recebendo retorno " + data2);
+
 
                 try {
 
@@ -1169,7 +1172,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
-
 
                   //recarrega tela
                   recarregarTela();
