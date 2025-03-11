@@ -352,7 +352,6 @@ const Sidebar = () => {
         </SidebarMenuItemDiffer>
 
         <SidebarFooter
-
           style={{
             display: "flex",
             justifyContent: "center",
@@ -380,7 +379,7 @@ const Sidebar = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                Vert Ecotech &copy; {currentYear}
+
               </motion.span>
             )}
           </AnimatePresence>
