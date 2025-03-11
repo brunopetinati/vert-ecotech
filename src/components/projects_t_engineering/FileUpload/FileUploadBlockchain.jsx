@@ -19,11 +19,10 @@ import {
   StyledButtonShowNft,
   StyledButtonSubstituirNft,
   sytleFileUpload,
-  ContractContainer,
-  ContractDetails,
-  ContractLabels,
-  ContractValues,
-  BlockchainText
+  BlockchainText,
+  ContractItem,
+  ContractLabel,
+  ContractValue,
 } from '../styles';
 
 import FileUploadComponentPDF from './FileUploadComponentPDF';
@@ -69,6 +68,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }));
   };
 
+  //criar assinatura para o pdf
   const handleFileChange = (event, fieldName, modelo_item_id) => {
     const selectedFile = event.target.files[0];
     const guid = uuidv4();
@@ -78,7 +78,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
     reader.onload = async (e) => {
       const arquivo_fisico_content = e.target.result;
-      const arquivo_fisico_base64 = btoa(arquivo_fisico_content);
+      // Não é necessário o btoa(), pois reader.readAsDataURL() já converte o arquivo para Base64
+      const arquivo_fisico_base64 = arquivo_fisico_content.split(',')[1]; // Remove a parte "data:..." da URL Base64
+      //const arquivo_fisico_base64 = btoa(arquivo_fisico_content);
 
       //cria uma assinatura para o doc
       const retorno = await protectPDF(guid, null);
@@ -100,8 +102,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       }));
     };
 
+    reader.readAsDataURL(selectedFile); // Usa readAsDataURL() para obter a string Base64 diretamente
     //"reader.readAsBinaryString(selectedFile);" versão antiga
-    reader.readAsArrayBuffer(selectedFile);
+    //reader.readAsArrayBuffer(selectedFile);
     return fileStates[fieldName];
   };
 
@@ -156,17 +159,12 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     for (const key of fileKeys) {
       const fileData = fileStates[key];
 
-      // 🔥 Garante que o arquivo seja realmente um File antes de converter para Base64
-      if (fileData.arquivo_fisico && fileData.arquivo_fisico instanceof File) {
-        try {
-          fileData.arquivo_fisico = await convertFileToBase64(fileData.arquivo_fisico);
-          console.log("✅ Base64 gerado corretamente:", fileData.arquivo_fisico.substring(0, 50) + "..."); // Mostra os primeiros 50 caracteres
-        } catch (error) {
-          console.error(`Erro ao converter ${fileData.name_orig_ext} para Base64:`, error);
-          continue;
-        }
+      // ✅ Agora só verificamos se arquivo_fisico é uma string Base64 válida
+      if (fileData.arquivo_fisico && typeof fileData.arquivo_fisico === "string") {
+        console.log("✅ Base64 já está correto:", fileData.arquivo_fisico.substring(0, 50) + "...");
       } else {
         console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
+        continue; // Pula este arquivo e evita o erro
       }
 
       try {
@@ -179,8 +177,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     console.log("Todos os arquivos foram enviados.");
     recarregarTela1();
   };
-
-
 
   async function envia_arquivo_pythondoc(fileData, fieldName) {
     try {
@@ -910,7 +906,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     axios
       .post(`${currentUrl}/api/getcontractinfo/select/`, { project_id: project_id }, { headers })
       .then((response) => {
-        //console.log(response);
+        //console.log("Resposta da API:", response.data);
 
         setFileManagerContract(response.data.id);
         setcontractAddressDeploy(response.data.ContratoAddress);
@@ -921,6 +917,14 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         setContractCar(response.data.ProjectCAR);
         setContractCnpjCpf(response.data.ProjectCnpjCpf);
 
+        //console.log("File Manager Contract:", response.data.id);
+        //console.log("Contract Address Deploy:", response.data.ContratoAddress);
+        //console.log("Contract Address Client:", response.data.ContratoClienteAddress);
+        //console.log("Wallet Owner:", response.data.Signer);
+        //console.log("Project Name:", response.data.ProjectName);
+        //console.log("Project Owner:", response.data.ProjectOwner);
+        //console.log("CAR:", response.data.ProjectCAR);
+        //console.log("CNPJ / CPF:", response.data.ProjectCnpjCpf);
       })
       .catch((error) => {
         console.error('Erro ao recarregar dados do contrato:', error);
@@ -1003,7 +1007,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         const requestDatainfo = {
           project_id: project_id,
         };
-
+        console.log("comfirmou")
         await axios.post(`${currentUrl}/api/getinfoproject/select/`, requestDatainfo, { headers })
           .then(async (response0) => {
             const nomePropriedade = response0.data.project.title;
@@ -1019,28 +1023,30 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
+            console.log("Resquest Data" + requestData)
+
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
-                //console.log(file_manager_contract_id);
+                console.log(file_manager_contract_id);
                 try {
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
 
-                  //console.log(retorno);
+                  console.log(retorno);
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
 
-                  //console.log(respostaAtualizacao);
+                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
 
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
+                  console.log("Recebendo retorno " + data2);
 
                   //recarrega tela
                   recarregarTela();
@@ -1057,6 +1063,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
                 } catch (error) {
+                  console.log("Entrou no catch")
                   //implement update file_manager_contract->is_error = true
                   const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
                   console.error('Erro ao criar o contrato:', error);
@@ -1431,7 +1438,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       }
     };
 
-    //FUNCIONALIDADE SUBSTITUIR
+    //FUNCIONALIDADE SUBSTITUIR ARQUIVO USA "FileUploadComponentPDF"
     const handleFileChangeLocal = (event, fieldName, modelo_item_id) => {
       const selectedFile = event.target.files[0];
       const guid = uuidv4();
@@ -1589,36 +1596,46 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
           (
             <div>
               <ListItemDivContract>
-              <BlockchainText>Blockchain</BlockchainText>
+                <BlockchainText>Contrato</BlockchainText>
                 {contract_contract_address_client === "" ? (
                   <StyledButtonCriarContract onClick={() => criarContract()}>
                     Criar Contract
                   </StyledButtonCriarContract>
                 ) : (
-                  <ContractContainer>
-                    <ContractDetails>
-                      <ContractLabels>
-                        <div>File Manager Contract:</div>
-                        <div>Contract Address Deploy:</div>
-                        <div>Contract Address Client:</div>
-                        <div>Wallet Owner:</div>
-                        <div>Project Name:</div>
-                        <div>Project Owner:</div>
-                        <div>CAR:</div>
-                        <div>CNPJ / CPF:</div>
-                      </ContractLabels>
-                      <ContractValues>
-                        <div>{contract_file_manager_contract}</div>
-                        <div>{contract_contract_address_deploy}</div>
-                        <div>{contract_contract_address_client}</div>
-                        <div>{contract_wallet_owner}</div>
-                        <div>{contract_project_name}</div>
-                        <div>{contract_project_owner}</div>
-                        <div>{contract_car}</div>
-                        <div>{contract_cnpj_cpf}</div>
-                      </ContractValues>
-                    </ContractDetails>
-                  </ContractContainer>
+                  <div>
+                    <ContractItem>
+                      <ContractLabel>File Manager Contract:</ContractLabel>
+                      <ContractValue>{contract_file_manager_contract}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Contract Address Deploy:</ContractLabel>
+                      <ContractValue>{contract_contract_address_deploy}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Contract Address Client:</ContractLabel>
+                      <ContractValue>{contract_contract_address_client}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Wallet Owner:</ContractLabel>
+                      <ContractValue>{contract_wallet_owner}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Project Name:</ContractLabel>
+                      <ContractValue>{contract_project_name}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Project Owner:</ContractLabel>
+                      <ContractValue>{contract_project_owner}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>CAR:</ContractLabel>
+                      <ContractValue>{contract_car}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>CNPJ / CPF:</ContractLabel>
+                      <ContractValue>{contract_cnpj_cpf}</ContractValue>
+                    </ContractItem>
+                  </div>
                 )}
               </ListItemDivContract>
               {/*Aquii*/}
@@ -1680,14 +1697,49 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                       <li key={item.questao}>
                         <ListItemDiv>
                           {/* Aquii fica o css da lateral onde fica escrita */}
-                          <div style={{ backgroundColor: 'red',float: 'left', marginLeft: '30px', marginTop: '5px', width: '380px', minHeight: '20px', paddingBottom: '5px' }}>
-                            <strong style={{ color: 'black', fontSize: '8pt' }}>{topic}.{item.questao}</strong> {item.label} {item.document_name ?
-                              <div style={{ cursor: 'pointer' }} onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
-                                <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>(Documento: {item.document_name})</b>
-                              </div> : ""}
+                          <div style={{
+                            float: 'left',
+                            marginLeft: '30px',
+                            marginTop: '15px',
+                            width: '540px',
+                            minHeight: '20px',
+                            paddingBottom: '3px',
+                            textAlign: 'left' 
+                          }}>
+                            <strong style={{
+                              color: 'black',
+                              fontSize: '8pt',
+                              //marginLeft: '4px',  
+                              marginRight: '2px', 
+                              //backgroundColor: 'pink',
+                              //marginBottom: '10px', // Margem abaixo
+                              //display: 'inline-block' // Permite aplicar margin-bottom corretamente
+                            }}>
+                              {topic}.{item.questao}
+                            </strong>
+                            {item.label} {item.document_name ? (
+                              <div style={{ 
+                                cursor: 'pointer', 
+                                marginLeft: '5px', 
+                                marginTop: '10px' ,
+                                //backgroundColor: 'pink',
+                              }}
+                                onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
+                                <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>
+                                  (Documento: {item.document_name})
+                                </b>
+                              </div>
+                            ) : ""}
                           </div>
+
                           {(
-                            <div style={{ background: 'green',float: 'left', width: '380px', height: '20px', marginLeft: '15px' }}>
+                            <div style={{ 
+                                //background: 'blue', 
+                                float: 'left', 
+                                width: '380px', 
+                                height: '30px', 
+                                marginLeft: '10px' 
+                                }}>
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>
@@ -1728,6 +1780,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                                       )}
                                     </div>
                                   ) : (
+                                    /* aqui chama para guardar pdf */
                                     <FileUploadComponentPDF
                                       item={item}
                                       handleFileChange={(e) => handleFileChange(e, item.fileNameFile, item.modelo_item_id)}
@@ -1788,6 +1841,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                             Confirmo que os documentos e informações declarados na ETAPA-1 estão corretas
                           </label>
                           <div style={{ float: 'left', width: '150px', height: '70px' }}>
+                            {/*parei aquii */}
                             <StyledButtonConfirmarDocs onClick={() => handleConfirmacaoDocumentos(data2[topic].titulo.id)} style={{ marginLeft: '10px', backgroundColor: isChecked ? 'rgba(0, 80, 0, 0.7)' : 'silver' }}>Confirmar</StyledButtonConfirmarDocs>
                           </div>
                         </div>
