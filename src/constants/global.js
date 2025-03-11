@@ -20,7 +20,7 @@ const localHost = 'http://localhost:8000';
 
 //quality
 const remote_server = 'http://18.231.255.96:8000';
-export const currentUrl = remote_server;
+export const currentUrl = localHost;
 
 // atenção:
 
