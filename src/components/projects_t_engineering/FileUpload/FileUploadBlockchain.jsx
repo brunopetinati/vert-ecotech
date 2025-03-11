@@ -842,7 +842,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-    console.log("entrou para confirmar");
+    //console.log("entrou para confirmar");
 
     const requestData = {
       project_id: project_id
@@ -853,7 +853,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       .then((response) => {
         //console.log(response.data.confirmed_documents_count);
         //if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true);}
-        if (parseInt(response.data.confirmed_documents_count, 10) === 6) { setDocConfirmed(true); }
+        if (parseInt(response.data.confirmed_documents_count, 10) >= 6) { setDocConfirmed(true); }
       })
       .catch((error) => {
         console.error('Erro ao buscar documentos:', error);
