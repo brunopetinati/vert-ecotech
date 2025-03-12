@@ -18,10 +18,15 @@ export const SidebarContainer = styled.div`
   transition: width 0.3s ease-in-out;
   position: relative; /* Permite empurrar o conteúdo */
   overflow: hidden;
+  z-index: 1000; /* Mesmo z-index do tabletMenu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+
 
   z-index: 1000; /* Mesmo z-index do tabletMenu */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
+
   /* Ajusta o espaço do conteúdo principal */
   & + main {
     margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")};
@@ -29,11 +34,13 @@ export const SidebarContainer = styled.div`
   }
 
 
+
   /* Garante que o conteúdo principal se ajuste ao lado do sidebar */
  & + main {
   margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")}; /* Ajuste os valores aqui */
   transition: margin-left 0.3s ease-in-out;
 }
+
 
 
   @media screen and (max-width: 768px) {

@@ -943,7 +943,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       // Converte BigInt para string
       const sanitizeBigInt = (obj) => {
         if (typeof obj !== 'object' || obj === null) return obj;
-  
+
         for (const key in obj) {
           if (typeof obj[key] === 'bigint') {
             console.warn(`⚠️ Convertendo BigInt para string em "${key}":`, obj[key]);
@@ -954,7 +954,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         }
         return obj;
       };
-  
+
       // Organiza os dados para enviar ao backend
       const payload = sanitizeBigInt({
         json_response: novoJsonResponse,
@@ -964,25 +964,25 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         signature,
         hashedMessage
       });
-  
+
       console.log('📦 Dados prontos para o backend:', payload);
-  
+
       // Faz a requisição PATCH
       const response = await axios.patch(
         `${currentUrl}/api/filemanagercontract/update_json_response/${fileManagerContractId}/`,
         payload,
         { headers }
       );
-  
+
       console.log('✅ Resposta do backend:', response.data);
       return response.data;
-  
+
     } catch (error) {
       console.error('❌ Erro ao atualizar JSON response:', error.response ? error.response.data : error.message);
       throw error;
     }
   };
-  
+
 
   const atualizarData2Contract = async (novoJsonResponse) => {
     try {
@@ -992,8 +992,11 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { headers }
       );
 
+<<<<<<< HEAD
       console.log(response.data);
 
+=======
+>>>>>>> 6e36a19 (menu ambiental fixed)
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1087,62 +1090,87 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
 
                 console.log(file_manager_contract_id);
-                try {
+   
 
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
                     console.log("Factory concluída. Retorno:", retorno);
-                  
+
                     console.log("Iniciando atualizarJsonResponseContract...");
                     const respostaAtualizacao = await atualizarJsonResponseContract(
-                      retorno.file_manager_contract_id, 
+                      retorno.file_manager_contract_id,
                       retorno,
-                      retorno.contratoAddress, 
+                      retorno.contratoAddress,
                       retorno.contratoClienteAddress,
-                      retorno.signerGeral, 
-                      retorno.signature, 
+                      retorno.signerGeral,
+                      retorno.signature,
                       retorno.hashedMessage
                     );
                     console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
-                  
+
                     console.log("Iniciando atualizarData2Contract...");
                     const data2 = await atualizarData2Contract(retorno);
                     console.log("atualizarData2Contract concluída. Data2:", data2);
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
+
+                try {
+
+                  //chamada para gerar contrato da nft
+                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
+                 
+
+                  //atualiza json_response com file_manager_contract_id
+                  const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
+                    retorno.contratoAddress, retorno.contratoClienteAddress,
+                    retorno.signerGeral, retorno.signature, retorno.hashedMessage);
+                    console.log('chegou aquiiiiiiiiiiiiiiii');
+
+
+                  //distribui dados para o modelo
+                  const data2 = await atualizarData2Contract(retorno);
+                  //console.log(data2);
+
+
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
+=======
+                    //recarrega tela
+                    recarregarTela();
+                    recarregarContract();
+>>>>>>> 6e36a19 (menu ambiental fixed)
 
-                  console.log('Smart Contract - Gerado com Sucesso!');
+                    console.log('Smart Contract - Gerado com Sucesso!');
 
-                  Swal.fire({
-                    title: 'Sucesso!',
-                    text: 'Smart Contract - Gerado com Sucesso!',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                  });
+                    Swal.fire({
+                      title: 'Sucesso!',
+                      text: 'Smart Contract - Gerado com Sucesso!',
+                      icon: 'success',
+                      confirmButtonText: 'OK',
+                    });
 
 
-                } catch (error) {
-                  console.log("Entrou no catch")
-                  //implement update file_manager_contract->is_error = true
-                  const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
-                  console.error('Erro ao criar o contrato:', error);
+                  } catch (error) {
+                    console.log("Entrou no catch")
+                    //implement update file_manager_contract->is_error = true
+                    const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
+                    console.error('Erro ao criar o contrato:', error);
 
-                  Swal.fire({
-                    title: 'Erro!',
-                    text: 'Algo deu errado ao tentar criar o contrato, verifique a carteira MetaMask. Por favor, contate nosso suporte! suporte@vertecotech.com',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
-                  });
+                    Swal.fire({
+                      title: 'Erro!',
+                      text: 'Algo deu errado ao tentar criar o contrato, verifique a carteira MetaMask. Por favor, contate nosso suporte! suporte@vertecotech.com',
+                      icon: 'error',
+                      confirmButtonText: 'OK'
+                    });
 
-                  return false;
-                }
+                    return false;
+                  }
 
-              })
+                })
+              
               .catch((error) => {
                 console.error('Erro ao criar o contrato:', error);
                 return false;
@@ -1768,13 +1796,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                             width: '540px',
                             minHeight: '20px',
                             paddingBottom: '3px',
-                            textAlign: 'left' 
+                            textAlign: 'left'
                           }}>
                             <strong style={{
                               color: 'black',
                               fontSize: '8pt',
                               //marginLeft: '4px',  
-                              marginRight: '2px', 
+                              marginRight: '2px',
                               //backgroundColor: 'pink',
                               //marginBottom: '10px', // Margem abaixo
                               //display: 'inline-block' // Permite aplicar margin-bottom corretamente
@@ -1782,10 +1810,10 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                               {topic}.{item.questao}
                             </strong>
                             {item.label} {item.document_name ? (
-                              <div style={{ 
-                                cursor: 'pointer', 
-                                marginLeft: '5px', 
-                                marginTop: '10px' ,
+                              <div style={{
+                                cursor: 'pointer',
+                                marginLeft: '5px',
+                                marginTop: '10px',
                                 //backgroundColor: 'pink',
                               }}
                                 onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
@@ -1797,13 +1825,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                           </div>
 
                           {(
-                            <div style={{ 
-                                //background: 'blue', 
-                                float: 'left', 
-                                width: '380px', 
-                                height: '30px', 
-                                marginLeft: '10px' 
-                                }}>
+                            <div style={{
+                              //background: 'blue', 
+                              float: 'left',
+                              width: '380px',
+                              height: '30px',
+                              marginLeft: '10px'
+                            }}>
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>

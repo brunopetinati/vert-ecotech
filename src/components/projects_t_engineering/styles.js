@@ -956,7 +956,6 @@ export const styles = {
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
-
     top: '55px', 
     maxHeight: '100vh',
     justifyContent: 'center', 
