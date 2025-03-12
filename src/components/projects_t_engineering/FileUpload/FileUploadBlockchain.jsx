@@ -1737,7 +1737,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc)
                           && verificarUploadVisivel(data2, '01')
                           && !verificarUploadVisivel(data2, topic))) ?
-                        (<div /*style={{ float: 'left', width: '500px', marginTop: '-3px' }}*/>
+                        (<div>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :

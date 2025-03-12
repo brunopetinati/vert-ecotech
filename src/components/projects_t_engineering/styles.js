@@ -425,7 +425,7 @@ export const ListItemDiv = styled.div`
 export const BlockchainText = styled.div`
   color: rgb(24, 107, 7);
   font-size: 16pt;
-  background-color: rgba(248, 248, 248, 0.91);
+  background-color: rgba(231, 229, 229, 0.91);
   display: flex;
   justify-content: center;
   align-items: center;
