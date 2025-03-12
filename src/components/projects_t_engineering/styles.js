@@ -966,7 +966,7 @@ export const styles = {
     flexDirection: 'column',
     margin: '0 auto',
     position: 'relative',
-    top: '80px', 
+    top: '55px',
     //background: 'green',
     maxHeight: '100vh',
     boxSizing: 'border-box',
