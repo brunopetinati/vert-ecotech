@@ -960,14 +960,6 @@ export const styles = {
     maxHeight: '100vh',
     justifyContent: 'center', 
     alignItems: 'center',     
-    //margin: '0 auto',
-    position: 'relative',
-    top: '55px',
-    //background: 'pink',
-    maxHeight: '100vh',
-    //boxSizing: 'border-box',
-    justifyContent: 'center', /* Centraliza horizontalmente */
-    alignItems: 'center',     /* Centraliza verticalmente */
   },
 
   menu: {
