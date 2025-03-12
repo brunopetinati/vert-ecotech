@@ -425,12 +425,16 @@ export const ListItemDiv = styled.div`
 export const BlockchainText = styled.div`
   color: rgb(24, 107, 7);
   font-size: 16pt;
-  background-color: rgb(255, 215, 82);
+  background-color: rgba(248, 248, 248, 0.91);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%; /* Garante centralização dentro do container */
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  color: rgb(79, 79, 79);
 `;
 
 export const ListItemDivContract = styled.div`
@@ -442,10 +446,10 @@ export const ListItemDivContract = styled.div`
   border-radius: 10px;
   transition: background-color 0.3s;
   color: rgb(79, 79, 79);
-  width: 45vw;
+  width: 38vw;
   margin-top: 3px;
   min-height: 25px;
-  padding: 10px 20px;
+  //padding: 10px 20px;
   //background-color: rgb(255, 215, 82);
   text-align: center; /* Garante que o texto fique centralizado */
 
@@ -458,8 +462,8 @@ export const ContractItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr; /* Primeira coluna menor, segunda maior */
   gap: 10px; /* Espaço entre os itens */
-  padding: 5px 0;
-  background-color: rgb(223, 17, 137);
+  padding: 8px ;
+  //background-color: rgb(223, 17, 137);
   text-align: left;
   width: 100%;
 `;
