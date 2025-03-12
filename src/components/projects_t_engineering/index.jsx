@@ -43,31 +43,16 @@ import FileUploadBlockchain from "./FileUpload/FileUploadBlockchain";
 import AdditionalInformation from "./AdditionalInformation/AdditionalInformation";
 import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
-
-
-<<<<<<< HEAD
 import { useEffect } from "react";
 
-=======
->>>>>>> c6aedd3 (ajuste do menu superior -nataly)
+
 const ProjectTabEngineering = ({ project }) => {
-
-
   const [telaAtiva, setTelaAtiva] = useState("cardsContainer");
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find((item) => item.project === project.id);
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
-
-<<<<<<< HEAD
-
   const collapsed = useSelector((state) => state.sidebar);
-
-
-=======
-  const collapsed = useSelector((state) => state.sidebar);
-
->>>>>>> c6aedd3 (ajuste do menu superior -nataly)
   const menuItems = [
     {
       id: "cardsContainer",
@@ -333,9 +318,9 @@ const ProjectTabEngineering = ({ project }) => {
                       ? "#f0f0f0"
                       : "transparent",
                 color: telaAtiva === id ? "white" : "black", 
-                padding: collapsed ? "12px 16px" : "8px 14px", 
-
+                padding: collapsed ? "12px 16px" : "8px 14px",
               }}
+
               onClick={() => setTelaAtiva(id)}
               onMouseEnter={() => setHoveredItem(id)}
               onMouseLeave={() => setHoveredItem(null)}
@@ -346,8 +331,6 @@ const ProjectTabEngineering = ({ project }) => {
               />
               <div style={{ paddingLeft: "8px", fontSize: collapsed ? "12px" : "10px", }}>
                 {label}
-                
-              </div>
             </div>
           ))}
         </div>
