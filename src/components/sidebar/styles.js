@@ -9,7 +9,7 @@ import { ReactComponent as Settings } from '../../assets/icons/configuracoes7.sv
 export const SidebarContainer = styled.div`
   background-color: #f6f6f6;
   width: ${({ collapsed }) => (collapsed ? "5vw" : "15vw")};
-  min-height: 100vh; /* Garante altura mínima de 100% da viewport */
+  min-height: 100vh;
   top: 0;
   left: 0;
   display: flex;
@@ -18,22 +18,24 @@ export const SidebarContainer = styled.div`
   transition: width 0.3s ease-in-out;
   position: relative; /* Permite empurrar o conteúdo */
   overflow: hidden;
+  z-index: 1000; /* Mesmo z-index do tabletMenu */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
 
-  /* Garante que o conteúdo principal se ajuste ao lado do sidebar */
- & + main {
-  margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")}; /* Ajuste os valores aqui */
-  transition: margin-left 0.3s ease-in-out;
-}
-
+  /* Ajusta o espaço do conteúdo principal */
+  & + main {
+    margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")};
+    transition: margin-left 0.3s ease-in-out;
+  }
 
   @media screen and (max-width: 768px) {
     width: ${({ showSidebar }) => (showSidebar ? "65vw" : "0")};
-    min-height: 100vh; /* Continua com altura mínima de 100% da tela */
+    min-height: 100vh;
     opacity: ${({ showSidebar }) => (showSidebar ? 1 : 0)};
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out;
     overflow: hidden;
   }
-`;
+    `;
 
 
 // mexer nessa altura de 153vh;

@@ -3,6 +3,42 @@ import Select from "react-select";
 import InputMask from "react-input-mask";
 
 
+export const AmbientalButton = styled.button`
+  --background-color: #98FB98;
+  background-color: rgba(0, 80, 0, 0.7);
+  border-radius: 100px;
+  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 10px;
+  width: 120px;
+  height: 25px;
+
+  :hover {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+    background-color: ligthGray;
+  }
+
+  :active {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+    background-color: darkGray;
+  }
+
+  
+`;
 
 export const Container = styled.div`
   
@@ -929,7 +965,7 @@ export const styles = {
     flexDirection: 'column',
     margin: '0 auto',
     position: 'relative',
-    top: '0', 
+    top: '80px', 
     //background: 'green',
     maxHeight: '100vh',
     boxSizing: 'border-box',
@@ -965,8 +1001,15 @@ export const styles = {
     minWidth: '10vw', // Garantir que a largura mínima seja adequada para o conteúdo
     height: '1vw',  // Altura baseada no viewport
     borderRadius: '10px',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#f8f8f8', //teste  '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+
+    menuItemHover: {
+      backgroundColor: "#f0f0f0", // Cor ao passar o mouse
+    },
+    menuItemActive: {
+      backgroundColor: "#d0d0d0", // Cor ao clicar
+    },
   
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {

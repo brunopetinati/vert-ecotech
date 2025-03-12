@@ -33,19 +33,25 @@ export const Tab = styled.div`
 
 
 export const LinearTabs = styled.ul`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: ${({ collapsed }) => (collapsed ? "5vw" : "15vw")}; /* Ajusta conforme a sidebar */
+  width: ${({ collapsed }) => (collapsed ? "95vw" : "85vw")}; /* Ocupa o espaço restante */
   display: flex;
   flex-direction: row;
-  justify-content: center; /* Mantém os itens centralizados */
+  justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #8bc34a; /* Deixa a linha mais visível */
+  border-bottom: 2px solid #8bc34a;
   background: #f9f9f9;
   list-style-type: none;
-  width: 100%; /* Linha ocupa toda a largura */
-  margin: 0 auto; /* Centraliza o contêiner */
-  //margin-right: 2000px;
-  padding: 0; /* Remove padding lateral */
+  margin: 0;
+  padding: 0;
+  z-index: 9999;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Suaviza a animação */
 `;
+
+
 
 
 export const TabItem = styled.li`
