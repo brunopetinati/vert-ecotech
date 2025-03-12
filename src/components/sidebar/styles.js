@@ -21,8 +21,6 @@ export const SidebarContainer = styled.div`
   z-index: 1000; /* Mesmo z-index do tabletMenu */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out;
-
-
   /* Ajusta o espaço do conteúdo principal */
   & + main {
     margin-left: ${({ collapsed }) => (collapsed ? "3vw" : "10vw")};

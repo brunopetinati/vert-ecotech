@@ -44,18 +44,21 @@ import AdditionalInformation from "./AdditionalInformation/AdditionalInformation
 import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
 
+
 import { useEffect } from "react";
 
 const ProjectTabEngineering = ({ project }) => {
 
-  
+
   const [telaAtiva, setTelaAtiva] = useState("cardsContainer");
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find((item) => item.project === project.id);
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
 
+
   const collapsed = useSelector((state) => state.sidebar);
+
 
   const menuItems = [
     {
@@ -323,7 +326,7 @@ const ProjectTabEngineering = ({ project }) => {
                       : "transparent",
                 color: telaAtiva === id ? "white" : "black", 
                 padding: collapsed ? "12px 16px" : "8px 14px", 
-          
+        
               }}
               onClick={() => setTelaAtiva(id)}
               onMouseEnter={() => setHoveredItem(id)}

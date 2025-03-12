@@ -53,6 +53,10 @@ export const LinearTabs = styled.ul`
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 05b3e18 (menu ambiental fixed)
 export const TabItem = styled.li`
   position: relative;
   padding: 12px 2px 12px 16px;
