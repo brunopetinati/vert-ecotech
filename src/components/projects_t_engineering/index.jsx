@@ -47,12 +47,16 @@ import { useEffect } from "react";
 
 
 const ProjectTabEngineering = ({ project }) => {
+
   const [telaAtiva, setTelaAtiva] = useState("cardsContainer");
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find((item) => item.project === project.id);
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
   const collapsed = useSelector((state) => state.sidebar);
+
+
+
   const menuItems = [
     {
       id: "cardsContainer",
@@ -331,6 +335,7 @@ const ProjectTabEngineering = ({ project }) => {
               />
               <div style={{ paddingLeft: "8px", fontSize: collapsed ? "12px" : "10px", }}>
                 {label}
+                
               </div>
             </div>
           ))}

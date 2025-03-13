@@ -954,11 +954,20 @@ export const styles = {
     padding: '10px',
     display: 'flex',
     flexDirection: 'column',
+
     position: 'relative',
     top: '55px', 
     maxHeight: '100vh',
     justifyContent: 'center', 
     alignItems: 'center',     
+    //margin: '0 auto',
+    position: 'relative',
+    top: '55px',
+    //background: 'pink',
+    maxHeight: '100vh',
+    //boxSizing: 'border-box',
+    justifyContent: 'center', /* Centraliza horizontalmente */
+    alignItems: 'center',     /* Centraliza verticalmente */
   },
 
   menu: {
@@ -973,7 +982,6 @@ export const styles = {
     width: '90%', 
     height: '20vh',
     marginLeft: '-50px', 
-
   },
 
   menuItem: {
@@ -986,6 +994,7 @@ export const styles = {
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+
     menuItemHover: {
       backgroundColor: "#f0f0f0", // Cor ao passar o mouse
     },
@@ -993,6 +1002,8 @@ export const styles = {
       backgroundColor: "#d0d0d0", // Cor ao clicar
     },
   
+
+
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
       padding: '2vw', 
