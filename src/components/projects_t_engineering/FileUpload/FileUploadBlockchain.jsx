@@ -965,6 +965,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { headers }
       );
 
+      console.log(response.data);
+
       // Você pode tratar a resposta conforme necessário
       //console.log('Resposta da atualização:', response.data);
       return response.data;
