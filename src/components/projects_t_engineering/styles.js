@@ -950,8 +950,7 @@ export const styles = {
   tabletMenu: {
     overflow: 'hidden',
     width: '100%',
-    //maxWidth: '100%', 
-    padding: '10px',
+    //padding: '10px',
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
@@ -973,6 +972,7 @@ export const styles = {
     width: '90%', 
     height: '20vh',
     marginLeft: '-50px', 
+
   },
 
   menuItem: {

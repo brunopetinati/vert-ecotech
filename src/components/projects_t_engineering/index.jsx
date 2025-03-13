@@ -45,8 +45,11 @@ import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
 
 
+<<<<<<< HEAD
 import { useEffect } from "react";
 
+=======
+>>>>>>> c6aedd3 (ajuste do menu superior -nataly)
 const ProjectTabEngineering = ({ project }) => {
 
 
@@ -56,10 +59,15 @@ const ProjectTabEngineering = ({ project }) => {
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
 
+<<<<<<< HEAD
 
   const collapsed = useSelector((state) => state.sidebar);
 
 
+=======
+  const collapsed = useSelector((state) => state.sidebar);
+
+>>>>>>> c6aedd3 (ajuste do menu superior -nataly)
   const menuItems = [
     {
       id: "cardsContainer",
@@ -326,7 +334,7 @@ const ProjectTabEngineering = ({ project }) => {
                       : "transparent",
                 color: telaAtiva === id ? "white" : "black", 
                 padding: collapsed ? "12px 16px" : "8px 14px", 
-        
+
               }}
               onClick={() => setTelaAtiva(id)}
               onMouseEnter={() => setHoveredItem(id)}
