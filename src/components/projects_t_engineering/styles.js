@@ -959,35 +959,36 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
+    overflow: 'hidden',
     width: '100%',
-    //maxWidth: '100%', 
-    padding: '10px',
+    //padding: '10px',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto',
+    //margin: '0 auto',
     position: 'relative',
     top: '55px',
-    //background: 'green',
+    //background: 'pink',
     maxHeight: '100vh',
-    boxSizing: 'border-box',
+    //boxSizing: 'border-box',
     justifyContent: 'center', /* Centraliza horizontalmente */
     alignItems: 'center',     /* Centraliza verticalmente */
-    overflow: 'hidden',
   },
   menu: {
+    overflow: 'hidden',
     position: 'relative',
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
     gridTemplateRows: 'repeat(2, auto)',
-    gap: '5px',
+    gap: '4px',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80vw', /* Largura relativa à largura da tela */
-    maxWidth: '80vw',
+    width: '90%', /* Largura relativa à largura da tela */
+    //maxWidth: '80vw',
     height: '20vh', /* Altura relativa à altura da tela */
-    padding: '0 0px',
+    //background: 'green',
+    marginLeft: '-50px',  // Adiciona uma margem à esquerda
+    //marginRight: '100px', // Adiciona uma margem à direita
   },
-
 
   menuItem: {
     cursor: 'pointer',
@@ -996,11 +997,8 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
-    padding: '1vw',  // Ajusta o padding de acordo com o viewport
-    width: '90vw',  // Largura baseada no viewport
-    maxWidth: '15vw', // Limita a largura a 20% da largura da tela
-    minWidth: '10vw', // Garantir que a largura mínima seja adequada para o conteúdo
-    height: '1vw',  // Altura baseada no viewport
+    //width: '20vh',  
+    //height: '1.5vw',  
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', //teste  '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
@@ -1032,7 +1030,7 @@ export const styles = {
     alignItems: 'center', // Centraliza horizontalmente
     width: '100%',  // Ocupa toda a largura disponível
     maxWidth: '60vw',  // Limita a largura máxima
-    marginTop: '20px', // Espaço superior para separar do menu
+    marginTop: '55px', // Espaço superior para separar do menu
     marginLeft: 'auto',
     marginRight: 'auto', // Centraliza horizontalmente
     textAlign: 'left',
