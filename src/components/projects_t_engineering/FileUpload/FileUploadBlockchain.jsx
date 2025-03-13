@@ -18,10 +18,13 @@ import {
   StyledButtonMintNft,
   StyledButtonShowNft,
   StyledButtonSubstituirNft,
-  sytleFileUpload
+  sytleFileUpload,
+  BlockchainText,
+  ContractItem,
+  ContractLabel,
+  ContractValue,
 } from '../styles';
 
-//import FileUploadComponent from './FileUploadComponent';
 import FileUploadComponentPDF from './FileUploadComponentPDF';
 import { useSelector } from 'react-redux';
 import ProgressBar from './ProgressBar';
@@ -65,6 +68,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }));
   };
 
+  //criar assinatura para o pdf
   const handleFileChange = (event, fieldName, modelo_item_id) => {
     const selectedFile = event.target.files[0];
     const guid = uuidv4();
@@ -74,7 +78,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
     reader.onload = async (e) => {
       const arquivo_fisico_content = e.target.result;
-      const arquivo_fisico_base64 = btoa(arquivo_fisico_content);
+      // Não é necessário o btoa(), pois reader.readAsDataURL() já converte o arquivo para Base64
+      const arquivo_fisico_base64 = arquivo_fisico_content.split(',')[1]; // Remove a parte "data:..." da URL Base64
+      //const arquivo_fisico_base64 = btoa(arquivo_fisico_content);
 
       //cria uma assinatura para o doc
       const retorno = await protectPDF(guid, null);
@@ -96,8 +102,9 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       }));
     };
 
+    reader.readAsDataURL(selectedFile); // Usa readAsDataURL() para obter a string Base64 diretamente
     //"reader.readAsBinaryString(selectedFile);" versão antiga
-    reader.readAsArrayBuffer(selectedFile);
+    //reader.readAsArrayBuffer(selectedFile);
     return fileStates[fieldName];
   };
 
@@ -130,56 +137,49 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   function convertFileToBase64(file) {
     return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = () => {
-            const base64String = reader.result.split(',')[1]; // Remove o prefixo "data:application/pdf;base64,"
-            resolve(base64String);
-        };
-        reader.onerror = (error) => reject(error);
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const base64String = reader.result.split(',')[1]; // Remove o prefixo "data:application/pdf;base64,"
+        resolve(base64String);
+      };
+      reader.onerror = (error) => reject(error);
     });
   }
 
   const handleUpload = async (_item = null, _name = null) => {
-      var docs = fileStates;
+    var docs = fileStates;
 
-      if (_item !== null && _name !== null) {
-          docs = { [_name]: _item };
+    if (_item !== null && _name !== null) {
+      docs = { [_name]: _item };
+    }
+
+    const fileKeys = Object.keys(docs);
+
+    for (const key of fileKeys) {
+      const fileData = fileStates[key];
+
+      // ✅ Agora só verificamos se arquivo_fisico é uma string Base64 válida
+      if (fileData.arquivo_fisico && typeof fileData.arquivo_fisico === "string") {
+        console.log("✅ Base64 já está correto:", fileData.arquivo_fisico.substring(0, 50) + "...");
+      } else {
+        console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
+        continue; // Pula este arquivo e evita o erro
       }
 
-      const fileKeys = Object.keys(docs);
-
-      for (const key of fileKeys) {
-          const fileData = fileStates[key];
-
-          // 🔥 Garante que o arquivo seja realmente um File antes de converter para Base64
-          if (fileData.arquivo_fisico && fileData.arquivo_fisico instanceof File) {
-              try {
-                  fileData.arquivo_fisico = await convertFileToBase64(fileData.arquivo_fisico);
-                  console.log("✅ Base64 gerado corretamente:", fileData.arquivo_fisico.substring(0, 50) + "..."); // Mostra os primeiros 50 caracteres
-              } catch (error) {
-                  console.error(`Erro ao converter ${fileData.name_orig_ext} para Base64:`, error);
-                  continue;
-              }
-          } else {
-              console.error("❌ arquivo_fisico não é um arquivo válido:", fileData.arquivo_fisico);
-          }
-
-          try {
-              await envia_arquivo_pythondoc(fileData, key);
-          } catch (error) {
-              console.error(`Erro ao enviar o arquivo ${key}:`, error);
-          }
+      try {
+        await envia_arquivo_pythondoc(fileData, key);
+      } catch (error) {
+        console.error(`Erro ao enviar o arquivo ${key}:`, error);
       }
+    }
 
-      console.log("Todos os arquivos foram enviados.");
-      recarregarTela1();
+    console.log("Todos os arquivos foram enviados.");
+    recarregarTela1();
   };
 
-
-
-async function envia_arquivo_pythondoc(fileData, fieldName) {
-  try {
+  async function envia_arquivo_pythondoc(fileData, fieldName) {
+    try {
       console.log("📤 Dados enviados para o backend:", JSON.stringify(fileData, null, 2)); // Exibe os dados formatados
 
       setUploading((prev) => ({ ...prev, [fieldName]: true }));
@@ -187,39 +187,39 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
       const doc = { [fieldName]: fileData };
 
       const response = await axios.post(`${currentUrl}/api/sendfilesupload/`, { file_states: doc }, {
-          headers,
-          params: {
-              usuario_id: sessionStorage.getItem('usuario_id')
-          },
-          onUploadProgress: (progressEvent) => {
-              const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
-              setUploadProgresses((prevProgress) => ({
-                  ...prevProgress,
-                  [fieldName]: progress,
-              }));
-          }
+        headers,
+        params: {
+          usuario_id: sessionStorage.getItem('usuario_id')
+        },
+        onUploadProgress: (progressEvent) => {
+          const progress = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+          setUploadProgresses((prevProgress) => ({
+            ...prevProgress,
+            [fieldName]: progress,
+          }));
+        }
       })
-      .then(async (response1) => {
+        .then(async (response1) => {
           console.log("Arquivo enviado com sucesso.");
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.error("Upload falhou!", error);
           Swal.fire({
-              title: "Erro!",
-              text: "Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com",
-              icon: "error",
-              confirmButtonText: "OK"
+            title: "Erro!",
+            text: "Algo deu errado. Por favor, contate nosso suporte! suporte@vertecotech.com",
+            icon: "error",
+            confirmButtonText: "OK"
           });
-      });
+        });
 
       setUploadSuccess((prev) => ({ ...prev, [fieldName]: true }));  // Marca sucesso após o envio
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload
       console.log(`Upload do arquivo ${fileData.name_orig_ext} realizado com sucesso.`);
-  } catch (error) {
+    } catch (error) {
       setUploading((prev) => ({ ...prev, [fieldName]: false }));  // Para o upload em caso de erro
       console.error(`Erro ao enviar o arquivo ${fileData.name_orig_ext}:`, error);
+    }
   }
-}
 
 
 
@@ -247,7 +247,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
       });
   }
 
-
+  //NÃO ESTÁ SENDO USADO 
   const createCopyWithoutFileContent = (fileStates) => {
     // Mapeia cada item de fileStates, removendo o campo 'arquivo_fisico'
     const updatedStates = Object.keys(fileStates).reduce((acc, key) => {
@@ -259,6 +259,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
     return updatedStates;
   };
 
+  //upload de PDF
   const handleUploadTemp = (docs, _motivo) => {
     return new Promise((resolve, reject) => {
       axios.post(`${currentUrl}/api/sendfilesupload/`, { file_states: docs }, {
@@ -291,7 +292,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
 
           Swal.fire({
             title: 'Erro!',
-            text: error.response.data.error + ', Por favor, contate nosso suporte! suporte@vertecotech.com',
+            text: error.response.data.error + ', Por favor, contate nosso suporte! suporte@vertecotech.com ',
             icon: 'error',
             confirmButtonText: 'OK'
           });
@@ -837,6 +838,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
+    //console.log("entrou para confirmar");
 
     const requestData = {
       project_id: project_id
@@ -846,7 +848,8 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
       .post(`${currentUrl}/api/getconfirmeddocumentscount/`, requestData, { headers })
       .then((response) => {
         //console.log(response.data.confirmed_documents_count);
-        if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true); }
+        //if (parseInt(response.data.confirmed_documents_count, 10) === 8) { setDocConfirmed(true);}
+        if (parseInt(response.data.confirmed_documents_count, 10) >= 6) { setDocConfirmed(true); }
       })
       .catch((error) => {
         console.error('Erro ao buscar documentos:', error);
@@ -903,7 +906,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
     axios
       .post(`${currentUrl}/api/getcontractinfo/select/`, { project_id: project_id }, { headers })
       .then((response) => {
-        //console.log(response);
+        //console.log("Resposta da API:", response.data);
 
         setFileManagerContract(response.data.id);
         setcontractAddressDeploy(response.data.ContratoAddress);
@@ -914,6 +917,14 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         setContractCar(response.data.ProjectCAR);
         setContractCnpjCpf(response.data.ProjectCnpjCpf);
 
+        //console.log("File Manager Contract:", response.data.id);
+        //console.log("Contract Address Deploy:", response.data.ContratoAddress);
+        //console.log("Contract Address Client:", response.data.ContratoClienteAddress);
+        //console.log("Wallet Owner:", response.data.Signer);
+        //console.log("Project Name:", response.data.ProjectName);
+        //console.log("Project Owner:", response.data.ProjectOwner);
+        //console.log("CAR:", response.data.ProjectCAR);
+        //console.log("CNPJ / CPF:", response.data.ProjectCnpjCpf);
       })
       .catch((error) => {
         console.error('Erro ao recarregar dados do contrato:', error);
@@ -953,6 +964,8 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         { json_response: novoJsonResponse },
         { headers }
       );
+
+      console.log(response.data);
 
       // Você pode tratar a resposta conforme necessário
       //console.log('Resposta da atualização:', response.data);
@@ -996,7 +1009,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         const requestDatainfo = {
           project_id: project_id,
         };
-
+        console.log("comfirmou")
         await axios.post(`${currentUrl}/api/getinfoproject/select/`, requestDatainfo, { headers })
           .then(async (response0) => {
             const nomePropriedade = response0.data.project.title;
@@ -1012,28 +1025,30 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
               ProjectCAR: car,
             };
 
+            console.log("Resquest Data" + requestData)
+
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
-                //console.log(file_manager_contract_id);
+                console.log(file_manager_contract_id);
                 try {
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
 
-                  //console.log(retorno);
+                  console.log(retorno);
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
 
-                  //console.log(respostaAtualizacao);
+                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
 
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
+                  console.log("Recebendo retorno " + data2);
 
                   //recarrega tela
                   recarregarTela();
@@ -1050,6 +1065,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
 
 
                 } catch (error) {
+                  console.log("Entrou no catch")
                   //implement update file_manager_contract->is_error = true
                   const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
                   console.error('Erro ao criar o contrato:', error);
@@ -1163,7 +1179,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
     }
   };
 
-
+  //mintagem do arquivo
   const mintNft = async (document_guid, document_name, file_manager_topic_id, item_document_path, file_manager_control_id, modelo_item_id) => {
     try {
       const confirmacao = await Swal.fire({
@@ -1201,7 +1217,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         };
         //console.log(requestData);
 
-        //implement
+        //implementação para inserir informação no banco "/api/filemanagernft/insert/`"
         await axios.post(`${currentUrl}/api/filemanagernft/insert/`, requestData, { headers })
           .then(async (response1) => {
             const file_manager_nft_id = response1.data.id;
@@ -1424,7 +1440,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
       }
     };
 
-    //FUNCIONALIDADE SUBSTITUIR
+    //FUNCIONALIDADE SUBSTITUIR ARQUIVO USA "FileUploadComponentPDF"
     const handleFileChangeLocal = (event, fieldName, modelo_item_id) => {
       const selectedFile = event.target.files[0];
       const guid = uuidv4();
@@ -1581,35 +1597,48 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
         {((verificarDocsConfirmados() &&
           (
             <div>
-              <div style={{ color: 'rgb(79,79,79)', fontSize: '10pt', marginLeft: '10px' }}>blockchain</div>
-              <ListItemDivContract style={{ backgroundColor: 'red', width: '780px', paddingLeft: '20px', paddingTop: '10px', paddingBottom: '10px' }}>
-                <div style={{ float: 'left', minHeight: '20px', width: '760px' }}>
-                  <div style={{ float: 'left', minHeight: '5px', width: '100px', display: contract_contract_address_client == '' ? 'block' : 'none' }}>
-                    <StyledButtonCriarContract onClick={() => criarContract()}>Criar contract</StyledButtonCriarContract>
+              <ListItemDivContract>
+                <BlockchainText>Contrato</BlockchainText>
+                {contract_contract_address_client === "" ? (
+                  <StyledButtonCriarContract onClick={() => criarContract()}>
+                    Criar Contract
+                  </StyledButtonCriarContract>
+                ) : (
+                  <div>
+                    <ContractItem>
+                      <ContractLabel>File Manager Contract:</ContractLabel>
+                      <ContractValue>{contract_file_manager_contract}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Contract Address Deploy:</ContractLabel>
+                      <ContractValue>{contract_contract_address_deploy}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Contract Address Client:</ContractLabel>
+                      <ContractValue>{contract_contract_address_client}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Wallet Owner:</ContractLabel>
+                      <ContractValue>{contract_wallet_owner}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Project Name:</ContractLabel>
+                      <ContractValue>{contract_project_name}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>Project Owner:</ContractLabel>
+                      <ContractValue>{contract_project_owner}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>CAR:</ContractLabel>
+                      <ContractValue>{contract_car}</ContractValue>
+                    </ContractItem>
+                    <ContractItem>
+                      <ContractLabel>CNPJ / CPF:</ContractLabel>
+                      <ContractValue>{contract_cnpj_cpf}</ContractValue>
+                    </ContractItem>
                   </div>
-                  <div style={{ display: contract_contract_address_client != '' ? 'block' : 'none' }}>
-                    <div style={{ float: 'left', minHeight: '80px', width: '160px', color: 'rgb(79,79,79)', fontSize: '8pt' }}>
-                      <div>File Manager Contract:</div>
-                      <div>Contract Address Deploy:</div>
-                      <div>Contract Address Client:</div>
-                      <div>Wallet Owner:</div>
-                      <div>Project Name:</div>
-                      <div>Project Owner:</div>
-                      <div>CAR:</div>
-                      <div>CNPJ / CPF:</div>
-                    </div>
-                    <div style={{ float: 'left', minHeight: '80px', width: '490px', color: 'rgb(79,79,79)', fontSize: '8pt' }}>
-                      <div>{contract_file_manager_contract}</div>
-                      <div>{contract_contract_address_deploy}</div>
-                      <div>{contract_contract_address_client}</div>
-                      <div>{contract_wallet_owner}</div>
-                      <div>{contract_project_name}</div>
-                      <div>{contract_project_owner}</div>
-                      <div>{contract_car}</div>
-                      <div>{contract_cnpj_cpf}</div>
-                    </div>
-                  </div>
-                </div>
+                )}
               </ListItemDivContract>
               {/*Aquii*/}
             </div>
@@ -1637,7 +1666,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                           && (contarDocumentOkTrue(data2, '01') === TopicoCount(data2, '01') && getContract() && verificarDocsConfirmados() || !confirmacao_doc)
                           && verificarUploadVisivel(data2, '01')
                           && !verificarUploadVisivel(data2, topic))) ?
-                        (<div /*style={{ float: 'left', width: '500px', marginTop: '-3px' }}*/>
+                        (<div>
                           <StyledButtonIniciarEtapa onClick={() => handleIniciarEtapa(data2[topic].titulo.id)}>Iniciar {topic}</StyledButtonIniciarEtapa>
                         </div>)
                         :
@@ -1662,25 +1691,63 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                 </div>
               </ListItemDiv>
 
+              {/* aqui mexe com na expanção dos documentos "subTopicos" */}
               {expandedTopics.includes(topic) && (
-                <div className="content">
+                <div >
                   <ul style={{ fontSize: '8pt', listStyleType: 'none' }}>
                     {data2[topic].questoes.map((item) => (
                       <li key={item.questao}>
-                        <ListItemDiv style={{ width: '750px' }}>
-                          <div style={{ float: 'left', marginLeft: '30px', marginTop: '5px', width: '380px', minHeight: '20px', paddingBottom: '5px' }}>
-                            <strong style={{ color: 'black', fontSize: '8pt' }}>{topic}.{item.questao})</strong> {item.label} {item.document_name ?
-                              <div style={{ cursor: 'pointer' }} onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
-                                <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>(Documento: {item.document_name})</b>
-                              </div> : ""}
+                        <ListItemDiv>
+                          {/* Aquii fica o css da lateral onde fica escrita */}
+                          <div style={{
+                            float: 'left',
+                            marginLeft: '30px',
+                            marginTop: '15px',
+                            width: '540px',
+                            minHeight: '20px',
+                            paddingBottom: '3px',
+                            textAlign: 'left' 
+                          }}>
+                            <strong style={{
+                              color: 'black',
+                              fontSize: '8pt',
+                              //marginLeft: '4px',  
+                              marginRight: '2px', 
+                              //backgroundColor: 'pink',
+                              //marginBottom: '10px', // Margem abaixo
+                              //display: 'inline-block' // Permite aplicar margin-bottom corretamente
+                            }}>
+                              {topic}.{item.questao}
+                            </strong>
+                            {item.label} {item.document_name ? (
+                              <div style={{ 
+                                cursor: 'pointer', 
+                                marginLeft: '5px', 
+                                marginTop: '10px' ,
+                                //backgroundColor: 'pink',
+                              }}
+                                onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
+                                <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>
+                                  (Documento: {item.document_name})
+                                </b>
+                              </div>
+                            ) : ""}
                           </div>
+
                           {(
-                            <div style={{ float: 'left', width: '380px', height: '20px', marginLeft: '15px' }}>
+                            <div style={{ 
+                                //background: 'blue', 
+                                float: 'left', 
+                                width: '380px', 
+                                height: '30px', 
+                                marginLeft: '10px' 
+                                }}>
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>
                                   {fileStates[item.fileNameFile] ? (
                                     <div style={{ float: 'left', width: '60px', height: '25px' }}>
+
                                       {/* Exibe a barra de progresso apenas se o upload estiver em andamento */}
                                       {uploading[item.fileNameFile] && (
                                         <progress value={uploadProgresses[item.fileNameFile] || 0} max="100">
@@ -1715,6 +1782,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                                       )}
                                     </div>
                                   ) : (
+                                    /* aqui chama para guardar pdf */
                                     <FileUploadComponentPDF
                                       item={item}
                                       handleFileChange={(e) => handleFileChange(e, item.fileNameFile, item.modelo_item_id)}
@@ -1744,10 +1812,12 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                                 (<div style={{ float: 'left', marginLeft: '5px' }}>
                                   {item.document_name ? <StyledButtonDownload disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#00FF7F' : 'white' }} onClick={() => downloadDocumentoDoBanco(item.document_guid, item.document_ext, item.document_name)}>Download</StyledButtonDownload> : ''}
                                 </div>)}
-
+                              {/* botão para mintagem de arquivo */}
                               {item.file_manager_control.visible_mint_nft && contract_contract_address_client &&
                                 (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                  {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }} onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
+                                  {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo}
+                                    style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }}
+                                    onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
                                 </div>)}
 
                               {item.file_manager_control.visible_show_nft && contract_contract_address_client &&
@@ -1773,6 +1843,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
                             Confirmo que os documentos e informações declarados na ETAPA-1 estão corretas
                           </label>
                           <div style={{ float: 'left', width: '150px', height: '70px' }}>
+                            {/*parei aquii */}
                             <StyledButtonConfirmarDocs onClick={() => handleConfirmacaoDocumentos(data2[topic].titulo.id)} style={{ marginLeft: '10px', backgroundColor: isChecked ? 'rgba(0, 80, 0, 0.7)' : 'silver' }}>Confirmar</StyledButtonConfirmarDocs>
                           </div>
                         </div>
@@ -1784,6 +1855,7 @@ async function envia_arquivo_pythondoc(fileData, fieldName) {
           ))}
         </div>
 
+        {/* salvando todos os topicos de documentação*/}
         <ContainerNewButton>
           <div style={sytleFileUpload.buttonContainer}>
             <StyledButtonSalvar
