@@ -1091,6 +1091,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
                 console.log(file_manager_contract_id);
 
+
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1172,6 +1173,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
+
 
                   //recarrega tela
                   recarregarTela();
