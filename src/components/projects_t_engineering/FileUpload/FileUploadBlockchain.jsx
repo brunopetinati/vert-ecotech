@@ -992,7 +992,15 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { json_response: novoJsonResponse },
         { headers }
       );
+<<<<<<< HEAD
       
+=======
+
+      console.log(response.data);
+
+      // Você pode tratar a resposta conforme necessário
+      //console.log('Resposta da atualização:', response.data);
+>>>>>>> 43ae8a1 (mudanças)
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
