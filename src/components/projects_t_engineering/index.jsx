@@ -47,6 +47,7 @@ import Moedas from "./CryptoMoeda/CryptoMoeda";
 import { useEffect } from "react";
 
 
+
 const ProjectTabEngineering = ({ project }) => {
 
 =======
@@ -64,6 +65,8 @@ const ProjectTabEngineering = ({ project }) => {
 
 =======
 >>>>>>> 6e36a19 (menu ambiental fixed)
+
+  const collapsed = useSelector((state) => state.sidebar);
 
   const menuItems = [
     {
@@ -327,19 +330,12 @@ const ProjectTabEngineering = ({ project }) => {
                   telaAtiva === id
                     ? color
                     : hoveredItem === id
-<<<<<<< HEAD
                       ? "#f0f0f0"
                       : "transparent",
                 color: telaAtiva === id ? "white" : "black", 
                 padding: collapsed ? "12px 16px" : "8px 14px",
               }}
 
-=======
-                    ? "#f0f0f0"
-                    : "transparent",
-                color: telaAtiva === id ? "white" : "black", // Texto branco quando ativo
-              }}
->>>>>>> 6e36a19 (menu ambiental fixed)
               onClick={() => setTelaAtiva(id)}
               onMouseEnter={() => setHoveredItem(id)}
               onMouseLeave={() => setHoveredItem(null)}
@@ -348,15 +344,10 @@ const ProjectTabEngineering = ({ project }) => {
                 icon={icon}
                 style={{ color: telaAtiva === id ? "white" : color }}
               />
-<<<<<<< HEAD
               <div style={{ paddingLeft: "8px", fontSize: collapsed ? "12px" : "10px", }}>
                 {label}
-                
-=======
-              <div style={{ paddingLeft: "8px", fontSize: "14px" }}>
-                {label}
->>>>>>> 6e36a19 (menu ambiental fixed)
               </div>
+
             </div>
           ))}
         </div>

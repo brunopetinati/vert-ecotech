@@ -949,6 +949,7 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
+<<<<<<< HEAD
 
     overflow: 'hidden',
     width: '100%',
@@ -960,6 +961,21 @@ export const styles = {
     maxHeight: '100vh',
     justifyContent: 'center', 
     alignItems: 'center',     
+=======
+    overflow: 'hidden',
+    width: '100%',
+    //padding: '10px',
+    display: 'flex',
+    flexDirection: 'column',
+    //margin: '0 auto',
+    position: 'relative',
+    top: '55px',
+    //background: 'pink',
+    maxHeight: '100vh',
+    //boxSizing: 'border-box',
+    justifyContent: 'center', /* Centraliza horizontalmente */
+    alignItems: 'center',     /* Centraliza verticalmente */
+>>>>>>> 346f3e5 (ajuste do menu superior -nataly)
   },
 
   menu: {
@@ -968,15 +984,16 @@ export const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
     gridTemplateRows: 'repeat(2, auto)',
-    gap: '5px',
+    gap: '4px',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80vw', /* Largura relativa à largura da tela */
-    maxWidth: '80vw',
+    width: '90%', /* Largura relativa à largura da tela */
+    //maxWidth: '80vw',
     height: '20vh', /* Altura relativa à altura da tela */
-    padding: '0 0px',
+    //background: 'green',
+    marginLeft: '-50px',  // Adiciona uma margem à esquerda
+    //marginRight: '100px', // Adiciona uma margem à direita
   },
-
 
   menuItem: {
     cursor: 'pointer',
@@ -985,6 +1002,11 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
+<<<<<<< HEAD
+=======
+    //width: '20vh',  
+    //height: '1.5vw',  
+>>>>>>> 346f3e5 (ajuste do menu superior -nataly)
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
@@ -1012,10 +1034,18 @@ export const styles = {
   pagina: {
     display: 'flex',
     flexDirection: 'column',
+<<<<<<< HEAD
     alignItems: 'center', 
     width: '100%',  
     maxWidth: '60vw',  
     marginTop: '55px', 
+=======
+    //justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center', // Centraliza horizontalmente
+    width: '100%',  // Ocupa toda a largura disponível
+    maxWidth: '60vw',  // Limita a largura máxima
+    marginTop: '55px', // Espaço superior para separar do menu
+>>>>>>> 346f3e5 (ajuste do menu superior -nataly)
     marginLeft: 'auto',
     marginRight: 'auto', 
     textAlign: 'left',
