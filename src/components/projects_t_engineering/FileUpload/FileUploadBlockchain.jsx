@@ -838,10 +838,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-<<<<<<< Updated upstream
-    //console.log("entrou para confirmar");
-=======
->>>>>>> Stashed changes
+
 
     const requestData = {
       project_id: project_id
@@ -995,9 +992,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { json_response: novoJsonResponse },
         { headers }
       );
-<<<<<<< HEAD
-      
-=======
 
       console.log(response.data);
 
@@ -1059,23 +1053,15 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
-<<<<<<< HEAD
-
             console.log("Resquest Data" + requestData)
 
-
-=======
-            console.log("Resquest Data" + requestData)
-
->>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
-<<<<<<< Updated upstream
+
                 console.log(file_manager_contract_id);
                 try {
-
                   try {
                     console.log("Iniciando Factory...");
                     const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1100,6 +1086,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
+
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
 
@@ -1115,7 +1102,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
                   console.log("Recebendo retorno " + data2);
-
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
