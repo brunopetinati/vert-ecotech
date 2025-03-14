@@ -954,7 +954,6 @@ export const styles = {
     padding: '10px',
     display: 'flex',
     flexDirection: 'column',
-
     position: 'relative',
     top: '55px', 
     maxHeight: '100vh',

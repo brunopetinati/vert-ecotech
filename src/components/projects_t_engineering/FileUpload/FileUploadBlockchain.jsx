@@ -1021,7 +1021,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   };
 
-
+  //criar contract
   const criarContract = async () => {
     try {
       const confirmacao = await Swal.fire({
@@ -1058,9 +1058,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
-
-
-                console.log(file_manager_contract_id);
+                console.log("contrato id" , file_manager_contract_id);
                 try {
                   try {
                     console.log("Iniciando Factory...");
