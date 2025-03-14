@@ -931,31 +931,59 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       });
   }
 
-  const atualizarJsonResponseContract = async (fileManagerContractId, novoJsonResponse,
-    ContratoAddress, ContratoClienteAddress, SignerGeral, signature, hashedMessage) => {
+  const atualizarJsonResponseContract = async (
+    fileManagerContractId,
+    novoJsonResponse,
+    ContratoAddress,
+    ContratoClienteAddress,
+    SignerGeral,
+    signature,
+    hashedMessage
+  ) => {
     try {
+      // Converte BigInt para string
+      const sanitizeBigInt = (obj) => {
+        if (typeof obj !== 'object' || obj === null) return obj;
+  
+        for (const key in obj) {
+          if (typeof obj[key] === 'bigint') {
+            console.warn(`⚠️ Convertendo BigInt para string em "${key}":`, obj[key]);
+            obj[key] = obj[key].toString();
+          } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            sanitizeBigInt(obj[key]); // Recursão para objetos aninhados
+          }
+        }
+        return obj;
+      };
+  
+      // Organiza os dados para enviar ao backend
+      const payload = sanitizeBigInt({
+        json_response: novoJsonResponse,
+        ContratoAddress,
+        ContratoClienteAddress,
+        SignerGeral,
+        signature,
+        hashedMessage
+      });
+  
+      console.log('📦 Dados prontos para o backend:', payload);
+  
+      // Faz a requisição PATCH
       const response = await axios.patch(
         `${currentUrl}/api/filemanagercontract/update_json_response/${fileManagerContractId}/`,
-        {
-          json_response: novoJsonResponse,
-          ContratoAddress: ContratoAddress,
-          ContratoClienteAddress: ContratoClienteAddress,
-          SignerGeral: SignerGeral,
-          signature: signature,
-          hashedMessage: hashedMessage
-        },
+        payload,
         { headers }
       );
-
-      // Você pode tratar a resposta conforme necessário
-      //console.log('Resposta da atualização:', response.data);
+  
+      console.log('✅ Resposta do backend:', response.data);
       return response.data;
+  
     } catch (error) {
-      console.error('Erro ao atualizar JSON response:', error);
-      // Trate o erro conforme necessário
+      console.error('❌ Erro ao atualizar JSON response:', error.response ? error.response.data : error.message);
       throw error;
     }
   };
+  
 
   const atualizarData2Contract = async (novoJsonResponse) => {
     try {
@@ -964,9 +992,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { json_response: novoJsonResponse },
         { headers }
       );
-
-      // Você pode tratar a resposta conforme necessário
-      //console.log('Resposta da atualização:', response.data);
+      
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1032,22 +1058,29 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                 console.log(file_manager_contract_id);
                 try {
 
-                  //chamada para gerar contrato da nft
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-
-                  console.log(retorno);
-
-                  //atualiza json_response com file_manager_contract_id
-                  const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
-                    retorno.contratoAddress, retorno.contratoClienteAddress,
-                    retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-
-                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
-
-                  //distribui dados para o modelo
-                  const data2 = await atualizarData2Contract(retorno);
-                  console.log("Recebendo retorno " + data2);
-
+                  try {
+                    console.log("Iniciando Factory...");
+                    const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
+                    console.log("Factory concluída. Retorno:", retorno);
+                  
+                    console.log("Iniciando atualizarJsonResponseContract...");
+                    const respostaAtualizacao = await atualizarJsonResponseContract(
+                      retorno.file_manager_contract_id, 
+                      retorno,
+                      retorno.contratoAddress, 
+                      retorno.contratoClienteAddress,
+                      retorno.signerGeral, 
+                      retorno.signature, 
+                      retorno.hashedMessage
+                    );
+                    console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
+                  
+                    console.log("Iniciando atualizarData2Contract...");
+                    const data2 = await atualizarData2Contract(retorno);
+                    console.log("atualizarData2Contract concluída. Data2:", data2);
+                  } catch (error) {
+                    console.error("Erro durante a execução sequencial:", error);
+                  }
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();

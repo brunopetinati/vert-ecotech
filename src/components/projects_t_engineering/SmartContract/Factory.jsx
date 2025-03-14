@@ -56,6 +56,9 @@ export const Factory = async (nomePropriedade, nomeProprietario, cnpjcpf, car, f
       .send({ from: signer, gas: gasLimit, gasPrice: gasPrice });
 
     console.log(transaction);
+    console.log('aqui temos uma boa sugestão de resultado');
+    console.log(transaction.events.NovoContrato.address);
+    console.log('fim de resultado');
 
     //cria retorno das informacoes da transacao
     return {
