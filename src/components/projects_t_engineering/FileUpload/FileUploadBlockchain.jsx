@@ -1000,7 +1000,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
       // Você pode tratar a resposta conforme necessário
       //console.log('Resposta da atualização:', response.data);
->>>>>>> 43ae8a1 (mudanças)
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1106,29 +1105,20 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-<<<<<<< HEAD
-                 
-=======
 
                   console.log(retorno);
->>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-                    console.log('chegou aquiiiiiiiiiiiiiiii');
 
-<<<<<<< HEAD
-=======
                   console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
->>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
                   console.log("Recebendo retorno " + data2);
 
->>>>>>> Stashed changes
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();

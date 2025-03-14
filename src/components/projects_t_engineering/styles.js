@@ -425,17 +425,12 @@ export const ListItemDiv = styled.div`
 export const BlockchainText = styled.div`
   color: rgb(24, 107, 7);
   font-size: 16pt;
-<<<<<<< HEAD
   background-color: rgba(231, 229, 229, 0.91);
-=======
-  background-color: rgb(255, 215, 82);
->>>>>>> a02672f (subindo ajustes que não foram terminados na parte do contrato -Nataly)
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%; /* Garante centralização dentro do container */
-<<<<<<< HEAD
   border: 2px solid #ddd;
   border-radius: 10px;
   transition: background-color 0.3s;
@@ -489,62 +484,7 @@ export const ContractValue = styled.div`
   flex: 1; /* Faz o valor ocupar a outra metade */
   text-align: left;
   //background-color: rgb(17, 223, 223); /* Correção aqui */
-=======
->>>>>>> a02672f (subindo ajustes que não foram terminados na parte do contrato -Nataly)
 `;
-
-export const ListItemDivContract = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
-  justify-content: center; /* Centraliza verticalmente */
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  transition: background-color 0.3s;
-  color: rgb(79, 79, 79);
-  width: 45vw;
-  margin-top: 3px;
-  min-height: 25px;
-  padding: 10px 20px;
-  //background-color: rgb(255, 215, 82);
-  text-align: center; /* Garante que o texto fique centralizado */
-
-  &:hover {
-    background-color: #e0f2f1;
-  }
-`;
-
-export const ContractItem = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr; /* Primeira coluna menor, segunda maior */
-  gap: 10px; /* Espaço entre os itens */
-  padding: 5px 0;
-  background-color: rgb(223, 17, 137);
-  text-align: left;
-  width: 100%;
-`;
-
-export const ContractLabel = styled.div`
-  font-weight: bold;
-  color: rgb(63, 62, 62);
-  font-size: 10pt;
-  flex: 2; /* Faz o rótulo ocupar metade do espaço */
-  text-align: right;
-  padding-right: 10px;
-  //background-color: rgb(17, 72, 223); /* Correção aqui */
-`;
-
-export const ContractValue = styled.div`
-  color: rgb(79, 79, 79);
-  font-size: 10pt;
-  flex: 1; /* Faz o valor ocupar a outra metade */
-  text-align: left;
-  //background-color: rgb(17, 223, 223); /* Correção aqui */
-`;
-
-
-
-
 
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
