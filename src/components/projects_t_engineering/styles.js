@@ -486,7 +486,6 @@ export const ContractValue = styled.div`
   //background-color: rgb(17, 223, 223); /* Correção aqui */
 `;
 
-
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
   border-radius: 100px;
@@ -949,8 +948,6 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
-<<<<<<< HEAD
-
     overflow: 'hidden',
     width: '100%',
     padding: '10px',
@@ -961,21 +958,6 @@ export const styles = {
     maxHeight: '100vh',
     justifyContent: 'center', 
     alignItems: 'center',     
-=======
-    overflow: 'hidden',
-    width: '100%',
-    //padding: '10px',
-    display: 'flex',
-    flexDirection: 'column',
-    //margin: '0 auto',
-    position: 'relative',
-    top: '55px',
-    //background: 'pink',
-    maxHeight: '100vh',
-    //boxSizing: 'border-box',
-    justifyContent: 'center', /* Centraliza horizontalmente */
-    alignItems: 'center',     /* Centraliza verticalmente */
->>>>>>> 346f3e5 (ajuste do menu superior -nataly)
   },
 
   menu: {
@@ -1002,11 +984,6 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
-<<<<<<< HEAD
-=======
-    //width: '20vh',  
-    //height: '1.5vw',  
->>>>>>> 346f3e5 (ajuste do menu superior -nataly)
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
@@ -1034,18 +1011,10 @@ export const styles = {
   pagina: {
     display: 'flex',
     flexDirection: 'column',
-<<<<<<< HEAD
     alignItems: 'center', 
     width: '100%',  
     maxWidth: '60vw',  
     marginTop: '55px', 
-=======
-    //justifyContent: 'center', // Centraliza verticalmente
-    alignItems: 'center', // Centraliza horizontalmente
-    width: '100%',  // Ocupa toda a largura disponível
-    maxWidth: '60vw',  // Limita a largura máxima
-    marginTop: '55px', // Espaço superior para separar do menu
->>>>>>> 346f3e5 (ajuste do menu superior -nataly)
     marginLeft: 'auto',
     marginRight: 'auto', 
     textAlign: 'left',

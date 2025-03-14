@@ -992,7 +992,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { headers }
       );
 
-
       console.log(response.data);
 
       return response.data;
@@ -1056,8 +1055,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
-
-                console.log("contrato id" , file_manager_contract_id);
+                console.log("contrato id", file_manager_contract_id);
 
 
                 try {
@@ -1119,14 +1117,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                try {
-
-                  try {
-
-
-                  //chamada para gerar contrato da nft
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-
+ 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
@@ -1137,6 +1128,30 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);
                   //console.log(data2);
+
+                  try {
+                    console.log("Iniciando Factory...");
+                    const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
+                    console.log("Factory concluída. Retorno:", retorno);
+                  
+                    console.log("Iniciando atualizarJsonResponseContract...");
+                    const respostaAtualizacao = await atualizarJsonResponseContract(
+                      retorno.file_manager_contract_id, 
+                      retorno,
+                      retorno.contratoAddress, 
+                      retorno.contratoClienteAddress,
+                      retorno.signerGeral, 
+                      retorno.signature, 
+                      retorno.hashedMessage
+                    );
+                    console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
+                  
+                    console.log("Iniciando atualizarData2Contract...");
+                    const data2 = await atualizarData2Contract(retorno);
+                    console.log("atualizarData2Contract concluída. Data2:", data2);
+                  } catch (error) {
+                    console.error("Erro durante a execução sequencial:", error);
+                  }
 
 
                   //recarrega tela
@@ -1163,7 +1178,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   const data2 = await atualizarData2Contract(retorno);
                   //console.log(data2);
 
-
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
@@ -1177,7 +1191,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     icon: 'success',
                     confirmButtonText: 'OK',
                   });
-
 
                 } catch (error) {
                   console.log("Entrou no catch")

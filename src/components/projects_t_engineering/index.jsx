@@ -43,29 +43,17 @@ import FileUploadBlockchain from "./FileUpload/FileUploadBlockchain";
 import AdditionalInformation from "./AdditionalInformation/AdditionalInformation";
 import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
-<<<<<<< HEAD
 import { useEffect } from "react";
 
 
 
-const ProjectTabEngineering = ({ project }) => {
-
-=======
 
 const ProjectTabEngineering = ({ project }) => {
->>>>>>> 6e36a19 (menu ambiental fixed)
   const [telaAtiva, setTelaAtiva] = useState("cardsContainer");
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find((item) => item.project === project.id);
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
-<<<<<<< HEAD
-  const collapsed = useSelector((state) => state.sidebar);
-
-
-=======
->>>>>>> 6e36a19 (menu ambiental fixed)
-
   const collapsed = useSelector((state) => state.sidebar);
 
   const menuItems = [
