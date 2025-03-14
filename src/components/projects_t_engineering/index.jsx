@@ -44,8 +44,11 @@ import AdditionalInformation from "./AdditionalInformation/AdditionalInformation
 import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
 
+import { useEffect } from "react";
 
 const ProjectTabEngineering = ({ project }) => {
+
+  
   const [telaAtiva, setTelaAtiva] = useState("cardsContainer");
   const engineering = useSelector((state) => state.app_data.engineering);
   const matchObject = engineering.find((item) => item.project === project.id);
@@ -297,6 +300,11 @@ const ProjectTabEngineering = ({ project }) => {
         return null;
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   return (
     <div>

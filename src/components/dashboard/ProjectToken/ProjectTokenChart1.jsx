@@ -22,7 +22,6 @@ const ProjectTokenChart1 = () => {
         const response = await axios.post(`${currentUrl}/api/project_tokens/get_by_months`, requestData, { headers });
 
         if (Array.isArray(response.data)) {
-          //console.log('Resposta da API:', response.data);
           setData3(response.data);
         } else {
           console.error('Dados da API inválidos');
@@ -30,7 +29,6 @@ const ProjectTokenChart1 = () => {
       } catch (error) {
         console.error('Error fetching data:', error);
       } finally {
-        //setIsLoading(false);
       }
     };
 

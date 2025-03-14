@@ -6,16 +6,18 @@ export const Container = styled.div`
   background: var(--body-color);
   display: flex;
   flex-direction: column;
-  --align-items: center;
-  --justify-content: center;
-  width: ${({collapsed}) => collapsed ? "96vw" : "85vw"};
+  align-items: center; /* Centraliza horizontalmente */
+  justify-content: center; /* Centraliza verticalmente */
+  width: ${({ collapsed }) => (collapsed ? "96vw" : "85vw")};
 
   @media screen and (max-width: 768px) {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center; /* Mantém centralizado no mobile */
+    align-items: center;
   }
 `;
+
 
 export const TitleContainer = styled.div`
   display: flex;
