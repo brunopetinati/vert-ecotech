@@ -1052,11 +1052,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
             console.log("Resquest Data" + requestData)
 
-
-=======
-            console.log("Resquest Data" + requestData)
-
->>>>>>> 3a3dd5d (subindo ajustes que não foram terminados na parte do contrato -Nataly)
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
@@ -1087,9 +1082,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                 } catch (error) {
                   console.error("Erro durante a execução sequencial:", error);
                 }
-
-
-                console.log(file_manager_contract_id);
+                console.log("contrato id" , file_manager_contract_id);
 
 
                   try {

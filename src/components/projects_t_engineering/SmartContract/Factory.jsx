@@ -88,6 +88,7 @@ export const Factory = async (nomePropriedade, nomeProprietario, cnpjcpf, car, f
     console.log("file_manager_contract_id retornado:", transaction.events.NovoContrato.returnValues.file_manager_contract_id);
 
 
+
     // Retorno das informações da transação
 
     console.log(transaction);
@@ -96,6 +97,7 @@ export const Factory = async (nomePropriedade, nomeProprietario, cnpjcpf, car, f
     console.log('fim de resultado');
 
     //cria retorno das informacoes da transacao
+
 
     return {
       transaction: transaction,

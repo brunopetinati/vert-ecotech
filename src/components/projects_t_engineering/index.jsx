@@ -335,10 +335,6 @@ const ProjectTabEngineering = ({ project }) => {
               <div style={{ paddingLeft: "8px", fontSize: collapsed ? "12px" : "10px", }}>
                 {label}
               </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> d8184ea (subindo ajustes que não foram terminados na parte do contrato -Nataly)
             </div>
           ))}
         </div>
