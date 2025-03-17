@@ -987,17 +987,6 @@ export const styles = {
     borderRadius: '10px',
     backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-<<<<<<< HEAD
-
-=======
-    menuItemHover: {
-      backgroundColor: "#f0f0f0", // Cor ao passar o mouse
-    },
-    menuItemActive: {
-      backgroundColor: "#d0d0d0", // Cor ao clicar
-    },
-  
->>>>>>> d8184ea (subindo ajustes que não foram terminados na parte do contrato -Nataly)
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
       padding: '2vw', 
