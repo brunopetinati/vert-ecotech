@@ -838,10 +838,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-<<<<<<< HEAD
-
-=======
->>>>>>> 43f1d63e6a247d65993d431523c2e73a30c84585
 
     const requestData = {
       project_id: project_id
@@ -947,7 +943,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       // Converte BigInt para string
       const sanitizeBigInt = (obj) => {
         if (typeof obj !== 'object' || obj === null) return obj;
-
+  
         for (const key in obj) {
           if (typeof obj[key] === 'bigint') {
             console.warn(`⚠️ Convertendo BigInt para string em "${key}":`, obj[key]);
@@ -958,7 +954,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         }
         return obj;
       };
-
+  
       // Organiza os dados para enviar ao backend
       const payload = sanitizeBigInt({
         json_response: novoJsonResponse,
@@ -968,25 +964,25 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         signature,
         hashedMessage
       });
-
+  
       console.log('📦 Dados prontos para o backend:', payload);
-
+  
       // Faz a requisição PATCH
       const response = await axios.patch(
         `${currentUrl}/api/filemanagercontract/update_json_response/${fileManagerContractId}/`,
         payload,
         { headers }
       );
-
+  
       console.log('✅ Resposta do backend:', response.data);
       return response.data;
-
+  
     } catch (error) {
       console.error('❌ Erro ao atualizar JSON response:', error.response ? error.response.data : error.message);
       throw error;
     }
   };
-
+  
 
   const atualizarData2Contract = async (novoJsonResponse) => {
     try {
@@ -995,9 +991,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { json_response: novoJsonResponse },
         { headers }
       );
-
-      console.log(response.data);
-
+      
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1022,7 +1016,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   };
 
-  //criar contract
+
   const criarContract = async () => {
     try {
       const confirmacao = await Swal.fire({
@@ -1054,131 +1048,12 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 43f1d63e6a247d65993d431523c2e73a30c84585
-            console.log("Resquest Data" + requestData)
 
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
-                console.log("contrato id", file_manager_contract_id);
-
-
-<<<<<<< HEAD
-                console.log(file_manager_contract_id);
-=======
->>>>>>> 43f1d63e6a247d65993d431523c2e73a30c84585
-                try {
-                  console.log("Iniciando Factory...");
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                  console.log("Factory concluída. Retorno:", retorno);
-
-                  console.log("Iniciando atualizarJsonResponseContract...");
-                  const respostaAtualizacao = await atualizarJsonResponseContract(
-                    retorno.file_manager_contract_id,
-                    retorno,
-                    retorno.contratoAddress,
-                    retorno.contratoClienteAddress,
-                    retorno.signerGeral,
-                    retorno.signature,
-                    retorno.hashedMessage
-                  );
-                  console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
-
-                  console.log("Iniciando atualizarData2Contract...");
-                  const data2 = await atualizarData2Contract(retorno);
-                  console.log("atualizarData2Contract concluída. Data2:", data2);
-
-                } catch (error) {
-                  console.error("Erro durante a execução sequencial:", error);
-                }
-                console.log("contrato id", file_manager_contract_id);
-
 
                 try {
-                  console.log("Iniciando Factory...");
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                  console.log("Factory concluída. Retorno:", retorno);
-
-                  console.log("Iniciando atualizarJsonResponseContract...");
-                  const respostaAtualizacao = await atualizarJsonResponseContract(
-                    retorno.file_manager_contract_id,
-                    retorno,
-                    retorno.contratoAddress,
-                    retorno.contratoClienteAddress,
-                    retorno.signerGeral,
-                    retorno.signature,
-                    retorno.hashedMessage
-                  );
-                  console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
-
-                  console.log("Iniciando atualizarData2Contract...");
-                  const data2 = await atualizarData2Contract(retorno);
-                  console.log("atualizarData2Contract concluída. Data2:", data2);
-
-                } catch (error) {
-                  console.error("Erro durante a execução sequencial:", error);
-                }
-
-                //chamada para gerar contrato da nft
-                const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-
-                console.log(retorno);
-
-                //atualiza json_response com file_manager_contract_id
-                const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
-                  retorno.contratoAddress, retorno.contratoClienteAddress,
-                  retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-
-                console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
-
-                //distribui dados para o modelo
-                const data2 = await atualizarData2Contract(retorno);
-                console.log("Recebendo retorno " + data2);
-
-
-                try {
-
-                  //chamada para gerar contrato da nft
-                  const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-
-                  //atualiza json_response com file_manager_contract_id
-                  const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
-                    retorno.contratoAddress, retorno.contratoClienteAddress,
-                    retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-
-                  console.log('chegou aquiiiiiiiiiiiiiiii');
-
-                  //distribui dados para o modelo
-                  const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
-
-                  try {
-                    console.log("Iniciando Factory...");
-                    const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                    console.log("Factory concluída. Retorno:", retorno);
-
-                    console.log("Iniciando atualizarJsonResponseContract...");
-                    const respostaAtualizacao = await atualizarJsonResponseContract(
-                      retorno.file_manager_contract_id,
-                      retorno,
-                      retorno.contratoAddress,
-                      retorno.contratoClienteAddress,
-                      retorno.signerGeral,
-                      retorno.signature,
-                      retorno.hashedMessage
-                    );
-                    console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
-
-                    console.log("Iniciando atualizarData2Contract...");
-                    //const data2 = await atualizarData2Contract(retorno);
-                    console.log("atualizarData2Contract concluída. Data2:", data2);
-                  } catch (error) {
-                    console.error("Erro durante a execução sequencial:", error);
-                  }
-<<<<<<< HEAD
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1195,10 +1070,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   const data2 = await atualizarData2Contract(retorno);
                   //console.log(data2);
 
-=======
-
-
->>>>>>> 43f1d63e6a247d65993d431523c2e73a30c84585
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
@@ -1230,7 +1101,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                 }
 
               })
-
               .catch((error) => {
                 console.error('Erro ao criar o contrato:', error);
                 return false;
@@ -1856,24 +1726,25 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                             width: '540px',
                             minHeight: '20px',
                             paddingBottom: '3px',
-
-                            textAlign: 'left'
-
+                            textAlign: 'left' 
                           }}>
                             <strong style={{
                               color: 'black',
                               fontSize: '8pt',
-                              marginRight: '2px',
-
+                              //marginLeft: '4px',  
+                              marginRight: '2px', 
+                              //backgroundColor: 'pink',
+                              //marginBottom: '10px', // Margem abaixo
+                              //display: 'inline-block' // Permite aplicar margin-bottom corretamente
                             }}>
                               {topic}.{item.questao}
                             </strong>
                             {item.label} {item.document_name ? (
-
-                              <div style={{
-                                cursor: 'pointer',
-                                marginLeft: '5px',
-                                marginTop: '10px',
+                              <div style={{ 
+                                cursor: 'pointer', 
+                                marginLeft: '5px', 
+                                marginTop: '10px' ,
+                                //backgroundColor: 'pink',
                               }}
                                 onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
                                 <b style={{ color: item.document_ativo ? 'blue' : 'red' }}>
@@ -1882,98 +1753,100 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                               </div>
                             ) : ""}
                           </div>
-                          <div style={{
-                            //background: 'blue', 
-                            float: 'left',
-                            width: '380px',
-                            height: '30px',
-                            marginLeft: '10px'
-                          }}>
 
+                          {(
+                            <div style={{ 
+                                //background: 'blue', 
+                                float: 'left', 
+                                width: '380px', 
+                                height: '30px', 
+                                marginLeft: '10px' 
+                                }}>
 
-                            {item.file_manager_control.visible_upload && (
-                              <div style={{ float: 'left', marginLeft: '5px' }}>
-                                {fileStates[item.fileNameFile] ? (
-                                  <div style={{ float: 'left', width: '60px', height: '25px' }}>
+                              {item.file_manager_control.visible_upload && (
+                                <div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {fileStates[item.fileNameFile] ? (
+                                    <div style={{ float: 'left', width: '60px', height: '25px' }}>
 
-                                    {/* Exibe a barra de progresso apenas se o upload estiver em andamento */}
-                                    {uploading[item.fileNameFile] && (
-                                      <progress value={uploadProgresses[item.fileNameFile] || 0} max="100">
-                                        {uploadProgresses[item.fileNameFile] || 0}%
-                                      </progress>
-                                    )}
+                                      {/* Exibe a barra de progresso apenas se o upload estiver em andamento */}
+                                      {uploading[item.fileNameFile] && (
+                                        <progress value={uploadProgresses[item.fileNameFile] || 0} max="100">
+                                          {uploadProgresses[item.fileNameFile] || 0}%
+                                        </progress>
+                                      )}
 
-                                    {uploading[item.fileNameFile] ? (  // Se o arquivo estiver sendo enviado, exiba "Enviando..." com a porcentagem
-                                      <div style={{ float: 'left', width: '100px', height: '15px', marginTop: '-15px' }}>
-                                        <p>Enviando {uploadProgresses[item.fileNameFile] || 0}%</p>
-                                      </div>
-                                    ) : uploadSuccess[item.fileNameFile] ? (  // Se o upload foi bem-sucedido, mostre "Sucesso"
-                                      <div style={{ float: 'left', width: '60px', height: '25px', marginTop: '-15px' }}>
-                                        <p>Sucesso!</p>
-                                      </div>
-                                    ) : (  // Caso contrário, exiba os botões de upload e delete
-                                      <>
-                                        <div style={{ float: 'left', width: '25px' }}>
-                                          <FUSalvarButton
-                                            disabled={isBotaoSalvar}
-                                            handleUpload={() => handleUpload(fileStates[item.fileNameFile], item.fileNameFile)}
-                                            nome_arquivo={item.fileNameFile}
-                                          />
+                                      {uploading[item.fileNameFile] ? (  // Se o arquivo estiver sendo enviado, exiba "Enviando..." com a porcentagem
+                                        <div style={{ float: 'left', width: '100px', height: '15px', marginTop: '-15px' }}>
+                                          <p>Enviando {uploadProgresses[item.fileNameFile] || 0}%</p>
                                         </div>
-                                        <div style={{ float: 'left', width: '25px', marginLeft: '5px' }}>
-                                          <FUDeleteButton
-                                            switchField={() => switchField(item.fileNameFile)}
-                                            nome_arquivo={item.fileNameFile}
-                                          />
+                                      ) : uploadSuccess[item.fileNameFile] ? (  // Se o upload foi bem-sucedido, mostre "Sucesso"
+                                        <div style={{ float: 'left', width: '60px', height: '25px', marginTop: '-15px' }}>
+                                          <p>Sucesso!</p>
                                         </div>
-                                      </>
-                                    )}
-                                  </div>
-                                ) : (
-                                  /* aqui chama para guardar pdf */
-                                  <FileUploadComponentPDF
-                                    item={item}
-                                    handleFileChange={(e) => handleFileChange(e, item.fileNameFile, item.modelo_item_id)}
-                                  />
-                                )}
-                              </div>
-                            )}
+                                      ) : (  // Caso contrário, exiba os botões de upload e delete
+                                        <>
+                                          <div style={{ float: 'left', width: '25px' }}>
+                                            <FUSalvarButton
+                                              disabled={isBotaoSalvar}
+                                              handleUpload={() => handleUpload(fileStates[item.fileNameFile], item.fileNameFile)}
+                                              nome_arquivo={item.fileNameFile}
+                                            />
+                                          </div>
+                                          <div style={{ float: 'left', width: '25px', marginLeft: '5px' }}>
+                                            <FUDeleteButton
+                                              switchField={() => switchField(item.fileNameFile)}
+                                              nome_arquivo={item.fileNameFile}
+                                            />
+                                          </div>
+                                        </>
+                                      )}
+                                    </div>
+                                  ) : (
+                                    /* aqui chama para guardar pdf */
+                                    <FileUploadComponentPDF
+                                      item={item}
+                                      handleFileChange={(e) => handleFileChange(e, item.fileNameFile, item.modelo_item_id)}
+                                    />
+                                  )}
+                                </div>
+                              )}
 
 
 
-                            {item.file_manager_control.visible_update && contract_contract_address_client &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.document_name ? <StyledButtonSubstituirNft onClick={() => substituirDocumento(item.document_guid, item, item.fileNameFile, item.modelo_item_id)}>Substituir</StyledButtonSubstituirNft> : ''}
-                              </div>)}
+                              {item.file_manager_control.visible_update && contract_contract_address_client &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.document_name ? <StyledButtonSubstituirNft onClick={() => substituirDocumento(item.document_guid, item, item.fileNameFile, item.modelo_item_id)}>Substituir</StyledButtonSubstituirNft> : ''}
+                                </div>)}
 
-                            {item.file_manager_control.visible_logs &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.log.length > 0 ? <StyledButtonLogs onClick={() => mostrarLogs(item.log)}>Logs</StyledButtonLogs> : ''}
-                              </div>)}
+                              {item.file_manager_control.visible_logs &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.log.length > 0 ? <StyledButtonLogs onClick={() => mostrarLogs(item.log)}>Logs</StyledButtonLogs> : ''}
+                                </div>)}
 
-                            {item.file_manager_control.visible_cancel &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.document_name ? <StyledButtonCancelar disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#FFA07A' : 'white' }} onClick={() => cancelarDocumento2(item.document_guid, item.file_manager_nft_dt, item.file_manager_control.visible_show_nft, item.file_manager_control.file_manager_control_id)}>Cancelar</StyledButtonCancelar> : ''}
-                              </div>)}
+                              {item.file_manager_control.visible_cancel &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.document_name ? <StyledButtonCancelar disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#FFA07A' : 'white' }} onClick={() => cancelarDocumento2(item.document_guid, item.file_manager_nft_dt, item.file_manager_control.visible_show_nft, item.file_manager_control.file_manager_control_id)}>Cancelar</StyledButtonCancelar> : ''}
+                                </div>)}
 
-                            {item.file_manager_control.visible_download &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.document_name ? <StyledButtonDownload disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#00FF7F' : 'white' }} onClick={() => downloadDocumentoDoBanco(item.document_guid, item.document_ext, item.document_name)}>Download</StyledButtonDownload> : ''}
-                              </div>)}
-                            {/* botão para mintagem de arquivo */}
-                            {item.file_manager_control.visible_mint_nft && contract_contract_address_client &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo}
-                                  style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }}
-                                  onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
-                              </div>)}
+                              {item.file_manager_control.visible_download &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.document_name ? <StyledButtonDownload disabled={!item.document_ativo} style={{ backgroundColor: item.document_ativo ? '#00FF7F' : 'white' }} onClick={() => downloadDocumentoDoBanco(item.document_guid, item.document_ext, item.document_name)}>Download</StyledButtonDownload> : ''}
+                                </div>)}
+                              {/* botão para mintagem de arquivo */}
+                              {item.file_manager_control.visible_mint_nft && contract_contract_address_client &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.document_name ? <StyledButtonMintNft disabled={!item.document_ativo}
+                                    style={{ backgroundColor: item.document_ativo ? '#F5DEB3' : 'white' }}
+                                    onClick={() => mintNft(item.document_guid, item.document_name, data2[topic]['titulo'].id, item.document_path, item.file_manager_control.file_manager_control_id, item.modelo_item_id)}>Mint NFT</StyledButtonMintNft> : ''}
+                                </div>)}
 
-                            {item.file_manager_control.visible_show_nft && contract_contract_address_client &&
-                              (<div style={{ float: 'left', marginLeft: '5px' }}>
-                                {item.document_name ? <StyledButtonShowNft style={{ backgroundColor: item.document_ativo ? '#7FFF00' : '#FFB6C1' }} onClick={() => showNft(item.file_manager_nft_dt)}>NFT</StyledButtonShowNft> : ''}
-                              </div>)}
-                          </div>
-                          
+                              {item.file_manager_control.visible_show_nft && contract_contract_address_client &&
+                                (<div style={{ float: 'left', marginLeft: '5px' }}>
+                                  {item.document_name ? <StyledButtonShowNft style={{ backgroundColor: item.document_ativo ? '#7FFF00' : '#FFB6C1' }} onClick={() => showNft(item.file_manager_nft_dt)}>NFT</StyledButtonShowNft> : ''}
+                                </div>)}
+
+                            </div>
+                          )}
                         </ListItemDiv>
                       </li>
                     ))}
