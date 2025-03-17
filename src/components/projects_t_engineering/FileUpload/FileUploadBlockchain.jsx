@@ -838,10 +838,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-<<<<<<< Updated upstream
-    //console.log("entrou para confirmar");
-=======
->>>>>>> Stashed changes
+
 
     const requestData = {
       project_id: project_id
@@ -1052,16 +1049,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
-<<<<<<< Updated upstream
+
             console.log("Resquest Data" + requestData)
-=======
->>>>>>> Stashed changes
 
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
-<<<<<<< Updated upstream
                 console.log(file_manager_contract_id);
                 try {
 
@@ -1083,13 +1077,11 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                     console.log("atualizarJsonResponseContract concluída. Resposta:", respostaAtualizacao);
                   
                     console.log("Iniciando atualizarData2Contract...");
-                    const data2 = await atualizarData2Contract(retorno);
+                    //const data2 = await atualizarData2Contract(retorno);
                     console.log("atualizarData2Contract concluída. Data2:", data2);
                   } catch (error) {
                     console.error("Erro durante a execução sequencial:", error);
                   }
-=======
-                try {
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
@@ -1106,7 +1098,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   const data2 = await atualizarData2Contract(retorno);
                   //console.log(data2);
 
->>>>>>> Stashed changes
                   //recarrega tela
                   recarregarTela();
                   recarregarContract();
