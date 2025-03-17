@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  position: relative;
   display: flex;
   width: 100vw; /* Garante que a largura ocupe 100% da tela */
   height: 100vh; /* Garante que a altura ocupe 100% da tela */

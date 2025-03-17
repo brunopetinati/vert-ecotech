@@ -7,6 +7,6 @@ export const stylesPgMenuInf = {
     width: '100%', // Mantém a largura dentro do container
     position: 'relative', // Evita que saia do fluxo do layout
     overflow: 'hidden', // Garante que não transborde
-    marginTop: '20px', // Define a margem superior
+    marginTop: '100px', // Define a margem superior
   },
 };

@@ -3,6 +3,42 @@ import Select from "react-select";
 import InputMask from "react-input-mask";
 
 
+export const AmbientalButton = styled.button`
+  --background-color: #98FB98;
+  background-color: rgba(0, 80, 0, 0.7);
+  border-radius: 100px;
+  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 3px 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 11px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-right: 10px;
+  width: 120px;
+  height: 25px;
+
+  :hover {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+    background-color: ligthGray;
+  }
+
+  :active {
+    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
+    transform: scale(1.02) ;
+    background-color: darkGray;
+  }
+
+  
+`;
 
 export const Container = styled.div`
   
@@ -389,12 +425,16 @@ export const ListItemDiv = styled.div`
 export const BlockchainText = styled.div`
   color: rgb(24, 107, 7);
   font-size: 16pt;
-  background-color: rgb(255, 215, 82);
+  background-color: rgba(231, 229, 229, 0.91);
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   width: 100%; /* Garante centralização dentro do container */
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+  color: rgb(79, 79, 79);
 `;
 
 export const ListItemDivContract = styled.div`
@@ -406,10 +446,10 @@ export const ListItemDivContract = styled.div`
   border-radius: 10px;
   transition: background-color 0.3s;
   color: rgb(79, 79, 79);
-  width: 45vw;
+  width: 38vw;
   margin-top: 3px;
   min-height: 25px;
-  padding: 10px 20px;
+  //padding: 10px 20px;
   //background-color: rgb(255, 215, 82);
   text-align: center; /* Garante que o texto fique centralizado */
 
@@ -422,8 +462,8 @@ export const ContractItem = styled.div`
   display: grid;
   grid-template-columns: auto 1fr; /* Primeira coluna menor, segunda maior */
   gap: 10px; /* Espaço entre os itens */
-  padding: 5px 0;
-  background-color: rgb(223, 17, 137);
+  padding: 8px ;
+  //background-color: rgb(223, 17, 137);
   text-align: left;
   width: 100%;
 `;
@@ -445,9 +485,6 @@ export const ContractValue = styled.div`
   text-align: left;
   //background-color: rgb(17, 223, 223); /* Correção aqui */
 `;
-
-
-
 
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
@@ -841,19 +878,18 @@ export const sytleFileUpload = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '100%',  // Ajusta a largura para 90% da tela
-    maxWidth: '1200px', // Limita a largura máxima
+    width: '100%',  
+    maxWidth: '1200px', 
     minHeight: '300px',
     border: '2px dashed #ccc',
     borderRadius: '8px',
     backgroundColor: '#fafafa',
     padding: '20px',
-    marginTop: '20px',  // Margem superior ajustada
+    marginTop: '20px',  
     textAlign: 'center',
     boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
     position: 'relative',
-    margin: '0 auto',  // Centraliza horizontalmente
-    // Remove o 'transform' para garantir que o contêiner não se mova
+    margin: '0 auto',  
   },
 
 
@@ -882,36 +918,29 @@ export const sytleFileUpload = {
   // Estilo para a barra de progresso
   progressBarContainer: {
     width: '900px',
-    height: '35px', // Aumento da altura para melhor acomodação
-    //backgroundColor: 'green',
+    height: '35px',
     marginLeft: '-90px',
     display: 'flex',
-    alignItems: 'center', // Alinha os itens verticalmente no centro
-    justifyContent: 'flex-start', // Alinha todos os itens à esquerda
-    gap: '70px', // Espaço entre os elementos
-    paddingLeft: '10px', // Pequeno espaço na esquerda para não grudar
+    alignItems: 'center', 
+    justifyContent: 'flex-start', 
+    gap: '70px', 
+    paddingLeft: '10px', 
   },
 
 
   progressBarTitle: {
-    //textAlign: 'left',
     fontWeight: 'bold',
     color: 'black',
     marginLeft: '10px',
-    //marginLeft: '-10px', // Ajuste conforme necessário
   },
 
   progressBarLabel: {
-    //float: 'left',
-    //Width: '420px',
-    //height: '35px',
     fontSize: '8.6pt',
-    //backgroundColor: 'pink',
     marginLeft: '-100px',
   },
 
   progressBar: {
-    marginLeft: '-60px', // Ajusta a posição da barra de progresso
+    marginLeft: '-60px', 
     width: '250px'
   },
 
@@ -919,35 +948,34 @@ export const sytleFileUpload = {
 
 export const styles = {
   tabletMenu: {
+    overflow: 'hidden',
     width: '100%',
-    //maxWidth: '100%', 
     padding: '10px',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 auto',
     position: 'relative',
-    top: '0',
-    //background: 'green',
+    top: '55px', 
     maxHeight: '100vh',
-    boxSizing: 'border-box',
-    justifyContent: 'center', /* Centraliza horizontalmente */
-    alignItems: 'center',     /* Centraliza verticalmente */
-    overflow: 'hidden',
+    justifyContent: 'center', 
+    alignItems: 'center',     
   },
+
   menu: {
+    overflow: 'hidden',
     position: 'relative',
     display: 'grid',
     gridTemplateColumns: 'repeat(5, 1fr)',
     gridTemplateRows: 'repeat(2, auto)',
-    gap: '5px',
+    gap: '4px',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '80vw', /* Largura relativa à largura da tela */
-    maxWidth: '80vw',
+    width: '90%', /* Largura relativa à largura da tela */
+    //maxWidth: '80vw',
     height: '20vh', /* Altura relativa à altura da tela */
-    padding: '0 0px',
+    //background: 'green',
+    marginLeft: '-50px',  // Adiciona uma margem à esquerda
+    //marginRight: '100px', // Adiciona uma margem à direita
   },
-
 
   menuItem: {
     cursor: 'pointer',
@@ -956,58 +984,50 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
-    padding: '1vw',  // Ajusta o padding de acordo com o viewport
-    width: '90vw',  // Largura baseada no viewport
-    maxWidth: '15vw', // Limita a largura a 20% da largura da tela
-    minWidth: '10vw', // Garantir que a largura mínima seja adequada para o conteúdo
-    height: '1vw',  // Altura baseada no viewport
     borderRadius: '10px',
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#f8f8f8', 
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
-
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
-      padding: '2vw', // Ajuste o padding para telas médias
-      width: '80vw', // Ajuste a largura para que fique mais proporcional
-      height: '6vw', // Ajuste a altura proporcionalmente
+      padding: '2vw', 
+      width: '80vw', 
+      height: '6vw', 
     },
 
     '@media (max-width: 768px)': {
-      padding: '3vw', // Mais padding para telas menores
-      width: '70vw', // Ajusta a largura em telas menores
-      height: '7vw',  // Ajusta a altura em telas menores
+      padding: '3vw', 
+      width: '70vw', 
+      height: '7vw',  
     },
 
     '@media (max-width: 480px)': {
-      padding: '4vw', // Aumenta o padding em telas muito pequenas
-      width: '60vw', // Ajusta a largura para telas de celular
-      height: '8vw',  // Ajuste de altura no mobile
+      padding: '4vw', 
+      width: '60vw',
+      height: '8vw',  
     },
   },
 
   pagina: {
     display: 'flex',
     flexDirection: 'column',
-    //justifyContent: 'center', // Centraliza verticalmente
-    alignItems: 'center', // Centraliza horizontalmente
-    width: '100%',  // Ocupa toda a largura disponível
-    maxWidth: '60vw',  // Limita a largura máxima
-    marginTop: '20px', // Espaço superior para separar do menu
+    alignItems: 'center', 
+    width: '100%',  
+    maxWidth: '60vw',  
+    marginTop: '55px', 
     marginLeft: 'auto',
-    marginRight: 'auto', // Centraliza horizontalmente
+    marginRight: 'auto', 
     textAlign: 'left',
-    minHeight: '100vh', // Garante que a altura mínima ocupe toda a tela
+    minHeight: '100vh', 
 
-    // Responsividade:
     '@media screen and (max-width: 1024px)': {
-      maxWidth: '80vw',  // Aumenta a largura em telas menores
-      marginTop: '20px', // Ajusta a margem superior
+      maxWidth: '80vw',  
+      marginTop: '20px', 
       marginLeft: '10px',
       marginRight: '10px',
     },
 
     '@media screen and (max-width: 768px)': {
-      maxWidth: '90vw',  // Ajusta ainda mais a largura
+      maxWidth: '90vw', 
       marginTop: '10px',
     },
 
