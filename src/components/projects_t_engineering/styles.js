@@ -486,6 +486,9 @@ export const ContractValue = styled.div`
   //background-color: rgb(17, 223, 223); /* Correção aqui */
 `;
 
+
+
+
 export const StyledButtonConfirmarDocs = styled.button`
   background-color: rgba(0, 80, 0, 0.7);
   border-radius: 100px;
@@ -950,14 +953,17 @@ export const styles = {
   tabletMenu: {
     overflow: 'hidden',
     width: '100%',
-    padding: '10px',
+    //padding: '10px',
     display: 'flex',
     flexDirection: 'column',
+    //margin: '0 auto',
     position: 'relative',
-    top: '55px', 
+    top: '55px',
+    //background: 'pink',
     maxHeight: '100vh',
-    justifyContent: 'center', 
-    alignItems: 'center',     
+    //boxSizing: 'border-box',
+    justifyContent: 'center', /* Centraliza horizontalmente */
+    alignItems: 'center',     /* Centraliza verticalmente */
   },
 
   menu: {
@@ -984,9 +990,12 @@ export const styles = {
     alignItems: 'center',
     justifyContent: 'flex-start',
     textAlign: 'left',
+    //width: '20vh',  
+    //height: '1.5vw',  
     borderRadius: '10px',
-    backgroundColor: '#f8f8f8', 
+    backgroundColor: '#f8f8f8', //teste  '#f8f8f8',
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
+
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
       padding: '2vw', 
@@ -1010,15 +1019,17 @@ export const styles = {
   pagina: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center', 
-    width: '100%',  
-    maxWidth: '60vw',  
-    marginTop: '55px', 
+    //justifyContent: 'center', // Centraliza verticalmente
+    alignItems: 'center', // Centraliza horizontalmente
+    width: '100%',  // Ocupa toda a largura disponível
+    maxWidth: '60vw',  // Limita a largura máxima
+    marginTop: '55px', // Espaço superior para separar do menu
     marginLeft: 'auto',
     marginRight: 'auto', 
     textAlign: 'left',
-    minHeight: '100vh', 
+    minHeight: '100vh', // Garante que a altura mínima ocupe toda a tela
 
+    // Responsividade:
     '@media screen and (max-width: 1024px)': {
       maxWidth: '80vw',  
       marginTop: '20px', 

@@ -51,6 +51,8 @@ export const LinearTabs = styled.ul`
   transition: left 0.3s ease-in-out, width 0.3s ease-in-out; /* Suaviza a animação */
 `;
 
+
+
 export const TabItem = styled.li`
   position: relative;
   padding: 12px 2px 12px 16px;

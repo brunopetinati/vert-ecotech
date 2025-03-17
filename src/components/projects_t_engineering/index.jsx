@@ -321,9 +321,9 @@ const ProjectTabEngineering = ({ project }) => {
                       ? "#f0f0f0"
                       : "transparent",
                 color: telaAtiva === id ? "white" : "black", 
-                padding: collapsed ? "12px 16px" : "8px 14px",
+                padding: collapsed ? "12px 16px" : "8px 14px", 
+          
               }}
-
               onClick={() => setTelaAtiva(id)}
               onMouseEnter={() => setHoveredItem(id)}
               onMouseLeave={() => setHoveredItem(null)}
@@ -334,6 +334,7 @@ const ProjectTabEngineering = ({ project }) => {
               />
               <div style={{ paddingLeft: "8px", fontSize: collapsed ? "12px" : "10px", }}>
                 {label}
+                
               </div>
             </div>
           ))}
