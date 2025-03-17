@@ -1188,30 +1188,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                   const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
                   console.error('Erro ao criar o contrato:', error);
 
-                  //distribui dados para o modelo
-                  const data2 = await atualizarData2Contract(retorno);
-                  //console.log(data2);
-
-                  //recarrega tela
-                  recarregarTela();
-                  recarregarContract();
-
-
-                  console.log('Smart Contract - Gerado com Sucesso!');
-
-                  Swal.fire({
-                    title: 'Sucesso!',
-                    text: 'Smart Contract - Gerado com Sucesso!',
-                    icon: 'success',
-                    confirmButtonText: 'OK',
-                  });
-
-                } catch (error) {
-                  console.log("Entrou no catch")
-                  //implement update file_manager_contract->is_error = true
-                  const retorno = await atualizaCampoErroContract(file_manager_contract_id, error.signer, error.signature, error.hashedMessage, error);
-                  console.error('Erro ao criar o contrato:', error);
-
                   Swal.fire({
                     title: 'Erro!',
                     text: 'Algo deu errado ao tentar criar o contrato, verifique a carteira MetaMask. Por favor, contate nosso suporte! suporte@vertecotech.com',
