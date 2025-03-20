@@ -10,6 +10,8 @@ import { Container, Column, FileContainer, InputLabel, Input, SmallText } from '
 import { Button } from '../project_register_upload_files/styles';
 import { ButtonContainer } from '../project_register_info/styles';
 
+import { appStatus } from '../../store/modules/app_status/actions';
+
 const FileUploader = () => {
 
   // quando é o próprio usuário registrando o próprio projeto
@@ -42,7 +44,7 @@ const FileUploader = () => {
   const handleUpload = async () => {
     const token = sessionStorage.getItem('Authorization');
     const url = `${currentUrl}/api/projects/${projectID}/update/`;
-  
+
     const formData = new FormData();
     formData.append('pdf_matricula_certificate', selectedFiles.pdf_matricula_certificate);
     formData.append('pdf_car', selectedFiles.pdf_car);
@@ -50,7 +52,7 @@ const FileUploader = () => {
     formData.append('pdf_federal_debt_certificate', selectedFiles.pdf_federal_debt_certificate);
     formData.append('pdf_ccir', selectedFiles.pdf_ccir);
     formData.append('project_image', selectedFiles.project_image);
-  
+
     try {
       const response = await axios.put(url, selectedFiles, {
         headers: {
@@ -63,8 +65,8 @@ const FileUploader = () => {
         text: 'Os documentos escolhidos foram enviados com sucesso!',
         icon: 'success',
         confirmButtonText: 'OK'
-      });      
-        // se existe projeto com mesmo id no array, não adicionar, tratar isso
+      });
+      // se existe projeto com mesmo id no array, não adicionar, tratar isso
       dispatch(addProjectToProjects(response.data));
     } catch (error) {
       Swal.fire({
@@ -79,48 +81,50 @@ const FileUploader = () => {
   };
 
   const navigate = useNavigate();
+
   const handleComeBack = () => {
-    navigate('/welcome');
-  };
+    dispatch(appStatus('Projetos')); // sem isso a página fica em branco
+    navigate('/welcome'); // sem isso vai para a página de criação de projeto
+  }
 
   return (
-  <Container>
-    <Column>
-      <FileContainer>
-        <InputLabel>Certidão de Matrícula</InputLabel><br />
-        <SmallText>(atualizada em até 180 dias)</SmallText>
-        <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
-      </FileContainer>
-      <FileContainer>
-        <InputLabel>PDF do CAR (SICAR)</InputLabel>
-        <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
-      </FileContainer>
-      <FileContainer>
-        <InputLabel>Polígono da propriedade</InputLabel><br />
-        <SmallText>(Formatos aceitos: *.KMZ ou *.KML)</SmallText>
-        <Input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
-      </FileContainer>
-    </Column>
-    <Column>
-      <FileContainer>
-        <InputLabel>Cópia do CCIR</InputLabel>
-        <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
-      </FileContainer>
-      <FileContainer>
-        <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
-        <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
-      </FileContainer>
-      <FileContainer>
-        <InputLabel>Imagem Representativa do Projeto</InputLabel><br />
-        <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText><br />
-        <Input type="file" onChange={(e) => handleFileInput('project_image', e)} />
-      </FileContainer>     
-      <ButtonContainer>
-        <Button onClick={handleUpload}>Registrar arquivos</Button>
-        <Button onClick={handleComeBack}>Voltar ao Painel</Button>
-      </ButtonContainer>
-    </Column>
-  </Container>
+    <Container>
+      <Column>
+        <FileContainer>
+          <InputLabel>Certidão de Matrícula</InputLabel><br />
+          <SmallText>(atualizada em até 180 dias)</SmallText>
+          <Input type="file" onChange={(e) => handleFileInput('pdf_matricula_certificate', e)} />
+        </FileContainer>
+        <FileContainer>
+          <InputLabel>PDF do CAR (SICAR)</InputLabel>
+          <Input type="file" onChange={(e) => handleFileInput('pdf_car', e)} />
+        </FileContainer>
+        <FileContainer>
+          <InputLabel>Polígono da propriedade</InputLabel><br />
+          <SmallText>(Formatos aceitos: *.KMZ ou *.KML)</SmallText>
+          <Input type="file" onChange={(e) => handleFileInput('property_polygon', e)} />
+        </FileContainer>
+      </Column>
+      <Column>
+        <FileContainer>
+          <InputLabel>Cópia do CCIR</InputLabel>
+          <Input type="file" onChange={(e) => handleFileInput('pdf_ccir', e)} />
+        </FileContainer>
+        <FileContainer>
+          <InputLabel>Certidão de Regularidade da Dívida Federal</InputLabel>
+          <Input type="file" onChange={(e) => handleFileInput('pdf_federal_debt_certificate', e)} />
+        </FileContainer>
+        <FileContainer>
+          <InputLabel>Imagem Representativa do Projeto</InputLabel><br />
+          <SmallText>Adicione uma foto para identificar a sua área verde.</SmallText><br />
+          <Input type="file" onChange={(e) => handleFileInput('project_image', e)} />
+        </FileContainer>
+        <ButtonContainer>
+          <Button onClick={handleUpload}>Registrar arquivos</Button>
+          <Button onClick={handleComeBack}>Voltar ao Painel</Button>
+        </ButtonContainer>
+      </Column>
+    </Container>
   );
 };
 

@@ -838,7 +838,6 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   const [isDocConfirmed, setDocConfirmed] = useState(false);
 
   const verificarDocsConfirmados = () => {
-    //console.log("entrou para confirmar");
 
     const requestData = {
       project_id: project_id
@@ -931,31 +930,59 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       });
   }
 
-  const atualizarJsonResponseContract = async (fileManagerContractId, novoJsonResponse,
-    ContratoAddress, ContratoClienteAddress, SignerGeral, signature, hashedMessage) => {
+  const atualizarJsonResponseContract = async (
+    fileManagerContractId,
+    novoJsonResponse,
+    ContratoAddress,
+    ContratoClienteAddress,
+    SignerGeral,
+    signature,
+    hashedMessage
+  ) => {
     try {
+      // Converte BigInt para string
+      const sanitizeBigInt = (obj) => {
+        if (typeof obj !== 'object' || obj === null) return obj;
+  
+        for (const key in obj) {
+          if (typeof obj[key] === 'bigint') {
+            console.warn(`⚠️ Convertendo BigInt para string em "${key}":`, obj[key]);
+            obj[key] = obj[key].toString();
+          } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            sanitizeBigInt(obj[key]); // Recursão para objetos aninhados
+          }
+        }
+        return obj;
+      };
+  
+      // Organiza os dados para enviar ao backend
+      const payload = sanitizeBigInt({
+        json_response: novoJsonResponse,
+        ContratoAddress,
+        ContratoClienteAddress,
+        SignerGeral,
+        signature,
+        hashedMessage
+      });
+  
+      console.log('📦 Dados prontos para o backend:', payload);
+  
+      // Faz a requisição PATCH
       const response = await axios.patch(
         `${currentUrl}/api/filemanagercontract/update_json_response/${fileManagerContractId}/`,
-        {
-          json_response: novoJsonResponse,
-          ContratoAddress: ContratoAddress,
-          ContratoClienteAddress: ContratoClienteAddress,
-          SignerGeral: SignerGeral,
-          signature: signature,
-          hashedMessage: hashedMessage
-        },
+        payload,
         { headers }
       );
-
-      // Você pode tratar a resposta conforme necessário
-      //console.log('Resposta da atualização:', response.data);
+  
+      console.log('✅ Resposta do backend:', response.data);
       return response.data;
+  
     } catch (error) {
-      console.error('Erro ao atualizar JSON response:', error);
-      // Trate o erro conforme necessário
+      console.error('❌ Erro ao atualizar JSON response:', error.response ? error.response.data : error.message);
       throw error;
     }
   };
+  
 
   const atualizarData2Contract = async (novoJsonResponse) => {
     try {
@@ -1025,26 +1052,23 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
               ProjectCAR: car,
             };
 
-            console.log("Resquest Data" + requestData)
 
             await axios.post(`${currentUrl}/api/filemanagercontract/insert/`, requestData, { headers })
               .then(async (response1) => {
                 const file_manager_contract_id = response1.data.id;
 
-                console.log(file_manager_contract_id);
                 try {
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-
-                  console.log(retorno);
+                 
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
+                    console.log('chegou aquiiiiiiiiiiiiiiii');
 
-                  console.log(" atualizando com os 7 parametros: " + respostaAtualizacao);
 
                   //distribui dados para o modelo
                   const data2 = await atualizarData2Contract(retorno);

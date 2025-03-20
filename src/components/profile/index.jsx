@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Banco from '../bank';
 import { StyledButton, StyledButtonSalvar } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer } from './styles';
+import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
@@ -96,191 +96,128 @@ const Profile = () => {
         transition={{ duration: 0.8 }}
       >
         <ProfileContainerInfo collapsed={collapsed}>
-          <InnerContainer>
-            <h2>Meu perfil</h2>
-            <Row>
-              <Label>Nome completo</Label>
-              <ShowInput
-                type="text"
-                value={userUpdate.full_name}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, full_name: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label>Email</Label>
-              <ShowInput
-                type="text"
-                value={userUpdate.email}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, email: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label>Whatsapp</Label>
-              <ShowInput
-                type="text"
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, phone: e.target.value })
-                }
-                mask="(99) 99999-9999"
-                maskplaceholder="(21) 98787-5512"
-                alwaysShowMask={false}
-                value={userUpdate.phone}
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="rg">RG:</Label>
-              <ShowInput
-                type="text"
-                id="rg"
-                name="rg"
-                mask="99.999.999-9"
-                maskplaceholder="47.857.659.3"
-                alwaysShowMask={false}
-                value={userUpdate.rg}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, rg: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="cpf">CPF:</Label>
-              <ShowInput
-                type="text"
-                id="cpf"
-                name="cpf"
-                mask="999.999.999-99"
-                alwaysShowMask={false}
-                value={userUpdate.cpf}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, cpf: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="cnpj">CNPJ:</Label>
-              <ShowInput
-                type="text"
-                id="cnpj"
-                name="cnpj"
-                mask="99.999.999/9999-99"
-                alwaysShowMask={false}
-                value={userUpdate.cnpj}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, cnpj: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="cep">CEP:</Label>
-              <ShowInput
-                type="text"
-                id="cep"
-                name="cep"
-                value={userUpdate.cep}
-                onChange={(event) => {
-                  setUserUpdate({ ...userUpdate, cep: event.target.value });
-                  handleCepOnForm(event.target.value);
-                }}
-                mask="99999-999"
-                maskplaceholder="13140-989"
-                alwaysShowMask={false}
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="rua">Rua:</Label>
-              <ShowInput
-                type="text"
-                id="rua"
-                name="rua"
-                value={userUpdate.street}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, street: e.target.value })
-                }
-                disabled
-                placeholder="Preencha o CEP para preenchimento automático"
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="numero">Número:</Label>
-              <ShowInput
-                type="text"
-                id="numero"
-                name="numero"
-                value={userUpdate.number}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, number: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="complemento">Complemento:</Label>
-              <ShowInput
-                type="text"
-                id="complemento"
-                name="complemento"
-                value={userUpdate.complement}
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, complement: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="bairro">Bairro:</Label>
-              <ShowInput
-                type="text"
-                id="bairro"
-                name="bairro"
-                value={userUpdate.district}
-                disabled
-                placeholder="Preencha o CEP para preenchimento automático"
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, district: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="cidade">Cidade:</Label>
-              <ShowInput
-                type="text"
-                id="cidade"
-                name="cidade"
-                value={userUpdate.city}
-                disabled
-                placeholder="Preencha o CEP para preenchimento automático"
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, city: e.target.value })
-                }
-              />
-            </Row>
-            <Row>
-              <Label htmlFor="uf">UF:</Label>
-              <ShowInput
-                type="text"
-                id="uf"
-                name="uf"
-                value={userUpdate.state}
-                disabled
-                placeholder="Preencha o CEP para preenchimento automático"
-                onChange={(e) =>
-                  setUserUpdate({ ...userUpdate, state: e.target.value })
-                }
-              />
-            </Row>
-            <ButtonContainer>
-              <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} style={{ margin: '0px 15px 0px 0px' }}/>
-              <StyledButtonSalvar onClick={handleRegister} style={{ margin: '0px 65px 20px 15px' }}>Salvar Alterações</StyledButtonSalvar>
-            </ButtonContainer>
-            {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
-          </InnerContainer>
+          <h2>Meu perfil</h2>
+          <FormContainer>
+            <LeftColumn>
+              <Row>
+                <Label>Nome completo</Label>
+                <ShowInput
+                  type="text"
+                  value={userUpdate.full_name}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, full_name: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label>Email</Label>
+                <ShowInput
+                  type="text"
+                  value={userUpdate.email}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, email: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label>Whatsapp</Label>
+                <ShowInput
+                  type="text"
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, phone: e.target.value })
+                  }
+                  mask="(99) 99999-9999"
+                  value={userUpdate.phone}
+                />
+              </Row>
+              <Row>
+                <Label>RG</Label>
+                <ShowInput
+                  type="text"
+                  mask="99.999.999-9"
+                  value={userUpdate.rg}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, rg: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label>CPF</Label>
+                <ShowInput
+                  type="text"
+                  mask="999.999.999-99"
+                  value={userUpdate.cpf}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, cpf: e.target.value })
+                  }
+                />
+              </Row>
+            </LeftColumn>
+  
+            <RightColumn>
+              <Row>
+                <Label>CNPJ</Label>
+                <ShowInput
+                  type="text"
+                  mask="99.999.999/9999-99"
+                  value={userUpdate.cnpj}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, cnpj: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label>CEP</Label>
+                <ShowInput
+                  type="text"
+                  mask="99999-999"
+                  value={userUpdate.cep}
+                  onChange={(event) => {
+                    setUserUpdate({ ...userUpdate, cep: event.target.value });
+                    handleCepOnForm(event.target.value);
+                  }}
+                />
+              </Row>
+              <Row>
+                <Label>Rua</Label>
+                <ShowInput
+                  type="text"
+                  value={userUpdate.street}
+                  disabled
+                />
+              </Row>
+              <Row>
+                <Label>Número</Label>
+                <ShowInput
+                  type="text"
+                  value={userUpdate.number}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, number: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label>Complemento</Label>
+                <ShowInput
+                  type="text"
+                  value={userUpdate.complement}
+                  onChange={(e) =>
+                    setUserUpdate({ ...userUpdate, complement: e.target.value })
+                  }
+                />
+              </Row>
+            </RightColumn>
+          </FormContainer>
+  
+          <ButtonContainer>
+            <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} />
+            <StyledButtonSalvar onClick={handleRegister}>Salvar Alterações</StyledButtonSalvar>
+          </ButtonContainer>
         </ProfileContainerInfo>
-        <p />
       </motion.div>
     </IndexContainer>
   );
+  
 };
 
 export default Profile;

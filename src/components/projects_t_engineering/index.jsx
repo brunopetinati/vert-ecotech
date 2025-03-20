@@ -43,6 +43,9 @@ import FileUploadBlockchain from "./FileUpload/FileUploadBlockchain";
 import AdditionalInformation from "./AdditionalInformation/AdditionalInformation";
 import ContasWilder from "./ContasWilder/ContasWilder";
 import Moedas from "./CryptoMoeda/CryptoMoeda";
+import { useEffect } from "react";
+
+
 
 
 const ProjectTabEngineering = ({ project }) => {
@@ -51,7 +54,6 @@ const ProjectTabEngineering = ({ project }) => {
   const matchObject = engineering.find((item) => item.project === project.id);
   let matchObjectId = null;
   const [hoveredItem, setHoveredItem] = useState(null);
-
   const collapsed = useSelector((state) => state.sidebar);
 
   const menuItems = [
@@ -297,6 +299,11 @@ const ProjectTabEngineering = ({ project }) => {
         return null;
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
 
   return (
     <div>

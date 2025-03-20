@@ -28,6 +28,7 @@ export const SidebarContainer = styled.div`
     transition: margin-left 0.3s ease-in-out;
   }
 
+
   @media screen and (max-width: 768px) {
     width: ${({ showSidebar }) => (showSidebar ? "65vw" : "0")};
     min-height: 100vh;

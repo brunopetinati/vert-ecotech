@@ -881,19 +881,18 @@ export const sytleFileUpload = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: '100%',  // Ajusta a largura para 90% da tela
-    maxWidth: '1200px', // Limita a largura máxima
+    width: '100%',  
+    maxWidth: '1200px', 
     minHeight: '300px',
     border: '2px dashed #ccc',
     borderRadius: '8px',
     backgroundColor: '#fafafa',
     padding: '20px',
-    marginTop: '20px',  // Margem superior ajustada
+    marginTop: '20px',  
     textAlign: 'center',
     boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
     position: 'relative',
-    margin: '0 auto',  // Centraliza horizontalmente
-    // Remove o 'transform' para garantir que o contêiner não se mova
+    margin: '0 auto',  
   },
 
 
@@ -922,36 +921,29 @@ export const sytleFileUpload = {
   // Estilo para a barra de progresso
   progressBarContainer: {
     width: '900px',
-    height: '35px', // Aumento da altura para melhor acomodação
-    //backgroundColor: 'green',
+    height: '35px',
     marginLeft: '-90px',
     display: 'flex',
-    alignItems: 'center', // Alinha os itens verticalmente no centro
-    justifyContent: 'flex-start', // Alinha todos os itens à esquerda
-    gap: '70px', // Espaço entre os elementos
-    paddingLeft: '10px', // Pequeno espaço na esquerda para não grudar
+    alignItems: 'center', 
+    justifyContent: 'flex-start', 
+    gap: '70px', 
+    paddingLeft: '10px', 
   },
 
 
   progressBarTitle: {
-    //textAlign: 'left',
     fontWeight: 'bold',
     color: 'black',
     marginLeft: '10px',
-    //marginLeft: '-10px', // Ajuste conforme necessário
   },
 
   progressBarLabel: {
-    //float: 'left',
-    //Width: '420px',
-    //height: '35px',
     fontSize: '8.6pt',
-    //backgroundColor: 'pink',
     marginLeft: '-100px',
   },
 
   progressBar: {
-    marginLeft: '-60px', // Ajusta a posição da barra de progresso
+    marginLeft: '-60px', 
     width: '250px'
   },
 
@@ -973,6 +965,7 @@ export const styles = {
     justifyContent: 'center', /* Centraliza horizontalmente */
     alignItems: 'center',     /* Centraliza verticalmente */
   },
+
   menu: {
     overflow: 'hidden',
     position: 'relative',
@@ -1005,21 +998,21 @@ export const styles = {
 
     // Responsividade para telas menores com media queries
     '@media (max-width: 1024px)': {
-      padding: '2vw', // Ajuste o padding para telas médias
-      width: '80vw', // Ajuste a largura para que fique mais proporcional
-      height: '6vw', // Ajuste a altura proporcionalmente
+      padding: '2vw', 
+      width: '80vw', 
+      height: '6vw', 
     },
 
     '@media (max-width: 768px)': {
-      padding: '3vw', // Mais padding para telas menores
-      width: '70vw', // Ajusta a largura em telas menores
-      height: '7vw',  // Ajusta a altura em telas menores
+      padding: '3vw', 
+      width: '70vw', 
+      height: '7vw',  
     },
 
     '@media (max-width: 480px)': {
-      padding: '4vw', // Aumenta o padding em telas muito pequenas
-      width: '60vw', // Ajusta a largura para telas de celular
-      height: '8vw',  // Ajuste de altura no mobile
+      padding: '4vw', 
+      width: '60vw',
+      height: '8vw',  
     },
   },
 
@@ -1032,20 +1025,20 @@ export const styles = {
     maxWidth: '60vw',  // Limita a largura máxima
     marginTop: '55px', // Espaço superior para separar do menu
     marginLeft: 'auto',
-    marginRight: 'auto', // Centraliza horizontalmente
+    marginRight: 'auto', 
     textAlign: 'left',
     minHeight: '100vh', // Garante que a altura mínima ocupe toda a tela
 
     // Responsividade:
     '@media screen and (max-width: 1024px)': {
-      maxWidth: '80vw',  // Aumenta a largura em telas menores
-      marginTop: '20px', // Ajusta a margem superior
+      maxWidth: '80vw',  
+      marginTop: '20px', 
       marginLeft: '10px',
       marginRight: '10px',
     },
 
     '@media screen and (max-width: 768px)': {
-      maxWidth: '90vw',  // Ajusta ainda mais a largura
+      maxWidth: '90vw', 
       marginTop: '10px',
     },
 

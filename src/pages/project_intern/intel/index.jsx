@@ -15,9 +15,10 @@ import { returnYesorNoforBoolean, returnUserName, formatSICARCode } from "../../
 import { currentUrl } from '../../../constants/global';
 import { convertPhone, transformNumbersToHectares, formatCPF, formatCEP } from "../../../constants/functions";
 import PasswordModal from "../../../components/projects_t_consolidation/password_modal";
+import { useEffect } from "react";
 
 const Intel = ({ user, project }) => {
-
+ 
 
   const users = useSelector((state) => state.app_data.users);
   const [password, setPassword] = useState('');
@@ -129,6 +130,10 @@ const Intel = ({ user, project }) => {
   }
 
   const addressString = addressParts.join(', ');
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <motion.div
