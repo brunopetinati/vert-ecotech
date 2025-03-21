@@ -15,15 +15,16 @@ import {
   RightColumn,
   FormContainer,
   ButtonContainer,
+  StyledSelect,
 } from "./styles";
 import { handleCepChange } from "../../api/requests/cep";
-import { motion } from "framer-motion";
+import { color, motion } from "framer-motion";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { currentUrl } from "../../constants/global";
 import { addUserToUsers } from "../../store/modules/app_data/actions";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 import { appStatus } from "../../store/modules/app_status/actions";
 
 const InternRegisterUser = () => {
@@ -42,7 +43,7 @@ const InternRegisterUser = () => {
   // Código pertinente ao preenchimento automático do CEP
 
   const [userObject, setUserObject] = useState({
-    id: "",
+    id: "", // O backend deve definir automaticamente
     full_name: "",
     rg: "",
     cpf: "",
@@ -56,8 +57,7 @@ const InternRegisterUser = () => {
     district: "",
     state: "",
     city: "",
-    user_type: "",
-    password: "123mudar",
+    password: "123123",
   });
 
   const handleCepOnForm = async (cep) => {
@@ -85,50 +85,19 @@ const InternRegisterUser = () => {
   const [verifyAccessType, setVerifyAccestype] = useState(false);
 
   const handleRegister = () => {
-    const token = sessionStorage.getItem("Authorization");
-    const headers = { Authorization: `Bearer ${token}` };
+    const formValues = { ...userObject };
+    delete formValues.id; // Removendo id antes de enviar
 
-    console.log('nome', userObject.full_name);
-    console.log('email', userObject.email);
-    console.log('whats', userObject.phone);
-    console.log('rg', userObject.rg);
-    console.log('cpf', userObject.cpf);
-
-    console.log('cnpj', userObject.cnpj);
-    console.log('cep', userObject.cep);
-    console.log('rua', userObject.street);
-    console.log('num', userObject.number);
-    console.log('complemento', userObject.complement);
+    //console.log("Valores do formulário enviados:", formValues);
 
     if (
-      !userObject.email ||
-      !/^\S+@\S+\.\S+$/.test(userObject.email) ||
-      !userObject.cep ||
-      userObject.cep.length < 9 ||
-      !userObject.full_name ||
-      !userObject.phone ||
-      !userObject.user_type
+      !formValues.email ||
+      !/^\S+@\S+\.\S+$/.test(formValues.email) ||
+      !formValues.cep ||
+      formValues.cep.length < 9 ||
+      !formValues.full_name ||
+      !formValues.phone
     ) {
-      if (!userObject.email) {
-        setVerifyEmail(true);
-      }
-
-      if (!userObject.cep) {
-        setVerifyCEP(true);
-      }
-
-      if (!userObject.full_name) {
-        setVerifyName(true);
-      }
-
-      if (!userObject.phone) {
-        setVerifyPhone(true);
-      }
-
-      if (!userObject.user_type) {
-        setVerifyAccestype(true);
-      }
-
       Swal.fire({
         title: "Erro!",
         text: "Verifique os campos que ainda faltam serem preenchidos.",
@@ -139,7 +108,11 @@ const InternRegisterUser = () => {
     }
 
     axios
-      .post(`${currentUrl}/api/signup/`, userObject, { headers })
+      .post(`${currentUrl}/api/signup/`, formValues, {
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("Authorization")}`,
+        },
+      })
       .then((response) => {
         Swal.fire({
           title: "Sucesso!",
@@ -158,7 +131,6 @@ const InternRegisterUser = () => {
           confirmButtonText: "OK",
         });
         console.error(error);
-        return;
       });
   };
 
@@ -187,39 +159,38 @@ const InternRegisterUser = () => {
             <LeftColumn>
               <Row>
                 <Label>Nome completo:</Label>
-                  <ShowInput
-                    type="text"
-                    defaultValue={userObject.full_name}
-                    onChange={(e) =>
-                      setUserObject({
-                        ...userObject,
-                        full_name: e.target.value,
-                      })
-                    }
-                  />
+                <ShowInput
+                  type="text"
+                  id="full_name"
+                  name="full_name"
+                  value={userObject.full_name || ""}
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, full_name: e.target.value })
+                  }
+                />
               </Row>
               <Row>
                 <Label>Email:</Label>
-                  <ShowInput
-                    type="text"
-                    defaultValue={userObject.email}
-                    onChange={(e) =>
-                      setUserObject({ ...userObject, email: e.target.value })
-                    }
-                  />
+                <ShowInput
+                  type="text"
+                  defaultValue={userObject.email}
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, email: e.target.value })
+                  }
+                />
               </Row>
               <Row>
                 <Label>Whatsapp:</Label>
-                  <ShowInput
-                    type="text"
-                    onChange={(e) =>
-                      setUserObject({ ...userObject, phone: e.target.value })
-                    }
-                    mask={"(99) 99999-9999"}
-                    maskPlaceholder={"(21) 98787-5512"}
-                    alwaysShowMask={false}
-                    defaultValue={userObject.phone}
-                  />
+                <ShowInput
+                  type="text"
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, phone: e.target.value })
+                  }
+                  mask={"(99) 99999-9999"}
+                  maskPlaceholder={"(21) 98787-5512"}
+                  alwaysShowMask={false}
+                  defaultValue={userObject.phone}
+                />
               </Row>
               <Row>
                 <Label htmlFor="rg">RG:</Label>
@@ -240,20 +211,17 @@ const InternRegisterUser = () => {
                 <Label htmlFor="cpg">CPF:</Label>
                 <ShowInput
                   type="text"
-                  id="cpg"
-                  name="cpg"
+                  id="cpf"
+                  name="cpf"
                   mask={"999.999.999-99"}
                   maskPlaceholder="359.868.555-19"
                   alwaysShowMask={false}
-                  defaultValue={userObject.cpf}
+                  value={userObject.cpf || ""}
                   onChange={(e) =>
                     setUserObject({ ...userObject, cpf: e.target.value })
                   }
                 />
               </Row>
-            </LeftColumn>
-
-            <RightColumn>
               <Row>
                 <Label htmlFor="cnpj">CNPJ:</Label>
                 <ShowInput
@@ -269,20 +237,46 @@ const InternRegisterUser = () => {
                 />
               </Row>
               <Row>
-                <Label htmlFor="cep">CEP:</Label>
-                  <ShowInput
-                    type="text"
-                    id="cep"
-                    name="cep"
-                    value={userObject.cep}
-                    onChange={(event) => {
-                      setUserObject({ ...userObject, cep: event.target.value });
-                      handleCepOnForm(event.target.value);
+                <Label>Tipo de acesso:</Label>
+                <StyledSelect
+                  options={optionsAccess}
+                  placeholder={"Selecione uma opção"}
+                  onChange={handleAccesTypeChange}
+                />
+                {verifyAccessType && (
+                  <div
+                    style={{
+                      color: "red",
+                      marginBottom: "16px",
+                      marginTop: "0px",
+                      marginLeft: "10px",
+                      fontStyle: "italic",
+                      fontSize: "10px",
                     }}
-                    mask={"99999-999"}
-                    maskPlaceholder="13140-989"
-                    alwaysShowMask={false}
-                  />
+                  >
+                    Esse campo é necessário
+                  </div>
+                )}
+              </Row>
+              <p style={{ color: "red", fontWeight: 300 }}>! No momento, só "Regular" é aceito pelo banco</p>
+            </LeftColumn>
+
+            <RightColumn>
+              <Row>
+                <Label htmlFor="cep">CEP:</Label>
+                <ShowInput
+                  type="text"
+                  id="cep"
+                  name="cep"
+                  value={userObject.cep}
+                  onChange={(event) => {
+                    setUserObject({ ...userObject, cep: event.target.value });
+                    handleCepOnForm(event.target.value);
+                  }}
+                  mask={"99999-999"}
+                  maskPlaceholder="13140-989"
+                  alwaysShowMask={false}
+                />
               </Row>
               <Row>
                 <Label htmlFor="rua">Rua:</Label>
@@ -298,6 +292,49 @@ const InternRegisterUser = () => {
                   placeholder="Preencha o CEP para preenchimento automático"
                 />
               </Row>
+             
+              <Row>
+                <Label for="bairro">Bairro:</Label>
+                <ShowInput
+                  type="text"
+                  id="bairro"
+                  name="bairro"
+                  value={userObject.district}
+                  disabled
+                  placeholder="Preencha o CEP para preenchimento automático"
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, district: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label for="cidade">Cidade:</Label>
+                <ShowInput
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  value={userObject.city}
+                  disabled
+                  placeholder="Preencha o CEP para preenchimento automático"
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, city: e.target.value })
+                  }
+                />
+              </Row>
+              <Row>
+                <Label for="uf">UF:</Label>
+                <ShowInput
+                  type="text"
+                  id="uf"
+                  name="uf"
+                  value={userObject.state}
+                  disabled
+                  placeholder="Preencha o CEP para preenchimento automático"
+                  onChange={(e) =>
+                    setUserObject({ ...userObject, state: e.target.value })
+                  }
+                />
+              </Row> 
               <Row>
                 <Label htmlFor="numero">Número:</Label>
                 <ShowInput
@@ -348,9 +385,8 @@ const InternRegisterUser = () => {
 export default InternRegisterUser;
 
 /**
- *     <div style={{display:'flex', flexDirection: 'row', width: '100%', justifyContent : 'flex-end', flexWrap: 'wrap'}}>
-            </div>     
-          {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
-              
- * 
+Não sei para quê esse modal está sendo usado, ele ficava em baixo de ButtonContainer, mas pelos meus testes não faz nada
+vou deixar isso comentado por que o uso pode ser descuberto mais para frente
+- Julia.
+{showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />} 
  */

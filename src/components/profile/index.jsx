@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Banco from '../bank';
 import { StyledButton, StyledButtonSalvar } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
+import { StyledSelect, ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
@@ -39,6 +39,17 @@ const Profile = () => {
     state: user.state || '',
     city: user.city || '',
   });
+
+  const handleAccesTypeChange = (e) => {
+    setUserUpdate({ ...userUpdate, user_type: e.value });
+  };
+
+  const optionsAccess = [
+    { value: "Comercial", label: "Comercial" },
+    { value: "Engenheiro", label: "Engenheiro" },
+    { value: "Regular", label: "Regular" },
+  ];
+
 
   const handleCepOnForm = async (cep) => {
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length - 1))) {
@@ -152,20 +163,30 @@ const Profile = () => {
                   }
                 />
               </Row>
-            </LeftColumn>
-  
-            <RightColumn>
               <Row>
-                <Label>CNPJ:</Label>
+                <Label htmlFor="cnpj">CNPJ:</Label>
                 <ShowInput
                   type="text"
-                  mask="99.999.999/9999-99"
+                  id="cnpj"
+                  name="cnpj"
+                  mask={"99.999.999/9999-99"}
                   value={userUpdate.cnpj}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, cnpj: e.target.value })
                   }
                 />
               </Row>
+              <Row>
+                <Label>Tipo de acesso:</Label>
+                <StyledSelect
+                  options={optionsAccess}
+                  onChange={handleAccesTypeChange}
+                  value={userUpdate.user_type}
+                />
+              </Row>
+            </LeftColumn>
+  
+            <RightColumn>
               <Row>
                 <Label>CEP:</Label>
                 <ShowInput
@@ -186,6 +207,36 @@ const Profile = () => {
                   disabled
                 />
               </Row>
+              <Row>
+                <Label for="bairro">Bairro:</Label>
+                <ShowInput
+                  type="text"
+                  id="bairro"
+                  name="bairro"
+                  value={userUpdate.district}
+                  disabled
+                />
+              </Row>
+              <Row>
+                <Label for="cidade">Cidade:</Label>
+                <ShowInput
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  value={userUpdate.city}
+                  disabled
+                />
+              </Row>
+              <Row>
+                <Label for="uf">UF:</Label>
+                <ShowInput
+                  type="text"
+                  id="uf"
+                  name="uf"
+                  value={userUpdate.state}
+                  disabled
+                />
+              </Row> 
               <Row>
                 <Label>Número:</Label>
                 <ShowInput

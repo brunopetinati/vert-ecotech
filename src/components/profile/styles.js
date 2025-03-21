@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import InputMask from "react-input-mask";
+import Select from 'react-select';
 
 export const IndexContainer = styled.div`
   display: flex;
@@ -122,5 +123,28 @@ export const ButtonContainer = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+  }
+`;
+
+export const StyledSelect = styled(Select)`
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 10px;
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
   }
 `;
