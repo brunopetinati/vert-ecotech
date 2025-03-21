@@ -18,7 +18,10 @@ const WarningDeleteModal = ({ text, path, id, width, height }) => {
   // lembrar de inserir a senha do usuário, para fazer deleções
 
   const onDelete = () =>{
-    axios.delete(`${currentUrl}/api/${path}/${id}/delete`, {
+    console.log("entrou para deletar")
+    console.log("Path atual:", path);  // Exibe o valor de path no console
+    console.log("URL completa:", `${currentUrl}/api/${path}/${id}/delete`);
+    axios.delete(`${currentUrl}/api/${path}/${id}/delete/`, {
       headers,
     })
     .then(response => {
