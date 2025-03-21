@@ -60,6 +60,30 @@ const InternRegisterUser = () => {
     password: "123123",
   });
 
+  const clearFormFields = () => {
+    setUserObject({
+      id: "",
+      full_name: "",
+      rg: "",
+      cpf: "",
+      phone: "",
+      email: "",
+      user_type: "",
+      cep: "",
+      street: "",
+      number: "",
+      complement: "",
+      district: "",
+      state: "",
+      city: "",
+      password: "123123",
+    });
+
+    setTimeout(() => {
+      setUserObject((prev) => ({ ...prev })); // Força re-render
+    }, 0);
+  };
+
   const handleCepOnForm = async (cep) => {
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length - 1))) {
       const cepObject = await handleCepChange(cep.replace("-", ""));
@@ -87,8 +111,6 @@ const InternRegisterUser = () => {
   const handleRegister = () => {
     const formValues = { ...userObject };
     delete formValues.id; // Removendo id antes de enviar
-
-    //console.log("Valores do formulário enviados:", formValues);
 
     if (
       !formValues.email ||
@@ -120,6 +142,8 @@ const InternRegisterUser = () => {
           icon: "success",
           confirmButtonText: "OK",
         });
+        clearFormFields();
+
         dispatch(addUserToUsers(response.data));
         navigate("/welcome");
       })
@@ -140,8 +164,9 @@ const InternRegisterUser = () => {
   };
 
   const optionsAccess = [
-    { value: "Comercial", label: "Comercial" },
-    { value: "Engenheiro", label: "Engenheiro" },
+    { value: "COM", label: "Comercial" },
+    { value: "ENG", label: "Engenharia" },
+    { value: "ADM", label: "Admin" },
     { value: "Regular", label: "Regular" },
   ];
 
@@ -173,7 +198,7 @@ const InternRegisterUser = () => {
                 <Label>Email:</Label>
                 <ShowInput
                   type="text"
-                  defaultValue={userObject.email}
+                  value={userObject.email || ""} // ✅ Agora o valor atualiza quando o estado muda
                   onChange={(e) =>
                     setUserObject({ ...userObject, email: e.target.value })
                   }
@@ -189,7 +214,7 @@ const InternRegisterUser = () => {
                   mask={"(99) 99999-9999"}
                   maskPlaceholder={"(21) 98787-5512"}
                   alwaysShowMask={false}
-                  defaultValue={userObject.phone}
+                  value={userObject.phone || ""}
                 />
               </Row>
               <Row>
@@ -201,7 +226,7 @@ const InternRegisterUser = () => {
                   mask={"99.999.999-9"}
                   maskPlaceholder="47.857.659.3"
                   alwaysShowMask={false}
-                  defaultValue={userObject.rg}
+                  value={userObject.rg || ""}
                   onChange={(e) =>
                     setUserObject({ ...userObject, rg: e.target.value })
                   }
@@ -230,7 +255,7 @@ const InternRegisterUser = () => {
                   name="cnpj"
                   mask={"99.999.999/9999-99"}
                   alwaysShowMask={false}
-                  defaultValue={userObject.cnpj}
+                  value={userObject.cnpj || ""}
                   onChange={(e) =>
                     setUserObject({ ...userObject, cnpj: e.target.value })
                   }
@@ -241,8 +266,14 @@ const InternRegisterUser = () => {
                 <StyledSelect
                   options={optionsAccess}
                   placeholder={"Selecione uma opção"}
+                  value={
+                    optionsAccess.find(
+                      (option) => option.value === userObject.user_type
+                    ) || null
+                  }
                   onChange={handleAccesTypeChange}
                 />
+
                 {verifyAccessType && (
                   <div
                     style={{
@@ -258,7 +289,6 @@ const InternRegisterUser = () => {
                   </div>
                 )}
               </Row>
-              <p style={{ color: "red", fontWeight: 300 }}>! No momento, só "Regular" é aceito pelo banco</p>
             </LeftColumn>
 
             <RightColumn>
@@ -292,7 +322,7 @@ const InternRegisterUser = () => {
                   placeholder="Preencha o CEP para preenchimento automático"
                 />
               </Row>
-             
+
               <Row>
                 <Label for="bairro">Bairro:</Label>
                 <ShowInput
@@ -334,7 +364,7 @@ const InternRegisterUser = () => {
                     setUserObject({ ...userObject, state: e.target.value })
                   }
                 />
-              </Row> 
+              </Row>
               <Row>
                 <Label htmlFor="numero">Número:</Label>
                 <ShowInput
