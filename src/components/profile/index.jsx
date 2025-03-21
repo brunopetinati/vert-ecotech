@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Banco from '../bank';
 import { StyledButton, StyledButtonSalvar } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
+import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
 import { handleCepChange } from '../../api/requests/cep';
 import { currentUrl } from '../../constants/global';
 import { motion } from 'framer-motion';
@@ -100,7 +100,7 @@ const Profile = () => {
           <FormContainer>
             <LeftColumn>
               <Row>
-                <Label>Nome completo</Label>
+                <Label>Nome completo:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.full_name}
@@ -110,7 +110,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Email</Label>
+                <Label>Email:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.email}
@@ -120,7 +120,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Whatsapp</Label>
+                <Label>Whatsapp:</Label>
                 <ShowInput
                   type="text"
                   onChange={(e) =>
@@ -131,7 +131,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>RG</Label>
+                <Label>RG:</Label>
                 <ShowInput
                   type="text"
                   mask="99.999.999-9"
@@ -142,7 +142,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>CPF</Label>
+                <Label>CPF:</Label>
                 <ShowInput
                   type="text"
                   mask="999.999.999-99"
@@ -156,7 +156,7 @@ const Profile = () => {
   
             <RightColumn>
               <Row>
-                <Label>CNPJ</Label>
+                <Label>CNPJ:</Label>
                 <ShowInput
                   type="text"
                   mask="99.999.999/9999-99"
@@ -167,7 +167,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>CEP</Label>
+                <Label>CEP:</Label>
                 <ShowInput
                   type="text"
                   mask="99999-999"
@@ -179,7 +179,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Rua</Label>
+                <Label>Rua:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.street}
@@ -187,7 +187,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Número</Label>
+                <Label>Número:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.number}
@@ -197,7 +197,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Complemento</Label>
+                <Label>Complemento:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.complement}

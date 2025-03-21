@@ -30,67 +30,89 @@ export const StyledButton = styled.button`
 `;
 
 export const StyledButtonSalvar = styled.button`
-  --background-color: #98FB98;
-  background-color: rgba(0, 80, 0, 0.7);
+  background-color: #559d46;
   border-radius: 100px;
-  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  box-shadow: rgba(128, 128, 128, 0.15) 0 -15px 12px -10px inset, 
+              rgba(128, 128, 128, 0.15) 0 1px 2px, 
+              rgba(128, 128, 128, 0.15) 0 2px 4px, 
+              rgba(128, 128, 128, 0.15) 0 4px 8px, 
+              rgba(128, 128, 128, 0.15) 0 8px 16px;
   color: white;
   cursor: pointer;
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 3px 5px;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 6px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-size: 11px;
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
   margin-right: 65px;
-  width: 120px;
-  height: 25px;
+  width: 140px;
+  height: 35px;
   z-index: 1;
 
   :hover {
-    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
-    transform: scale(1.02) ;
+    box-shadow: rgba(128, 128, 128, 0.3) 0 -25px 18px -14px inset, 
+                rgba(128, 128, 128, 0.3) 0 1px 2px, 
+                rgba(128, 128, 128, 0.3) 0 2px 4px, 
+                rgba(128, 128, 128, 0.3) 0 4px 8px, 
+                rgba(128, 128, 128, 0.3) 0 8px 16px, 
+                rgba(128, 128, 128, 0.3) 0 16px 32px;
+    transform: scale(1.05);
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 10px;
+    font-size: 12px;
+    width: 130px;
+    height: 30px;
   }
 `;
 
+
+
 export const StyledButtonVoltar = styled.button`
-  background-color: #4682B4;
+  background-color: #3A70B2;
   border-radius: 100px;
-  box-shadow: rgba(70,130,180, .2) 0 -25px 18px -14px inset,rgba(70,130,180, .15) 0 1px 2px,rgba(70,130,180, .15) 0 2px 4px,rgba(70,130,180, .15) 0 4px 8px,rgba(70,130,180, .15) 0 8px 16px,rgba(70,130,180, .15) 0 16px 32px;
+  box-shadow: rgba(128, 128, 128, 0.15) 0 -15px 12px -10px inset, 
+              rgba(128, 128, 128, 0.15) 0 1px 2px, 
+              rgba(128, 128, 128, 0.15) 0 2px 4px, 
+              rgba(128, 128, 128, 0.15) 0 4px 8px, 
+              rgba(128, 128, 128, 0.15) 0 8px 16px;
   color: white;
   cursor: pointer;
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 3px 5px;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 6px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-size: 11px;
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-right: 65px;
-  width: 60px;
-  height: 25px;
+  width: 140px;
+  height: 35px;
   z-index: 1;
 
   :hover {
-    box-shadow: rgba(70,130,180,.35) 0 -25px 18px -14px inset,rgba(70,130,180,.35) 0 1px 2px,rgba(70,130,180,.35) 0 2px 4px,rgba(70,130,180,.35) 0 4px 8px,rgba(70,130,180,.35) 0 8px 16px,rgba(70,130,180,.35) 0 16px 32px;
-    transform: scale(1.02) ;
+    box-shadow: rgba(128, 128, 128, 0.3) 0 -25px 18px -14px inset, 
+                rgba(128, 128, 128, 0.3) 0 1px 2px, 
+                rgba(128, 128, 128, 0.3) 0 2px 4px, 
+                rgba(128, 128, 128, 0.3) 0 4px 8px, 
+                rgba(128, 128, 128, 0.3) 0 8px 16px, 
+                rgba(128, 128, 128, 0.3) 0 16px 32px;
+    transform: scale(1.05);
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 10px;
+    font-size: 12px;
+    width: 130px;
+    height: 30px;
   }
 `;
 

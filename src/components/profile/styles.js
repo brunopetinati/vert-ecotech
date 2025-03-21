@@ -1,16 +1,39 @@
 import styled from 'styled-components';
 import InputMask from "react-input-mask";
 
-export const Container = styled.div`
-  width: 600px;
-  padding: 2em;
+export const IndexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Garante que ocupe a tela inteira */
+  margin: 0;
+  padding: 20px;
+`;
+
+export const ProfileContainerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 2;
-  background: red;
+  background: #fff;
+  width: ${({ collapsed }) => (collapsed ? "60vw" : "50vw")};
+  margin: auto 0;
+  margin-top: 50px;
 
   h3 {
+    display: flex;
+    align-self: flex-start;
     color: #054D00;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
   }
 `;
 
@@ -43,11 +66,6 @@ export const RightColumn = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
   }
-`;
-
-export const Column = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 export const Row = styled.div`
@@ -92,6 +110,7 @@ export const ShowInput = styled(InputMask)`
     max-width: none;
   }
 `;
+
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -103,80 +122,5 @@ export const ButtonContainer = styled.div`
   @media screen and (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-  }
-`;
-
-export const Button = styled.button`
-  background-color: #28a745;
-  border: none;
-  border-radius: 10px;
-  color: white;
-  font-size: 18px; /* Aumenta o tamanho do texto */
-  padding: 15px 30px; /* Aumenta o tamanho do botão */
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  width: 220px; /* Define uma largura fixa maior */
-
-  &:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 100%; /* Faz o botão ocupar toda a largura no mobile */
-    text-align: center;
-  }
-`;
-
-
-export const IndexContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%; /* Garante que ocupe a tela inteira */
-  margin: 0;
-  padding: 20px;
-
-`;
-
-export const ProfileContainerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5em;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  z-index: 2;
-  background: #fff;
-  width: ${({ collapsed }) => (collapsed ? "70vw" : "60vw")};
-  margin: auto 0;
-  margin-top: 50px;
-
-  h3 {
-    display: flex;
-    align-self: flex-start;
-    color: #054D00;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 90vw;
-  }
-`;
-
-export const InnerContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  max-width: 650px;
-  padding: 20px;
-  margin-top: 0px;
-
-  h2 {
-    color: #054D00;
-    margin-bottom: 20px;
   }
 `;
