@@ -100,8 +100,12 @@ const InternRegisterUser = () => {
     }
   };
 
-  const handleAccesTypeChange = (e) => {
-    setUserObject({ ...userObject, user_type: e.value });
+  const handleAccesTypeChange = (event) => {
+    const { value } = event.target;
+    setUserObject((prevState) => ({
+      ...prevState,
+      user_type: value, // Atualiza o campo 'user_type' com o valor selecionado
+    }));
   };
 
   const [verifyName, setVerifyName] = useState(false);
@@ -165,7 +169,7 @@ const InternRegisterUser = () => {
     navigate("/welcome");
   };
 
-  const optionsAccess = [
+  const optionsAccess = [ // não está mais sendo usado
     { value: "COM", label: "Comercial" },
     { value: "ENG", label: "Engenharia" },
     { value: "ADM", label: "Admin" },
@@ -266,15 +270,14 @@ const InternRegisterUser = () => {
               <Row>
                 <Label>Tipo de acesso:</Label>
                 <StyledSelect
-                  options={optionsAccess}
-                  placeholder={"Selecione uma opção"}
-                  value={
-                    optionsAccess.find(
-                      (option) => option.value === userObject.user_type
-                    ) || null
-                  }
                   onChange={handleAccesTypeChange}
-                />
+                  value={userObject.user_type}
+                >
+                  <option value="COM">Comercial</option>
+                  <option value="ENG">Engenharia</option>
+                  <option value="ADM">Admin</option>
+                  <option value="Regular">Regular</option>
+                </StyledSelect>
 
                 {verifyAccessType && (
                   <div

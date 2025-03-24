@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import InputMask from "react-input-mask";
-import Select from 'react-select';
 import folha1 from '../../assets/icons/folha1.png';
 
 export const IndexContainer = styled.div`
@@ -144,21 +143,24 @@ export const ButtonContainer = styled.div`
   }
 `;
 
-export const StyledSelect = styled(Select)`
+export const StyledSelect = styled.select`
   width: 100%;
-  max-width: 400px;
-  padding: 10px;
+  max-width: 425px;
+  height: 40px;
   border: 2px solid rgb(204, 204, 204);
   border-radius: 8px;
+  padding: 8px;
   font-size: 14px;
   outline: none;
   background: rgba(245, 245, 245, 0.4);
   transition: all 0.3s ease-in-out;
-  margin-bottom: 10px;
+  margin-left: 0px;
+  color: #888; /* Deixa o texto cinza */
 
   &:focus {
     border-color: #007bff;
     background: #fff;
+    color: #333; /* Escurece o texto ao focar */
   }
 
   @media screen and (max-width: 768px) {

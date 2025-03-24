@@ -49,11 +49,15 @@ const Profile = () => {
     city: user.city || "",
   });
 
-  const handleAccesTypeChange = (e) => {
-    setUserUpdate({ ...userUpdate, user_type: e.value });
+  const handleAccesTypeChange = (event) => {
+    const { value } = event.target;
+    setUserUpdate((prevState) => ({
+      ...prevState,
+      user_type: value, // Atualiza o campo 'user_type' com o valor selecionado
+    }));
   };
 
-  const optionsAccess = [
+  const optionsAccess = [ //não está sendo mais usado
     { value: "COM", label: "Comercial" },
     { value: "ENG", label: "Engenharia" },
     { value: "ADM", label: "Admin" },
@@ -77,6 +81,8 @@ const Profile = () => {
   const handleRegister = () => {
     const token = sessionStorage.getItem("Authorization");
     const headers = { Authorization: `Bearer ${token}` };
+
+    console.log(userUpdate);
 
     axios
       .put(`${currentUrl}/api/users/${user.id}/update/`, userUpdate, {
@@ -105,7 +111,8 @@ const Profile = () => {
 
   const collapsed = useSelector((state) => state.sidebar);
 
-  const handleDelete = () => {  //não está sendo usado mesmo, não é erro
+  const handleDelete = () => {
+    //não está sendo usado mesmo, não é erro
     console.log("Deleting the account"); // Replace with your actual delete function
   };
 
@@ -190,14 +197,14 @@ const Profile = () => {
               <Row>
                 <Label>Tipo de acesso:</Label>
                 <StyledSelect
-                  options={optionsAccess}
                   onChange={handleAccesTypeChange}
-                  value={
-                    optionsAccess.find(
-                      (option) => option.value === userUpdate.user_type
-                    ) || null
-                  }
-                />
+                  value={userUpdate.user_type}
+                >
+                  <option value="COM">Comercial</option>
+                  <option value="ENG">Engenharia</option>
+                  <option value="ADM">Admin</option>
+                  <option value="Regular">Regular</option>
+                </StyledSelect>
               </Row>
             </LeftColumn>
 
@@ -272,12 +279,19 @@ const Profile = () => {
           </FormContainer>
 
           <ButtonContainer>
-          <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} style={{ margin: '0px 15px 0px 0px' }}/>
+            <WarningDeleteModal
+              text={"Deletar"}
+              path={"users"}
+              id={user.id}
+              style={{ margin: "0px 15px 0px 0px" }}
+            />
             <StyledButtonSalvar onClick={handleRegister}>
               Salvar Alterações
             </StyledButtonSalvar>
           </ButtonContainer>
-          {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
+          {showModalBanco && (
+            <Banco isOpen={showModalBanco} onClose={handleModalBanco} />
+          )}
         </ProfileContainerInfo>
       </motion.div>
     </IndexContainer>
