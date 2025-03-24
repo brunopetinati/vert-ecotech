@@ -24,9 +24,7 @@ import WarningDeleteModal from "../warning_delete_modal";
 
 const Profile = () => {
   const dispatch = useDispatch();
-
   const [showModalBanco, setShowModalBanco] = useState(false);
-
   const user = useSelector((state) => state.user.currentUser);
 
   const handleModalBanco = () => {
@@ -107,7 +105,7 @@ const Profile = () => {
 
   const collapsed = useSelector((state) => state.sidebar);
 
-  const handleDelete = () => {
+  const handleDelete = () => {  //não está sendo usado mesmo, não é erro
     console.log("Deleting the account"); // Replace with your actual delete function
   };
 
@@ -274,11 +272,12 @@ const Profile = () => {
           </FormContainer>
 
           <ButtonContainer>
-            <WarningDeleteModal text={"Deletar"} path={"users"} id={user.id} />
+          <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} style={{ margin: '0px 15px 0px 0px' }}/>
             <StyledButtonSalvar onClick={handleRegister}>
               Salvar Alterações
             </StyledButtonSalvar>
           </ButtonContainer>
+          {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />}
         </ProfileContainerInfo>
       </motion.div>
     </IndexContainer>

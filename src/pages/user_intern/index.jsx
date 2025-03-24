@@ -12,7 +12,10 @@ import {
   Row,
   Label,
   ShowInput,
-  BackgroundImage,
+  FormContainer,
+  LeftColumn,
+  RightColumn,
+  ButtonContainer,
 } from "./styles";
 import { handleCepChange } from "../../api/requests/cep";
 import { currentUrl } from "../../constants/global";
@@ -22,24 +25,13 @@ import { appStatus } from "../../store/modules/app_status/actions";
 import WarningDeleteModal from "../../components/warning_delete_modal";
 import Swal from "sweetalert2";
 import folha1 from "../../assets/icons/folha1.png";
-
 import { useSelector, useDispatch } from "react-redux";
-
-import {
-  FormContainer,
-  LeftColumn,
-  RightColumn,
-  ButtonContainer,
-} from "./styles";
 
 const UserIntern = () => {
   const location = useLocation();
   const user = location.state?.user || {};
-
   const collapsed = useSelector((state) => state.sidebar);
-
   const [showModalBanco, setShowModalBanco] = useState(false);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -412,9 +404,3 @@ const UserIntern = () => {
 };
 
 export default UserIntern;
-
-/**
- *
- *
- *
- */

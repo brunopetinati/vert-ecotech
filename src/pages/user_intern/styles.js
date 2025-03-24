@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import InputMask from "react-input-mask";
-
 import folha1 from "../../assets/icons/folha1.png";
 
 export const MainContainer = styled.div`
@@ -55,7 +54,6 @@ export const ProfileContainerInfo = styled.div`
     z-index: -1; /* Para que fique atrás do conteúdo */
   }
 `;
-
 
 export const FormContainer = styled.div`
   display: flex;

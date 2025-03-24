@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import InputMask from "react-input-mask";
 import Select from 'react-select';
 
+import folha1 from '../../assets/icons/folha1.png';
+
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -12,6 +14,7 @@ export const MainContainer = styled.div`
   margin: 0;
   padding: 20px;
 `;
+
 
 export const ProfileContainerInfo = styled.div`
   display: flex;
@@ -24,8 +27,10 @@ export const ProfileContainerInfo = styled.div`
   z-index: 2;
   background: #fff;
   width: ${({ collapsed }) => (collapsed ? "60vw" : "50vw")};
-  margin: auto 0;
+  margin: auto;
   margin-top: 50px;
+  position: relative;
+  overflow: hidden; /* Para evitar vazamentos da imagem */
 
   h3 {
     display: flex;
@@ -35,6 +40,21 @@ export const ProfileContainerInfo = styled.div`
 
   @media screen and (max-width: 768px) {
     width: 90vw;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(${folha1});
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: -1; /* Para que fique atrás do conteúdo */
   }
 `;
 

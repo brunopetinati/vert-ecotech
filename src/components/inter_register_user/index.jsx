@@ -27,6 +27,8 @@ import { addUserToUsers } from "../../store/modules/app_data/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { appStatus } from "../../store/modules/app_status/actions";
 
+import folha1 from '../../assets/icons/folha1.png';
+
 const InternRegisterUser = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
 
@@ -406,6 +408,7 @@ const InternRegisterUser = () => {
               Voltar
             </StyledButtonVoltar>
           </ButtonContainer>
+
         </ProfileContainerInfo>
       </motion.div>
     </MainContainer>
