@@ -4,6 +4,7 @@ export const StyledTable = styled.table`
   width: 69vw;
   border-collapse: collapse;
   --margin-top: 20px;
+  margin: 0 auto; 
 `;
 
 export const StyledTableHead = styled.thead`
