@@ -72,7 +72,7 @@ export const mintNFT = async (contratoClienteAddress, signerGeral, _nftTitle, _n
       contratoClienteAddress: mintTransaction.events.NFTMinted.returnValues.contract_address_client,
       signerGeral: signerGeral,
       file_manager_nft_id: mintTransaction.events.NFTMinted.returnValues.file_manager_nft_id,
-      tokenId: mintTransaction.events.NFTMinted.returnValues.tokenId,
+      tokenId: Number(mintTransaction.events.NFTMinted.returnValues.tokenId).toString(),
       signer: signer,
       signature: signature,
       hashedMessage: hashedMessage
