@@ -17,8 +17,6 @@ import OutsiderCanceled from "../pages/outsider_canceled";
 import RecoverPassword from "../components/recover_password";
 
 const AppRoutes = () => {
-
-
   const navigate = useNavigate();
   const location = useLocation();
   

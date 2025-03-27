@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+/**
+ * export const Container = styled.div`
   height: 100%;
   background: var(--body-color);
   display: flex;
@@ -15,6 +16,9 @@ export const Container = styled.div`
     justify-content: flex-start;
   }
 `;
+ */
+
+
 
 export const TitleContainer = styled.div`
   display: flex;
@@ -25,7 +29,8 @@ export const TitleContainer = styled.div`
   color: #000; 
 `;
 
-export const ButtonContainer = styled.div`
+/**
+ * export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -41,49 +46,21 @@ export const ButtonContainer = styled.div`
     align-items: center;
   }
 `;
+ */
 
 export const TableContainer = styled.div`
+  padding: 30px;
   display: flex;
-  width: 90%;
+  width: 85%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 20px;
+  width: ${({ collapsed }) => (collapsed ? "80vw" : "70vw")};
 `;
+
 
 export const Input = styled.input`
   color: #363636;
   font-size: 9pt;
-`;
-
-export const StyledSelect = styled.select`
-  width: 350px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  --padding: 8px;
-  font-size: 12px;
-  outline: none;
-  margin-left: 0px;
-  background: white;
-  width: 250px;
-  height: 25px;
-
-  ::placeholder {
-    font-size: 16px;
-  }
-
-  &:focus {
-    border-color: #7eff00;
-  }
-
-  @media screen and (max-width: 768px) {
-    margin-left: 20px;
-    margin-top: 64px;
-    width: 81%;
-    font-size: 12px;
-    
-    ::placeholder {
-      font-size: 12px; 
-    }
-  }
 `;
 
 export const MarginForCelphone = styled.div`
@@ -93,38 +70,201 @@ export const MarginForCelphone = styled.div`
 `;
 
 export const StyledButtonAdicionarProjeto = styled.button`
-  --background-color: #98FB98;
-  background-color: rgba(0, 80, 0, 0.7);
+background-color: #559D46;
   border-radius: 100px;
-  box-shadow: rgba(0,128,0, .2) 0 -25px 18px -14px inset,rgba(0,128,0, .15) 0 1px 2px,rgba(0,128,0, .15) 0 2px 4px,rgba(0,128,0, .15) 0 4px 8px,rgba(0,128,0, .15) 0 8px 16px,rgba(0,128,0, .15) 0 16px 32px;
+  box-shadow: rgba(128, 128, 128, 0.15) 0 -15px 12px -10px inset,
+    rgba(128, 128, 128, 0.15) 0 1px 2px, rgba(128, 128, 128, 0.15) 0 2px 4px,
+    rgba(128, 128, 128, 0.15) 0 4px 8px, rgba(128, 128, 128, 0.15) 0 8px 16px;
   color: white;
   cursor: pointer;
   display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 3px 5px;
+  font-family: CerebriSans-Regular, -apple-system, system-ui, Roboto, sans-serif;
+  padding: 6px 10px;
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
   border: 0;
-  font-size: 11px;
+  font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
-  margin-right: 65px;
-  width: 170px;
-  height: 24px;
+  width: 140px;
+  height: 35px;
+  z-index: 1;
 
   :hover {
-    box-shadow: rgba(0,128,0,.35) 0 -25px 18px -14px inset,rgba(0,128,0,.35) 0 1px 2px,rgba(0,128,0,.35) 0 2px 4px,rgba(0,128,0,.35) 0 4px 8px,rgba(0,128,0,.35) 0 8px 16px,rgba(0,128,0,.35) 0 16px 32px;
-    transform: scale(1.02) ;
+    box-shadow: rgba(128, 128, 128, 0.3) 0 -25px 18px -14px inset,
+      rgba(128, 128, 128, 0.3) 0 1px 2px, rgba(128, 128, 128, 0.3) 0 2px 4px,
+      rgba(128, 128, 128, 0.3) 0 4px 8px, rgba(128, 128, 128, 0.3) 0 8px 16px,
+      rgba(128, 128, 128, 0.3) 0 16px 32px;
+    transform: scale(1.05);
   }
 
   @media screen and (max-width: 768px) {
-    font-size: 10px;
+    font-size: 12px;
+    width: 130px;
+    height: 30px;
   }
 `;
 
-export const Label = styled.label`
+
+
+/**
+ * export const Label = styled.label`
   color: #363636;
   font-size: 9pt;
+`;
+ */
+
+
+export const Label = styled.label`
+  font-weight: bold;
+  font-size: 12pt;
+  color: rgb(54, 54, 54);
+  margin-bottom: 5px;
+`;
+
+// styles.js (correção)
+export const ShowInput = styled.input`
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+  }
+`;
+
+export const StyledSelect = styled.select`
+  width: 100%;
+  max-width: 350px;
+  height: 40px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  padding: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+  margin-left: 0px;
+  color: #888; /* Deixa o texto cinza */
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+    color: #333; /* Escurece o texto ao focar */
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+  }
+`;
+
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 70%;
+  padding: 10px 0;
+  gap: 5px;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+`;
+
+export const LeftColumn = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 48%;
+`;
+
+export const RightColumn = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 48%;
+`;
+
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  --align-items: center;
+  width: 170px;
+  --margin-bottom: 32px;
+  --margin-top: 20px;
+  text-align: right;
+  float: "left";
+  height: 50px;
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const IndexContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Garante que ocupe a tela inteira */
+  margin: 0;
+  padding: 20px;
+`;
+
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
+  z-index: 2;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden; /* Para evitar vazamentos da imagem */
+
+  h3 {
+    display: flex;
+    align-self: flex-start;
+    color: #054d00;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.2;
+    z-index: -1; /* Para que fique atrás do conteúdo */
+  }
 `;

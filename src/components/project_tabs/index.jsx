@@ -96,12 +96,7 @@ const ProjectTabs = ({ tabs, handleRegister, project }) => {
       <TabContainer collapsed={collapsed}>
         <LinearTabs collapsed={collapsed}>
           {tabs.map((tab, index) => (
-            <Tab
-              key={index}
-              active={activeTab === index}
-              onClick={() => handleTabClick(index)}
-              status={status}
-            >
+            <Tab key={index} active={(activeTab === index).toString()} onClick={() => handleTabClick(index)} status={status}>
               {tab.label}
             </Tab>
           ))}

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import InputMask from "react-input-mask";
 import folha1 from '../../assets/icons/folha1.png';
 
 export const IndexContainer = styled.div`
@@ -107,7 +106,7 @@ export const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-export const ShowInput = styled(InputMask)`
+export const ShowInput = styled.input`
   width: 100%;
   max-width: 400px;
   padding: 10px;
@@ -168,3 +167,4 @@ export const StyledSelect = styled.select`
     max-width: none;
   }
 `;
+

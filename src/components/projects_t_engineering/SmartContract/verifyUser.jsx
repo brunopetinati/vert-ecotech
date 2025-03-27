@@ -38,14 +38,14 @@ export const verifyUser = async (signerGeral, chave) => {
     hashedMessage = (web3.utils.soliditySha3(
       { type: 'string', value: chave }
     ));
-    console.log({ hashedMessage });
+    //console.log({ hashedMessage });
 
     //assina mensagem de hash
     signature = (await window.ethereum.request({
       method: "personal_sign",
       params: [hashedMessage, signer],
     }));
-    console.log({ signature });
+    //console.log({ signature });
 
     // Verifica a assinatura
     const retorno = await verifySignature({

@@ -44,7 +44,7 @@ const ProjectTokenChart1 = () => {
   };
 
   return (
-    <div collapsed={collapsed}>
+    <div collapsed={collapsed.toString()}>
       <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
       <ControlsContainer>
         <Button onClick={handlePrevYear}>{'<<'}</Button>
