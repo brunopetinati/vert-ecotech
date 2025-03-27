@@ -8,6 +8,13 @@ import { storeProjects } from "../../store/modules/app_data/actions";
 import { currentUrl } from '../../constants/global';
 import { useNavigate } from "react-router-dom";
 
+import { ShowInput,
+  Row,
+  LeftColumn,
+  RightColumn,
+  IndexContainer
+ } from "./styles";
+
 const Projects = () => {
   const collapsed = useSelector((state) => state.sidebar);
   const app_status = useSelector((state) => state.app_status.status);
@@ -91,36 +98,51 @@ const Projects = () => {
   }  
 
   return (
-    <Container collapsed={collapsed}>
-      <ButtonContainer>
-        <div style={{ float: 'left' }}>
-          <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>
-              <Label style={{ color: '#363636' }}>Campo </Label>
-              <StyledSelect id="column-select" onChange={handleColumnChange}>
-                  <option value="Nome">Nome - Título do Projeto</option>
-                  <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
-                  <option value="Localidade">Localidade</option>
-                  <option value="Status da Matrícula">Status da Matrícula</option>
-                  <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
-                  <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
-                  <option value="Status CAR">Status CAR</option>
-              </StyledSelect>      
-            </div>    
-            <div style={{ float: 'left', marginLeft: '20px', width: '350px', height: '50px' }}>            
-              <Label style={{ color: '#363636' }}>Valor </Label>
-              <Input type="text" placeholder="Pesquisar..." value={searchValue} onChange={handleSearchChange} />
-            </div>
-        </div>
-        <MarginForCelphone />
-        <StyledButtonAdicionarProjeto onClick={() => handleClick()} style={{ margin: '-30px 400px 0px 0px' }}>Adicionar Projeto</StyledButtonAdicionarProjeto>
-      </ButtonContainer>
+    <IndexContainer>
+<Container collapsed={collapsed}>
+      <Row>
+          <LeftColumn>
+            <Label>Campo:</Label>
+            <StyledSelect id="column-select" onChange={handleColumnChange}>
+              <option value="Nome">Nome - Título do Projeto</option>
+              <option value="Unidade de Conservação (UC)">Unidade de Conservação (UC)</option>
+              <option value="Localidade">Localidade</option>
+              <option value="Status da Matrícula">Status da Matrícula</option>
+              <option value="Status do Georreferenciamento">Status do Georreferenciamento</option>
+              <option value="Situação da Reserva Legal">Situação da Reserva Legal</option>
+              <option value="Status CAR">Status CAR</option>
+            </StyledSelect>
+          </LeftColumn>
 
-      <TableContainer>
+          <RightColumn>
+            <Label>Valor:</Label>
+            <ShowInput
+              type="text"
+              placeholder="Pesquisar..."
+              value={searchValue}
+              onChange={handleSearchChange}
+            />
+          </RightColumn>
+
+         <ButtonContainer>
+        <StyledButtonAdicionarProjeto onClick={() => handleClick()}>Adicionar Projeto</StyledButtonAdicionarProjeto>
+      </ButtonContainer>
+        </Row>
+
+      <TableContainer collapsed={collapsed}>
+
+        
         {layoutProjects ? <Card filteredProjects={filteredProjects} /> : <ProjectsTable filteredProjects={filteredProjects} />}
       </TableContainer>
 
     </Container>
+    </IndexContainer>
+    
   );
 };
 
 export default Projects;
+
+/*
+<MarginForCelphone />
+*/ 

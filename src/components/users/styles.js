@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import InputMask from "react-input-mask";
 
 import Select from "react-select";
 
@@ -24,7 +23,7 @@ export const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   z-index: 2;
   background: #fff;
-  width: ${({ collapsed }) => (collapsed ? "60vw" : "50vw")};
+  width: ${({ collapsed }) => (collapsed ? "70vw" : "70vw")};
   margin: auto;
   margin-top: 50px;
   position: relative;
@@ -59,7 +58,8 @@ export const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-export const ShowInput = styled(InputMask)`
+// styles.js (correção)
+export const ShowInput = styled.input`
   width: 100%;
   max-width: 350px;
   padding: 10px;

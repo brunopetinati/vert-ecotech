@@ -6,6 +6,7 @@ import Chart from '../chart';
 import { calculateTotalAreaByMonth, calculateTotalRealAreaByMonth, mergeCarbonData } from './carbon';
 import { groupByMonthAndStatus } from './project_status';
 import { groupByUserType } from './users';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
 

@@ -226,7 +226,7 @@ const Profile = () => {
                 <ShowInput type="text" value={userUpdate.street} disabled />
               </Row>
               <Row>
-                <Label for="bairro">Bairro:</Label>
+                <Label>Bairro:</Label>
                 <ShowInput
                   type="text"
                   id="bairro"
@@ -236,7 +236,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label for="cidade">Cidade:</Label>
+                <Label>Cidade:</Label>
                 <ShowInput
                   type="text"
                   id="cidade"
@@ -246,7 +246,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label for="uf">UF:</Label>
+                <Label>UF:</Label>
                 <ShowInput
                   type="text"
                   id="uf"
