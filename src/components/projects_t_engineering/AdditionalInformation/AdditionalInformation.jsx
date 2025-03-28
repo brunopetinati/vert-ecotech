@@ -70,12 +70,18 @@ const AdditionalInformation = ({ project_id, matchObjectId }) => {
   useEffect(() => {
     const token = sessionStorage.getItem('Authorization');
     const headers = { Authorization: `Bearer ${token}` };
-
+  
     axios.get(`${currentUrl}/api/engineering/${matchObjectId}/`, { headers })
       .then((response) => {
         setFileStates(prevState => ({
-          ...prevState,
-          ...response.data,
+          metodologia: response.data.metodologia || '',
+          tipo_de_projeto: response.data.tipo_de_projeto || '',
+          tipo_de_ativo: response.data.tipo_de_ativo || '',
+          data_de_emissao: response.data.data_de_emissao || '',
+          additional_information: response.data.additional_information || '',
+          responsavel_projeto: response.data.responsavel_projeto || '',
+          duracao_projeto: response.data.duracao_projeto || '',
+          certificadora: response.data.certificadora || '',
         }));
       })
       .catch((error) => {
