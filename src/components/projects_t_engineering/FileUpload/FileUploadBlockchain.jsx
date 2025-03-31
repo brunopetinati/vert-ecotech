@@ -117,7 +117,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     axios.get(`${currentUrl}/api/documentmodels2/${modelo_GUID}/data/`, { headers, params: { project_id: project_id } })
       .then((response) => {
         setData2({ ...response.data });
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
