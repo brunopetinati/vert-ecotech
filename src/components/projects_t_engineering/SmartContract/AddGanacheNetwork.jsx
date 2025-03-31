@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from './styles';
 
 const AddGanacheNetwork = () => {
   const addNetwork = async () => {
@@ -39,10 +40,11 @@ const AddGanacheNetwork = () => {
   };
 
   return (
-    <div>
-      <button onClick={addNetwork}>Add GANACHE-QA-SP Network</button>
-    </div>
+      <Button onClick={addNetwork}>Adicionar rede</Button>
   );
 };
 
 export default AddGanacheNetwork;
+{/**
+    Add GANACHE-QA-SP Network
+*/}
