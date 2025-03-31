@@ -1,6 +1,33 @@
-import styled from 'styled-components';
+
 import Select from "react-select";
-import InputMask from "react-input-mask";
+import React from 'react';
+import styled from 'styled-components';
+import InputMask from '@mona-health/react-input-mask';
+
+export const Input = React.forwardRef((props, ref) => {
+  return <StyledInput {...props} ref={ref} />; // Ref corrigido aqui
+});
+
+// styles2.js
+const StyledInput = styled(InputMask).withConfig({
+  shouldForwardProp: (prop) => !['maskChar'].includes(prop), // Filtra maskChar
+})`
+  padding: 2px;
+  margin-bottom: 20px;
+  width: 430px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+
+  ::placeholder {
+    font-size: 12px;
+  }
+
+  &:focus {
+    border-color: #007bff;
+  }
+`;
 
 export const Container = styled.div`
   
@@ -39,23 +66,7 @@ export const Label = styled.label`
   font-weight: 500;
 `;
 
-export const Input = styled(InputMask)`
-  padding: 2px;
-  margin-bottom: 20px;
-  width: 430px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-  outline: none;
 
-  ::placeholder {
-    font-size: 12px;
-  }
-
-  &:focus {
-    border-color: #007bff;
-  }
-`;
 
 export const Span = styled.span`
   color: #323338;
