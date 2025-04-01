@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import Select from "react-select";
-import InputMask from "react-input-mask";
 
 export const Container = styled.div`
   width: 1100px;
@@ -35,7 +33,7 @@ export const Label = styled.label`
   font-weight: 700;
 `;
 
-export const Input = styled(InputMask)`
+export const ShowInput = styled.input`
   padding: 10px;
   margin-bottom: 20px;
   width: 430px;

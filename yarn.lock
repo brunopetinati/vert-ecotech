@@ -14038,6 +14038,15 @@ react-imask@^7.6.1:
     imask "^7.6.1"
     prop-types "^15.8.1"
 
+react-input-mask-next@^3.0.0-alpha.12:
+  version "3.0.0-alpha.12"
+  resolved "https://registry.npmmirror.com/react-input-mask-next/-/react-input-mask-next-3.0.0-alpha.12.tgz#126483b86bbe4e876f760e0549fabfad3afdb213"
+  integrity sha512-ATUbd4vigFCmGxTDCjjZ3tAaqzLrebfTR8/XbcYXp0yQSUB14vav1ggUTEGMSu5FnrKyMGxnn/iGx6CLziKwxQ==
+  dependencies:
+    invariant "^2.2.4"
+    prop-types "^15.7.2"
+    warning "^4.0.3"
+
 react-input-mask@^2.0.4:
   version "2.0.4"
   resolved "https://registry.npmmirror.com/react-input-mask/-/react-input-mask-2.0.4.tgz#9ade5cf8196f4a856dbf010820fe75a795f3eb14"

@@ -1,4 +1,4 @@
-import { Container, InnerContainer, Column, Label, Input, TextArea, Span, Button, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, StyledButtonConfirmar, StyledButtonVoltar } from './styles'
+import { Container, InnerContainer, Column, Label, ShowInput, TextArea, Span, ButtonContainer, ButtonLink, StyledSelect, StyledSelectForUser, StyledButtonConfirmar, StyledButtonVoltar } from './styles'
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
@@ -323,7 +323,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
         <h2>Informações Cadastrais</h2>
         <div style={{width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <Label style={{fontSize : '16px'}} >Qual o nome (fantasia) da sua terra, fazenda ou reserva?</Label>
-          <Input
+          <ShowInput
               type="text"
               placeholder="Ex: Fazenda Santa Júlia"
               value={title}
@@ -363,7 +363,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
             </StyledSelect>
 
             <Label>{boolean ? 'CPF' : 'CNPJ'} do proprietário {<ButtonLink onClick={() => handleInputChange(setBoolean(!boolean))} >{boolean ? 'Alternar para CNPJ' : 'Alternar para CPF'}</ButtonLink>}</Label>
-            <Input type="text" 
+            <ShowInput type="text" 
               placeholder={boolean ? 'Ex: 137.258.369-46' : 'Ex: 12.345.678/0001-28'}
               mask={mask}
               maskplaceholder="CPF/CNPJ"
@@ -372,7 +372,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
               onChange={(e) => setCNPJ(e.target.value)}
             />
             <Label>Qual o endereço da propriedade?</Label>
-            <Input
+            <ShowInput
             type="text"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -413,7 +413,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
           </Column>
           <Column>
             <Label>Área total da propriedade (ha)?</Label>
-            <Input
+            <ShowInput
                 type="text"
                 placeholder="Em hectares (ha)"
                 value={totalArea}
@@ -422,7 +422,7 @@ const RegisterProjectInfo = ({ newOwner }) => {
               />
             {totalAreaError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{totalAreaError}</div>}
             <Label>Área total da reserva legal (ha)?</Label>
-              <Input
+              <ShowInput
                 type="text"
                 placeholder="Em hectares (ha)"
                 value={totalReserveArea}
@@ -442,15 +442,14 @@ const RegisterProjectInfo = ({ newOwner }) => {
             </StyledSelect>
             {selectedCarError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{selectedCarError}</div>}
             <Label>Código SICAR (CAR)</Label>
-            <Input type="text" 
+            <ShowInput type="text" 
               mask={"**-*******-****.****.****.****.****.****.****.****"}
-              maskplaceholder="MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               alwaysShowMask={false}
               placeholder="Ex: MS-5003207-785F.26BA.34BA.49FB.8327.7FAB.C58C.E4C2"
               onChange={(e) => setSicarCode(e.target.value)}
               disabled={thereIsNoCar}
             >
-            </Input>
+            </ShowInput>
             {statusCARError && <div style={{ color: 'red', marginBottom: '16px', marginTop: '-8px', fontStyle: 'italic', fontSize: '12px' }}>{statusCARError}</div>}
             <Label>Status do georreferenciamento no SIGEF</Label>
             <StyledSelect

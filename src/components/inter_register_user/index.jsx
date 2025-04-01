@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Banco from "../bank";
 import {
-  StyledButton,
   StyledButtonSalvar,
   StyledButtonVoltar,
 } from "../default_button/styles";
@@ -27,7 +26,8 @@ import { addUserToUsers } from "../../store/modules/app_data/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { appStatus } from "../../store/modules/app_status/actions";
 
-import folha1 from '../../assets/icons/folha1.png';
+import { useRef } from "react";
+import InputMask from "react-input-mask";
 
 const InternRegisterUser = () => {
   const [showModalBanco, setShowModalBanco] = useState(false);
@@ -37,6 +37,8 @@ const InternRegisterUser = () => {
   const handleModalBanco = () => {
     setShowModalBanco(!showModalBanco);
   };
+
+  const inputRefs = useRef({});
 
   const collapsed = useSelector((state) => state.sidebar);
 
@@ -169,7 +171,8 @@ const InternRegisterUser = () => {
     navigate("/welcome");
   };
 
-  const optionsAccess = [ // não está mais sendo usado
+  const optionsAccess = [
+    // não está mais sendo usado
     { value: "COM", label: "Comercial" },
     { value: "ENG", label: "Engenharia" },
     { value: "ADM", label: "Admin" },
@@ -210,63 +213,50 @@ const InternRegisterUser = () => {
                   }
                 />
               </Row>
+
               <Row>
                 <Label>Whatsapp:</Label>
-                <ShowInput
-                  type="text"
-                  onChange={(e) =>
-                    setUserObject({ ...userObject, phone: e.target.value })
-                  }
-                  mask={"(99) 99999-9999"}
-                  maskPlaceholder={"(21) 98787-5512"}
-                  alwaysShowMask={false}
-                  value={userObject.phone || ""}
-                />
+                <ShowInput type="text"
+                onChange={(e) => setUserObject({ ...userObject, phone: e.target.value})}
+                mask={"(99) 99999-9999"}
+                maskPlaceholder={"(21) 98787-5512"}
+                alwaysShowMask={false}
+                defaultValue={userObject.phone}
+              />
               </Row>
+
               <Row>
                 <Label htmlFor="rg">RG:</Label>
-                <ShowInput
-                  type="text"
-                  id="rg"
-                  name="rg"
-                  mask={"99.999.999-9"}
-                  maskPlaceholder="47.857.659.3"
-                  alwaysShowMask={false}
-                  value={userObject.rg || ""}
-                  onChange={(e) =>
-                    setUserObject({ ...userObject, rg: e.target.value })
-                  }
-                />
-              </Row>
+                <ShowInput type="text" id="rg" name="rg" 
+              mask={"99.999.999-9"}
+              maskPlaceholder="47.857.659.3"
+              alwaysShowMask={false}
+              defaultValue={userObject.rg}
+              onChange={((e) => setUserObject({...userObject, rg: e.target.value}))} />
+            </Row>
+           
               <Row>
-                <Label htmlFor="cpg">CPF:</Label>
-                <ShowInput
-                  type="text"
-                  id="cpf"
-                  name="cpf"
-                  mask={"999.999.999-99"}
-                  maskPlaceholder="359.868.555-19"
-                  alwaysShowMask={false}
-                  value={userObject.cpf || ""}
-                  onChange={(e) =>
-                    setUserObject({ ...userObject, cpf: e.target.value })
-                  }
-                />
+                <Label htmlFor="cpf">CPF:</Label>
+                <ShowInput type="text" id="cpg" name="cpg" 
+              mask={"999.999.999-99"}
+              maskPlaceholder="359.868.555-19"
+              alwaysShowMask={false}
+              defaultValue={userObject.cpf}
+              onChange={(e) => setUserObject({...userObject, cpf: e.target.value})}
+              />        
               </Row>
+
               <Row>
                 <Label htmlFor="cnpj">CNPJ:</Label>
-                <ShowInput
-                  type="text"
-                  id="cnpj"
-                  name="cnpj"
-                  mask={"99.999.999/9999-99"}
-                  alwaysShowMask={false}
-                  value={userObject.cnpj || ""}
-                  onChange={(e) =>
-                    setUserObject({ ...userObject, cnpj: e.target.value })
-                  }
-                />
+                <ShowInput type="text" id="cnpj" name="cnpj" 
+              mask={"99.999.999/9999-99"}
+              maskPlaceholder="12.345.678/0001-00"
+              alwaysShowMask={false}
+              defaultValue={userObject.cnpj}
+              onChange={(e) => setUserObject({...userObject, cnpj: e.target.value})}
+              />
               </Row>
+
               <Row>
                 <Label>Tipo de acesso:</Label>
                 <StyledSelect
@@ -309,7 +299,6 @@ const InternRegisterUser = () => {
                     handleCepOnForm(event.target.value);
                   }}
                   mask={"99999-999"}
-                  maskPlaceholder="13140-989"
                   alwaysShowMask={false}
                 />
               </Row>
@@ -329,7 +318,7 @@ const InternRegisterUser = () => {
               </Row>
 
               <Row>
-                <Label for="bairro">Bairro:</Label>
+                <Label htmlFor="bairro">Bairro:</Label>
                 <ShowInput
                   type="text"
                   id="bairro"
@@ -343,7 +332,7 @@ const InternRegisterUser = () => {
                 />
               </Row>
               <Row>
-                <Label for="cidade">Cidade:</Label>
+                <Label htmlFor="cidade">Cidade:</Label>
                 <ShowInput
                   type="text"
                   id="cidade"
@@ -357,7 +346,7 @@ const InternRegisterUser = () => {
                 />
               </Row>
               <Row>
-                <Label for="uf">UF:</Label>
+                <Label htmlFor="uf">UF:</Label>
                 <ShowInput
                   type="text"
                   id="uf"
@@ -411,7 +400,6 @@ const InternRegisterUser = () => {
               Voltar
             </StyledButtonVoltar>
           </ButtonContainer>
-
         </ProfileContainerInfo>
       </motion.div>
     </MainContainer>
@@ -422,7 +410,7 @@ export default InternRegisterUser;
 
 /**
 Não sei para quê esse modal está sendo usado, ele ficava em baixo de ButtonContainer, mas pelos meus testes não faz nada
-vou deixar isso comentado por que o uso pode ser descuberto mais para frente
+vou deixar isso comentado por que o uso pode ser descoberto mais para frente
 - Julia.
 {showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />} 
  */

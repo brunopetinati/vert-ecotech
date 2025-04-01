@@ -173,56 +173,46 @@ const UserIntern = () => {
               </Row>
               <Row>
                 <Label>Whatsapp</Label>
-                <ShowInput
+                
+<ShowInput
                   type="text"
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, phone: e.target.value })
                   }
-                  mask={"(99) 99999-9999"}
-                  maskPlaceholder={"(21) 98787-5512"}
-                  alwaysShowMask={false}
-                  defaultValue={userUpdate.phone}
+                  mask="(99) 99999-9999"
+                  value={userUpdate.phone}
                 />
               </Row>
               <Row>
-                <Label for="rg">RG:</Label>
+                <Label htmlFor="rg">RG:</Label>
                 <ShowInput
                   type="text"
-                  id="rg"
-                  name="rg"
-                  mask={"99.999.999-9"}
-                  maskPlaceholder="47.857.659.3"
-                  alwaysShowMask={false}
-                  defaultValue={userUpdate.rg}
+                  mask="99.999.999-9"
+                  value={userUpdate.rg}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, rg: e.target.value })
                   }
                 />
               </Row>
               <Row>
-                <Label for="cpg">CPF:</Label>
+                <Label htmlFor="cpg">CPF:</Label>
                 <ShowInput
                   type="text"
-                  id="cpg"
-                  name="cpg"
-                  mask={"999.999.999-99"}
-                  maskPlaceholder="359.868.555-19"
-                  alwaysShowMask={false}
-                  defaultValue={userUpdate.cpf}
+                  mask="999.999.999-99"
+                  value={userUpdate.cpf}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, cpf: e.target.value })
                   }
                 />
               </Row>
               <Row>
-                <Label for="cnpj">CNPJ:</Label>
+                <Label htmlFor="cnpj">CNPJ:</Label>
                 <ShowInput
                   type="text"
                   id="cnpj"
                   name="cnpj"
                   mask={"99.999.999/9999-99"}
-                  alwaysShowMask={false}
-                  defaultValue={userUpdate.cnpj}
+                  value={userUpdate.cnpj}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, cnpj: e.target.value })
                   }
@@ -232,7 +222,7 @@ const UserIntern = () => {
 
             <RightColumn>
               <Row>
-                <Label for="cep">CEP:</Label>
+                <Label htmlFor="cep">CEP:</Label>
                 <ShowInput
                   type="text"
                   id="cep"
@@ -248,7 +238,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="rua">Rua:</Label>
+                <Label htmlFor="rua">Rua:</Label>
                 <ShowInput
                   type="text"
                   id="rua"
@@ -262,7 +252,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="numero">Número:</Label>
+                <Label htmlFor="numero">Número:</Label>
                 <ShowInput
                   type="text"
                   id="numero"
@@ -274,7 +264,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="rua">Complemento:</Label>
+                <Label htmlFor="rua">Complemento:</Label>
                 <ShowInput
                   type="text"
                   id="complemento"
@@ -289,7 +279,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="bairro">Bairro:</Label>
+                <Label htmlFor="bairro">Bairro:</Label>
                 <ShowInput
                   type="text"
                   id="bairro"
@@ -303,7 +293,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="cidade">Cidade:</Label>
+                <Label htmlFor="cidade">Cidade:</Label>
                 <ShowInput
                   type="text"
                   id="cidade"
@@ -317,7 +307,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label for="uf">UF:</Label>
+                <Label htmlFor="uf">UF:</Label>
                 <ShowInput
                   type="text"
                   id="uf"
@@ -384,14 +374,16 @@ const UserIntern = () => {
                 ></div>
               </div>
               <div style={{ float: "left", width: "100%" }}>
-                {userProjects.map((project) => (
-                  <StyledButtonProjetos
-                    style={{ margin: "0px 32px 32px 0" }}
-                    onClick={() => sendInternProject(project)}
-                  >
-                    {project.title.toUpperCase()}
-                  </StyledButtonProjetos>
-                ))}
+              {userProjects.map((project) => (
+  <StyledButtonProjetos
+    key={project.id} // ✅ Adicionado um identificador único
+    style={{ margin: "0px 32px 32px 0" }}
+    onClick={() => sendInternProject(project)}
+  >
+    {project.title.toUpperCase()}
+  </StyledButtonProjetos>
+))}
+
               </div>
             </div>
           )}
