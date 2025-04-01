@@ -1,8 +1,49 @@
 import styled from 'styled-components';
-import InputMask from "react-input-mask";
-import Select from 'react-select';
-
 import folha1 from '../../assets/icons/folha1.png';
+
+export const ShowInput = styled.input`
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+  }
+`;
+
+export const InputMask = styled.input`
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+  }
+`;
 
 export const MainContainer = styled.div`
   display: flex;
@@ -110,27 +151,7 @@ export const Label = styled.label`
   margin-bottom: 5px;
 `;
 
-export const ShowInput = styled(InputMask)`
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  border: 2px solid rgb(204, 204, 204);
-  border-radius: 8px;
-  font-size: 14px;
-  outline: none;
-  background: rgba(245, 245, 245, 0.4);
-  transition: all 0.3s ease-in-out;
 
-  &:focus {
-    border-color: #007bff;
-    background: #fff;
-  }
-
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    max-width: none;
-  }
-`;
 
 export const ButtonContainer = styled.div`
   display: flex;

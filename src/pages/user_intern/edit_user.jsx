@@ -123,7 +123,7 @@ const UserIntern = () => {
               onChange={(e) => setUserUpdate({...userUpdate, cpf: e.target.value})}
               />          
             </Row>
-            {/* <Row>            
+            <Row>            
               <Label for="cnpj">CNPJ:</Label>
               <ShowInput type="text" id="cnpj" name="cnpj" 
               mask={"99.999.999/9999-99"}
@@ -131,7 +131,7 @@ const UserIntern = () => {
               alwaysShowMask={false}
               onChange={(e) => setUserUpdate({...userUpdate, cnpj: e.target.value})}
               />
-            </Row> */}
+            </Row> 
             <Row>
               <Label for="cep">CEP:</Label>
               <ShowInput type="text" id="cep" name="cep" value={userUpdate.cep} onChange={(event) => {
