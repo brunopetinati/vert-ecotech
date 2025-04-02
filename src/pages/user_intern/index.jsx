@@ -122,13 +122,15 @@ const UserIntern = () => {
         );
         setUserProjects(response.data);
       } catch (error) {
-        // Handle any errors here
         console.error("error", error);
       }
     };
-
-    fetchData();
-  }, []);
+  
+    if (user.id) {
+      fetchData();
+    }
+  }, [user.id]); // ✅ Adicionando user.id como dependência
+  
 
   const sendInternProject = (project) => {
     dispatch(appStatus(""));
@@ -351,16 +353,16 @@ const UserIntern = () => {
           {userProjects.length > 0 && (
             <div style={{ marginTop: "-25px" }}>
               <div style={{ float: "left" }}>
-                <h3
-                  style={{
-                    float: "left",
-                    height: "20px",
-                    width: "325px",
-                    float: "left",
-                  }}
-                >
-                  Projetos de Crédito de Carbono
-                </h3>
+              <h3
+  style={{
+    height: "20px",
+    width: "325px",
+    float: "left", // ✅ Mantendo apenas uma vez
+  }}
+>
+  Projetos de Crédito de Carbono
+</h3>
+
                 <div
                   style={{
                     float: "left",
