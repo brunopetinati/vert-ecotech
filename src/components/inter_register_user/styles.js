@@ -23,6 +23,28 @@ export const ShowInput = styled.input`
   }
 `;
 
+export const InputMask = styled.input`
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
+  }
+`;
+
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;

@@ -151,14 +151,12 @@ const UserIntern = () => {
       fetchData();
     }
   }, [user]); // O efeito executa apenas quando `user` muda
-  
-  
 
   const sendInternProject = (project) => {
     dispatch(appStatus(""));
     navigate("/intern_project", { state: { project, user } });
   };
-
+  
   return (
     <MainContainer>
       <motion.div
@@ -184,7 +182,6 @@ const UserIntern = () => {
                   }
                 />
               </Row>
-
               <Row>
                 <Label>Email</Label>
                 <ShowInput
@@ -197,7 +194,6 @@ const UserIntern = () => {
               </Row>
               <Row>
                 <Label>Whatsapp</Label>
-
                 <ShowInput
                   type="text"
                   onChange={(e) =>
@@ -219,7 +215,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label htmlFor="cpg">CPF:</Label>
+                <Label htmlFor="cpf">CPF:</Label>
                 <ShowInput
                   type="text"
                   mask="999.999.999-99"
@@ -235,7 +231,7 @@ const UserIntern = () => {
                   type="text"
                   id="cnpj"
                   name="cnpj"
-                  mask={"99.999.999/9999-99"}
+                  mask="99.999.999/9999-99"
                   value={userUpdate.cnpj}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, cnpj: e.target.value })
@@ -243,7 +239,7 @@ const UserIntern = () => {
                 />
               </Row>
             </LeftColumn>
-
+  
             <RightColumn>
               <Row>
                 <Label htmlFor="cep">CEP:</Label>
@@ -256,9 +252,8 @@ const UserIntern = () => {
                     setUserUpdate({ ...userUpdate, cep: event.target.value });
                     handleCepOnForm(event.target.value);
                   }}
-                  mask={"99999-999"}
+                  mask="99999-999"
                   maskPlaceholder="13140-989"
-                  alwaysShowMask={false}
                 />
               </Row>
               <Row>
@@ -288,7 +283,7 @@ const UserIntern = () => {
                 />
               </Row>
               <Row>
-                <Label htmlFor="rua">Complemento:</Label>
+                <Label htmlFor="complemento">Complemento:</Label>
                 <ShowInput
                   type="text"
                   id="complemento"
@@ -311,9 +306,6 @@ const UserIntern = () => {
                   value={userUpdate.district}
                   disabled
                   placeholder="Preencha o CEP para preenchimento automático"
-                  onChange={(e) =>
-                    setUserUpdate({ ...userUpdate, district: e.target.value })
-                  }
                 />
               </Row>
               <Row>
@@ -325,9 +317,6 @@ const UserIntern = () => {
                   value={userUpdate.city}
                   disabled
                   placeholder="Preencha o CEP para preenchimento automático"
-                  onChange={(e) =>
-                    setUserUpdate({ ...userUpdate, city: e.target.value })
-                  }
                 />
               </Row>
               <Row>
@@ -339,18 +328,15 @@ const UserIntern = () => {
                   value={userUpdate.state}
                   disabled
                   placeholder="Preencha o CEP para preenchimento automático"
-                  onChange={(e) =>
-                    setUserUpdate({ ...userUpdate, state: e.target.value })
-                  }
                 />
               </Row>
             </RightColumn>
           </FormContainer>
-
+  
           <ButtonContainer>
             <WarningDeleteModal
-              text={"Deletar Usuário"}
-              path={"users"}
+              text="Deletar Usuário"
+              path="users"
               id={user.id}
             />
             <StyledButtonSalvar
@@ -366,41 +352,52 @@ const UserIntern = () => {
               Voltar
             </StyledButtonVoltar>
           </ButtonContainer>
-
+  
           <ButtonContainer>
             {showModalBanco && (
               <Banco isOpen={showModalBanco} onClose={handleModalBanco} />
             )}
-
+  
+            <div
+              style={{
+                float: "left",
+                width: "25px",
+                height: "25px",
+                marginTop: "15px",
+                backgroundImage: `url(${folha1})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
+  
             {userProjects.length > 0 && (
-              <div style={{ marginTop: "-25px" }}>
-                <div style={{ float: "left" }}>
-                  <h3
-                    style={{
-                      height: "20px",
-                      width: "325px",
-                      float: "left", // ✅ Mantendo apenas uma vez
-                    }}
-                  >
-                    Projetos de Crédito de Carbono
-                  </h3>
-
-                  <div
-                    style={{
-                      float: "left",
-                      width: "25px",
-                      height: "25px",
-                      marginTop: "15px",
-                      backgroundImage: `url(${folha1})`,
-                      backgroundSize: "cover",
-                      backgroundRepeat: "no-repeat",
-                    }}
-                  ></div>
-                </div>
+              <div style={{ width: "100%" }}>
+                <h3
+                  style={{
+                    height: "20px",
+                    width: "325px",
+                    float: "left",
+                  }}
+                >
+                  Projetos de Crédito de Carbono
+                </h3>
+  
+                <div
+                  style={{
+                    float: "left",
+                    width: "25px",
+                    height: "25px",
+                    marginTop: "15px",
+                    backgroundImage: `url(${folha1})`,
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                  }}
+                ></div>
+  
                 <div style={{ float: "left", width: "100%" }}>
                   {userProjects.map((project) => (
                     <StyledButtonProjetos
-                      key={project.id} // ✅ Adicionado um identificador único
+                      key={project.id}
                       style={{ margin: "0px 32px 32px 0" }}
                       onClick={() => sendInternProject(project)}
                     >
@@ -416,6 +413,7 @@ const UserIntern = () => {
       </motion.div>
     </MainContainer>
   );
+  
 };
 
 export default UserIntern;

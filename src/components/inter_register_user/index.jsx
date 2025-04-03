@@ -27,6 +27,7 @@ import { appStatus } from "../../store/modules/app_status/actions";
 
 const InternRegisterUser = () => {
   const navigate = useNavigate();
+
   const collapsed = useSelector((state) => state.sidebar);
   const dispatch = useDispatch();
 
@@ -183,8 +184,10 @@ const InternRegisterUser = () => {
                   }
                 />
               </Row>
+
               <Row>
                 <Label>Whatsapp:</Label>
+
                 <ShowInput
                   type="text"
                   onChange={(e) =>
@@ -193,6 +196,7 @@ const InternRegisterUser = () => {
                   value={userObject.phone || ""}
                 />
               </Row>
+
               <Row>
                 <Label htmlFor="rg">RG:</Label>
                 <ShowInput
@@ -213,6 +217,7 @@ const InternRegisterUser = () => {
                   }
                 />
               </Row>
+
               <Row>
                 <Label htmlFor="cnpj">CNPJ:</Label>
                 <ShowInput
@@ -223,6 +228,7 @@ const InternRegisterUser = () => {
                   }
                 />
               </Row>
+
               <Row>
                 <Label>Tipo de acesso:</Label>
                 <StyledSelect
@@ -265,7 +271,6 @@ const InternRegisterUser = () => {
                     handleCepOnForm(event.target.value);
                   }}
                   mask={"99999-999"}
-                  maskPlaceholder="13140-989"
                   alwaysShowMask={false}
                 />
               </Row>
@@ -367,7 +372,6 @@ const InternRegisterUser = () => {
               Voltar
             </StyledButtonVoltar>
           </ButtonContainer>
-
         </ProfileContainerInfo>
       </motion.div>
     </MainContainer>
@@ -375,3 +379,10 @@ const InternRegisterUser = () => {
 };
 
 export default InternRegisterUser;
+
+/**
+Não sei para quê esse modal está sendo usado, ele ficava em baixo de ButtonContainer, mas pelos meus testes não faz nada
+vou deixar isso comentado por que o uso pode ser descoberto mais para frente
+- Julia.
+{showModalBanco && <Banco isOpen={showModalBanco} onClose={handleModalBanco} />} 
+ */

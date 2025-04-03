@@ -1118,7 +1118,60 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       console.error('Erro:', error);
     }
   };
-
+  
+  const atualizarJsonResponseNft = async (fileManagerNftId,novoJsonResponse,ContratoAddress,ContratoClienteAddress,SignerGeral,tokenId,signer,signature,hashedMessage) => {
+    try {
+      console.log("Iniciando atualização do JSON response...");
+      console.log("ID do NFT:", fileManagerNftId);
+      console.log("Novo JSON Response:", novoJsonResponse);
+      console.log("Contrato Address:", ContratoAddress);
+      console.log("Contrato Cliente Address:", ContratoClienteAddress);
+      console.log("Signer Geral:", SignerGeral);
+      console.log("Token ID:", tokenId);
+      console.log("Signer:", signer);
+      console.log("Signature:", signature);
+      console.log("Hashed Message:", hashedMessage);
+  
+      // Converte qualquer valor "bigint" para string no JSON
+      const jsonData = JSON.stringify(
+        {
+          json_response: novoJsonResponse,
+          ContratoAddress: ContratoAddress,
+          ContratoClienteAddress: ContratoClienteAddress,
+          SignerGeral: SignerGeral,
+          tokenId: tokenId,
+          signer: signer,
+          signature: signature,
+          hashedMessage: hashedMessage,
+        },
+        (key, value) => (typeof value === "bigint" ? value.toString() : value)
+      );
+  
+      const response = await axios.patch(
+        `${currentUrl}/api/filemanagernft/update_json_response2/${fileManagerNftId}/`,
+        jsonData,
+        {
+          headers: headers 
+        }
+      );
+  
+      console.log("Resposta da API:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao atualizar JSON response:", error);
+      if (error.response) {
+        console.error("Resposta do servidor:", error.response.data);
+        console.error("Código de status:", error.response.status);
+      } else if (error.request) {
+        console.error("Nenhuma resposta recebida:", error.request);
+      } else {
+        console.error("Erro ao configurar a requisição:", error.message);
+      }
+      throw error;
+    }
+  };
+  
+/*
   const atualizarJsonResponseNft = async (fileManagerNftId,novoJsonResponse,ContratoAddress,ContratoClienteAddress,SignerGeral, tokenId, signer, signature, hashedMessage) => {
     try {
       console.log("Iniciando atualização do JSON response...");
@@ -1162,7 +1215,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       throw error;
     }
   };
-  
+  */
+ 
 
   const atualizarData2Nft = async (novoJsonResponse) => {
     try {
