@@ -39,8 +39,6 @@ const UserIntern = () => {
     setShowModalBanco(!showModalBanco);
   };
 
-  // Código pertinente ao preenchimento automático do CEP
-
   const [userUpdate, setUserUpdate] = useState({
     id: user.id || "",
     full_name: user.full_name || "",
@@ -109,27 +107,51 @@ const UserIntern = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = sessionStorage.getItem("Authorization");
-        const response = await axios.get(
-          `${currentUrl}/api/projects/${user.id}/by_user/`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        setUserProjects(response.data);
-      } catch (error) {
-        console.error("error", error);
-      }
-    };
+    if (user && user.id) {
+      setUserUpdate((prevUserUpdate) => {
+        // Verifica se os dados do usuário já estão corretos antes de atualizar
+        if (JSON.stringify(prevUserUpdate) !== JSON.stringify(user)) {
+          return {
+            id: user.id,
+            full_name: user.full_name || "",
+            rg: user.rg || "",
+            cpf: user.cpf || "",
+            cnpj: user.cnpj || "",
+            phone: user.phone || "",
+            email: user.email || "",
+            user_type: user.user_type || "",
+            cep: user.cep || "",
+            street: user.street || "",
+            number: user.number || "",
+            complement: user.complement || "",
+            district: user.district || "",
+            state: user.state || "",
+            city: user.city || "",
+          };
+        }
+        return prevUserUpdate;
+      });
   
-    if (user.id) {
+      const fetchData = async () => {
+        try {
+          //console.log("Buscando projetos para user.id:", user.id);
+          const token = sessionStorage.getItem("Authorization");
+          const response = await axios.get(
+            `${currentUrl}/api/projects/${user.id}/by_user/`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          setUserProjects(response.data);
+        } catch (error) {
+          console.error("Erro ao buscar projetos:", error);
+        }
+      };
+  
       fetchData();
     }
-  }, [user.id]); // ✅ Adicionando user.id como dependência
+  }, [user]); // O efeito executa apenas quando `user` muda
+  
   
 
   const sendInternProject = (project) => {
@@ -175,8 +197,8 @@ const UserIntern = () => {
               </Row>
               <Row>
                 <Label>Whatsapp</Label>
-                
-<ShowInput
+
+                <ShowInput
                   type="text"
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, phone: e.target.value })
@@ -346,49 +368,48 @@ const UserIntern = () => {
           </ButtonContainer>
 
           <ButtonContainer>
-             {showModalBanco && (
-            <Banco isOpen={showModalBanco} onClose={handleModalBanco} />
-          )}
+            {showModalBanco && (
+              <Banco isOpen={showModalBanco} onClose={handleModalBanco} />
+            )}
 
-          {userProjects.length > 0 && (
-            <div style={{ marginTop: "-25px" }}>
-              <div style={{ float: "left" }}>
-              <h3
-  style={{
-    height: "20px",
-    width: "325px",
-    float: "left", // ✅ Mantendo apenas uma vez
-  }}
->
-  Projetos de Crédito de Carbono
-</h3>
+            {userProjects.length > 0 && (
+              <div style={{ marginTop: "-25px" }}>
+                <div style={{ float: "left" }}>
+                  <h3
+                    style={{
+                      height: "20px",
+                      width: "325px",
+                      float: "left", // ✅ Mantendo apenas uma vez
+                    }}
+                  >
+                    Projetos de Crédito de Carbono
+                  </h3>
 
-                <div
-                  style={{
-                    float: "left",
-                    width: "25px",
-                    height: "25px",
-                    marginTop: "15px",
-                    backgroundImage: `url(${folha1})`,
-                    backgroundSize: "cover",
-                    backgroundRepeat: "no-repeat",
-                  }}
-                ></div>
+                  <div
+                    style={{
+                      float: "left",
+                      width: "25px",
+                      height: "25px",
+                      marginTop: "15px",
+                      backgroundImage: `url(${folha1})`,
+                      backgroundSize: "cover",
+                      backgroundRepeat: "no-repeat",
+                    }}
+                  ></div>
+                </div>
+                <div style={{ float: "left", width: "100%" }}>
+                  {userProjects.map((project) => (
+                    <StyledButtonProjetos
+                      key={project.id} // ✅ Adicionado um identificador único
+                      style={{ margin: "0px 32px 32px 0" }}
+                      onClick={() => sendInternProject(project)}
+                    >
+                      {project.title.toUpperCase()}
+                    </StyledButtonProjetos>
+                  ))}
+                </div>
               </div>
-              <div style={{ float: "left", width: "100%" }}>
-              {userProjects.map((project) => (
-  <StyledButtonProjetos
-    key={project.id} // ✅ Adicionado um identificador único
-    style={{ margin: "0px 32px 32px 0" }}
-    onClick={() => sendInternProject(project)}
-  >
-    {project.title.toUpperCase()}
-  </StyledButtonProjetos>
-))}
-
-              </div>
-            </div>
-          )}
+            )}
           </ButtonContainer>
         </ProfileContainerInfo>
         <p />

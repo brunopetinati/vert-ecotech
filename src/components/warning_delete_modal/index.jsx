@@ -15,18 +15,11 @@ const WarningDeleteModal = ({ text, path, id, width, height }) => {
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
 
-  // lembrar de inserir a senha do usuário, para fazer deleções
-
   const onDelete = () =>{
-    //enviando novamente
-    console.log("entrou para deletar")
-    console.log("Path atual:", path);  // Exibe o valor de path no console
-    console.log("URL completa:", `${currentUrl}/api/${path}/${id}/delete`);
     axios.delete(`${currentUrl}/api/${path}/${id}/delete/`, {
       headers,
     })
     .then(response => {
-      console.log('Response:', response.data);
       Swal.fire({
         title: 'Sucesso!',
         text: 'Seu projeto foi deletado com sucesso!',
