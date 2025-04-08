@@ -93,6 +93,8 @@ const InternRegisterUser = () => {
       ...prevState,
       user_type: value,
     }));
+
+    console.log(userObject.user_type);
   };
 
   const [verifyAccessType, setVerifyAccestype] = useState(false);

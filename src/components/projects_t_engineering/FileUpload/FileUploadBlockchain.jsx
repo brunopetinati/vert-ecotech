@@ -943,7 +943,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       // Converte BigInt para string
       const sanitizeBigInt = (obj) => {
         if (typeof obj !== 'object' || obj === null) return obj;
-  
+
         for (const key in obj) {
           if (typeof obj[key] === 'bigint') {
             console.warn(`⚠️ Convertendo BigInt para string em "${key}":`, obj[key]);
@@ -954,7 +954,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         }
         return obj;
       };
-  
+
       // Organiza os dados para enviar ao backend
       const payload = sanitizeBigInt({
         json_response: novoJsonResponse,
@@ -964,25 +964,25 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         signature,
         hashedMessage
       });
-  
+
       console.log('📦 Dados prontos para o backend:', payload);
-  
+
       // Faz a requisição PATCH
       const response = await axios.patch(
         `${currentUrl}/api/filemanagercontract/update_json_response/${fileManagerContractId}/`,
         payload,
         { headers }
       );
-  
+
       console.log('✅ Resposta do backend:', response.data);
       return response.data;
-  
+
     } catch (error) {
       console.error('❌ Erro ao atualizar JSON response:', error.response ? error.response.data : error.message);
       throw error;
     }
   };
-  
+
 
   const atualizarData2Contract = async (novoJsonResponse) => {
     try {
@@ -991,7 +991,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
         { json_response: novoJsonResponse },
         { headers }
       );
-      
+
       return response.data;
     } catch (error) {
       console.error('Erro ao atualizar JSON response:', error);
@@ -1057,13 +1057,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
                   //chamada para gerar contrato da nft
                   const retorno = await Factory(nomePropriedade, nomeProprietario, cnpjcpf, car, file_manager_contract_id);
-                 
+
 
                   //atualiza json_response com file_manager_contract_id
                   const respostaAtualizacao = await atualizarJsonResponseContract(retorno.file_manager_contract_id, retorno,
                     retorno.contratoAddress, retorno.contratoClienteAddress,
                     retorno.signerGeral, retorno.signature, retorno.hashedMessage);
-                    console.log('chegou aquiiiiiiiiiiiiiiii');
+                  console.log('chegou aquiiiiiiiiiiiiiiii');
 
 
                   //distribui dados para o modelo
@@ -1118,8 +1118,8 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       console.error('Erro:', error);
     }
   };
-  
-  const atualizarJsonResponseNft = async (fileManagerNftId,novoJsonResponse,ContratoAddress,ContratoClienteAddress,SignerGeral,tokenId,signer,signature,hashedMessage) => {
+
+  const atualizarJsonResponseNft = async (fileManagerNftId, novoJsonResponse, ContratoAddress, ContratoClienteAddress, SignerGeral, tokenId, signer, signature, hashedMessage) => {
     try {
       console.log("Iniciando atualização do JSON response...");
       console.log("ID do NFT:", fileManagerNftId);
@@ -1131,93 +1131,146 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       console.log("Signer:", signer);
       console.log("Signature:", signature);
       console.log("Hashed Message:", hashedMessage);
-  
-      // Converte qualquer valor "bigint" para string no JSON
-      const jsonData = JSON.stringify(
-        {
-          json_response: novoJsonResponse,
-          ContratoAddress: ContratoAddress,
-          ContratoClienteAddress: ContratoClienteAddress,
-          SignerGeral: SignerGeral,
-          tokenId: tokenId,
-          signer: signer,
-          signature: signature,
-          hashedMessage: hashedMessage,
-        },
-        (key, value) => (typeof value === "bigint" ? value.toString() : value)
-      );
-  
+
+      // Função para converter valores bigint dentro de objetos aninhados
+      const normalizeBigInt = (obj) => {
+        if (typeof obj === 'bigint') {
+          return obj.toString();
+        } else if (Array.isArray(obj)) {
+          return obj.map(normalizeBigInt);
+        } else if (typeof obj === 'object' && obj !== null) {
+          return Object.fromEntries(
+            Object.entries(obj).map(([k, v]) => [k, normalizeBigInt(v)])
+          );
+        }
+        return obj;
+      };
+
+      const jsonData = {
+        json_response: normalizeBigInt(novoJsonResponse),
+        ContratoAddress,
+        ContratoClienteAddress,
+        SignerGeral,
+        tokenId: typeof tokenId === 'bigint' ? tokenId.toString() : tokenId,
+        signer,
+        signature,
+        hashedMessage,
+      };
+
       const response = await axios.patch(
         `${currentUrl}/api/filemanagernft/update_json_response2/${fileManagerNftId}/`,
         jsonData,
         {
-          headers: headers 
+          headers: {
+            "Content-Type": "application/json",
+            ...headers, // se você tiver outros headers como Authorization
+          },
+        }
+      );
+
+      console.log("Resposta da API:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao atualizar JSON response:", error);
+      if (error.response) {
+        console.error("Resposta do servidor:", error.response.data);
+        console.error("Código de status:", error.response.status);
+      } else if (error.request) {
+        console.error("Nenhuma resposta recebida:", error.request);
+      } else {
+        console.error("Erro ao configurar a requisição:", error.message);
+      }
+      throw error;
+    }
+  };
+
+  const atualizarData2Nft = async (novoJsonResponse) => {
+    try {
+      // Função recursiva para converter BigInt para string
+      const normalizeBigInt = (obj) => {
+        if (typeof obj === 'bigint') {
+          return obj.toString();
+        } else if (Array.isArray(obj)) {
+          return obj.map(normalizeBigInt);
+        } else if (typeof obj === 'object' && obj !== null) {
+          return Object.fromEntries(
+            Object.entries(obj).map(([key, value]) => [key, normalizeBigInt(value)])
+          );
+        }
+        return obj;
+      };
+  
+      const jsonData = {
+        json_response: normalizeBigInt(novoJsonResponse),
+      };
+      
+      console.log(jsonData)
+      const response = await axios.post(
+        `${currentUrl}/api/save_smart_contract_nft_data2/insert/`,
+        jsonData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            ...headers, // inclui seus headers personalizados (como Authorization, se houver)
+          },
         }
       );
   
-      console.log("Resposta da API:", response.data);
       return response.data;
     } catch (error) {
-      console.error("Erro ao atualizar JSON response:", error);
-      if (error.response) {
-        console.error("Resposta do servidor:", error.response.data);
-        console.error("Código de status:", error.response.status);
-      } else if (error.request) {
-        console.error("Nenhuma resposta recebida:", error.request);
-      } else {
-        console.error("Erro ao configurar a requisição:", error.message);
-      }
+      console.error('Erro ao atualizar JSON response:', error);
       throw error;
     }
   };
   
-/*
-  const atualizarJsonResponseNft = async (fileManagerNftId,novoJsonResponse,ContratoAddress,ContratoClienteAddress,SignerGeral, tokenId, signer, signature, hashedMessage) => {
-    try {
-      console.log("Iniciando atualização do JSON response...");
-      console.log("ID do NFT:", fileManagerNftId);
-      console.log("Novo JSON Response:", novoJsonResponse);
-      console.log("Contrato Address:", ContratoAddress);
-      console.log("Contrato Cliente Address:", ContratoClienteAddress);
-      console.log("Signer Geral:", SignerGeral);
-      console.log("Token ID:", tokenId);
-      console.log("Signer:", signer);
-      console.log("Signature:", signature);
-      console.log("Hashed Message:", hashedMessage);
-  
-      const response = await axios.patch(
-        `${currentUrl}/api/filemanagernft/update_json_response2/${fileManagerNftId}/`,
-        {
-          json_response: novoJsonResponse,
-          ContratoAddress: ContratoAddress,
-          ContratoClienteAddress: ContratoClienteAddress,
-          SignerGeral: SignerGeral,
-          tokenId: tokenId,
-          signer: signer,
-          signature: signature,
-          hashedMessage: hashedMessage
-        },
-        { headers }
-      );
-  
-      console.log("Resposta da API:", response.data);
-      return response.data;
-    } catch (error) {
-      console.error("Erro ao atualizar JSON response:", error);
-      if (error.response) {
-        console.error("Resposta do servidor:", error.response.data);
-        console.error("Código de status:", error.response.status);
-      } else if (error.request) {
-        console.error("Nenhuma resposta recebida:", error.request);
-      } else {
-        console.error("Erro ao configurar a requisição:", error.message);
-      }
-      throw error;
-    }
-  };
-  */
- 
 
+  /*
+    const atualizarJsonResponseNft = async (fileManagerNftId,novoJsonResponse,ContratoAddress,ContratoClienteAddress,SignerGeral, tokenId, signer, signature, hashedMessage) => {
+      try {
+        console.log("Iniciando atualização do JSON response...");
+        console.log("ID do NFT:", fileManagerNftId);
+        console.log("Novo JSON Response:", novoJsonResponse);
+        console.log("Contrato Address:", ContratoAddress);
+        console.log("Contrato Cliente Address:", ContratoClienteAddress);
+        console.log("Signer Geral:", SignerGeral);
+        console.log("Token ID:", tokenId);
+        console.log("Signer:", signer);
+        console.log("Signature:", signature);
+        console.log("Hashed Message:", hashedMessage);
+    
+        const response = await axios.patch(
+          `${currentUrl}/api/filemanagernft/update_json_response2/${fileManagerNftId}/`,
+          {
+            json_response: novoJsonResponse,
+            ContratoAddress: ContratoAddress,
+            ContratoClienteAddress: ContratoClienteAddress,
+            SignerGeral: SignerGeral,
+            tokenId: tokenId,
+            signer: signer,
+            signature: signature,
+            hashedMessage: hashedMessage
+          },
+          { headers }
+        );
+    
+        console.log("Resposta da API:", response.data);
+        return response.data;
+      } catch (error) {
+        console.error("Erro ao atualizar JSON response:", error);
+        if (error.response) {
+          console.error("Resposta do servidor:", error.response.data);
+          console.error("Código de status:", error.response.status);
+        } else if (error.request) {
+          console.error("Nenhuma resposta recebida:", error.request);
+        } else {
+          console.error("Erro ao configurar a requisição:", error.message);
+        }
+        throw error;
+      }
+    };
+    */
+
+/*
   const atualizarData2Nft = async (novoJsonResponse) => {
     try {
       const response = await axios.post(
@@ -1235,6 +1288,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
       throw error;
     }
   };
+  */
 
   const atualizarNftButton = async (fileManagerControlId) => {
     try {
@@ -1273,135 +1327,135 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
   //mintagem do arquivo
   const mintNft = async (document_guid, document_name, file_manager_topic_id, item_document_path, file_manager_control_id, modelo_item_id) => {
     try {
-        console.log("Iniciando o processo de mintagem...");
+      console.log("Iniciando o processo de mintagem...");
 
-        // Confirmação do usuário
-        const confirmacao = await Swal.fire({
-            title: 'Confirmação',
-            text: 'Você realmente deseja mintar a NFT?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Sim',
-            cancelButtonText: 'Cancelar',
-        });
+      // Confirmação do usuário
+      const confirmacao = await Swal.fire({
+        title: 'Confirmação',
+        text: 'Você realmente deseja mintar a NFT?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Sim',
+        cancelButtonText: 'Cancelar',
+      });
 
-        if (!confirmacao.isConfirmed) {
-            console.log("Operação cancelada pelo usuário.");
-            return;
-        }
+      if (!confirmacao.isConfirmed) {
+        console.log("Operação cancelada pelo usuário.");
+        return;
+      }
 
-        console.log("Usuário confirmou a mintagem.");
+      console.log("Usuário confirmou a mintagem.");
 
-        const requestDatainfo = {
-            project_id: project_id,
-        };
+      const requestDatainfo = {
+        project_id: project_id,
+      };
 
-        const dominio_site = 'http://teste.com.br/';
-        const _nftTitle = document_guid;
-        const _nftDescription = document_name;
-        const _nftPrice = 1;
-        const _nftRoyaltyPercentage = 1;
-        const _nftImageUrl = dominio_site + item_document_path;
+      const dominio_site = 'http://teste.com.br/';
+      const _nftTitle = document_guid;
+      const _nftDescription = document_name;
+      const _nftPrice = 1;
+      const _nftRoyaltyPercentage = 1;
+      const _nftImageUrl = dominio_site + item_document_path;
 
-        console.log("Dados da NFT montados:", {
-            title: _nftTitle,
-            description: _nftDescription,
-            price: _nftPrice,
-            royalty: _nftRoyaltyPercentage,
-            img_url: _nftImageUrl
-        });
+      console.log("Dados da NFT montados:", {
+        title: _nftTitle,
+        description: _nftDescription,
+        price: _nftPrice,
+        royalty: _nftRoyaltyPercentage,
+        img_url: _nftImageUrl
+      });
 
-        const requestData = {
-            Document_id: document_guid,
-            project_id: project_id,
-            Contract_id: contract_file_manager_contract,
-            Topic_id: file_manager_topic_id,
-            title: _nftTitle,
-            description: _nftDescription,
-            price: _nftPrice,
-            royalty: _nftRoyaltyPercentage,
-            img_url: _nftImageUrl,
-            modelo_item_id: modelo_item_id
-        };
+      const requestData = {
+        Document_id: document_guid,
+        project_id: project_id,
+        Contract_id: contract_file_manager_contract,
+        Topic_id: file_manager_topic_id,
+        title: _nftTitle,
+        description: _nftDescription,
+        price: _nftPrice,
+        royalty: _nftRoyaltyPercentage,
+        img_url: _nftImageUrl,
+        modelo_item_id: modelo_item_id
+      };
 
-        console.log("Enviando requisição para salvar no banco...", requestData);
+      console.log("Enviando requisição para salvar no banco...", requestData);
 
-        await axios.post(`${currentUrl}/api/filemanagernft/insert/`, requestData, { headers })
-            .then(async (response1) => {
-                const file_manager_nft_id = response1.data.id;
-                console.log("NFT registrada no banco com sucesso. ID:", file_manager_nft_id);
+      await axios.post(`${currentUrl}/api/filemanagernft/insert/`, requestData, { headers })
+        .then(async (response1) => {
+          const file_manager_nft_id = response1.data.id;
+          console.log("NFT registrada no banco com sucesso. ID:", file_manager_nft_id);
 
-                try {
-                    console.log("Chamando função para gerar a NFT...");
+          try {
+            console.log("Chamando função para gerar a NFT...");
 
-                    const retorno = await mintNFT(
-                        contract_contract_address_client,
-                        contract_wallet_owner,
-                        _nftTitle,
-                        _nftDescription,
-                        _nftPrice,
-                        _nftRoyaltyPercentage,
-                        _nftImageUrl,
-                        file_manager_nft_id
-                    );
+            const retorno = await mintNFT(
+              contract_contract_address_client,
+              contract_wallet_owner,
+              _nftTitle,
+              _nftDescription,
+              _nftPrice,
+              _nftRoyaltyPercentage,
+              _nftImageUrl,
+              file_manager_nft_id
+            );
 
-                    console.log("NFT gerada na blockchain. Retorno:", retorno);
+            console.log("NFT gerada na blockchain. Retorno:", retorno);
 
-                    console.log("Atualizando JSON response com os dados da NFT...");
-                    const respostaAtualizacao = await atualizarJsonResponseNft(
-                        retorno.file_manager_nft_id, retorno,
-                        retorno.contratoAddress, retorno.contratoClienteAddress,
-                        retorno.signerGeral, retorno.tokenId, retorno.signer,
-                        retorno.signature, retorno.hashedMessage
-                    );
+            console.log("Atualizando JSON response com os dados da NFT...");
+            const respostaAtualizacao = await atualizarJsonResponseNft(
+              retorno.file_manager_nft_id, retorno,
+              retorno.contratoAddress, retorno.contratoClienteAddress,
+              retorno.signerGeral, retorno.tokenId, retorno.signer,
+              retorno.signature, retorno.hashedMessage
+            );
 
-                    console.log("JSON response atualizado:", respostaAtualizacao);
+            console.log("JSON response atualizado:", respostaAtualizacao);
 
-                    console.log("Distribuindo dados para o modelo...");
-                    const data2 = await atualizarData2Nft(retorno);
-                    console.log("Dados distribuídos:", data2);
+            console.log("Distribuindo dados para o modelo...");
+            const data2 = await atualizarData2Nft(retorno);
+            console.log("Dados distribuídos:", data2);
 
-                    console.log("Atualizando status do botão...");
-                    const data3 = await atualizarNftButton(file_manager_control_id);
-                    console.log("Status atualizado:", data3);
+            console.log("Atualizando status do botão...");
+            const data3 = await atualizarNftButton(file_manager_control_id);
+            console.log("Status atualizado:", data3);
 
-                    recarregarTela();
+            recarregarTela();
 
-                    console.log("NFT gerada com sucesso!");
+            console.log("NFT gerada com sucesso!");
 
-                    Swal.fire({
-                        title: 'Sucesso!',
-                        text: 'NFT - Gerada com sucesso!',
-                        icon: 'success',
-                        confirmButtonText: 'OK',
-                    });
-
-                } catch (error) {
-                    console.error('Erro ao criar a NFT na blockchain:', error);
-
-                    console.log("Atualizando banco de dados com erro da NFT...");
-                    await atualizaCampoErroNft(file_manager_nft_id, error.signer, error.signature, error.hashedMessage, error);
-                    console.log("Erro registrado no banco.");
-
-                    Swal.fire({
-                        title: 'Erro!',
-                        text: 'Algo deu errado ao tentar criar a NFT, verifique a carteira MetaMask. Por favor, contate nosso suporte! suporte@vertecotech.com',
-                        icon: 'error',
-                        confirmButtonText: 'OK'
-                    });
-
-                    return false;
-                }
-            })
-            .catch((error) => {
-                console.error('Erro ao salvar a NFT no banco:', error);
-                return false;
+            Swal.fire({
+              title: 'Sucesso!',
+              text: 'NFT - Gerada com sucesso!',
+              icon: 'success',
+              confirmButtonText: 'OK',
             });
 
+          } catch (error) {
+            console.error('Erro ao criar a NFT na blockchain:', error);
+
+            console.log("Atualizando banco de dados com erro da NFT...");
+            await atualizaCampoErroNft(file_manager_nft_id, error.signer, error.signature, error.hashedMessage, error);
+            console.log("Erro registrado no banco.");
+
+            Swal.fire({
+              title: 'Erro!',
+              text: 'Algo deu errado ao tentar criar a NFT, verifique a carteira MetaMask. Por favor, contate nosso suporte! suporte@vertecotech.com',
+              icon: 'error',
+              confirmButtonText: 'OK'
+            });
+
+            return false;
+          }
+        })
+        .catch((error) => {
+          console.error('Erro ao salvar a NFT no banco:', error);
+          return false;
+        });
+
     } catch (error) {
-        console.error('Erro inesperado:', error);
+      console.error('Erro inesperado:', error);
     }
-};
+  };
 
 
   const showNft = async (nftData) => {
@@ -1827,13 +1881,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                             width: '540px',
                             minHeight: '20px',
                             paddingBottom: '3px',
-                            textAlign: 'left' 
+                            textAlign: 'left'
                           }}>
                             <strong style={{
                               color: 'black',
                               fontSize: '8pt',
                               //marginLeft: '4px',  
-                              marginRight: '2px', 
+                              marginRight: '2px',
                               //backgroundColor: 'pink',
                               //marginBottom: '10px', // Margem abaixo
                               //display: 'inline-block' // Permite aplicar margin-bottom corretamente
@@ -1841,10 +1895,10 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                               {topic}.{item.questao}
                             </strong>
                             {item.label} {item.document_name ? (
-                              <div style={{ 
-                                cursor: 'pointer', 
-                                marginLeft: '5px', 
-                                marginTop: '10px' ,
+                              <div style={{
+                                cursor: 'pointer',
+                                marginLeft: '5px',
+                                marginTop: '10px',
                                 //backgroundColor: 'pink',
                               }}
                                 onClick={() => abrirDocumentoNavegadorDoBanco(item.document_guid, item.document_ext, item.mime_type)}>
@@ -1856,13 +1910,13 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
                           </div>
 
                           {(
-                            <div style={{ 
-                                //background: 'blue', 
-                                float: 'left', 
-                                width: '380px', 
-                                height: '30px', 
-                                marginLeft: '10px' 
-                                }}>
+                            <div style={{
+                              //background: 'blue', 
+                              float: 'left',
+                              width: '380px',
+                              height: '30px',
+                              marginLeft: '10px'
+                            }}>
 
                               {item.file_manager_control.visible_upload && (
                                 <div style={{ float: 'left', marginLeft: '5px' }}>

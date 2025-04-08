@@ -2171,7 +2171,7 @@
 
 "@mona-health/react-input-mask@^3.0.3":
   version "3.0.3"
-  resolved "https://registry.npmmirror.com/@mona-health/react-input-mask/-/react-input-mask-3.0.3.tgz#7e0200e29e59c4498290c3a001eb72112ee8bffc"
+  resolved "https://registry.yarnpkg.com/@mona-health/react-input-mask/-/react-input-mask-3.0.3.tgz#7e0200e29e59c4498290c3a001eb72112ee8bffc"
   integrity sha512-E8t4ZAaHjmPT1NS/9nlIGR7OsyshP7hs5OwqEYnVslm/eaWrQg5ZziB6r5IOxGmFUyB+G1muFPobVPA08L2sJg==
   dependencies:
     invariant "^2.2.4"

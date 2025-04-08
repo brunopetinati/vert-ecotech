@@ -338,6 +338,7 @@ const UserIntern = () => {
               text="Deletar Usuário"
               path="users"
               id={user.id}
+              context={"self"}
             />
             <StyledButtonSalvar
               onClick={handleRegister}

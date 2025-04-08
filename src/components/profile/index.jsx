@@ -284,6 +284,7 @@ const Profile = () => {
               path={"users"}
               id={user.id}
               style={{ margin: "0px 15px 0px 0px" }}
+              context={"admin"}
             />
             <StyledButtonSalvar onClick={handleRegister}>
               Salvar Alterações
