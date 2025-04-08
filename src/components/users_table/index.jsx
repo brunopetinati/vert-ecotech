@@ -24,6 +24,7 @@ const UsersTable = ({filteredUsers}) => {
   };
 
   return (
+    <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
       <Table>
         <THead>
           <TR>
@@ -52,6 +53,7 @@ const UsersTable = ({filteredUsers}) => {
           ))}
         </tbody>
       </Table>
+      </div>
   );
 };
 
