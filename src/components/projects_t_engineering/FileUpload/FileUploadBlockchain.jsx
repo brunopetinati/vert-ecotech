@@ -1119,32 +1119,22 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
     }
   };
 
+   // Função para converter valores bigint dentro de objetos aninhados
+   const normalizeBigInt = (obj) => {
+    if (typeof obj === 'bigint') {
+      return obj.toString();
+    } else if (Array.isArray(obj)) {
+      return obj.map(normalizeBigInt);
+    } else if (typeof obj === 'object' && obj !== null) {
+      return Object.fromEntries(
+        Object.entries(obj).map(([k, v]) => [k, normalizeBigInt(v)])
+      );
+    }
+    return obj;
+  };
+
   const atualizarJsonResponseNft = async (fileManagerNftId, novoJsonResponse, ContratoAddress, ContratoClienteAddress, SignerGeral, tokenId, signer, signature, hashedMessage) => {
     try {
-      console.log("Iniciando atualização do JSON response...");
-      console.log("ID do NFT:", fileManagerNftId);
-      console.log("Novo JSON Response:", novoJsonResponse);
-      console.log("Contrato Address:", ContratoAddress);
-      console.log("Contrato Cliente Address:", ContratoClienteAddress);
-      console.log("Signer Geral:", SignerGeral);
-      console.log("Token ID:", tokenId);
-      console.log("Signer:", signer);
-      console.log("Signature:", signature);
-      console.log("Hashed Message:", hashedMessage);
-
-      // Função para converter valores bigint dentro de objetos aninhados
-      const normalizeBigInt = (obj) => {
-        if (typeof obj === 'bigint') {
-          return obj.toString();
-        } else if (Array.isArray(obj)) {
-          return obj.map(normalizeBigInt);
-        } else if (typeof obj === 'object' && obj !== null) {
-          return Object.fromEntries(
-            Object.entries(obj).map(([k, v]) => [k, normalizeBigInt(v)])
-          );
-        }
-        return obj;
-      };
 
       const jsonData = {
         json_response: normalizeBigInt(novoJsonResponse),
@@ -1186,20 +1176,7 @@ const FileUploadBlockchain = ({ project_id, tela_name, modelo_GUID, confirmacao_
 
   const atualizarData2Nft = async (novoJsonResponse) => {
     try {
-      // Função recursiva para converter BigInt para string
-      const normalizeBigInt = (obj) => {
-        if (typeof obj === 'bigint') {
-          return obj.toString();
-        } else if (Array.isArray(obj)) {
-          return obj.map(normalizeBigInt);
-        } else if (typeof obj === 'object' && obj !== null) {
-          return Object.fromEntries(
-            Object.entries(obj).map(([key, value]) => [key, normalizeBigInt(value)])
-          );
-        }
-        return obj;
-      };
-  
+
       const jsonData = {
         json_response: normalizeBigInt(novoJsonResponse),
       };
