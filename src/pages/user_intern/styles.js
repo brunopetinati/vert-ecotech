@@ -1,27 +1,88 @@
 import styled from 'styled-components';
-import InputMask from "react-input-mask";
+import folha1 from "../../assets/icons/folha1.png";
 
-export const Container = styled.div`
-  width: 600px;
-  padding: 2em;
+export const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Garante que ocupe a tela inteira */
+  margin: 0;
+  padding: 20px;
+`;
+
+export const ProfileContainerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5em;
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  z-index: 2;
   background: #fff;
+  width: ${({ collapsed }) => (collapsed ? "60vw" : "50vw")};
+  margin: auto;
+  margin-top: 50px;
+  position: relative;
+  overflow: hidden; /* Para evitar vazamentos da imagem */
+
   h3 {
-    color:#054D00;
+    display: flex;
+    align-self: flex-start;
+    color: #054D00;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 90vw;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(${folha1});
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: -1; /* Para que fique atrás do conteúdo */
   }
 `;
 
-export const InnerContainer = styled.div`
+export const FormContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 600px;
+  width: 100%;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
-export const Column = styled.div`
+export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
+  width: 48%;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
+
+export const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 export const Row = styled.div`
@@ -29,143 +90,75 @@ export const Row = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
-  --padding: 16px;
-  z-index: 1;
+  width: 100%;
+  padding: 10px 0;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 export const Label = styled.label`
-  --margin-bottom: 10px;
-  --font-weight: 700;
-  font-size: 10pt;
+  font-weight: bold;
+  font-size: 12pt;
   color: rgb(54, 54, 54);
-`;
-
-export const ShowInput = styled(InputMask)`
   margin-bottom: 5px;
-  border: 2px solid rgb(204, 204, 204);
-  border-radius: 4px;
-  font-size: 12px;
-  outline: none;
-  width: 400px;
-  background: rgba(245, 245, 245, 0.2);
-  margin-top: 5px;
-
-  &:focus {
-    border-color: #007bff;
-  }
 `;
 
-export const Input = styled(InputMask)`
+export const ShowInput = styled.input`
+  width: 100%;
+  max-width: 400px;
   padding: 10px;
-  margin-bottom: 20px;
-  
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  border: 2px solid rgb(204, 204, 204);
+  border-radius: 8px;
+  font-size: 14px;
   outline: none;
-  width: 250px;
+  background: rgba(245, 245, 245, 0.4);
+  transition: all 0.3s ease-in-out;
 
   &:focus {
     border-color: #007bff;
+    background: #fff;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    max-width: none;
   }
 `;
 
-export const Span = styled.span`
-  color: #323338;
+export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%; /* Garante que ocupe a tela inteira */
+  margin: 0;
+  padding: 20px;
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
+  gap: 20px;
   width: 100%;
-`;
+  margin-top: 20px; /* Aumenta a distância dos botões para o conteúdo acima */
+  padding-top: 30px;
 
-export const ButtonDisplay = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  width: 102%;
-`;
-
-export const Button = styled.button`
-  background-color: #c2fbd7;
-  border-radius: 10px;
-  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-  color: green;
-  cursor: pointer;
-  display: inline-block;
-  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
-  padding: 7px 20px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 250ms;
-  border: 0;
-  font-size: 16px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  margin-top: 50px;
-  margin-right: 16px;
-
-  :hover {
-  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-  transform: scale(1.02) ;
-  }
-`;
-
-export const IndexContainer = styled.div`
-  --display: flex;
-  --flex-direction: column;
-  --justify-content: center;
-  --align-items: center;
-  --background: #f5f5f5;
-  width: 100%;
-  height: 100%;
-  --margin-left: 200px;
-`;
-
-export const ProfileContainerInfo = styled.div`
-  --display: flex;
-  --flex-direction: column;
-  --justify-content: space-around;
-  --align-items: center;
-  width: 650px;
-  padding: 10px;
-  --background: #fff;
-  margin-top: 30px;
-  -border-radius: 20px;
-  --box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-  h3 {
-    display: flex;
-    align-self: flex-start;
-    color: #054D00;
-  }
-`;
-
-export const ButtonContainerIndex = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 600px;
-  padding: 2em;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  background: #fff;
-
-  h3 {
-    color:#054D00;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
   }
 `;
 
 export const BackgroundImage = styled.div`
   position: relative;
-  /* Outros estilos aqui */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+    margin: 0;
 
   &.background-image {
     position: absolute;
@@ -179,3 +172,8 @@ export const BackgroundImage = styled.div`
     --z-index: -1;
   }
 `;
+
+
+
+
+

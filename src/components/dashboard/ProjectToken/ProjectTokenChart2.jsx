@@ -40,7 +40,7 @@ const ProjectTokenChart2 = () => {
   }, []); // Não é necessário depender do 'currentYear' aqui
 
   return (
-     <div collapsed={collapsed}>
+    <div collapsed={collapsed.toString()}>
           <Chart data={data3} title={'Tokens Visão Anual'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
       </div>
   );

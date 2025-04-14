@@ -55,6 +55,7 @@ const CryptoMoeda = () => {
 
   const mintMoeda = async () => {
     try {
+
       const retorno = await Mint(addressTo, amount, serialNumber, value);
       console.log(retorno);
 

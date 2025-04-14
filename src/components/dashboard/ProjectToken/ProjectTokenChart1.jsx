@@ -9,7 +9,10 @@ const ProjectTokenChart1 = () => {
 
   const collapsed = useSelector((state) => state.sidebar);
   const [data3, setData3] = useState([]);
-  const [currentYear, setCurrentYear] = useState(2023);
+  
+  // Dentro do seu componente:
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +47,7 @@ const ProjectTokenChart1 = () => {
   };
 
   return (
-    <div collapsed={collapsed}>
+    <div collapsed={collapsed.toString()}>
       <Chart data={data3} title={'Tokens Visão Mensal'} name={'name'} key_a={'ativos'} key_b={'aposentados'} stroke_a={'blue'} stroke_b={'black'} />
       <ControlsContainer>
         <Button onClick={handlePrevYear}>{'<<'}</Button>

@@ -330,7 +330,7 @@ export const StyledButtonCancelar = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -361,7 +361,7 @@ export const StyledButtonDownload = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -392,7 +392,7 @@ export const StyledButtonLogs = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -515,7 +515,7 @@ export const StyledButtonConfirmarDocs = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -555,7 +555,7 @@ export const StyledButtonSalvar = styled.button`
     transform: scale(1.02);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -587,7 +587,7 @@ export const StyledButtonSalvarUnico = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -619,7 +619,7 @@ export const StyledButtonNovo = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -651,7 +651,7 @@ export const StyledButtonPesquisar = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -682,7 +682,7 @@ export const StyledButtonIniciarEtapa = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -713,7 +713,7 @@ export const StyledButtonIniciado = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -744,7 +744,7 @@ export const StyledButtonCriarContract = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -775,7 +775,7 @@ export const StyledButtonMintNft = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -806,7 +806,7 @@ export const StyledButtonShowNft = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -837,7 +837,7 @@ export const StyledButtonSubstituirNft = styled.button`
     transform: scale(1.02) ;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (maxWidth: 768px) {
     font-size: 10px;
   }
 `;
@@ -850,16 +850,16 @@ export const CardContainer = styled.div`
   position: relative; 
   justify-content: start; 
   
-  @media (max-width: 1024px) {
+  @media (maxWidth: 1024px) {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(6, auto);
   }
 
-  @media (max-width: 768px) {
+  @media (maxWidth: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (max-width: 480px) {
+  @media (maxWidth: 480px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
@@ -997,19 +997,19 @@ export const styles = {
     boxShadow: '0px 2px 4px rgba(0,0,0,0.1)',
 
     // Responsividade para telas menores com media queries
-    '@media (max-width: 1024px)': {
+    '@media (maxWidth: 1024px)': {
       padding: '2vw', 
       width: '80vw', 
       height: '6vw', 
     },
 
-    '@media (max-width: 768px)': {
+    '@media (maxWidth: 768px)': {
       padding: '3vw', 
       width: '70vw', 
       height: '7vw',  
     },
 
-    '@media (max-width: 480px)': {
+    '@media (maxWidth: 480px)': {
       padding: '4vw', 
       width: '60vw',
       height: '8vw',  
@@ -1030,19 +1030,19 @@ export const styles = {
     minHeight: '100vh', // Garante que a altura mínima ocupe toda a tela
 
     // Responsividade:
-    '@media screen and (max-width: 1024px)': {
+    '@media screen and (maxWidth: 1024px)': {
       maxWidth: '80vw',  
       marginTop: '20px', 
       marginLeft: '10px',
       marginRight: '10px',
     },
 
-    '@media screen and (max-width: 768px)': {
+    '@media screen and (maxWidth: 768px)': {
       maxWidth: '90vw', 
       marginTop: '10px',
     },
 
-    '@media screen and (max-width: 480px)': {
+    '@media screen and (maxWidth: 480px)': {
       maxWidth: '100vw',  // Ocupa toda a largura da tela em dispositivos pequenos
       marginTop: '0',
     },

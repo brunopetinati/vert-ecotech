@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { appStatus } from '../../store/modules/app_status/actions';
 
-const WarningDeleteModal = ({ text, path, id, width, height }) => {
+const WarningDeleteModal = ({ text, path, id, width, height, context }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,23 +15,33 @@ const WarningDeleteModal = ({ text, path, id, width, height }) => {
   const token = sessionStorage.getItem('Authorization');
   const headers = { Authorization: `Bearer ${token}` };
 
-  // lembrar de inserir a senha do usuário, para fazer deleções
-
+  //users
+  // projects
   const onDelete = () =>{
-    axios.delete(`${currentUrl}/api/${path}/${id}/delete`, {
+    console.log('Deletando item do caminho:', path);
+    axios.delete(`${currentUrl}/api/${path}/${id}/delete/`, {
       headers,
     })
     .then(response => {
-      console.log('Response:', response.data);
       Swal.fire({
         title: 'Sucesso!',
-        text: 'Seu projeto foi deletado com sucesso!',
+        text: 'Deletado com sucesso!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
-      dispatch(appStatus('Projetos'))
-      navigate('/welcome')
-    })
+        if (path === 'projects') {
+          dispatch(appStatus('Projetos'));
+          navigate('/welcome');
+        } else if (path === 'users' && context === 'self') {
+          dispatch(appStatus('Usuários'));
+          navigate('/welcome');
+        } else if (path === 'users' && context === 'admin') {
+          sessionStorage.clear(); 
+          navigate('/');
+        } else {
+          navigate('/welcome');
+        }
+      })
     .catch(error => {
       console.log('error', error);
       Swal.fire({
@@ -46,7 +56,7 @@ const WarningDeleteModal = ({ text, path, id, width, height }) => {
   const showDeleteWarning = () => {
     Swal.fire({
       title: 'Confirmação',
-      text: 'Tem certeza que deseja deletar a sua conta?',
+      text: 'Tem certeza que deseja deletar?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',

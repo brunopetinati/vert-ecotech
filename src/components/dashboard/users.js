@@ -4,7 +4,7 @@ export const groupByUserType = (users) => {
   const totalUsers = {};
 
   if (!Array.isArray(users)) {
-    console.error("O parâmetro 'users' não é um array válido.");
+    //console.error("O parâmetro 'users' não é um array válido.");
     return [];
   }
 

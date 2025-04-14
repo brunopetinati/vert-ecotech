@@ -117,6 +117,7 @@ const Sidebar = () => {
   useEffect(() => {
     handleActiveIcon();
     handleLogin();
+
   }, [app_status, currentUser]);
 
   const handleNavigate = (path) => {
@@ -180,7 +181,9 @@ const Sidebar = () => {
                 onClick={() => handleItemClick("Dashboard")}
               >
                 {collapsed ? (
-                  <StyledStocks active={activeDashboard} />
+                  <StyledStocks
+                    active={app_status === "Dashboard" ? "true" : "false"}
+                  />
                 ) : (
                   "Dashboard"
                 )}
@@ -202,7 +205,9 @@ const Sidebar = () => {
                   onClick={() => handleItemClick("Usuários")}
                 >
                   {collapsed ? (
-                    <StyledUsers active={activeUsers} />
+                    <StyledUsers
+                      active={activeUsers === "Usuários" ? "true" : "false"}
+                    />
                   ) : (
                     "Usuários"
                   )}
@@ -256,7 +261,13 @@ const Sidebar = () => {
                   className={app_status === "Desenvolvimento" ? "active" : ""}
                   onClick={() => handleNavigate("/analysis_and_development")}
                 >
-                  {collapsed ? <StyledWork active={activeUsers} /> : "Projetos"}
+                  {collapsed ? (
+                    <StyledWork
+                      active={activeUsers === "Projetos" ? "true" : "false"}
+                    />
+                  ) : (
+                    "Projetos"
+                  )}
                 </SidebarMenuItem>
               </motion.div>
             </AnimatePresence>
@@ -274,7 +285,13 @@ const Sidebar = () => {
                 className={app_status === "Meu Perfil" ? "active" : ""}
                 onClick={() => handleItemClick("Meu Perfil")}
               >
-                {collapsed ? <StyledUser active={activeUser} /> : "Meu Perfil"}
+                {collapsed ? (
+                  <StyledUser
+                    active={activeUsers === "Meu Perfil" ? "true" : "false"}
+                  />
+                ) : (
+                  "Meu Perfil"
+                )}
               </SidebarMenuItem>
             </motion.div>
           </AnimatePresence>
@@ -292,7 +309,11 @@ const Sidebar = () => {
                 onClick={() => handleItemClick("Configurações")}
               >
                 {collapsed ? (
-                  <StyledSettings active={activeSettings} />
+                  <StyledSettings
+                    active={
+                      activeSettings === "Configurações" ? "true" : "false"
+                    }
+                  />
                 ) : (
                   "Configurações"
                 )}
@@ -350,38 +371,38 @@ const Sidebar = () => {
         </SidebarMenuItemDiffer>
 
         <SidebarFooter
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        overflow: "hidden",
-      }}
-    >
-      <AnimatePresence mode="wait">
-        {collapsed ? (
-          <motion.span
-            key="collapsed"
-            style={{ color: "#054d00", position: "absolute" }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            V.E &copy;
-          </motion.span>
-        ) : (
-          <motion.span
-            key="expanded"
-            style={{ color: "#054d00", position: "absolute" }}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            Vert Ecotech &copy; {currentYear}
-          </motion.span>
-        )}
-      </AnimatePresence>
-    </SidebarFooter>
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            overflow: "hidden",
+          }}
+        >
+          <AnimatePresence mode="wait">
+            {collapsed ? (
+              <motion.span
+                key="collapsed"
+                style={{ color: "#054d00", position: "absolute" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                V.E &copy;
+              </motion.span>
+            ) : (
+              <motion.span
+                key="expanded"
+                style={{ color: "#054d00", position: "absolute" }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                Vert Ecotech &copy; {currentYear}
+              </motion.span>
+            )}
+          </AnimatePresence>
+        </SidebarFooter>
       </SidebarContainer>
     </motion.div>
   );

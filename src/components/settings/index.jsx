@@ -2,7 +2,7 @@ import ToggleSwitch from '../default_toggle';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { projectsCards, usersCards } from '../../store/modules/settings/actions';
-import { Container, InnerContainer } from './styles'
+import { Container, InnerContainer, Row, ButtonContainer, SectionContainer } from './styles'
 import { StyledButton } from '../default_button/styles';
 import ResetPassword from '../reset_password';
 import { eraseAll } from '../../store/modules/app_data/actions';
@@ -69,15 +69,35 @@ const Settings = () => {
     <Container collapsed={collapsed}>
       <InnerContainer>
         <h1>Configurações</h1>
-        {currentUser.user_type === 'ADM' && <ToggleSwitch label={"Habilitar visualização em cards para usuários"} checked={layoutUsers} onChange={handleChangeUsers}/>}
-        <ToggleSwitch label={"Habilitar visualização em cards para projetos"} checked={layoutProjects} onChange={handleChangeProjects}/>
-        <StyledButton onClick={handleShowResetPasswordModal} style={{position: 'absolute', bottom: '32px', right: '160px'}}>Alterar Senha</StyledButton>
-        <StyledButton onClick={handleLogout} style={{position: 'absolute', bottom: '32px', right: '32px'}}>Deslogar</StyledButton>
-        {showResetPassword && <ResetPassword isOpen={showResetPassword} onClose={handleShowResetPasswordModal}/>}
-        <div>
+        
+        {currentUser.user_type === 'ADM' && (
+          <ToggleSwitch 
+            label={"Habilitar visualização em cards para usuários"} 
+            checked={layoutUsers} 
+            onChange={handleChangeUsers}
+          />
+        )}
+        
+        <ToggleSwitch 
+          label={"Habilitar visualização em cards para projetos"} 
+          checked={layoutProjects} 
+          onChange={handleChangeProjects}
+        />
+        
+        <SectionContainer>  {/* Novo container para a seção */}
           <h1>Adicionar Rede Ganache-QA-SP à MetaMask</h1>
-          <AddGanacheNetwork />
-        </div>        
+          <ButtonContainer>
+            <AddGanacheNetwork />
+            <StyledButton onClick={handleShowResetPasswordModal}>
+              Alterar Senha
+            </StyledButton>
+            <StyledButton onClick={handleLogout}>
+              Deslogar
+            </StyledButton>
+          </ButtonContainer>
+        </SectionContainer>
+  
+        {showResetPassword && <ResetPassword isOpen={showResetPassword} onClose={handleShowResetPasswordModal}/>}
       </InnerContainer>
     </Container>
   );

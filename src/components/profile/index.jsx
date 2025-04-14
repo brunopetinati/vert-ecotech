@@ -1,21 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-import Banco from '../bank';
-import { StyledButton, StyledButtonSalvar } from '../default_button/styles';
-import { ProfileContainerInfo, IndexContainer, Row, Label, ShowInput, InnerContainer, ButtonContainer, FormContainer, LeftColumn, RightColumn } from './styles';
-import { handleCepChange } from '../../api/requests/cep';
-import { currentUrl } from '../../constants/global';
-import { motion } from 'framer-motion';
-import { userUpdater } from '../../store/modules/login/actions';
-import Swal from 'sweetalert2';
-import WarningDeleteModal from '../warning_delete_modal';
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import Banco from "../bank";
+import { StyledButton, StyledButtonSalvar } from "../default_button/styles";
+import {
+  StyledSelect,
+  ProfileContainerInfo,
+  IndexContainer,
+  Row,
+  Label,
+  ShowInput,
+  ButtonContainer,
+  FormContainer,
+  LeftColumn,
+  RightColumn,
+} from "./styles";
+import { handleCepChange } from "../../api/requests/cep";
+import { currentUrl } from "../../constants/global";
+import { motion } from "framer-motion";
+import { userUpdater } from "../../store/modules/login/actions";
+import Swal from "sweetalert2";
+import WarningDeleteModal from "../warning_delete_modal";
 
 const Profile = () => {
   const dispatch = useDispatch();
-
   const [showModalBanco, setShowModalBanco] = useState(false);
-
   const user = useSelector((state) => state.user.currentUser);
 
   const handleModalBanco = () => {
@@ -23,26 +32,41 @@ const Profile = () => {
   };
 
   const [userUpdate, setUserUpdate] = useState({
-    id: user.id || '',
-    full_name: user.full_name || '',
-    rg: user.rg || '',
-    cpf: user.cpf || '',
-    phone: user.phone || '',
-    email: user.email || '',
-    user_type: user.user_type || '',
-    cep: user.cep || '',
-    cnpj: user.cnpj || '',
-    street: user.street || '',
-    number: user.number || '',
-    complement: user.complement || '',
-    district: user.district || '',
-    state: user.state || '',
-    city: user.city || '',
+    id: user.id || "",
+    full_name: user.full_name || "",
+    rg: user.rg || "",
+    cpf: user.cpf || "",
+    phone: user.phone || "",
+    email: user.email || "",
+    user_type: user.user_type || "",
+    cep: user.cep || "",
+    cnpj: user.cnpj || "",
+    street: user.street || "",
+    number: user.number || "",
+    complement: user.complement || "",
+    district: user.district || "",
+    state: user.state || "",
+    city: user.city || "",
   });
+
+  const handleAccesTypeChange = (event) => {
+    const { value } = event.target;
+    setUserUpdate((prevState) => ({
+      ...prevState,
+      user_type: value, // Atualiza o campo 'user_type' com o valor selecionado
+    }));
+  };
+
+  const optionsAccess = [ //não está sendo mais usado
+    { value: "COM", label: "Comercial" },
+    { value: "ENG", label: "Engenharia" },
+    { value: "ADM", label: "Admin" },
+    { value: "Regular", label: "Regular" },
+  ];
 
   const handleCepOnForm = async (cep) => {
     if (cep.length === 9 && !isNaN(cep.charAt(cep.length - 1))) {
-      const cepObject = await handleCepChange(cep.replace('-', ''));
+      const cepObject = await handleCepChange(cep.replace("-", ""));
       setUserUpdate({
         ...userUpdate,
         cep: cepObject.cep,
@@ -55,28 +79,32 @@ const Profile = () => {
   };
 
   const handleRegister = () => {
-    const token = sessionStorage.getItem('Authorization');
+    const token = sessionStorage.getItem("Authorization");
     const headers = { Authorization: `Bearer ${token}` };
 
+    console.log(userUpdate);
+
     axios
-      .put(`${currentUrl}/api/users/${user.id}/update/`, userUpdate, { headers })
+      .put(`${currentUrl}/api/users/${user.id}/update/`, userUpdate, {
+        headers,
+      })
       .then((response) => {
         Swal.fire({
-          title: 'Sucesso!',
-          text: 'Sua requisição foi processada com sucesso.',
-          icon: 'success',
-          confirmButtonText: 'OK',
+          title: "Sucesso!",
+          text: "Sua requisição foi processada com sucesso.",
+          icon: "success",
+          confirmButtonText: "OK",
         });
         dispatch(userUpdater(userUpdate));
       })
       .catch((error) => {
         Swal.fire({
-          title: 'Erro!',
-          text: 'Algo deu errado ao tentar processar sua requisição.',
-          icon: 'error',
-          confirmButtonText: 'OK',
+          title: "Erro!",
+          text: "Algo deu errado ao tentar processar sua requisição.",
+          icon: "error",
+          confirmButtonText: "OK",
         });
-        console.error('erro a seguir', error);
+        console.error("erro a seguir", error);
         return;
       });
   };
@@ -84,7 +112,8 @@ const Profile = () => {
   const collapsed = useSelector((state) => state.sidebar);
 
   const handleDelete = () => {
-    console.log('Deleting the account'); // Replace with your actual delete function
+    //não está sendo usado mesmo, não é erro
+    console.log("Deleting the account"); // Replace with your actual delete function
   };
 
   return (
@@ -100,7 +129,7 @@ const Profile = () => {
           <FormContainer>
             <LeftColumn>
               <Row>
-                <Label>Nome completo</Label>
+                <Label>Nome completo:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.full_name}
@@ -110,7 +139,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Email</Label>
+                <Label>Email:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.email}
@@ -120,7 +149,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Whatsapp</Label>
+                <Label>Whatsapp:</Label>
                 <ShowInput
                   type="text"
                   onChange={(e) =>
@@ -131,7 +160,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>RG</Label>
+                <Label>RG:</Label>
                 <ShowInput
                   type="text"
                   mask="99.999.999-9"
@@ -142,7 +171,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>CPF</Label>
+                <Label>CPF:</Label>
                 <ShowInput
                   type="text"
                   mask="999.999.999-99"
@@ -152,14 +181,13 @@ const Profile = () => {
                   }
                 />
               </Row>
-            </LeftColumn>
-  
-            <RightColumn>
               <Row>
-                <Label>CNPJ</Label>
+                <Label htmlFor="cnpj">CNPJ:</Label>
                 <ShowInput
                   type="text"
-                  mask="99.999.999/9999-99"
+                  id="cnpj"
+                  name="cnpj"
+                  mask={"99.999.999/9999-99"}
                   value={userUpdate.cnpj}
                   onChange={(e) =>
                     setUserUpdate({ ...userUpdate, cnpj: e.target.value })
@@ -167,7 +195,22 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>CEP</Label>
+                <Label>Tipo de acesso:</Label>
+                <StyledSelect
+                  onChange={handleAccesTypeChange}
+                  value={userUpdate.user_type}
+                >
+                  <option value="COM">Comercial</option>
+                  <option value="ENG">Engenharia</option>
+                  <option value="ADM">Admin</option>
+                  <option value="Regular">Regular</option>
+                </StyledSelect>
+              </Row>
+            </LeftColumn>
+
+            <RightColumn>
+              <Row>
+                <Label>CEP:</Label>
                 <ShowInput
                   type="text"
                   mask="99999-999"
@@ -179,15 +222,41 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Rua</Label>
+                <Label>Rua:</Label>
+                <ShowInput type="text" value={userUpdate.street} disabled />
+              </Row>
+              <Row>
+                <Label>Bairro:</Label>
                 <ShowInput
                   type="text"
-                  value={userUpdate.street}
+                  id="bairro"
+                  name="bairro"
+                  value={userUpdate.district}
                   disabled
                 />
               </Row>
               <Row>
-                <Label>Número</Label>
+                <Label>Cidade:</Label>
+                <ShowInput
+                  type="text"
+                  id="cidade"
+                  name="cidade"
+                  value={userUpdate.city}
+                  disabled
+                />
+              </Row>
+              <Row>
+                <Label>UF:</Label>
+                <ShowInput
+                  type="text"
+                  id="uf"
+                  name="uf"
+                  value={userUpdate.state}
+                  disabled
+                />
+              </Row>
+              <Row>
+                <Label>Número:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.number}
@@ -197,7 +266,7 @@ const Profile = () => {
                 />
               </Row>
               <Row>
-                <Label>Complemento</Label>
+                <Label>Complemento:</Label>
                 <ShowInput
                   type="text"
                   value={userUpdate.complement}
@@ -208,16 +277,26 @@ const Profile = () => {
               </Row>
             </RightColumn>
           </FormContainer>
-  
+
           <ButtonContainer>
-            <WarningDeleteModal text={'Deletar'} path={'users'} id={user.id} />
-            <StyledButtonSalvar onClick={handleRegister}>Salvar Alterações</StyledButtonSalvar>
+            <WarningDeleteModal
+              text={"Deletar"}
+              path={"users"}
+              id={user.id}
+              style={{ margin: "0px 15px 0px 0px" }}
+              context={"admin"}
+            />
+            <StyledButtonSalvar onClick={handleRegister}>
+              Salvar Alterações
+            </StyledButtonSalvar>
           </ButtonContainer>
+          {showModalBanco && (
+            <Banco isOpen={showModalBanco} onClose={handleModalBanco} />
+          )}
         </ProfileContainerInfo>
       </motion.div>
     </IndexContainer>
   );
-  
 };
 
 export default Profile;
