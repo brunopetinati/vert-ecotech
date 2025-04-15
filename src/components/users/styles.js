@@ -10,7 +10,6 @@ export const IndexContainer = styled.div`
   width: 100%;
   height: 100%; /* Garante que ocupe a tela inteira */
   margin: 0;
-  //padding: px;
 `;
 
 export const Container = styled.div`
