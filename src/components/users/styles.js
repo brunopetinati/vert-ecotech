@@ -11,7 +11,6 @@ export const IndexContainer = styled.div`
   height: 100%; /* Garante que ocupe a tela inteira */
   margin: 0;
   //padding: px;
-  background: rgb(255, 0, 0);
 `;
 
 export const Container = styled.div`
