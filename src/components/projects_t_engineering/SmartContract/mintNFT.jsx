@@ -25,7 +25,7 @@ export const mintNFT = async (contratoClienteAddress, signerGeral, _nftTitle, _n
     hashedMessage = (web3.utils.soliditySha3(
       { type: 'string', value: file_manager_nft_id }
     ));
-    console.log({ hashedMessage });
+    console.log({ "hashedMessage": hashedMessage });
 
     //assina mensagem de hash
     signature = (await window.ethereum.request({
