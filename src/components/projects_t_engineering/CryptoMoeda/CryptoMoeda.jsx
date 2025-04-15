@@ -67,7 +67,7 @@ const CryptoMoeda = () => {
       });
 
     } catch (err) {
-      console.error('Erro ao cunhar moeda:', err);
+      console.error('Erro ao tentar criar moeda:', err);
     }
   };
 
